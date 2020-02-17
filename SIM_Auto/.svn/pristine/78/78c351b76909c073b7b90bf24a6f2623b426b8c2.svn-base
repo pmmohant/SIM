@@ -1,0 +1,781 @@
+package com.lavante.sim.customer.TestScripts.Tasks.Claims;
+
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class TaskClaimLockTest extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+					throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP1();
+	
+		lavanteUtils.driver = driver;
+
+		List<?> listofdatafrm = lavanteUtils.login("CustomerKrogerAdmin", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		LdataMap.put("maintab", "Tasks");
+		LdataMap.put("subtab", "claimTasks");
+		enobjhomePage.selectTab(LdataMap);
+
+		lavanteUtils.fluentwait(objTasksClaimPage.taskSearchBtn());
+		LdataMap.put("TaskView", "My Task");
+		objTasksClaimPage.switchTasksClaimView(LdataMap);
+		if(!(objTasksClaimPage.iterateSearchHeaderFindColList("Claim ID").size()>4)){
+			
+			LdataMap.put("subtab", "viewApprovalTasks");
+			enobjhomePage.selectTab(LdataMap);
+			
+			LdataMap.put("filterby","Claims to approve");
+			LdataMap.put("ALLSupplier","");
+			LdataMap.put("ReAssign","");
+			LdataMap.put("AssginTo","User");
+			/*String x="Select lr.UserRoleName From Login l,LoginRole lr where l.ContactID in (select ContactID From contact where Email ='"+LdataMap.get("username")+"') "
+					+ " and lr.UserRoleID=l.UserRoleID";
+			x=lavanteUtils.fetchDBdata(x);
+			String uname=x+"("+LdataMap.get("username")+")";*/
+			LdataMap.put("User",LdataMap.get("username")); 
+			enReassign.selectSupplierFormAction(LdataMap);
+		}
+	
+	}
+	
+	/**
+	 * Before method to navigate to the Tasks->Claim tab
+	 * 
+	 */
+	@BeforeMethod
+	public void navigateToTaskClaimPage(){
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+
+		LdataMap.put("maintab", "Tasks");
+		LdataMap.put("subtab", "claimTasks");
+		enobjhomePage.selectTab(LdataMap);
+		waitforPageload(objTasksClaimPage.pageHeader());		
+	}
+	
+	/**
+	 * Test Script to check claim lock feature in the same user.
+	 * 
+	 *  Lock Icon Should be available for Any Scenario
+	 * Check Box on Search Result Will be shown for Same Login
+	 * 
+	 * 
+	 * @throws Exception
+	 * @author girish.n
+	 */
+	@Test
+	public void lockClaimForSameUserTest() throws Exception {
+		Reporter.log("<---------------------Test Started for lockClaimForSameUserTest: " + currenttime(),true);
+		
+		SoftAssert softAssert = new SoftAssert();
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+		
+		String expClaimID="Any";
+		String action ="EditClaim";
+		dataMap.put("Action", action);
+		dataMap.put("ClaimId", expClaimID);
+	//	dataMap.put("ClaimAmount", expClaimID);
+		dataMap.put("TaskView", "My Task");
+	//	dataMap.put("Advanced", "");
+	//	dataMap.put("SearchFields", "ClaimId#ClaimAmount");
+		objTasksClaimPage.actionOnTasksClaims(dataMap);	
+		
+		boolean flag=false;
+		if(dataMap.containsKey("flag")){
+			
+			String x=dataMap.get("flag");
+			if(x.equalsIgnoreCase("true")){
+				flag=true;		
+				String mainWinHandle = driver.getWindowHandle();
+				
+				//To open the home page in new tab
+				String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL,Keys.RETURN); 
+				enobjhomePage.companylogo().sendKeys(selectLinkOpeninNewTab);
+				
+				Set<String> winHandles = driver.getWindowHandles();
+				Iterator<String> iterator = winHandles.iterator();
+				while(iterator.hasNext()){ 
+					String winHandle=iterator.next();
+					if(!winHandle.equals(mainWinHandle)){
+						driver.switchTo().window(winHandle);
+						break;
+					}
+				}
+				
+				waitforPageload(enobjhomePage.pageHeader());
+				dataMap.put("maintab", "Tasks");
+				dataMap.put("subtab", "claimTasks");
+				enobjhomePage.selectTab(dataMap);
+				waitforPageload(objTasksClaimPage.pageHeader());
+						
+				objTasksClaimPage.searchTasksClaim(dataMap);
+				
+				//To verify if the lock icon and check box is present for the claim in Task-> Claim page
+				objTasksClaimPage.isLockExists(dataMap);
+				objTasksClaimPage.isCheckBoxExists(dataMap);
+				
+				String actClaimId = dataMap.get("ClaimId");
+				boolean lockFlag = false;
+				if(dataMap.containsKey("LockExists")){
+					String data = dataMap.get("LockExists");
+					if(data.equalsIgnoreCase("True")){
+						lockFlag=true;
+						Reporter.log("Lock exists in Tasks -> Claim page for Claim ID " + actClaimId,true);
+						Reporter.log("Lock Message: " + dataMap.get("LockMessage"), true);
+					}
+				}
+				boolean chkBoxFlag = false;
+				if(dataMap.containsKey("CheckBoxExists")){
+					String data = dataMap.get("CheckBoxExists");
+					if(data.equalsIgnoreCase("True")){
+						chkBoxFlag=true;
+					}
+				}
+				
+				softAssert.assertTrue(lockFlag, "Lock icon is missing in Task -> Claims page");
+				softAssert.assertTrue(chkBoxFlag, "Checkbox is missing in Task -> Claims page");
+		
+				//To verify if the lock icon and check box is present for the claim in Transactions -> Claim page
+				dataMap.put("maintab", "Transactions");
+				dataMap.put("subtab", "customerClaimResult");
+				enobjhomePage.selectTab(dataMap);
+				waitforPageload(objTasksClaimPage.pageHeader());
+				
+				dataMap.put("ClaimId",actClaimId);
+				dataMap.put("Search", "");
+				enClaimsBasicSearch.Search(dataMap);
+				scrollup();
+				
+				enClaimsPage.isLockExists(dataMap);
+				enClaimsPage.isCheckBoxExists(dataMap);
+				
+				boolean clmSearchLockFlag = false;
+				if(dataMap.containsKey("LockExists")){
+					String data = dataMap.get("LockExists");
+					if(data.equalsIgnoreCase("True")){
+						clmSearchLockFlag=true;
+						Reporter.log("Lock exists in Transactions -> Claim page for Claim ID " + actClaimId,true);
+						Reporter.log("Lock Message: " + dataMap.get("LockMessage"), true);
+					}
+				}
+				boolean clmSearchChkBoxFlag = false;
+				if(dataMap.containsKey("CheckBoxExists")){
+					String data = dataMap.get("CheckBoxExists");
+					if(data.equalsIgnoreCase("True")){
+						clmSearchChkBoxFlag=true;
+					}
+				}
+				
+				softAssert.assertTrue(clmSearchLockFlag, "Lock icon is missing in Transaction -> Claims page");
+				softAssert.assertTrue(clmSearchChkBoxFlag, "Checkbox is missing in Transaction -> Claims page");
+				
+				//Closing the browser tab
+				iterator = winHandles.iterator();
+				while(iterator.hasNext()){ 
+					String winHandle=iterator.next();
+					if(!winHandle.equals(mainWinHandle)){
+						driver.close();
+						break;
+					}
+				}
+				driver.switchTo().window(mainWinHandle);
+				
+				//Closing edit claim popup
+				dataMap.remove("subtab");
+				dataMap.put("maintab", "Home");
+				enobjhomePage.selectTab(dataMap);
+		
+			}else{
+				softAssert.assertTrue(flag, "Test data (Tasks -> Claims) is not available");
+				flag=true;
+			}
+		}
+		
+		softAssert.assertTrue(flag,"Please Retest");
+		softAssert.assertAll();
+		Reporter.log("<---------------------Test Ended at:" + currenttime(),true);
+	}
+	
+	/**
+	 * Test Script to check claim lock feature in the same user on a another browser instance
+	 * 
+	 * Lock Icon Should be available for Any Scenario
+	 * Check Box on Search Result Will be shown for Same Login
+	 * 
+	 * 
+	 * @throws Exception
+	 * @author girish.n
+	 */
+	@Test
+	public void lockClaimForSameUserDiffBrowserTest() throws Exception {
+		Reporter.log("<---------------------Test Started for lockClaimForSameUserDiffBrowserTest: " + currenttime(),true);
+		
+		SoftAssert softAssert = new SoftAssert();
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+		
+		String expClaimID="Any";
+		String action ="EditClaim";
+		dataMap.put("Action", action);
+		dataMap.put("ClaimId", expClaimID);
+		dataMap.put("TaskView", "My Task");
+		objTasksClaimPage.actionOnTasksClaims(dataMap);	
+
+		boolean flag=false;
+		if(dataMap.containsKey("flag")){
+			String x=dataMap.get("flag");
+			
+			if(x.equalsIgnoreCase("true")){
+				flag=true;
+				String mainWinHandle = driver.getWindowHandle();
+
+				launchAppFromPOM(Platform, browser, browserVersion);
+				initiate();
+				openAPP1();
+			
+			    WebDriver driver1 = lavanteUtils.driver;
+			    lavanteUtils.driver = driver;
+				
+				Set<String> winHandles = driver.getWindowHandles();
+				
+				Iterator<String> iterator = winHandles.iterator();
+				while(iterator.hasNext()){ 
+					String winHandle=iterator.next();
+					if(!winHandle.equals(mainWinHandle)){
+						driver.switchTo().window(winHandle);
+						break;
+					}
+				}
+				
+				List<?> listofdatafrm = lavanteUtils.login("CustomerKrogerAdmin", browser);
+				LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+				LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		
+				// Login
+				enobjloginpage.logintoAPP(LdataMap);
+				enobjhomePage.close();
+				
+				waitforPageload(enobjhomePage.pageHeader());
+				dataMap.put("maintab", "Tasks");
+				dataMap.put("subtab", "claimTasks");
+				enobjhomePage.selectTab(dataMap);
+				waitforPageload(objTasksClaimPage.pageHeader());
+						
+				objTasksClaimPage.searchTasksClaim(dataMap);
+				
+				//To verify if the lock icon and check box is present for the claim in Task-> Claim page
+				objTasksClaimPage.isLockExists(dataMap);
+				objTasksClaimPage.isCheckBoxExists(dataMap);
+				
+				String actClaimId = dataMap.get("ClaimId");
+				boolean lockFlag = false;
+				if(dataMap.containsKey("LockExists")){
+					String data = dataMap.get("LockExists");
+					if(data.equalsIgnoreCase("True")){
+						lockFlag=true;
+						Reporter.log("Lock exists in Task -> Claim page for Claim ID " + actClaimId,true);
+						Reporter.log("Lock Message: " + dataMap.get("LockMessage"), true);
+					}
+				}
+				boolean chkBoxFlag = false;
+				if(dataMap.containsKey("CheckBoxExists")){
+					String data = dataMap.get("CheckBoxExists");
+					if(data.equalsIgnoreCase("True")){
+						chkBoxFlag=true;
+					}
+				}
+			
+				boolean editTaskClaimFlag = false;
+				if(chkBoxFlag){
+					objTasksClaimPage.actionOnTasksClaims(dataMap);
+					String url=driver.getCurrentUrl();
+					if(url.contains("editClaimTask.lvp")){
+						editTaskClaimFlag=true;
+					}
+				}
+				
+				softAssert.assertTrue(lockFlag, "Lock icon is missing in Task -> Claims page");
+				softAssert.assertTrue(chkBoxFlag, "Checkbox is missing in Task -> Claims page");
+				softAssert.assertTrue(editTaskClaimFlag, "Edit claim failed in Task -> Claims page");
+		
+				//To open the home page in new tab
+				String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL,Keys.RETURN); 
+				enobjhomePage.companylogo().sendKeys(selectLinkOpeninNewTab);
+				
+				String mainWinHandle1 = driver.getWindowHandle();
+				Set<String> winHandles1 = driver.getWindowHandles();
+				Iterator<String> iterator1 = winHandles1.iterator();
+				while(iterator1.hasNext()){ 
+					String winHandle=iterator1.next();
+					if(!winHandle.equals(mainWinHandle1)&&!winHandle.equals(mainWinHandle)){
+						driver.switchTo().window(winHandle);
+						break;
+					}
+				}
+				
+				//To verify if the lock icon and check box is present for the claim in Transactions -> Claim page
+				waitforPageload(enobjhomePage.pageHeader());
+				dataMap.put("maintab", "Transactions");
+				dataMap.put("subtab", "customerClaimResult");
+				enobjhomePage.selectTab(dataMap);
+				waitforPageload(objTasksClaimPage.pageHeader());
+				
+				dataMap.put("ClaimId",actClaimId);
+				dataMap.put("Search", "");
+				enClaimsBasicSearch.Search(dataMap);
+				
+				enClaimsPage.isLockExists(dataMap);
+				enClaimsPage.isCheckBoxExists(dataMap);
+				
+				boolean clmSearchLockFlag = false;
+				if(dataMap.containsKey("LockExists")){
+					String data = dataMap.get("LockExists");
+					if(data.equalsIgnoreCase("True")){
+						clmSearchLockFlag=true;
+						Reporter.log("Lock exists in Transactions -> Claim page for Claim ID " + actClaimId,true);
+						Reporter.log("Lock Message: " + dataMap.get("LockMessage"), true);
+					}
+				}
+				boolean clmSearchChkBoxFlag = false;
+				if(dataMap.containsKey("CheckBoxExists")){
+					String data = dataMap.get("CheckBoxExists");
+					if(data.equalsIgnoreCase("True")){
+						clmSearchChkBoxFlag=true;
+					}
+				}
+				
+				boolean editTransactClaimFlag = false;
+				if(chkBoxFlag){
+					dataMap.put("EditClaim", "");
+					enClaimsPage.selectClaimActions(dataMap);
+					String url=driver.getCurrentUrl();
+					if(url.contains("editClaimTask.lvp")){
+						editTransactClaimFlag=true;
+					}
+				}
+		
+				softAssert.assertTrue(clmSearchLockFlag, "Lock icon is missing in Transaction -> Claims page");
+				softAssert.assertTrue(clmSearchChkBoxFlag, "Checkbox is missing in Transaction -> Claims page");
+				softAssert.assertTrue(editTransactClaimFlag, "Edit claim failed in Transaction -> Claims page");
+				
+				driver.close();
+				driver.switchTo().window(mainWinHandle1);
+				
+				//To close the second browser and switch the control back to the first browser
+				
+				dataMap.remove("subtab");
+				dataMap.put("maintab", "Home");
+				enobjhomePage.selectTab(dataMap);
+				
+				WebDriver driver2 = lavanteUtils.driver;
+				driver2.close();
+				driver=driver1;
+				lavanteUtils.driver = driver1;
+				initiate();
+				enobjhomePage.selectTab(dataMap);
+			}else{
+				softAssert.assertTrue(flag, "Test data (Tasks -> Claims) is not available");
+				flag=true;
+			}
+		}
+		
+		softAssert.assertTrue(flag,"Please Retest");
+		softAssert.assertAll();
+		Reporter.log("<---------------------Test Ended at:" + currenttime(),true);
+	}
+		
+	/**
+	 * Test Script to check claim lock feature in the different user of the same user role.
+	 * 
+	 * Lock Icon Should be available for Any Scenario
+	 * Check Box on Search Result Will not be shown for Same User Role
+	 * 
+	 * @throws Exception
+	 * @author girish.n
+	 */
+	@Test
+	public void lockClaimForSameUserRoleTest() throws Exception {
+		Reporter.log("<---------------------Test Started for lockClaimForSameUserRoleTest: " + currenttime(),true);
+		
+		SoftAssert softAssert = new SoftAssert();
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+		String expClaimID="Any";
+		String action ="EditClaim";
+		dataMap.put("Action", action);
+		dataMap.put("ClaimId", expClaimID);
+		dataMap.put("TaskView", "My Task");
+		//Edit a Claim in Task -> Claim page and keep it open
+		objTasksClaimPage.actionOnTasksClaims(dataMap);	
+		
+		boolean flag=false;
+		if(dataMap.containsKey("flag")){
+			String x=dataMap.get("flag");
+			
+			if(x.equalsIgnoreCase("true")){
+				flag=true;
+				String mainWinHandle = driver.getWindowHandle();
+	
+				launchAppFromPOM(Platform, browser, browserVersion);
+				initiate();
+				openAPP1();
+			
+			    WebDriver driver1 = lavanteUtils.driver;
+			    lavanteUtils.driver = driver;
+				
+				Set<String> winHandles = driver.getWindowHandles();
+				
+				Iterator<String> iterator = winHandles.iterator();
+				while(iterator.hasNext()){ 
+					String winHandle=iterator.next();
+					if(!winHandle.equals(mainWinHandle)){
+						driver.switchTo().window(winHandle);
+						break;
+					}
+				}
+				
+				List<?> listofdatafrm = lavanteUtils.login("CustomerKrogerAdmin01", browser);
+				LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+				LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		
+				// Login
+				enobjloginpage.logintoAPP(LdataMap);
+				enobjhomePage.close();
+		
+				waitforPageload(enobjhomePage.pageHeader());
+				dataMap.put("maintab", "Tasks");
+				dataMap.put("subtab", "claimTasks");
+				enobjhomePage.selectTab(dataMap);
+				waitforPageload(objTasksClaimPage.pageHeader());
+				dataMap.put("TaskView", "All");
+				objTasksClaimPage.searchTasksClaim(dataMap);
+				
+				//To verify if the lock icon and check box is present for the claim in Task-> Claim page
+				objTasksClaimPage.isLockExists(dataMap);
+				objTasksClaimPage.isCheckBoxExists(dataMap);
+				
+				String actClaimId = dataMap.get("ClaimId");
+				boolean lockFlag = false;
+				if(dataMap.containsKey("LockExists")){
+					String data = dataMap.get("LockExists");
+					if(data.equalsIgnoreCase("True")){
+						lockFlag=true;
+						Reporter.log("Lock exists in Task -> Claim page for Claim ID " + actClaimId,true);
+						Reporter.log("Lock Message: " + dataMap.get("LockMessage"), true);
+					}
+				}
+				
+				boolean chkBoxFlag = true;
+				if(dataMap.containsKey("CheckBoxExists")){
+					String data = dataMap.get("CheckBoxExists");
+					if(data.equalsIgnoreCase("False")){
+						chkBoxFlag=false;
+					}
+				}
+				
+				softAssert.assertTrue(lockFlag, "Lock icon is missing in TASK -> Claims page for the Claim Id: "+actClaimId);
+				softAssert.assertFalse(chkBoxFlag, "Checkbox is present in Task -> Claims page for the Claim Id: "+actClaimId);
+		
+				//To verify if the lock icon and check box is present for the claim in Transactions -> Claim page
+				dataMap.put("maintab", "Transactions");
+				dataMap.put("subtab", "customerClaimResult");
+				enobjhomePage.selectTab(dataMap);
+				waitforPageload(objTasksClaimPage.pageHeader());
+				
+				dataMap.put("ClaimId",actClaimId);
+				dataMap.put("Search", "");
+				enClaimsBasicSearch.Search(dataMap);
+				
+				enClaimsPage.isLockExists(dataMap);
+				enClaimsPage.isCheckBoxExists(dataMap);
+				
+				boolean clmSearchLockFlag = false;
+				if(dataMap.containsKey("LockExists")){
+					String data = dataMap.get("LockExists");
+					if(data.equalsIgnoreCase("True")){
+						clmSearchLockFlag=true;
+						Reporter.log("Lock exists in Transactions -> Claim page for Claim ID " + actClaimId,true);
+						Reporter.log("Lock Message: " + dataMap.get("LockMessage"), true);
+					}
+				}
+				
+				boolean clmSearchChkBoxFlag = true;
+				if(dataMap.containsKey("CheckBoxExists")){
+					String data = dataMap.get("CheckBoxExists");
+					if(data.equalsIgnoreCase("False")){
+						clmSearchChkBoxFlag=false;
+					}
+				}
+				
+				if(clmSearchLockFlag&&clmSearchChkBoxFlag){
+					Reporter.log("Claim Basic Search: Claim "+actClaimId+" IS LOCKED!!!");
+				}
+				
+				softAssert.assertTrue(clmSearchLockFlag, "Lock icon is missing in Transaction -> Claims page for the Claim Id: "+actClaimId);
+				softAssert.assertFalse(clmSearchChkBoxFlag, "Checkbox is present in Transaction -> Claims page for the Claim Id: "+actClaimId);
+				
+				//To close the second browser and switch the control back to the first browser
+				WebDriver driver2 = lavanteUtils.driver;
+				driver2.close();
+				driver=driver1;
+				lavanteUtils.driver = driver1;
+				initiate();
+				
+				dataMap.remove("subtab");
+				dataMap.put("maintab", "Home");
+				enobjhomePage.selectTab(dataMap);
+			}else{
+				softAssert.assertTrue(flag, "Test data (Tasks -> Claims) is not available");
+				flag=true;
+			}
+		}
+		
+		softAssert.assertTrue(flag,"Please Retest");
+		softAssert.assertAll();
+		Reporter.log("<---------------------Test Ended at:" + currenttime(),true);
+	}
+
+	/**
+	 * Test Script to check claim lock feature in the different user of the different user role.
+	 * 
+	 * Lock Icon Should be available for Any Scenario
+	 * Check Box on Search Result Will not be shown for Diff User Role
+	 * 
+	 * @throws Exception
+	 * @author girish.n
+	 */
+	@Test
+	public void lockClaimForDiffUserRoleTest() throws Exception {
+		Reporter.log("<---------------------Test Started for lockClaimForDiffUserRoleTest: " + currenttime(),true);
+		
+		SoftAssert softAssert = new SoftAssert();
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+		String expClaimID="Any";
+		String action ="EditClaim";
+		dataMap.put("Action", action);
+		dataMap.put("ClaimId", expClaimID);
+		dataMap.put("TaskView", "My Task");
+		//Edit a Claim in Task -> Claim page and keep it open
+		objTasksClaimPage.actionOnTasksClaims(dataMap);	
+		
+		boolean flag=false;
+		if(dataMap.containsKey("flag")){
+			String x=dataMap.get("flag");
+			
+			if(x.equalsIgnoreCase("true")){
+				flag=true;
+				String mainWinHandle = driver.getWindowHandle();
+	
+				launchAppFromPOM(Platform, browser, browserVersion);
+				initiate();
+				openAPP1();
+			
+			    WebDriver driver1 = lavanteUtils.driver;
+			    lavanteUtils.driver = driver;
+				
+				Set<String> winHandles = driver.getWindowHandles();
+				Iterator<String> iterator = winHandles.iterator();
+				while(iterator.hasNext()){ 
+					String winHandle=iterator.next();
+					if(!winHandle.equals(mainWinHandle)){
+						driver.switchTo().window(winHandle);
+						break;
+					}
+				}
+				
+				List<?> listofdatafrm = lavanteUtils.login("KrogerClerk", browser);
+				LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+				LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		
+				// Login
+				enobjloginpage.logintoAPP(LdataMap);
+				enobjhomePage.close();
+		
+				waitforPageload(enobjhomePage.pageHeader());
+		
+				//To verify if the lock icon and check box is present for the claim in Transactions -> Claim page
+				dataMap.put("maintab", "Transactions");
+				dataMap.put("subtab", "customerClaimResult");
+				enobjhomePage.selectTab(dataMap);
+				waitforPageload(objTasksClaimPage.pageHeader());
+				
+				String actClaimId = dataMap.get("ClaimId");
+				dataMap.put("ClaimId",actClaimId);
+				dataMap.put("Search", "");
+				enClaimsBasicSearch.Search(dataMap);
+				
+				enClaimsPage.isLockExists(dataMap);
+				enClaimsPage.isCheckBoxExists(dataMap);
+				
+				boolean clmSearchLockFlag = false;
+				if(dataMap.containsKey("LockExists")){
+					String data = dataMap.get("LockExists");
+					if(data.equalsIgnoreCase("True")){
+						clmSearchLockFlag=true;
+						Reporter.log("Lock exists in Transactions -> Claim page for Claim ID " + actClaimId,true);
+						Reporter.log("Lock Message: " + dataMap.get("LockMessage"), true);
+					}
+				}
+				
+				boolean clmSearchChkBoxFlag = true;
+				if(dataMap.containsKey("CheckBoxExists")){
+					String data = dataMap.get("CheckBoxExists");
+					if(data.equalsIgnoreCase("False")){
+						clmSearchChkBoxFlag=false;
+					}
+				}
+				
+				softAssert.assertTrue(clmSearchLockFlag, "Lock icon is missing in Transaction -> Claims page for the Claim Id: "+actClaimId);
+				softAssert.assertFalse(clmSearchChkBoxFlag, "Checkbox is present in Transaction -> Claims page for the Claim Id: "+actClaimId);
+				
+				//To close the second browser and switch the control back to the first browser
+				WebDriver driver2 = lavanteUtils.driver;
+				driver2.close();
+				driver=driver1;
+				lavanteUtils.driver = driver1;
+				initiate();
+				
+				dataMap.remove("subtab");
+				dataMap.put("maintab", "Home");
+				enobjhomePage.selectTab(dataMap);
+			}else{
+				softAssert.assertTrue(flag, "Test data (Tasks -> Claims) is not available");
+				flag=true;
+			}
+		}
+		
+		softAssert.assertTrue(flag,"Please Retest");
+		softAssert.assertAll();
+		Reporter.log("<---------------------Test Ended at:" + currenttime(),true);
+	}
+
+	/**
+	 * Test script to verify the confirmation pop up displayed the user exits from edit claim page.
+	 * @author Girish.N
+	 * @throws Exception 
+	 */
+	@Test()
+	public void exitEditClaimPopupTest() throws Exception{
+		Reporter.log("<----------Test Started for exitEditClaimPopupTest: " + currenttime(),true);
+		
+		SoftAssert softAssert = new SoftAssert();
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+		String expClaimID="Any";
+		String action ="EditClaim";
+		dataMap.put("Action", action);
+		dataMap.put("ClaimId", expClaimID);
+		dataMap.put("TaskView", "My Task");
+		//Edit a Claim in Task->Claim page and keep it open
+		objTasksClaimPage.actionOnTasksClaims(dataMap);	
+		
+		//Popup check when clicked on Cancel Button.
+		boolean flag=false;
+		if(dataMap.containsKey("flag")){
+			String x=dataMap.get("flag");
+				
+			if(x.equalsIgnoreCase("true")){
+				
+				dataMap.put("PopupAction", "No");
+				click(objCreateClaimPage.CancelBtn());
+				objCreateClaimPage.editClaimPopupAction(dataMap);
+				
+				if(dataMap.containsKey("PopupDisplayed")){
+					flag=true;
+					Reporter.log("<---------------POPUP DISPLAYED: Clicked on Cancel button",true);
+					dataMap.remove("PopupDisplayed");
+				}
+				softAssert.assertTrue(flag,"Popup didn't displayed when clicked on Cancel button");
+				
+				//Popup check when clicked on Company Logo
+				if(flag){
+					flag=false;
+					click(enobjhomePage.companylogo());
+					objCreateClaimPage.editClaimPopupAction(dataMap);
+					
+					if(dataMap.containsKey("PopupDisplayed")){
+						flag=true;
+						Reporter.log("<---------------POPUP DISPLAYED: Clicked on Company logo",true);
+						dataMap.remove("PopupDisplayed");
+					}
+					softAssert.assertTrue(flag,"Popup didn't displayed when clicked on company logo");
+					
+					//Popup check when clicked on Any Tab (For Ex: Suppliers)
+					if(flag){
+						flag=false;
+						dataMap.put("Skip", "");
+						dataMap.remove("subtab");
+						dataMap.put("maintab", "Suppliers");
+						enobjhomePage.selectTab(dataMap);
+						objCreateClaimPage.editClaimPopupAction(dataMap);
+						
+						if(dataMap.containsKey("PopupDisplayed")){
+							flag=true;
+							Reporter.log("<---------------POPUP DISPLAYED: Clicked on Suppliers tab",true);
+							dataMap.remove("PopupDisplayed");
+						}
+						softAssert.assertTrue(flag,"Popup didn't displayed when clicked on Suppliers Tab");
+						
+						//Popup check when clicked on Logout button
+						if(flag){
+							flag=false;
+							enobjhomePage.logout();
+							objCreateClaimPage.editClaimPopupAction(dataMap);
+							
+							if(dataMap.containsKey("PopupDisplayed")){
+								flag=true;
+								Reporter.log("<---------------POPUP DISPLAYED: Clicked on Logout button",true);
+								dataMap.remove("PopupDisplayed");
+							}
+							softAssert.assertTrue(flag,"Popup didn't displayed when clicked on Suppliers Tab");
+						}
+					}
+				}				
+			}else{
+				softAssert.assertTrue(flag, "Test data (Tasks -> Claims) is not available");
+				flag=true;
+			}
+		}
+		dataMap.remove("Skip");
+		dataMap.remove("subtab");
+		dataMap.put("maintab", "Home");
+		enobjhomePage.selectTab(dataMap);
+		
+		softAssert.assertTrue(flag,"Please Retest");
+		softAssert.assertAll();
+		Reporter.log("<---------------------Test Ended at:" + currenttime(),true);
+	}
+	
+	@AfterClass
+	public void SetupafterClassmethod() {
+		enobjhomePage.logout();
+		quitBrowser();		
+	}
+}

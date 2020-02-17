@@ -1,0 +1,9 @@
+#surefire_0
+#Tue Aug 02 10:03:58 IST 2016
+RemoteURL=http\://192.168.21.20\:4444
+user.dir=D\:\\Recovery_Auto_Workspace\\Recovery_Automation
+webdriver.chrome.driver=C\:\\LavanteDrivers\\ChromeDriver.exe
+RemoteExecution=false
+localRepository=C\:\\Users\\tallury.srikanth\\.m2\\repository
+webdriver.ie.driver=C\:\\LavanteDrivers\\IEDriverServer.exe
+basedir=D\:\\Recovery_Auto_Workspace\\Recovery_Automation

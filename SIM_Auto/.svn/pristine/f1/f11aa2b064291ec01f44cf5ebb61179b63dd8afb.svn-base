@@ -1,0 +1,209 @@
+package com.lavante.sim.customer.TestScripts.Transactions.NCH;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class NCHBasicSearchTest extends PageInitiator{
+
+	LavanteUtils lavanteUtils=new LavanteUtils();	
+	
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * @author Thejaswi.Bhat
+	 * 
+	 */
+	@BeforeMethod
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception
+	{
+				
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		openAPP1();	
+		lavanteUtils.driver=driver;
+		
+		List<?> listofdatafrm=lavanteUtils.login("Kroger",browser);
+		LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String>();
+		LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+		
+		//Login		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+	}
+	
+	@BeforeMethod
+	public void setup() {
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String, String>();
+		dataMap.put("maintab","TRANSACTIONS");
+		dataMap.put("subtab", "couponDeductionSearchResult");
+		enobjhomePage.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+		
+		dataMap.put("Clear","");
+		objNCHInvoicePage.formAction(dataMap);
+	}
+	
+	/**
+	 * Do a basic search using single criteria
+	 * @author Thejaswi.Bhat
+	 * @throws Exception
+	 */
+	@Test
+	public void BasicSearchSingleCriteria() throws Exception
+	{
+		
+		Reporter.log("Test Started for Basic Search for single criteria: "+currenttime());
+		LinkedHashMap<String , String> dataMap = new LinkedHashMap<>();
+		SoftAssert softassert=new SoftAssert();
+		boolean flag=false;
+		
+		String expdata = "1236";
+		dataMap.put("NCHDeduction", expdata);
+		dataMap.put("Search","");
+		objNCHInvoicePage.searchNCH(dataMap);
+		
+		lavanteUtils.switchtoFrame(objNCHInvoicePage.IFrameSearchResults());
+		lavanteUtils.waitForTime(5000);
+		
+		List<WebElement> criteria = objNCHInvoicePage.iterateSearchHeaderFindColList("NCH Deduction");
+		if(criteria.size()>0) {
+			for(int i=0;i<criteria.size();i++) {
+				System.out.println("Search results, Expected: "+expdata+" Actual: "+criteria.get(i).getText());
+				Reporter.log("Search results, Expected: "+expdata+" Actual: "+criteria.get(i).getText());
+				softassert.assertEquals(criteria.get(i).getText(), expdata,"Search results are not matching, Expected: "+expdata+" Actual: "+criteria.get(i).getText());
+				flag = true;
+			}
+		} else {
+			softassert.assertEquals("No results", objNCHInvoicePage.NoData().getText());
+			flag = true;
+		}
+		
+		if(flag == false) {
+			Reporter.log("Search results are not matching");
+		}
+				
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Basic NCH Search for single criteria: "+currenttime());
+	}
+	
+	/**
+	 * Do a basic search using multiple criteria
+	 * @author Thejaswi.Bhat
+	 * @throws Exception
+	 */
+	@Test
+	public void BasicSearchMultipleCriteria() throws Exception
+	{
+		
+		Reporter.log("Test Started for Basic Search for multiple criteria for Coupon Deduction: "+currenttime());
+		LinkedHashMap<String , String> dataMap = new LinkedHashMap<>();
+		SoftAssert softassert=new SoftAssert();
+		boolean flag=false;
+		
+		String expNCHManufacturer = "223232";
+		String expNCHManufacturerName = "CABOT CREAMERY CO-OP, INC";
+		dataMap.put("NCHManufacturer", expNCHManufacturer);
+		dataMap.put("NCHManufacturerName",expNCHManufacturerName);
+		dataMap.put("Search","");
+		objNCHInvoicePage.searchNCH(dataMap);
+		
+		lavanteUtils.switchtoFrame(objNCHInvoicePage.IFrameSearchResults());
+		lavanteUtils.waitForTime(5000);
+		
+		/*dataMap.put("ClaimTypeCol", "");*/
+		List<WebElement> claimTypeList = objNCHInvoicePage.iterateSearchHeaderFindColList("NCH Manufacturer");
+		List<WebElement> NCHtatusList = objNCHInvoicePage.iterateSearchHeaderFindColList("NCH Manufacturer Names");
+		if(claimTypeList.size()>0) {
+			for(int i=0;i<claimTypeList.size();i++) {
+				System.out.println("Search results, Expected: "+expNCHManufacturer+" Actual: "+claimTypeList.get(i).getText());
+				Reporter.log("Search results, Expected: "+expNCHManufacturer+" Actual: "+claimTypeList.get(i).getText());
+				softassert.assertEquals(claimTypeList.get(i).getText(), expNCHManufacturer,"Search results are not matching, Expected: "+expNCHManufacturer
+						+" Actual: "+claimTypeList.get(i).getText());
+				softassert.assertEquals(NCHtatusList.get(i).getText(), expNCHManufacturerName,"Search results are not matching, Expected: "+expNCHManufacturerName
+						+" Actual: "+NCHtatusList.get(i).getText());
+				flag = true;
+			}
+		} else {
+			softassert.assertEquals("No results", objNCHInvoicePage.NoData().getText());
+			flag = true;
+		}
+		
+		if(flag == false) {
+			Reporter.log("Search results are not matching");
+		}
+				
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Basic NCH Search for multiple criteria: "+currenttime());
+	}
+	
+	/**
+	 * Do a basic search using single criteria and clear the search and 
+	 * verify whether the search is getting cleared
+	 * @author Vidya.C
+	 * @throws Exception
+	 */
+	@Test
+	public void VerifyBasicSearchClear() throws Exception
+	{
+		
+		Reporter.log("Test Started for Basic Search for single criteria and clear the search: "+currenttime());
+		LinkedHashMap<String , String> dataMap = new LinkedHashMap<>();
+		SoftAssert softassert=new SoftAssert();
+		
+		lavanteUtils.switchtoFrame(objNCHInvoicePage.IFrameSearchResults());
+		lavanteUtils.click(objNCHInvoicePage.showCountlink());
+		String expcount = objNCHInvoicePage.GetResultsCount().getText();
+		lavanteUtils.switchtoFrame(null);
+		
+		String expdata = "1022";
+		dataMap.put("ClaimId", expdata);
+		dataMap.put("Search","");
+		objNCHInvoicePage.searchNCH(dataMap);
+		
+		lavanteUtils.switchtoFrame(objNCHInvoicePage.IFrameSearchResults());
+		lavanteUtils.waitForTime(5000);
+		String searchCount = objNCHInvoicePage.GetResultsCount().getText();
+		lavanteUtils.switchtoFrame(null);
+
+		dataMap.put("Clear", "");
+		objNCHInvoicePage.searchNCH(dataMap);
+		
+		lavanteUtils.switchtoFrame(objNCHInvoicePage.IFrameSearchResults());
+		lavanteUtils.waitForTime(5000);
+		String clearCount = objNCHInvoicePage.GetResultsCount().getText();
+		softassert.assertFalse(expcount.equals(searchCount), "After search count is equal to no search count");
+		softassert.assertTrue(expcount.equals(clearCount), "After clear count is not equal to no search count");
+
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Basic NCH Search for single criteria and clear the search: "+currenttime());
+	}
+	
+	
+	@AfterMethod
+	public void SetupAftermethod() {
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.refreshPage();
+	}
+	
+	@AfterMethod
+	public void SetupafterClassmethod(){
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+}

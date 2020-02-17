@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="">
+<head>
+  <title>Test Results Report - Lavante - Recovery - Running on IE 11</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="description" content="TestNG unit test results." />
+  <link href="reportng.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="reportng.js"></script>
+</head>
+<body>
+<h1>Lavante - Recovery - Running on IE 11</h1>
+<p>
+  Test duration: 819.589s
+</p>
+
+  <table class="resultsTable configTable">
+    <tr><th colspan="3" class="header failedConfig">Failed Configuration</th></tr>
+              <tr class="group">
+        <td colspan="3">lavante.recovery.testsuites.SanityTestSuite</td>
+      </tr>
+            
+<tr>
+  <td class="method">
+                  clean
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+        
+    
+        
+
+        <a href="javascript:toggleElement('exception-0', 'block')" title="Click to expand/collapse"><b>org.openqa.selenium.WebDriverException: Session [eb0de9c4-f64f-426b-b298-a7e94824a93f] was terminated due to SO_TIMEOUT<br/>
+Command duration or timeout: 7 milliseconds<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{browserAttachTimeout=0, enablePersistentHover=false, ie.forceCreateProcessApi=false, ie.usePerProcessProxy=false, ignoreZoomSetting=true, handlesAlerts=true, version=11, platform=WINDOWS, nativeEvents=false, ie.ensureCleanSession=false, elementScrollBehavior=0, ie.browserCommandLineSwitches=, webdriver.remote.sessionid=eb0de9c4-f64f-426b-b298-a7e94824a93f, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:41786/, takesScreenshot=true, javascriptEnabled=true, ignoreProtectedModeSettings=true, enableElementCacheCleanup=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=dismiss}]<br/>
+Session ID: eb0de9c4-f64f-426b-b298-a7e94824a93f</b></a><br />
+    <div class="stackTrace" id="exception-0">
+              sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)<br />
+              sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)<br />
+              java.lang.reflect.Constructor.newInstance(Constructor.java:422)<br />
+              org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)<br />
+              org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)<br />
+              org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)<br />
+              org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:701)<br />
+              org.openqa.selenium.remote.RemoteWebDriver.quit(RemoteWebDriver.java:526)<br />
+              lavante.recovery.utilities.seleniumBaseClass.quitBrowser(seleniumBaseClass.java:72)<br />
+              lavante.recovery.testsuites.SanityTestSuite.clean(SanityTestSuite.java:573)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:564)<br />
+              org.testng.internal.Invoker.invokeConfigurations(Invoker.java:213)<br />
+              org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)<br />
+              org.testng.TestRunner.afterRun(TestRunner.java:1014)<br />
+              org.testng.TestRunner.run(TestRunner.java:621)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                    <b>Caused by: </b> <a href="javascript:toggleElement('exception-1', 'block')" title="Click to expand/collapse">org.openqa.selenium.WebDriverException: Session [eb0de9c4-f64f-426b-b298-a7e94824a93f] was terminated due to SO_TIMEOUT<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: unknown</a><br />
+        <div class="stackTrace" id="exception-1">
+                      org.openqa.grid.internal.ActiveTestSessions.getExistingSession(ActiveTestSessions.java:105)<br />
+                      org.openqa.grid.internal.Registry.getExistingSession(Registry.java:425)<br />
+                      org.openqa.grid.web.servlet.handler.RequestHandler.getSession(RequestHandler.java:240)<br />
+                      org.openqa.grid.web.servlet.handler.RequestHandler.process(RequestHandler.java:120)<br />
+                      org.openqa.grid.web.servlet.DriverServlet.process(DriverServlet.java:83)<br />
+                      org.openqa.grid.web.servlet.DriverServlet.doDelete(DriverServlet.java:73)<br />
+                      javax.servlet.http.HttpServlet.service(HttpServlet.java:713)<br />
+                      javax.servlet.http.HttpServlet.service(HttpServlet.java:790)<br />
+                      org.seleniumhq.jetty9.servlet.ServletHolder.handle(ServletHolder.java:808)<br />
+                      org.seleniumhq.jetty9.servlet.ServletHandler.doHandle(ServletHandler.java:587)<br />
+                      org.seleniumhq.jetty9.server.session.SessionHandler.doHandle(SessionHandler.java:221)<br />
+                      org.seleniumhq.jetty9.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)<br />
+                      org.seleniumhq.jetty9.servlet.ServletHandler.doScope(ServletHandler.java:515)<br />
+                      org.seleniumhq.jetty9.server.session.SessionHandler.doScope(SessionHandler.java:185)<br />
+                      org.seleniumhq.jetty9.server.handler.ContextHandler.doScope(ContextHandler.java:1061)<br />
+                      org.seleniumhq.jetty9.server.handler.ScopedHandler.handle(ScopedHandler.java:141)<br />
+                      org.seleniumhq.jetty9.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)<br />
+                      org.seleniumhq.jetty9.server.Server.handle(Server.java:499)<br />
+                      org.seleniumhq.jetty9.server.HttpChannel.handle(HttpChannel.java:310)<br />
+                      org.seleniumhq.jetty9.server.HttpConnection.onFillable(HttpConnection.java:257)<br />
+                      org.seleniumhq.jetty9.io.AbstractConnection$2.run(AbstractConnection.java:540)<br />
+                      org.seleniumhq.jetty9.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)<br />
+                      org.seleniumhq.jetty9.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)<br />
+                      java.lang.Thread.run(Unknown Source)<br />
+                  </div>
+          </div>
+      </td>
+</tr>
+    
+      </table>
+
+
+  <table class="resultsTable">
+    <tr><th colspan="3" class="header failed">Failed Tests</th></tr>
+          <tr>
+        <td colspan="3" class="group">lavante.recovery.testsuites.SanityTestSuite</td>
+      </tr>
+            
+<tr>
+  <td class="method">
+                  verifyCreditsAssignmentsPage
+      </td>
+  <td class="duration">
+    3.006s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Fail: &apos;creditsLink&apos; is not displayed<br />
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-2', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;creditsLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-2">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:20)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:207)<br />
+              lavante.recovery.pageobjects.Assignments.CreditsPage.verifycreditsLink(CreditsPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyCreditsAssignmentsPage(SanityTestSuite.java:541)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyHoldsAssignmentsPage
+      </td>
+  <td class="duration">
+    5.007s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Fail: &apos;assignmentsLink&apos; is not displayed<br />
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-3', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;assignmentsLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-3">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:20)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:207)<br />
+              lavante.recovery.pageobjects.Assignments.HoldsPage.verifyAssignmentsLink(HoldsPage.java:18)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyHoldsAssignmentsPage(SanityTestSuite.java:527)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyReportsPage
+      </td>
+  <td class="duration">
+    33.138s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;reportsLink&apos; is clicked<br />
+                                Pass: &apos;clientLink&apos; is clicked<br />
+                                Pass: &apos;clientReportLink&apos; is clicked<br />
+                                Fail: &apos;runBtn&apos; is not displayed<br />
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-4', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;runBtn&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-4">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:20)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:207)<br />
+              lavante.recovery.pageobjects.ReportsPage.verifyrunBtn(ReportsPage.java:54)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyReportsPage(SanityTestSuite.java:385)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifySetupPage
+      </td>
+  <td class="duration">
+    137.173s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;configurationLink&apos; is clicked<br />
+                                Fail: &apos;setUpLink&apos; is not displayed<br />
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-5', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;setUpLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-5">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:20)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:207)<br />
+              lavante.recovery.pageobjects.Configuration.Setup.AuditPage.verifySetUpLink(AuditPage.java:28)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifySetupPage(SanityTestSuite.java:396)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyStatementsAssignmentsPage
+      </td>
+  <td class="duration">
+    20.005s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Fail: &apos;statementsLink&apos; is not displayed<br />
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-6', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;statementsLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-6">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:20)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:207)<br />
+              lavante.recovery.pageobjects.Assignments.StatementsPage.verifyStatementsLink(StatementsPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyStatementsAssignmentsPage(SanityTestSuite.java:553)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyauditStatisticsAssignmentsPage
+      </td>
+  <td class="duration">
+    15.006s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Fail: &apos;auditStatisticsLink&apos; is not displayed<br />
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-7', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;auditStatisticsLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-7">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:20)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:207)<br />
+              lavante.recovery.pageobjects.Assignments.AuditStatisticsPage.verifyauditStatisticsLink(AuditStatisticsPage.java:21)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyauditStatisticsAssignmentsPage(SanityTestSuite.java:565)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+      </table>
+
+
+  <table class="resultsTable">
+    <tr><th colspan="3" class="header passed">Passed Tests</th></tr>
+          <tr>
+        <td colspan="3" class="group">lavante.recovery.testsuites.SanityTestSuite</td>
+      </tr>
+            
+<tr>
+  <td class="method">
+                  verifyBatchingPage
+      </td>
+  <td class="duration">
+    35.357s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;batchingLink&apos; is clicked<br />
+                                Info: Switched successfully to frame :0<br />
+                                Pass: &apos;unBatchedCreditsTable&apos; is displayed<br />
+                                Info: Switched successfully to frame :1<br />
+                                Pass: &apos;batchedClaimsTable&apos; is displayed<br />
+                                Info: Switched successfully to frame :2<br />
+                                Pass: &apos;batchSummaryTable&apos; is displayed<br />
+                                Info: Switched successfully to frame :3<br />
+                                Pass: &apos;batchedDetailsTable&apos; is displayed<br />
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyCheckRegistryPage
+      </td>
+  <td class="duration">
+    13.972s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;chkRegLink&apos; is clicked<br />
+                                Pass: &apos;chkRegList&apos; is displayed<br />
+                                Pass: &apos;addNewBtn&apos; is displayed<br />
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyClaimsPage
+      </td>
+  <td class="duration">
+    63.206s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;claimsLink&apos; is clicked<br />
+                                Pass: &apos;totalClaimsTable&apos; is displayed<br />
+                                Pass: &apos;claimsListTable&apos; is displayed<br />
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyDashBoardClaims
+      </td>
+  <td class="duration">
+    32.772s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;dashBoardLink&apos; is displayed<br />
+                                Pass: &apos;claimsLink&apos; is displayed<br />
+                                Pass: &apos;openClaims&apos; is displayed<br />
+                                Pass: &apos;batchedClaimslink&apos; is clicked<br />
+                                Pass: &apos;batchedClaimslink&apos; is displayed<br />
+                                Pass: &apos;batchedClaimslink&apos; is clicked<br />
+                                Pass: &apos;batchedClaimslink&apos; is displayed<br />
+                                Pass: &apos;batchedClaims&apos; is displayed<br />
+                                Pass: &apos;invoiceslink&apos; is clicked<br />
+                                Pass: &apos;invoiceslink&apos; is displayed<br />
+                                Pass: &apos;invoiceslink&apos; is clicked<br />
+                                Pass: &apos;invoiceslink&apos; is displayed<br />
+                                Pass: &apos;invoices&apos; is displayed<br />
+                                Pass: &apos;claimsByStatusChart&apos; is displayed<br />
+                                Pass: &apos;claimsByTypeChart&apos; is displayed<br />
+                                Pass: &apos;allClaimsChart&apos; is displayed<br />
+                                Pass: &apos;claimsByOrgChart&apos; is displayed<br />
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyDashBoardCompliance
+      </td>
+  <td class="duration">
+    31.870s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;complainceLink&apos; is clicked<br />
+                                Pass: &apos;complainceLink&apos; is displayed<br />
+                                Pass: &apos;compliantLink&apos; is clicked<br />
+                                Pass: &apos;compliantLink&apos; is displayed<br />
+                                Pass: &apos;compliantTable&apos; is displayed<br />
+                                Pass: &apos;complianceSummary&apos; is displayed<br />
+                                Pass: &apos;noncompliantLink&apos; is clicked<br />
+                                Pass: &apos;noncompliantLink&apos; is displayed<br />
+                                Pass: &apos;noncompliantTable&apos; is displayed<br />
+                                Pass: &apos;complianceSummary&apos; is displayed<br />
+                                Pass: &apos;complianceBySpendChart&apos; is displayed<br />
+                                Pass: &apos;complianceByCountChart&apos; is displayed<br />
+                                Pass: &apos;complianceBySpendRankChart&apos; is displayed<br />
+                                Pass: &apos;OFACChart&apos; is displayed<br />
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyDashBoardSupplier
+      </td>
+  <td class="duration">
+    69.814s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;supplierLink&apos; is clicked<br />
+                                Pass: &apos;supplierLink&apos; is displayed<br />
+                                Pass: &apos;supplierCreditLink&apos; is clicked<br />
+                                Pass: &apos;supplierCreditLink&apos; is displayed<br />
+                                Pass: &apos;supplierCreditLink&apos; is clicked<br />
+                                Pass: &apos;supplierCreditLink&apos; is displayed<br />
+                                Pass: &apos;CreditTopSuppliers&apos; is displayed<br />
+                                Pass: &apos;supplierCreditLink&apos; is clicked<br />
+                                Pass: &apos;supplierCreditLink&apos; is displayed<br />
+                                Pass: &apos;FileStatistics&apos; is displayed<br />
+                                Pass: &apos;supplierSpendLink&apos; is clicked<br />
+                                Pass: &apos;supplierSpendLink&apos; is displayed<br />
+                                Pass: &apos;supplierSpendLink&apos; is clicked<br />
+                                Pass: &apos;supplierSpendLink&apos; is displayed<br />
+                                Pass: &apos;SpendTopSuppliers&apos; is displayed<br />
+                                Pass: &apos;supplierSpendLink&apos; is clicked<br />
+                                Pass: &apos;supplierSpendLink&apos; is displayed<br />
+                                Pass: &apos;FileStatistics&apos; is displayed<br />
+                                Pass: &apos;chkReqLink&apos; is clicked<br />
+                                Pass: &apos;chkReqLink&apos; is displayed<br />
+                                Pass: &apos;chkReqLink&apos; is clicked<br />
+                                Pass: &apos;chkReqLink&apos; is displayed<br />
+                                Pass: &apos;chkReqTopSuppliers&apos; is displayed<br />
+                                Pass: &apos;chkReqLink&apos; is clicked<br />
+                                Pass: &apos;chkReqLink&apos; is displayed<br />
+                                Pass: &apos;FileStatistics&apos; is displayed<br />
+                                Pass: &apos;supplierExcludedChart&apos; is displayed<br />
+                                Pass: &apos;supplierTargetChart&apos; is displayed<br />
+                                Pass: &apos;supplierChangeChart&apos; is displayed<br />
+                                Pass: &apos;relSupChart&apos; is displayed<br />
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyInvoicePage
+      </td>
+  <td class="duration">
+    56.177s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;invoiceLink&apos; is clicked<br />
+                                Info: Switched successfully to frame :0<br />
+                                Pass: &apos;invoicesTable&apos; is displayed<br />
+                                Info: Switched successfully to frame :1<br />
+                                Pass: &apos;invoiceSummaryTable&apos; is displayed<br />
+                                Info: Switched successfully to frame :2<br />
+                                Pass: &apos;invoiceCreditLink&apos; is clicked<br />
+                                Pass: &apos;invoiceCreditTable&apos; is displayed<br />
+                                Info: Switched successfully to frame :2<br />
+                                Pass: &apos;invoiceVoidLink&apos; is clicked<br />
+                                Pass: &apos;invoiceVoidTable&apos; is displayed<br />
+                                Info: Switched successfully to frame :2<br />
+                                Pass: &apos;invoiceRefundLink&apos; is clicked<br />
+                                Pass: &apos;invoiceRefundTable&apos; is displayed<br />
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyPossibleDupesPage
+      </td>
+  <td class="duration">
+    27.411s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;possibleDupesLink&apos; is clicked<br />
+                                Info: Switched successfully to frame :0<br />
+                                Pass: &apos;possDupSummaryTable&apos; is displayed<br />
+                                Info: Switched successfully to frame :1<br />
+                                Pass: &apos;preBatchTable&apos; is displayed<br />
+                                Info: Switched successfully to frame :2<br />
+                                Pass: &apos;postBatchTable&apos; is displayed<br />
+                                Info: Switched successfully to frame :3<br />
+                                Pass: &apos;possDupDetailsTable&apos; is displayed<br />
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifySummaryPage
+      </td>
+  <td class="duration">
+    22.427s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;summaryLink&apos; is clicked<br />
+                                Pass: &apos;currMonthTable&apos; is displayed<br />
+                                Pass: &apos;custSummaryTable&apos; is displayed<br />
+                                Pass: &apos;OutReachgrph&apos; is displayed<br />
+                                Pass: &apos;statementProcessedgrph&apos; is displayed<br />
+                                Pass: &apos;openClaimsBySpendGrph&apos; is displayed<br />
+                                Pass: &apos;openClaimsByCountGrph&apos; is displayed<br />
+                                Pass: &apos;subClaimsBySpendGrph&apos; is displayed<br />
+                                Pass: &apos;subClaimsByCountGrph&apos; is displayed<br />
+                                Pass: &apos;totalCreditsgrph&apos; is displayed<br />
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyauditInboundPage
+      </td>
+  <td class="duration">
+    161.650s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;inboundLink&apos; is clicked<br />
+                                Pass: &apos;inboundLink&apos; is displayed<br />
+                                Pass: &apos;inboundDocumentStatistics&apos; is displayed<br />
+                                Pass: &apos;inboundDocumentSummary&apos; is displayed<br />
+                                Pass: &apos;recognizedfax&apos; is clicked<br />
+                                Pass: &apos;statements&apos; is clicked<br />
+                                Pass: &apos;verifications&apos; is clicked<br />
+                                Pass: &apos;statements&apos; is displayed<br />
+                                Pass: &apos;verificationsTable&apos; is displayed<br />
+                                Pass: &apos;checks&apos; is clicked<br />
+                                Pass: &apos;checksTable&apos; is displayed<br />
+                                Pass: &apos;correspondence&apos; is clicked<br />
+                                Pass: &apos;correspondenceTable&apos; is displayed<br />
+                                Pass: &apos;duplicate&apos; is clicked<br />
+                                Pass: &apos;duplicateTable&apos; is displayed<br />
+                                Pass: &apos;profiles&apos; is clicked<br />
+                                Pass: &apos;profilesTable&apos; is displayed<br />
+                                Pass: &apos;unrecognizedfax&apos; is clicked<br />
+                                Pass: &apos;statements&apos; is clicked<br />
+                                Pass: &apos;verifications&apos; is clicked<br />
+                                Pass: &apos;statements&apos; is displayed<br />
+                                Pass: &apos;verificationsTable&apos; is displayed<br />
+                                Pass: &apos;checks&apos; is clicked<br />
+                                Pass: &apos;checksTable&apos; is displayed<br />
+                                Pass: &apos;correspondence&apos; is clicked<br />
+                                Pass: &apos;correspondenceTable&apos; is displayed<br />
+                                Pass: &apos;duplicate&apos; is clicked<br />
+                                Pass: &apos;duplicateTable&apos; is displayed<br />
+                                Pass: &apos;profiles&apos; is clicked<br />
+                                Pass: &apos;profilesTable&apos; is displayed<br />
+                                Pass: &apos;dna&apos; is clicked<br />
+                                Pass: &apos;statements&apos; is clicked<br />
+                                Pass: &apos;verifications&apos; is clicked<br />
+                                Pass: &apos;statements&apos; is displayed<br />
+                                Pass: &apos;verificationsTable&apos; is displayed<br />
+                                Pass: &apos;checks&apos; is clicked<br />
+                                Pass: &apos;checksTable&apos; is displayed<br />
+                                Pass: &apos;correspondence&apos; is clicked<br />
+                                Pass: &apos;correspondenceTable&apos; is displayed<br />
+                                Pass: &apos;duplicate&apos; is clicked<br />
+                                Pass: &apos;duplicateTable&apos; is displayed<br />
+                                Pass: &apos;profiles&apos; is clicked<br />
+                                Pass: &apos;profilesTable&apos; is displayed<br />
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyauditOutboundPage
+      </td>
+  <td class="duration">
+    29.199s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;auditLink&apos; is clicked<br />
+                                Pass: &apos;auditLink&apos; is displayed<br />
+                                Pass: &apos;outboundLink&apos; is clicked<br />
+                                Pass: &apos;outboundLink&apos; is displayed<br />
+                                Pass: &apos;currentMonCredits&apos; is displayed<br />
+                                Pass: &apos;auditContactDetails&apos; is displayed<br />
+                                Pass: &apos;furureCreditsGrph&apos; is displayed<br />
+                                Pass: &apos;claimHistoryGrph&apos; is clicked<br />
+                                Pass: &apos;claimHistoryGrph&apos; is displayed<br />
+                                Pass: &apos;supplierStatus&apos; is displayed<br />
+                                Pass: &apos;pendingCorrespondence&apos; is displayed<br />
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifycontactEntryPage
+      </td>
+  <td class="duration">
+    18.310s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;contactEntry&apos; is clicked<br />
+                                Pass: &apos;docQueueTable&apos; is displayed<br />
+                                Pass: &apos;supDetailsTable&apos; is displayed<br />
+                                Pass: &apos;docDetails&apos; is displayed<br />
+                  </div>
+    
+
+      </td>
+</tr>
+      </table>
+  
+</body>
+</html>

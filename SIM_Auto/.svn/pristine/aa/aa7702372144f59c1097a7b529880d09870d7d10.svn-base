@@ -1,0 +1,270 @@
+package com.lavante.sim.customer.TestScripts.Supplier.EditProfile;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.CMDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 16-12-2015
+ * Created for Deliverable Test case
+ * Enhancement covered 
+ * Ended on 04-02-2016
+ * @author Piramanayagam.S
+ *
+ */
+public class CMdelTC004 extends PageInitiator {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+				
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		openAPP();	
+		//Assigning the driver to the object of lavante utils		
+		lavanteUtils.driver=driver;
+		
+		//Login
+		List listofdatafrm=lavanteUtils.login("DEL-1", browser);
+		LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String>();
+		LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+		String customerID=(String) listofdatafrm.get(1);
+		
+		String sname="select MAX(su.SupplierName) from Deliverable d,StatementOfWork s, Relationship R,Supplier su,MasterServiceAgreement m "
+				+ " where s.MSAID=m.MSAID and r.RelationShipID=m.RelationShipID and r.LavanteUID=su.LavanteUID and d.SowID=s.SowID "
+				+ " and r.CustomerID="+customerID;
+		sname=lavanteUtils.fetchDBdata(sname);
+		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String, String>();
+		dataMap.put("maintab","Supplier");
+		dataMap.put("profile", "");
+		dataMap.put("editProfile", "");		
+		
+		dataMap.put("Search", "");
+		dataMap.put("supplierName", sname);
+		
+		enobjhomePage.selectTab(dataMap);
+		enobjsupplierBasicSearch.search(dataMap);		
+		enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+	
+		dataMap.put("tab", "enterpriseContract");
+		eneditProfile.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+
+	
+	}
+	
+	/**
+	 * Verify in the Edit page,status field is available or not
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 *
+	 * 
+	 */
+	@Test(dataProvider="SingleDELData",dataProviderClass=CMDataProvider.class)
+	public void VerifyeditstatusDeliverable001(LinkedHashMap<String,String> dataMap) throws Exception{	
+		Reporter.log("Verification for status filed in Edit page"+LavanteUtils.currenttime());
+		
+		SoftAssert softassert=new SoftAssert();
+		boolean flag=false;
+		
+		dataMap.put("save", "");
+		eneditContractManagement.AddDelievarable(dataMap);
+		int deliverable=3879;
+		deliverable=eneditContractManagement.deliverable;
+		String del=""+deliverable;
+		
+		lavanteUtils.waitForTime(2000);
+		
+		outr:for(int i=eneditContractManagement.DELnolist().size()-1;i>=0;i--){
+			if(del.equalsIgnoreCase(eneditContractManagement.DELnolist().get(i).getText()))
+				{
+						Reporter.log("Created Deliverable available in the list");
+						lavanteUtils.click(eneditContractManagement.DELedit().get(i));
+						lavanteUtils.waitForTime(4000);
+						lavanteUtils.switchtoFrame(driver.findElement(By.cssSelector("iframe[src*='addEditDeliverables']")));
+						//lu.switchtoFrame(dp.DELEditIframe());
+						lavanteUtils.waitForTime(2000);
+						
+						List<WebElement> st=driver.findElements(By.xpath("//*[text()='Status:']"));
+						Reporter.log("Status field in Edit Page:"+st.size());
+						softassert.assertTrue(st.size()>0,"Status Field is available");
+						flag=true;
+						break outr;
+				}
+			
+			}	
+		
+		if(flag==false)
+		{
+			softassert.assertTrue(false,"Data not matched");
+			
+		}
+		softassert.assertAll();
+		Reporter.log("verification completed for status fiels in Edit page"+LavanteUtils.currenttime());
+	}
+	
+	/**
+	 * Verify in the view page,
+
+	status field is available or not
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException	 
+	 * 
+	 */
+	@Test(dataProvider="SingleDELData",dataProviderClass=CMDataProvider.class)
+	public void VerifyviewSTATUSDeliverable002(LinkedHashMap<String,String> dataMap) throws Exception{	
+		Reporter.log("Verification for status filed in view page"+LavanteUtils.currenttime());
+	
+		dataMap.put("save", "");
+		SoftAssert softassert=new SoftAssert();
+		
+		boolean flag=false;
+		eneditContractManagement.AddDelievarable(dataMap);
+		int deliverable=3879;
+		deliverable=eneditContractManagement.deliverable;
+		String deli=""+deliverable;
+		
+		lavanteUtils.waitForTime(2000);
+		
+		outr:for(int i=eneditContractManagement.DELnolist().size()-1;i>=0;i--){
+			if(deli.equalsIgnoreCase(eneditContractManagement.DELnolist().get(i).getText()))
+			{
+				Reporter.log("Created Deliverable available in the list");
+				lavanteUtils.click(eneditContractManagement.DELnolist().get(i));
+				lavanteUtils.waitForTime(4000);
+				lavanteUtils.switchtoFrame(driver.findElement(By.cssSelector("div[style*='visible']  iframe[src*='table_id=Add_Edit_Delive']")));
+				//lu.switchtoFrame(dp.DELEditIframe());
+				lavanteUtils.waitForTime(2000);
+				
+				List<WebElement> st=driver.findElements(By.xpath("//*[text()='Status:']"));
+				Reporter.log("Status field in View Page:,"+st.size());
+				softassert.assertTrue(st.size()>0,"Status field available");
+				flag=true;
+				break outr;
+			}
+		}		
+			
+		if(flag==false)
+		{
+			softassert.assertTrue(false,"Data not matched");
+			
+		}
+	
+		softassert.assertAll();
+		Reporter.log("Test Ended at:"+LavanteUtils.currenttime());
+	}
+	
+	/**
+	 *
+	//Header Verification for Deliverable
+	 *
+	 */
+	@Test
+	public void DELHeaderInfo003() throws Exception{	
+		SoftAssert softassert=new SoftAssert();  
+		Reporter.log("Test Started for DELIVERABLE header verify:"+LavanteUtils.currenttime());
+		
+		String MSA=eneditContractManagement.DeheadlMSA().getText();
+		Reporter.log("MSA Number, Expected:MSA Number, Actual:"+MSA);	
+		softassert.assertEquals( MSA,"MSA Number","MSA Numberis not matched, Expected: ,Actual:"+MSA);
+		String SOWN=eneditContractManagement.DeheadlSOW().getText();
+		Reporter.log("SOW Number, Expected:SOW Number, Actual:"+SOWN);	
+		softassert.assertEquals( SOWN,"SOW Number","SOW Numberis not matched, Expected: ,Actual:"+SOWN);
+		String item=eneditContractManagement.DelheadItem().getText();
+		Reporter.log("Item Number, Expected:Item Number, Actual:"+item);	
+		softassert.assertEquals( item,"Item Number","Item Number is not matched, Expected: ,Actual:"+item);
+		String Del=eneditContractManagement.headDeliverable().getText();
+		Reporter.log("Deliverable, Expected:Deliverable, Actual:"+Del);	
+		softassert.assertEquals( Del,"Deliverable","Deliverable is not matched, Expected: ,Actual:"+Del);
+		String expd=eneditContractManagement.headExpdeldate().getText();
+		Reporter.log("Expected Deliverable Date, Expected:Expected Deliverable Date, Actual:"+expd);	
+		softassert.assertEquals( expd,"Expected Deliverable Date","Expected Deliverable Date is not matched, Expected: ,Actual:"+expd);
+		String Dlc=eneditContractManagement.headDellocation().getText();
+		Reporter.log("Deliverable Location, Expected:Deliverable Location, Actual:"+Dlc);	
+		softassert.assertEquals( Dlc,"Deliverable Location","Deliverable Location is not matched, Expected: ,Actual:"+Dlc);
+		String itty=eneditContractManagement.Delheaditemtype().getText();
+		Reporter.log("Item Type, Expected:Item Type, Actual:"+itty);	
+		softassert.assertEquals( itty,"Item Type","Item Type is not matched, Expected: ,Actual:"+itty);
+		String itamt=eneditContractManagement.Delheaditemamt().getText();
+		Reporter.log("Item Amount, Expected:Item Amount, Actual:"+itamt);	
+		softassert.assertEquals( itamt,"Item Amount","Item Amount is not matched, Expected: ,Actual:"+itamt);
+		
+		String paysta=eneditContractManagement.Delheadpaystatus().getText();
+		Reporter.log("Payment Status, Expected:Payment Status, Actual:"+paysta);	
+		softassert.assertEquals( paysta,"Payment Status","Payment Status is not matched, Expected: ,Actual:"+paysta);
+		
+		String act=eneditContractManagement.Delheadactions().getText();
+		Reporter.log("Actions, Expected:Actions, Actual:"+act);
+		softassert.assertEquals( act,"Actions","Actions is not matched, Expected: ,Actual:"+act);
+		
+		
+		List<WebElement> curr=driver.findElements(By.xpath("//*[text()='currency:']"));
+		Reporter.log("currency field is not available");
+		softassert.assertTrue(curr.size()<=0,"currency Column available");
+		List<WebElement> acc=driver.findElements(By.xpath("//*[text()='Account/Project Number:']"));
+		Reporter.log("Account/Project Number field is not available");
+		softassert.assertTrue(acc.size()<=0,"Account/Project Number Column available");
+		List<WebElement> st=driver.findElements(By.xpath("//*[text()='Status:']"));
+		Reporter.log("Status field available"+st.size());
+		softassert.assertTrue(st.size()<=0,"Status Column available");
+
+		softassert.assertAll();
+	
+		Reporter.log("Test Ended for Deliverable header at:"+LavanteUtils.currenttime());
+	}
+	
+	
+	
+	@AfterMethod
+	public void SetupAftermethod(){
+		refreshPage();
+		enobjhomePage.popupclose();
+		
+	}
+	
+	
+	@AfterClass
+	public void SetupafterClassmethod(){
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String,String>();
+		dataMap.put("SaveExit", "");
+		eneditProfile.formAction(dataMap);
+		
+		enobjhomePage.logout();
+		
+		quitBrowser();
+	}
+
+
+}
+

@@ -1,0 +1,161 @@
+package com.lavante.sim.customer.TestScripts.Transactions.Invoices;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.InvoiceSearchDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+
+
+public class  Invoice_AdvancedSearch extends PageInitiator  {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();	
+	String customerID="";
+	
+	
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception
+	{
+				
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		openAPP();	
+		lavanteUtils.driver=driver;
+		
+		List<?> listofdatafrm=lavanteUtils.login("Invoice",browser);
+		LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String>();
+		LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+		customerID=(String) listofdatafrm.get(1);
+		
+		//Login		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String, String>();
+		dataMap.put("maintab","Invoice");
+		dataMap.put("subtab", "InvoiceSearchResult");
+		
+		enobjhomePage.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+			
+	}
+	
+	/**
+	 * As part of SIM UAT 
+	 * TC_01: Invoice advanced search. 
+	 * 
+	 * @author tejaswini ar
+	 * @param dataMap
+	 * @throws Exception 
+	 */	
+	@Test(dataProvider="AdvancedSearch",dataProviderClass=InvoiceSearchDataProvider.class)
+	public void  InvoiceAdvancedSearch(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		
+		Reporter.log("Test Started Invoice Advanced search:"+currenttime()+dataMap);
+		
+		SoftAssert softassert=new SoftAssert();
+		boolean flag=false;
+		
+		dataMap.put("CustomerID", customerID);
+		dataMap= lavanteUtils.convertdatamapwoDB(dataMap);
+		
+		// Invoice Advanced search
+		lavanteUtils.fluentwait(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.click(enInvoiceAdvanceSearch.AdvancedSearchTab());
+		
+		lavanteUtils.click(enInvoiceAdvanceSearch.BuildQuerybtn());
+	
+		
+		dataMap.put("Search","");
+		enInvoiceAdvanceSearch.buildquery(dataMap);
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.waitForTime(3000);
+		
+		if(eninvoicePage.Listinvnum().size()>0)
+		{
+
+			if(dataMap.containsKey("SupplierERPID"))
+			{
+
+				String ExpResult = dataMap.get("SupplierERPID");
+				String[] x=enInvoiceAdvanceSearch.splitString(ExpResult);
+				String ActResult = eninvoicePage.getColumnText("ERP", 0);
+				
+				if(x[0].equalsIgnoreCase("Is Empty")){
+				
+					Reporter.log("Advanced search for Supplier ERPID,Expected:Empty,Actul:"+ActResult,true);
+					softassert.assertTrue(ActResult.length()==0,"Incorrect search results for Supplier ERP ID Empty search,"+ActResult);
+					flag=true;
+				}else if(x[0].equalsIgnoreCase("Contains")){
+					Reporter.log("Advanced search for Supplier ERPID,Expected:Some Value,Actual:"+ActResult,true);
+					softassert.assertTrue(ActResult.contains(x[1]),"Incorrect search results for Supplier ERP ID Contains search,"+ActResult);
+					flag=true;
+				}
+			}
+			if(dataMap.containsKey("InvoiceNumber"))
+			{
+				String	ActResult = eninvoicePage.TBLInvoicenumber().getText();
+				String ExpResult = dataMap.get("InvoiceNumber");
+				String[] x=enInvoiceAdvanceSearch.splitString(ExpResult);
+				 if(x[0].equalsIgnoreCase("Equals To")){
+					Reporter.log("Advanced search for Supplier InvoiceNumber,Expected:"+ExpResult+"Actul:"+ActResult,true);
+					softassert.assertEquals(ActResult, x[1],"Incorrect search results for Supplier InvoiceNumber,"+ExpResult);
+					flag=true;
+				 }
+			}
+			
+		}else
+		{
+			softassert.assertTrue(flag,"Search Returned with Empty Result Set,Hence Please Add Data for the Search");
+			
+		}
+		
+		softassert.assertTrue(flag,"Please Retest");
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended for Invoice advanced search:"+currenttime());
+		
+	}
+	
+	
+	@AfterMethod
+	public void SetupAftermethod()
+	{
+		enobjhomePage.popupclose();
+		lavanteUtils.refreshPage();
+	}
+	
+	
+	
+	@AfterClass
+	public void SetupafterClassmethod()
+	{
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+	
+	
+
+
+}
+

@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 2, Time elapsed: 1,787.833 sec <<< FAILURE! - in TestSuite
+preCondition(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 1,787.728 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: Application is not Launched.unknown error: cannot find Chrome binary
+  (Driver info: chromedriver=2.9.248315,platform=Windows NT 6.3 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 531 milliseconds
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA01', ip: '192.168.21.81', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command duration or timeout: 1786.86 seconds
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.launchAppThroughPOM(seleniumBaseClass.java:114)
+	at lavante.recovery.testsuites.SanityTestSuite.preCondition(SanityTestSuite.java:31)
+

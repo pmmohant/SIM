@@ -1,0 +1,146 @@
+package com.lavante.sim.customer.TestScripts.UserRoles;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.ManageUsers;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 25-8-2018  SIM-17089 Shadow/proxy user for support
+ * 
+ *@author Piramanayagam.S
+ */
+
+public class ProxyRoleTest extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String selctedCust="";
+
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * 
+	 * 
+	 */
+	LinkedHashMap<String, String> LdataMap = null;
+
+	@SuppressWarnings("unchecked")
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+					throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		// Login
+		List<?> listofdatafrm = lavanteUtils.login("LavanteSupportRole", browser);
+		LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		
+		
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+	}
+
+	
+	@BeforeMethod
+	public void before() throws FileNotFoundException, IOException, SQLException{
+		List<?> listofdatafrm=lavanteUtils.login("Kroger",browser);
+		String customerid=(String) listofdatafrm.get(1);
+		
+		selctedCust="select Name From Customer where CustomerID="+customerid;
+		selctedCust=lavanteUtils.fetchDBdata(selctedCust);
+		lavanteUtils.click(enobjhomePage.AllCustomersDropDwn());
+		lavanteUtils.typeinEdit(selctedCust, enobjhomePage.AllCustomersDropDwnTxtBox);
+		lavanteUtils.selectvalueFrmDpdn(selctedCust);
+		
+	}
+
+	/**
+	 * Supplier Search Act Behalf
+	 * 
+	 * 
+	 * SIM 7.2 
+	 * @author Piramanayagam.S
+	 * @throws Exception
+	 */
+	@Test
+	public void SupplierActBehalf() throws Exception {
+		Reporter.log("Test Started for Act Behalf : " + currenttime());
+		SoftAssert softAssert=new SoftAssert();
+		boolean flag=false;
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+
+		dataMap.put("Tab", "Enterprise");
+		dataMap.put("ManagedBy", "Supplier");
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+		
+		enobjsupplierPage.searchResultsFilterBy("All");
+		
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			String sup=enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0).getText();
+			
+			dataMap.put("supplierName",sup);
+			
+			sup=enobjsupplierPage.iterateSearchHeaderFindColList("Profile Managed By").get(0).getText();
+			Reporter.log("Profile Managed by:"+sup);
+			String x="select PropertyValue From ApplicationPropertiesCustomer where ApplicationPropertyID in ( "
+					+ " select ApplicationPropertyID from ApplicationProperties where PropertyName='SupplierLoginRoles')"
+					+ " and CustomerID in (Select CustomerID from Customer where Name='"+selctedCust+"')";
+			x=lavanteUtils.fetchDBdata(x);
+			if(x.contains(",")){
+				String[] asd=x.split(",");
+				
+				dataMap.put("ActBehalf",asd[0]);
+				dataMap.put("profile","");
+				enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+	
+				flag=true;
+			}
+		}
+		
+		softAssert.assertTrue(flag,"Please retest");
+		
+		softAssert.assertAll();
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	
+	
+	
+	@AfterClass
+	public void SetupafterClassmethod() {
+
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+}

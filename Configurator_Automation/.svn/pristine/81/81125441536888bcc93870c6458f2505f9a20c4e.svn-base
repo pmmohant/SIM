@@ -1,0 +1,33 @@
+
+#Application URL
+APPURL=https://recoveryqa.lavante.com/cas/login?service=http%3A%2F%2Frecoveryqa.lavante.com%3A8080%2Frecovery%2FclaimDashboard.lvp#claims
+DriverPath =.\\resources
+
+#G mail URL
+GMAILURL=https://accounts.google.com/ServiceLogin?service=mail
+
+		 
+lavante.db.driver=com.mysql.jdbc.Driver
+
+#Recovery DB Details
+Recovery.dbURL=192.168.21.17
+Recovery.dbUser=as_user
+Recovery.dbPass=as678!**
+Recovery.dbport=7322
+Recovery.dbName=AS
+
+
+#Created for Reading Email
+GMAIL_HOST_NAME =pop.gmail.com
+GMAIL_HOST_PORT =995
+GMAIL_AUTH_USER =simsupplierqa42@gmail.com
+GMAIL_AUTH_PWD =lavante123
+GMAIL_HOST_PROTOCAL =ON		
+
+#Linux
+lf.hostname=192.168.21.42
+lf.username=lavante
+lf.password=indecomm@123
+
+#Linux Folder
+exportContractManagement=D:/FILEREPO/exportContractManagement

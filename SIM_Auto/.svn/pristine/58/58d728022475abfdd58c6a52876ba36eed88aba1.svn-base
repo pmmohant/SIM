@@ -1,0 +1,10 @@
+#Expected Text
+strReplaceText=VERIFIED\n
+
+#Xpath
+McAfeeLink=//img[contains(@alt,'McAf')]
+#McafeeTrustedDate=html/body/div[2]/div/table/tbody/tr/td[1]/div/div[1]/table/tbody/tr/td[2]/div
+McafeeTrustedDate=//*[@class='verifydate']
+#TimeFormat
+McafeeDateFormat=yyyy-MM-dd
+GenericTimeZone=GMT-7:00

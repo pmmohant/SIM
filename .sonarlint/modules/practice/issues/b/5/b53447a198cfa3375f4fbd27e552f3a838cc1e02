@@ -1,0 +1,23 @@
+
+o
+squid:S106";Replace this usage of System.out or System.err by a logger.(­…Ã©8êêù¥œ-H›>RMAJORZ
+CODE_SMELL
+„squid:S2159"VRemove this call to "equals"; comparisons between unrelated types always return false.(­…Ã©8êêù¥œ-H™>RMAJORZBUG
+t
+squid:S106";Replace this usage of System.out or System.err by a logger.(°Ÿ£Œûÿÿÿÿ8„ó‚§œ-H§>RMAJORZ
+CODE_SMELL
+t
+squid:S106";Replace this usage of System.out or System.err by a logger.(ÖÊ„Àøÿÿÿÿ8£ž‹¦œ-H >RMAJORZ
+CODE_SMELL
+n
+squid:S106";Replace this usage of System.out or System.err by a logger.(­×Ú8žø¦œ-H¦>RMAJORZ
+CODE_SMELL
+n
+squid:S106";Replace this usage of System.out or System.err by a logger.(»á´M8êêù¥œ-Hš>RMAJORZ
+CODE_SMELL
+Xsquid:S2129"#Remove this "Character" constructor(ÈÂÆ8êêù¥œ-H>RMAJORZ
+CODE_SMELL
+gsquid:S1118":Add a private constructor to hide the implicit public one.(ÄÇÊEH—>RMAJORZ
+CODE_SMELL
+Vsquid:S2129	"!Remove this "Integer" constructor(ß¶°ë8êêù¥œ-Hœ>RMAJORZ
+CODE_SMELL

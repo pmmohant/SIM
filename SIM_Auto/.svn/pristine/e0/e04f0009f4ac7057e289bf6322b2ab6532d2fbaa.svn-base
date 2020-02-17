@@ -1,0 +1,403 @@
+package com.lavante.sim.customer.TestScripts.Supplier.EditProfile;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * SIM-18824 As a buyer/support user, I should be able to save the Legal ID that exists in the Database
+ *	
+ * @author Vidya.C
+ *
+ */
+public class DuplicateLegalID extends PageInitiator{
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String customerID="";
+	String newSupp="";
+
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * 
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		List listofdatafrm = lavanteUtils.login("LavanteSupportRole", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+	
+
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+	}
+
+	@BeforeMethod
+	public void before() throws FileNotFoundException, IOException, SQLException {
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.waitForTime(3000);
+		String x=enobjhomePage.AllCustomersDropDwn().getText();
+		String custName="GP Strategies";
+		
+		if(!x.equalsIgnoreCase(custName)){
+			lavanteUtils.click(enobjhomePage.AllCustomersDropDwn());
+			
+			lavanteUtils.typeinEdit(custName, enobjhomePage.AllCustomersDropDwnTxtBox);
+			lavanteUtils.selectvalueFrmDpdn(custName);
+		}
+		customerID="select CustomerID from Customer where Name='"+custName+"'";
+		customerID= lavanteUtils.fetchDBdata(customerID);
+		
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+	}
+
+	/**SIM-18824 As a buyer/support user, I should be able to save the Legal ID that exists in the Database
+	 * Support Login can set two supplier with Same Legal ID 
+	 * 
+	 * @author Vidya.C
+	 * @throws Exception
+	 */
+	@Test
+	public void VerifyLegalIdNoMergeWithExistingSupplier() throws Exception {
+		Reporter.log("Test started at VerifyLegalIdNoMergeWithExistingSupplier : " + currenttime());
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+		SoftAssert softAssert = new SoftAssert();
+		
+		Boolean flag = false;
+		String suppName ="select MAX(SupplierNAme)  from supplier s ,RelationShip r "
+				+ " where len((dbo.lcfn_decrypt(s.legalidentifier,'TripTheLightFandango')))=9"
+				+ " and s.lavanteUID=r.LavanteUID and R.CustomerID="+customerID;
+		suppName= lavanteUtils.fetchDBdata(suppName);
+		
+		String legalId = "select max(dbo.lcfn_decrypt(s.legalidentifier,'TripTheLightFandango')) from supplier s where SupplierName like '%"+suppName+"%'";
+		legalId = lavanteUtils.fetchDBdata(legalId);
+		
+		lavanteUtils.click(enobjsupplierBasicSearch.resetbtn());
+		
+		dataMap.put("ProfStatus", "Loaded");
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		lavanteUtils.fluentwait(enobjsupplierPage.SearchListIFRAME());
+		dataMap.put("profile", "");
+		dataMap.put("editProfile", "");
+		newSupp = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+		
+		dataMap.put("tab", "supplierCompanyDetails");
+		eneditProfile.selectTab(dataMap);
+		
+		Boolean EditCoR = lavanteUtils.verifyElementDisplayed("EditCoR", eneditLegal.EditCoRLink());
+		if(EditCoR) {
+			lavanteUtils.click(eneditLegal.EditCoRLink());
+		}
+		
+		dataMap.put("CountryOfReg", "United States");
+		eneditLegal.fillLegal(dataMap);
+		dataMap.remove("CountryOfReg");
+		
+		lavanteUtils.fluentwait(eneditLegal.SaveBtn());
+		
+		if(lavanteUtils.verifyElementDisplayed("Edit Link", eneditLegal.EditTaxIdLink())) {
+			dataMap.put("EditEIN", "");
+		} else {
+			dataMap.put("TIN", "YES");
+		}
+		dataMap.put("TINNum", legalId);
+		eneditLegal.fillLegal(dataMap);
+		
+		dataMap.put("Save", "");
+		eneditProfile.formAction(dataMap);
+		
+		dataMap.put("NoMerge", "");
+		eneditLegal.DuplicateLegalIdMerge(dataMap);
+		
+		softAssert.assertTrue(dataMap.get("DupLegalIdText").contains("Saving Legal ID "+legalId+" for "+newSupp+" will result in multiple suppliers with same Legal ID"
+				+ " in the system which is regarded as duplicates."),"");
+		
+		dataMap.remove("Save");
+		dataMap.put("EditCancel", "");
+		eneditProfile.formAction(dataMap);
+		
+		lavanteUtils.click(enobjsupplierBasicSearch.resetbtn());
+		dataMap.remove("ProfStatus");
+		dataMap.put("TaxID", legalId);
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		List<WebElement> suppList = enobjsupplierPage.iterateSearchHeaderFindColList("Supplier Name");
+		ArrayList<String> suppNameList=new ArrayList<String>();
+		for(int i=0;i<suppList.size();i++){
+			suppNameList.add(suppList.get(i).getText().trim());
+		}
+		
+		String allSupp = suppName+"#"+newSupp;
+		
+		if(suppNameList.size()>0) {
+			for(int j=0; j<suppNameList.size(); j++) {
+				softAssert.assertTrue(allSupp.contains(suppNameList.get(j)),"Supp not matched");
+				flag=true;
+			}
+		} else {
+			softAssert.assertEquals(enobjsupplierBasicSearch.noData().getText(), "No results", "Supplier is merged with the existing supplier");
+			flag=false;
+		}
+		
+		softAssert.assertTrue(flag,"Supplier legal id does not exist");
+		
+		softAssert.assertAll();
+		Reporter.log("Test ended at VerifyLegalId NoMergeWithExistingSupplier : " + currenttime());
+	}
+	
+	/**SIM-18824 As a buyer/support user, I should be able to save the Legal ID that exists in the Database
+	 * Support Login merging new supplier with existing supplier using same legal id
+	 * 
+	 * @author Vidya.C
+	 * @throws Exception
+	 */
+	@Test
+	public void VerifyLegalIdMergeWithExistingSupplier() throws Exception {
+		Reporter.log("Test started at VerifyLegalIdMergeWithExistingSupplier : " + currenttime());
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+		SoftAssert softAssert = new SoftAssert();
+		
+		String suppName ="select MAX(SupplierNAme)  from supplier s ,RelationShip r "
+				+ " where len((dbo.lcfn_decrypt(s.legalidentifier,'TripTheLightFandango')))=9"
+				+ " and s.lavanteUID=r.LavanteUID and R.CustomerID="+customerID;
+		suppName= lavanteUtils.fetchDBdata(suppName);
+		
+		String legalId = "select max(dbo.lcfn_decrypt(s.legalidentifier,'TripTheLightFandango')) from supplier s where SupplierName like '%"+suppName+"%'";
+		legalId = lavanteUtils.fetchDBdata(legalId);
+		
+		enobjsupplierBasicSearch.formAction(dataMap);
+
+		dataMap.put("ProfStatus", "Loaded");
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		dataMap.remove("Search");
+		
+		dataMap.put("profile", "");
+		dataMap.put("editProfile", "");
+		newSupp = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+		
+		dataMap.put("tab", "supplierCompanyDetails");
+		eneditProfile.selectTab(dataMap);
+		
+		Boolean EditCoR = lavanteUtils.verifyElementDisplayed("EditCoR", eneditLegal.EditCoRLink());
+		if(EditCoR) {
+			lavanteUtils.click(eneditLegal.EditCoRLink());
+		}
+		dataMap.put("CountryOfReg", "United States");
+		eneditLegal.fillLegal(dataMap);
+		
+		lavanteUtils.fluentwait(eneditLegal.SaveBtn());
+		
+		if(lavanteUtils.verifyElementDisplayed("Edit Link", eneditLegal.EditTaxIdLink())) {
+			dataMap.put("EditEIN", "");
+			dataMap.put("EditTaxIdComment", "AutoSP_"+currenttime());
+		} else {
+			dataMap.put("TIN", "YES");
+		}
+		dataMap.remove("CountryOfReg");
+		dataMap.put("TINNum", legalId);
+		eneditLegal.fillLegal(dataMap);
+		
+		dataMap.put("Save", "");
+		eneditProfile.formAction(dataMap);
+		
+		dataMap.put("YesMerge", "");
+		eneditLegal.DuplicateLegalIdMerge(dataMap);
+		softAssert.assertTrue(dataMap.get("MergeBanner").contains("Supplier profile of "+newSupp+" has been merged with "+suppName),"Supplier legal id is not merged");
+		
+		enobjsupplierBasicSearch.formAction(dataMap);
+		
+		dataMap.remove("ProfStatus");
+		dataMap.put("TaxID", legalId);
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		List<WebElement> suppList = enobjsupplierPage.iterateSearchHeaderFindColList("Supplier Name");
+		ArrayList<String> suppNameList=new ArrayList<String>();
+		for(int i=0;i<suppList.size();i++){
+			suppNameList.add(suppList.get(i).getText().trim());
+		}
+		
+		Boolean flag = false;
+		if(suppNameList.size()>0) {
+			for(int j=0; j<suppNameList.size(); j++) {
+				softAssert.assertTrue(suppNameList.get(j).contains(suppName),"Supplier not matched");
+				softAssert.assertNotEquals(suppNameList.get(j),newSupp,"Supplier new  matched");
+				flag=true;
+			}
+		}else {
+			softAssert.assertEquals(enobjsupplierBasicSearch.noData().getText(), "No results", "Supplier is not merged with the existing supplier");
+			flag=false;
+		}
+		
+		newSupp="";
+		softAssert.assertTrue(flag,"Supplier legal id does not exist");
+		
+		softAssert.assertAll();
+		Reporter.log("Test ended at VerifyLegalIdMergeWithExistingSupplier : " + currenttime());
+
+	}
+
+	/**
+	 * SIM-18824 As a buyer/support user, I should be able to save the Legal ID that exists in the Database
+	 * Support Login can set two supplier with Same Legal ID across prgx network
+	 * Fetch other than current customer enter the same 
+	 * 
+	 * @author Vidya.C
+	 * @throws Exception
+	 */
+	@Test
+	public void VerifyLegalIdNoMergeWithExistingSuppAcrossNetwork() throws Exception {
+		Reporter.log("Test started at VerifyLegalIdNoMergeWithExistingSuppAcrossNetwork : " + currenttime());
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+		SoftAssert softAssert = new SoftAssert();
+		
+		Boolean flag = false;
+		String customerID="select MAX(customerID) from Customer where Name like '%flower%'";
+		customerID=lavanteUtils.fetchDBdata(customerID);
+		
+		String suppName ="select MAX(s.SupplierNAme)  from supplier s ,RelationShip r "
+				+ " where len((dbo.lcfn_decrypt(s.legalidentifier,'TripTheLightFandango')))=9"
+				+ " and s.SupplierNAme not LIKE ('%''%') and s.lavanteUID=r.LavanteUID and R.CustomerID="+customerID;
+		suppName= lavanteUtils.fetchDBdata(suppName);
+		
+		String legalId = "select max(dbo.lcfn_decrypt(s.legalidentifier,'TripTheLightFandango')) from supplier s where SupplierName like '%"+suppName+"%'";
+		legalId = lavanteUtils.fetchDBdata(legalId);
+		
+		lavanteUtils.click(enobjsupplierBasicSearch.resetbtn());
+		dataMap.put("ProfStatus", "Loaded");
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		enobjsupplierPage.searchResultsFilterBy("All");
+		lavanteUtils.fluentwait(enobjsupplierPage.SearchListIFRAME());
+		dataMap.put("profile", "");
+		dataMap.put("editProfile", "");
+		newSupp = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+		
+		dataMap.put("tab", "supplierCompanyDetails");
+		eneditProfile.selectTab(dataMap);
+		
+		Boolean EditCoR = lavanteUtils.verifyElementDisplayed("EditCoR", eneditLegal.EditCoRLink());
+		if(EditCoR) {
+			lavanteUtils.click(eneditLegal.EditCoRLink());
+		}
+		dataMap.put("CountryOfReg", "United States");
+		eneditLegal.fillLegal(dataMap);
+		
+		lavanteUtils.fluentwait(eneditLegal.SaveBtn());
+		
+		if(lavanteUtils.verifyElementDisplayed("Edit Link", eneditLegal.EditTaxIdLink())) {
+			dataMap.put("EditEIN", "");
+			dataMap.put("EditTaxIdComment", "AutoSP_"+currenttime());
+		} else {
+			dataMap.put("TIN", "YES");
+		}
+		dataMap.remove("CountryOfReg");
+		dataMap.put("TINNum", legalId);
+		eneditLegal.fillLegal(dataMap);
+		
+		dataMap.put("Save", "");
+		eneditProfile.formAction(dataMap);
+		
+		dataMap.put("NoMerge", "");
+		eneditLegal.DuplicateLegalIdMerge(dataMap);
+		
+		softAssert.assertTrue(dataMap.get("DupLegalIdText").contains("Saving Legal ID "+legalId+" for "+newSupp+" will result in multiple suppliers with same Legal ID"
+				+ " in the system which is regarded as duplicates."),"");
+		
+		dataMap.remove("Save");
+		dataMap.put("EditCancel", "");
+		eneditProfile.formAction(dataMap);
+		
+		lavanteUtils.click(enobjsupplierBasicSearch.resetbtn());
+		
+		dataMap.put("AcrossNetwork", "");
+		dataMap.remove("ProfStatus");
+		dataMap.put("TaxID", legalId);
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		List<WebElement> suppList = enobjsupplierPage.iterateSearchHeaderFindColList("Supplier Name");
+		ArrayList<String> suppNameList=new ArrayList<String>();
+		for(int i=0;i<suppList.size();i++){
+			suppNameList.add(suppList.get(i).getText().trim());
+		}
+		
+		String allSupp = suppName+"#"+newSupp;
+		lavanteUtils.waitForTime(3000);
+		if(suppNameList.size()>1) {
+			for(int j=0; j<suppNameList.size(); j++) {
+				softAssert.assertTrue(allSupp.contains(suppNameList.get(j)),"Supp not matched");
+				flag=true;
+			}
+		} else {
+			softAssert.assertEquals(enobjsupplierBasicSearch.noData().getText(), "No results", "Supplier is merged with the existing supplier");
+			flag=false;
+		}
+		
+		softAssert.assertTrue(flag,"Supplier legal id does not exist");
+		
+		softAssert.assertAll();
+		Reporter.log("Test ended at VerifyLegalIdNoMergeWithExistingSuppAcrossNetwork : " + currenttime());
+	}
+	
+	@AfterMethod
+	public void after() throws FileNotFoundException, IOException, SQLException{
+		if(newSupp.length()>0){
+		
+			String legalId="Update Supplier set LegalIdentifier=null where SupplierName='"+newSupp+"'";
+			lavanteUtils.UpdateDB(legalId);
+		}
+	}
+	
+	/**
+	 * SetupAfter Class- Close any popup and Close the driver
+	 * @author Piramanayagam.S
+	 */
+	@AfterClass
+	public void SetupafterClassmethod(){
+		
+		enobjhomePage.logout();
+		
+		quitBrowser();
+	}
+
+
+}

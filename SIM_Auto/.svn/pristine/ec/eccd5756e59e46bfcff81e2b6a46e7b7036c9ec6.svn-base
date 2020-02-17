@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Edit Profile" parallel="tests" preserve-order="true" thread-count="3" verbose="1">
+	
+	<listeners>
+		 <listener class-name="com.lavante.sim.Common.Util.ExtentReporterNG"/>
+	 </listeners>
+	 
+	<!-- Running on IE 11 -->
+	 <test preserve-order="false" thread-count="1"
+		name="Lavante SIM - Running on IE 11">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="internet Explorer" />
+		<parameter name="Version" value="11" />
+		<classes>
+
+	 	</classes>
+	</test> 
+		
+	<!-- Running on FF 35 -->
+	<test preserve-order="false" thread-count="1"
+		name="Lavante SIM - Running on Firefox">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="firefox" />
+		<parameter name="Version" value="Latest" />
+		<classes>
+		
+		</classes>
+	</test>  
+	
+    <!-- Running on Chrome 46 -->
+	<test preserve-order="true" thread-count="1"
+		name="Lavante SIM - Running on Chrome">	
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="chrome" />
+		<parameter name="Version" value="54" />
+		<classes>	
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CompanyNAICS02" />
+						<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.EsignReset" />	
+		<!-- 	<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CompleteProfile01" />
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CustomTabFields01" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CustomTabDownload02" />
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CertificateAdd01" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CertificateDiversity02"/>
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.UATEditLegalID001" />
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.Companyw9w8Deactivate01" />	
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CompanyDissociationOfSupplierContact03"/>
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CompanyEthnicDiversity04" />
+			
+			 <class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.PaymentTerms01" />
+			 <class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.PaymentEFT02" />
+			 <class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.PaymentCenter03" />
+			 <class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.PaymentEFTChangeNotifcation04" />
+			 <class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.PaymentDefaultTerms05" />
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.UIW8W9VerificationAdminLogin" />
+		    <class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.UIW8W9VerificationSupportLogin" />
+			  -->
+		</classes>
+	</test> 
+	
+ 	
+</suite> 

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Invite Test" parallel="tests" preserve-order="true"
+	thread-count="3" verbose="1">
+
+	<listeners>
+		 <listener class-name="com.lavante.sim.Common.Util.ExtentReporterNG"/>
+	 </listeners>
+	 
+	<!-- Running on IE -->
+	<test preserve-order="false" thread-count="1"
+		name="Lavante SIM - Running on IE ">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="internet Explorer" />
+		 	<classes>
+		    <!--Commented as invite throws exception  
+		    <class name="com.lavante.sim.customer.TestScripts.Invite.UpdateInviteOrganization001"/>
+		   <class name="com.lavante.sim.customer.TestScripts.Invite.UpdateInviteOrganization002"/> -->
+				
+		</classes>
+	</test>
+
+	<!-- Running on FF -->
+	<test preserve-order="false" thread-count="1"
+		name="Lavante SIM - Running on Firefox ">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="firefox" />
+		<classes>
+	
+		 <!--Commented as invite throws exception     <class name="com.lavante.sim.customer.TestScripts.Invite.UpdateInviteOrganization001"/>
+		   <class name="com.lavante.sim.customer.TestScripts.Invite.UpdateInviteOrganization002"/> -->
+		
+		</classes>
+	</test>
+
+	<!-- Running on Chrome -->
+	<test preserve-order="true" thread-count="1"
+		name="Lavante SIM - Running on Chrome">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="chrome" />
+		<classes>
+		   <!--Commented as invite throws exception 
+		   <class name="com.lavante.sim.customer.TestScripts.Invite.UpdateInviteOrganization001"/>
+		   <class name="com.lavante.sim.customer.TestScripts.Invite.UpdateInviteOrganization002"/> -->
+		   <!-- 
+		   <class name="com.lavante.sim.customer.TestScripts.Invite.UATAddAddressForPreScreenedTests" /> 
+		   <class name="com.lavante.sim.customer.TestScripts.Invite.ExtendInviteCustomFieldsTC" />
+		    -->
+		   
+		    <class name="com.lavante.sim.customer.TestScripts.Invite.UATInviteNewSupplierTests" />
+		   <class name="com.lavante.sim.customer.TestScripts.Invite.ConfigInvite" />
+		   <class name="com.lavante.sim.customer.TestScripts.Invite.ExtendInviteTests" />
+		   
+		    
+		   
+		      
+			
+ 		</classes>
+	</test>
+
+
+</suite> 

@@ -1,0 +1,330 @@
+package com.lavante.sim.customer.TestScripts.SanityTest;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class SIMSanityTest01 extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP2();
+		lavanteUtils.driver = driver;
+		waitForTime(4000);
+	}
+
+	@Test
+	public void AloginsTest2() throws FileNotFoundException, IOException, SQLException {
+
+		// Verifying Login Page Displayed
+
+		objLoginPage.verifyLoginPageDisplayed();
+		List<?> listofdatafrm = lavanteUtils.login("Kroger", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+
+		enobjloginpage.logintoAPP(LdataMap);
+		objHomePage.verifyHomePageDisplayed();
+		lavanteUtils.fluentwait(enobjhomePage.UserName());
+
+	}
+
+	@Test(dependsOnMethods = { "AloginsTest2" })
+	public void dashboardTest2() throws InterruptedException {
+		Reporter.log("Test Started for Kroger Dashboard Test:" + currenttime(), true);
+
+		boolean flag=enobjdashBoard.krogerDashboard();
+
+		Assert.assertTrue(flag,"Dashboard failed");
+		Reporter.log("Test Ended for Kroger Dashboard Test:" + currenttime(), true);
+	}
+
+	@Test(dependsOnMethods = { "AloginsTest2" })
+	public void TaskPageTest2() {
+		SoftAssert softAssert =new SoftAssert();
+		
+		// Tasks -> Supplier registrations to approve
+		dataMap.put("maintab", "Tasks");
+		dataMap.put("subtab", "customerApprovals");
+		enobjhomePage.selectTab(dataMap);
+		boolean flag=objtaskapproval.verifySuppRegToAprvPageDtlsDisplayed();
+		softAssert.assertTrue(flag,"Customer Approval Failed");
+
+		// Tasks -> Supplier Invoices to Approve
+		dataMap.put("subtab", "getInvoiceTasks");
+		enobjhomePage.selectTab(dataMap);
+		flag=objtaskapproval.verifyInvoicesToAprvPageDtlsDisplayed();
+		softAssert.assertTrue(flag,"Invoice Approval Failed");
+		
+		// Tasks -> Reassignment
+		dataMap.put("subtab", "viewApprovalTasks");
+		enobjhomePage.selectTab(dataMap);
+		flag=objtaskapproval.verifyReassignmentPageDtlsDisplayed();
+		softAssert.assertTrue(flag,"Reassinment Failed");
+
+		// Tasks --> Supplier registrations pending update
+		dataMap.put("subtab", "supplierProfileChangesToUpdate");
+		enobjhomePage.selectTab(dataMap);
+		flag=objtaskapproval.verifySuppRegToAprvPageDtlsDisplayed();
+		softAssert.assertTrue(flag,"Supp PRofile Change Failed");
+
+		//Tasks -->Supplier Profile Changes To Update 
+		
+		//does not exist
+		
+		// Tasks--> Claims to approve
+		
+		enobjhomePage.selectTab(dataMap);
+		flag=objtaskapproval.verifyClaimsToApprovePageIsDisplayed();
+		softAssert.assertTrue(flag,"Claims To Approve  Failed");
+
+		/// 
+		// Tasks--> Claims pending update
+		dataMap.put("subtab", "ClaimPendingUpdate");
+		enobjhomePage.selectTab(dataMap);
+		flag=objtaskapproval.verifyClaimsPendingUpdatePageIsDisplayed();
+		softAssert.assertTrue(flag,"Claims Pending Update  Failed");
+
+		// Tasks--> Payments question to answer
+		dataMap.put("subtab", "PaymentQuesToAns");
+		enobjhomePage.selectTab(dataMap);
+		flag=objtaskapproval.verifyPaymentQuestionsToAnswerPageIsDisplayed();
+		softAssert.assertTrue(flag,"Payment Qn to Ans  Failed");
+
+		// Tasks -> Invoice Questions to Answer
+		if (!lavanteUtils.driver.getCurrentUrl().contains("simstaging.westus2")) {
+			dataMap.put("subtab", "getInvoiceQuesToAns");
+			enobjhomePage.selectTab(dataMap);
+			flag=objtaskapproval.verifyInvoiceQuestsToAnsPageDtlsDisplayed();
+			softAssert.assertTrue(flag,"Invoice Qn to Ans  Failed");
+		}
+
+		// Tasks -> Track/Reassign Task
+		dataMap.put("subtab", "taskTracker");
+		enobjhomePage.selectTab(dataMap);
+		flag=objtaskapproval.verifyTaskTrackerPageDtlsDisplayed();
+		softAssert.assertTrue(flag,"Task Tracker  Failed");
+
+		// Tasks -> Invoice Pending Updates
+		dataMap.put("subtab", "getInvoicePendingUpdate");
+		enobjhomePage.selectTab(dataMap);
+		flag=objtaskapproval.verifyInvoicesToUpdatePageDtlsDisplayed();
+		softAssert.assertTrue(flag,"Invoice to Upadte  Failed");
+		
+		softAssert.assertAll();
+		
+		Reporter.log("Test Ended:"+currenttime());
+
+	}
+
+	@Test(dependsOnMethods = { "AloginsTest2" })
+	public void supplierTest2() {
+		Reporter.log("Test Started for supplier Test:" + currenttime(), true);
+		dataMap.put("maintab", "Suppliers");
+		enobjhomePage.selectTab(dataMap);
+		SoftAssert softassert = new SoftAssert();
+		
+		boolean flag=objSupplierSearchPage.verifyBasicSearchTableDisplayed();
+		softassert.assertTrue(flag,"Basic Failed");
+		flag=objSupplierSearchPage.verifyAdvanceSearchTableDisplayed();
+		softassert.assertTrue(flag,"Advance Failed");
+
+		softassert.assertAll();
+	}
+
+	@Test(dependsOnMethods = { "AloginsTest2" })
+	public void TransactionTest2() {
+		SoftAssert softassert = new SoftAssert();
+		
+		dataMap.put("maintab", "TRANSACTIONS");
+		dataMap.put("subtab", "Contract");
+		enobjhomePage.selectTab(dataMap);
+		boolean flag=encontractManagement.verifyContractManagementPage();
+		softassert.assertTrue(flag,"Contract Failed");
+
+		dataMap.put("subtab", "Invoice");
+		enobjhomePage.selectTab(dataMap);
+		flag=eninvoicePage.verifyInvoicePage();
+		softassert.assertTrue(flag,"Invoice Failed");
+
+		dataMap.put("subtab", "Payment");
+		enobjhomePage.selectTab(dataMap);
+		flag=objPaymentsPage.verifyPaymentsPage();
+		softassert.assertTrue(flag,"Payment Failed");
+
+		dataMap.put("subtab", "Claim");
+		enobjhomePage.selectTab(dataMap);
+		flag=enClaimsPage.verifyClaimsPage();
+		softassert.assertTrue(flag,"Claim Failed");
+		
+		softassert.assertAll();
+		
+
+	}
+
+	/**
+	 * Reports verification
+	 */
+	@Test(dependsOnMethods = { "AloginsTest2" })
+	public void ReportsTest2() {
+		Reporter.log("Test Started for sanity test in Reports page  : "+ currenttime(), true);
+		dataMap.clear();
+		dataMap.put("maintab", "reports");
+		enobjhomePage.selectTab(dataMap);
+
+		boolean flag=enReportuserDefined.verifyAdminTablePresent();
+		Assert.assertTrue(flag,"Report Failed");
+		Reporter.log("Test Ended for sanity test in Reports page  : "+ currenttime(), true);
+	}
+
+	/**
+	 * Messages verification
+	 */
+	@Test(dependsOnMethods = { "AloginsTest2" })
+	public void MessageTest2() {
+		dataMap.clear();
+		dataMap.put("maintab", "message");
+		enobjhomePage.selectTab(dataMap);
+
+		boolean flag=enMessage.sanityCheck();
+		Assert.assertTrue(flag,"Message Failed");
+	}
+
+	/**
+	 * Admin Test Verification
+	 * 
+	 */
+	@Test(dependsOnMethods = { "AloginsTest2" })
+	public void AdminTest2() {
+		Reporter.log("Test Started for sanity test in Admin page  : "+ currenttime(), true);
+		SoftAssert softassert = new SoftAssert();
+		boolean flag=false;
+		
+		dataMap.put("maintab", "Admin");
+		dataMap.put("subtab", "Upload");
+		enobjhomePage.selectTab(dataMap);
+		flag=objManageFilesPage.verifyUploadFilesPageDetailsDisplayed();
+		softassert.assertTrue(flag,"Upload Failed");
+
+		dataMap.put("subtab", "Download");
+		enobjhomePage.selectTab(dataMap);
+		flag=objManageFilesPage.verifyDownloadFilesPageDetailsDisplayed();
+		softassert.assertTrue(flag,"Download Failed");
+
+		dataMap.put("subtab", "Contacts");
+		enobjhomePage.selectTab(dataMap);
+		flag=objUserPage.verifyUsersSectionDisplayed();
+		softassert.assertTrue(flag,"USers Failed");
+		
+		dataMap.put("subtab", "claimGlCodes");
+		enobjhomePage.selectTab(dataMap);
+		flag=glcode.verifyGLCodePage();
+		softassert.assertTrue(flag,"GL Failed");
+		
+		// Addresses
+		dataMap.put("maintab", "Admin");
+		dataMap.put("subtab", "manageAddress");
+		enobjhomePage.selectTab(dataMap);
+		flag=objManageAddressesPage.verifyAddressPageDisplayed();
+		softassert.assertTrue(flag,"Address Failed");
+
+		// Claim Resolution
+		dataMap.put("maintab", "Admin");
+		dataMap.put("subtab", "manageClaimResolution");
+		enobjhomePage.selectTab(dataMap);
+		flag=objClaimResolutionPage.verifyClaimResolutionIsDisplayed();
+		softassert.assertTrue(flag,"Claim Resolution Failed");
+		
+		// Claim Type
+		dataMap.put("subtab", "manageClaimType");
+		enobjhomePage.selectTab(dataMap);
+		flag=objClaimTypePage.verifyClaimTypePageIsDisplayed();
+		softassert.assertTrue(flag,"Claim Type Failed");
+
+		// Claim Type Mapping
+		dataMap.put("subtab", "claimTypeMapping");
+		enobjhomePage.selectTab(dataMap);
+		flag=objClaimTypeMapPage.verifyClaimTypeMappingSectionDisplayed();
+		softassert.assertTrue(flag,"Claim Type Mapping Failed");
+
+		// Deal Location Mapping
+		dataMap.put("subtab", "dealLocationMapping");
+		enobjhomePage.selectTab(dataMap);
+		flag=objDealLocation.verifyDealLocationMappingSectionDisplayed();
+		softassert.assertTrue(flag,"Deal Location Mapping Failed");
+
+		// Department
+		dataMap.put("subtab", "department");
+		enobjhomePage.selectTab(dataMap);
+		flag=objDepartments.verifyDepartmentSectionIsDisplayed();
+		softassert.assertTrue(flag,"Department Failed");
+
+		// Divisions
+		dataMap.put("subtab", "buyerDivision");
+		enobjhomePage.selectTab(dataMap);
+		flag=objDivisionPage.verifyDivisionPage();
+		softassert.assertTrue(flag,"Division Failed");
+
+		// Gl code Mapping
+		dataMap.put("subtab", "glCodeMapping");
+		enobjhomePage.selectTab(dataMap);
+		flag=glcodemapping.verifyGLCodeMappingPage();
+		softassert.assertTrue(flag,"Gl Code Mapping Failed");
+
+		// Payment Center
+		dataMap.put("subtab", "buyerPaymentCenter");
+		enobjhomePage.selectTab(dataMap);
+		flag=objPaymentCenterPage.verifyPaymentCenterPage();
+		softassert.assertTrue(flag,"Payment Center Failed");
+
+		// Payment Center Mapping
+		dataMap.put("subtab", "buyerPaymentCenterMapping");
+		enobjhomePage.selectTab(dataMap);
+		flag=objPayCntrMapPage.verifyPaymentCenterMappingPage();
+		softassert.assertTrue(flag,"Payment Center Mapping Failed");
+
+		// Payment Terms Group
+		dataMap.put("subtab", "buyerPaymentTerms");
+		enobjhomePage.selectTab(dataMap);
+		flag=objPaymentTermPage.verifyPaymentTermsPage();
+		softassert.assertTrue(flag,"Payment Term Failed");
+
+		// Buyer Supplier Group
+		dataMap.put("subtab", "buyerSupplierGroup");
+		enobjhomePage.selectTab(dataMap);
+		flag=objSupplierGroupPage.verifyBuyerSupplierGroupPage();
+		softassert.assertTrue(flag,"Supplier Group Failed");
+
+		softassert.assertAll();
+		Reporter.log("Test Ended for sanity test in Admin page :"+ currenttime(), true);
+
+	}
+
+	@AfterClass
+	public void close() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+}

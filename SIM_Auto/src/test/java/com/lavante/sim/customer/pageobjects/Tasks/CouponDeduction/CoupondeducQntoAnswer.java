@@ -1,0 +1,330 @@
+package com.lavante.sim.customer.pageobjects.Tasks.CouponDeduction;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+public class CoupondeducQntoAnswer {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	
+	public CoupondeducQntoAnswer(WebDriver driver)
+	{
+		lavanteUtils.driver=driver;
+	}
+
+/*	@FindBy(css="dummy")
+	private WebElement taskID;
+	public WebElement taskID()
+	{
+		return taskID;
+	}
+	@FindBy(css="dummy")
+	private WebElement nchDeductionNumber;
+	public WebElement nchDeductionNumber()
+	{
+		return nchDeductionNumber;
+	}
+	@FindBy(css="dummy")
+	private WebElement nchInvoiceNumber;
+	public WebElement nchInvoiceNumber()
+	{
+		return nchInvoiceNumber;
+	}
+	
+	@FindBy(css="dummy")
+	private WebElement nchManufNumber;
+	public WebElement nchManufNumber()
+	{
+		return nchManufNumber;
+	}
+	
+	@FindBy(css="dummy")
+	private WebElement nchManufName;
+	public WebElement nchManufName()
+	{
+		return nchManufName;
+	}
+	@FindBy(css="dummy")
+	private WebElement supplierERPID;
+	public WebElement supplierERPID()
+	{
+		return supplierERPID;
+	}
+	@FindBy(css="dummy")
+	private WebElement supplierName;
+	public WebElement supplierName()
+	{
+		return supplierName;
+	}
+	@FindBy(css="dummy")
+	private WebElement nchInvoiceDate;
+	public WebElement nchInvoiceDate()
+	{
+		return nchInvoiceDate;
+	}
+	@FindBy(css="dummy")
+	private WebElement reportDate;
+	public WebElement reportDate()
+	{
+		return reportDate;
+	}
+	@FindBy(css="dummy")
+	private WebElement assignedUser;
+	public WebElement assignedUser()
+	{
+		return nchInvoiceDate;
+	}
+	@FindBy(css="dummy")
+	private WebElement assignedRole;
+	public WebElement assignedRole()
+	{
+		return assignedRole;
+	}
+	@FindBy(css="dummy")
+	private WebElement assignedGrp;
+	public WebElement assignedGrp()
+	{
+		return assignedGrp;
+	}
+	@FindBy(css="dummy")
+	private WebElement taskStatus;
+	public WebElement taskStatus()
+	{
+		return taskStatus;
+	}
+	@FindBy(css="dummy")
+	private WebElement assignedOn;
+	public WebElement assignedOn()
+	{
+		return assignedOn;
+	}*/
+	
+	@FindBy(xpath="//button/span[contains(text(), 'Search')]")
+	private WebElement searchbtn;
+	public WebElement searchbtn(){
+		return searchbtn;
+	}	
+	@FindBy(xpath = "//button/span[contains(text(),'Clear')]")
+	private WebElement clearBtn;
+	public WebElement clearBtn(){
+		return clearBtn;
+	}	
+	@FindBy(css = "p-table table tr td")
+	private WebElement noDataFound;
+	public WebElement noDataFound() {
+		return noDataFound;
+	}
+	
+	@FindBy(css="div[class*='recordInfo']")
+	private WebElement GetResultsCount;
+	public WebElement GetResultsCount() {
+		// TODO Auto-generated method stub
+		return GetResultsCount;
+	}
+	
+	@FindBy(css="a[href*='buyerHome']")
+	private WebElement Home;
+	public WebElement Home() {
+		return Home;
+	}
+	
+	@FindBy(css="div[class='task-section'] a[href*='couponDeductionTasksSearchResult']")
+	private WebElement CoupondedtnQuesToAnswer;
+	public WebElement CoupondedtnQuesToAnswer() {
+		return CoupondedtnQuesToAnswer;
+	}
+	
+	@FindBy(css="a[href*='couponDeductionTasksSearchResult'] span[class ='badge']")
+	private WebElement Couponcount;
+	public WebElement Couponcount() {
+		return Couponcount;
+	}
+	
+	
+	@FindBy(css = "p-table table th")
+	private List<WebElement> Headers;
+	
+	
+	public List<WebElement> iterateSearchHeaderFindColList(String col) {
+		List<WebElement> s = null;
+		int j = ColIdentify(col);
+		int y = j + 1;
+		String x = "p-table table td:nth-child(" + j + ")";
+		s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		if (col.contains("NCH deduction #")) {
+
+			x = "p-table table td:nth-child(" + j + ") a";
+			s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		}
+		return s;
+	}
+	
+	
+	
+	public void search(LinkedHashMap<String, String> dataMap) throws Exception {
+		fillSearchdetails(dataMap);
+		formAction(dataMap);
+
+	}
+	
+
+	public void formAction(LinkedHashMap<String, String> dataMap) {
+		if (dataMap.containsKey("Search")) {
+			lavanteUtils.click(searchbtn);
+		}
+		if (dataMap.containsKey("Clear")) {
+			lavanteUtils.click(clearBtn);
+		}
+		
+	}
+
+	
+	public int ColIdentify(String col) {
+		int ki = 0;
+		boolean found = false;
+		lavanteUtils.fluentwait(Headers.get(0));
+		if (Headers.size() > 0) {
+			for (int i = 0; i < Headers.size(); i++) {
+				String x = Headers.get(i).getText().toLowerCase();
+				if (x.contains(col.toLowerCase())) {
+					ki = i;
+					// List start with 0 but need a number more than that to
+					// fetch in xpath
+					ki = i + 1;
+					found = true;
+					break;
+				}
+			}
+		}
+
+		if (found == false) {
+			Assert.assertTrue(found, "Col name not found" + col);
+		}
+		return ki;
+
+	}
+
+	public void fillSearchdetails(LinkedHashMap<String, String> dataMap) throws Exception {
+		if(dataMap.containsKey("View")) {
+			//switchTasksCouponView(dataMap);
+		}
+		
+		lavanteUtils.fluentwait(searchbtn);
+		String search = "Dummy";
+		String x="//*[text()='"+search+"']/..//input";
+		
+		if(dataMap.containsKey("TaskID")){
+			if(!dataMap.get("TaskID").equalsIgnoreCase("ANY")){
+				x=x.replace(search, "Task ID");
+				lavanteUtils.driver.findElement(By.xpath(x)).clear();
+				lavanteUtils.driver.findElement(By.xpath(x)).sendKeys(dataMap.get("TaskID"));
+			}
+		}
+		if(dataMap.containsKey("NCHDeduction")){
+				if(!dataMap.get("NCHDeduction").equalsIgnoreCase("ANY")){
+					x=x.replace(search, "NCH deduction #");
+					lavanteUtils.driver.findElement(By.xpath(x)).clear();
+					lavanteUtils.driver.findElement(By.xpath(x)).sendKeys(dataMap.get("NCHDeduction"));
+				}
+		}
+			if(dataMap.containsKey("NCH Invoice#")){
+					if(!dataMap.get("NCH Invoice#").equalsIgnoreCase("ANY")){
+						x=x.replace(search, "NCH invoice #");
+						lavanteUtils.driver.findElement(By.xpath(x)).clear();
+						lavanteUtils.driver.findElement(By.xpath(x)).sendKeys(dataMap.get("NCH Invoice#"));
+					}
+			}
+						
+			if(dataMap.containsKey("NCHmanufacturer")){
+				if(!dataMap.get("NCHmanufacturer").equalsIgnoreCase("ANY")){
+					x=x.replace(search, "NCH manufacturer #");
+					lavanteUtils.driver.findElement(By.xpath(x)).clear();
+					lavanteUtils.driver.findElement(By.xpath(x)).sendKeys(dataMap.get("NCHmanufacturer"));
+				}
+			}
+			if(dataMap.containsKey("NCH Manufacturername")){
+					if(!dataMap.get("NCH Manufacturername").equalsIgnoreCase("ANY")){
+						x=x.replace(search, "NCH manufacturer name");
+						lavanteUtils.driver.findElement(By.xpath(x)).clear();
+				lavanteUtils.driver.findElement(By.xpath(x)).sendKeys(dataMap.get("NCH Manufacturername"));
+					}	
+			}
+			if(dataMap.containsKey("SupplierERPID")){
+				if(!dataMap.get("SupplierERPID").equalsIgnoreCase("ANY")){
+					x=x.replace(search, "Supplier ERP ID");
+					lavanteUtils.driver.findElement(By.xpath(x)).clear();
+					lavanteUtils.driver.findElement(By.xpath(x)).sendKeys(dataMap.get("SupplierERPID"));
+				}	
+			}
+				if(dataMap.containsKey("Suppliername")){
+					if(!dataMap.get("Suppliername").equalsIgnoreCase("ANY")){
+						x=x.replace(search, "Supplier name");
+						lavanteUtils.driver.findElement(By.xpath(x)).clear();
+						lavanteUtils.driver.findElement(By.xpath(x)).sendKeys(dataMap.get("Suppliername"));
+					}	
+				}
+			if(dataMap.containsKey("NCH Invoicedate")){
+				if(!dataMap.get("NCH Invoicedate").equalsIgnoreCase("ANY")){
+						x=x.replace(search, "NCH invoice date");
+						lavanteUtils.driver.findElement(By.xpath(x)).clear();
+				//		lavanteUtils.driver.findElement(By.xpath(x)).date(dataMap.get("NCH Invoicedate"));
+						}
+			}
+			if(dataMap.containsKey("Reportdate")){
+				if(!dataMap.get("Reportdate").equalsIgnoreCase("ANY")){
+						x=x.replace(search, "Report date");
+						lavanteUtils.driver.findElement(By.xpath(x)).clear();
+				//		lavanteUtils.driver.findElement(By.xpath(x)).date(dataMap.get("Reportdate"));
+						}
+			}
+			if(dataMap.containsKey("Reportdate")){
+				if(!dataMap.get("Reportdate").equalsIgnoreCase("ANY")){
+						x=x.replace(search, "Reportdate");
+						lavanteUtils.driver.findElement(By.xpath(x)).clear();
+				//		lavanteUtils.driver.findElement(By.xpath(x)).date(dataMap.get("Reportdate"));
+				}	
+			}
+			if(dataMap.containsKey("AssignedUser")){
+				if(!dataMap.get("AssignedUser").equalsIgnoreCase("ANY")){
+						x=x.replace(search, "Assigned user");
+						lavanteUtils.selectbyvalue(dataMap.get("AssignedUser"), lavanteUtils.driver.findElement(By.xpath(x)));
+				}
+			}
+			if(dataMap.containsKey("AssignedRole")){
+				if(!dataMap.get("AssignedRole").equalsIgnoreCase("ANY")){
+					x=x.replace(search, "Assigned role");
+					lavanteUtils.selectbyvalue(dataMap.get("AssignedRole"), lavanteUtils.driver.findElement(By.xpath(x)));
+					}
+			}
+			if(dataMap.containsKey("AssignedGroup")){
+				if(!dataMap.get("AssignedGroup").equalsIgnoreCase("ANY")){
+					x=x.replace(search, "Assigned group");
+					lavanteUtils.selectbyvalue(dataMap.get("AssignedGroup"), lavanteUtils.driver.findElement(By.xpath(x)));
+					}
+			}
+			if(dataMap.containsKey("TaskStatus")){
+				if(!dataMap.get("TaskStatus").equalsIgnoreCase("ANY")){
+					x=x.replace(search, "Task status");
+					lavanteUtils.selectbyvalue(dataMap.get("TaskStatus"), lavanteUtils.driver.findElement(By.xpath(x)));
+					}	
+			}
+			if(dataMap.containsKey("AssignedOn")){
+				if(!dataMap.get("AssignedOn").equalsIgnoreCase("ANY")){
+					x=x.replace(search, "Assigned on");
+				//	lavanteUtils.selectbyvalue(dataMap.get("AssignedOn"), lavanteUtils.driver.findElement(By.xpath(x)));
+					}
+			}
+	
+			
+		
+}
+	
+}

@@ -1,0 +1,306 @@
+package com.lavante.sim.customer.pageobjects.Admin;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+/**
+ * 
+ * @author Piramanayagam.S
+ *
+ */
+public class Departments {
+
+	public WebDriver driver;
+	public LavanteUtils lavanteUtils = new LavanteUtils();
+
+	public Departments(WebDriver driver) {
+		lavanteUtils.driver = driver;
+		this.driver = driver;
+	}
+
+	@FindBy(xpath = "//label[contains(text(),'Department Name')]/../..//input")
+	public WebElement SearchDepartmentNametxt;
+	public WebElement SearchDepartmentNametxt() {
+		return SearchDepartmentNametxt;
+	}
+
+	@FindBy(css = "button[type='reset']")
+	public WebElement ResetBtn;
+	public WebElement ResetBtn() {
+		return ResetBtn;
+	}
+
+	@FindBy(css = "button[type='Submit']")
+	public WebElement SearchBtn;
+	public WebElement SearchBtn() {
+		return SearchBtn;
+	}
+
+	@FindBy(css = "#tableId th")
+	private List<WebElement> Headers;
+	
+	//Add Department
+	@FindBy(css = "button[type*='AddNew']")
+	public WebElement AddDprtmntbtn;
+	public WebElement AddDprtmntbtn() {
+		return AddDprtmntbtn;
+	}
+	
+	@FindBy(css="pop-up input")
+	private WebElement deptNameTxt;
+	public WebElement deptNameTxt(){
+		return deptNameTxt;
+	}
+	
+	@FindBy(css="table[class*='data_table'] tbody tr:nth-child(1) td:nth-child(2)")
+	private WebElement deptNameValue;
+	public WebElement deptNameValue(){
+		return deptNameValue;
+	}
+	
+	@FindBy(css="div[style*='block'] button[class*='primary']")
+	private WebElement saveBtn;
+	public WebElement saveBtn(){
+		return saveBtn;
+	}
+	
+	@FindBy(css="table[class*='data_table'] tbody span[class*='edit']")
+	private WebElement deptEdit;
+	public WebElement deptEdit(){
+		return deptEdit;
+	}
+	
+	@FindBy(css="table[class*='data_table'] tbody span[class*='delete']")
+	private WebElement deptDelete;
+	public WebElement deptDelete(){
+		return deptDelete;
+	}
+	
+	@FindBy(css="div[style*='block']  button[class*='button_primary']")
+	private WebElement deleteConfirmButton;
+	public WebElement deleteConfirmButton(){
+		return deleteConfirmButton;
+	}
+	
+	@FindBy(css="table[class*='data_table'] tr td")
+	private WebElement noResultsText;
+	public WebElement noResultsText(){
+		return noResultsText;
+	}
+	
+	//Search
+	@FindBy(css="button[class*='primary']")
+	private WebElement searchbtn;
+	public WebElement searchbtn(){
+		return searchbtn;
+	}	
+	
+	@FindBy(css = "span[ng-bind='error']")
+	private WebElement Errormsg;
+	public WebElement Errormsg(){
+		return Errormsg;
+	}
+	
+	@FindBy(css = "span[class= 'close close_image_white icon_area align_right ng-scope']")
+	private WebElement Bannerclose;
+	public WebElement Bannerclose(){
+		return Bannerclose;
+	}
+	
+	@FindBy(css = "table[class*='table_grid zebra'] tbody td:nth-child(2)")
+	public List<WebElement> ListDepartment;
+	
+	//End of Search
+
+	/**
+	 * Basic Search
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	public void basicSearch(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.switchtoFrame(null);
+		searchfillDetails(dataMap);
+		searchformAction(dataMap);
+	}
+
+	/**
+	 * Basic Search fill details
+	 * 
+	 *  @author Piramanayagam.S
+	 */
+	public void searchfillDetails(LinkedHashMap<String, String> dataMap) {
+		if (dataMap.containsKey("Department")) {
+			deptNameTxt.clear();
+			lavanteUtils.typeinEdit(dataMap.get("Department"), deptNameTxt);
+		}
+	}
+
+	/**
+	 * Basic Search form actions
+	 * 
+	 *  @author Piramanayagam.S
+	 */
+	public void searchformAction(LinkedHashMap<String, String> dataMap) {
+		if (dataMap.containsKey("Clear")) {
+			lavanteUtils.clicks(ResetBtn);
+		}
+		if (dataMap.containsKey("Search")) {
+			lavanteUtils.clicks(SearchBtn);
+		}
+	}
+
+	public String getColumnText(String colname, int count) {
+		String x = "";
+		int size = iterateSearchHeaderFindColList(colname).size();
+		List<WebElement> sx = iterateSearchHeaderFindColList(colname);
+		outr: for (int i = 0; i < size; i++) {
+			System.out.println(sx.get(i) + "," + i + " COL TExt size: " + sx.size());
+			x = sx.get(i).getText();
+			System.out.println("Col Text:" + x);
+			if (count == 0) {
+				if (x.length() > 0) {
+					break outr;
+				}
+			} else {
+				x = sx.get(count).getText();
+				System.out.println("Exact I Value in col :" + x);
+				break outr;
+			}
+		}
+		return x;
+	}
+
+	public List<WebElement> iterateSearchHeaderFindColList(String col) {
+		List<WebElement> s = null;
+		int j = ColIdentify(col);
+	
+		int y = j + 1;
+	
+		String x = "#tableId tr td:nth-child(" + j + ")";
+		s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		System.out.println("Iterate col locator:" + x + ",Size:" + s.size());
+		if (col.contains("Reference") || col.contains("Invoice")) {
+			x = "#search_results tr td:nth-child(" + j + ") a";
+		
+			System.out.println("Iterate for name/contact:" + x);
+			s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		} else if (col.contains("Notes")) {
+			x = "#search_results tr td:nth-child(" + j + ") a";
+			s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		}
+		System.out.println("Iterate Search Col:" + col + ":" + s.size());
+		return s;
+	}
+
+	public int ColIdentify(String col) {
+		int ki = 0;
+		boolean found = false;
+		if (Headers.size() > 0) {
+			for (int i = 0; i < Headers.size(); i++) {
+				String x = Headers.get(i).getText().toLowerCase();
+				if (x.contains(col.toLowerCase())) {
+					ki = i;
+					// List start with 0 but need a number more than that to
+					// fetch in xpath
+					ki = i + 1;
+					System.out.println(col + ",Col Found at " + ki);
+					found = true;
+					break;
+				}
+			}
+		}
+
+		if (found == false) {
+			Assert.assertTrue(false, "Col name not found" + col);
+		}
+		return ki;
+
+	}
+
+	public void createDepartment(LinkedHashMap<String, String> dataMap) {
+		ClickDepartment();
+		FillDepartment(dataMap);
+		formActionDepartment(dataMap);
+	}
+
+	private void ClickDepartment() {
+		lavanteUtils.click(AddDprtmntbtn);
+		
+	}
+
+	public void FillDepartment(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.fluentwait(deptNameTxt);
+		if(dataMap.containsKey("Department")){
+			deptNameTxt.clear();
+			lavanteUtils.typeinEdit(dataMap.get("Department"),deptNameTxt );
+		}
+		
+	}
+
+	public void formActionDepartment(LinkedHashMap<String, String> dataMap) {
+		if(dataMap.containsKey("Save")){
+			lavanteUtils.click(saveBtn);
+		}
+	}
+	
+	/**
+	 * Search on Claims to Approve
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 */
+	public void search(LinkedHashMap<String, String> dataMap) {
+		fillSearchDetails(dataMap);
+		formSearchDetails(dataMap);
+		
+	}
+
+	private void fillSearchDetails(LinkedHashMap<String, String> dataMap) {
+		//Created Dummy Text
+		lavanteUtils.fluentwait(searchbtn);
+		String y="DUMMY";
+		String x="//*[text()='"+y+"']/../following-sibling::div//input";
+		
+		if(dataMap.containsKey("Department")){
+			if(!dataMap.get("Department").equalsIgnoreCase("ANY")){
+				String z=x;
+				z=z.replace(y, "Department Name");
+				lavanteUtils.driver.findElement(By.xpath(z)).clear();
+				lavanteUtils.driver.findElement(By.xpath(z)).sendKeys(dataMap.get("Department"));
+			}
+		}
+		
+	}
+
+	private void formSearchDetails(LinkedHashMap<String, String> dataMap) {
+		if(dataMap.containsKey("Search")){
+			lavanteUtils.click(searchbtn);
+		}
+	}
+
+	/**
+	 * Used for Sanity
+	 * 
+	 * @author Thejaswi.Bhat 
+	 */
+	public boolean verifyDepartmentSectionIsDisplayed() {
+		boolean flag=false;
+		lavanteUtils.switchtoFrame(null);
+		boolean flag2=lavanteUtils.verifyElementDisplayed("AddNewDepartment", AddDprtmntbtn);
+		boolean flag1=lavanteUtils.verifyElementDisplayed("searchBtn", SearchBtn);
+		
+		if(flag2&& flag1){
+			flag=true;
+		}
+		return flag;
+	}
+	
+}

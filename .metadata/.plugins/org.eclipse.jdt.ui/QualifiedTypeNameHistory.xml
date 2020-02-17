@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.testng.asserts.SoftAssert"/>
+<fullyQualifiedTypeName name="java.util.LinkedHashMap"/>
+<fullyQualifiedTypeName name="com.lavante.configurator.pageobjects.buyers.UsersPage"/>
+<fullyQualifiedTypeName name="com.lavante.configurator.pageobjects.buyers.User.UsersPage"/>
+<fullyQualifiedTypeName name="com.lavante.sim.customer.pageobjects.ManageUsers.ClaimTypeMapping"/>
+<fullyQualifiedTypeName name="org.testng.annotations.BeforeMethod"/>
+<fullyQualifiedTypeName name="com.lavante.sim.customer.pageobjects.ManageUsers.ClaimTypeMappingPage"/>
+<fullyQualifiedTypeName name="com.lavante.sim.Common.Util.LavanteUtils"/>
+<fullyQualifiedTypeName name="com.lavante.sim.customer.pageobjects.Campaign.CampaignPage"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.support.PageFactory"/>
+<fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthOptionPaneUI"/>
+<fullyQualifiedTypeName name="org.testng.Reporter"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.support.ui.Select"/>
+<fullyQualifiedTypeName name="org.testng.Assert"/>
+<fullyQualifiedTypeName name="org.testng.annotations.Ignore"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.By"/>
+<fullyQualifiedTypeName name="com.lavante.sim.customer.pageobjects.PageInitiator"/>
+<fullyQualifiedTypeName name="org.testng.annotations.Test"/>
+<fullyQualifiedTypeName name="com.lavante.sim.customer.pageobjects.Transactions.NCH.NCHInvoice"/>
+<fullyQualifiedTypeName name="com.lavante.sim.customer.pageobjects.Transactions.NCH.ViewNCHPage"/>
+<fullyQualifiedTypeName name="com.lavante.sim.customer.pageobjects.Tasks.CouponDeduction.CoupondeducQntoAnswer"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.WebElement"/>
+<fullyQualifiedTypeName name="java.lang.Character"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="practice.Subclass"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.WebDriver"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.chrome.ChromeDriver"/>
+</qualifiedTypeNameHistroy>

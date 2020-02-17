@@ -1,0 +1,591 @@
+package com.lavante.sim.customer.TestScripts.UserRoles;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.ManageUsers;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 07-10-2016 Created for Verifying SIM User Roles
+ * 
+ * @author Subhash.BV
+ *
+ */
+
+public class LavanteSupportRoleTests extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String CustomerID="";
+
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * 
+	 * @author Subhash.BV
+	 * 
+	 */
+	LinkedHashMap<String, String> LdataMap = null;
+
+	@SuppressWarnings("unchecked")
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+					throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		// Login
+		List<?> listofdatafrm = lavanteUtils.login("LavanteSupportRole", browser);
+		LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+	}
+
+	/**
+	 * 
+	 * UserRoles: Verify that SIM app has Lavante support role running with
+	 * UserRoleID=17 , this support role account should be able to see customers
+	 * drop down on top, changing to any customers should be possible
+	 * 
+	 * SIM 7.2 
+	 * @author Subhash.BV
+	 * @throws Exception
+	 */
+	@Test
+	public void verifyCustomerRoleDropDownTest() throws Exception {
+		Reporter.log("Test Started for verifyCustomerDropDownTest : " + currenttime());
+		SoftAssert softAssert=new SoftAssert();
+		
+		lavanteUtils.click(enobjhomePage.AllCustomersDropDwn());
+				
+		List<String> customers = listelement(null);
+		int random = randomnum(customers.size());
+		String selctedCust = "";
+		selctedCust=customers.get(random) ;
+		
+		while(!(selctedCust.length()>0)){
+			selctedCust=customers.get(random) ;
+			random = randomnum(customers.size());
+		}
+		
+		String x="select Count(NAme) From Customer ";
+		x=lavanteUtils.fetchDBdata(x);
+		List<String> actuals = new ArrayList<String>();
+		for(int i=0;i<customers.size();i++){
+			if(customers.get(i).length()>0){
+				actuals.add(customers.get(i));
+			}
+		}
+		Reporter.log("Customer Count,Exp:"+x+",Actuals:"+actuals.size(),true);
+		softAssert.assertEquals(x, ""+actuals.size(),"Customer Count Not matched");
+		
+		lavanteUtils.typeinEdit(selctedCust, enobjhomePage.AllCustomersDropDwnTxtBox);
+		lavanteUtils.selectvalueFrmDpdn(selctedCust);
+		Reporter.log("SELECTED CUSTOMER:"+selctedCust,true);
+		
+		 x = "select CustomerLogoUrl from Customer where [Name]='" + selctedCust + "'";
+		 x = lavanteUtils.fetchDBdata(x);
+		 
+		lavanteUtils.waitForTime(5000);
+		String actual = enobjhomePage.customerlogo().getAttribute("src");
+
+		Reporter.log("Verify  support role account should be able to see customers drop down on top, changing to any customers should be possible. Expected, "	+ x + " Actual , " + actual);
+
+		if (actual.contains(x)) {
+			softAssert.assertTrue(true,"Verify  support role account should be able to see customers drop down on top, changing to any customers should be possible. Expected, "	+ x + " Actual , " + actual);
+		} else {
+
+			softAssert.assertTrue(false,"Verify  support role account should be able to see customers drop down on top, changing to any customers should be possible. Expected, "		+ x + " Actual , " + actual);
+		}
+		
+		lavanteUtils.click(enobjhomePage.RoleproxyDpdn());
+		
+		customers = listelement(null);
+		
+		 x="select count(UserRoleID) from CustomerLoginRoleMap where  IsActive=1 and CustomerID in (Select CustomerID from Customer where Name='" + selctedCust + "')";
+		x=lavanteUtils.fetchDBdata(x);
+		actuals = new ArrayList<String>();
+		for(int i=0;i<customers.size();i++){
+			if(customers.get(i).length()>0 && !customers.get(i).contains("Act on behalf")){
+				actuals.add(customers.get(i));
+			}
+		}
+		Reporter.log("Role Count,Exp:"+x+",Actuals:"+actuals.size(),true);
+		softAssert.assertEquals(x, ""+actuals.size(),"Role Count Not matched");
+		
+		
+		random = randomnum(actuals.size());
+		selctedCust = "";
+		selctedCust=actuals.get(random) ;
+		
+		while(!(selctedCust.length()>0)){
+			selctedCust=actuals.get(random) ;
+			random = randomnum(actuals.size());
+		}
+		lavanteUtils.selectvalueFrmDpdn(selctedCust);
+		Reporter.log("SELECTED Role:"+selctedCust,true);
+			
+		
+		lavanteUtils.fluentwait(enobjhomePage.supportbannermsg());
+		x=enobjhomePage.supportbannermsg().getText().trim();
+		Reporter.log("Actuals:"+x+",Expected:"+selctedCust,true);
+		softAssert.assertEquals(x,selctedCust,"After Role selection, support banner is not shown");
+		
+		boolean flag=lavanteUtils.isElementDisplayed(enobjhomePage.returntoSupport());
+		Reporter.log("After RoleSection ,Support Return msg expected true,actuals:"+flag);
+		softAssert.assertTrue(flag,"After Role selection, support banner is not shown");
+		
+		lavanteUtils.click(enobjhomePage.returntoSupport());
+		lavanteUtils.fluentwait(enobjhomePage.UserName());
+		
+		flag=lavanteUtils.isElementDisplayed(enobjhomePage.returntoSupport());
+		Reporter.log("After RoleSection ,Support Return msg expected false,actuals:"+flag);
+		softAssert.assertFalse(flag,"After return, support banner is shown");
+		
+		softAssert.assertAll();
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	/**
+	 * 
+	 * UserRoles: support role should be able to Reset legal name and TIN/VAT
+	 * number combination
+	 * 
+	 * @author Subhash.BV
+	 * @throws Exception
+	 */
+	@Test(dataProvider = "AddNwUser", dataProviderClass = ManageUsers.class)
+	public void verifyResetUserpasswordTest(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for verifyResetUserpasswordTest:" + currenttime());
+
+		dataMap.put("maintab", "Admin");
+		dataMap.put("subtab", "Contacts");
+		enobjhomePage.selectTab(dataMap);
+
+		dataMap.put("Save", "");
+		objUserPage.addNewUser(dataMap);
+		String x=dataMap.get("ContactName");
+		Reporter.log("Added New User:"+x);
+		String username=x;
+		
+		dataMap.clear();
+		dataMap.put("ContactName", x);
+		objUserPage.searchUserContactName(dataMap);
+		
+		lavanteUtils.switchtoFrame(objUserPage.IFRAMESearchResult());
+		boolean flag=false;
+		outr:for (int i = 0; i < objUserPage.UserList.size(); i++) {
+			String getUserName = lavanteUtils.getText(objUserPage.UserList.get(i));
+			if (x.equals(getUserName)) {
+				lavanteUtils.selectChkBox(objUserPage.UserListChkBox.get(i), "yes");
+				dataMap.put("ResetPassword","");
+				objUserPage.otherActions(dataMap);
+				
+				/*String expectedSuccessMsg = "Your reset password link has been sent to your E-mail address.";
+				String actualSuccessMsg = lavanteUtils.getText(objUserPage.GetSuccessMsg);
+
+				Reporter.log(" Verify Reset Password, Expected : " + expectedSuccessMsg + ", Actual : " + actualSuccessMsg);
+				Assert.assertEquals(actualSuccessMsg, expectedSuccessMsg,	" Verify Reset Password, Expected : " + expectedSuccessMsg + ", Actual : " + actualSuccessMsg);*/
+			
+				flag=true;
+				break outr;
+			}
+		}
+		
+		if(x.length()>0){
+			username=x;
+			String q = " delete from LoginInvitingOrgMap where LoginID in (select LoginID from [Login]  where ContactID in (select ContactID from Contact where ContactName='" + username+ "'))";
+			String q1 = "delete from ReceiverMessage where RecieverLoginID in (select LoginID From Login where ContactID in (select ContactID from Contact where ContactName='" + username+ "'))";
+			String q2 = "delete from Login where ContactID in (select ContactID from Contact where ContactName='" + username+ "')";
+			String q3 = "delete from Customer_Contact_Map  where ContactID in (select ContactID from Contact where ContactName='"+ username + "')";
+			String q4 = "delete from  Contact where ContactName='" + username + "'";
+	
+			lavanteUtils.UpdateDB(q);
+			lavanteUtils.UpdateDB(q1);
+			lavanteUtils.UpdateDB(q2);
+			lavanteUtils.UpdateDB(q3);
+			lavanteUtils.UpdateDB(q4);
+		}
+		
+		Assert.assertTrue(flag);
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	/**
+	 * 
+	 * UserRoles: support role should be able to Reset legal name and TIN/VAT
+	 * number combination
+	 * 
+	 * @author Subhash.BV
+	 * @throws Exception
+	 */
+	@Test
+	public void verifyResetLegalNameAndEINTest() throws Exception {
+		Reporter.log("Test Started for Support role reset Reset LegalNameAndEINTest : " + currenttime());
+
+		lavanteUtils.click(enobjhomePage.AllCustomersDropDwn());
+		
+		String selctedCust = "GP Strategies";
+		lavanteUtils.typeinEdit(selctedCust, enobjhomePage.AllCustomersDropDwnTxtBox);
+		lavanteUtils.selectvalueFrmDpdn(selctedCust);
+		Reporter.log("SELECTED CUSTOMER:"+selctedCust,true);
+		 selctedCust = "select CustomerID from Customer where [Name]='" + selctedCust + "'";
+		 CustomerID = lavanteUtils.fetchDBdata(selctedCust);
+		 
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+		dataMap.put("Tab", "Legal#Enterprise");
+		dataMap.put("suppRegCountrylierName", "");
+		dataMap.put("RegCountry", "Equals To,United States");
+		//dataMap.put("TaxIDNumber", "Is Not Empty");
+		dataMap.put("BusinessStructure", "Individual/Sole Proprietor or Single-Member LLC");
+		dataMap.put("BusinessName", "Contains,a");
+		dataMap.put("LegalIdentifierStatus", "Provided");
+		dataMap.put("SearchAcrossNW", "");
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+		dataMap.remove("BusinessName");
+		
+		enobjsupplierPage.selectChangeView("Invites");
+		
+		String supplierName = enobjsupplierPage.VerifyManagedBywithoutNetwork(CustomerID);
+		dataMap.put("supplierName", supplierName);
+		dataMap.put("editProfile", "");
+		dataMap.put("profile", "");
+		enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+
+		dataMap.put("tab", "Company");
+		eneditProfile.selectTab(dataMap);
+		lavanteUtils.fluentwait(eneditProfile.iframe_todo());
+		lavanteUtils.waitforPageload(eneditProfile.iframe_todo());
+				
+		dataMap.put("EditEIN", "any");
+		dataMap.put("EditBusinessName", "any");
+		String data[] = eneditLegal.fillLegal(dataMap);
+		dataMap.put("SaveExit", "");
+		eneditProfile.formAction(dataMap);
+
+		dataMap.clear();
+		String expectedBusinessName = data[0];
+		String expectedEIN = data[1];
+		dataMap.put("Clear", "");
+		dataMap.put("Tab", "Legal");
+		dataMap.put("Legal", "");
+		dataMap.put("TaxIDNumber", "Equals To," + expectedEIN);
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		enviewSupplier.clickOnSupplier(supplierName);
+		
+		dataMap.remove("Supplier");
+		enviewSupplier.selectTab(dataMap);
+
+		String actualBusinessName = lavanteUtils.getText(enviewSupplier.BusinessName());
+		String actualEIN = lavanteUtils.getText(enviewSupplier.taxIDNum());
+
+		Reporter.log("Verify reset legal name and TIN/VAT number, " + expectedBusinessName + " Actual , "+ actualBusinessName);
+		Assert.assertEquals(actualBusinessName, expectedBusinessName,"Verify reset legal name and TIN/VAT number. Expected, " + expectedBusinessName + " Actual , "	+ actualBusinessName);
+
+		Reporter.log("Verify reset legal name and TIN/VAT number. Expected, " + expectedEIN + " Actual , " + actualEIN);
+		Assert.assertEquals(actualEIN, expectedEIN,"Verify reset legal name and TIN/VAT number. Expected, " + expectedEIN + " Actual , " + actualEIN);
+
+		Reporter.log("Test Ended for Support role reset Reset LegalNameAndEINTest:" + currenttime());
+	}
+
+	/**
+	 * 
+	 * DBTest: More Legal ID Validations
+	 * 
+	 * @author Subhash.BV
+	 * @throws IOException
+	 */
+	@Test
+	public void verifyLegalIDValidationsTest() throws Exception {
+		Reporter.log("Test Started for verifyLegalIDValidationsTest :" + currenttime());
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+
+		lavanteUtils.click(enobjhomePage.AllCustomersDropDwn());
+		lavanteUtils.selectvalueFrmDpdn("Discovery Communications, LLC");
+
+		dataMap.put("maintab", "COMPLIANCE");
+		dataMap.put("subtab", "customerSupplierLegalID");
+		enobjhomePage.selectTab(dataMap);
+
+		dataMap.put("SupplierLocation", "EU");
+		dataMap.put("FilterBY", "LegalID");
+		dataMap.put("FilterSub", "MisMatch");
+		enobjLegalID.searchSupplier(dataMap);
+		
+		boolean supplierLegalName = false;
+		Reporter.log("Verify Ability for customers to view the Actual Supplier Legal Name as stored in the EU Validation DB in case of EU Legal ID Mismatch only.");
+
+		lavanteUtils.fluentwait(enobjLegalID.ListSupplierLegalName().get(0));
+		if (enobjLegalID.ListSupplierLegalName().get(0).getText().length() > 0) {
+			supplierLegalName = true;
+		}
+		Assert.assertTrue(supplierLegalName,"Verify Ability for customers to view the Actual Supplier Legal Name as stored in the EU Validation DB in case of EU Legal ID Mismatch only.");
+
+		dataMap.clear();
+		dataMap.put("FilterSub", "AutoValidated");
+		enobjLegalID.searchSupplier(dataMap);
+
+		lavanteUtils.click(enobjLegalID.ListSupplier().get(0));
+
+		lavanteUtils.fluentwait(enviewSupplier.VATRegistrationTickMark());
+		String actual = lavanteUtils.getValue(enviewSupplier.VATRegistrationTickMark(), "class");
+		String expected = "icon_checked";
+		Reporter.log("Verify Auto Validated Legal IDs in the View Supplier Profile should have a green tick mark displayed, Expected "					+ expected + ", Actual " + actual);
+		Assert.assertEquals(actual, expected,	"Verify Auto Validated Legal IDs in the View Supplier Profile should have a green tick mark displayed, Expected "						+ expected + ", Actual " + actual);
+
+		enobjhomePage.backtoSearch();
+		
+		dataMap.put("maintab", "COMPLIANCE");
+		dataMap.put("subtab", "customerSupplierLegalID");
+		enobjhomePage.selectTab(dataMap);
+
+		dataMap.clear();
+		dataMap.put("SupplierLocation", "EU");
+		dataMap.put("FilterBY", "LegalID");
+		dataMap.put("FilterSub", "ManuallyValidated");
+		enobjLegalID.searchSupplier(dataMap);
+
+		lavanteUtils.click(enobjLegalID.ListSupplier().get(0));
+		lavanteUtils.fluentwait(enviewSupplier.VATRegistrationTickMark());
+		String actualYellow = lavanteUtils.getValue(enviewSupplier.VATRegistrationTickMark(), "class");
+		String expectedYellow = "icon_checked_yellow";
+		Reporter.log(	"Verify Manually Validated Legal IDs in the View Supplier Profile should have a yellow tick mark displayed, Expected "						+ expectedYellow + ", Actual " + actualYellow);
+		Assert.assertEquals(actualYellow, expectedYellow,	"Verify Manually Validated Legal IDs in the View Supplier Profile should have a yellow tick mark displayed, Expected "						+ expectedYellow + ", Actual " + actualYellow);
+
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	/**
+	 * 
+	 * DBTest: Defaulting to "EFT" as a Preferred Payment Type
+	 * 
+	 * @author Subhash.BV
+	 * @throws IOException
+	 */
+	//@Test(dataProvider = "InviteSupplierEmail", dataProviderClass = SupplierRegistrationDataProvider.class)
+	public void verifyEFTPreferredPayementTypeTest(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for verifyEFTPreferredPayementTypeTest :" + currenttime());
+		SoftAssert softAssert = new SoftAssert();
+
+		String cname = "Omnicare";
+
+		lavanteUtils.fluentwait(enobjhomePage.AllCustomersDropDwn());
+		lavanteUtils.click(enobjhomePage.AllCustomersDropDwn());
+		lavanteUtils.typeinEdit(cname, enobjhomePage.AllCustomersDropDwnTxtBox);
+		lavanteUtils.selectvalueFrmDpdn(cname);
+
+		String query = "	select CustomerID from Customer where [Name]='" + cname + "'";
+		String custid = lavanteUtils.fetchDBdata(query);
+
+		query = "select propertyValue from CustomerPropertyvalue where CustomerPropertyID=19 and CustomerID=" + custid;
+		query = lavanteUtils.fetchDBdata(query);
+		if (query == null) {
+			query = "Insert into CustomerPropertyValue (CustomerPropertyID ,CustomerID  ,PropertyValue ,IsActive  ,CreatedBy  ,CreatedOn ) VALUES (19 ,"
+					+ custid + " ,'True' ,1 ,'Automation' ,getdate())";
+			lavanteUtils.UpdateDB(query);
+		} else if (!Boolean.parseBoolean(query)) {
+			query = "update CustomerPropertyValue set PropertyValue='True' where CustomerPropertyID=19 and CustomerID="
+					+ custid + "";
+			lavanteUtils.UpdateDB(query);
+		}
+
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+
+		dataMap.put("invite", "");
+		dataMap.put("email", "any");
+		
+		if(dataMap.containsKey("inviteorg")){
+			dataMap.remove("inviteorg");
+		}
+		String[] dataContent = enobjInvitenewSupplier.inviteNwSupp(dataMap);
+		Reporter.log("Invited New Supp:"+dataContent[0]);
+		
+		dataMap.put("supplierName", dataContent[0]);
+		dataMap.put("profile", "");
+		dataMap.put("TakeControl", "");
+		String supplierName = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+
+		dataMap.put("tab", "supplierRelationshipTreasuryInfo");
+		eneditProfile.selectTab(dataMap);
+
+		String actualValue = lavanteUtils.getValue(eneditPayment.EFTChkBox(), "onclick");
+		String expectedValue = "return false";
+
+		Reporter.log("Verify EFT type is enabled as the default preferred type, Expected " + expectedValue + ", Actual "				+ actualValue);
+		Assert.assertEquals(actualValue, expectedValue,
+				"Verify EFT type is enabled as the default preferred type, Expected " + expectedValue + ", Actual "						+ actualValue);
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.click(eneditProfile.Finish_Profile_Button());
+
+		lavanteUtils.fluentwait(eneditPayment.GetTableErrorMsg());
+		String actualMsg = lavanteUtils.getText(eneditPayment.GetTableErrorMsg());
+		String expectedMsg = "Cannot be left blank.";
+
+		Reporter.log(	"Verify EFT payment type appeared as 'Checked/selected' for associated suppliers, an message 'Cannot be left blank', Expected "						+ expectedMsg + ", Actual " + actualMsg);
+		softAssert.assertEquals(actualMsg, expectedMsg,				"Verify EFT payment type appeared as 'Checked/selected' for associated suppliers, an message 'Cannot be left blank', Expected "						+ expectedMsg + ", Actual " + actualMsg);
+
+		dataMap.put("paymentTypeSupport", "Check");
+		eneditPayment.fillPayMentInfo(dataMap);
+		lavanteUtils.selectChkBox(eneditPayment.EFTChkBox(), "no");
+		lavanteUtils.selectChkBox(eneditPayment.CreditCardChkBox(), "no");
+		dataMap.clear();
+		dataMap.put("CheckPayableTo", "any");
+		dataMap.put("CheckPaymentTerms", "any");
+		eneditPayment.fillPayMentInfo(dataMap);
+
+		dataMap.put("SaveExit", "");
+		eneditProfile.formAction(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		enviewSupplier.clickOnSupplier(supplierName);
+
+		dataMap.put("maintab", "Supplier Managed");
+		dataMap.put("subtab", "viewRelationshipTreasuryDetails");
+		enviewSupplier.selectTab(dataMap);
+
+		String actualPayableToValue = lavanteUtils.getText(enviewSupplier.GetPayableToValue());
+		String actualPaymentTermsValue = lavanteUtils.getText(enviewSupplier.GetPaymentTermsValue());
+
+		Reporter.log("Verify users are able to change 'Preferred Payment Type' to Credit Card / Check and save the profile successfully, Expected "	+ dataMap.get("CheckPayableTo") + "  " + dataMap.get("CheckPaymentTerms") + " , Actual "
+						+ actualPayableToValue + "   " + actualPaymentTermsValue);
+		Boolean flag = false;
+		if (dataMap.get("CheckPayableTo").equals(actualPayableToValue)
+				&& dataMap.get("CheckPaymentTerms").equals(actualPaymentTermsValue)) {
+			flag = true;
+		}
+		softAssert.assertTrue(flag,	"Verify users are able to change 'Preferred Payment Type' to Credit Card / Check and save the profile successfully, Expected "			+ dataMap.get("CheckPayableTo") + "  " + dataMap.get("CheckPaymentTerms") + " , Actual "	+ actualPayableToValue + "   " + actualPaymentTermsValue);
+
+		String delQuery = "delete from CustomerPropertyValue where CustomerPropertyID=19 and CustomerID=50";
+		lavanteUtils.UpdateDB(delQuery);
+	}
+
+	/**
+	 * 
+	 * Supplier Account Setup : 1, Verify that if existing supplier gets invite
+	 * from a new customer then supplier invite opens to a accept/decline page
+	 * 2, Verify that same supplier can accept invites from multiple customers
+	 * 
+	 * @author Subhash.BV
+	 * @param dataMap
+	 * @throws Exception
+	 */
+	//@Test(dataProvider = "InviteSupplierEmail", dataProviderClass = SupplierRegistrationDataProvider.class)
+	public void verifyAccountSetupDeclinePageTest(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for verifyAccountSetupDeclinePageTest : " + currenttime());
+
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+
+		int customerId = 53;
+		String query = "SELECT  max(C.Email) FROM [Login] L INNER JOIN Supplier_Contact_Map SCM ON L.ContactID = SCM.ContactID INNER JOIN "
+				+ " Contact C ON C.ContactID = L.ContactID INNER JOIN Relationship R ON SCM.LavanteUID = R.LavanteUID WHERE C.IsActive =1 AND "
+				+ " L.IsActive= 1 AND L.IsLocked=0 AND C.IsTalentAgent=0 AND R.ProfileStatusID=4 AND  R.ProfileManagedBy_KVID=5102 and R.CustomerID not in ("
+				+ customerId + ") ";
+		String emailId = lavanteUtils.fetchDBdata(query);
+
+		String getRelationshipId = "select * from Relationship where CustomerID=" + customerId + " and LavanteUID in "
+				+ "(select LavanteUID from Supplier_Contact_Map where ContactID in "
+				+ "(select ContactID from Contact where email='" + emailId + "'))";
+		getRelationshipId = lavanteUtils.fetchDBdata(getRelationshipId);
+
+		System.out.println(getRelationshipId);
+		if (getRelationshipId != null) {
+			String deleteQuery = "delete from ProfileStageProgress where RelationshipID=" + getRelationshipId + ""
+					+ "delete from Relationship_CustomerOrganization_Map where RelationshipID=" + getRelationshipId + ""
+					+ "delete from SupplierOutreach where RelationshipID=" + getRelationshipId + ""
+					+ "delete from SupplierOutreachAccessCode where RelationshipID=" + getRelationshipId + ""
+					+ "delete from SupplierOutreachLog where RelationshipID=" + getRelationshipId + ""
+					+ "delete from Relationship where RelationshipID=" + getRelationshipId + " and CustomerID = "
+					+ customerId + "";
+			lavanteUtils.UpdateDB(deleteQuery);
+		}
+
+		dataMap.put("email", emailId);
+		dataMap.put("SelectExistingMailId", "");
+		dataMap.put("invite", "");
+		String[] dataContent = enobjInvitenewSupplier.inviteNwSupp(dataMap);
+		Reporter.log("Invited New Supplier:"+dataContent[0]);
+		
+		String getContactName = "select ContactName from Contact where email='" + emailId + "'";
+		dataContent[1] = lavanteUtils.fetchDBdata(getContactName);
+
+		lavanteUtils.navigatetoAccSetup(dataContent);
+		Reporter.log("Navigated to acc Setup Page:");
+		
+		boolean flag = false;
+		lavanteUtils.switchtoFrame(null);
+		if (lavanteUtils.isElementDisplayed(objSimAccSetupPages.VerifyDelcineRadioBtn())) {
+			flag = true;
+		}
+
+		Reporter.log(	" Verify that if existing supplier gets invite from a new customer then supplier invite opens to a accept/decline page");
+		Assert.assertTrue(flag,	" Verification failed that if existing supplier gets invite from a new customer then supplier invite opens to a accept/decline page");
+
+		lavanteUtils.fluentwait(objSimAccSetupPages.nextbttn());
+		lavanteUtils.click(objSimAccSetupPages.nextbttn());
+
+		lavanteUtils.fluentwait(enobjhomePage.logoutbtn());
+
+		if (lavanteUtils.isElementDisplayed(enobjhomePage.AllCustomersDropDwnTxtBox)) {
+			flag = true;
+		}
+		Reporter.log(" Verify that same supplier can accept invites from multiple customers ");
+		Assert.assertTrue(flag, " Verification failed the same supplier can accept invites from multiple customers");
+
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	@AfterMethod
+	public void SetupAftermethod() {
+		
+		enobjhomePage.backtoSearch();
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String,String>();
+		dataMap.put("EditCancel", "");
+		eneditProfile.formAction(dataMap);
+		
+		enobjInvitenewSupplier.cancel();
+		enobjhomePage.popupclose();
+		lavanteUtils.refreshPage();
+		
+		
+	}
+
+	@AfterClass
+	public void SetupafterClassmethod() {
+
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+}

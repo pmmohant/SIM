@@ -1,0 +1,286 @@
+package com.lavante.configurator.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.lavante.configurator.Common.Util.LavanteUtils;
+
+
+public class CheckRegister {
+	
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	
+	public CheckRegister(WebDriver driver) {
+		lavanteUtils.driver = driver;
+	}
+	
+	@FindBy(id="frmQuickSearch")
+	private WebElement quickSearch_Form;
+	public WebElement quickSearch_Form(){
+		return quickSearch_Form;
+	}
+
+	//user Page Locators Started
+	
+	@FindBy(id="btn-delete")
+	private WebElement user_deletebttn;
+	public WebElement user_deletebttn(){
+		return user_deletebttn;
+	}
+	@FindBy(id="btn-add")
+	private WebElement user_addbttn;
+	public WebElement user_addbttn(){
+		return user_addbttn;
+	}
+	@FindBy(css="th:nth-child(2) span")
+	private WebElement user_headername;
+	public WebElement user_headername(){
+		return user_headername;
+	}
+	@FindBy(css="th:nth-child(3) span")
+	private WebElement user_headeruser;
+	public WebElement user_headeruser(){
+		return user_headeruser;
+	}
+	@FindBy(css="th:nth-child(4) span")
+	private WebElement user_headeractive;
+	public WebElement user_headeractive(){
+		return user_headeractive;
+	}
+	
+	@FindBy(css="th:nth-child(5) span")
+	private WebElement user_headeraccountcreated;
+	public WebElement user_headeraccountcreated(){
+		return user_headeraccountcreated;
+	}
+	
+	@FindBy(css="th:nth-child(6) span")
+	private WebElement user_headeremail;
+	public WebElement user_headeremail(){
+		return user_headeremail;
+	}
+	@FindBy(css="th:nth-child(7) span")
+	private WebElement user_headerphone;
+	public WebElement user_headerphone(){
+		return user_headerphone;
+	}
+	@FindBy(css="th:nth-child(8) span")
+	private WebElement user_headerfax;
+	public WebElement user_headerfax(){
+		return user_headerfax;
+	}
+	@FindBy(css="th:nth-child(9) span")
+	private WebElement user_headeractions;
+	public WebElement user_headeractions(){
+		return user_headeractions;
+	}
+	@FindBy(css="[name='filter-contactName']")
+	private WebElement user_username;
+	public WebElement user_username(){
+		return user_username;
+	}
+	
+	
+	
+	//user Page Locators Ended
+	
+	
+	//Outreach template page locators started
+	
+	@FindBy(css="[ng-click*='del']")
+	private WebElement deleteoutreachbttn;
+	public WebElement deleteoutreachbttn(){
+		return deleteoutreachbttn;
+	}
+	
+	
+	@FindBy(css="[ng-click*='dialog']")
+	private WebElement addoutreachbttn;
+	public WebElement addoutreachbttn(){
+		return addoutreachbttn;
+	}
+	
+	@FindBy(css="th:nth-child(2) span")
+	private WebElement headergroupname;
+	public WebElement headergroupname(){
+		return headergroupname;
+	}
+	
+	@FindBy(css="th:nth-child(3) span")
+	private WebElement headerlanguage;
+	public WebElement headerlanguage(){
+		return headerlanguage;
+	}
+	@FindBy(css="th:nth-child(4) span")
+	private WebElement headeroutreachtype;
+	public WebElement headeroutreachtype(){
+	return headeroutreachtype;
+}
+	
+	@FindBy(css="th:nth-child(5) span")
+	private WebElement headertemplate;
+	public WebElement headertemplate(){
+	return headertemplate;
+}
+	
+	@FindBy(css="th:nth-child(6) span")
+	private WebElement headerpreview;
+	public WebElement headerpreview(){
+	return headerpreview;
+}
+	
+	@FindBy(css="th:nth-child(7) span")
+	private WebElement headercreatedby;
+	public WebElement headercreatedby(){
+	return headercreatedby;
+}
+	
+	@FindBy(css="th:nth-child(8) span")
+	private WebElement headercreatedon;
+	public WebElement headercreatedon(){
+	return headercreatedon;
+}
+	@FindBy(css="th:nth-child(9) span")
+	private WebElement headeraction;
+	public WebElement headeraction(){
+	return headeraction;
+}
+	
+
+	//Outreach template page locators ended
+	
+	
+	//outreach setup page locators started
+	
+	
+	@FindBy(css="[ng-click*='de']")
+	private WebElement outset_deletebttn;
+	public WebElement outset_deletebttn(){
+	return outset_deletebttn;
+}
+	
+	@FindBy(css="[ng-click*='dia']")
+	private WebElement outset_addbttn;
+	public WebElement  outset_addbttn(){
+	return  outset_addbttn;
+}
+	
+	@FindBy(css="th:nth-child(2) span")
+	private WebElement headeroutreachseq;
+	public WebElement  headeroutreachseq(){
+	return  headeroutreachseq;
+}
+	
+	@FindBy(css="th:nth-child(3) span")
+	private WebElement headerouttype;
+	public WebElement  headerouttype(){
+	return  headerouttype;
+}
+	@FindBy(css="th:nth-child(4) span")
+	private WebElement headerwaitdays;
+	public WebElement  headerwaitdays(){
+	return  headerwaitdays;
+}
+	@FindBy(css="th:nth-child(5) span")
+	private WebElement headercreaby;
+	public WebElement  headercreaby(){
+	return  headercreaby;
+}
+	@FindBy(css="th:nth-child(6) span")
+	private WebElement headercreaon;
+	public WebElement  headercreaon(){
+	return  headercreaon;
+}
+	@FindBy(css="th:nth-child(7) span")
+	private WebElement headeractions;
+	public WebElement  headeractions(){
+	return  headeractions;
+}
+	
+	//outreach setup page locators ended
+	
+	//Vendor Type Page objects started
+	
+	@FindBy(css="[ng-click*='delete']")
+	private WebElement vendordelbttn;
+	public WebElement  vendordelbttn(){
+	return  vendordelbttn;
+}
+	
+	@FindBy(css="[ng-click*='dialogAdd']")
+	private WebElement vendoraddbttn;
+	public WebElement  vendoraddbttn(){
+	return  vendoraddbttn;
+}
+	
+	@FindBy(css="th:nth-child(2) span")
+	private WebElement vendortypeheader;
+	public WebElement  vendortypeheader(){
+	return  vendortypeheader;
+}
+	
+	@FindBy(css="th:nth-child(3) span")
+	private WebElement vendoractionsheader;
+	public WebElement  vendoractionsheader(){
+	return  vendoractionsheader;
+}
+	//Vendor Type Page objects Ended
+	
+	//supplier Group page locators started
+	
+	@FindBy(css="[ng-click*='delete']")
+	private WebElement suppgroupdelbttn;
+	public WebElement  suppgroupdelbttn(){
+	return  suppgroupdelbttn;
+}
+
+	@FindBy(css="[ng-click*='dialog']")
+	private WebElement suppgroupaddbttn;
+	public WebElement  suppgroupaddbttn(){
+	return  suppgroupaddbttn;
+}
+	@FindBy(css="th:nth-child(2) span")
+	private WebElement suppgroupheadtext;
+	public WebElement  suppgroupheadtext(){
+	return  suppgroupheadtext;
+}
+	
+	@FindBy(css="th:nth-child(3) span")
+	private WebElement suppgroupactionheadtext;
+	public WebElement  suppgroupactionheadtext(){
+	return  suppgroupactionheadtext;
+}
+
+//supplier Group page locators ended
+	
+	//Payment Setting Page locators Started
+	
+	@FindBy(css="[ng-click*='del']")
+	private WebElement paysettdelbttn;
+	public WebElement  paysettdelbttn(){
+	return  paysettdelbttn;
+}
+	@FindBy(css="[ng-click*='dial']")
+	private WebElement paysettaddbttn;
+	public WebElement  paysettaddbttn(){
+	return  paysettaddbttn;
+}
+	
+	@FindBy(css="th:nth-child(2) span")
+	private WebElement paysetpayytypehead;
+	public WebElement  paysetpayytypehead(){
+	return  paysetpayytypehead;
+}
+	@FindBy(css="th:nth-child(3) span")
+	private WebElement paysetpayytermhead;
+	public WebElement  paysetpayytermhead(){
+	return  paysetpayytermhead;
+}
+	@FindBy(css="th:nth-child(4) span")
+	private WebElement paysetactionhead;
+	public WebElement  paysetactionhead(){
+	return  paysetactionhead;
+}
+}
+

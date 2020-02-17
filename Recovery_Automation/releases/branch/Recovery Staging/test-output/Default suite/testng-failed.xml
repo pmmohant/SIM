@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
+    <classes>
+      <class name="lavante.recovery.testsuites.SanityTestSuite">
+        <methods>
+          <include name="verifycontactEntryPage"/>
+          <include name="clean"/>
+          <include name="verifyMailerRegistryPage"/>
+          <include name="verifyOthersFaxCommentsPage"/>
+          <include name="verifyFinContractDetailsPage"/>
+          <include name="verifyPossibleDupesPage"/>
+          <include name="verifySummaryPage"/>
+          <include name="verifySetupBUPage"/>
+          <include name="verifyAccountUsersPage"/>
+          <include name="verifyDashBoardLink"/>
+          <include name="verifyAuditLink"/>
+          <include name="verifyDashBoardClaims"/>
+          <include name="verifyPhoneExtensionPage"/>
+          <include name="verifyHoldsAssignmentsPage"/>
+          <include name="verifyClaimsPage"/>
+          <include name="verifyauditInboundPage"/>
+          <include name="verifySetupPreferencesPage"/>
+          <include name="verifyauditStatisticsAssignmentsPage"/>
+          <include name="verifySetupManageCurrencyPage"/>
+          <include name="verifyAccountAuditGroupsPage"/>
+          <include name="verifyFinancePage"/>
+          <include name="verifyAccountNotificationPage"/>
+          <include name="verifyFaxJobsPage"/>
+          <include name="verifySetupPage"/>
+          <include name="verifyCheckRegistryPage"/>
+          <include name="verifyBackGroundJobsPage"/>
+          <include name="verifyAccountUserGroupsPage"/>
+          <include name="verifyOthersPage"/>
+          <include name="verifyReportsPage"/>
+          <include name="verifyFinInvoicesPage"/>
+          <include name="verifyAssignmentsPage"/>
+          <include name="verifyAccountPage"/>
+          <include name="verifyCreditsAssignmentsPage"/>
+          <include name="verifyCreditrejectionPage"/>
+          <include name="verifyInvoicePage"/>
+          <include name="verifyStatementsAssignmentsPage"/>
+          <include name="verifySetupAuditPage"/>
+          <include name="verifyInvoicesPage"/>
+          <include name="preCondition"/>
+          <include name="verifySetupReqLetterPage"/>
+          <include name="verifyConfigTab"/>
+          <include name="verifyUploadsPage"/>
+          <include name="verifyBatchingPage"/>
+          <include name="verifySetupClientPage"/>
+        </methods>
+      </class> <!-- lavante.recovery.testsuites.SanityTestSuite -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

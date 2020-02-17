@@ -1,0 +1,878 @@
+package com.lavante.sim.customer.pageobjects.Transactions.Claims;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+/**
+ * Page Objects for Create claim and edit claim page
+ * 
+ * @author girish.n
+ *
+ */
+public class CreateClaimPage {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+
+	public CreateClaimPage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+	}
+
+	@FindBy (css = ".notification-block.info")
+	private WebElement notificationBar;
+	public WebElement notificationBar() {
+		return notificationBar;
+	}
+	
+	@FindBy(css = "[id*='claimType'] a")
+	private WebElement claimTypeDDL;
+
+	public WebElement claimTypeDDL() {
+		return claimTypeDDL;
+	}
+
+	@FindBy(id = "claimAmount")
+	private WebElement claimAmountTxtBox;
+
+	public WebElement claimAmountTxtBox() {
+		return claimAmountTxtBox;
+	}
+
+	@FindBy(css = "#claimCurrency_chosen a")
+	private WebElement currencyTypeDDL;
+
+	public WebElement currencyTypeDDL() {
+		return currencyTypeDDL;
+	}
+
+	@FindBy(css = "#claimCurrency_chosen input")
+	private WebElement currencyTypeDDLTxtBox;
+
+	public WebElement currencyTypeDDLTxtBox() {
+		return currencyTypeDDLTxtBox;
+	}
+
+	@FindBy(id = "comment")
+	private WebElement claimDescriptionTxtBox;
+
+	public WebElement claimDescriptionTxtBox() {
+		return claimDescriptionTxtBox;
+	}
+
+	@FindBy(id = "addNewSupportingDoc")
+	private WebElement addNewSupportingDocBtn;
+
+	public WebElement addNewSupportingDocBtn() {
+		return addNewSupportingDocBtn;
+	}
+
+	@FindBy(id = "attachments")
+	private List<WebElement> browseBtnList;
+
+	public List<WebElement> browseBtnList() {
+		return browseBtnList;
+	}
+
+	@FindBy(id = "documentTypeClaimsPayment")
+	private List<WebElement> supDocTypeSelectDDLList;
+
+	public List<WebElement> supDocTypeSelectDDLList() {
+		return supDocTypeSelectDDLList;
+	}
+
+	@FindBy(css = "a[class='icon_delete suppDocsRowDelete']")
+	private List<WebElement> deleteSupDocTypeLinkList;
+
+	public List<WebElement> deleteSupDocTypeLinkList() {
+		return deleteSupDocTypeLinkList;
+	}
+
+	@FindBy(css = "button[onclick*='reminderDialog']") 
+	private WebElement reminder;
+
+	public WebElement reminder() {
+		return reminder;
+	}
+
+	@FindBy(css = "form button[class*='primary']")
+	private WebElement submitBtn;
+
+	public WebElement submitBtn() {
+		return submitBtn;
+	}
+
+	//@FindBy(css = "div[class*='dia'] button.button_primary")
+	@FindBy(xpath="//button[contains(text(), 'Yes')]")
+	private WebElement yesBtn;
+
+	public WebElement yesBtn() {
+		return yesBtn;
+	}
+	
+	@FindBy(id="bannerDiv")
+	private WebElement bannerMsg;	
+	public WebElement bannerMsg(){
+		return bannerMsg;
+	}
+
+	@FindBy(css = "a[class*='cancel']")
+	private WebElement cancelBtn;
+
+	public WebElement cancelBtn() {
+		return cancelBtn;
+	}
+
+	// Task -> Edit Claim Page
+	@FindBy(css = "label[for='claimId']+span")
+	private WebElement claimID;
+
+	public WebElement claimID() {
+		return claimID;
+	}
+
+	@FindBy(css = "div[id*='claimCurrency'] a")
+	private WebElement ClaimCurrency;
+
+	public WebElement ClaimCurrency() {
+		return ClaimCurrency;
+	}
+
+	// Task Claim
+	@FindBy(xpath = "//*[@for='claimAmount']/..//dd")
+	private WebElement ClaimAmtTxt;
+
+	public WebElement ClaimAmtTxt() {
+		return ClaimAmtTxt;
+	}
+
+	@FindBy(id = "departmentID_chosen")
+	private WebElement DepartmentDrpdwn;
+
+	public WebElement DepartmentDrpdwn() {
+		return DepartmentDrpdwn;
+	}
+
+	@FindBy(css = "div#departmentID_chosen input")
+	private WebElement DepartmentTxt;
+
+	public WebElement DepartmentTxt() {
+		return DepartmentTxt;
+	}
+
+	@FindBy(css = "label.box-image[for='claimPriorityLow']")
+	private WebElement ClaimPriorityRadioYes;
+
+	public WebElement ClaimPriorityRadioYes() {
+		return ClaimPriorityRadioYes;
+	}
+
+	@FindBy(css = "label.box-image[for='claimPriorityHigh']")
+	private WebElement ClaimPriorityRadioNo;
+
+	public WebElement ClaimPriorityRadioNo() {
+		return ClaimPriorityRadioNo;
+	}
+
+	@FindBy(css = "label.box-image[for='repay']")
+	private WebElement RepayRadioBtn;
+
+	public WebElement RepayRadioBtn() {
+		return RepayRadioBtn;
+	}
+
+	@FindBy(css = "label.box-image[for='partialRepay']")
+	private WebElement PartialRepayRadioBtn;
+
+	public WebElement PartialRepayRadioBtn() {
+		return PartialRepayRadioBtn;
+	}
+
+	@FindBy(css = "label.box-image[for='deny']")
+	private WebElement DenyRadioBtn;
+
+	public WebElement DenyRadioBtn() {
+		return DenyRadioBtn;
+	}
+
+	@FindBy(id = "settlementAmountEditInp")
+	private WebElement SettlementAmtTxt;
+
+	public WebElement SettlementAmtTxt() {
+		return SettlementAmtTxt;
+	}
+
+	@FindBy(css = "div#claimResolution_chosen input")
+	private WebElement ClaimResolReasonDrpdwn;
+	public WebElement ClaimResolReasonDrpdwn() {
+		return ClaimResolReasonDrpdwn;
+	}
+	
+	@FindBy(css = "#claimResolution_chosen li[class*='choice']")
+	private WebElement ClaimResolReasonSelect;
+	public WebElement ClaimResolReasonSelect() {
+		return ClaimResolReasonSelect;
+	}
+
+	@FindBy(id = "addNewGlCode")
+	private WebElement AddNewGLCodeBtn;
+	public WebElement AddNewGLCodeBtn() {
+		return AddNewGLCodeBtn;
+	}
+
+	// @FindBy(css = "[class*='glCodesTR'][style*='row'] #availableGlCodes")
+	@FindBy(css = "tr[class*='glCodesTR'][style*='row'] td:nth-child(1) a")
+	private List<WebElement> GLCodedrpdn;
+	public List<WebElement> GLCodedrpdn() {
+		return GLCodedrpdn;
+	}
+	
+	//@FindBy(css = "tr[style*='table-row'] select[id*='availableGlCodes']")
+	@FindBy(id = "glCodesTD") 
+	private List<WebElement> GLCodeDrpdwn;
+	public List<WebElement> GLCodeDrpdwn() {
+		return GLCodeDrpdwn;
+	}
+
+	// @FindBy(css = "[class*='glCodesTR'][style*='row'] #glCodeAmount")
+	//@FindBy(css = "tr[style*='table-row'] #glCodeAmount")
+	@FindBy(css = "tr[style*='row'] #glCodeAmount")
+	private List<WebElement> GLCodeAmtTxt;
+	public List<WebElement> GLCodeAmtTxt() {
+		return GLCodeAmtTxt;
+	}
+
+	@FindBy(css = "tr a[class*='glCodeDelete']")
+	private List<WebElement> GLCodeDeleteBtn;
+	public List<WebElement> GLCodeDeleteBtn() {
+		return GLCodeDeleteBtn;
+	}
+
+	@FindBy(css = "div.isAmountError")
+	private WebElement GLCodeAmtError;
+	public WebElement GLCodeAmtError() {
+		return GLCodeAmtError;
+	}
+
+	@FindBy(css = "div.isSelectCodeError")
+	private WebElement GLCodeError;
+	public WebElement GLCodeError() {
+		return GLCodeError;
+	}
+
+	@FindBy(css = "a[title='Cancel']")
+	private WebElement CancelBtn;
+	public WebElement CancelBtn() {
+		return CancelBtn;
+	}
+
+	@FindBy(css = "button[value='save']")
+	private WebElement SaveBtn;
+	public WebElement SaveBtn() {
+		return SaveBtn;
+	}
+	
+	@FindBy(css="a[class*='user-info'] span:nth-child(2) strong")
+	private WebElement homePageContactName;
+
+	@FindBy(css = "button[value='Save and Submit']")
+	private WebElement SubmitBtn;
+	public WebElement SubmitBtn() {
+		return SubmitBtn;
+	}
+
+	@FindBy(css = "div[class*='ui-dialog-content']")
+	private WebElement GLCodeConfirmTxt;
+	public WebElement GLCodeConfirmTxt() {
+		return GLCodeConfirmTxt;
+	}
+
+	@FindBy(css = ".button_flat>span")
+	private WebElement GLCodeNoBtn;
+
+	public WebElement GLCodeNoBtn() {
+		return GLCodeNoBtn;
+	}
+
+	@FindBy(css = ".button_primary>span")
+	private List<WebElement> GLCodeYesBtn;
+
+	public List<WebElement> GLCodeYesBtn() {
+		return GLCodeYesBtn;
+	}
+
+	@FindBy(css = "div.bannerMessage")
+	private List<WebElement> GLCodeBannerMsg;
+
+	public List<WebElement> GLCodeBannerMsg() {
+		return GLCodeBannerMsg;
+	}
+
+	//Claim Header
+	@FindBy(xpath = "//*[contains(text(),'Invoice Number')]/../..//a")
+	private WebElement ViewInvNum;
+
+	public WebElement ViewInvNum() {
+		return ViewInvNum;
+	}
+	
+	@FindBy(xpath = "//*[contains(text(),'Payment Ref No')]/../..//a")
+	private WebElement ViewPaymentRef;
+
+	public WebElement ViewPaymentRef() {
+		return ViewPaymentRef;
+	}
+	
+	@FindBy(css="div[class*='dial'] button[class*='prim']")
+	private WebElement dialogYes;
+	public WebElement dialogYes() {
+		return dialogYes;
+	}
+	
+	@FindBy(css="div[class*='dial'] button[class*='flat']")
+	private WebElement dialogNo;
+	public WebElement dialogNo() {
+		return dialogNo;
+	}
+	
+	@FindBy(css="div[class*='bannerMessage']")
+	private WebElement bannerMessage;
+	public WebElement bannerMessage(){
+		return bannerMessage;
+	}
+	
+	// End of Task
+
+	// End of Locators
+
+	/**
+	 * @author subhas.bv
+	 * 
+	 *         Create Claim
+	 * @throws SQLException 
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 * 
+	 */
+	public void createClaim(LinkedHashMap<String, String> dataMap) throws FileNotFoundException, IOException, SQLException {
+		lavanteUtils.switchtoFrame(null);
+		createClaimFillDetails(dataMap);
+		formAction(dataMap);
+	}
+
+	/**
+	 * @author subhas.bv, vidya.c
+	 * 
+	 *         Create and Edit Claim fill details
+	 * 
+	 */
+	public void createClaimFillDetails(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.fluentwait(SaveBtn);
+		if (dataMap.containsKey("ClaimType")) {
+			lavanteUtils.clicks(claimTypeDDL);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("ClaimType"));
+		//	lavanteUtils.selectbyvalue(dataMap.get("ClaimType"), claimTypeDDL);
+		}
+		if (dataMap.containsKey("ClaimAmount")) {
+			claimAmountTxtBox.clear();
+			lavanteUtils.typeinEdit(dataMap.get("ClaimAmount"),claimAmountTxtBox);
+		}
+		if (dataMap.containsKey("ClaimCurrency")) {
+		}
+		if (dataMap.containsKey("ClaimDesc")) {
+			claimDescriptionTxtBox.clear();
+			lavanteUtils.typeinEdit("ANY", claimDescriptionTxtBox);
+		}
+		if (dataMap.containsKey("Department")) {
+			lavanteUtils.click(DepartmentDrpdwn);
+			lavanteUtils.selectValueFrmdropdown(dataMap.get("Department"));
+		}
+		if (dataMap.containsKey("ClaimPriority")) {
+			if (dataMap.get("ClaimPriority").equalsIgnoreCase("Yes")) {
+				lavanteUtils.click(ClaimPriorityRadioYes);
+			} else if (dataMap.get("ClaimPriority").equalsIgnoreCase("No")) {
+				lavanteUtils.click(ClaimPriorityRadioNo);
+			}
+		}
+		if (dataMap.containsKey("Repay")) {
+			lavanteUtils.click(RepayRadioBtn);
+		}
+		if (dataMap.containsKey("PartialRepay")) {
+			lavanteUtils.click(PartialRepayRadioBtn);
+			if (dataMap.containsKey("SettlementAmt")) {
+				String data1 = dataMap.get("SettlementAmt");
+				if (data1.equalsIgnoreCase("ANY")) {
+					String x=ClaimAmtTxt.getText();
+					if(x.contains(" ")){
+						String[] y=x.split(" ");
+						x=y[0];
+					}
+					Integer xx = Integer.parseInt(x) - 1;
+					data1 = "" + xx;
+				}
+				lavanteUtils.typeinEdit(data1, SettlementAmtTxt);
+			}
+		}
+		if (dataMap.containsKey("Deny")) {
+			lavanteUtils.click(DenyRadioBtn);
+		}
+		if (dataMap.containsKey("ClaimResolReason")) {
+			String x=dataMap.get("ClaimResolReason");
+			if(x.equalsIgnoreCase("ANY")){
+				if(!lavanteUtils.isElementDisplayed(ClaimResolReasonSelect)){
+					lavanteUtils.click(ClaimResolReasonDrpdwn);
+				//	lavanteUtils.click(ClaimResolReasonDrpdwn);
+					lavanteUtils.selectValueFrmdropdown(x);
+				}
+			}else{
+			//	lavanteUtils.click(ClaimResolReasonDrpdwn);
+				lavanteUtils.click(ClaimResolReasonDrpdwn);
+				lavanteUtils.selectValueFrmdropdown(x);
+			}
+		}
+		if (dataMap.containsKey("GLCode")) {
+			addGLCode(dataMap);
+		}
+		if (dataMap.containsKey("GLCodeAmount")) {
+			TypeGLCodeAmount(dataMap);
+		}
+
+	}
+
+	/**
+	 * @author subhas.bv
+	 * 
+	 *         Form Action
+	 * @throws SQLException 
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 * 
+	 */
+	public void formAction(LinkedHashMap<String, String> dataMap)  {
+		lavanteUtils.fluentwait(SaveBtn);
+		if(dataMap.containsKey("SubjectNotification")){
+			dataMap.put("SubjectNotification", notificationBar.getText());
+		}
+		
+		if (dataMap.containsKey("SaveClaim")) {
+			lavanteUtils.clicks(SaveBtn);
+			lavanteUtils.waitForTime(4000);
+			lavanteUtils.fluentwait(homePageContactName);
+			//Added for Warning Message
+			String xc=homePageContactName.getText().trim();
+			String das="select MAX(LoginID) from Login where ContactID in (Select MAX(ContactID) from contact where ContactName='"+xc+"')";
+			try {
+				das=lavanteUtils.fetchDBdata(das);
+			} catch (Exception e) { 			} 
+			if(das!=null){
+				das="select MAX(LOGINID) from UserAgreementLog where UserAgreementPolicyType_KVID=17503 and LoginID="+das;
+				try {
+					das=lavanteUtils.fetchDBdata(das);
+				} catch (Exception e) {  				} 
+				
+				if(das==null){
+					lavanteUtils.click(dialogYes);
+				}
+			}
+			
+			if (GLCodeYesBtn.size() > 0) {
+				getGLCodeWarning(dataMap);
+			}if(dataMap.containsKey("Error")){
+				lavanteUtils.fluentwait(bannerMsg);
+				dataMap.put("BannerMsg", bannerMsg.getText());
+			}
+		}
+		if (dataMap.containsKey("SubmitClaim")) {
+			lavanteUtils.clicks(submitBtn);
+			if (!dataMap.containsKey("GLCODE")) {
+				lavanteUtils.clicks(yesBtn);
+				lavanteUtils.fluentwait(bannerMsg);
+				dataMap.put("BannerMsg", bannerMsg.getText());
+			} else {
+				if (GLCodeYesBtn.size() > 0) {
+					getGLCodeWarning(dataMap);
+				}
+			}
+		}
+		if (dataMap.containsKey("DenyClaim")) {
+			lavanteUtils.clicks(submitBtn);
+		}
+		if (dataMap.containsKey("Cancel")) {
+			lavanteUtils.clicks(cancelBtn);
+		}
+
+		if (dataMap.containsKey("EditCancel")) {
+			lavanteUtils.click(CancelBtn);
+		}
+	}
+
+	public void EditClaim(LinkedHashMap<String, String> dataMap)  {
+		lavanteUtils.switchtoFrame(null);
+		createClaimFillDetails(dataMap);
+		formAction(dataMap);
+	}
+
+	/**
+	 * @author Vidya.C 
+	 * 
+	 * 		Method to handle GL code warning pop up when GL code is
+	 *         not filled
+	 * 
+	 */
+	public void getGLCodeWarning(LinkedHashMap<String, String> dataMap) {
+		if (dataMap.containsKey("GLCodeWarning")) {
+			if (dataMap.get("GLCodeWarning").equalsIgnoreCase("Yes")) {
+				lavanteUtils.click(GLCodeYesBtn.get(0));
+				if (GLCodeBannerMsg.size() > 0) {
+					/*
+					 * if(dataMap.containsKey("GLCodeBanner")) {
+					 * dataMap.put("GLCodeBanner",
+					 * GLCodeBannerMsg.get(0).getText()); }
+					 */
+					lavanteUtils.selectDropDownValue(GLCodeDrpdwn.get(0),dataMap.get("GLCode"));
+					TypeGLCodeAmount(dataMap);
+					lavanteUtils.click(SubmitBtn);
+				}
+			}
+			if (dataMap.get("GLCodeWarning").equalsIgnoreCase("No")) {
+				lavanteUtils.click(GLCodeNoBtn);
+				lavanteUtils.click(GLCodeDrpdwn.get(0));
+				lavanteUtils.selectDropDownValue(GLCodeDrpdwn.get(0),dataMap.get("GLCode"));
+				TypeGLCodeAmount(dataMap);
+				lavanteUtils.click(SubmitBtn);
+			}
+
+		}
+		if (dataMap.containsKey("GLCodeConfirmTxt")) {
+			String text = lavanteUtils.getText(GLCodeConfirmTxt);
+			dataMap.put("GLCodeConfirmTxt", text);
+		}
+	}
+
+	/**
+	 * @author Vidya.C 
+	 * 
+	 * 		Method to handle different scenarios of entering a GL
+	 *         code
+	 * 
+	 * @param dataMap
+	 */
+	public void TypeGLCodeAmount(LinkedHashMap<String, String> dataMap) {
+
+		if (dataMap.containsKey("GLCodeAmount")) {
+			String data = dataMap.get("GLCodeAmount");
+			// if GL code amount is empty or any
+			if (!(data.length() > 0) || data.equalsIgnoreCase("any")) {
+				GLCodeAmtTxt.get(0).clear();
+				String x=ClaimAmtTxt.getText();
+				if(x.contains(" ")){
+					String[] y=x.split(" ");
+					x=y[0];
+				}
+				lavanteUtils.typeinEdit(x,GLCodeAmtTxt.get(0));
+			}
+
+			// if GL code amount is present
+			if (!(data.contains("#"))) {
+				GLCodeAmtTxt.get(0).clear();
+				lavanteUtils.typeinEdit(data, GLCodeAmtTxt.get(0));
+			} else {
+				// Split when there is multiple GLCode Amount
+
+				String[] str = data.split("#");
+
+				int size = str.length - 1;
+				String r = "";
+				Integer a;
+				for (int i = 0; i < str.length; i++) {
+
+					if (str[i].equalsIgnoreCase("any")) {
+						if (i == 0) {
+							String x=ClaimAmtTxt.getText();
+							if(x.contains(" ")){
+								String[] y=x.split(" ");
+								x=y[0];
+							}
+							String ss = x.replace(".", "#").split("#")[0];
+							if (ss.contains(",")) {
+								String[] newStr = ss.split(",");
+								ss = newStr[0] + newStr[1];
+							}
+							a = Integer.parseInt(ss);
+							a = a - size;
+							GLCodeAmtTxt.get(i).clear();
+						//	lavanteUtils.fluentwait(GLCodeAmtTxt.get(i));
+							lavanteUtils.typeinEdit(a.toString(),GLCodeAmtTxt.get(i));
+
+						} else {
+							a = 1;
+							GLCodeAmtTxt.get(i).clear();
+							lavanteUtils.typeinEdit(a.toString(),GLCodeAmtTxt.get(i));
+						}
+
+						r = r + a.toString() + "#";
+						dataMap.put("GLCodeAmount", r);
+
+					} else {
+						GLCodeAmtTxt.get(i).clear();
+						lavanteUtils.typeinEdit(str[i], GLCodeAmtTxt.get(i));
+					}
+
+				}
+			}
+
+		} else if (dataMap.containsKey("SettlementAmt")) {
+			String data1 = dataMap.get("SettlementAmt");
+			if (data1.equalsIgnoreCase("ANY")) {
+				String x=ClaimAmtTxt.getText();
+				if(x.contains(" ")){
+					String[] y=x.split(" ");
+					x=y[0];
+				}
+				Integer xx = Integer.parseInt(x) - 1;
+				data1 = "" + xx;
+			}
+			GLCodeAmtTxt.get(0).clear();
+			lavanteUtils.typeinEdit(data1, GLCodeAmtTxt.get(0));
+		}
+	}
+
+	/**
+	 * @author Vidya.C 
+	 * 
+	 * 		Method to add GL code one or multiple value
+	 * 
+	 */
+	public void addGLCode(LinkedHashMap<String, String> dataMap) {
+		String data = dataMap.get("GLCode");
+		if (data.length() > 0) {
+			deleteGLCode();
+			if (GLCodeDrpdwn.size()==0) {
+				lavanteUtils.click(AddNewGLCodeBtn);
+			}
+			if (!(data.contains("#")) || data.equalsIgnoreCase("any") ) {
+				lavanteUtils.click(GLCodedrpdn.get(0));
+				lavanteUtils.selectvalueFrmDpdn("ANY");
+				//lavanteUtils.selectDropDownValue(GLCodeDrpdwn.get(0), data);
+			} else {
+
+				// Split if multiple GL code is present
+				String[] str = data.split("#");
+				String s = "";
+				for (int i = 0; i < str.length; i++) {
+					//lavanteUtils.waitForTime(1000);
+					if (str[i].equalsIgnoreCase("any")) {
+						lavanteUtils.click(GLCodedrpdn.get(i));
+						lavanteUtils.selectvalueFrmDpdn(str[i].trim());
+						s = s+str[i].trim()+"#";// lavanteUtils.selectDropDownValues(GLCodeDrpdwn.get(i), str[i]).trim()+ "#";
+					} else {
+						lavanteUtils.click(GLCodedrpdn.get(i));
+						lavanteUtils.selectvalueFrmDpdn(str[i]);
+						s=s+str[i]+"#";
+					}
+					dataMap.put("GLCode", s);
+					if (i < str.length - 1) {
+						lavanteUtils.click(AddNewGLCodeBtn);
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * @author Vidya.C 
+	 * 
+	 * 		Method to delete GL code entered, if it already exists
+	 *
+	 */
+	public void deleteGLCode() {
+		System.out.println("DELete size......." + GLCodeDeleteBtn.size());
+		if (GLCodeDeleteBtn.size() > 0) {
+			int size = GLCodeDeleteBtn.size();
+			for (int j = 0; j < size; j++) {
+				lavanteUtils.click(GLCodeDeleteBtn.get(0));
+				lavanteUtils.waitForTime(4000);
+			//	boolean x=lavanteUtils.isElementDisplayed(GLCodeDeleteBtn.get(0));
+			//	if(x==true){
+				//	size = GLCodedrpdn.size();
+				//	j = -1;
+			//	}else{
+			//		break outr;
+			//	}
+
+			}
+		}
+	}
+	
+	/**
+	 * Method to handle the confirmation pop up displayed the user exits from edit claim page.
+	 */
+	public void editClaimPopupAction(LinkedHashMap<String, String> dataMap) {
+		if(dataMap.containsKey("PopupAction")){
+			String url=lavanteUtils.driver.getCurrentUrl();
+			if(url.contains("editClaimTask.lvp") && lavanteUtils.isElementDisplayed(dialogNo())){
+				dataMap.put("PopupDisplayed", "");
+				String data=dataMap.get("PopupAction");
+				if(data.equalsIgnoreCase("Yes")){
+					lavanteUtils.click(dialogYes());
+				}else{
+					lavanteUtils.click(dialogNo());
+				}	
+			}	
+		}
+	}
+
+	/**
+	 * glCodeFetch to fetch the GL code
+	 * 
+	 * @param claimID2
+	 * @param paymentRef
+	 * @param Glcode
+	 * @param customerID
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public String glCodeFetch(String claimID2, String paymentRef,String Glcode,String customerID) throws FileNotFoundException, IOException, SQLException {
+		String GlCodeNw="";
+		if(Glcode==null || !( Glcode.length()>0)){
+			Glcode="";
+		}
+		if(claimID2.length()>0){
+			String pref=Prefix();
+			if(claimID2.contains(pref)){
+				claimID2=claimID2.replace(pref, "");
+			}
+			pref=Suffix();
+			if(claimID2.contains(pref)){
+				claimID2=claimID2.replace(pref, "");
+			}
+		}
+		GlCodeNw=" select MAX(gc.Code) From Claim c,Payment P,Division_GLCode_Map dg , GLCode gc "
+				+ " where P.CustomerOrganizationID=dg.CustomerOrganizationID and gc.GLCodeID = dg.GLcodeID "
+				+ "	and gc.CustomerID="+customerID+"  and c.PaymentID=P.PaymentID and C.ClaimID like '%"+claimID2+"%' and P.PaymentRefNumber='"+paymentRef+"' and gc.Code not in ('"+Glcode+"') " ;
+		GlCodeNw=lavanteUtils.fetchDBdata(GlCodeNw);
+		return GlCodeNw;
+	}
+
+	/**
+	 * UpdateGLCode to update the GL Code
+	 * 
+	 * @param claimID2
+	 * @param PaymentRef
+	 * @param Glcode
+	 * @param customerID
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public void UpdateGLCode(String claimID2, String PaymentRef, String Glcode,String customerID) throws FileNotFoundException, IOException, SQLException {
+		if(Glcode==null || !( Glcode.length()>0)){
+			Glcode="";
+		} 
+		if(claimID2.length()>0){
+			String pref=Prefix();
+			if(claimID2.contains(pref)){
+				claimID2=claimID2.replace(pref, "");
+			}
+			pref=Suffix();
+			if(claimID2.contains(pref)){
+				claimID2=claimID2.replace(pref, "");
+			}
+		}
+		String aGlcode=" insert into Division_GLCode_Map (  CustomerOrganizationID  ,GLcodeID) VALUES ( "
+				+ "  ( select MAX(CustomerOrganizationID) from Payment where PaymentRefNumber='"+PaymentRef+"' "
+						+ " and PaymentID in ( select PaymentID from Claim where ClaimID like '%"+claimID2+"%' )) " 
+				+ "  ,(Select MAX(GLCodeID) FROM GLCode where isActive=1 and Code not in ('"+Glcode+"') and CustomerID="+customerID+" )) " ;
+		lavanteUtils.UpdateDB(aGlcode);
+		
+	}
+
+	/**
+	 * To fetch Suffix of Claim ID
+	 * 
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	private String Suffix() throws FileNotFoundException, IOException, SQLException {
+		String pref="select PropertyValue  from CustomerPropertyValue  where CustomerPropertyID in "
+				+ "	(Select CustomerPropertyID from CustomerProperty where PropertyName like '%CLAIM%SUFFIX%')";
+		pref=lavanteUtils.fetchDBdata(pref);	
+		if(pref==null){
+			pref="";
+		}
+		return pref;
+	}
+	
+	/**
+	 * To fetch Prefix of Claim ID
+	 * 
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	private String Prefix() throws FileNotFoundException, IOException, SQLException {
+		String pref="select PropertyValue  from CustomerPropertyValue  where CustomerPropertyID in "
+				+ "	(Select CustomerPropertyID from CustomerProperty where PropertyName like '%CLAIM%Pref%')";
+		pref=lavanteUtils.fetchDBdata(pref);
+		if(pref==null){
+			pref="";
+		}
+		return pref;
+	}
+
+	
+	/**
+	 * GetOtherClaims 
+	 * 
+	 * @param claimType
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public String getOtherClaimType(String claimType) throws FileNotFoundException, IOException, SQLException {
+		String db="";
+		String payID="";
+		if(claimType.contains("#")){
+			
+			String url=lavanteUtils.driver.getCurrentUrl();
+			if(url.contains("paymentId=")){
+				String[] x=url.split("paymentId=");
+				payID=x[1];
+			}
+			
+			String[] das=claimType.split("#");
+			for(int i=0;i<das.length;i++){
+				if(i==0){
+					db="'"+das[i]+"'";;
+				}else{
+					db=db+","+"'"+das[i]+"'";
+				}
+			}
+			
+		}else{
+			db="'"+claimType+"'";
+		}
+		
+		db="select Max(ClaimType) From CLaimType where ClaimTypeID in ( "
+				+ " select ClaimTypeID from Division_ClaimType_Map where CustomerOrganizationID in( "
+				+ " select CustomerOrganizationID from Payment where PaymentID="+payID+")) and IsActive=1 and ClaimType not in ("+db+");";
+		db=lavanteUtils.fetchDBdata(db);
+		
+		return db;
+	}	
+
+
+}

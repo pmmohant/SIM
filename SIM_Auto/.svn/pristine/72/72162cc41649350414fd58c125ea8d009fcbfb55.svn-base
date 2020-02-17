@@ -1,0 +1,110 @@
+package com.lavante.sim.customer.pageobjects.Admin;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Reporter;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+public class PaymentCenterPage {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	
+	public PaymentCenterPage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+	}
+	
+	@FindBy(css = "button[class*='add_payment_center']")
+	private WebElement AddPaymentCenter;
+	public WebElement AddPaymentCenter(){
+		return AddPaymentCenter;
+	}
+	
+	@FindBy(css = "input[data-label='Payment Center Name']")
+	private WebElement PaymentCenterNameTxtBox;
+	public WebElement PaymentCenterNameTxtBox(){
+		return PaymentCenterNameTxtBox;
+	}
+	
+	@FindBy(css = "div[class*='file_save']")
+	private WebElement SaveBtn;
+	public WebElement SaveBtn(){
+		return SaveBtn;
+	}
+	
+	@FindBy(css = "div[class*='dialog'] button[class*='primary']")
+	private WebElement DeleteBtn;
+	public WebElement DeleteBtn(){
+		return DeleteBtn;
+	}
+	
+	@FindBy(css = "span[class='error']")
+	private WebElement Errormsg;
+	public WebElement Errormsg(){
+		return Errormsg;
+	}
+	
+	@FindBy(css=".bannerMessage")
+	private WebElement bannerMsg;
+	public WebElement bannerMsg(){
+		return bannerMsg;
+	}
+	
+	@FindBy(css = "div[name='paymentcentername']")
+	public List<WebElement> ListPaymentCenterName;
+	
+	@FindBy(css = "div[class*='edit']")
+	public List<WebElement> ListEditPaymentCenter;
+	
+	@FindBy(css = "div[class*='checked']")
+	public List<WebElement> ListCheckedPaymentCenter;
+		
+	@FindBy(css = "a[href*='deleteBuyerData']")
+	public List<WebElement> ListDeletePaymentCenter;
+	
+	/**
+	 * MethodName : addNewPaymentCenter : will add new payment center
+	 * 
+	 * @param testData
+	 *            : LinkedHashMap<String, String> testData
+	 */
+
+	public String addNewPaymentCenter(LinkedHashMap<String, String> testData) {
+
+		Reporter.log("Adding new payment center");
+		clickAddPaymentCenter();
+		String data = fillPaymentCenter(testData);
+		formUserAction(testData);
+		return data;
+	}
+
+	
+	private void clickAddPaymentCenter() {
+		lavanteUtils.click(AddPaymentCenter);
+	}
+
+	public String fillPaymentCenter(LinkedHashMap<String, String> testData) {
+		LinkedHashMap<String, String> testData1=new LinkedHashMap<>();
+		String data = new String();
+		if (testData.containsKey("PaymentCenter")) {
+			PaymentCenterNameTxtBox.clear();
+			data = lavanteUtils.typeString(testData.get("PaymentCenter"), PaymentCenterNameTxtBox);
+			testData1.put("PaymentCenter", data);
+		}
+		
+		return data;
+	}
+	
+	public void formUserAction(LinkedHashMap<String, String> testData) {
+		lavanteUtils.fluentwait(SaveBtn);
+		if (testData.containsKey("Save")) {
+			lavanteUtils.click(SaveBtn);
+			lavanteUtils.waitForTime(5000);
+		}
+		
+	}
+}

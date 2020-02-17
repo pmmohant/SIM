@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Application DB Update" parallel="tests" preserve-order="true"
+	thread-count="1" verbose="1">
+	
+	<!-- Running on IE 11 -->
+
+	  <test preserve-order="true" thread-count="1"
+		name="Lavante SIM - Running on IE">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="internet Explorer" />
+		<parameter name="Version" value="11" />
+		<classes> 
+			<class name="com.lavante.sim.UtilityAppDB" /> 
+
+	 	</classes>
+
+	</test> 
+
+</suite> 

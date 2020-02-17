@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@5442a311found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Application is launched successfully.]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@1130520dfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@55c53a33found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@797b0699found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@26df6e3afound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@6b58b9e9found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@79c97cbfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@42a15bdcfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@27e47833found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@27508c5dfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@4b5189acfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@3ddc6915found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@6c61a903found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@421e361found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@389c4eb1found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@34f6515bfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@1187c9e8found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@14008db3found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@57c03d88found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@6d7fc27found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@135606dbfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@68034211found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@6c372fe6found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@2a3888c1found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@14fa86aefound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@68f1b17ffound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@57ad2aa7found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@3e2059aefound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@7cb502cfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@1b8a29dffound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@12a94400found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@2049a9c1found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@46271dd6found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@7c51f34bfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@2a225dd7found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@125290e5found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@57576994found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@67b9b51afound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@7ef27d7ffound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@6337c201found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@31920adefound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Config filejava.io.FileInputStream@4032d386found]]>
+    </line>
+    <line>
+      <![CDATA[Info: ------------Test ' loginWithValidCredentials ' Started------------]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'adminuser1' is entered in userName_txtField]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'lavante@123' is entered in password_TextField]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'quickSearch_Form' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'auditSelectbox' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'BNSF 2006' is entered in auditdrpDownTextBox]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'auditdrpDownTextBox' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Info: ------------Test ' loginWithValidCredentials ' Ended------------]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'dashBoardLink' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'auditLink' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Supplier details updated successfully]]>
+    </line>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="65388" started-at="2016-12-12T11:44:12Z" finished-at="2016-12-12T11:45:18Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="65388" started-at="2016-12-12T11:44:12Z" finished-at="2016-12-12T11:45:18Z">
+      <class name="lavante.recovery.testsuites.Audit_OutboundDataPage_TS04">
+        <test-method status="PASS" signature="preCondition(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:lavante.recovery.testsuites.Audit_OutboundDataPage_TS04@5702b3b1]" name="preCondition" is-config="true" duration-ms="27490" started-at="2016-12-12T17:14:12Z" finished-at="2016-12-12T17:14:40Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Windows]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[45.0]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: Application is launched successfully.]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@1130520dfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@55c53a33found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@797b0699found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@26df6e3afound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@6b58b9e9found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@79c97cbfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@42a15bdcfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@27e47833found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@27508c5dfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@4b5189acfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@3ddc6915found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@6c61a903found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@421e361found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@389c4eb1found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@34f6515bfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@1187c9e8found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@14008db3found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@57c03d88found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@6d7fc27found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@135606dbfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@68034211found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@6c372fe6found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@2a3888c1found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@14fa86aefound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@68f1b17ffound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@57ad2aa7found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@3e2059aefound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@7cb502cfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@1b8a29dffound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@12a94400found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@2049a9c1found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@46271dd6found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@7c51f34bfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@2a225dd7found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@125290e5found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@57576994found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@67b9b51afound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@7ef27d7ffound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@6337c201found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@31920adefound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Config filejava.io.FileInputStream@4032d386found]]>
+            </line>
+            <line>
+              <![CDATA[Info: ------------Test ' loginWithValidCredentials ' Started------------]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'adminuser1' is entered in userName_txtField]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'lavante@123' is entered in password_TextField]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'quickSearch_Form' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'auditSelectbox' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'BNSF 2006' is entered in auditdrpDownTextBox]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'auditdrpDownTextBox' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Info: ------------Test ' loginWithValidCredentials ' Ended------------]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- preCondition -->
+        <test-method status="PASS" signature="verifySupplierDetailsChange()[pri:0, instance:lavante.recovery.testsuites.Audit_OutboundDataPage_TS04@5702b3b1]" name="verifySupplierDetailsChange" duration-ms="36609" started-at="2016-12-12T17:14:40Z" finished-at="2016-12-12T17:15:16Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'dashBoardLink' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'auditLink' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Supplier details updated successfully]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifySupplierDetailsChange -->
+        <test-method status="PASS" signature="clean()[pri:0, instance:lavante.recovery.testsuites.Audit_OutboundDataPage_TS04@5702b3b1]" name="clean" is-config="true" duration-ms="1274" started-at="2016-12-12T17:15:16Z" finished-at="2016-12-12T17:15:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clean -->
+      </class> <!-- lavante.recovery.testsuites.Audit_OutboundDataPage_TS04 -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

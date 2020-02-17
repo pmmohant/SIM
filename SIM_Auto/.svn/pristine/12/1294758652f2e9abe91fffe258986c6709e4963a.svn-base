@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!-- MAX#3min for a test  57 Test -12000000ms to 3.3 hours -->
+<suite name="Supplier Search Module" parallel="tests"  preserve-order="true" verbose="1" thread-count="3">
+	
+	<listeners>
+		 <listener class-name="com.lavante.sim.Common.Util.ExtentReporterNG"/>
+	 </listeners>
+	 
+	<!-- Running on IE 11 -->
+	 <test preserve-order="false" thread-count="1"
+		name="Lavante SIM - Running on IE 11">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="internet Explorer" />
+		<parameter name="Version" value="11" />
+		<classes>
+			<!-- <class name="com.lavante.sim.customer.TestScripts.Supplier.Search.SupplierSearchTC" />
+			<class 	name="com.lavante.sim.customer.TestScripts.Supplier.Search.UATSupplierSearchTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.UATSupplierAdvancedSearchTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.ConfigViewInSupplierSearch" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.SupplierAdvancedSearchTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.SupplierAdvancedSearchTC002" />
+			
+			Supplier Search module
+			verify_SameContactEmail_VMFOutreachProcess
+			<class name="com.lavante.sim.customer.TestScripts.BasicSearch.CustomerSupplierSearchTC0016" />			
+			 Pre Screen
+			<class name="com.lavante.sim.customer.TestScripts.BasicSearch.CustomerSupplierSearchTC0017" />
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.AssocitateSupplierAgent" /> -->
+		
+	 		</classes>
+	</test>	
+			<!-- Advanced Search Module -->
+			<!-- Date 
+			<class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0009" />	 
+			
+			<class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0010" />
+			 <class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0012" />	
+			<class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0013" />
+			<class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0014" />
+			<class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0015" /> -->
+
+		
+	<!-- Running on FF 35 -->
+	<test preserve-order="false" thread-count="1"
+		name="Lavante SIM - Running on Firefox v53">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="firefox" />
+		<parameter name="Version" value="34" />
+		<classes>
+		<!-- 	<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.INNotINOperator" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.SupplierSearchTC" />
+			<class 	name="com.lavante.sim.customer.TestScripts.Supplier.Search.UATSupplierSearchTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.UATSupplierAdvancedSearchTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.ConfigViewInSupplierSearch" />
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.SupplierAdvancedSearchTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.SupplierAdvancedSearchTC002" />
+			
+			Supplier Search module
+			verify_SameContactEmail_VMFOutreachProcess
+			<class name="com.lavante.sim.customer.TestScripts.BasicSearch.CustomerSupplierSearchTC0016" />			
+			 Pre Screen
+			<class name="com.lavante.sim.customer.TestScripts.BasicSearch.CustomerSupplierSearchTC0017" />	
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.AssocitateSupplierAgent" /> -->
+		
+		</classes>	
+			<!-- Advanced Search Module -->
+			<!-- Date <class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0009" />	 
+			<class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0010" />
+			
+			 <class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0012" />	
+			<class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0013" />
+			<class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0014" />
+			<class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0015" /> -->
+			
+			
+	</test>  
+	
+    <!-- Running on Chrome 46 -->
+	<test preserve-order="true" thread-count="1"
+		name="Lavante SIM - Running on Chrome">	
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="chrome" />
+		<parameter name="Version" value="47" />
+		<classes>
+		
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.SupplierSearchTC" />
+			<class 	name="com.lavante.sim.customer.TestScripts.Supplier.Search.UATSupplierSearchTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.UATSupplierAdvancedSearchTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.ConfigViewInSupplierSearch" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.SupplierAdvancedSearchTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.SupplierAdvancedSearchTC002" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.SupplierAdvancedSearchTC03" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.ChangeViewTests" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.SendEmailTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.Search.AssocitateSupplierAgent" />
+			
+			<!-- Advanced Search Module -->
+			<!-- Date <class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0009" />
+			<class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0010" />
+			 <class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0012" />	
+			<class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0013" />
+			<class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0014" />
+			<class name="com.lavante.sim.customer.TestScripts.AdvanceSearch.CustomerSupplierAdvanceSearchTC0015" />
+			<class name="com.lavante.sim.customer.TestScripts.BasicSearch.CustomerSupplierSearchTC0016" />	
+			<class name="com.lavante.sim.customer.TestScripts.BasicSearch.CustomerSupplierSearchTC0017" />	
+			 -->
+			
+		</classes>
+	</test> 
+	
+ 	  
+</suite> 

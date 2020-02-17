@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <meta charset='utf-8'>
+  <title>TestNG reports</title>
+
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" />  
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="testng-reports.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
+    </script>
+    <!--
+      <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+     -->
+  </head>
+
+  <body>
+    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <br/>
+      <span class="top-banner-font-1">1 suite</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
+        <span>All suites</span>
+        <a href="#" class="collapse-all-link" title="Collapse/expand all the suites">
+          <img class="collapse-all-icon" src="collapseall.gif">
+          </img> <!-- collapse-all-icon -->
+        </a> <!-- collapse-all-link -->
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" class="navigator-link" panel-name="suite-Default_suite">
+              <span class="suite-name border-passed">Default suite</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="test-xml-Default_suite">
+                    <span>C:\Users\tallury.srikanth\AppData\Local\Temp\testng-eclipse--132888566\testng-customsuite.xml</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="testlist-Default_suite">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="group-Default_suite">
+                    <span>0 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="times-Default_suite">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="reporter-Default_suite">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="ignored-methods-Default_suite">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="chronological-Default_suite">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">44 methods,   44 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods passed suite-Default_suite"> (hide)</a> <!-- hide-methods passed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods passed suite-Default_suite"> (show)</a> <!-- show-methods passed suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content passed suite-Default_suite">
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyAccountAuditGroupsPage">verifyAccountAuditGroupsPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyAccountNotificationPage">verifyAccountNotificationPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyAccountPage">verifyAccountPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyAccountUserGroupsPage">verifyAccountUserGroupsPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyAccountUsersPage">verifyAccountUsersPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyAssignmentsPage">verifyAssignmentsPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyAuditLink">verifyAuditLink</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyBackGroundJobsPage">verifyBackGroundJobsPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyBatchingPage">verifyBatchingPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyCheckRegistryPage">verifyCheckRegistryPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyClaimsPage">verifyClaimsPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyConfigTab">verifyConfigTab</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyCreditrejectionPage">verifyCreditrejectionPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyCreditsAssignmentsPage">verifyCreditsAssignmentsPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyDashBoardClaims">verifyDashBoardClaims</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyDashBoardCompliance">verifyDashBoardCompliance</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyDashBoardLink">verifyDashBoardLink</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyDashBoardSupplier">verifyDashBoardSupplier</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyFaxJobsPage">verifyFaxJobsPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyFinContractDetailsPage">verifyFinContractDetailsPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyFinInvoicesPage">verifyFinInvoicesPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyFinancePage">verifyFinancePage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyHoldsAssignmentsPage">verifyHoldsAssignmentsPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyInvoicePage">verifyInvoicePage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyInvoicesPage">verifyInvoicesPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyMailerRegistryPage">verifyMailerRegistryPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyOthersFaxCommentsPage">verifyOthersFaxCommentsPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyOthersPage">verifyOthersPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyPhoneExtensionPage">verifyPhoneExtensionPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyPossibleDupesPage">verifyPossibleDupesPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifySetupAuditPage">verifySetupAuditPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifySetupBUPage">verifySetupBUPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifySetupClientPage">verifySetupClientPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifySetupManageCurrencyPage">verifySetupManageCurrencyPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifySetupPage">verifySetupPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifySetupPreferencesPage">verifySetupPreferencesPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifySetupReqLetterPage">verifySetupReqLetterPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyStatementsAssignmentsPage">verifyStatementsAssignmentsPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifySummaryPage">verifySummaryPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyUploadsPage">verifyUploadsPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyauditInboundPage">verifyauditInboundPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyauditOutboundPage">verifyauditOutboundPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifyauditStatisticsAssignmentsPage">verifyauditStatisticsAssignmentsPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="lavante.recovery.testsuites.SanityTestSuite" hash-for-method="verifycontactEntryPage">verifycontactEntryPage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Default_suite -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Default_suite" class="panel Default_suite">
+          <div class="suite-Default_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">lavante.recovery.testsuites.SanityTestSuite</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyAccountAuditGroupsPage">
+                  </a> <!-- verifyAccountAuditGroupsPage -->
+                  <span class="method-name">verifyAccountAuditGroupsPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyAccountNotificationPage">
+                  </a> <!-- verifyAccountNotificationPage -->
+                  <span class="method-name">verifyAccountNotificationPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyAccountPage">
+                  </a> <!-- verifyAccountPage -->
+                  <span class="method-name">verifyAccountPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyAccountUserGroupsPage">
+                  </a> <!-- verifyAccountUserGroupsPage -->
+                  <span class="method-name">verifyAccountUserGroupsPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyAccountUsersPage">
+                  </a> <!-- verifyAccountUsersPage -->
+                  <span class="method-name">verifyAccountUsersPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyAssignmentsPage">
+                  </a> <!-- verifyAssignmentsPage -->
+                  <span class="method-name">verifyAssignmentsPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyAuditLink">
+                  </a> <!-- verifyAuditLink -->
+                  <span class="method-name">verifyAuditLink</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyBackGroundJobsPage">
+                  </a> <!-- verifyBackGroundJobsPage -->
+                  <span class="method-name">verifyBackGroundJobsPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyBatchingPage">
+                  </a> <!-- verifyBatchingPage -->
+                  <span class="method-name">verifyBatchingPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyCheckRegistryPage">
+                  </a> <!-- verifyCheckRegistryPage -->
+                  <span class="method-name">verifyCheckRegistryPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyClaimsPage">
+                  </a> <!-- verifyClaimsPage -->
+                  <span class="method-name">verifyClaimsPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyConfigTab">
+                  </a> <!-- verifyConfigTab -->
+                  <span class="method-name">verifyConfigTab</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyCreditrejectionPage">
+                  </a> <!-- verifyCreditrejectionPage -->
+                  <span class="method-name">verifyCreditrejectionPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyCreditsAssignmentsPage">
+                  </a> <!-- verifyCreditsAssignmentsPage -->
+                  <span class="method-name">verifyCreditsAssignmentsPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyDashBoardClaims">
+                  </a> <!-- verifyDashBoardClaims -->
+                  <span class="method-name">verifyDashBoardClaims</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyDashBoardCompliance">
+                  </a> <!-- verifyDashBoardCompliance -->
+                  <span class="method-name">verifyDashBoardCompliance</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyDashBoardLink">
+                  </a> <!-- verifyDashBoardLink -->
+                  <span class="method-name">verifyDashBoardLink</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyDashBoardSupplier">
+                  </a> <!-- verifyDashBoardSupplier -->
+                  <span class="method-name">verifyDashBoardSupplier</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyFaxJobsPage">
+                  </a> <!-- verifyFaxJobsPage -->
+                  <span class="method-name">verifyFaxJobsPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyFinContractDetailsPage">
+                  </a> <!-- verifyFinContractDetailsPage -->
+                  <span class="method-name">verifyFinContractDetailsPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyFinInvoicesPage">
+                  </a> <!-- verifyFinInvoicesPage -->
+                  <span class="method-name">verifyFinInvoicesPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyFinancePage">
+                  </a> <!-- verifyFinancePage -->
+                  <span class="method-name">verifyFinancePage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyHoldsAssignmentsPage">
+                  </a> <!-- verifyHoldsAssignmentsPage -->
+                  <span class="method-name">verifyHoldsAssignmentsPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyInvoicePage">
+                  </a> <!-- verifyInvoicePage -->
+                  <span class="method-name">verifyInvoicePage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyInvoicesPage">
+                  </a> <!-- verifyInvoicesPage -->
+                  <span class="method-name">verifyInvoicesPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyMailerRegistryPage">
+                  </a> <!-- verifyMailerRegistryPage -->
+                  <span class="method-name">verifyMailerRegistryPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyOthersFaxCommentsPage">
+                  </a> <!-- verifyOthersFaxCommentsPage -->
+                  <span class="method-name">verifyOthersFaxCommentsPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyOthersPage">
+                  </a> <!-- verifyOthersPage -->
+                  <span class="method-name">verifyOthersPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyPhoneExtensionPage">
+                  </a> <!-- verifyPhoneExtensionPage -->
+                  <span class="method-name">verifyPhoneExtensionPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyPossibleDupesPage">
+                  </a> <!-- verifyPossibleDupesPage -->
+                  <span class="method-name">verifyPossibleDupesPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifySetupAuditPage">
+                  </a> <!-- verifySetupAuditPage -->
+                  <span class="method-name">verifySetupAuditPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifySetupBUPage">
+                  </a> <!-- verifySetupBUPage -->
+                  <span class="method-name">verifySetupBUPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifySetupClientPage">
+                  </a> <!-- verifySetupClientPage -->
+                  <span class="method-name">verifySetupClientPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifySetupManageCurrencyPage">
+                  </a> <!-- verifySetupManageCurrencyPage -->
+                  <span class="method-name">verifySetupManageCurrencyPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifySetupPage">
+                  </a> <!-- verifySetupPage -->
+                  <span class="method-name">verifySetupPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifySetupPreferencesPage">
+                  </a> <!-- verifySetupPreferencesPage -->
+                  <span class="method-name">verifySetupPreferencesPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifySetupReqLetterPage">
+                  </a> <!-- verifySetupReqLetterPage -->
+                  <span class="method-name">verifySetupReqLetterPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyStatementsAssignmentsPage">
+                  </a> <!-- verifyStatementsAssignmentsPage -->
+                  <span class="method-name">verifyStatementsAssignmentsPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifySummaryPage">
+                  </a> <!-- verifySummaryPage -->
+                  <span class="method-name">verifySummaryPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyUploadsPage">
+                  </a> <!-- verifyUploadsPage -->
+                  <span class="method-name">verifyUploadsPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyauditInboundPage">
+                  </a> <!-- verifyauditInboundPage -->
+                  <span class="method-name">verifyauditInboundPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyauditOutboundPage">
+                  </a> <!-- verifyauditOutboundPage -->
+                  <span class="method-name">verifyauditOutboundPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyauditStatisticsAssignmentsPage">
+                  </a> <!-- verifyauditStatisticsAssignmentsPage -->
+                  <span class="method-name">verifyauditStatisticsAssignmentsPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifycontactEntryPage">
+                  </a> <!-- verifycontactEntryPage -->
+                  <span class="method-name">verifycontactEntryPage</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-passed -->
+        </div> <!-- panel Default_suite -->
+        <div panel-name="test-xml-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">C:\Users\tallury.srikanth\AppData\Local\Temp\testng-eclipse--132888566\testng-customsuite.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;Default suite&quot;&gt;
+  &lt;test verbose=&quot;2&quot; name=&quot;Default test&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;lavante.recovery.testsuites.SanityTestSuite&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Default test --&gt;
+&lt;/suite&gt; &lt;!-- Default suite --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Default test (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Default_suite');
+function tableData_Default_suite() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(44);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'verifyFaxJobsPage')
+data.setCell(0, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(0, 3, 156578);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'verifyauditInboundPage')
+data.setCell(1, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(1, 3, 61474);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'verifyAuditLink')
+data.setCell(2, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(2, 3, 54294);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'verifyDashBoardSupplier')
+data.setCell(3, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(3, 3, 44816);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'verifyStatementsAssignmentsPage')
+data.setCell(4, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(4, 3, 41585);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'verifyDashBoardLink')
+data.setCell(5, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(5, 3, 30369);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'verifyPossibleDupesPage')
+data.setCell(6, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(6, 3, 28263);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'verifyInvoicePage')
+data.setCell(7, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(7, 3, 23990);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'verifyBatchingPage')
+data.setCell(8, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(8, 3, 20953);
+data.setCell(9, 0, 9)
+data.setCell(9, 1, 'verifyHoldsAssignmentsPage')
+data.setCell(9, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(9, 3, 20038);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'verifyCreditsAssignmentsPage')
+data.setCell(10, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(10, 3, 19782);
+data.setCell(11, 0, 11)
+data.setCell(11, 1, 'verifyDashBoardCompliance')
+data.setCell(11, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(11, 3, 18766);
+data.setCell(12, 0, 12)
+data.setCell(12, 1, 'verifySummaryPage')
+data.setCell(12, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(12, 3, 18188);
+data.setCell(13, 0, 13)
+data.setCell(13, 1, 'verifyUploadsPage')
+data.setCell(13, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(13, 3, 15418);
+data.setCell(14, 0, 14)
+data.setCell(14, 1, 'verifyauditStatisticsAssignmentsPage')
+data.setCell(14, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(14, 3, 15041);
+data.setCell(15, 0, 15)
+data.setCell(15, 1, 'verifyClaimsPage')
+data.setCell(15, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(15, 3, 13810);
+data.setCell(16, 0, 16)
+data.setCell(16, 1, 'verifyInvoicesPage')
+data.setCell(16, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(16, 3, 13006);
+data.setCell(17, 0, 17)
+data.setCell(17, 1, 'verifyAssignmentsPage')
+data.setCell(17, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(17, 3, 12718);
+data.setCell(18, 0, 18)
+data.setCell(18, 1, 'verifyauditOutboundPage')
+data.setCell(18, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(18, 3, 9018);
+data.setCell(19, 0, 19)
+data.setCell(19, 1, 'verifyDashBoardClaims')
+data.setCell(19, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(19, 3, 8465);
+data.setCell(20, 0, 20)
+data.setCell(20, 1, 'verifyFinContractDetailsPage')
+data.setCell(20, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(20, 3, 8084);
+data.setCell(21, 0, 21)
+data.setCell(21, 1, 'verifyPhoneExtensionPage')
+data.setCell(21, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(21, 3, 7845);
+data.setCell(22, 0, 22)
+data.setCell(22, 1, 'verifySetupReqLetterPage')
+data.setCell(22, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(22, 3, 7398);
+data.setCell(23, 0, 23)
+data.setCell(23, 1, 'verifyCreditrejectionPage')
+data.setCell(23, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(23, 3, 7279);
+data.setCell(24, 0, 24)
+data.setCell(24, 1, 'verifySetupClientPage')
+data.setCell(24, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(24, 3, 7242);
+data.setCell(25, 0, 25)
+data.setCell(25, 1, 'verifyMailerRegistryPage')
+data.setCell(25, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(25, 3, 7198);
+data.setCell(26, 0, 26)
+data.setCell(26, 1, 'verifySetupPreferencesPage')
+data.setCell(26, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(26, 3, 7050);
+data.setCell(27, 0, 27)
+data.setCell(27, 1, 'verifyOthersFaxCommentsPage')
+data.setCell(27, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(27, 3, 7041);
+data.setCell(28, 0, 28)
+data.setCell(28, 1, 'verifySetupManageCurrencyPage')
+data.setCell(28, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(28, 3, 7038);
+data.setCell(29, 0, 29)
+data.setCell(29, 1, 'verifyBackGroundJobsPage')
+data.setCell(29, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(29, 3, 6535);
+data.setCell(30, 0, 30)
+data.setCell(30, 1, 'verifycontactEntryPage')
+data.setCell(30, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(30, 3, 6514);
+data.setCell(31, 0, 31)
+data.setCell(31, 1, 'verifyCheckRegistryPage')
+data.setCell(31, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(31, 3, 4778);
+data.setCell(32, 0, 32)
+data.setCell(32, 1, 'verifyOthersPage')
+data.setCell(32, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(32, 3, 4760);
+data.setCell(33, 0, 33)
+data.setCell(33, 1, 'verifyAccountAuditGroupsPage')
+data.setCell(33, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(33, 3, 4747);
+data.setCell(34, 0, 34)
+data.setCell(34, 1, 'verifyConfigTab')
+data.setCell(34, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(34, 3, 4719);
+data.setCell(35, 0, 35)
+data.setCell(35, 1, 'verifyAccountUserGroupsPage')
+data.setCell(35, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(35, 3, 4627);
+data.setCell(36, 0, 36)
+data.setCell(36, 1, 'verifyAccountNotificationPage')
+data.setCell(36, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(36, 3, 4583);
+data.setCell(37, 0, 37)
+data.setCell(37, 1, 'verifyAccountPage')
+data.setCell(37, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(37, 3, 4420);
+data.setCell(38, 0, 38)
+data.setCell(38, 1, 'verifySetupBUPage')
+data.setCell(38, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(38, 3, 4385);
+data.setCell(39, 0, 39)
+data.setCell(39, 1, 'verifySetupPage')
+data.setCell(39, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(39, 3, 3993);
+data.setCell(40, 0, 40)
+data.setCell(40, 1, 'verifyFinancePage')
+data.setCell(40, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(40, 3, 3955);
+data.setCell(41, 0, 41)
+data.setCell(41, 1, 'verifyAccountUsersPage')
+data.setCell(41, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(41, 3, 3158);
+data.setCell(42, 0, 42)
+data.setCell(42, 1, 'verifyFinInvoicesPage')
+data.setCell(42, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(42, 3, 39);
+data.setCell(43, 0, 43)
+data.setCell(43, 1, 'verifySetupAuditPage')
+data.setCell(43, 2, 'lavante.recovery.testsuites.SanityTestSuite')
+data.setCell(43, 3, 37);
+window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 12 minutes</span>
+              <div id="times-div-Default_suite">
+              </div> <!-- times-div-Default_suite -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifySetupBUPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'businessUnitLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/businessUnit.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'businessUnitTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyAccountPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'accountLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/accountConfiguration.lvp Page is working fine</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyFaxJobsPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'configurationJobsLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/jobConfiguration.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'faxJobsTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyBatchingPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'batchingLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/batchingPage.lvp Page is working fine</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :0</span>
+                <span class="reporter-method-output">Pass: 'unBatchedCreditsTable' is displayed</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :1</span>
+                <span class="reporter-method-output">Pass: 'batchedClaimsTable' is displayed</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :2</span>
+                <span class="reporter-method-output">Pass: 'batchSummaryTable' is displayed</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :3</span>
+                <span class="reporter-method-output">Pass: 'batchedDetailsTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyHoldsAssignmentsPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'holdsLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/holdAssignments.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'holdsTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'searchBtn' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyDashBoardCompliance</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'complainceLink' is clicked</span>
+                <span class="reporter-method-output">Pass: 'complainceLink' is displayed</span>
+                <span class="reporter-method-output">Pass: 'compliantTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'complianceSummary' is displayed</span>
+                <span class="reporter-method-output">Pass: 'noncompliantLink' is clicked</span>
+                <span class="reporter-method-output">Pass: 'noncompliantLink' is displayed</span>
+                <span class="reporter-method-output">Pass: 'complianceSummary' is displayed</span>
+                <span class="reporter-method-output">Pass: 'complianceBySpendChart' is displayed</span>
+                <span class="reporter-method-output">Pass: 'complianceByCountChart' is displayed</span>
+                <span class="reporter-method-output">Pass: 'complianceBySpendRankChart' is displayed</span>
+                <span class="reporter-method-output">Pass: 'OFACChart' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyCheckRegistryPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'chkRegLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/checkRequest.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'chkRegList' is displayed</span>
+                <span class="reporter-method-output">Pass: 'addNewBtn' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyConfigTab</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'configurationLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/configurationSetup.lvp Page is working fine</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyAccountNotificationPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'notificationsLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/batchInvoiceNotification.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'notificationsTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'addNewBtn' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyPossibleDupesPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'possibleDupesLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/creditMatch.lvp Page is working fine</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :0</span>
+                <span class="reporter-method-output">Pass: 'possDupSummaryTable' is displayed</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :1</span>
+                <span class="reporter-method-output">Pass: 'preBatchTable' is displayed</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :2</span>
+                <span class="reporter-method-output">Pass: 'postBatchTable' is displayed</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :3</span>
+                <span class="reporter-method-output">Pass: 'possDupDetailsTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifySetupManageCurrencyPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'manCurrencyLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/manageCurrency.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'manageCurrencyTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifySummaryPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'summaryLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/auditSummary.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'currMonthTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'custSummaryTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'OutReachgrph' is displayed</span>
+                <span class="reporter-method-output">Pass: 'statementProcessedgrph' is displayed</span>
+                <span class="reporter-method-output">Pass: 'openClaimsBySpendGrph' is displayed</span>
+                <span class="reporter-method-output">Pass: 'openClaimsByCountGrph' is displayed</span>
+                <span class="reporter-method-output">Pass: 'subClaimsBySpendGrph' is displayed</span>
+                <span class="reporter-method-output">Pass: 'subClaimsByCountGrph' is displayed</span>
+                <span class="reporter-method-output">Pass: 'totalCreditsgrph' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyPhoneExtensionPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'othersPhoneExtensionLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/phoneExtension.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'othersPhoneExtensionTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'addNewBtn' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifySetupClientPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'clientLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/clientConfiguration.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'clientTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyAccountAuditGroupsPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'auditGroupsLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/auditGroupSetUp.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'auditGroupsTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'addNewBtn' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyDashBoardClaims</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'openClaims' is displayed</span>
+                <span class="reporter-method-output">Pass: 'batchedClaimslink' is clicked</span>
+                <span class="reporter-method-output">Pass: 'batchedClaimslink' is displayed</span>
+                <span class="reporter-method-output">Pass: 'batchedClaimslink' is clicked</span>
+                <span class="reporter-method-output">Pass: 'batchedClaimslink' is displayed</span>
+                <span class="reporter-method-output">Pass: 'batchedClaims' is displayed</span>
+                <span class="reporter-method-output">Pass: 'invoiceslink' is clicked</span>
+                <span class="reporter-method-output">Pass: 'invoiceslink' is displayed</span>
+                <span class="reporter-method-output">Pass: 'invoices' is displayed</span>
+                <span class="reporter-method-output">Pass: 'claimsByStatusChart' is displayed</span>
+                <span class="reporter-method-output">Pass: 'claimsByTypeChart' is displayed</span>
+                <span class="reporter-method-output">Pass: 'allClaimsChart' is displayed</span>
+                <span class="reporter-method-output">Pass: 'claimsByOrgChart' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyClaimsPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'claimsLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/claim.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'totalClaimsTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'claimsListTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyInvoicePage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'invoiceLink' is clicked</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :0</span>
+                <span class="reporter-method-output">Pass: 'invoicesTable' is displayed</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :1</span>
+                <span class="reporter-method-output">Pass: 'invoiceSummaryTable' is displayed</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :2</span>
+                <span class="reporter-method-output">Pass: 'invoiceCreditLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/invoicingPage.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'invoiceCreditTable' is displayed</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :2</span>
+                <span class="reporter-method-output">Pass: 'invoiceVoidLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/invoicingPage.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'invoiceVoidTable' is displayed</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :2</span>
+                <span class="reporter-method-output">Pass: 'invoiceRefundLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/invoicingPage.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'invoiceRefundTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyAccountUsersPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'usersListTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'addNewBtn' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyFinInvoicesPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'finInvoicesTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyMailerRegistryPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'mailerRegistryLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/mailerRegistry.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'mailerRegistryTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'addNewBtn' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyUploadsPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'uploadsLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/uploadConfiguration.lvp#supplier_files Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'uploadFilesTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'templatesTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'uploadSuppFilesLink' is clicked</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :0</span>
+                <span class="reporter-method-output">Pass: 'uploadSuppFilesTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'uploadReqLetterLink' is clicked</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :1</span>
+                <span class="reporter-method-output">Pass: 'uploadReqLetterTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'uploadCreditFileLink' is clicked</span>
+                <span class="reporter-method-output">Info: Switched successfully to frame :2</span>
+                <span class="reporter-method-output">Pass: 'creditFilesTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyOthersFaxCommentsPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'othersFaxCommentsLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/otherConfiguration.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'othersFaxCommentsTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'addNewBtn' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifySetupPreferencesPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'preferencesLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/automationConfiguration.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'preferencesTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifySetupPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'setUpLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/configurationSetup.lvp Page is working fine</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyInvoicesPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'invoicesLink' is clicked</span>
+                <span class="reporter-method-output">Pass: 'invoiceSummaryTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'invoiceSummaryDetailsTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'invoicesCreditLink' is clicked</span>
+                <span class="reporter-method-output">Pass: 'invoicesCreditTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'invoicesVoidLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#void Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'invoicesRefundLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#refund Page is working fine</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyStatementsAssignmentsPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'statementsLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/statementAssignments.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'statementsTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'searchBtn' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifySetupReqLetterPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'reqLetterLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/requestLetters.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'reqLetterTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyDashBoardSupplier</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'supplierLink' is clicked</span>
+                <span class="reporter-method-output">Pass: 'supplierLink' is displayed</span>
+                <span class="reporter-method-output">Pass: 'CreditTopSuppliers' is displayed</span>
+                <span class="reporter-method-output">Pass: 'FileStatistics' is displayed</span>
+                <span class="reporter-method-output">Pass: 'supplierSpendLink' is clicked</span>
+                <span class="reporter-method-output">Pass: 'supplierSpendLink' is displayed</span>
+                <span class="reporter-method-output">Pass: 'SpendTopSuppliers' is displayed</span>
+                <span class="reporter-method-output">Pass: 'FileStatistics' is displayed</span>
+                <span class="reporter-method-output">Pass: 'chkReqLink' is clicked</span>
+                <span class="reporter-method-output">Pass: 'chkReqLink' is displayed</span>
+                <span class="reporter-method-output">Pass: 'chkReqTopSuppliers' is displayed</span>
+                <span class="reporter-method-output">Pass: 'FileStatistics' is displayed</span>
+                <span class="reporter-method-output">Pass: 'supplierExcludedChart' is displayed</span>
+                <span class="reporter-method-output">Pass: 'supplierTargetChart' is displayed</span>
+                <span class="reporter-method-output">Pass: 'supplierChangeChart' is displayed</span>
+                <span class="reporter-method-output">Pass: 'relSupChart' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyAssignmentsPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'assignmentsLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyAccountUserGroupsPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'userGroupsLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/userGroupConfiguration.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'userGroupsTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'addNewBtn' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyauditOutboundPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'currentMonCredits' is displayed</span>
+                <span class="reporter-method-output">Pass: 'auditContactDetails' is displayed</span>
+                <span class="reporter-method-output">Pass: 'furureCreditsGrph' is displayed</span>
+                <span class="reporter-method-output">Pass: 'claimHistoryGrph' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/outbound.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'claimHistoryGrph' is displayed</span>
+                <span class="reporter-method-output">Pass: 'supplierStatus' is displayed</span>
+                <span class="reporter-method-output">Pass: 'pendingCorrespondence' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifycontactEntryPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'contactEntry' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/dataentry.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'docQueueTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'supDetailsTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'docDetails' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyBackGroundJobsPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'backgroundJobsLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/backgroundJobs.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'backgroundJobsTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyFinContractDetailsPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'finContractDetailsLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/contractDetails.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'finContractDetailsTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyCreditrejectionPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'othersCreditRejectionLink' is clicked</span>
+                <span class="reporter-method-output">Pass: 'othersCreditRejectionTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'addNewBtn' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyAuditLink</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'auditLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/outbound.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'auditLink' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyFinancePage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'financeLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/financeConfiguration.lvp Page is working fine</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyCreditsAssignmentsPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'creditsLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/creditAssignments.lvp Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'creditsTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'searchBtn' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyOthersPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'othersLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/otherConfiguration.lvp Page is working fine</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyDashBoardLink</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'dashBoardLink' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyauditInboundPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'inboundLink' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'inboundLink' is displayed</span>
+                <span class="reporter-method-output">Pass: 'inboundDocumentStatistics' is displayed</span>
+                <span class="reporter-method-output">Pass: 'inboundDocumentSummary' is displayed</span>
+                <span class="reporter-method-output">Pass: 'recognizedfax' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'statements' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'verifications' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'statements' is displayed</span>
+                <span class="reporter-method-output">Pass: 'verificationsTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'checks' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'checksTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'correspondence' is clicked</span>
+                <span class="reporter-method-output">Pass: 'correspondenceTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'duplicate' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'duplicateTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'profiles' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'profilesTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'unrecognizedfax' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'statements' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'verifications' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'statements' is displayed</span>
+                <span class="reporter-method-output">Pass: 'verificationsTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'checks' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'checksTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'correspondence' is clicked</span>
+                <span class="reporter-method-output">Pass: 'correspondenceTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'duplicate' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'duplicateTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'profiles' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'profilesTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'dna' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#DNA Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'statements' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#DNA Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'verifications' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#DNA Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'statements' is displayed</span>
+                <span class="reporter-method-output">Pass: 'verificationsTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'checks' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#DNA Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'checksTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'correspondence' is clicked</span>
+                <span class="reporter-method-output">Pass: 'correspondenceTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'duplicate' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#DNA Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'duplicateTable' is displayed</span>
+                <span class="reporter-method-output">Pass: 'profiles' is clicked</span>
+                <span class="reporter-method-output">Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#DNA Page is working fine</span>
+                <span class="reporter-method-output">Pass: 'profilesTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifyauditStatisticsAssignmentsPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'auditStatsTable' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">verifySetupAuditPage</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Pass: 'addNewBtn' is displayed</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">lavante.recovery.testsuites.SanityTestSuite</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">preCondition</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <span class="method-name">verifyDashBoardLink</span>
+                <span class="method-start">28941 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyDashBoardClaims</span>
+                <span class="method-start">59313 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyDashBoardSupplier</span>
+                <span class="method-start">67779 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyDashBoardCompliance</span>
+                <span class="method-start">112596 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyAuditLink</span>
+                <span class="method-start">131363 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyauditOutboundPage</span>
+                <span class="method-start">185658 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyauditInboundPage</span>
+                <span class="method-start">194678 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifycontactEntryPage</span>
+                <span class="method-start">256153 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyBatchingPage</span>
+                <span class="method-start">262668 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyInvoicePage</span>
+                <span class="method-start">283622 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyPossibleDupesPage</span>
+                <span class="method-start">307613 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifySummaryPage</span>
+                <span class="method-start">335877 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyCheckRegistryPage</span>
+                <span class="method-start">354066 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyClaimsPage</span>
+                <span class="method-start">358845 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyInvoicesPage</span>
+                <span class="method-start">372656 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyConfigTab</span>
+                <span class="method-start">385663 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifySetupPage</span>
+                <span class="method-start">390383 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifySetupAuditPage</span>
+                <span class="method-start">394378 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifySetupClientPage</span>
+                <span class="method-start">394416 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifySetupBUPage</span>
+                <span class="method-start">401659 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifySetupPreferencesPage</span>
+                <span class="method-start">406045 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifySetupReqLetterPage</span>
+                <span class="method-start">413095 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifySetupManageCurrencyPage</span>
+                <span class="method-start">420494 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyFaxJobsPage</span>
+                <span class="method-start">427532 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyBackGroundJobsPage</span>
+                <span class="method-start">584111 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyAccountPage</span>
+                <span class="method-start">590647 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyAccountUsersPage</span>
+                <span class="method-start">595068 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyAccountUserGroupsPage</span>
+                <span class="method-start">598227 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyAccountAuditGroupsPage</span>
+                <span class="method-start">602854 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyAccountNotificationPage</span>
+                <span class="method-start">607604 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyFinancePage</span>
+                <span class="method-start">612188 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyFinInvoicesPage</span>
+                <span class="method-start">616144 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyFinContractDetailsPage</span>
+                <span class="method-start">616184 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyUploadsPage</span>
+                <span class="method-start">624268 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyOthersPage</span>
+                <span class="method-start">639687 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyOthersFaxCommentsPage</span>
+                <span class="method-start">644448 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyCreditrejectionPage</span>
+                <span class="method-start">651490 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyPhoneExtensionPage</span>
+                <span class="method-start">658769 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyMailerRegistryPage</span>
+                <span class="method-start">666614 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyAssignmentsPage</span>
+                <span class="method-start">673812 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyauditStatisticsAssignmentsPage</span>
+                <span class="method-start">686530 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyHoldsAssignmentsPage</span>
+                <span class="method-start">701572 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyCreditsAssignmentsPage</span>
+                <span class="method-start">721613 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">verifyStatementsAssignmentsPage</span>
+                <span class="method-start">741396 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-class after">
+                <span class="method-name">clean</span>
+                <span class="method-start">782982 ms</span>
+              </div> <!-- configuration-class after -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
+    </div> <!-- wrapper -->
+  </body>
+</html>

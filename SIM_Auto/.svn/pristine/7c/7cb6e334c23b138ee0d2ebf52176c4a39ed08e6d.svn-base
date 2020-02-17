@@ -1,0 +1,232 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>SIM_NewFrameWork</groupId>
+	<artifactId>SIM_NewFrameWork</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>SIM_NewFrameWork</name>
+	<url>http://maven.apache.org</url>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyyMMdd_hhmmss</maven.build.timestamp.format>
+	</properties>
+	<dependencies>
+	  <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-support</artifactId>
+        <version>3.0.1</version>
+  	  </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<!-- <version>2.52.0</version> -->
+			<version>3.4.0</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.relevantcodes</groupId>
+    		<artifactId>extentreports</artifactId>
+    		<version>2.41.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>21.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.uncommons</groupId>
+			<artifactId>reportng</artifactId>
+			<version>1.1.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>ooxml-schemas</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+<!-- 		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency> -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>ooxml-security</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlbeans</groupId>
+			<artifactId>xmlbeans</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>1.4.01</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>3.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- For Reading Mail Added By Piramu -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!-- For Reading File from linux folder Added By Piramu -->
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.53</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>2.3</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+
+					<!-- <systemPropertyVariables> <RemoteURL>http://192.168.21.20:4444</RemoteURL> 
+						<webdriver.ie.driver>C:\LavanteDrivers\IEDriverServer.exe</webdriver.ie.driver> 
+						<webdriver.chrome.driver>C:\LavanteDrivers\ChromeDriver.exe</webdriver.chrome.driver> 
+						<ReportFolder>${basedir}/TestResults/LogReports</ReportFolder> </systemPropertyVariables> -->
+					<suiteXmlFiles>
+						 <!--     <suiteXmlFiles>SanityTestSuite.xml</suiteXmlFiles> 
+						     <suiteXmlFile>UATAutomation.xml</suiteXmlFile> 
+						          -->
+						            <suiteXmlFile>Manage_Users_UAT_6.0.xml</suiteXmlFile> 
+						 		 <suiteXmlFile>Claims.xml</suiteXmlFile> 
+						   <!--   <suiteXmlFile>CustomerDashboard.xml</suiteXmlFile> 
+						     <suiteXmlFile>SupplierSearch.xml</suiteXmlFile> -->
+							 <!-- <suiteXmlFile>Invite.xml</suiteXmlFile>  
+						    	 <suiteXmlFile>Invoice.xml</suiteXmlFile>  
+						     	<suiteXmlFile>Tasks.xml</suiteXmlFile>
+						        <suiteXmlFile>MyAccount.xml</suiteXmlFile>   -->
+					
+						<!-- <suiteXmlFile>Campaigns.xml</suiteXmlFile>  -->
+						
+						<suiteXmlFile>ContractManagement.xml</suiteXmlFile> 
+						  <suiteXmlFile>SupplierSearch.xml</suiteXmlFile>
+				
+					<!--   	<suiteXmlFile>EditProfile.xml</suiteXmlFile>  
+						<suiteXmlFile>RecoveryChart.xml</suiteXmlFile> 
+							 <suiteXmlFile>OIGSAMOFACLegalID.xml</suiteXmlFile> 
+							 <suiteXmlFile>DownloadDoc.xml</suiteXmlFile> 
+							 
+							 <suiteXmlFile>SIMAccountSetup.xml</suiteXmlFile>  
+							 <suiteXmlFile>SupplierRegisteration.xml</suiteXmlFile> 
+							 <suiteXmlFile>Upload.xml</suiteXmlFile>  -->
+				
+					</suiteXmlFiles>
+					<properties>
+						<property>
+							<name>usedefaultlisteners</name>
+							<value>false</value>
+						</property>
+						<property>
+							<name>listener</name>
+							<!-- <value>com.lavante.sim.UtilFunction.Listner</value> -->
+							<!-- ,org.uncommons.reportng.JUnitXMLReporter -->
+							<value>org.uncommons.reportng.HTMLReporter</value>
+						</property>
+					</properties>
+					<reportsDirectory>TestResults/${maven.build.timestamp}</reportsDirectory>
+					<!-- <reportsDirectory>TestResults/SP</reportsDirectory> -->
+					<systemPropertyVariables>
+						<RemoteExecution>true</RemoteExecution> <!-- true/false -->
+						<RemoteURL>http://192.168.21.20:4445</RemoteURL>
+						<TestData>QAStagingTestData</TestData>
+						<webdriver.ie.driver>C:\LavanteDrivers\IEDriverServer.exe</webdriver.ie.driver>
+						<webdriver.chrome.driver>C:\LavanteDrivers\ChromeDriver.exe</webdriver.chrome.driver>
+						<!-- <ReportFolder>${basedir}/TestResults/LogReports</ReportFolder> -->
+						<!-- <ScreenshotsFolder>${basedir}/TestResults/Screenshots</ScreenshotsFolder> -->
+					</systemPropertyVariables>
+ 					<testFailureIgnore>true</testFailureIgnore> 
+
+
+				</configuration>
+
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

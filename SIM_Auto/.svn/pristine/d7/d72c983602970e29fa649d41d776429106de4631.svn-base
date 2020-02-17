@@ -1,0 +1,734 @@
+
+/**
+ * Company			: 	LAVANTE
+ * Project Name	   	:	Lavante SIM Application
+ * Automation		: 	Selenium Automation
+ * Author			: 	Venkata Ravi Majjari 
+ */ 
+
+package com.lavante.sim.customer.pageobjects.Admin.ManageFiles;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+import com.lavante.sim.customer.pageobjects.AdvanceSearch.AdvanceSearchPage;
+import com.lavante.sim.Common.Util.*;
+
+public class ManageFilesPage extends PageInitiator {
+	LavanteUtils lavanteUtils =new LavanteUtils();
+	
+	//Declare the WebDriver
+	//Declare the variables
+
+
+	private String expHomePageTitle="Lavante SIM - On-boarding";
+	
+	private String expManageFilesPageTitle="Lavante SIM - Upload Files";
+	
+	@FindBy(id="file_upload_form")
+	private WebElement UploadFilesSection;
+	
+	@FindBy(how=How.CSS,using="iframe[src*='VMF']")
+	private WebElement IFRAMEVMFuploadFile;	
+	public WebElement IFRAMEVMFuploadFile(){
+		return IFRAMEVMFuploadFile;
+	}
+	
+	@FindBy(css="[href*='Template']")
+	private WebElement TemplateSection;
+	
+	@FindBy(css = "[href*='DownloadFiles']")
+	private WebElement LinkDownloadFiles;
+	
+	@FindBy(id="file_download_form")
+	private WebElement DownloadVendorMasterFileSection;
+	@FindBy(xpath="//a[@href='originalVMFDataFields.lvp']")
+	private WebElement FieldsAvailableinTemplates;
+	
+	@FindBy(xpath="//form[contains(@id,'file_upload_form')]/div[2]/input[contains(@id,'upload_button')]")
+	private WebElement xpathupload_button;
+	@FindBy(xpath="//input[contains(@id,'searchText')]")
+	private WebElement xpathsearchTexts;
+	@FindBy(id="searchSupplier")
+	private WebElement idsearchSupplier;
+	@FindBy(xpath="//a[contains(@title,'Manage Files')]")
+	private WebElement xpathmanageFiles;
+	@FindBy(xpath="//div[contains(@id,'sub-navigation')]/a[contains(@title,'Upload Files')]")
+	private WebElement xpathuploadFiles;
+	@FindBy(xpath="//div[contains(@id,'sub-navigation')]/a[contains(@title,'Download Files')]")
+	private WebElement xpathdownloadFiles;
+	
+	private String xpathuploadFileTypeTable="//table[contains(@class,'data_table')]/tbody/tr[1]/td/ol/li";
+	
+	private String xpathdownloadFileTypeTable="//table[contains(@class,'data_table')]/tbody/tr/td/ul/li";
+	
+	private String xpathdownloadFileHistoryTbl="//div[contains(@id,'downloadFileDetailsDiv')]/table";
+	@FindBy(xpath="//div[contains(@class,'content ')]/div[1]/table/tbody/tr[1]/td[3]/div/table/tbody/tr/th/table/tbody/tr[1]/td[1]")
+	private WebElement xpathtemplatesTable;
+	
+	private String xpathcloseOption="]/a";
+	@FindBy(xpath="//div[contains(@class,'ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix')]/span")
+	private WebElement xpathpopupTitlebar;
+	@FindBy(xpath="//*[@id='content']//button[contains(@class,'refresh')]")
+	private WebElement xpathrefreshBtn;
+	@FindBy(xpath="//form[contains(@id,'file_upload_form')]/div/table/tbody/tr[1]/td[1]/div[2]")
+	private WebElement xpathfileType_chosen;
+	@FindBy(xpath="//div[contains(@id,'fileType_chosen')]/div/ul/li")
+	private WebElement xpathfileTypeDropDownFiled;
+	@FindBy(xpath="//input[contains(@id,'multipartFile')]")
+	private WebElement xpathmultipartFile;
+	
+	private String xpathfileHistoryTbl="//div[contains(@id,'uploadedFileDetailsDiv')]/table";
+	@FindBy(xpath=".//iframe[@class='iframe_page']")
+	private WebElement xpathfileHistoryTableFrame;
+	@FindBy(xpath="//form[contains(@id,'file_download_form')]/div[1]/table/tbody/tr[1]/td[2]/div[2]")
+	private WebElement xpathspecify_data_chosen;
+	@FindBy(xpath="//form[contains(@id,'file_download_form')]/div[1]/table/tbody/tr[1]/td[2]/div[2]/div[1]/ul/li")
+	private WebElement xpathdownload_Data_Chosen_DrpDwn;
+	@FindBy(xpath="//form[contains(@id,'file_download_form')]/div[1]/table/tbody/tr[2]/td[2]/div[2]")
+	private WebElement xpathspecific_data_change_chosen;
+	@FindBy(xpath="//form[contains(@id,'file_download_form')]/div[1]/table/tbody/tr[2]/td[2]/div[2]/div[1]/ul/li")
+	private WebElement xpathdata_Change_Chosen_DrpDwn;
+	@FindBy(xpath="//form[contains(@id,'file_download_form')]/div[2]/input[contains(@title,'Request the selected file')]")
+	private WebElement xpathrequestBtn;
+	@FindBy(xpath="//form[contains(@id,'search_form')]/div[2]/a/span")
+	private WebElement xpathdrpdownSelection;
+	@FindBy(xpath="//div[contains(@class,'chosen-drop')]/ul/li")
+	private WebElement xpathsupplierDrpDwnType;
+	@FindBy(xpath="//div[contains(@class,'dialog undefined ui-dialog-content ui-widget-content')]")
+	private WebElement xpathuploadDialogPopup;
+	@FindBy(xpath="//div[contains(@class,'ui-dialog-buttonset')]/button[contains(@type,'button')]")
+	private WebElement xpathuploadOKButton;
+	@FindBy(css="button[title='close'][type='button']")
+	private WebElement cssPopupCloseBtn;
+	
+	private String fileUploadSuccessMsg="File uploaded successfully";
+	public WebDriver driver;
+	
+	/**
+	 * Method Name : Constructor method (ManageFilesPage)
+	 * Purpose: Constructor method where we initialize the driver
+	 */
+	public ManageFilesPage(WebDriver driver){
+
+		try{
+			this.driver = driver;
+			lavanteUtils.driver = driver;
+		} catch(Exception e){
+			//log.severe("Method: ManageFilesPage :: " + "Exception = " + e  + " Line Number = " + e.getMessage());
+		}		
+		
+	}
+
+	/**
+	 * Method Name : verifyUILnksonManageUsersPage
+	 * Purpose: Public method which includes logic related to verify the UI Links on ManageUsersPage
+	 * @param: None
+	 * @return: None
+	 */
+	public void verifyUIControls_ManageFilesPage() {
+
+		try{
+			//close the pop up button
+			closePopupButton();
+			//Verify the Home page (Dash board) title
+			verify_PageTitle(expHomePageTitle);
+			//ge.clicks on the Manage Files tab
+			lavanteUtils.click( xpathmanageFiles);
+			Reporter.log("Clicked on the 'Manage Files' tab");
+			lavanteUtils.waitForTime(3000);
+			//Verify the Manage Users page title
+			verify_PageTitle(expManageFilesPageTitle);
+			//Verify the Upload files sub tab
+			lavanteUtils.isElementDisplayed( xpathuploadFiles);
+			Reporter.log("Verification is successful for 'Upload Files' sub tab");
+			lavanteUtils.waitForTime(1000);
+			//Verify the Download files sub tab
+			lavanteUtils.isElementDisplayed(xpathuploadFiles);
+			Reporter.log("Verification is successful for 'Download Files' Tab");
+		} catch(Exception e){
+			/*ge.takeScreenshot(wdManageFiles, "verifyUIControls_ManageFilesPage");
+			Assert.assertTrue(true,"Exception in the method verifyUIControls_ManageFilesPage: "+e.getMessage());*/
+		}		
+	}
+
+	/**
+	 * Method Name : verify_And_UplaodFile
+	 * Purpose: Public method which includes logic related to verify the UI Links on ManageUsersPage
+	 * @param: None
+	 * @return: None
+	 */
+	public void verify_And_UplaodFile(List<setTestData> getManageFileData, List<setTestData> getVMFFileData){
+
+		String sFileName="";
+		try{
+			//close the pop up button
+			closePopupButton();
+			//Verify the Home page (Dash board) title
+			verify_PageTitle(expHomePageTitle);
+			//ge.clicks on the Manage Files tab
+			lavanteUtils.click( xpathmanageFiles);
+			Reporter.log("Clicked on the 'Manage Files' tab");
+			lavanteUtils.waitForTime(3000);
+			//Verify the Manage Users page title
+			verify_PageTitle(expManageFilesPageTitle);
+			//ge.clicks on the 'Upload File' sub tab
+			lavanteUtils.click( xpathuploadFiles);
+			Reporter.log("Clicked on the 'Upload Files' sub tab");
+			lavanteUtils.waitForTime(4000);
+			//ge.clicks on the 'Upload button
+			lavanteUtils.click(xpathfileType_chosen);
+			Reporter.log("Clicked on the 'Upload Type' drop down field");
+			for(int i=0;i<getManageFileData.size();i++){
+				sFileName=getManageFileData.get(i).getFileType().toString();
+				System.out.println(sFileName);
+			}
+			//Verification
+			if(!(sFileName.trim().toString().equalsIgnoreCase(""))){
+				lavanteUtils.waitForTime(1000);
+				//select file type drop down
+				selectDrpDwnOption(sFileName,xpathfileTypeDropDownFiled);
+				lavanteUtils.waitForTime(3000);
+				//Upload the file
+				uploadFileDoc();
+				//ge.clicks on the 'Upload button
+				lavanteUtils.click(xpathupload_button);
+				Reporter.log("Clicked on the 'Upload' Button");
+				lavanteUtils.waitForTime(1000);
+				//ge.clicks on the Dialog pop up OK Button
+				validateDialogPopup(xpathuploadDialogPopup,fileUploadSuccessMsg);
+				//Verify the table data
+				if(verify_Upload_FileHistory_Tbl()==true){
+					Reporter.log("Verification is successful for Upload File Functionality: ");
+					for(int i=0;i<getVMFFileData.size();i++){
+						if(!(getVMFFileData.get(i).getSupplierName().toString().equalsIgnoreCase(""))){
+							String sSupplierID= getVMFFileData.get(i).getTaxID().toString();
+							String sSupplierName= getVMFFileData.get(i).getSupplierName().toString();
+							String sContactEmail=getVMFFileData.get(i).getContactEmail().toString();			
+							searchForSupplier(sSupplierName);
+							objAdvanceSearchPage.verify_QuickSupplierTbl_And_TINNum(sSupplierID, sContactEmail, i);
+						} else {
+							continue;
+						}
+					}
+				}
+			} else {
+				//log.severe("Failed to fetch the File name from Excel File:");
+				Assert.assertTrue(true, "Failed to retrieve the File name from the Excel File: ");
+			}
+		} catch(Exception e){
+			//log.severe("Exception in the method: 'verify_And_UploadFile'" + e.getMessage());
+			/*ge.takeScreenshot(wdManageFiles, "verify_And_UplaodFile");
+			Assert.assertTrue(true, "Exception in the method 'verify_And_UploadFile" + e.getMessage());*/
+		}		
+	}
+
+	/**
+	 * Method Name : verify_Template_File_Types
+	 * Purpose: Public method which includes logic related to verify the template files types for Upload Files & Download Files
+	 * @param: None
+	 * @return: None
+	 */
+	public void verify_Template_File_Types() {
+
+		try{
+			//ge.clicks on the 'Upload Files' sub tab
+			lavanteUtils.click(xpathuploadFiles);
+			Reporter.log("Clicked on the 'Upload Files' sub tab");
+			//Verify the Upload file Template file type links
+			verify_UploadFiles_Template_Links(xpathtemplatesTable,xpathuploadFileTypeTable,"Upload Files");
+			lavanteUtils.waitForTime(2000);
+			//ge.clicks on the 'Download Files' sub tab
+			lavanteUtils.click( xpathdownloadFiles);
+			Reporter.log("Clicked on the 'Download Files' sub tab");
+			lavanteUtils.waitForTime(2000);
+			//Verify the Upload file Template file type links
+			verify_DownloadFile_Template_Links(xpathtemplatesTable,xpathdownloadFileTypeTable,"Download Files");
+		} catch(Exception e){
+			//log.severe("Exception in the method verify_Template_File_Types: " + e.getMessage());
+			/*ge.takeScreenshot(wdManageFiles, "verifyUIControls_ManageFilesPage");
+			Assert.assertTrue(true,"Exception in the method verifyUIControls_ManageFilesPage: "+e.getMessage());*/
+		}	
+	}
+
+	/**
+	 * Method Name : verify_And_DownloadFile
+	 * Purpose: Public method which includes logic related to verify and download the file
+	 * @param: None
+	 * @return: None
+	 */
+	public void verify_And_DownloadFile(List<setTestData> getManageDownloadFile){
+
+		try{
+			//close the pop up button
+			closePopupButton();
+			//Verify the Home page (Dash board) title
+			verify_PageTitle(expHomePageTitle);
+			//ge.clicks on the Manage Files tab
+			lavanteUtils.click( xpathmanageFiles);
+			Reporter.log("Clicked on the 'Manage Files' tab");
+			lavanteUtils.waitForTime(4000);
+			//Verify the Manage Users page title
+			verify_PageTitle(expManageFilesPageTitle);
+			//ge.clicks on the 'Upload File' sub tab
+			lavanteUtils.click(xpathdownloadFiles);
+			Reporter.log("Clicked on the 'Download Files' sub tab");
+			lavanteUtils.waitForTime(4000);
+			for(int i=0;i<getManageDownloadFile.size();i++){
+				if(!(getManageDownloadFile.get(i).getDataToBeDownloaded().toString().equalsIgnoreCase(""))){
+					Reporter.log("\n");
+					String sFileType=getManageDownloadFile.get(i).getDataToBeDownloaded().toString();
+					String sChangeDate=getManageDownloadFile.get(i).getDataChangeDate().toString();
+					String sDownloadType=getManageDownloadFile.get(i).getFileType().toString();
+					System.out.println(sFileType);
+					System.out.println(sChangeDate);
+					System.out.println(sDownloadType);
+					lavanteUtils.waitForTime(3000);
+					lavanteUtils.click( xpathspecify_data_chosen);
+					lavanteUtils.waitForTime(2000);
+					//select Specify data to be down loaded: drop down
+					selectDrpDwnOption(sFileType, xpathdownload_Data_Chosen_DrpDwn);
+					lavanteUtils.waitForTime(2000);
+					lavanteUtils.click( xpathspecific_data_change_chosen);
+					lavanteUtils.waitForTime(2000);
+					//select Specify Data Change Date: drop down
+					selectDrpDwnOption(sChangeDate,xpathdata_Change_Chosen_DrpDwn);
+					//ge.clicks on the Request Button
+					lavanteUtils.click( xpathrequestBtn);
+					Reporter.log("Clicked on the 'Request' button");
+					lavanteUtils.waitForTime(3000);
+					//ge.clicks on the Dialog pop up OK Button
+					validateDialogPopup(xpathuploadDialogPopup,sFileType);
+					lavanteUtils.waitForTime(2000);
+					//verification of the Down loaded Files History
+					if(verify_DownLoadFileHistory_Tbl(sFileType,sChangeDate,sDownloadType)==true){
+						Reporter.log("Verification is successful for: " + sFileType);
+					}
+				} else {
+					continue;
+				}
+			}			
+		} catch(Exception e){
+			//log.severe("Exception in the method: 'verify_And_DownloadFile'" + e.getMessage());
+			lavanteUtils.takeScreenshot(driver, "verify_And_DownloadFile");
+			Assert.assertTrue(false, "Exception in the method 'verify_And_DownloadFile" + e.getMessage());
+		}
+	}
+
+	public void searchForSupplier(String sSupplierName){
+
+		try{
+			lavanteUtils.click( xpathdrpdownSelection);
+			selectDrpDwnOption("Supplier Name", xpathsupplierDrpDwnType);
+			lavanteUtils.typeinEdit(sSupplierName,xpathsearchTexts);
+			lavanteUtils.click(idsearchSupplier);
+		}catch(Exception e){
+			//log.severe("Exception in the method: 'searchForSupplier'" + e.getMessage());
+			lavanteUtils.takeScreenshot(driver, "searchForSupplier");
+			Assert.assertTrue(false, "Exception in the method 'searchForSupplier" + e.getMessage());
+		}		
+	}
+
+	/**
+	 * Method Name : verify_UploadFiles_Template_Links
+	 * Purpose: Public method which includes logic related to verify the template files links (Upload Files)
+	 * @param: String sTemplateTable, String sFileTypeTbl
+	 * @return: None
+	 */
+	public void verify_UploadFiles_Template_Links(WebElement sTemplateTable, String sFileTypeTbl, String sTab){
+
+		try{
+			//Verification
+			if(lavanteUtils.isElementDisplayed(sTemplateTable)==true){
+				List<WebElement> rowCount= driver.findElements(By.xpath(sFileTypeTbl));
+				int tableRowCount=rowCount.size();
+				Reporter.log("Templates field links Count: " + tableRowCount);
+				for(int i=1;i<=tableRowCount;i++){
+					String sFileType=lavanteUtils.getText(driver.findElement(By.xpath(sFileTypeTbl + "[" + i + xpathcloseOption)));
+					lavanteUtils.waitForTime(2000);
+					if(!(sFileType.trim().toString().equalsIgnoreCase("")==true)){
+						lavanteUtils.click(driver.findElement(By.xpath(sFileTypeTbl + "[" + i + xpathcloseOption)));
+						lavanteUtils.waitForTime(5000);
+						Reporter.log("clicked on the file template: " + sFileType);
+						String downloadFilePath=ConfigPathFile.WinPopupFile.getConstantValue();
+						if(lavanteUtils.isFileExist(downloadFilePath)==true){
+							Runtime.getRuntime().exec(downloadFilePath);
+							Reporter.log("Verification is successful for " + "'" + sTab + "'" + " file type link: " +
+									sFileType);
+							lavanteUtils.waitForTime(3000);
+						}		
+					}
+				}
+			} else{
+				//log.severe("Failed to identify the Templates Table: ");
+			}
+		} catch(Exception e){
+			//log.severe("Exception in the method verify_UploadFiles_Template_Links: " + e.getMessage());
+			lavanteUtils.takeScreenshot("verify_UploadFiles_Template_Links");
+			Assert.assertTrue(false,"Exception in the method verify_UploadFiles_Template_Links: "+e.getMessage());
+		}
+	}
+
+	/**
+	 * Method Name : verify_DownloadFile_Template_Links
+	 * Purpose: Public method which includes logic related to verify the template files links (Download Files)
+	 * @param: String sTemplateTable, String sFileTypeTbl
+	 * @return: None
+	 */
+	public void verify_DownloadFile_Template_Links(WebElement sTemplateTable, String sFileTypeTbl, String sTab){
+
+		try{
+			//Verification
+			if(lavanteUtils.isElementDisplayed(sTemplateTable)==true){
+				List<WebElement> rowCount= driver.findElements(By.xpath(sFileTypeTbl));
+				int tableRowCount=rowCount.size();
+				Reporter.log("Templates field links Count: " + tableRowCount);
+				for(int i=1;i<=tableRowCount;i++){
+					String sFileType=lavanteUtils.getText(driver.findElement(By.xpath(
+							sFileTypeTbl + "[" + i + xpathcloseOption)));
+					lavanteUtils.waitForTime(2000);
+					if(!(sFileType.trim().toString().equalsIgnoreCase("")==true)){
+						lavanteUtils.click(driver.findElement(By.xpath( sFileTypeTbl + "[" + i + xpathcloseOption)));
+						Reporter.log("clicked on the file template: " + sFileType);
+						lavanteUtils.waitForTime(2000);
+						//verify the Send Invite dialog pop up
+						validateTitleDialogPopup(xpathpopupTitlebar,sFileType);
+						closePopupButton();
+						lavanteUtils.waitForTime(3000);
+						Reporter.log("Verification is successful for " + "'" + sTab + "'" + " file type link: " + sFileType);
+					}
+				}
+			} else{
+				//log.severe("Failed to identify the Templates Table: ");
+			}
+		} catch(Exception e){
+			//log.severe("Exception in the method verify_DownloadFile_Template_Links: " + e.getMessage());
+			lavanteUtils.takeScreenshot( "verify_DownloadFile_Template_Links");
+			Assert.assertTrue(false,"Exception in the method verify_DownloadFile_Template_Links: "+e.getMessage());
+		}
+	}
+
+	/**
+	 * Method Name : verify_Upload_FileHistory_Tbl
+	 * Purpose: Public method which includes logic related to verify the Upload File History table
+	 * @param: None
+	 * @return: true/false
+	 */
+	public boolean verify_Upload_FileHistory_Tbl(){
+		boolean flag=false;
+
+		try{
+			//Frame In
+			lavanteUtils.switchtoFrame(xpathfileHistoryTableFrame);
+			//get the actual data for Upload Status
+			String strActualUploadStatus=objAdvanceSearchPage.getCorrespondingData(xpathfileHistoryTbl,
+					ConfigPathFile.FILENAMECOLHEADER.getConstantValue(),
+					ConfigPathFile.FILENAME.getConstantValue(), "Upload Status");
+			//get the actual data for Uploaded on
+			String strActualUploadedOn=objAdvanceSearchPage.getCorrespondingData(xpathfileHistoryTbl,
+					ConfigPathFile.FILENAMECOLHEADER.getConstantValue(),
+					ConfigPathFile.FILENAME.getConstantValue(), "Uploaded on");
+			//get the actual data for Uploaded by
+			String strActualUploadedBy=objAdvanceSearchPage.getCorrespondingData(xpathfileHistoryTbl,
+					ConfigPathFile.FILENAMECOLHEADER.getConstantValue(),
+					ConfigPathFile.FILENAME.getConstantValue(), "Uploaded by");
+			//Verification
+			if(strActualUploadStatus.trim().toString().equalsIgnoreCase("File Loaded")) {
+				Reporter.log("Verification is successful for File Name:" + ConfigPathFile.FILENAME.getConstantValue()
+						+ " And Uploaded Status: " + "'" + strActualUploadStatus + "'");
+				Reporter.log("Verification is successful for File Name:" + ConfigPathFile.FILENAME.getConstantValue()
+						+ " And Uploaded On: " + "'" + strActualUploadedOn + "'");
+				Reporter.log("Verification is successful for File Name:" + ConfigPathFile.FILENAME.getConstantValue()
+						+ " And Uploaded By: " + "'" + strActualUploadedBy + "'");
+				flag=true;
+				//Frame out
+				lavanteUtils.switchtoFrame(null);
+			} else {
+				//log.severe("Verification failed due to expected text is not matched with the actual:");
+				lavanteUtils.takeScreenshot( "verify_Upload_FileHistory_Tbl");
+				Assert.assertTrue(false,"Exception in the method verify_Upload_FileHistory_Tbl:");
+			}
+		} catch(Exception e){
+			//log.severe("Exception in the method verify_Upload_FileHistory_Tbl: " + e.getMessage());
+			lavanteUtils.takeScreenshot( "verify_Upload_FileHistory_Tbl");
+			Assert.assertTrue(false,"Exception in the method verify_Upload_FileHistory_Tbl: "+e.getMessage());
+		}
+		return flag;
+	}
+
+	public void clkCloseButton(){
+
+		try{
+
+		}catch(Exception e){
+			//log.severe("Exception in the method clkCloseButton: " + e.getMessage());
+			lavanteUtils.takeScreenshot( "clkCloseButton");
+			Assert.assertTrue(false,"Exception in the method clkCloseButton: "+e.getMessage());
+		}
+	}
+
+	/**
+	 * Method Name : verify_DownLoadFileHistory_Tbl
+	 * Purpose: Public method which includes logic related to verify the Download File History table
+	 * @param: None
+	 * @return: true/false
+	 */
+	public boolean verify_DownLoadFileHistory_Tbl(String sFileType, String sChangeDate, String sDownloadType){
+		boolean flag=false;
+
+		try{
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.waitForTime(2000);
+			lavanteUtils.click( xpathrefreshBtn);
+			lavanteUtils.waitForTime(2000);
+			//Frame In
+			lavanteUtils.waitForTime(100000);
+			lavanteUtils.switchtoFrame(xpathfileHistoryTableFrame);
+			lavanteUtils.waitForTime(2000);
+			//get the actual data for Download Type
+			String strActualDownloadType=objAdvanceSearchPage.getCorrespondingData(xpathdownloadFileHistoryTbl,
+					"Download Type",sDownloadType, "Download Type");
+			System.out.println("APP dOWNLOAD TYPE:"+strActualDownloadType);
+			
+			//Verification
+			if(sDownloadType.trim().toString().equalsIgnoreCase(strActualDownloadType.trim().toString())){
+				lavanteUtils.waitForTime(3000);
+				lavanteUtils.switchtoFrame(null);
+				lavanteUtils.waitForTime(2000);
+				lavanteUtils.click( xpathrefreshBtn);
+				lavanteUtils.waitForTime(2000);
+				lavanteUtils.switchtoFrame( xpathfileHistoryTableFrame);
+				lavanteUtils.waitForTime(2000);
+				//get the actual data for Download File Name
+				String strDownloadFileName=objAdvanceSearchPage.getCorrespondingData(xpathdownloadFileHistoryTbl,
+						"Download Type",sDownloadType, "File Name");
+				//get the actual data for Download Status
+				String strDownloadStatus=objAdvanceSearchPage.getCorrespondingData(xpathdownloadFileHistoryTbl,
+						"Download Type",sDownloadType, "Download Status");
+				//get the actual data for Down loaded By
+				String strDownloadedBy=objAdvanceSearchPage.getCorrespondingData(xpathdownloadFileHistoryTbl,
+						"Download Type",sDownloadType, "Downloaded by");
+				//get the actual data for No.of Records
+				String intRecordsCount=objAdvanceSearchPage.getCorrespondingData(xpathdownloadFileHistoryTbl,
+						"Download Type",sDownloadType, "No of Records");
+				
+				if((intRecordsCount.trim().toString().isEmpty()) ||
+						(intRecordsCount.trim().toString().equalsIgnoreCase(""))==true){
+					Reporter.log("File Name "  + strDownloadFileName + " can not be downloaded because"
+							+ " records count is: " + intRecordsCount);
+					Reporter.log("Verification is successful for Download Status:" + strDownloadStatus);
+					Reporter.log("Verification is successful for Downloaded By:" + strDownloadedBy);
+					flag=true;
+					//Frame out
+					lavanteUtils.switchtoFrame(null);
+				} else {
+					String downloadFilePath=ConfigPathFile.WinPopupFile.getConstantValue();
+					if(lavanteUtils.isFileExist(downloadFilePath)==true){
+						Runtime.getRuntime().exec(downloadFilePath);
+						Reporter.log("Verification is successful for File Name "  + strDownloadFileName + 
+								" can be downloaded because records count is: " + intRecordsCount);
+						lavanteUtils.waitForTime(3000);
+						Runtime.getRuntime().exec("D:\\LAVANTE\\AUTO IT\\PopUp_BulkDeactivate_Template.exe");
+						flag=true;
+					}
+				}
+			}
+		} catch(Exception e){
+			//log.severe("Exception in the method verify_DownLoadFileHistory_Tbl: " + e.getMessage());
+			lavanteUtils.takeScreenshot( "verify_DownLoadFileHistory_Tbl");
+			Assert.assertTrue(false,"Exception in the method verify_DownLoadFileHistory_Tbl: "+e.getMessage());
+		}
+		return flag;		
+	}
+
+	/**
+	 * Method Name : uploadFileDoc
+	 * Purpose: Public method which includes logic related to verify and upload the file
+	 * @param: None
+	 * @return: None
+	 */
+	public void uploadFileDoc(){
+		lavanteUtils.waitForTime(2000);
+		String path=ConfigPathFile.VMFFile.getConstantValue();
+		if(lavanteUtils.isFileExist(path)==true){
+			lavanteUtils.waitForTime(3000);
+			if(lavanteUtils.isElementDisplayed(xpathmultipartFile)==true){
+				lavanteUtils.typeinEdit(path,xpathmultipartFile);
+			}
+		}
+	}
+
+	/**
+	 * Method Name : closePopupButton
+	 * Purpose: Public method which includes logic related to close the pop up (yellow pop up)
+	 * @param: None
+	 * @return: None
+	 */	
+	public void closePopupButton(){
+		try{
+			if(lavanteUtils.isElementDisplayed(cssPopupCloseBtn)==true){
+				lavanteUtils.click( cssPopupCloseBtn);
+				lavanteUtils.waitForTime(1000);
+			}
+		}catch(Exception e){
+			//log.severe("Exception in the method closePopupButton: " + e.getMessage());
+			lavanteUtils.takeScreenshot("closePopupButton");
+			Assert.assertTrue(false,"Exception in the method closePopupButton: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * Method Name : verify_PageTitle
+	 * Purpose: Public method which includes logic related to verify the page title
+	 * @param: String expPageTitle
+	 * @return: true/false
+	 */	
+	public boolean verify_PageTitle(String expPageTitle){
+		boolean flag=false;
+
+		try{
+			lavanteUtils.waitForTime(4000);
+			String actualPageTitle=driver.getTitle().trim().toString();
+			//Validation - Suppliers Search Page
+			if (expPageTitle.equalsIgnoreCase(actualPageTitle)) {
+				Reporter.log("Expected page displayed: Expected title: " + expPageTitle
+						+ " Actual title: " + actualPageTitle);
+				flag=true;
+			} else {
+				lavanteUtils.takeScreenshot(driver, "verify_PageTitle");
+				Assert.assertTrue(false,"Test failed due to Expected title: " + expPageTitle  + "  doesn't match with"
+						+ " Actual title: " + actualPageTitle);
+			}
+		} catch(Exception e){
+			//log.severe("Exception in the method verify_PageTitle: " + e.getMessage());
+			lavanteUtils.takeScreenshot( "verify_PageTitle");
+			Assert.assertTrue(false,"Exception in the method verify_PageTitle: " + e.getMessage());
+		}
+		return flag;
+	}
+
+	/**
+	 * Method Name : validateTitleDialogPopup
+	 * Purpose: Public method which includes logic related to validate the title dialog Pop up message
+	 * @param: String dialogPopup, String expPopupMsg
+	 * @return: None
+	 */
+	public void validateTitleDialogPopup(WebElement dialogPopup, String expPopupMsg ){
+
+		try{
+			if(lavanteUtils.isElementDisplayed(dialogPopup)==true){
+				String getText=lavanteUtils.getText(dialogPopup);
+				//Validation
+				if (getText.trim().toString().contains(expPopupMsg.trim().toString())) {
+					Reporter.log("Verification is successful for 'dialog pop up' message: " + getText);
+				} else {
+					//log.severe("Test failed due to Expected message: " + expPopupMsg  + "  doesn't match with "
+						//	+ " Actual message: " + ge.getText);
+					lavanteUtils.takeScreenshot( "validateDialogPopup");
+					Assert.assertTrue(false,"Test failed due to Expected message: " + expPopupMsg  + "  doesn't match with "
+							+ " Actual message: " + getText);
+				}
+			} else {
+				//log.severe("Test failed due to dialog pop up did not displayed:");
+				Assert.assertTrue(false,"Failed due to 'Upload dialog pop up' did not displayed: ");
+			}
+		} catch(Exception e){
+			//log.severe("Exception in the method validateTitleDialogPopup: "+ e.getMessage());
+			lavanteUtils.takeScreenshot("validateTitleDialogPopup");
+			Assert.assertTrue(false,"Exception in the method validateTitleDialogPopup: " + e.getMessage());
+		}		
+	}
+
+	/**
+	 * Method Name : selectDrpDwnOption
+	 * Purpose: Public method which includes logic related to select the drop down values
+	 * @param: String sDrpDwnOption, String sEleProperty
+	 * @return: None
+	 */
+	public void selectDrpDwnOption(String sDrpDwnOption, WebElement sEleProperty){
+		List<WebElement> options=null;
+		try{			
+			lavanteUtils.waitForTime(1000);
+			options=sEleProperty.findElements(By.xpath(".//option"));
+			lavanteUtils.waitForTime(2000);
+
+			for(WebElement option: options){
+				String value = option.getText().trim().toLowerCase().toString();
+				if (sDrpDwnOption.trim().toLowerCase().toString().equalsIgnoreCase(value)) {
+					option.click();
+					lavanteUtils.waitForTime(2000);
+					Reporter.log("Selected " + "'" + sDrpDwnOption + "'" + " drop down option ");
+					break;
+				}
+			}
+		} catch(Exception e){
+			//log.severe("Exception in the method selectDrpDwnOption: "+ e.getMessage());
+			lavanteUtils.takeScreenshot( "selectDrpDwnOption");
+			Assert.assertTrue(false,"Exception in the method selectDrpDwnOption: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * Method Name : validateDialogPopup
+	 * Purpose: Public method which includes logic related to validate the dialog Pop up message and ge.clicks on OK Button
+	 * @param: String dialogPopup, String expPopupMsg
+	 * @return: None
+	 */
+	public void validateDialogPopup(WebElement dialogPopup, String expPopupMsg ){
+
+		try{
+			if(lavanteUtils.isElementDisplayed(dialogPopup)==true){
+				String getText=lavanteUtils.getText(dialogPopup);
+				//Validation
+				lavanteUtils.click(xpathuploadOKButton);
+				lavanteUtils.waitForTime(1000);
+				
+				if (getText.trim().toString().contains(expPopupMsg.trim().toString())) {
+					Reporter.log("Verification is successful for 'dialog pop up' message: " + getText);
+				
+					Reporter.log("Clicked on the 'OK' button");
+				} else {
+					//log.severe("Test failed due to Expected message: " + expPopupMsg  + "  doesn't match with "
+					//		+ " Actual message: " + ge.getText);
+					lavanteUtils.takeScreenshot( "validateDialogPopup");
+					Assert.assertTrue(false,"Test failed due to Expected message: " + expPopupMsg  + "  doesn't match with "
+							+ " Actual message: " + getText);
+					
+				}
+			} else {
+				//log.severe("Test failed due to dialog pop up did not displayed:");
+				Assert.assertTrue(false,"Failed due to 'Upload dialog pop up' did not displayed: ");
+			}
+		} catch(Exception e){
+			//log.severe("Exception in the method validateDialogPopup: "+ e.getMessage());
+			lavanteUtils.takeScreenshot( "validateDialogPopup");
+			Assert.assertTrue(false,"Exception in the method validateDialogPopup: " + e.getMessage());
+		}		
+	}
+	
+	public void verifyUploadFilesPageDetailsDisplayed()
+	{
+		lavanteUtils.fluentwait(IFRAMEVMFuploadFile);
+		lavanteUtils.verifyElementDisplayed("UploadFilesSection", UploadFilesSection);
+		
+		lavanteUtils.verifyElementDisplayed("TemplateSection",TemplateSection);
+		
+	}
+	
+	public void verifyDownloadFilesPageDetailsDisplayed()
+	{
+		lavanteUtils.fluentwait(DownloadVendorMasterFileSection);
+		lavanteUtils.verifyElementDisplayed("DownloadVendorMasterFileSection", DownloadVendorMasterFileSection);
+		lavanteUtils.verifyElementDisplayed("FieldsAvailableinTemplates", FieldsAvailableinTemplates);
+	}
+}

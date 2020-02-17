@@ -1,0 +1,54 @@
+
+#PageTitle
+expectedPageTitle=Lavante SIM
+ 
+ExpectedMsg=Password Updated Successfully
+#ID
+ID8_cancel=w8_cancel
+IDuserName=username
+IDpassword=password
+IDlogOut=logout_link
+IDcpassword=currentPassword
+IDnewPassword=newPassword
+IDconfirmPassword=confirmPassword
+IDstatus=status
+IDcurrentPassword=currentPassword
+IDresetPassword=resetPassword
+IDFrame=00J
+IDFrame012=012
+contactName=contactName
+userName=UserName
+RecoverySIM=Looking for Lavante Supplier Information Management (SIM)?
+McafeeTrustedDate=html/body/div[2]/div/table/tbody/tr/td[1]/div/div[1]/table/tbody/tr/td[2]/div
+DIgiCertTrustedDate=todays-date
+#Xpath
+xResetFieldErrorMsg=//td/span[contains(@class,'error')]
+xIFrameNewLogout=.//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+XpathResetPwdMsg=//h4
+XloginBtn=//input[contains(@type,'image')]	
+xLogo=//img[contains(@src,'images_common/layout/logo.png')]
+XpathSaveBtn=//input[contains(@class,'button button_green')]
+xpathPopupLogout=//div[@class='align_right button_set']/a[@class='button button_blue']
+#xpathPopupLogout=//div[@class='align_right button_set']/a[@href='logout.lvp']
+expiredText=//form[contains(@id,'command')]/div[1]/span
+deactivateMsg=//div[contains(@id,'content')]/table/tbody/tr[1]/td[2]/div
+
+CopyRights=//table/tbody/tr/td/div[2]    
+#CopyRights=//div[contains(@style,'color:')]
+McAfeeLink=//a/img[contains(@alt,'McAfee SECURE')]
+DigiCertLink=//img[contains(@src,'digicert')]
+#LinkText
+LinkClickHere=here
+NotRegisteredLink=Not Registered
+ForgotPasswordLink=Forgot Password
+RecoveryLink=Looking for Lavante Recovery?
+#CSS
+CSSPopupOkBtn=*[value='Ok'][class='button button_green ajax']
+
+#Message
+expExpiredMessage=Please create a new password as your current password has expired
+expiredUserCredentials=Expired User credentials
+expDeactivatedUserMsg=Your account has been deactivated. Please contact Lavante support or your customer for more information.
+#You are not associated with any active supplier. Please contact Lavante support or your customer for more information.
+
+

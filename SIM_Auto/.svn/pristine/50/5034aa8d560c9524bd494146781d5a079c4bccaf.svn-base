@@ -1,0 +1,507 @@
+package com.lavante.sim.customer.pageobjects.Tasks;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+/**
+ * Tasks->Track/Reassign Task [Tasktracker.lvp]
+ * @author Piramanayagam.S
+ *
+ */
+
+public class TasksTracker {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+
+	public TasksTracker(WebDriver driver){
+		lavanteUtils.driver=driver;
+	}
+
+	@FindBy(css="thead th")
+	private List<WebElement> Headers;
+	
+	@FindBy(css="div[class='header'] form-select:nth-child(1)  select")
+	private WebElement tasksClaimsViewDDL;
+	public WebElement tasksClaimsViewDDL(){
+		return tasksClaimsViewDDL;
+	}
+
+	@FindBy(css=".page-header")
+	private WebElement pageHeader;
+	public WebElement pageHeader(){
+		return pageHeader;
+	}
+	
+	@FindBy(css="button[class*='action_buttons']")
+	private WebElement actionBtn;
+	public WebElement actionBtn(){
+		return actionBtn;
+	}
+	
+	@FindBy(css="input[value*='Reassign']")
+	private WebElement ReassignActnbtn;
+	public WebElement ReassignActnbtn() {
+		return ReassignActnbtn;
+	}
+	
+	
+	
+	//Reassign Popup
+	@FindBy(css="iframe[src*='Reassign']")
+	private WebElement IFRAMEReassign;
+
+	public WebElement IFRAMEReassign() {
+		return IFRAMEReassign;
+	}
+
+	@FindBy(css="input[data-input-id*='Group']~label")
+	private WebElement Groupoption;
+
+	public WebElement Groupoption() {
+		return Groupoption;
+	}
+
+	@FindBy(css="input[data-input-id*='Contact']~label")
+	private WebElement Useroption;
+
+	public WebElement Useroption() {
+		return Useroption;
+	}
+
+	@FindBy(css="input[data-input-id*='Role']~label")
+	private WebElement Roleoption;
+
+	public WebElement Roleoption() {
+		return Roleoption;
+	}
+
+	@FindBy(css="[id*='customerGroup'] a")
+	private WebElement Grpdpdn;
+
+	public WebElement Grpdpdn() {
+		return Grpdpdn;
+	}
+
+	@FindBy(css="[id*='customerUserRole'] a")
+	private WebElement Roledpdn;
+
+	public WebElement Roledpdn() {
+		return Roleoption;
+	}
+
+	@FindBy(css="[id*='customerInvitingOrg'] a")
+	private WebElement InvitingOrgdpdn;
+
+	public WebElement InvitingOrgdpdn() {
+		return InvitingOrgdpdn;
+	}
+	
+	@FindBy(css="[id*='customerInvitingOrg'] input")
+	private WebElement InvitingOrgdpdntxt;
+
+
+	@FindBy(css="[id*='customerContact'] a")
+	private WebElement UserDrpdn;
+
+	public WebElement UserDrpdn() {
+		return UserDrpdn;
+	}
+
+	@FindBy(css="[id*='groupUser'] a")
+	private WebElement GrpUserDrpdn;
+
+	public WebElement GrpUserDrpdn() {
+		return GrpUserDrpdn;
+	}
+
+	@FindBy(css="[id*='customerContact'] input")
+	private WebElement Usertxt;
+
+	public WebElement Usertxt() {
+		return Usertxt;
+	}
+
+	@FindBy(css="input[type*='submit']")
+	private WebElement Reassignbtn;
+
+	@FindBy(css="button[class='primary']")
+	private WebElement OkBtn;
+
+	public WebElement OkBtn() {
+		return OkBtn;
+	}
+
+	//total no. of records displayed in header
+	@FindBy(css="span[class='highlight_green']")
+	private WebElement totalRecords;
+	public WebElement totalRecords(){
+		return totalRecords;
+	}
+	
+	@FindBy(css="table tr td")
+	private WebElement NoResulttxt;
+	public WebElement NoResulttxt(){
+		return NoResulttxt;
+	}
+	
+	
+	
+	//Pagination
+	@FindBy(css="ul[class='pagination']")
+	private WebElement paginationBox;
+	public WebElement paginationBox(){
+		return paginationBox;
+	}
+	
+	@FindBy(css="[class*='pagination'] li a[ng-click*='+ 1']")
+	private List<WebElement> paginationBtns;
+	public List<WebElement> paginationBtns(){
+		return paginationBtns;
+	}
+	
+	
+	//Search
+	@FindBy(css="button[class*='primary']")
+	private WebElement searchbtn;
+	public WebElement searchbtn(){
+		return searchbtn;
+	}	
+	
+	//End of Search
+	
+	
+	/**
+	 * Method to search a claim and perform an action.
+	 * @author girish.n 
+	 * @throws SQLException 
+	 */
+	
+	public LinkedHashMap<String, String> actionOnTasksClaims(LinkedHashMap<String, String> dataMap) throws IOException, SQLException {
+		
+		String index="";
+		dataMap=searchTasksClaim(dataMap);
+		
+		if(dataMap.containsKey("Index")){
+			index=dataMap.get("Index");
+		}
+		if(!index.equalsIgnoreCase("-1")){	
+			Reporter.log("Task ID is found in Task Tracker Page at index:"+index,true);
+			selectAction(dataMap);
+			dataMap.put("flag","true");
+		}
+		else{
+			Reporter.log("Claim ID is not present",true);
+			dataMap.put("flag","false");
+		}
+		
+		return dataMap;
+	
+	}	
+	/**
+	 * Method to search claim. Pagination is handled.
+	 * 
+	 * @param dataMap
+	 * @return
+	 */
+	public LinkedHashMap<String, String> searchTasksClaim(LinkedHashMap<String, String> dataMap) {
+		int ind=-1;
+		boolean flag=false;
+		do{
+			dataMap=searchClaim(dataMap);
+			if(dataMap.containsKey("Index")){
+				ind=Integer.parseInt(dataMap.get("Index"));
+			}
+			if(ind!=-1)
+			{
+				break;
+			}
+			if(paginationBtns.size()>0){
+		//		if(paginationBtns.get(paginationBtns.size()-2).getAttribute("href")!=null)
+				{
+					flag=true;
+					lavanteUtils.click(paginationBtns.get(0));
+					lavanteUtils.waitforPageload(pageHeader);
+				}//else{
+				//	flag=false;
+				//}
+			}
+		}while(flag);
+		return dataMap;
+	}
+	
+	/**
+	 * Dont know why i wrote, can be deleted  
+	 * Written by Piram
+	 
+	  public LinkedHashMap<String, String> pendingUpdateReassign(LinkedHashMap<String, String> dataMap) throws FileNotFoundException, IOException, SQLException {
+		switchTasksClaimView(dataMap);
+		search(dataMap);
+		int index=-1;
+		dataMap.put("Index", String.valueOf(index));
+		if(iterateSearchHeaderFindColList("Task ID").size()>0){
+			if (dataMap.containsKey("Status")){
+					String data=dataMap.get("Status");
+					int size=paginationBtns.size();
+					if(size==0){
+						size=1;
+					}
+					boolean flag=false;
+					for(int yx=0;yx<size;yx++){
+						int sizer=iterateSearchHeaderFindColList("Object Status").size();
+						outr: for(int i=0;i<sizer;i++){
+								String x=iterateSearchHeaderFindColList("Object Status").get(i).getText().trim();
+								x=iterateSearchHeaderFindColList("Assigned To").get(i).getText().trim();
+								if(dataMap.containsKey("User")){
+									if(x.equalsIgnoreCase(dataMap.get("User"))){
+										if (data.equalsIgnoreCase(x)){
+											lavanteUtils.click(iterateSearchHeaderFindColList("Object Status").get(i));
+											flag=true;
+										}
+									}
+								}
+						}
+						if(flag==true){
+							Action(dataMap);
+						}
+						size=paginationBtns.size();
+						if(yx<size){
+							lavanteUtils.click(paginationBtns.get(yx));
+						}
+					}
+			}
+		}	
+		return dataMap;
+	}
+	 */
+	
+	
+	private LinkedHashMap<String, String> searchClaim(LinkedHashMap<String, String> dataMap) {
+		switchTasksClaimView(dataMap);
+		search(dataMap);
+		int index=-1;
+		dataMap.put("Index", String.valueOf(index));
+		if(iterateSearchHeaderFindColList("Task ID").size()>0){
+			if (dataMap.containsKey("TaskID")){
+					String data=dataMap.get("TaskID");
+					if (data.equalsIgnoreCase("Any")){
+						outr: for(int i=0;i<iterateSearchHeaderFindColList("Task ID").size();i++){
+							String x=iterateSearchHeaderFindColList("Task ID").get(i).getText();
+							x=x.trim();
+							if(x.length()>0){
+								dataMap.put("Index", String.valueOf(i));
+								dataMap.put("TaskID", x);
+								break outr;
+							}
+						}
+						return dataMap;
+					}else{
+						for(int i=0;i<iterateSearchHeaderFindColList("Task ID").size();i++){
+							if(data.equals(iterateSearchHeaderFindColList("Task ID").get(i).getText().trim())){
+								index=i;
+								dataMap.put("Index", String.valueOf(index));
+								return dataMap;
+							}
+						}
+					}
+			}
+		}	
+		return dataMap;
+	}
+	
+	/**
+	 * Search on Claims to Approve
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 */
+	public void search(LinkedHashMap<String, String> dataMap) {
+		fillSearchDetails(dataMap);
+		formSearchDetails(dataMap);
+		
+	}
+
+	private void fillSearchDetails(LinkedHashMap<String, String> dataMap) {
+		//Created Dummy Text
+		lavanteUtils.fluentwait(searchbtn);
+		String y="DUMMY";
+		String x="//*[text()='"+y+"']/../following-sibling::div//input";
+		
+		if(dataMap.containsKey("TaskID")){
+			String n=dataMap.get("TaskID");
+			String a=x;
+			if(!n.equalsIgnoreCase("ANY")){
+				a=a.replace(y, "Task ID");
+				lavanteUtils.driver.findElement(By.xpath(a)).clear();
+				lavanteUtils.driver.findElement(By.xpath(a)).sendKeys(n);
+			}
+		}
+		if(dataMap.containsKey("TaskType")){
+			String n=dataMap.get("TaskType");
+			String a=x;
+			if(!n.equalsIgnoreCase("ANY")){
+				a=a.replace(y, "Task Type");
+				a=a.replace("input", "button");
+				lavanteUtils.driver.findElement(By.xpath(a)).click();
+				lavanteUtils.NwselectvalueFrmDpdn(n);
+				lavanteUtils.driver.findElement(By.xpath(a)).click();
+			}
+		}
+		
+	}
+
+	private void formSearchDetails(LinkedHashMap<String, String> dataMap) {
+		if(dataMap.containsKey("Search")){
+			lavanteUtils.click(searchbtn);
+		}
+	}
+
+	private void selectAction(LinkedHashMap<String, String> dataMap) throws FileNotFoundException, IOException, SQLException{
+		int index=Integer.parseInt(dataMap.get("Index"));
+		lavanteUtils.click(iterateSearchHeaderFindColList("Object").get(index));
+		lavanteUtils.click(actionBtn);
+		lavanteUtils.waitForTime(2000);
+		String action = dataMap.get("Action");
+		
+		if(action.equalsIgnoreCase("Reassign")){
+			lavanteUtils.click(ReassignActnbtn);
+			lavanteUtils.waitForTime(3000);
+			Reassigning(dataMap);
+			lavanteUtils.switchtoFrame(IFRAMEReassign);
+			if(!dataMap.containsKey("ReAssignError")){
+				lavanteUtils.click(Reassignbtn);
+				lavanteUtils.switchtoFrame(null);
+				lavanteUtils.waitforPageload(searchbtn);
+				lavanteUtils.fluentwait(searchbtn);
+				lavanteUtils.waitForTime(4000);
+			}
+		}
+		
+	}
+
+	public void Reassigning(LinkedHashMap<String, String> dataMap) throws FileNotFoundException, IOException, SQLException {
+		lavanteUtils.switchtoFrame(IFRAMEReassign);
+		lavanteUtils.fluentwait(Useroption);
+		if (dataMap.containsKey("AssginTo")) {
+			String data = dataMap.get("AssginTo");
+			if (data.equalsIgnoreCase("Group")) {
+				// lavanteUtils.click(Groupoption);
+			}
+			if (data.equalsIgnoreCase("Role")) {
+				lavanteUtils.click(Roleoption);
+			}
+			if (data.equalsIgnoreCase("User")) {
+				lavanteUtils.click(Useroption);
+			}
+
+		}
+		if (dataMap.containsKey("InvitingOrg")) {
+			lavanteUtils.click(InvitingOrgdpdn);
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.typeinEdit(dataMap.get("InvitingOrg"),InvitingOrgdpdntxt);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("InvitingOrg"));
+			lavanteUtils.switchtoFrame(IFRAMEReassign);
+		}
+
+		if (dataMap.containsKey("Group")) {
+			lavanteUtils.click(Grpdpdn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("Group"));
+			lavanteUtils.switchtoFrame(IFRAMEReassign);
+
+			if (dataMap.containsKey("User")) {
+				lavanteUtils.click(GrpUserDrpdn);
+				lavanteUtils.selectContainFrmDpdn(dataMap.get("User"));
+				lavanteUtils.switchtoFrame(IFRAMEReassign);
+			}
+
+		}
+		if (dataMap.containsKey("Role")) {
+			lavanteUtils.click(Roledpdn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("Role"));
+			lavanteUtils.switchtoFrame(IFRAMEReassign);
+		}
+		if ((!dataMap.containsKey("Group")) && (dataMap.containsKey("User"))) {
+			lavanteUtils.click(UserDrpdn);
+			lavanteUtils.selectContainFrmDpdn(dataMap.get("User"));
+			lavanteUtils.switchtoFrame(IFRAMEReassign);
+		}
+
+	}
+
+
+	/**
+	 * Method to switch view "My" and "All Task"
+	 * 
+	 * By default Claims View if , needed for Claim and GL code then use this method
+	 * @author Girish.N
+	 * 
+	 */
+	public void switchTasksClaimView(LinkedHashMap<String, String> dataMap){
+		lavanteUtils.switchtoFrame(null);
+		String data="17201";
+		if (dataMap.containsKey("View")){
+			data=dataMap.get("View");
+			if(data.contains("My Tasks")){
+				data=""+17202;
+			}else{
+				data=""+17201;
+			}
+		}	
+		lavanteUtils.selectbyvalue(data,tasksClaimsViewDDL);
+		
+	}
+
+	
+	public List<WebElement> iterateSearchHeaderFindColList(String col) {
+		List<WebElement> s = null;
+		int j = ColIdentify(col);
+		String x = "tbody td:nth-child(" + j + ")";
+		s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		System.out.println("Iterate col locator:" + x + ",Size:" + s.size());
+		if (col.contains("Task ID") ) {
+			x = "tbody td:nth-child(" + j + ") a";
+			System.out.println("Iterate for name/contact:" + x);
+			s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		}
+		System.out.println("Iterate Search Col:" + col + ":" + s.size());
+		return s;
+	}
+	
+	public int ColIdentify(String col) {
+		int ki = 0;
+		boolean found = false;
+		if (Headers.size() > 0) {
+			for (int i = 0; i < Headers.size(); i++) {
+				String x = Headers.get(i).getText().toLowerCase();
+				if (x.contains(col.toLowerCase())) {
+					ki = i;
+					// List start with 0 but need a number more than that to
+					// fetch in xpath
+					ki = i + 1;
+					System.out.println(col + ",Col Found at " + ki);
+					found = true;
+					break;
+				}
+			}
+		}
+
+		if (found == false) {
+			Assert.assertTrue(false, "Col name not found" + col);
+		}
+		return ki;
+
+	}
+
+	
+}

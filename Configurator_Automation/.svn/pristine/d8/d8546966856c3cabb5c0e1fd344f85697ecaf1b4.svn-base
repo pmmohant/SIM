@@ -1,0 +1,85 @@
+package com.lavante.configurator.pageobjects;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
+
+import org.openqa.selenium.By;
+
+
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import com.lavante.configurator.Common.Util.LavanteUtils;
+
+
+public class HomePage {
+	
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	
+	public HomePage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+	}
+
+	
+	@FindBy(how=How.CSS,using="[href*='logout']")
+	private WebElement logoutbtn;
+	
+	@FindBy(how=How.CSS,using="[class*='head'] a[class*='drop']")
+	private WebElement LoginName;
+	
+	@FindBy(css="tr button")
+	private List<WebElement> editBtn;
+	
+	@FindBy(how=How.CSS,using="a[id*='feature']")
+	private WebElement FeatureMenulnk;
+	public WebElement FeatureMenulnk(){
+		return FeatureMenulnk;
+	}
+	
+	@FindBy(how=How.CSS,using="a[href*='#Supplier']")
+	private WebElement SupplierMenu;
+	public WebElement SupplierMenu(){
+		return SupplierMenu;
+	}
+	
+	
+	//Methods
+		
+	/**
+	 * Selection of Buyer 
+	 * 
+	 * @author Piramanayagam.S
+	 * @param buyerName
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 */
+	public void SelectBuyer(String buyerName) throws FileNotFoundException, IOException {
+		
+		System.out.println(editBtn.size());
+		if(editBtn.size()>0){
+			if(buyerName.equalsIgnoreCase("ANY")){
+				lavanteUtils.click(editBtn.get(0));
+			}
+		}
+	}
+	
+	/**
+	 * Logout Application
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	public void logout() {
+		
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.click(LoginName);
+		lavanteUtils.fluentwait(logoutbtn);
+		lavanteUtils.click(logoutbtn);
+
+	}
+	
+	
+}

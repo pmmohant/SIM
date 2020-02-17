@@ -1,0 +1,128 @@
+package com.lavante.sim.customer.TestScripts.Transactions.Invoices;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.InvoiceSearchDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+
+
+public class  InvoiceBatchPayment extends PageInitiator  {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();	
+	
+	/**
+	 * This class all test starts using login page and driver initialization
+	 *@author tejaswini.ar
+	 *@created on -08-05-2017
+	 *
+	 *SIM-10513 - Check on valid batch file creation
+	 *
+	 *Batching for diff invoice for same client is done
+	 *Batching for diff invoice for diff client to be done.
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception
+	{
+				
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		openAPP();	
+		lavanteUtils.driver=driver;
+		
+		List<?> listofdatafrm=lavanteUtils.login("Invoice",browser);
+		LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String>();
+		LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+		String customerID=(String) listofdatafrm.get(1);
+		//Login		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String, String>();
+		dataMap.put("maintab","Invoice");
+		dataMap.put("subtab", "InvoiceSearchResult");
+		
+		enobjhomePage.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+		
+		//Config
+		String query="update CustomerPropertyValue set PropertyValue='true' where CustomerPropertyID=83 and CustomerID="+customerID;
+		lavanteUtils.UpdateDB(query);
+			
+	}
+	
+	/**
+	 * SIM-10513 - Check on valid batch file creation
+	 * TC_01: Search for Invoices with different client & do tag for Payment , check for the confirmation.
+	 * 
+	 * @author tejaswini ar
+	 * @param dataMap
+	 * @throws Exception 
+	 */	
+	@Test(dataProvider="InvoiceDate",dataProviderClass=InvoiceSearchDataProvider.class)
+	public void  InvoiceBatching(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		Reporter.log("Test Started Invoice Advanced search:"+currenttime());
+		
+		SoftAssert softassert=new SoftAssert();
+		boolean flag=false;
+		// Invoice Advanced search
+		lavanteUtils.fluentwait(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.click(enInvoiceAdvanceSearch.AdvancedSearchTab());
+	
+		lavanteUtils.click(enInvoiceAdvanceSearch.BuildQuerybtn());
+		
+		dataMap.put("Search","");
+		enInvoiceAdvanceSearch.buildquery(dataMap);
+		
+		eninvoicePage.ViewSelection("Payments");
+		
+		//For Wait
+		eninvoicePage.getColumnText("Payment Type", 0);
+		
+		dataMap.put("SelectallInvoice","");
+		dataMap.put("TagForPayment","");
+		dataMap.put("BatchDescription",""+randomnum());
+		eninvoicePage.selectSupplierFormAction(dataMap);
+		
+		lavanteUtils.switchtoFrame(null);
+		String ExpResult = "The Batch file cannot be created because the selected invoices belong to different clients. Please select invoices associated with the same client for batch file creation";
+		String actResult=eninvoicePage.Confirmationmessage().getText();
+		
+		Reporter.log("Configuration for Multiple client set to No,Expected:"+ExpResult+",Actua:"+actResult);
+		softassert.assertEquals(actResult, ExpResult,"Batch can be done");
+		flag=true;
+		
+		softassert.assertTrue(flag,"Please Retest");
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended for Invoice Batching:"+LavanteUtils.currenttime());
+		
+	}
+	
+	@AfterClass
+	public void SetupafterClassmethod()
+	{
+		lavanteUtils.refreshPage();
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+	
+	
+
+
+}
+

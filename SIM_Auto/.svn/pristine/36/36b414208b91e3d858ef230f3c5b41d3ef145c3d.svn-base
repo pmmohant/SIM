@@ -1,0 +1,1006 @@
+package com.lavante.sim.customer.TestScripts.Supplier.Search;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.EditProfDataProvider;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.SupplierRegistrationDataProvider;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.SupplierSearchDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 20-08-2016 Created for Supplier Search All Profile Actions TC Done
+ * here Ended on 25-08-2016
+ * 
+ * SIM-19331 Ability to add and reset primary supplier contact for the buyer
+ * 
+ * @author Piramanayagam.S
+ *
+ */
+public class UATProfileActionTC extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String CustomerID = "";
+	String loginemailid = "";
+
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * 
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+		List listofdatafrm = lavanteUtils.login("Search-Supp", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		CustomerID = (String) listofdatafrm.get(1);
+		loginemailid = LdataMap.get("username");
+
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+	}
+
+	@BeforeMethod
+	public void before() {
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+		
+		enobjsupplierBasicSearch.formAction(dataMap);
+		//Bcz Some method starts to advance search tab and starts to search tab
+		lavanteUtils.waitForTime(3000);
+	}
+
+	/**
+	 * Save Template Email Verify the Mail Body Mail Sub
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	//@Test(dataProvider="SendEmail",dataProviderClass=EditProfDataProvider.class)
+	public void SaveTemplateEmaill006(LinkedHashMap<String, String> dataMap) throws Exception {
+		System.out.println("------------Test Started for Save Email Template-------------------" + dataMap);
+		Reporter.log("Test Started for Save Email Template verify:" + currenttime());
+		SoftAssert softassert = new SoftAssert();
+
+		dataMap.put("Search", "");
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		enobjsupplierBasicSearch.search(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		dataMap.put("Invitation", "");
+		dataMap.put("sendEmail", "");
+		dataMap.put("mailSave", "");
+		String tmplname = LavanteUtils.randomnum();
+		dataMap.put("mailTemplateName", tmplname);
+		enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.IFRAMEsendEmail());
+		String tmplatnme = enobjsupplierPage.mailTemplate().getText();
+		System.out.println("Template Name ,Exp:" + tmplname + ",Actual:" + tmplatnme);
+		softassert.assertEquals(tmplatnme, tmplname, "Template Name Not matched");
+
+		String mailbody = enobjsupplierPage.mailmsgtxt().getText();
+		String mailsub = enobjsupplierPage.mailsubtxt().getAttribute("value");
+		/*
+		 * String attach="";
+		 * attach=enobjsupplierPage.mailAttchdfilname().get(0).getText();
+		 */
+
+		dataMap.clear();
+		dataMap.put("mailClear", "");
+		enobjsupplierPage.formActionEmail(dataMap);
+
+		dataMap.put("mailTemplate", tmplatnme);
+		enobjsupplierPage.fillformEmail(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.IFRAMEsendEmail());
+
+		tmplatnme = enobjsupplierPage.mailTemplate().getText();
+		String actmailbody = enobjsupplierPage.mailmsgtxt().getText();
+		String actmailsub = enobjsupplierPage.mailsubtxt().getAttribute("value");
+		// String
+		// actattach=enobjsupplierPage.mailAttchdfilname().get(0).getText();
+
+		System.out.println("Saved Template Name ,Exp:" + tmplname + ",Actual:" + tmplatnme);
+		softassert.assertEquals(actmailbody, mailbody, "Mail Body Not matched" + actmailbody);
+		softassert.assertEquals(actmailsub, mailsub, "Mail Subject Not matched" + actmailsub);
+		// Assert.assertEquals(actattach, attach,"Mail attach Not
+		// matched"+actmailsub);
+
+		if (tmplatnme.length() > 0) {
+			String query = "delete from EmailTemplate where EmailTemplateName='" + tmplatnme + "'";
+			lavanteUtils.UpdateDB(query);
+		}
+
+		softassert.assertAll();
+		Reporter.log("Test Ended for Save Template at:" + currenttime());
+
+	}
+
+	/**
+	 * Verify Email Attachment count
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	//@Test(dataProvider="AttachEmail",dataProviderClass=EditProfDataProvider.class)
+	public void SendEmailAtchmntCount007(LinkedHashMap<String, String> dataMap) throws Exception {
+		System.out.println("------------Test Started for Browse Button Status After 5-------------------" + dataMap);
+		Reporter.log("Test Started for Browse Button Status After 5 Attachment verify:" + currenttime());
+
+		dataMap.put("Search", "");
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		enobjsupplierBasicSearch.search(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		dataMap.put("Invitation", "");
+		dataMap.put("sendEmail", "");
+
+		enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.IFRAMEsendEmail());
+		boolean brwsebtnStatus = enobjsupplierPage.mailUploadbtn().isEnabled();
+		Reporter.log("Browse Button Status After 5 Attachments,Exp:False, Actual:" + brwsebtnStatus);
+		System.out.println("Browse Button Status After 5 Attachments,Exp:False, Actual:" + brwsebtnStatus);
+		Assert.assertFalse(brwsebtnStatus, "Browse Button Enabling After 5 Attachments," + brwsebtnStatus);
+
+		dataMap.put("mailClear", "");
+		enobjsupplierPage.formActionEmail(dataMap);
+
+		int brwsebtn = enobjsupplierPage.mailUploadlstbtn().size();
+		Reporter.log("Browse Button Count,Expected,1,Actual:" + brwsebtn);
+		Assert.assertEquals(brwsebtn, 1, "Browse Button Count,Expected,1,Actual:" + brwsebtn);
+		Reporter.log("Test Ended for Browse Button Status After 5 at:" + currenttime());
+
+	}
+
+	/**
+	 * Save Template Email Verify the Mail Body Mail Sub
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * 
+	 *             Can be used as replica of CustomerSupplierSearchTC0004
+	 */
+	//@Test(dataProvider="SendEmail",dataProviderClass=EditProfDataProvider.class)
+	public void SendEmaill008(LinkedHashMap<String, String> dataMap) throws Exception {
+		System.out.println("------------Test Started for Save Email Template-------------------" + dataMap);
+		Reporter.log("Test Started for Success Email Message verify:" + currenttime());
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		dataMap.put("Invitation", "");
+		dataMap.put("sendEmail", "");
+		dataMap.put("mailSend", "");
+		dataMap.put("confirmMailSend", "");
+		enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+		Reporter.log("Email Sent");
+
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(enobjsupplierPage.OKbtn());
+		String expSuccessmsg = "Email sent successfully.";
+		String actSuccessmsg = enobjsupplierPage.OKdialogmsg().getText();
+
+		System.out.println("Success Email MSG ,Exp:" + expSuccessmsg + ",Actual:" + actSuccessmsg);
+		Reporter.log("Success Msg aFter sending the email,Exp:" + expSuccessmsg + ",Actual:" + actSuccessmsg);
+		Assert.assertEquals(actSuccessmsg, expSuccessmsg,
+				"Success Msg aFter sending the email Not matched Exp:" + expSuccessmsg + ",Actual:" + actSuccessmsg);
+
+		Reporter.log("Test Ended for Success Email Message at:" + currenttime());
+
+	}
+
+	/**
+	 * Save Template Email Verify the Mail Body Mail Sub
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	//@Test(dataProvider="SendEmail",dataProviderClass=EditProfDataProvider.class)
+	public void MultipleSendEmaill009(LinkedHashMap<String, String> dataMap) throws Exception {
+		System.out.println("------------Test Started for Save Email Template-------------------" + dataMap);
+		Reporter.log("Test Started for Success Email Message verify:" + currenttime());
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		enobjsupplierPage.searchResultsFilterBy("ANY");
+
+		enobjsupplierPage.selectAllSupplier();
+
+		dataMap.put("Invitation", "");
+		dataMap.put("sendEmail", "");
+		dataMap.put("mailSend", "");
+		dataMap.put("confirmMailSend", "");
+		enobjsupplierPage.ProfileAction(dataMap);
+
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(enobjsupplierPage.OKbtn());
+		String expSuccessmsg = "Email sent successfully.";
+		String actSuccessmsg = enobjsupplierPage.OKdialogmsg().getText();
+
+		System.out.println("Success Email MSG ,Exp:" + expSuccessmsg + ",Actual:" + actSuccessmsg);
+
+		Assert.assertEquals(actSuccessmsg, expSuccessmsg, "Success Msg aFter sending the email Not matched");
+
+		Reporter.log("Test Ended for Success Email Message at:" + currenttime());
+
+	}
+
+	/**
+	 * Single Activate Test Select the Supplier click on deactivate Verify the
+	 * Status
+	 * 
+	 * Replacement of CustomerSupplierSearchTC0002_0003
+	 * 
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "Activate", dataProviderClass = SupplierSearchDataProvider.class)
+	public void SingleActivatetoDeactivate012(LinkedHashMap<String, String> dataMap) throws Exception {
+		System.out.println("------------Test Started for Save Email Template-------------------" + dataMap);
+		Reporter.log("Test Started for Success Email Message verify:" + currenttime());
+		boolean flag = false;
+
+		dataMap.put("Search", "");
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		enobjsupplierBasicSearch.search(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		dataMap.put("Account", "");
+		dataMap.put("Deactivate", "");
+		dataMap.put("Comments", LavanteUtils.randomnum());
+		dataMap.put("DeactivateSave", "");
+		String sup = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+
+		if (sup.length() > 0) {
+		/*	lavanteUtils.switchtoFrame(null);
+			lavanteUtils.fluentwait(enobjsupplierPage.OKbtn());
+			String expSuccessmsg = "Selected Supplier(s)/Invite(s) has(have) been Deactivated successfully.";
+			String actSuccessmsg = enobjsupplierPage.OKdialogmsg().getText();
+
+			System.out.println("Success  MSG ,Exp:" + expSuccessmsg + ",Actual:" + actSuccessmsg);
+			Reporter.log("Success  MSG ,Exp:" + expSuccessmsg + ",Actual:" + actSuccessmsg);
+			Assert.assertEquals(actSuccessmsg, expSuccessmsg, "Success Msg aFter sending the email Not matched");
+
+			lavanteUtils.click(enobjsupplierPage.OKbtn());*/
+			Reporter.log("Deactivated the supplier:" + sup);
+
+			dataMap.clear();
+			// To Reset the previous Search
+			enobjsupplierBasicSearch.formAction(dataMap);
+
+			dataMap.put("Search", "");
+			dataMap.put("supplierName", sup);
+			dataMap.put("InactiveSup", "");
+			lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+			enobjsupplierBasicSearch.search(dataMap);
+
+			lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+			String actStatus = enobjsupplierPage.getColumnText("Status", 0);
+			String expStatus = "Inactive";
+
+			System.out.println("Status,Exp:" + expStatus + ",Actual:" + actStatus);
+			Reporter.log("Status,Exp:" + expStatus + ",Actual:" + actStatus);
+			Assert.assertEquals(actStatus, expStatus, "Status Exp not matched");
+			flag = true;
+		}
+		Assert.assertTrue(flag,"Please Retest");
+		if (flag == false) {
+			Reporter.log("Supplier Not Found,Retest");
+			Assert.assertTrue(false, "Supplier Not Found,Retest");
+		}
+		Reporter.log("Test Ended for Success Email Message at:" + currenttime());
+
+	}
+
+	/**
+	 * SingleDeactivate Select the Supplier click on activate Verify the Status
+	 * 
+	 * Replacement of CustomerSupplierSearchTC0002_0003
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "DeActivate", dataProviderClass = SupplierSearchDataProvider.class)
+	public void SingleDeActivatetoActivate013(LinkedHashMap<String, String> dataMap) throws Exception {
+		System.out.println("------------Test Started for Deactivate to Activate-------------------" + dataMap);
+		Reporter.log("Test Started for Deactivate to Activate verify:" + currenttime());
+		boolean flag = false;
+
+		dataMap.put("Search", "");
+		dataMap.put("InactiveSup","");
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		enobjsupplierBasicSearch.search(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		dataMap.put("Account", "");
+		dataMap.put("Deactivate", "");
+		dataMap.put("Comments", LavanteUtils.randomnum());
+		dataMap.put("DeactivateSave", "");
+
+		String sup = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+		if (sup.length() > 0) {
+			/*lavanteUtils.switchtoFrame(null);
+			lavanteUtils.fluentwait(enobjsupplierPage.OKbtn());
+			String expSuccessmsg = "Selected Supplier(s)/Invite(s) has(have) been Deactivated successfully.";
+			String actSuccessmsg = enobjsupplierPage.OKdialogmsg().getText();
+
+			System.out.println("Success  MSG ,Exp:" + expSuccessmsg + ",Actual:" + actSuccessmsg);
+			Reporter.log("Success  MSG ,Exp:" + expSuccessmsg + ",Actual:" + actSuccessmsg);
+			Assert.assertEquals(actSuccessmsg, expSuccessmsg, "Success Msg aFter sending the email Not matched");
+
+			lavanteUtils.click(enobjsupplierPage.OKbtn());*/
+			dataMap.clear();
+			enobjsupplierBasicSearch.formAction(dataMap);
+			dataMap.put("Search", "");
+			dataMap.put("supplierName", sup);
+			dataMap.put("InactiveSup", "");
+			lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+			enobjsupplierBasicSearch.search(dataMap);
+
+			lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+			String actStatus = enobjsupplierPage.getColumnText("Status", 0);
+			String expStatus = "Inactive";
+
+			System.out.println("Status Should Match,Exp:" + expStatus + ",Actual:" + actStatus);
+			Reporter.log("Status Should Match,Exp:" + expStatus + ",Actual:" + actStatus);
+			Assert.assertEquals(actStatus, expStatus, "Deactivate to Activate exp matched");
+			
+			dataMap.put("Account", "");
+			dataMap.put("Activate", "");
+			dataMap.put("Comments", LavanteUtils.randomnum());
+			dataMap.put("DeactivateSave", "");
+			dataMap.put("supplierName", sup);
+			enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+/*
+			lavanteUtils.fluentwait(enobjsupplierPage.OKbtn());
+			String expSuccessmsg1 = "The selected Supplier has been activated successfully.";
+			String actSuccessmsg1 = enobjsupplierPage.OKdialogmsg().getText();
+
+			System.out.println("Success  MSG ,Exp:" + expSuccessmsg1 + ",Actual:" + actSuccessmsg1);
+			Reporter.log("Success  MSG ,Exp:" + expSuccessmsg1 + ",Actual:" + actSuccessmsg1);
+			Assert.assertEquals(actSuccessmsg1, expSuccessmsg1, "Success Msg aFter sending the email Not matched");
+			lavanteUtils.click(enobjsupplierPage.OKbtn());	lavanteUtils.switchtoFrame(null);*/
+
+			lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+			String actStatus1 = enobjsupplierPage.getColumnText("Status", 0);
+			String expStatus1 = "Inactive";
+
+			System.out.println("Status Should Not Match,Exp:" + expStatus1 + ",Actual:" + actStatus1);
+			Reporter.log("Status Should Not Match,Exp:" + expStatus1 + ",Actual:" + actStatus1);
+			Assert.assertNotEquals(actStatus1, expStatus1, "Deactivate to Activate exp matched");
+			flag = true;
+		}
+
+		if (flag == false) {
+			Reporter.log("Supplier Not Found,Retest");
+			Assert.assertTrue(flag, "Supplier Not Found,Retest");
+		}
+		Assert.assertTrue(flag,"Please Recheck");
+		Reporter.log("Test Ended for Deactivate to Activate at:" + currenttime());
+
+	}
+
+	/**
+	 * Search Loaded Supplier Do a Out Reach Verify the Success message
+	 * 
+	 * Note :Post Out Reach No Verification Done as because it takes more time.
+	 * 
+	 * replacement of CustomerSupplierSearchTC0006
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "OutreachLoaded", dataProviderClass = SupplierSearchDataProvider.class)
+	public void Outreach(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for  OutReach verify:" + currenttime(),true);
+		boolean flag = false;
+
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+		dataMap.put("Clear", "");
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		dataMap.put("Invitation", "");
+		dataMap.put("Outreach", "");
+		dataMap.put("Success", "");
+		dataMap.put("OKBtn", "");
+		String sup = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+
+		if (sup.length() > 0) {
+			/*lavanteUtils.switchtoFrame(null);
+			lavanteUtils.fluentwait(enobjsupplierPage.OKbtn());
+			String expSuccessmsg = "The Outreach Process has now been initiated.";
+			String actSuccessmsg = enobjsupplierPage.OKdialogmsg().getText();
+
+			System.out.println("Success  MSG ,Exp:" + expSuccessmsg + ",Actual:" + actSuccessmsg);
+			Reporter.log("Success  MSG ,Exp:" + expSuccessmsg + ",Actual:" + actSuccessmsg);
+			Assert.assertEquals(actSuccessmsg, expSuccessmsg, "Success Msg aFter Out Reach Not matched");
+
+			lavanteUtils.click(enobjsupplierPage.OKbtn());*/
+			Reporter.log("Outreached the supplier:" + sup);
+
+			flag = true;
+		}
+
+		if (flag == false) {
+			Reporter.log("Supplier Not Found,Retest");
+			Assert.assertTrue(false, "Supplier Not Found,Retest");
+		}
+		Reporter.log("Test Ended for Outreach at:" + currenttime(),true);
+
+	}
+
+	/**
+	 * invite a Supplier From Basic Search Tab Verify the name Create a Supplier
+	 * from Advance Search Tab Verify the Supplier Name
+	 * 
+	 * Replacement of CustomerSupplierSearchTC0008
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	//@Test(dataProvider = "InviteNewSupplier", dataProviderClass = SupplierRegistrationDataProvider.class)
+	public void BasicAdvinvitenewSupp(LinkedHashMap<String, String> dataMap) throws Exception {
+		System.out.println("------------Test Started for invite New Supplier-------------------" + dataMap);
+		Reporter.log("Test Started for  Create New Supplier verify:" + currenttime());
+		SoftAssert softAssert = new SoftAssert();
+
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		Reporter.log("Basic Search invite New Supplier:");
+		dataMap.put("invite", "");
+		String[] s = enobjInvitenewSupplier.inviteNwSupp(dataMap);
+
+		lavanteUtils.fluentwait(eneditProfile.cancelBtn());
+		dataMap.put("EditCancel", "");
+		eneditProfile.formAction(dataMap);
+
+		enobjsupplierPage.searchResultsFilterBy("ANY");
+
+		String supp = enobjsupplierPage.getColumnText("Name", 0);
+		System.out.println("Supplier Name ,Expected:" + s[0] + ",Actuals::" + supp);
+		Reporter.log("Supplier Name ,Expected:" + s[0] + ",Actuals::" + supp);
+		softAssert.assertEquals(s[0], supp, "Supplier Name Not Matched,Expected:" + s[0] + ",Actuals::" + supp);
+
+		Reporter.log("Advanced Search invite New Supplier:");
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+
+		s = enobjInvitenewSupplier.inviteNwSupp(dataMap);
+
+		lavanteUtils.fluentwait(eneditProfile.cancelBtn());
+		eneditProfile.formAction(dataMap);
+
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		supp = enobjsupplierPage.getColumnText("Name", 0);
+		System.out.println("Supplier Name ,Expected:" + s[0] + ",Actuals::" + supp);
+		Reporter.log("Supplier Name ,Expected:" + s[0] + ",Actuals::" + supp);
+		softAssert.assertEquals(s[0], supp, "Supplier Name Not Matched,Expected:" + s[0] + ",Actuals::" + supp);
+
+		Reporter.log("Test Ended for invite New Supplier at:" + currenttime());
+
+	}
+
+	/**
+	 * Search Loaded Supplier who has fax contact Do Fax Verification
+	 * 
+	 * Note :Post Out Reach No Verification Done as because it takes more time.
+	 * 
+	 * Data not available for the this test , mandatory loaded state with CF fax
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	//@Test(dataProvider = "FAX", dataProviderClass = SupplierSearchDataProvider.class)
+	public void companyFAXOutreach(LinkedHashMap<String, String> dataMap) throws Exception {
+		System.out.println("------------Test Started for FAX OutReach-------------------" + dataMap);
+		Reporter.log("Test Started for FAX OutReach verify:" + currenttime());
+		boolean flag = false;
+
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		dataMap.put("Invitation", "");
+		dataMap.put("Outreach", "");
+		dataMap.put("Success", "");
+		dataMap.put("OKBtn", "");
+		String sup = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+
+		if (sup.length() > 0) {
+
+			Reporter.log("Supplier  Found:" + sup);
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.fluentwait(enobjsupplierPage.OKbtn());
+			String expSuccessmsg = "The Outreach Process has now been initiated.";
+			String actSuccessmsg = enobjsupplierPage.OKdialogmsg().getText();
+
+			System.out.println("Success  MSG ,Exp:" + expSuccessmsg + ",Actual:" + actSuccessmsg);
+			Reporter.log("Success  MSG ,Exp:" + expSuccessmsg + ",Actual:" + actSuccessmsg);
+			Assert.assertEquals(actSuccessmsg, expSuccessmsg, "Success Msg aFter Out Reach Not matched");
+
+			lavanteUtils.click(enobjsupplierPage.OKbtn());
+			Reporter.log("Deactivated the supplier:" + sup);
+
+			flag = true;
+		} else {
+			Assert.assertTrue(false, "Supplier Outreach process Not done,Retest");
+			flag = true;
+		}
+
+		if (flag == false) {
+			Assert.assertTrue(false, "Supplier Not Found,Retest");
+		}
+
+		Reporter.log("Test Ended for FAX OutReach JOB at:" + currenttime());
+
+	}
+
+	/**
+	 * Reinvite Loaded Supplier
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 * @throws SQLException
+	 * 
+	 *             Replacement for CustomerSupplierSearchTC0005
+	 * 
+	 */
+	//@Test(dataProvider="ProfStatus",dataProviderClass=SupplierSearchDataProvider.class)
+	public void ReinviteSupp(LinkedHashMap<String, String> dataMap) throws Exception {
+		boolean flag = false;
+		SoftAssert softassert = new SoftAssert();
+		Reporter.log("Test Started for Reinvite Supplier at:" + currenttime());
+		eneditProfile.formAction(dataMap);
+		lavanteUtils.fluentwait(enobjsupplierBasicSearch.searchbtn());
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+
+		Reporter.log("Navigated to Search Page");
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+
+			dataMap.put("Invitation", "");
+			dataMap.put("Reinvite", "");
+			dataMap.put("Invite", "");
+			dataMap.put("NewContact", "");
+			dataMap.put("ContactName", "AutoCntctEmil");
+			dataMap.put("ContactEmail", "AutoCntctEmil@AutoCntctEmil.com");
+			String sup = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+			Reporter.log("In Reinvite Page");
+
+			lavanteUtils.refreshPage();
+
+			dataMap.clear();
+			enobjsupplierBasicSearch.formAction(dataMap);
+
+			dataMap.put("supplierName", sup);
+			dataMap.put("Search", "");
+			enobjsupplierBasicSearch.search(dataMap);
+
+			lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+			String actsup = enobjsupplierPage.getColumnText("Name", 0);
+			System.out.println("Supplier Name ,Exp:" + sup + ",Actual:" + actsup);
+			Reporter.log("Supplier Name,Exp:" + sup + ",Actual:" + actsup);
+			softassert.assertEquals(actsup, sup, "Supplier Name not matched" + sup + actsup);
+
+			String expState = "Invited";
+			String pro = enobjsupplierPage.getColumnText("Status", 0);
+			System.out.println("Supplier Stage ,After Reinvite,Exp:" + expState + ",Actual:" + pro);
+			Reporter.log("Supplier Stage ,After Reinvite,Exp:" + expState + ",Actual:" + pro);
+			softassert.assertEquals(pro, expState, "Supplier State not matched" + expState + pro);
+			flag = true;
+
+		}
+		softassert.assertTrue(flag, "No Data available for the Matched Criteria not matched");
+
+		softassert.assertAll();
+		Reporter.log("Test Ended for Reinvite Supplier at:" + currenttime());
+		System.out.println("----------Test Ended----------------");
+	}
+
+	/**
+	 * Invited Supplier,Take Control, Send Invite and Check the Status
+	 * 
+	 * Send invite will be done part of extend invite
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 * @throws SQLException
+	 * 
+	 *             Replacement for CustomerSupplierSearchTC0015
+	 * 
+	 */
+	//@Test(dataProvider = "Invited", dataProviderClass = SupplierSearchDataProvider.class)
+	public void SendInvite(LinkedHashMap<String, String> dataMap) throws Exception {
+		boolean flag = false;
+		SoftAssert softassert = new SoftAssert();
+		Reporter.log("Test Started for SendInvite Supplier at:" + currenttime());
+
+		lavanteUtils.fluentwait(enobjsupplierBasicSearch.searchbtn());
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		Reporter.log("Navigated to Search Page");
+		enobjsupplierPage.selectChangeView("Suppliers");
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+
+			dataMap.put("profile", "");
+			dataMap.put("TakeControl", "");
+			String sup = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+			Reporter.log("In Edit Page");
+
+			lavanteUtils.fluentwait(eneditProfile.saveExitbtn());
+
+			dataMap.put("tab", "Treasury");
+			eneditProfile.selectTab(dataMap);
+
+//			dataMap.put("SendInvite", "");
+//			eneditProfile.formAction(dataMap);
+//
+//			dataMap.remove("SendInvite");
+			dataMap.put("EditCancel", "");
+			eneditProfile.formAction(dataMap);
+
+			dataMap.clear();
+			enobjsupplierBasicSearch.formAction(dataMap);
+			lavanteUtils.refreshPage();
+
+			dataMap.put("supplierName", sup);
+			dataMap.put("Search", "");
+			enobjsupplierBasicSearch.search(dataMap);
+
+			lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+			String actsup = enobjsupplierPage.getColumnText("Name", 0);
+			System.out.println("Supplier Name ,Exp:" + sup + ",Actual:" + actsup);
+			Reporter.log("Supplier Name,Exp:" + sup + ",Actual:" + actsup);
+			softassert.assertEquals(actsup, sup, "Supplier Name not matched" + sup + actsup);
+
+			String expState = "Pending Validation";
+			String pro = enobjsupplierPage.getColumnText("Status", 0);
+			System.out.println("Supplier Stage ,After Reinvite,Exp:" + expState + ",Actual:" + pro);
+			Reporter.log("Supplier Stage ,After Reinvite,Exp:" + expState + ",Actual:" + pro);
+			softassert.assertEquals(pro, expState, "Supplier State not matched" + expState + pro);
+			flag = true;
+
+		}
+
+		softassert.assertTrue(flag, "No Data available for the Search Criteria ");
+
+		softassert.assertAll();
+		Reporter.log("Test Ended for Reinvite Supplier at:" + currenttime());
+		System.out.println("----------Test Ended----------------");
+	}
+
+	/**
+	 * SIM-12047 Take Control BY Value Verification
+	 * 
+	 * Take Control ,Verify in View Page
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 * @throws SQLException
+	 * 
+	 *             Replacement for CustomerSupplierSearchTC0015
+	 * 
+	 */
+	@Test(dataProvider = "ProfStatus", dataProviderClass = SupplierSearchDataProvider.class)
+	public void TakeControl(LinkedHashMap<String, String> dataMap) throws Exception {
+		boolean flag = false;
+		SoftAssert softassert = new SoftAssert();
+		Reporter.log("Test Started for Take Control By Supplier at:" + currenttime());
+	
+		lavanteUtils.fluentwait(enobjsupplierBasicSearch.searchbtn());
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+
+		Reporter.log("Navigated to Search Page");
+
+		enobjsupplierPage.selectChangeView("Suppliers");
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+
+			dataMap.put("profile", "");
+			dataMap.put("TakeControl", "");
+			dataMap.put("NoEdit", "");
+
+			String sup = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+
+			lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+			enviewSupplier.clickOnSupplier(sup);
+
+			lavanteUtils.waitForTime(5000);
+			lavanteUtils.switchtoFrame(null);
+
+			dataMap.put("maintab", "Enterprise");	
+			dataMap.put("subtab", "viewEnterpriseHeaderInformation");
+			enviewSupplier.selectTab(dataMap);
+
+			lavanteUtils.fluentwait(enviewSupplier.takeControlBy());
+			String actual = enviewSupplier.takeControlBy().getText();
+
+			Reporter.log("Take Control, Expected:" + loginemailid + ",Actuals:" + actual);
+			softassert.assertEquals(actual, loginemailid, 	"Take Control By, Expected:" + loginemailid + ",Actuals:" + actual);
+
+			flag = true;
+
+		}
+
+		softassert.assertTrue(flag, "No Data available for the Search Criteria ");
+
+		softassert.assertAll();
+		Reporter.log("Test Ended for Take Control By Supplier at:" + currenttime());
+		System.out.println("----------Test Ended----------------");
+	}
+
+	/**
+	 * Test case to verify 'Move To Profile Complete' action on invites of the state 'Incomplete'
+	 * @author Girish.N 
+	 * @throws Exception
+	 */
+	@Test
+	public void moveToProfileCompleteTest() throws Exception {
+		Reporter.log("<---------------------Test Started for moveToProfileCompleteTest: " + currenttime(),true);
+		
+		SoftAssert softAssert = new SoftAssert();
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+		
+		//Search for the supplier profile with status 'Incomplete' and switch the view to Invites
+		dataMap.put("ProfStatus", "Incomplete");
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		waitforPageload(enobjsupplierBasicSearch.BasicSearchTab);
+		dataMap.remove("ProfStatus");
+		
+		enobjsupplierPage.selectChangeView("Invites");
+		
+		String expSupName = "";
+		String expProfStatus="";
+		int count = getCount();
+		boolean flag=false;
+		if(count>0){
+		
+			expSupName=enobjsupplierPage.getColumnText("Supplier Name",0).trim();
+			expProfStatus=enobjsupplierPage.getColumnText("Profile Status",0).trim();
+			
+			Reporter.log("<--------Supplier Selected: "+expSupName,true);
+			Reporter.log("<--------Profile Status: "+expProfStatus,true);
+			dataMap.put("supplierName", expSupName);
+			dataMap.put("profile", "");
+			dataMap.put("MoveToProfileComplete", "");
+			enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+		
+			switchtoFrame(null);
+			waitforPageload(enobjsupplierBasicSearch.BasicSearchTab);
+			
+			click(enobjsupplierBasicSearch.resetbtn());
+			
+			enobjsupplierBasicSearch.search(dataMap);
+			
+			waitforPageload(enobjsupplierBasicSearch.BasicSearchTab);
+			switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+			String actSupName = "";
+			String actProfStatus="";
+			int newCount = getCount();
+			if(newCount>0){
+				actSupName = enobjsupplierPage.getColumnText("Supplier Name",0).trim();
+				actProfStatus=enobjsupplierPage.getColumnText("Profile Status",0).trim();
+			}
+			switchtoFrame(null);
+			
+			softAssert.assertEquals(actSupName, expSupName, "Supplier Name Mismatch");
+			if(actProfStatus.equalsIgnoreCase("Pending")||actProfStatus.equalsIgnoreCase("Approved")||actProfStatus.equalsIgnoreCase("Pending Approval")){
+				flag=true;
+			}
+			softAssert.assertTrue(flag,"Profile status is not changed from Incomplete,Actual:"+actProfStatus);
+			Reporter.log("Expected Supplier Name:" + expSupName+"::Actual Supplier Name:"+actSupName,true);
+			Reporter.log("Supplier Profile Previous Status:" + expProfStatus+"::Supplier Profile Current Status:"+actProfStatus,true);
+			
+		}else{
+			softAssert.assertTrue(flag, "Test data is not available");
+			flag=true;
+		}
+	
+		softAssert.assertTrue(flag,"Please Retest");
+		softAssert.assertAll();
+		Reporter.log("<---------------------Test Ended at:" + currenttime(),true);
+	}
+
+	/**
+	 *SIM-19331 Ability to add and reset primary supplier contact for the buyer
+	 * 
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 * @throws SQLException
+	 * 
+	 * 
+	 */
+	@Test
+	public void ChangePrimary() throws Exception {
+		boolean flag = false;
+		SoftAssert softassert = new SoftAssert();
+		Reporter.log("Test Started for Change Primary Contact at:" + currenttime());
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String>();
+	
+		lavanteUtils.fluentwait(enobjsupplierBasicSearch.searchbtn());
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+
+		Reporter.log("Navigated to Search Page");
+
+		enobjsupplierPage.selectChangeView("Invites");
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+
+			String x="Auto"+lavanteUtils.randomnum();
+			dataMap.put("profile", "");
+			dataMap.put("ChangePrimary", x);
+			dataMap.put("ContactName", x);
+			dataMap.put("ContactPhone", "ANY");
+			dataMap.put("ContactEmail", "ANY");
+			dataMap.put("ContactFax", "ANY");
+			dataMap.put("Save","");
+
+			String sup = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+			
+			lavanteUtils.refreshPage();
+			lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+			
+			String act=enobjsupplierPage.iterateSearchHeaderFindColList("Supplier Name").get(0).getText();
+			Assert.assertEquals(act, sup,"Supplier name match");
+			act=enobjsupplierPage.iterateSearchHeaderFindColList("Supplier Contact").get(0).getText();
+			Reporter.log("Primary contact Changed,Actuals:"+act+",Orginal:"+x);
+			softassert.assertEquals(act, x,"Primary Contact Not Matched");
+			
+			String OrgPrimay=dataMap.get("OrgPrimary");
+			Reporter.log("Org Primary contact Changed,Actuals:"+act+",Orginal:"+OrgPrimay);
+			softassert.assertNotEquals(act, OrgPrimay,"Org Contact Matched");
+			
+			enviewSupplier.clickOnSupplier(sup);
+			lavanteUtils.waitForTime(5000);
+			lavanteUtils.switchtoFrame(null);
+
+			dataMap.put("maintab", "Enterprise");	
+			dataMap.put("subtab", "viewEnterpriseHeaderInformation");
+			enviewSupplier.selectTab(dataMap);
+
+			lavanteUtils.fluentwait(enviewSupplier.takeControlBy());
+			for(int i=0;i<enviewSupplier.ContactsupplierName().size();i++){
+				 act=enviewSupplier.ContactsupplierName().get(i).getText();
+				if(act.equalsIgnoreCase(x)){
+					Reporter.log("Changed Contact, Expected:" + loginemailid + ",Actuals:" + x);
+					softassert.assertEquals(act, x,"Contact , Expected:" + loginemailid + ",Actuals:" + act);
+					
+					 act=enviewSupplier.ContactsupplierPhone().get(i).getText();
+					Reporter.log("Changed Contact Phone, Expected:" + dataMap.get("ContactPhone") + ",Actuals:" + x);
+					softassert.assertEquals(act, dataMap.get("ContactPhone"),"Contact Phone, Expected:" + dataMap.get("ContactPhone") + ",Actuals:" + act);
+					
+					act=enviewSupplier.ContactsupplierFax().get(i).getText();
+					Reporter.log("Changed  ContactFax, Expected:" + dataMap.get("ContactFax") + ",Actuals:" + x);
+					softassert.assertEquals(act, dataMap.get("ContactFax")," ContactFax, Expected:" + dataMap.get("ContactFax") + ",Actuals:" + act);
+
+					act=enviewSupplier.ContactsupplierEmail().get(i).getText();
+					Reporter.log("Changed  ContactEmail, Expected:" + dataMap.get("ContactEmail") + ",Actuals:" + x);
+					softassert.assertEquals(act, dataMap.get("ContactEmail"),"ContactEmail, Expected:" + dataMap.get("ContactEmail") + ",Actuals:" + act);
+				}
+				if(act.equalsIgnoreCase(OrgPrimay)){
+					Reporter.log("Original Primary Contact, Expected:" + loginemailid + ",Actuals:" + x);
+					softassert.assertEquals(act, x,"Original Primary Contact , Expected:" + loginemailid + ",Actuals:" + act);
+				}
+			}
+
+
+			flag = true;
+
+		}
+
+		softassert.assertTrue(flag, "No Data available for the Search Criteria ");
+
+		softassert.assertAll();
+		Reporter.log("Test Ended for Change Primary Contact at:" + currenttime());
+	}
+	
+	/**
+	 * SetupAfter method closes any popup
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@AfterMethod
+	public void SetupAftermethod() {
+		enobjInvitenewSupplier.cancel();
+		enobjhomePage.backtoSearch();
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("EditCancel", "");
+		eneditProfile.formAction(dataMap);
+		lavanteUtils.refreshPage();
+
+	}
+
+	/**
+	 * SetupAfter Class closes any popup and Closes the Browser and Driver
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@AfterClass
+	public void SetupafterClassmethod() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+}

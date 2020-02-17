@@ -1,0 +1,919 @@
+/**
+ * 
+ */
+package com.lavante.sim.customer.pageobjects.Suppliers;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+/**
+ * @author Piramanayagam.S
+ *
+ */
+public class InvitenewSupplier {
+
+	public WebDriver driver;
+	public LavanteUtils lavanteUtils = new LavanteUtils();
+
+	public InvitenewSupplier(WebDriver driver) {
+		this.driver = driver;
+		lavanteUtils.driver = driver;
+	}
+
+	@FindBy(id="enableFields")
+	private WebElement EnableCustomFields;
+
+	public WebElement EnableCustomFields() {
+		return EnableCustomFields;
+	}
+	
+	@FindBy(css="iframe[src*='invite']")
+	private WebElement IFRAMEnewSupp;
+
+	public WebElement IFRAMEnewSupp() {
+		return IFRAMEnewSupp;
+	}
+
+	@FindBy(css="a[href*='action=invite']")
+	private WebElement InviteNewSupplierLinkKbtn;
+
+	public WebElement InviteNewSupplierLinkKbtn() {
+		return InviteNewSupplierLinkKbtn;
+	}
+
+	@FindBy(css="a[href*='action=create']")
+	private WebElement CreateNewSupplierLink;
+
+	public WebElement CreateNewSupplierLink() {
+		return CreateNewSupplierLink;
+	}
+
+	@FindBy(css="iframe[src*='SUPPLIER_GROUP']")
+	private WebElement IFRAMEsuppGrp;
+
+	public WebElement IFRAMEsuppGrp() {
+		return IFRAMEsuppGrp;
+	}
+
+	@FindBy(id="supplierName")
+	private WebElement inviteSuppName;
+
+	public WebElement inviteSuppName() {
+		return inviteSuppName;
+	}
+
+	@FindBy(css="[ng-model*='item.contactName']")
+	private WebElement inviteContactname;
+
+	public WebElement inviteContactname() {
+		return inviteContactname;
+	}
+
+	@FindBy(css="[ng-model*='item.contactName']")
+	private List<WebElement> inviteContactnameList;
+
+	public List<WebElement> inviteContactnameList() {
+		return inviteContactnameList;
+	}
+
+	@FindBy(css="[ng-model*='item.email']")
+	private WebElement inviteContactmail;
+
+	public WebElement inviteContactmail() {
+		return inviteContactmail;
+	}
+	
+	@FindBy(css="[ng-model*='item.email']")
+	private List<WebElement> inviteContactmailList;
+
+	public List<WebElement> inviteContactmailList() {
+		return inviteContactmailList;
+	}
+
+	@FindBy (css="button[ng-click*='contactData']")
+	private WebElement addContactBtn;
+	public WebElement addContactBtn() {
+		return addContactBtn;
+	}
+	
+	@FindBy(css="[id*='invitingOrganization']>ul")
+	private WebElement inviteorg;
+
+	public WebElement inviteorg() {
+		return inviteorg;
+	}
+
+	@FindBy(css = "div[id*='invitingOrganization'] span")
+	private List<WebElement> inviteorgList;
+
+	public List<WebElement> inviteorgList() {
+		return inviteorgList;
+	}
+
+	@FindBy(css="div[id*='userInvitingGroup'] li[class='search-choice'] span")
+	private List<WebElement> getSelectedInviteorgs;
+
+	public List<WebElement> getSelectedInviteorgs() {
+		return getSelectedInviteorgs;
+	}
+
+
+	@FindBy(css="div#supplierGroup_chosen>a>span")
+	private WebElement inviteSuppGrp;
+
+	public WebElement inviteSuppGrp() {
+		return inviteSuppGrp;
+	}
+
+	@FindBy(css = "div#templateLanguageID_chosen>a>span")
+	private WebElement inviteLang;
+
+	public WebElement inviteLang() {
+		return inviteLang;
+	}
+
+	@FindBy(css= "label[for*='primaryContact']")
+	private WebElement PrimaryContactRadioBtn;
+
+	public WebElement PrimaryContactRadioBtn() {
+		return PrimaryContactRadioBtn;
+	}
+
+	@FindBy(id="q")
+	private WebElement suppGrpSearchtxt;
+
+	public WebElement suppGrpSearchtxt() {
+		return suppGrpSearchtxt;
+	}
+
+	@FindBy(css="[id*='results'] div strong")
+	private WebElement selectsuppgrp;
+
+	public WebElement selectsuppgrp() {
+		return selectsuppgrp;
+	}
+
+	@FindBy(id="save")
+	private WebElement suppGrpSavebtn;
+
+	public WebElement suppGrpSavebtn() {
+		return suppGrpSavebtn;
+	}
+
+	@FindBy(id="supplierInviteJustification")
+	private WebElement inviteReason;
+
+	public WebElement inviteReason() {
+		return inviteReason;
+	}
+
+	@FindBy(css="label.dialog_prompt_question>input")
+	private WebElement agreesupp;
+
+	public WebElement agreesupp() {
+		return agreesupp;
+	}
+
+	@FindBy(id="isTakeControlOfsupplierProfile")
+	private WebElement takeControl;
+
+	public WebElement takeControl() {
+		return takeControl;
+	}
+
+	@FindBy(css="td[class='truncate nrmTxt']>input")
+	private WebElement ExistingMailIDChkBox;
+
+	public WebElement ExistingMailIDChkBox() {
+		return ExistingMailIDChkBox;
+	}
+
+	@FindBy(css="[class='subtable_grid wrap'] td[class='nrmTxt truncate']")
+	private WebElement GetExistingMailIDSupplierName;
+
+	public WebElement GetExistingMailIDSupplierName() {
+		return GetExistingMailIDSupplierName;
+	}
+
+	@FindBy(id = "sendinvite")
+	private WebElement suppInvitebtn;
+
+	public WebElement suppInvitebtn() {
+		return suppInvitebtn;
+	}
+
+	@FindBy(id = "saveexit_button")
+	private WebElement saveExitBtn;
+
+	public WebElement saveExitBtn() {
+		return saveExitBtn;
+	}
+
+	@FindBy(css = "button[value='Next_Button']")
+	private WebElement NextBtn;
+
+	public WebElement NextBtn() {
+		return NextBtn;
+	}
+
+	@FindBy(css = "a[href*='Search']")
+	private WebElement cancel;
+
+	public WebElement cancelBtn() {
+		return cancel;
+	}
+
+	// Verify email dialog where existing supplier email id can be selected
+	@FindBy(css = "iframe[src*='verifyEmail']")
+	private List<WebElement> IFRAMEverifyEmail;
+
+	public List<WebElement> IFRAMEverifyEmail() {
+		return IFRAMEverifyEmail;
+	}
+
+	@FindBy(css = "input[name='supplierId']")
+	private List<WebElement> supplierIdRadio;
+
+	public List<WebElement> supplierIdRadio() {
+		return supplierIdRadio;
+	}
+
+	@FindBy(css = "table#supplier_contacts_table tr>td:nth-child(2)")
+	private List<WebElement> supplierInoSuppName;
+
+	public List<WebElement> supplierInoSuppName() {
+		return supplierInoSuppName;
+	}
+
+	@FindBy(css = "button[class*='primary'][name='ok']")
+	private WebElement supplierInfoOkBtn;
+
+	public WebElement supplierInfoOkBtn() {
+		return supplierInfoOkBtn;
+	}
+
+	@FindBy(css = "input[value='Cancel']")
+	private List<WebElement> supplierInfoCancelBtn;
+
+	public List<WebElement> supplierInfoCancelBtn() {
+		return supplierInfoCancelBtn;
+	}
+
+	@FindBy(css="[id*='invite'] a[href*='Search']")
+	private List<WebElement> cancelbtn;
+
+	public List<WebElement> cancelbtn() {
+		return cancelbtn;
+	}
+
+	@FindBy(css = "div[class*='ui-dialog-content']")
+	private WebElement errMsg;
+
+	public WebElement errMsg() {
+		return errMsg;
+	}
+
+	@FindBy(css="div[class*='dialog']>button[class*='primary']")
+	private WebElement OKbtn;
+
+	public WebElement OKbtn() {
+		return OKbtn;
+	}
+
+	@FindBy(css="#dialog p")
+	private WebElement GetMSGEmailExist;
+
+	public WebElement GetMSGEmailExist() {
+		return GetMSGEmailExist;
+	}
+
+	// Address prescreened
+	@FindBy(css = "button[ng-click*='addressData']")
+	private WebElement anotherAddressBtn;
+
+	public WebElement anotherAddressBtn() {
+		return anotherAddressBtn;
+	}
+
+	@FindBy(css = "input[ng-model*='address1']")
+	private List<WebElement> address1Txt;
+
+	public List<WebElement> address1Txt() {
+		return address1Txt;
+	}
+
+	@FindBy(css = "input[ng-model*='address2']")
+	private List<WebElement> address2Txt;
+
+	public List<WebElement> address2Txt() {
+		return address2Txt;
+	}
+
+	@FindBy(css = "input[ng-model*='city']")
+	private List<WebElement> cityTxt;
+
+	public List<WebElement> cityTxt() {
+		return cityTxt;
+	}
+
+	@FindBy(css = "select[ng-model*='country']")
+	private List<WebElement> countryDrpdwn;
+
+	public List<WebElement> countryDrpdwn() {
+		return countryDrpdwn;
+	}
+
+	@FindBy(css = "select[ng-model*='state']")
+	private List<WebElement> stateDrpdwn;
+
+	public List<WebElement> stateDrpdwn() {
+		return stateDrpdwn;
+	}
+
+	@FindBy(css = "button#preScreen")
+	private WebElement preScreenBtn;
+
+	public WebElement preScreenBtn() {
+		return preScreenBtn;
+	}
+
+	@FindBy(css = "iframe[src*='preScreenSupplier']")
+	private WebElement IFRAMEpreScreenSupp;
+
+	public WebElement IFRAMEpreScreenSupp() {
+		return IFRAMEpreScreenSupp;
+	}
+
+	@FindBy(css = "button[name='preScreenOk']")
+	private WebElement preScreenOk;
+
+	public WebElement preScreenOk() {
+		return preScreenOk;
+	}
+	
+	//Reusable Methods
+	
+	
+	///Can be deleted
+	public String[] inviteNwSupp(LinkedHashMap<String, String> dataMap) {
+
+		lavanteUtils.click(InviteNewSupplierLinkKbtn);
+		String[] ns = new String[2];
+		fillInviteDetails(dataMap);
+		formSuppAction(dataMap);
+
+		return ns;
+	}
+
+
+	/**
+	 * Inviting new Supplier 
+	 * 
+	 * @author Vidya.C
+	 */
+	public LinkedHashMap<String, String> inviteNwSupplier(LinkedHashMap<String, String> dataMap) {
+
+		lavanteUtils.click(InviteNewSupplierLinkKbtn);
+		LinkedHashMap<String, String> ns = fillNewInviteDetails(dataMap);
+		ns = formSuppAction(dataMap);
+
+		return ns;
+	}
+
+	/**
+	 * 
+	 * @author Vidya.C
+	 * @param dataMap
+	 * @return
+	 */
+	public LinkedHashMap<String, String> fillNewInviteDetails(LinkedHashMap<String, String> dataMap) {
+
+		
+		String data = "";
+		if (dataMap.containsKey("supplierName")) {
+			inviteSuppName.clear();
+			data = ""	+ lavanteUtils.typeString(dataMap.get("supplierName"),	inviteSuppName);
+			dataMap.put("supplierName", data);
+		}
+		if (dataMap.containsKey("inviteorg")) {
+			String org = dataMap.get("inviteorg");
+			String orgList = "";
+			if (org.contains("#")) {
+
+			} else {
+				lavanteUtils.click(inviteorg);
+				data = lavanteUtils.selectValueFrmdropdown(org);
+				if (inviteorgList.size() > 0) {
+					if (inviteorgList.size() == 1) {
+						orgList = inviteorgList().get(0).getText();
+					} else {
+						for (int i = 0; i < inviteorgList.size(); i++) {
+							if (i == 0) {
+								orgList = inviteorgList().get(i).getText();
+							} else {
+								orgList = inviteorgList().get(i).getText()+ "#" + orgList;
+							}
+
+						}
+					}
+
+				}
+
+				dataMap.put("inviteorg", orgList);
+			}
+		}
+		if (dataMap.containsKey("suppgrp")) {
+
+			String supplierGrp = dataMap.get("suppgrp");
+			lavanteUtils.fluentwait(inviteSuppGrp);
+			lavanteUtils.click(inviteSuppGrp);
+			data = lavanteUtils.selectvalueFrmDpdn(supplierGrp);
+			dataMap.put("suppgrp", data);
+		}
+		if (dataMap.containsKey("reason")) {
+			lavanteUtils.typeinEdit(dataMap.get("reason"), inviteReason);
+		}
+		if (dataMap.containsKey("contactName")) {
+			inviteContactname().clear();
+			data = ""+ lavanteUtils.typeString(dataMap.get("contactName"),inviteContactname);
+			dataMap.put("contactName", data);
+		}
+		if (dataMap.containsKey("email")) {
+
+			String email = dataMap.get("email");
+
+			if (dataMap.get("email").equalsIgnoreCase("ANY")) {
+				email = lavanteUtils.randomnum();
+				email = email + "@" + email + ".com";
+			}
+			dataMap.put("email", email);
+			inviteContactmail.clear();
+			//lavanteUtils.fluentwait(inviteContactmail());
+			lavanteUtils.typeinEdit(email, inviteContactmail);
+			
+		}
+		if (dataMap.containsKey("Address1")) {
+			dataMap=fillAddressDetails(dataMap);
+		}
+
+
+		return dataMap;
+	}
+
+	/**
+	 * 
+	 * @author Vidya.C
+	 * @param dataMap
+	 * @return
+	 */
+	public LinkedHashMap<String, String> fillAddressDetails(LinkedHashMap<String, String> dataMap) {
+		LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String> ();
+		String[] d =null;
+		int s=0;
+		String data = "";
+
+		if(dataMap.containsKey("Address1")) {
+				data = dataMap.get("Address1");
+				if(data.contains("#")){
+					d=data.split("#");
+					s=d.length;
+				} else{
+					s=1;
+				}
+		   }
+		
+		for(int i=0;i<s;i++){
+			
+			String[] a =null;
+			a =null;
+			
+			if(dataMap.containsKey("Address1")) {
+				data = dataMap.get("Address1");
+				if(data.contains("#")) {
+					 a = data.split("#");
+					// data=a[i];
+					 lavanteUtils.typeString(a[i], address1Txt.get(i));
+				} else{				
+					String add1 = ""+lavanteUtils.typeString(data, address1Txt.get(i));
+					LdataMap.put("Address1", add1);
+				}
+			}
+			
+			if(dataMap.containsKey("Address2")) {
+				data = dataMap.get("Address2");
+				if(data.contains("#")) {
+					 a = data.split("#");
+					// data=a[i];
+					 lavanteUtils.typeString(a[i], address2Txt.get(i));
+				} else {
+					String add2 = ""+lavanteUtils.typeString(data, address2Txt.get(i));
+					LdataMap.put("Address2", add2);
+				}
+			}
+			
+			if(dataMap.containsKey("City")) {
+				 data = dataMap.get("City");
+				if(data.contains("#")) {
+					d = data.split("#");
+				//	data=d[i];
+					lavanteUtils.typeString(d[i], cityTxt.get(i));
+				} else {
+					String city = ""+lavanteUtils.typeString(data, cityTxt.get(i));
+					dataMap.put("City", city);
+				}
+			}
+			
+			if(dataMap.containsKey("Country")) {
+				 data = dataMap.get("Country");
+				if(data.contains("#")) {
+					d = data.split("#");
+					data=d[i];
+				} 
+				lavanteUtils.fluentwait(countryDrpdwn.get(i));
+				lavanteUtils.selectbyvisibiletxt(data,countryDrpdwn.get(i));
+				//dataMap.put("City", country);
+			}
+			
+			if(dataMap.containsKey("State")) {
+				 data = dataMap.get("State");
+				if(data.contains("#")) {
+					d = data.split("#");
+					data=d[i];
+				} 
+				lavanteUtils.fluentwait(stateDrpdwn.get(i));
+				lavanteUtils.selectbyvisibiletxt(data,stateDrpdwn.get(i));
+			//	LdataMap.put("City", state);
+			}
+			if(i<(s)-1) {
+				 lavanteUtils.click(anotherAddressBtn);
+			}
+			
+		}
+		
+		return LdataMap;
+		
+	}
+	
+	/**
+	 * 
+	 * @author Vidya.C
+	 * @param dataMap
+	 * @return
+	 */
+	public LinkedHashMap<String, String> addAnotherContact(LinkedHashMap<String, String> dataMap) {
+		LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String> ();
+		String[] d =null;
+		int s=0;
+		String data = "";
+
+		if(dataMap.containsKey("contactName")) {
+				data = dataMap.get("contactName");
+				if(data.contains("#")){
+					d=data.split("#");
+					s=d.length;
+				} else{
+					s=1;
+				}
+		   }
+		
+		for(int i=0;i<s;i++) {
+			String[] a =null;
+			a =null;
+			
+			if(dataMap.containsKey("contactName")) {
+				data = dataMap.get("contactName");
+				if(data.contains("#")) {
+					 a = data.split("#");
+					// data=a[i];
+					 inviteContactnameList.get(i).clear();
+					 String name = lavanteUtils.typeString(a[i], inviteContactnameList.get(i));
+					 dataMap.put("contactName", name+"#");
+				}
+			}
+			if(dataMap.containsKey("email")) {
+				data = dataMap.get("email");
+				if(data.contains("#")) {
+					 a = data.split("#");
+					// data=a[i];
+					 if (dataMap.get("email").equalsIgnoreCase("ANY")) {
+							data = lavanteUtils.randomnum();
+							data = data + "@" + data + ".com";
+						} else {
+							data=a[i];
+						}
+					 
+						dataMap.put("email", data+"#");
+						inviteContactmail().clear();
+						lavanteUtils.fluentwait(inviteContactmail());
+						lavanteUtils.typeinEdit(data, inviteContactmailList().get(i));
+						//dataMap.put("email", email+"#");
+				}
+			}
+		}
+		return LdataMap;
+	}
+	
+	/**
+	 * Can be deleted
+	 */
+	public void fillInviteDetails(LinkedHashMap<String, String> dataMap) {
+
+		String data = "";
+		if (dataMap.containsKey("supplierName")) {
+			data = ""
+					+ lavanteUtils.typeString(dataMap.get("supplierName"),
+							inviteSuppName());
+		}
+
+		if (dataMap.containsKey("inviteorg")) {
+			String org = dataMap.get("inviteorg");
+			if (org.contains("#")) {
+
+			} else {
+				lavanteUtils.click(inviteorg);
+				lavanteUtils.switchtoFrame(null);
+				lavanteUtils.waitForTime(5000);
+				lavanteUtils.selectvalueFrmDpdn(org);
+				if (!lavanteUtils
+						.isElementPresent(lavanteUtils.driver.findElements(By
+								.cssSelector("[id*='invitingOrganization']>ul>li>input")))) {
+
+					lavanteUtils.click(inviteorg);
+					lavanteUtils.switchtoFrame(null);
+					WebElement ele = null;
+					if ("any".equalsIgnoreCase(org)) {
+						ele = lavanteUtils.driver
+								.findElement(By
+										.cssSelector("div[id*='invitingOrganization']>div>ul>li[data-option-array-index='2']"));
+
+					} else {
+						String obj = "//div[@id='invitingOrganization_chosen']/div/ul/li[contains(text(),'"
+								+ org + "')]";
+						ele = lavanteUtils.driver.findElement(By.xpath(obj));
+					}
+					lavanteUtils.click(ele);
+				}
+			}
+
+		}
+		if (dataMap.containsKey("suppgrp")) {
+
+			String supplierGrp = dataMap.get("suppgrp");
+			lavanteUtils.fluentwait(inviteSuppGrp);
+			lavanteUtils.click(inviteSuppGrp);
+			lavanteUtils.selectvalueFrmDpdn(supplierGrp);
+		}
+		if (dataMap.containsKey("invitelang")) {
+
+			/*
+			 * Need to validate String invitingLang = dataMap.get("invitelang");
+			 * lavanteUtils.fluentwait(inviteLang);
+			 * lavanteUtils.click(inviteLang);
+			 * lavanteUtils.selectvalueFrmDpdn(invitingLang);
+			 */
+		}
+		if (dataMap.containsKey("reason")) {
+			lavanteUtils.fluentwait(inviteReason());
+			lavanteUtils.typeinEdit(dataMap.get("reason"), inviteReason());
+		}
+		if (dataMap.containsKey("contactName")) {
+			 lavanteUtils.typeString(dataMap.get("contactName"), inviteContactname());
+		}
+		if (dataMap.containsKey("email")) {
+
+			String email = dataMap.get("email");
+
+			if (dataMap.get("email").equalsIgnoreCase("ANY")) {
+				email = lavanteUtils.randomnum();
+				email = email + "@" + email + ".com";
+			}
+			
+			lavanteUtils.typeinEdit(email, inviteContactmail);
+			
+		}
+
+		// Unknown Can be deleted
+		if (dataMap.containsKey("TakeControl")) {
+			lavanteUtils.fluentwait(takeControl());
+			lavanteUtils.selectChkBox(takeControl(), "YES");
+		}
+		if (dataMap.containsKey("SelectExistingMailId")) {
+			lavanteUtils.fluentwait(ExistingMailIDChkBox());
+			lavanteUtils.click(ExistingMailIDChkBox());
+			data = lavanteUtils.getText(GetExistingMailIDSupplierName());
+
+		}
+
+		//return ns;
+	}
+
+	public String[] fillSuppDetails(LinkedHashMap<String, String> dataMap) {
+
+		String[] ns = new String[3];
+		// lavanteUtils.switchtoFrame(IFRAMESuppInvite());
+		if (dataMap.containsKey("supplierName")) {
+	//		data = ""
+			//		+ lavanteUtils.typeString(dataMap.get("supplierName"),
+			//				inviteSuppName());
+		}
+		if (dataMap.containsKey("contactName")) {
+	//		data = ""
+		//			+ lavanteUtils.typeString(dataMap.get("contactName"),
+			//				inviteContactname());
+		}
+
+		if (dataMap.containsKey("inviteorg")) {
+			String org = dataMap.get("inviteorg");
+			if (org.contains("#")) {
+				/*
+				 * String[] orglist=org.split("#");
+				 * System.out.println(orglist.length); for(int
+				 * i=0;i<orglist.length;i++) {
+				 * System.out.println(orglist[i]+"DA"); String
+				 * loct="option[title='"+orglist[i]+"']";
+				 * driver.findElement(By.cssSelector(loct)).click();
+				 * 
+				 * }
+				 */
+			} else {
+				lavanteUtils.click(inviteorg);
+				lavanteUtils.switchtoFrame(null);
+				// lavanteUtils.typeinEdit(org, inviteorg);
+				lavanteUtils.waitForTime(5000);
+				lavanteUtils.selectvalueFrmDpdn(org);
+				// lavanteUtils.switchtoFrame(IFRAMESuppInvite);
+
+				if (!lavanteUtils
+						.isElementPresent(lavanteUtils.driver.findElements(By
+								.cssSelector("[id*='invitingOrganization']>ul>li>span")))) {
+
+					lavanteUtils.click(inviteorg);
+					lavanteUtils.switchtoFrame(null);
+					WebElement ele = null;
+					if ("any".equalsIgnoreCase(org)) {
+						ele = lavanteUtils.driver
+								.findElement(By
+										.cssSelector("div[id*='invitingOrganization']>div>ul>li[data-option-array-index='2']"));
+
+					} else {
+						String obj = "//div[@id='invitingOrganization_chosen']/div/ul/li[contains(text(),'"
+								+ org + "')]";
+						ele = lavanteUtils.driver.findElement(By.xpath(obj));
+					}
+					lavanteUtils.click(ele);
+					// lavanteUtils.switchtoFrame(IFRAMESuppInvite);
+				}
+			}
+
+		}
+		if (dataMap.containsKey("suppgrp")) {
+
+			String supplierGrp = dataMap.get("suppgrp");
+			// AddSuppGrp(dataMap);
+			lavanteUtils.fluentwait(inviteSuppGrp);
+			lavanteUtils.click(inviteSuppGrp);
+			lavanteUtils.selectvalueFrmDpdn(supplierGrp);
+			// lavanteUtils.switchtoFrame(IFRAMESuppInvite);
+		}
+		if (dataMap.containsKey("email")) {
+
+			String email = dataMap.get("email");
+
+			if (dataMap.get("email").equalsIgnoreCase("ANY")) {
+				email = lavanteUtils.randomnum();
+				email = email + "@" + email + ".com";
+			}
+			lavanteUtils.fluentwait(inviteContactmail());
+			lavanteUtils.typeinEdit(email, inviteContactmail());
+			lavanteUtils.fluentwait(inviteContactmail);
+		}
+
+		if (dataMap.containsKey("reason")) {
+			lavanteUtils.fluentwait(inviteReason());
+			lavanteUtils.typeinEdit(dataMap.get("reason"), inviteReason());
+		}
+		if (dataMap.containsKey("agreesup")) {
+			lavanteUtils.fluentwait(agreesupp());
+			lavanteUtils.click(agreesupp());
+		}
+		if (dataMap.containsKey("TakeControl")) {
+			lavanteUtils.fluentwait(takeControl());
+			lavanteUtils.selectChkBox(takeControl(), "YES");
+		}
+		if (dataMap.containsKey("SelectExistingMailId")) {
+			lavanteUtils.fluentwait(ExistingMailIDChkBox());
+			lavanteUtils.click(ExistingMailIDChkBox());
+		//	data = lavanteUtils.getText(GetExistingMailIDSupplierName());
+
+		}
+
+		return ns;
+	}
+
+	private void AddSuppGrp(LinkedHashMap<String, String> dataMap) {
+		inviteSuppGrp().click();
+
+		lavanteUtils.waitForTime(3000);
+		lavanteUtils.switchtoFrame(null);
+
+		lavanteUtils.fluentwait(driver.findElement(By
+				.cssSelector("iframe[src*='SUPPLIER_GROUP']")));
+		lavanteUtils.switchtoFrame(IFRAMEsuppGrp());
+		// lu.switchtoFrame(driver.findElement(By.cssSelector("iframe[src*='SUPPLIER_GROUP']")));
+		lavanteUtils.fluentwait(suppGrpSearchtxt());
+		// SwitchsuppGrpview(dataMap);
+		if (dataMap.containsKey("suppgrp")) {
+			lavanteUtils.typeinEdit(dataMap.get("suppgrp"), suppGrpSearchtxt());
+		}
+		lavanteUtils.fluentwait(selectsuppgrp());
+		selectsuppgrp().click();
+		// formAction(dataMap);
+		suppGrpSavebtn().click();
+		lavanteUtils.switchtoFrame(null);
+		// lavanteUtils.switchtoFrame(IFRAMESuppInvite());
+
+	}
+
+	public LinkedHashMap<String, String> formSuppAction(LinkedHashMap<String, String> dataMap) {
+		String text;
+		if (dataMap.containsKey("cancel")) {
+			lavanteUtils.click(cancelBtn());
+			lavanteUtils.switchtoFrame(null);
+		}
+		if (dataMap.containsKey("invite")) {
+			lavanteUtils.click(suppInvitebtn);
+			dataMap = selectSupplier(dataMap);
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.click(agreesupp);
+			//Agree msg
+			text = errMsg().getText();
+			dataMap.put("ErrorMsg", text);
+			lavanteUtils.click(OKbtn);
+		}
+		if (dataMap.containsKey("PreScreen")) {
+			lavanteUtils.click(preScreenBtn);
+			lavanteUtils.switchtoFrame(IFRAMEpreScreenSupp);
+			lavanteUtils.click(preScreenOk);
+			lavanteUtils.switchtoFrame(null);
+		}
+		if (dataMap.containsKey("SaveExit")) {
+			lavanteUtils.click(saveExitBtn);
+			dataMap = selectSupplier(dataMap);
+			lavanteUtils.switchtoFrame(null);
+			/*text = errMsg().getText();
+			dataMap.put("ErrorMsg", text);*/
+			/*lavanteUtils.fluentwait(OKbtn);
+			lavanteUtils.click(OKbtn());*/
+		}
+
+		if (dataMap.containsKey("Next")) {
+			lavanteUtils.click(NextBtn());
+			lavanteUtils.waitForTime(4000);
+		}
+
+		return dataMap;
+
+	}
+
+	public LinkedHashMap<String, String> selectSupplier(LinkedHashMap<String, String> dataMap) {
+		if (dataMap.containsKey("DuplicateEmail")) {
+			lavanteUtils.waitForTime(4000);
+			if (IFRAMEverifyEmail.size() > 0) {
+				lavanteUtils.switchtoFrame(IFRAMEverifyEmail.get(0));
+				int size = supplierIdRadio.size();
+				if (dataMap.get("DuplicateEmail").contains("None")) {
+					// None of the Above option always at the end
+					lavanteUtils.clickJavaScriptNoWait(supplierIdRadio.get(size - 1));
+				} else {
+					for (int i = 0; i < size; i++) {
+						if (dataMap.get("DuplicateEmail").contains(supplierInoSuppName.get(i).getText()))
+
+							lavanteUtils.clickJavaScriptNoWait(supplierIdRadio.get(i));
+							break;
+					}
+				}
+				lavanteUtils.click(supplierInfoOkBtn);
+			}
+		}
+		return dataMap;
+	}
+
+	/**
+	 * Cancel Button in The Invite Page
+	 */
+	public void cancel() {
+		for (int i = 0; i < cancelbtn.size(); i++) {
+			lavanteUtils.click(cancelbtn.get(0));
+		}
+
+	}
+
+}

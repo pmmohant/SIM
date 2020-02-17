@@ -1,0 +1,62 @@
+package com.lavante.configurator.TestScripts;
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import com.lavante.configurator.Common.Util.LavanteUtils;
+import com.lavante.configurator.pageobjects.pageInitiator;
+
+/**
+ * @author Piramanayagam
+ *
+ */
+public class ConfigSanity extends pageInitiator {
+
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void preCondition(@Optional(LavanteUtils.Platform) String platform,
+			@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String version)
+			throws Exception {
+
+		launchAppThroughPOM(platform, browser, version);
+		initiate();
+		openAPP();
+
+		loginPage.login();
+
+		waitForTime(3000);
+
+		homePage.SelectBuyer("ANY");
+
+		waitForTime(3000);
+
+	}
+
+
+	@Test
+	public void ConfigSanityTest() throws Exception{
+		fluentwait(homePage.FeatureMenulnk());
+		click(homePage.FeatureMenulnk());
+		fluentwait(homePage.SupplierMenu());
+		click(homePage.SupplierMenu());
+		System.out.println(homePage.SupplierMenu().getText());
+	}
+	
+	/**
+	 * After Class Logout and Quit Method 
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	
+	@AfterClass
+	  public void QuitBrowser() {
+		  homePage.logout();
+		  quitBrowser();
+	  }
+	
+	
+}

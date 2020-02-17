@@ -1,0 +1,267 @@
+#Page Tiles
+supplierHomePageTitle=Lavante SIM - Home
+supplierProfilePageTitle=Lavante SIM - Profile
+
+#ID
+clientAvgNo=gpstrategiesCustomField6
+legalIdField=legalIdentifier_1
+legalBtnYes=VAT_yes
+legalBtnNo=VAT_no
+supplierEmail=supplierEmail
+profilePercentage=profile_percentage
+etfCheckBox=etf
+checkPaymentDesc=checkPaymentDesc
+headQuarterPhone=headQuarterPhone
+doingBusinessAs=doingBusinessAs
+servicesMaterialSummary=servicesMaterialSummary
+headquartersInfo=headquarters_information
+legalIformation=legal_id_information
+insuranceInformation=insurance_information
+paymentInfo=payment_discount_details
+paymentInfoType=preferredPaymentType_chosen
+contactDetails=contact_details
+erpversion=erpversion
+referenceName=referenceName
+jobTitle=jobTitle
+code=code
+description=description
+ePasswordField=password
+eSignatureCheckBox=isESigatureComplete
+address1EditField=address1
+cityEditField=city
+zipCode=zipCode
+leavePopupBtn=leave
+btnSaveExit=saveexit_button
+businesssalescontact=primarySupplierContactMap_chosen
+visa=visa
+editproductsServicesPerformed=productsServicesPerformed
+
+#LinksNames
+profile=Profile
+home=Home
+
+#XPath
+#Profile Home Page properties
+tabListOfProfile=//a[contains(@class,'evt-trail-evt trail-item')]/span
+toDoListCompleteProfile=//table[@class='data_table table_grid zebra']/tbody/tr/td[1]
+toDoListInCompleteProfile=//table[@class='data_table table_grid zebra']/tbody/tr/td[1]/a
+conwayLogo=//*[@class='customer_logo']/img[contains(@src,'conway_logo')]
+omnicareLogo=//*[@class='customer_logo']/img[contains(@src,'Omni_Logo')]
+gpStrategiesLogo=//*[@class='customer_logo']/img[contains(@src,'GPstrategies_Logo')]
+profileSummary=//textarea[@id='productsServicesPerformedDescription']
+#Properties for add profile complete
+goodsRadioBtn=omnicareCustomField6
+agreeCheckBox=omnicareCustomField7
+nameFieldCT=omnicareCustomField8
+titleField=omnicareCustomField9
+paymentTermDrpBtn=//div[@id='omnicareCustomField5_chosen']/a
+paymentTermDrpList=
+#//div[@id='omnicareCustomField5_chosen']/div/ul/li
+addressReqLabel=//label[contains(@class,'field_required')][contains(@for,'headquarterAddressId')]
+phoneReqLabel=//label[contains(@class,'field_required')][contains(@for,'headQuarterPhone')]
+companyEmailLabel=//label[contains(@class,'field_required')][contains(@for,'supplierEmail')]
+remitToLabel=//label[contains(@class,'field_required')][contains(@for,'remitToAddressId')]
+orderFromLabel=//label[contains(@class,'field_required')][contains(@for,'orderFromAddressId')]
+legalNoticeLabel=//label[contains(@class,'field_required')][contains(@for,'legalNoticesAddressId')]
+paymentContractRadioBtnYesLabel=//label[contains(@class,'field_required')][contains(@for,'omnicareCustomField3')]
+paymentContractBrowseBtnLabel=//label[contains(@class,'required_field')][contains(@for,'omnicareCustomField4')]
+#Mandate fields of Contact Terms
+dateFieldLabel=//label[contains(@class,'required_field')][contains(@for,'omnicareCustomField10')]
+titleFieldLabel=//label[contains(@class,'required_field')][contains(@for,'omnicareCustomField9')]
+nameFieldLabel=//label[contains(@class,'required_field')][contains(@for,'omnicareCustomField8')]
+agreeTermsFieldLabel=//label[contains(@class,'required_field')][contains(@for,'omnicareCustomField7')]
+productServicesLabel=//label[contains(@class,'required_field')][contains(@for,'omnicareCustomField6')]
+paymentTermsDrpLabel=//label[contains(@class,'required_field')][contains(@for,'omnicareCustomField5')]
+completenessPopOkBtn=//button[@title='Ok'][@name='Submit'][@class='button button_blue cancel']
+
+
+
+accountReceivableContactLabel=//label[contains(@class,'field_required')][contains(@for,'accountReceivableContactMap')]
+productServiceTypeLabel=//label[contains(@class,'field_required')][contains(@for,'productServiceType')]
+conflictofInterestLabel=//label[contains(@class,'no_lineheight field_required')][contains(@for,'isConflictofInterest')]
+eSigatureCompleteLabel=//label[contains(@class,'no_lineheight field_required')][contains(@for,'isESigatureComplete')]
+businessStructureLabel=//label[contains(@class,'field_required')][contains(@for,'businessStructure')]
+taxIdentificationLabel=//label[contains(@class,'field_required')][contains(@for,'tax_identification_number')]
+majorityUSOwnershipLabel=//label[contains(@class,'field_required')][contains(@for,'isMajorityUSOwnership')]
+
+
+paymentContractBtnYes=//input[1][@id='omnicareCustomField3']
+paymentContractBtnNo=//input[2][@id='omnicareCustomField3']
+paymentContractBrowseBtn=//input[@id='omnicareCustomField4']
+
+businessStrDrpBtn=//div[@id='businessStructure_chosen']/a
+businessStrDrpList=businessStructure_chosen
+#//div[@id='businessStructure_chosen']/div/ul/li
+
+aRecContactDrpBtn=//div[@id='accountReceivableContactMap_chosen']/a
+aRecContactDrpList=//div[@id='accountReceivableContactMap_chosen']/div/ul/li
+
+productServiceTypeDrpBtn=//div[@id='productServiceType_chosen']/a
+productServiceTypeDrpList=productServiceType_chosen
+#productServiceType
+#//div[@id='productServiceType_chosen']/div/ul/li
+sigInterestRadioBtnYes=//input[@id='isConflictofInterest'][@value='true']
+sigInterestRadioBtnNo=//input[@id='isConflictofInterest'][@value='false']
+
+majorityRadioBtnYes=//input[@id='isMajorityUSOwnership'][@value='true']
+majorityRadioBtnNo=//input[@id='isMajorityUSOwnership'][@value='false']
+
+#New EFT Properties
+addNewEFTBtn=//table[@id='etf_table']/tbody/tr/td/div/a[@class='button_gold std_margin open_popup']
+eFTType=//input[@value='ACH'][@name='eftSubType']
+currency=//div[@id='paymentEFTCurrencyID_chosen']/a
+eFTcurrencyDrpList=//div[@id='paymentEFTCurrencyID_chosen']/div/ul/li
+bankCountry=//div[@id='countryId_chosen']/a
+bankCountryDrpList=//div[@id='countryId_chosen']/div/ul/li
+
+remittanceEmail=emailAddress1
+aBANumber=routingNumber
+accountNumber=accountNumber
+payeeName=payeeName
+bankName=bankName
+branchAddress=branchAddress
+city=city
+postalCode=zip
+checkBox=isDirectDepositAuthorized
+swiftCode=swiftCode
+
+stateId=//div[@id='stateId_chosen']/a
+stateIdDrpList=//div[@id='stateId_chosen']/div/ul/li
+saveBtn	=//button[@class='button button_green'][@type='submit']
+cancelBtn=//button[@class='button button_red cancel'][@title='Cancel']
+profileCompletenessBtn=//div[@class='complete_profile_component']/input[@class='button_blue'][@value='Complete Company Profile']
+customerNameDropDownField=//div[@id='customer_chosen']/a[contains(@class,'chosen-single')]
+customerNameDropDownList=//div[@id='customer_chosen']/div[contains(@class,'chosen-drop')]/ul/li
+w9SaveBtn=//input[@type='submit'][@value='Save']
+w9CancelBtn=//input[@class='button button_red cancel'][@title='Cancel']
+w9browseFileBtn=//*[@id='multipartFile']
+w9UploadBtn=//a[@class='button_gold std_margin open_popup'][@name='Add_New']
+legalIDInfoHeader=//*[@id='legal_id_information']
+//w9UploadBtn=//div[@class='toggle_content']/div/a[@class='button button_blue ajax']
+toDoReqFieldHeaderList=//div[@class='trail-container horizontal-tab']/ul/li/a
+currencyDrp=//div[@id='currency_chosen']/a
+currencyDrpList=//div[@id='currency_chosen']/div/ul/li
+paymentTypeDrp=//div[@id='preferredPaymentType_chosen']/a
+paymentTypeDrpList=preferredPaymentType_chosen
+#//div[@id='preferredPaymentType_chosen']/div/ul/li
+toDoReqFieldInputDataList=//div[@class='trail-container horizontal-tab']/ul/li
+toDoReqFieldList=//div[@class='trail-container horizontal-tab']/ul/li/ul/li
+doingBusinessAs=//*[@id='doingBusinessAs']
+comProfileMenuTab=//div[@class='trail-container horizontal-tab']/a[1]
+cutProfileMenuTab=//div[@class='trail-container horizontal-tab']/a[5]
+legalIDMenuTab=//div[@class='trail-container horizontal-tab']/a[contains(@title,'Legal ID')]
+certificationMenuTab=//div[@class='trail-container horizontal-tab']/a[contains(@title,'Certification')]
+paymentInfoMenuTab=//div[@class='trail-container horizontal-tab']/a[contains(@title,'Payment Info')]
+
+
+addNewERPBtn=//div[@class='align_right']/a[@title='Add New ERP Information']
+eRPSystemNameField=.//*[@id='erp_chosen']/a/span
+eRPSystemNameDrpDwn=//div[@class='chosen-drop']/ul/li
+cusRefAddNewBtn=//div[@class='align_right']/a[@title='Add New Customer References']
+addNewTableRowUNSPSC=table_smClassificationUNSPSC
+addNewTableRowSIC=table_smClassificationSIC
+addNewTableRowNAICS=table_smClassificationNAICS
+addNewYellowBtnPrefix=//div[@class='align_right']/a[2][@title='
+addNewYellowBtnSuffix=']
+addNewBtnSave=//input[@class='button_green'][@type='submit']
+addNewBtnPopupHeader=//div/span[contains(@id,'ui-id')][@class='ui-dialog-title']
+profileTabArrowVisibleBtn=//table[@id='profile_tab']/tbody/tr/td[3]/button[@class='trail-next']
+profileTabArrowBtn=//table[@id='profile_tab']/tbody/tr/td[3]/button[@class='trail-next'][@disabled='']
+profileTabTableRow=//table[@id='profile_tab']
+supplierPageTable=//table[@class='table_ab']
+businessContactLabel=//*[@id='primary_contact']
+
+eSignaturePopUpHeader=//div/span[contains(@id,'ui-id')][contains(@class,'ui-dialog-title')]
+countryRegNo=//table[@class='data_table table_outer_grid']/tbody/tr[2]/td[2]
+provinceName=//table[@class='data_table table_outer_grid']/tbody/tr[3]/td[2]
+businessName=//table[@class='data_table table_outer_grid']/tbody/tr[4]/td[2]
+gstNo=//table[@class='data_table table_outer_grid']/tbody/tr[6]/td[2]
+qstNo=//table[@class='data_table table_outer_grid']/tbody/tr[7]/td[2]
+profileContactDetails=//div[4]/table[@class='data_table table_grid zebra']/tbody/tr/td
+profileContactHeaders=//div[4]/table[@class='data_table table_grid zebra']/thead/tr/th
+profileSubMenus=//div[@id='dialog']/div[@id='sub-navigation']/a
+profileTabledata=//form[@id='command']
+profileTab5=//a[@href='supplierRelationshipInfo.lvp']
+addressDrpDwn=.//*[@id='addressId_chosen']/a
+
+addressDrpDwnList=//*[@id='addressId_chosen']/div/ul/li
+
+addressDrpDwnEditFld=//div[@id='addressId_chosen']/div/div/input[@type='text']
+departmentDrpDwnEditFld=//div[@class='chosen-container chosen-container-single chosen-with-drop chosen-container-active']/div/div/input[@type='text']
+departmentDrpDwn=.//*[@id='command']/table/tbody/tr[3]/td[2]/div[2]/a
+countryDrpDwn=.//*[@id='countryId_chosen']/a
+countryDrpDwnList=//div[contains(@id,'countryId_chosen')]/div[1]/ul/li
+stateDrpDwn=.//*[@id='stateId_chosen']/a
+stateDrpDwnList=//div[contains(@id,'stateId_chosen')]/div/ul/li
+btnSaveAddress=[class='button_green'][type='submit']
+addNewDrpDwnBtnPrefix=//div[@id='
+addNewDrpDwnBtnSuffix=']/a
+addNewDrpDwnListSuffix=']/div[1]/ul/li
+btnCancel=//button[contains(@class,'button')][contains(@title,'Cancel')]
+errorMsg=//span[@class='error']
+toDoListFrame=//iframe[@class='iframe_page'][@name='supplierProfileStatusInfo']
+activatePopupFrame=.//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+btnOk=//button[contains(@class,'button_green')][contains(@role,'button')]
+successMsg=//div[contains(@class,'dialog undefined ui-dialog-content ui-widget-content')]
+supplierName=.//*[@id='supplierName']
+supplierWelcomeName=//td[@id='header_middle']/strong[2]
+supplierManuTabList=//table[@id='profile_tab']/tbody/tr/td[2]/div/div/a
+profileMenuTab=//table[@id='profile_tab']/tbody/tr/td[2]/div/div/a[1]
+supplierNameField=//input[@id='supplierName'][@type='text']
+profileDataSaveBtn=//button[@id='save_button'][@type='submit']
+
+editProfileTabTitlesList=//a[contains(@class,'evt-trail-evt trail-item')]/div/h2[contains(@class,'wizard_tab_title')]
+profileDataSavedSuccessMsg=//div[contains(@class,'dialog undefined ui-dialog-content ui-widget-content')]
+profileMsgPopupOkBtn=//button[(@class='button_green')][contains(@role,'button')]
+profileTabNamesList=//table[@id='profile_tab']/tbody/tr/td/div/div[@class='trail-container']/a/div/h2
+profilePageMandateFieldList=//form[@id='command']/table/tbody/tr/td/label[@class='field_required']
+profilePageTabIndexNo=//table[@id='profile_tab']/tbody/tr/td/div/div[@class='trail-container']/a/span
+profilePageTabBtnPrefix=//table[@id='profile_tab']/tbody/tr/td/div/div[@class='trail-container']/a[
+profilePageTabBtnSuffix=]
+profileBtnPrevious=//button[@class='button_blue'][@title='Previous']
+profileBtnNext=//button[@class='button_blue'][@title='Next']
+profileBtnSave=//button[@id='save_button'][@title='Save']
+profileToDoListlegalIDBtn=//div[@class='trail-container horizontal-tab']/a[2][contains(@title,'Legal ID')]
+profileMenuTabBtnRowList=//div[@class='trail-container']/a
+profileSubMenuTabBtnRowList=//table[@id='profile_tab']/tbody/tr/td/div/div[@class='trail-container']/a/div/p
+
+lasttab=//input[@id='productsServicesPerformedDescription']
+businesscontactdropdwn=//div[@id='primarySupplierContactMap_chosen']/div/ul/li
+name=//input[@id='contactName']
+email=//input[@id='email']
+
+#CSS
+eSignatureOkBtn=button[class='button button_green'][type='submit']
+
+#Exp Text Messages
+profileSavedPopupsMsg=Profile is successfully saved
+eSignatureHeader=Electronic Signature
+
+#Page Header
+uNSPSCPageHeader=Add UNSPSC Information
+sicPageHeader=Add SIC Information
+nAICSPageHeader=Add NAICS Information
+#Property Names
+tabNameProfile=Profile
+tabNameLegalID=Legal ID
+subTabNameYourCompany=(Your Company)
+subTabNameCustomerSpecific=(Customer Specific)
+subTabNameEnterpriseOwned=(Enterprise Owned)
+
+#common
+rowNumber=//div[contains(@id,'ui-datepicker-div')]/table/tbody/tr[
+rowClose=]/td
+columnNumber=[
+columnClose=]/a
+dateRowCount=//div[contains(@id,'ui-datepicker-div')]/table/tbody/tr
+#Date Field (Common)
+monthDropDownOption=//div[contains(@id,'ui-datepicker-div')]/div[1]/div[1]/select[1]/option
+yearDropDownOption=//div[contains(@id,'ui-datepicker-div')]/div[1]/div[1]/select[2]/option
+dateField=//*[@id='omnicareCustomField10']
+
+#File Properties
+upLoadW9File=.\\src\\test\\resources\\config\\W-9.pdf
+
+#Expected Text
+toDoListInComPrfExpMsg=Please complete your profile
+toDoListComPrfExpMsg=You have no mandatory unfinished task, but update your profile at any time it changes

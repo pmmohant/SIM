@@ -1,0 +1,135 @@
+/**
+ * Company			: 	LAVANTE
+ * Project Name	   	:	Lavante SIM Application
+ * Automation		: 	Selenium Automation
+ * Author			: 	MadhuMurthy
+ */
+
+package com.lavante.sim.customer.TestScripts.CustomerSupplierProfileView;
+
+import java.util.List;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import com.lavante.sim.Common.Util.ConfigPathFile;
+import com.lavante.sim.Common.Util.GetExcelFile;
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.Common.Util.setTestData;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class CustSupViewProfileTC0004 extends PageInitiator {
+
+	List<setTestData> objReqFieldListsTestData = null;
+	List<setTestData> objViewProfileMandateFieldTestData = null;
+	List<String> rtnExpCusMandateFieldsLabel=null;
+	List<String> rtnSupMandateFieldsLabel=null;
+	List<String>  datBaseResults = null;
+	
+	GetExcelFile ge=new GetExcelFile();
+	
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+		
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		
+		openAPP();
+		
+		objReqFieldListsTestData = ge.getData(ConfigPathFile.TestDataForCustSupViewProfile.getConstantValue(),ConfigPathFile.RequiredFieldLists.getConstantValue());
+		objViewProfileMandateFieldTestData = ge.getData(ConfigPathFile.TestDataForCustSupViewProfile.getConstantValue(),"MandatoryFieldsOnProfile");
+		datBaseResults = objCustSupViewProfilePage.fetchMandatroyFields(objViewProfileMandateFieldTestData.get(0).getKeyValue().toString());
+	
+	}
+
+	/**
+	 * Method Name : VerifyMandateFields 
+	 * Purpose: which calls the respective method to validate Mandate Field Lists.
+	 * @param: None
+	 * @return None
+	 */
+
+	@Test(priority=24)
+	public void verifyMandateFields(){
+		Reporter.log("CustSupViewProfileTC0004 Started: ");
+		try {
+			
+			for (int i = 0; i < objReqFieldListsTestData.size(); i++) {
+				if (objLoginPage.userLogin(objReqFieldListsTestData.get(i)) == true) {
+					if(i==0){
+						rtnExpCusMandateFieldsLabel=objCustSupViewProfilePage.validateCompletedRequiredFieldLists(objReqFieldListsTestData.get(i).getSupplierName().trim().toString(),"viewprofile");
+						objLoginPage.logout();	
+					}else if(i==1){
+						rtnSupMandateFieldsLabel=objCustSupViewProfilePage.validateSuppliersRequiredFieldList(objReqFieldListsTestData.get(i).getSupplierName().trim().toString(),"viewprofile",objReqFieldListsTestData.get(i).getCustomerName().trim().toString());
+					}
+				}
+			}
+			objLoginPage.logout();
+
+			// Method validate the supplier's  mandate fields label from supplier login with Database
+			Reporter.log("\n");
+			Reporter.log("Mandate field label names mapping with Database from Customer view profile initiated");
+			Reporter.log("\n");
+			try {
+				for(int k = 0; k < datBaseResults.size(); k++){
+				
+					for (int j = 0; j < rtnSupMandateFieldsLabel.size(); j++) {	
+						System.out.println(rtnSupMandateFieldsLabel.get(j)+"Sup Mandate DB: "+datBaseResults.get(k));
+						if (rtnSupMandateFieldsLabel.get(j).trim().toString().contains(datBaseResults.get(k).trim().toString())) {
+							Reporter.log(" Mandate Field from Data base : | "+ (datBaseResults.get(k).trim().toString()	+ " | is matched with Mandate Field from view profile's page  : | " + rtnSupMandateFieldsLabel.get(j).toString()+" |"));
+							break;
+						} else {
+							if (j + 1 == rtnSupMandateFieldsLabel.size()) {
+								Reporter.log("Expected and actual mandate field labels are mismatched, expected label name from Database is "+ datBaseResults.get(k).trim().toString()+ " but actual is " + rtnSupMandateFieldsLabel.get(j).toString());
+							}
+						}
+					}
+				}
+
+			} catch (Exception e) {
+			//	log.severe("Exception in the method due to : "+ e.getMessage());
+			}
+			// Method validate the supplier's  mandate fields label from customer login  with Database
+			Reporter.log("\n");
+			Reporter.log("Mandate field label names mapping with Database from Customer view profile initiated");
+			Reporter.log("\n");
+			try {
+				for(int k = 0; k < datBaseResults.size(); k++){
+					for (int j = 0; j < rtnExpCusMandateFieldsLabel.size(); j++) {
+						System.out.println(rtnExpCusMandateFieldsLabel.get(j)+"Sup Mandate DB: "+datBaseResults.get(k));
+						if (rtnExpCusMandateFieldsLabel.get(j).trim().toString().contains(datBaseResults.get(k).trim().toString())) {
+							Reporter.log(" Mandate Field from Data base : | "+ (datBaseResults.get(k).trim().toString()	+ " | is matched with Mandate Field from view profile's page  : | " + rtnExpCusMandateFieldsLabel.get(j).toString()+" |"));
+							break;
+						} else {
+							if (j + 1 == rtnExpCusMandateFieldsLabel.size()) {
+								Reporter.log("Expected and actual mandate field labels are mismatched, expected label name from Database is "+ datBaseResults.get(k).trim().toString()+ " but actual is " + rtnExpCusMandateFieldsLabel.get(j).toString());
+							}
+						}
+					}
+				}
+
+			} catch (Exception e) {
+			//	log.severe("Exception in the method due to : "+ e.getMessage());
+			}
+		}catch (Exception e) {
+		//	log.severe("Exception in method VerifyMandateFields: "+ e.getMessage());
+			Assert.assertTrue(false,"Exception in method VerifyMandateFields: "+ e.getMessage());
+		}
+		Reporter.log("Execution of Test Case CustSupViewProfileTC0004 is completed: ");
+	}
+
+	@AfterClass
+	public void closer(){
+	
+		quitBrowser();
+	}
+
+		
+}

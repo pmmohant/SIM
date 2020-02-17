@@ -1,0 +1,378 @@
+package com.lavante.configurator.TestScripts;
+
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.configurator.Common.Util.LavanteUtils;
+import com.lavante.configurator.pageobjects.pageInitiator;
+
+/**
+ * @author Nandini
+ *
+ */
+public class ConfigSanitys extends pageInitiator {
+
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void preCondition(@Optional(LavanteUtils.Platform) String platform,
+			@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String version)
+			throws Exception {
+
+		launchAppThroughPOM(platform, browser, version);
+		initiate();
+		openAPP();
+
+		loginPage.login();
+
+		waitForTime(3000);
+
+		homePage.SelectBuyer("ANY");
+
+		waitForTime(3000);
+
+	}
+
+	
+	/**
+	 * checking header names and buttons in User page 
+	 * 
+	 * @author Nandini.R
+	 */
+	@Test
+	public void ConfigSanityUserpage() throws Exception{
+		Reporter.log("Test Started at:"+currenttime());	
+		SoftAssert softassert=new SoftAssert();
+		fluentwait(homePage.userMenu());
+		click(homePage.userMenu());
+		fluentwait(sanityTest.user_deletebttn());
+		
+		boolean flag= isElementDisplayed(sanityTest.user_deletebttn());
+		Reporter.log("Delete button in User page:"+flag);
+		softassert.assertTrue(flag,"Delete button in User page:"+flag);
+
+		flag=isElementDisplayed(sanityTest.user_addbttn());
+		Reporter.log("Add button present in User page:"+flag);
+		softassert.assertTrue(flag,"Add button present in User page:"+flag);
+		
+		String actualheader1=sanityTest.user_headername().getText();
+		String expheader1="Name";
+		Reporter.log("Header name,Expected:"+expheader1+"Actual:"+actualheader1);
+		
+		softassert.assertEquals(actualheader1,expheader1,"Header Name not matched,Expected:"+expheader1+",Actuals:"+actualheader1);
+		
+		String actualheader2=sanityTest.user_headeruser().getText();
+		String expheader2="User Role";
+		Reporter.log("Header name,Expected:"+expheader2+"Actual:"+actualheader2);
+		softassert.assertEquals(actualheader2, expheader2,"Header Name not matched,Expected:"+expheader2+",Actuals:"+actualheader2);
+		
+		String actualheader3=sanityTest.user_headeractive().getText();
+		String expheader3="Active";
+		Reporter.log("Header name,Expected:"+expheader3+"Actual:"+actualheader3);
+		softassert.assertEquals(actualheader3, expheader3,"Header Name not matched,Expected:"+expheader3+",Actuals:"+actualheader3);
+		
+		String actualheader4=sanityTest.user_headeraccountcreated().getText();
+		String expheader4="Account Created";
+		Reporter.log("Header name,Expected:"+expheader4+"Actual:"+actualheader4);
+		softassert.assertEquals(actualheader4, expheader4,"Header Name not matched,Expected:"+expheader4+",Actuals:"+actualheader4);
+		
+		String actualheader5=sanityTest.user_headeremail().getText();
+		
+		String expheader5="Email";
+		Reporter.log("Header name,Expected:"+expheader5+"Actual:"+actualheader5);
+		softassert.assertEquals(actualheader5, expheader5,"Header Name not matched,Expected:"+expheader5+",Actuals:"+actualheader5);
+		
+		String actualheader6=sanityTest.user_headerphone().getText();
+		String expheader6="Phone";
+		Reporter.log("Header name,Expected:"+expheader6+"Actual:"+actualheader6);
+		softassert.assertEquals(actualheader6, expheader6,"Header Name not matched,Expected:"+expheader6+",Actuals:"+actualheader6);
+		
+		String actualheader7=sanityTest.user_headerfax().getText();
+		String expheader7="Fax";
+		Reporter.log("Header name,Expected:"+expheader7+"Actual:"+actualheader7);
+		softassert.assertEquals(actualheader7, expheader7,"Header Name not matched,Expected:"+expheader7+",Actuals:"+actualheader7);
+		
+		String actualheader8=sanityTest.user_headeractions().getText();
+		String expheader8="Actions";
+		Reporter.log("Header name,Expected:"+expheader8+"Actual:"+actualheader8);
+		softassert.assertEquals(actualheader8, expheader8,"Header Name not matched,Expected:"+expheader8+",Actuals:"+actualheader8);
+		
+		String actualheader9=sanityTest.user_username().getText();
+		String expheader9="User Name";
+		Reporter.log("Header name,Expected:"+expheader9+"Actual:"+actualheader9);
+		softassert.assertEquals(actualheader8, expheader8,"Header Name not matched,Expected:"+expheader9+",Actuals:"+actualheader9);
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended at:"+currenttime());
+	}
+	
+	/**
+	 * checking header names and buttons in outreach set up
+	 * 
+	 * @author Nandini.R
+	 */
+		@Test
+		public void ConfigSanityoutreachsetup() throws Exception{
+			
+			SoftAssert softassert=new SoftAssert();
+			
+			Reporter.log("Test Started for OutReach at:"+currenttime());
+			
+			fluentwait(homePage.outreachMenu());
+			click(homePage.outreachMenu());
+			fluentwait(homePage.outreachsetupMenu());
+			click(homePage.outreachsetupMenu());
+			
+			
+			fluentwait(sanityTest.headeroutreachseq());
+			
+			boolean flag= isElementDisplayed(sanityTest.outset_deletebttn());
+			Reporter.log("Delete button in User page:"+flag);
+			softassert.assertTrue(flag,"Delete button in User page:"+flag);
+			
+			flag=isElementDisplayed(sanityTest.outset_addbttn());
+			Reporter.log("Add button in User page:"+flag);
+			softassert.assertTrue(flag,"Add button in User page:"+flag);
+			
+			String actualheader=sanityTest.headeroutreachseq().getText();
+			String expHeader="Outreach Sequence";
+			Reporter.log("Header Name,Expected:"+expHeader+",Actuals:"+actualheader);
+			softassert.assertEquals(actualheader,expHeader,"Header Name not matched,Expected:"+expHeader+",Actuals:"+actualheader);
+			
+			actualheader=sanityTest.headerouttype().getText();
+			expHeader="Outreach Type";
+			Reporter.log("Header Name,Expected:"+expHeader+",Actuals:"+actualheader);
+			softassert.assertEquals(actualheader, expHeader,"Header Name not matched,Expected:"+expHeader+",Actuals:"+actualheader);
+			
+			String actualheader3=sanityTest.headerwaitdays().getText();
+			String expheader3="Wait Days";
+			Reporter.log("Header Name,Expected:"+expheader3+",Actuals:"+actualheader3);
+			softassert.assertEquals(actualheader3, expheader3,"Header Name not matched,Expected:"+expheader3+",Actuals:"+actualheader3);
+			
+			String actualheader4=sanityTest.headercreaby().getText();
+			String expheader4="Created By";
+			Reporter.log("Header Name,Expected:"+expheader4+",Actuals:"+actualheader4);
+			softassert.assertEquals(actualheader4, expheader4,"Header Name not matched,Expected:"+expheader4+",Actuals:"+actualheader4);
+			
+			String actualheader5=sanityTest.headercreaon().getText();
+			String expheader5="Created On";
+			Reporter.log("Header Name,Expected:"+expheader5+",Actuals:"+actualheader5);
+			softassert.assertEquals(actualheader5, expheader5,"Header Name not matched,Expected:"+expheader5+",Actuals:"+actualheader5);
+			
+			String actualheader6=sanityTest.headeractions().getText();
+			String expheader6="Actions";
+			Reporter.log("Header Name,Expected:"+expheader6+",Actuals:"+actualheader6);
+			softassert.assertEquals(actualheader6, expheader6,"Header Name not matched,Expected:"+expheader6+",Actuals:"+actualheader6);
+			
+			softassert.assertAll();
+			Reporter.log("Test Ended at:"+currenttime());
+		}
+
+	/**
+	 * checking header names and buttons in outreach template
+	 * 
+	 * @author Nandini.R
+	 */
+	@Test
+		public void ConfigSanityOutReachtemplate() throws Exception{
+		Reporter.log("Test Started at:"+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		
+			fluentwait(homePage.outreachMenu());
+			click(homePage.outreachMenu());
+			click(homePage.outreachtempMenu());
+			
+
+			fluentwait(sanityTest.headergroupname());
+			
+			boolean	flag=isElementDisplayed(sanityTest.deleteoutreachbttn());
+			Reporter.log("DeleteOutreach button in User page:"+flag);
+			softassert.assertTrue(flag,"Deleteoutreach button in User page:"+flag);
+
+			flag=isElementDisplayed(sanityTest.addoutreachbttn());
+			Reporter.log("Addoutreach button in User page:"+flag);
+			softassert.assertTrue(flag,"Addoutreach button in User page:"+flag);
+			
+			String actualheader1=sanityTest.headergroupname().getText();
+			String expheader1="Group Name";
+			Reporter.log("Header Name,Expected:"+expheader1+",Actuals:"+actualheader1);
+			softassert.assertEquals(actualheader1,expheader1,"Header Name not matched,Expected:"+expheader1+",Actuals:"+actualheader1);
+			
+			String actualheader2=sanityTest.headerlanguage().getText();
+			String expheader2="Language";
+			Reporter.log("Header Name,Expected:"+expheader2+",Actuals:"+actualheader2);
+			softassert.assertEquals(actualheader2, expheader2,"Header Name not matched,Expected:"+expheader2+",Actuals:"+actualheader2);
+			
+			String actualheader3=sanityTest.headeroutreachtype().getText();
+			String expheader3="Outreach Type";
+			Reporter.log("Header Name,Expected:"+expheader3+",Actuals:"+actualheader3);
+			softassert.assertEquals(actualheader3, expheader3,"Header Name not matched,Expected:"+expheader3+",Actuals:"+actualheader3);
+			
+			String actualheader4=sanityTest.headertemplate().getText();
+			String expheader4="Template";
+			Reporter.log("Header Name,Expected:"+expheader4+",Actuals:"+actualheader4);
+			softassert.assertEquals(actualheader4, expheader4,"Header Name not matched,Expected:"+expheader4+",Actuals:"+actualheader4);
+			
+			String actualheader5=sanityTest.headerpreview().getText();
+			String expheader5="Preview";
+			Reporter.log("Header Name,Expected:"+expheader5+",Actuals:"+actualheader5);
+			softassert.assertEquals(actualheader5, expheader5,"Header Name not matched,Expected:"+expheader5+",Actuals:"+actualheader5);
+			
+			String actualheader6=sanityTest.headercreatedby().getText();
+			String expheader6="Created By";
+			Reporter.log("Header Name,Expected:"+expheader6+",Actuals:"+actualheader6);
+			softassert.assertEquals(actualheader6, expheader6,"Header Name not matched,Expected:"+expheader6+",Actuals:"+actualheader6);
+			
+			String actualheader7=sanityTest.headercreatedon().getText();
+			String expheader7="Created On";
+			Reporter.log("Header Name,Expected:"+expheader7+",Actuals:"+actualheader7);
+			softassert.assertEquals(actualheader7, expheader7,"Header Name not matched,Expected:"+expheader7+",Actuals:"+actualheader7);
+			
+			String actualheader8=sanityTest.headeraction().getText();
+			String expheader8="Actions";
+			Reporter.log("Header Name,Expected:"+expheader8+",Actuals:"+actualheader8);
+			softassert.assertEquals(actualheader8, expheader8,"Header Name not matched,Expected:"+expheader8+",Actuals:"+actualheader8);
+			softassert.assertAll();
+			Reporter.log("Test Ended at:"+currenttime());	
+		}
+
+	/**
+	 * checking header names and buttons in Vendor Type page 
+	 * 
+	 * @author Nandini.R
+	 */
+	@Test
+	public void ConfigSanityvendortypepage() throws Exception{
+		Reporter.log("Test Started at:"+currenttime());	
+		SoftAssert softassert=new SoftAssert();
+		fluentwait(homePage.preferenceMenu());
+		click(homePage.preferenceMenu());
+		
+		fluentwait(homePage.vendortypeMenu());
+		click(homePage.vendortypeMenu());
+		
+		fluentwait(sanityTest.vendoraddbttn());
+		boolean flag= isElementDisplayed(sanityTest.vendordelbttn());
+		Reporter.log("Delete button in User page:"+flag);
+		softassert.assertTrue(flag,"Delete button in Vendor Type page:"+flag);
+
+		flag=isElementDisplayed(sanityTest.vendoraddbttn());
+		Reporter.log("Add button present in User page:"+flag);
+		softassert.assertTrue(flag,"Add button present in Vendor Type page:"+flag);
+		
+		String actualheader1=sanityTest.vendortypeheader().getText();
+		String expheader1="Vendor Type";
+		Reporter.log("Header name,Expected:"+expheader1+"Actual:"+actualheader1);
+		
+		softassert.assertEquals(actualheader1,expheader1,"Header Name not matched,Expected:"+expheader1+",Actuals:"+actualheader1);
+		
+		String actualheader2=sanityTest.vendoractionsheader().getText();
+		String expheader2="Actions";
+		Reporter.log("Header name,Expected:"+expheader2+"Actual:"+actualheader2);
+		softassert.assertEquals(actualheader2, expheader2,"Header Name not matched,Expected:"+expheader2+",Actuals:"+actualheader2);
+		
+		
+			softassert.assertAll();
+			Reporter.log("Test Ended at:"+currenttime());
+	}
+	
+	/**
+	 * checking header names and buttons in Supplier Group page 
+	 * 
+	 * @author Nandini.R
+	 */
+	@Test
+	public void ConfigSanitysuppliergrouppage() throws Exception{
+		Reporter.log("Test Started at:"+currenttime());	
+		SoftAssert softassert=new SoftAssert();
+		fluentwait(homePage.preferenceMenu());
+		click(homePage.preferenceMenu());
+		click(homePage.suppliergroupMenu());
+
+		
+		boolean flag= isElementDisplayed(sanityTest.suppgroupdelbttn());
+		Reporter.log("Delete button in User page:"+flag);
+		softassert.assertTrue(flag,"Delete button in supplier Group page:"+flag);
+
+		flag=isElementDisplayed(sanityTest.suppgroupaddbttn());
+		Reporter.log("Add button present in User page:"+flag);
+		softassert.assertTrue(flag,"Add button present in supplier group page:"+flag);
+		
+		String actualheader1=sanityTest.suppgroupheadtext().getText();
+		String expheader1="Supplier Group";
+		Reporter.log("Header name,Expected:"+expheader1+"Actual:"+actualheader1);
+		
+		softassert.assertEquals(actualheader1,expheader1,"Header Name not matched,Expected:"+expheader1+",Actuals:"+actualheader1);
+		
+		String actualheader2=sanityTest.suppgroupactionheadtext().getText();
+		String expheader2="Actions";
+		Reporter.log("Header name,Expected:"+expheader2+"Actual:"+actualheader2);
+		softassert.assertEquals(actualheader2, expheader2,"Header Name not matched,Expected:"+expheader2+",Actuals:"+actualheader2);
+		
+	
+		softassert.assertAll();
+		Reporter.log("Test Ended at:"+currenttime());
+	}
+		
+	/**
+	 * checking header names and buttons in Payment Settings page 
+	 * 
+	 * @author Nandini.R
+	 */
+	@Test
+	public void ConfigSanitypaymentsettingpage() throws Exception{
+		Reporter.log("Test Started at:"+currenttime());	
+		SoftAssert softassert=new SoftAssert();
+		fluentwait(homePage.preferenceMenu());
+		click(homePage.preferenceMenu());
+		click(homePage.paymentsettingsMenu());
+
+		
+		boolean flag= isElementDisplayed(sanityTest.paysettdelbttn());
+		Reporter.log("Delete button in User page:"+flag);
+		softassert.assertTrue(flag,"Delete button in supplier Group page:"+flag);
+
+		flag=isElementDisplayed(sanityTest.paysettaddbttn());
+		Reporter.log("Add button present in User page:"+flag);
+		softassert.assertTrue(flag,"Add button present in supplier group page:"+flag);
+		
+		String actualheader1=sanityTest.paysetpayytypehead().getText();
+		String expheader1="Payment Type";
+		Reporter.log("Header name,Expected:"+expheader1+"Actual:"+actualheader1);
+		
+		softassert.assertEquals(actualheader1,expheader1,"Header Name not matched,Expected:"+expheader1+",Actuals:"+actualheader1);
+		
+		String actualheader2=sanityTest.paysetpayytermhead().getText();
+		String expheader2="Payment Term";
+		Reporter.log("Header name,Expected:"+expheader2+"Actual:"+actualheader2);
+		softassert.assertEquals(actualheader2, expheader2,"Header Name not matched,Expected:"+expheader2+",Actuals:"+actualheader2);
+		
+		String actualheader3=sanityTest.paysetactionhead().getText();
+		String expheader3="Actions";
+		Reporter.log("Header Name,Expected:"+expheader3+",Actuals:"+actualheader3);
+		softassert.assertEquals(actualheader3, expheader3,"Header Name not matched,Expected:"+expheader3+",Actuals:"+actualheader3);
+			
+		softassert.assertAll();
+		Reporter.log("Test Ended at:"+currenttime());
+	}
+	
+	
+	/**
+	 * After Class Logout and Quit Method 
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	
+	@AfterClass
+	  public void QuitBrowser() {
+		  homePage.logout();
+		  quitBrowser();
+	  }
+	
+	
+}

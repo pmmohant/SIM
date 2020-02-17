@@ -1,0 +1,258 @@
+
+package com.lavante.sim.customer.pageobjects.Tasks.Payments;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+/**
+ * Navigate to Task - Approval
+ * @author Piramanayagam.S
+ * @date- 24-10-2016
+ */
+public class PaymentQntoAnswer 
+{
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	
+	public PaymentQntoAnswer(WebDriver driver)
+	{
+		lavanteUtils.driver=driver;
+	}
+	
+	//Web Elements 
+	@FindBy(css="a[href*='claimsPayment']")
+	private List<WebElement> ListPayment;
+	public List<WebElement> ListPayment()
+	{
+		return ListPayment;
+	}
+	
+	@FindBy(css="a[href*='invoice']")
+	private List<WebElement> ListInvoice;
+	public List<WebElement> ListInvoice()
+	{
+		return ListInvoice;
+	}
+	
+	@FindBy(css="[id*='approval'] td:nth-child(8)")
+	private List<WebElement> ListAssignedUser;
+	public List<WebElement> ListAssignedUser()
+	{
+		return ListAssignedUser;
+	}
+	
+	@FindBy(css= "button[class*='action_buttons']")
+	private WebElement Actnbtn;
+	public WebElement Actnbtn() {
+		return Actnbtn;
+	}
+
+	@FindBy(css= "[title*='Respond']")
+	private WebElement RespondBtn;
+	public WebElement RespondBtn() {
+		return RespondBtn;
+	}
+	
+	@FindBy(css= "iframe[src*='requestForPaymentInformation.lvp']")
+	private WebElement IFrameRespondToQuest;
+	public WebElement IFrameRespondToQuest() {
+		return IFrameRespondToQuest;
+	}
+	
+	@FindBy(css= "#comment")
+	private WebElement commentTextArea;
+	public WebElement commentTextArea() {
+		return commentTextArea;
+	}
+	
+	@FindBy(css= ".error")
+	private WebElement responseError;
+	public WebElement responseError() {
+		return responseError;
+	}
+	
+	@FindBy(css= ".data_table.table_grid.zebra.wrap.table td:nth-child(4)")
+	private List<WebElement> commentsList;
+	public List<WebElement> commentsList() {
+		return commentsList;
+	}
+	
+	@FindBy(css= "input[value='Submit']")
+	private WebElement responseSubmitBtn;
+	public WebElement responseSubmitBtn() {
+		return responseSubmitBtn;
+	}
+	
+	@FindBy(css= ".bannerMessage")
+	private WebElement BannerMsg;
+	public WebElement BannerMsg() {
+		return BannerMsg;
+	}
+	//End of Email
+	
+	//For New Payment Questions to answer page
+	@FindBy(css="button[class*='primary']")
+	private WebElement searchbtn;
+	public WebElement searchbtn(){
+		return searchbtn;
+	}	
+	
+	@FindBy(css=".ng-isolate-scope th")
+	private List<WebElement> Headers;
+	public List<WebElement> Headers(){
+		return Headers;
+	}	
+	
+	@FindBy(css="[ng-bind='vm.dataSource.message']")
+	private WebElement NoData;
+	public WebElement NoData(){
+		return NoData;
+	}	
+	
+	@FindBy(css=".ng-scope.check_box span")
+	private List<WebElement> checkBoxList;
+	public List<WebElement> checkBoxList(){
+		return checkBoxList;
+	}	
+		
+	//RE-USABLE METHODS 
+	public void selectSupplierFormAction(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		//fillSearchDetails(dataMap);
+		selectPaymentMethod(dataMap);
+		formAction(dataMap);
+		lavanteUtils.waitForTime(4000);
+			
+	}
+
+	/**
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws Exception
+	 */
+	public void formAction(LinkedHashMap<String, String> dataMap) throws Exception 
+	{
+	
+		if(dataMap.containsKey("Respond")){
+			lavanteUtils.click(Actnbtn);
+			lavanteUtils.click(RespondBtn);	
+			RespondQuestion(dataMap);
+		}
+	}
+	
+	private void fillSearchDetails(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.waitForTime(6000);
+		lavanteUtils.fluentwait(searchbtn);
+		String search = "Dummy";
+		String x="//*[text()='"+search+"']/../following-sibling::div//input";
+		
+		if(dataMap.containsKey("PaymentRef")){
+			if(!dataMap.get("PaymentRef").equalsIgnoreCase("ANY")){
+				x=x.replace(search, "Payment Ref No");
+				lavanteUtils.driver.findElement(By.xpath(x)).clear();
+				lavanteUtils.driver.findElement(By.xpath(x)).sendKeys(dataMap.get("PaymentRef"));
+			}
+		}
+		lavanteUtils.click(searchbtn);
+	}
+	
+	public List<WebElement> iterateSearchHeaderFindColList(String col) {
+		List<WebElement> s = null;
+		int j = ColIdentify(col);
+		int y = j + 1;
+		String x = ".ng-isolate-scope tr td:nth-child(" + j + ")";
+		s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		System.out.println("Iterate col locator:" + x + ",Size:" + s.size());
+		if (col.contains("Payment Ref No") || col.contains("Invoice")) {
+			x = ".ng-isolate-scope tr td:nth-child(" + j + ") a";
+			System.out.println("Iterate for name/contact:" + x);
+			s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		} 
+		System.out.println("Iterate Search Col:" + col + ":" + s.size());
+		return s;
+	}
+
+	public int ColIdentify(String col) {
+		int ki = 0;
+		boolean found = false;
+		if (Headers.size() > 0) {
+			for (int i = 0; i < Headers.size(); i++) {
+				String x = Headers.get(i).getText().toLowerCase();
+				if (x.contains(col.toLowerCase())) {
+					ki = i;
+					// List start with 0 but need a number more than that to
+					// fetch in xpath
+					ki = i + 1;
+					System.out.println(col + ",Col Found at " + ki);
+					found = true;
+					break;
+				}
+			}
+		}
+
+		if (found == false) {
+			Assert.assertTrue(false, "Col name not found" + col);
+		}
+		return ki;
+
+	}
+	
+	public void selectPaymentMethod(LinkedHashMap<String, String>dataMap) throws Exception {
+		fillSearchDetails(dataMap);
+		lavanteUtils.fluentwait(Headers.get(0));
+		List<WebElement> invList = iterateSearchHeaderFindColList("Invoice Number");
+		List<WebElement> payList = iterateSearchHeaderFindColList("Payment Ref No");
+		int j = 0;
+		if(invList.size()>0) {
+			String invNum = dataMap.get("Invoice");
+			for(int i=0; i<invList.size(); i++) {
+				//Since single payment can have multiple invoices
+				if(invList.get(i).getText().equals(invNum) && payList.get(i).getText().equals(dataMap.get("PaymentRef"))) {
+					String x=iterateSearchHeaderFindColList("Supplier Name").get(i).getText();
+					dataMap.put("SuppName", x);
+					j = i;
+					break;
+				}
+			}
+			lavanteUtils.click(checkBoxList.get(j));
+		}
+		//lavanteUtils.fluentwait(checkBoxList.get(0));
+		
+	}
+	
+	public void RespondQuestion(LinkedHashMap<String, String>dataMap) {
+		lavanteUtils.switchtoFrame(IFrameRespondToQuest);
+		//Added for Qn Flag Check
+		dataMap.put("ResponseError", "EmptyQN");
+		
+		String quest= dataMap.get("Question");
+		for(int i=0; i<commentsList.size(); i++) {
+			if(commentsList.get(i).getText().equals(quest)) {
+				Reporter.log("Question from supplier is listed in the Buyer's question list", true);
+				
+				if(dataMap.containsKey("ResponseError")) {
+					lavanteUtils.click(responseSubmitBtn);
+					String resError = responseError.getText();
+					dataMap.put("ResponseError", resError);
+				}
+				lavanteUtils.typeinEdit(dataMap.get("Response"), commentTextArea);
+				lavanteUtils.click(responseSubmitBtn);
+				lavanteUtils.switchtoFrame(null);
+				lavanteUtils.fluentwait(BannerMsg);
+				dataMap.put("BannerMsg", BannerMsg.getText());
+				break;
+			}
+		}		
+	}
+	
+}

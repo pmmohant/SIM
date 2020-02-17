@@ -1,0 +1,625 @@
+package com.lavante.sim.customer.TestScripts.Transactions.ContractManagement;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.CMSearchDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+
+/**
+ * Created on 1-2-2016
+ * Created for Contract Management Advanced Search and Basic Search
+ * Enhancement covered SIM-7528,SIM-7529,SIM-7153,SIM-7238
+ * Ended on 8-1-2016
+ * @author Piramanayagam.S
+ * 
+ */
+public class CMAdvanceBASICSearch002 extends PageInitiator {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+		
+		
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		openAPP();	
+		//Assigning the driver to the object of Lavante utils		
+		lavanteUtils.driver=driver;
+		
+		List<?> listofdatafrm=lavanteUtils.login("CMSearch", browser);
+		LinkedHashMap<String,String> LdataMap=new LinkedHashMap<String, String>();
+		LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+		
+		enobjloginpage.logintoAPP(LdataMap);
+		
+		enobjhomePage.close();
+	
+	}
+	
+	/**
+	 * In this Class all test starts from Supplier-Contract management tab,hence navigated to the page
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeMethod
+	public void beforeClassMethod(){
+		
+		enobjhomePage.close();
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String, String>();
+		dataMap.put("maintab","Invoices");
+		dataMap.put("subtab", "ContractManagement");
+		System.out.println(dataMap);
+		enobjhomePage.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+	
+	}
+	
+	/** 
+	 * Verify Edit 
+	 * SIM-7238
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 */
+	@Test(dataProvider="SingleAdvSearch",dataProviderClass=CMSearchDataProvider.class)
+	public void EditbuttonVerification001(LinkedHashMap<String,String> dataMap) throws Exception{	
+		System.out.println("------------Test Started for EDIT ------------------");
+		Reporter.log("Test Started for EDIT In contract:"+currenttime());
+		System.out.println(dataMap);
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		//To avoid wrong datas.
+		dataMap.clear();
+		dataMap.put("DELitemtype","Services");
+		
+		dataMap.put("AdvSearch","AdvSearch");
+		encontractManagement.selectSearchTab(dataMap);
+		Reporter.log("Navigated to Advanced Search Tab");
+		//For CLicking Build Option
+		dataMap.put("Build","Build");
+		encontractManagement.SelectSearchOption(dataMap);
+		Reporter.log("Select Buiild Query Option in Advanced Search Tab");
+	
+		dataMap.put("Search","");
+		
+		encontractAdvancedSearch.buildquery(dataMap);
+		Reporter.log("Query searched");
+		
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(encontractManagement.advSearchtab());
+	
+		lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+		lavanteUtils.fluentwait(encontractManagement.editMSAbtn());
+		if(encontractManagement.msalist().size()>0){
+			Reporter.log("Search Returned with MSA");
+			
+			String expatt="true";
+			
+			String attmsa=encontractManagement.editMSAbtn().getAttribute("disabled");
+			Reporter.log("Edit button MSA without Selecting in app: ,"+attmsa+",Expected"+expatt);
+			softassert.assertEquals(attmsa, expatt);
+			
+			
+			String att=encontractManagement.editSOWbtn().getAttribute("disabled");
+			Reporter.log("Edit button SOW  without Selecting  in app: ,"+att+",Expected"+expatt);
+			softassert.assertEquals(att, expatt);
+			
+			String attdel=encontractManagement.editDelBtn().getAttribute("disabled");
+			Reporter.log("Edit button Delieverable  without Selecting in app: ,"+attdel+",Expected"+expatt);
+			softassert.assertEquals(attdel, expatt);
+		
+			
+			flag=true;
+			
+			
+		}else{
+			Reporter.log("Search Returned with no data");
+		}
+		
+		
+		
+	
+		
+		if(flag==false){
+			softassert.assertTrue(false,"Test Failed,Recheck with the data");
+		}
+		softassert.assertAll();
+		System.out.println("----------Test Ended----------------");
+		Reporter.log("Test Ended at EDIT In contract:"+currenttime());
+	}
+
+	/** 
+	 * Verify Edit MSA
+	 * SIM-7238
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 */
+	@Test(dataProvider="SingleAdvSearch",dataProviderClass=CMSearchDataProvider.class)
+	public void EditMSAbuttonVerification002(LinkedHashMap<String,String> dataMap) throws Exception{	
+		System.out.println("------------Test Started for EDIT ------------------");
+		Reporter.log("Test Started for EDIT In contract:"+currenttime());
+		System.out.println(dataMap);
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		//To avoid wrong datas.
+		dataMap.clear();
+		dataMap.put("msasuppliername","S");
+		dataMap.put("DPTYPESUPPMSA","Contains");
+		dataMap.put("SOWNumber","");
+		dataMap.put("TypeSOWNumber","Is Empty");
+		
+		dataMap.put("AdvSearch","AdvSearch");
+		encontractManagement.selectSearchTab(dataMap);
+		Reporter.log("Navigated to Advanced Search Tab");
+		//For CLicking Build Option
+		dataMap.put("Build","Build");
+		encontractManagement.SelectSearchOption(dataMap);
+		Reporter.log("Select Buiild Query Option in Advanced Search Tab");
+	
+		dataMap.put("Search","");
+		
+		encontractAdvancedSearch.buildquery(dataMap);
+		Reporter.log("Query searched");
+		
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(encontractManagement.advSearchtab());
+	
+		lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+		lavanteUtils.fluentwait(encontractManagement.editMSAbtn());
+		if(encontractManagement.msalist().size()>0){
+			Reporter.log("Search Returned with MSA");
+			lavanteUtils.click(encontractManagement.msatypelist().get(0));
+			
+					
+			String expatt="true";
+			String attdel=encontractManagement.editDelBtn().getAttribute("disabled");
+			Reporter.log("Edit button Delieverable in app: ,"+attdel+",Expected"+expatt);
+			softassert.assertEquals(attdel, expatt);
+			
+			String att=encontractManagement.editSOWbtn().getAttribute("disabled");
+			Reporter.log("Edit button SOW in app: ,"+att+",Expected"+expatt);
+			softassert.assertEquals(att, expatt);
+			
+			flag=true;
+			
+			
+		}else{
+			Reporter.log("Search Returned with No MSA");
+		}
+		
+	
+		
+		if(flag==false){
+			softassert.assertTrue(false,"Test Failed,Recheck with the data");
+		}
+		softassert.assertAll();
+		System.out.println("----------Test Ended----------------");
+		Reporter.log("Test Ended at EDIT In contract:"+currenttime());
+	}
+
+	/**
+	 * Verify Edit SOW
+	 * SIM-7238
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 */
+	@Test(dataProvider="SingleAdvSearch",dataProviderClass=CMSearchDataProvider.class)
+	public void EditSOWbuttonVerification003(LinkedHashMap<String,String> dataMap) throws Exception{	
+		Reporter.log("Test Started for EDIT In contract:"+currenttime());
+		System.out.println(dataMap);
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		//To avoid wrong data.
+		dataMap.clear();
+		dataMap.put("SOWStatus","Active");
+		dataMap.put("DELdeliverable","Active");
+		dataMap.put("TypeDel","Is Empty");
+		
+		
+		dataMap.put("AdvSearch","AdvSearch");
+		encontractManagement.selectSearchTab(dataMap);
+		Reporter.log("Navigated to Advanced Search Tab");
+		//For CLicking Build Option
+		dataMap.put("Build","Build");
+		encontractManagement.SelectSearchOption(dataMap);
+		Reporter.log("Select Buiild Query Option in Advanced Search Tab");
+	
+		dataMap.put("Search","");
+		
+		encontractAdvancedSearch.buildquery(dataMap);
+		Reporter.log("Query searched");
+		
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(encontractManagement.advSearchtab());
+		lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+		lavanteUtils.fluentwait(encontractManagement.editSOWbtn());
+		if(encontractManagement.sowlist().size()>0){
+			Reporter.log("Search Returned with data:");
+			lavanteUtils.click(encontractManagement.msatypelist().get(0));
+			String expatt="true";
+			String att=encontractManagement.editDelBtn().getAttribute("disabled");
+			Reporter.log("Edit button Delieverable in app: ,"+att+",Expected"+expatt);
+			softassert.assertEquals(att,expatt,"Edit button in Del failed");
+			
+			flag=true;
+				
+			}else{
+			Reporter.log("Search Returned with SOW with No Delevirable");
+		}
+		
+		
+		if(flag==false){
+			softassert.assertTrue(false,"Test Failed,Recheck with the data");
+		}
+		softassert.assertAll();
+		Reporter.log("Test Ended at EDIT In contract:"+currenttime());
+	}
+
+	/**
+	 * Verify Edit MSA
+	 * SIM-7238
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 */
+	@Test
+	public void EditMSAFunction004() throws Exception{	
+		Reporter.log("Test Started for EDIT In contract:"+currenttime());
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String,String>();
+		dataMap.put("msasuppliername","S");
+		dataMap.put("DPTYPESUPPMSA","Contains");
+		
+		dataMap.put("AdvSearch","AdvSearch");
+		encontractManagement.selectSearchTab(dataMap);
+		Reporter.log("Navigated to Advanced Search Tab");
+		//For CLicking Build Option
+		dataMap.put("Build","Build");
+		encontractManagement.SelectSearchOption(dataMap);
+		Reporter.log("Select Buiild Query Option in Advanced Search Tab");
+	
+		dataMap.put("Search","");
+		
+		encontractAdvancedSearch.buildquery(dataMap);
+		Reporter.log("Query searched");
+		
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(encontractManagement.advSearchtab());
+	
+
+		lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+		lavanteUtils.fluentwait(encontractManagement.editMSAbtn());
+		if(encontractManagement.msalist().size()>0){
+			Reporter.log("Search Returned with MSA");
+			
+			lavanteUtils.click(encontractManagement.msatypelist().get(0));
+			lavanteUtils.click(encontractManagement.editMSAbtn());
+			lavanteUtils.switchtoFrame(eneditContractManagement.IFRAMEMSAAddEdit());
+			
+			lavanteUtils.fluentwait(eneditContractManagement.MSAnottoexceed());
+			String x=LavanteUtils.randomnum(99)+"."+LavanteUtils.randomnum(9)+""+LavanteUtils.randomnum(9);
+			dataMap.put("msanottoexceed",x);
+			dataMap.put("MSASave","");
+			dataMap.put("Errmsg","");
+			eneditContractManagement.fillMSAdetails(dataMap);
+			eneditContractManagement.formActionMSA(dataMap);
+			
+			lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+			lavanteUtils.fluentwait(encontractManagement.msalist().get(0));
+			
+			if(encontractManagement.msalist().size()>0){
+				
+					lavanteUtils.click(encontractManagement.msalist().get(0));
+
+					lavanteUtils.switchtoFrame(eneditContractManagement.MSAViewIFRAME());
+				
+					String s=eneditContractManagement.msaviewnttoexced().getText();
+					Reporter.log("MSA EDITION"+s+",Expected"+x);
+					softassert.assertEquals(s, x, "EDIT MSA  not working");
+					flag=true;
+			}
+			
+		}else{
+			Reporter.log("Search Returned with No MSA");
+		}
+		
+		if(flag==false){
+			softassert.assertTrue(false,"Test Failed,Recheck with the data");
+		}
+		softassert.assertAll();
+		System.out.println("----------Test Ended----------------");
+		Reporter.log("Test Ended at EDIT In contract:"+currenttime());
+	}
+
+	/** 
+	 * Verify Edit SOW
+	 * SIM-7238
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 */
+	@Test
+	public void EditSOWFunction005() throws Exception{	
+		Reporter.log("Test Started for EDIT In contract:"+currenttime());
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String,String>();
+		dataMap.put("SOWStatus","Active");
+		dataMap.put("AdvSearch","AdvSearch");
+		encontractManagement.selectSearchTab(dataMap);
+		Reporter.log("Navigated to Advanced Search Tab");
+		//For CLicking Build Option
+		dataMap.put("Build","Build");
+		encontractManagement.SelectSearchOption(dataMap);
+		Reporter.log("Select Buiild Query Option in Advanced Search Tab");
+	
+		dataMap.put("Search","");
+		
+		encontractAdvancedSearch.buildquery(dataMap);
+		Reporter.log("Query searched");
+		
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(encontractManagement.advSearchtab());
+	
+		lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+		lavanteUtils.fluentwait(encontractManagement.editMSAbtn());
+		if(encontractManagement.sowlist().size()>0){
+			Reporter.log("Search Returned with MSA");
+			lavanteUtils.click(encontractManagement.SowStatus().get(0));
+			lavanteUtils.click(encontractManagement.editSOWbtn());
+			
+			lavanteUtils.switchtoFrame(eneditContractManagement.SOWEditIframe());
+			
+			lavanteUtils.fluentwait(eneditContractManagement.SOWnotToExceedAmount());
+			String x=LavanteUtils.randomnum(99)+"."+LavanteUtils.randomnum(99);
+			dataMap.put("SOWNotToExecedAmnt",x);
+			dataMap.put("SOWSave","");
+			
+			eneditContractManagement.fillSOWDetails(dataMap,"");
+			eneditContractManagement.formActionSOW(dataMap);
+			
+			lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+			lavanteUtils.fluentwait(encontractManagement.msalist().get(0));
+			
+			if(encontractManagement.sowlist().size()>0){
+				
+					Reporter.log(""+encontractManagement.sowNoList().size(),true);
+					encontractManagement.sowlist().get(0).click();
+
+					lavanteUtils.switchtoFrame(eneditContractManagement.SOWViewIframe());
+				
+					String s=eneditContractManagement.SOWViewNottoExceed().getText();
+					Reporter.log("SOW EDITION"+s+",Expected"+x);
+					softassert.assertEquals(s, x, "EDIT MSA  not working");
+					
+					flag=true;			
+				
+			}
+			
+		}else{
+			Reporter.log("Search Returned with No MSA");
+		}
+		
+		if(flag==false){
+			softassert.assertTrue(false,"Test Failed,Recheck with the data");
+		}
+		softassert.assertAll();
+		System.out.println("----------Test Ended----------------");
+		Reporter.log("Test Ended at EDIT In contract:"+currenttime());
+	}
+
+	/** 
+	 * Verify Edit DEL
+	 * SIM-7238
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 */
+	@Test
+	public void EditDELFunction006() throws Exception{	
+		Reporter.log("Test Started for EDIT In contract:"+currenttime());
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String,String>();
+		dataMap.put("DELitemtype","Services");
+		dataMap.put("AdvSearch","AdvSearch");
+		encontractManagement.selectSearchTab(dataMap);
+		Reporter.log("Navigated to Advanced Search Tab");
+		//For CLicking Build Option
+		dataMap.put("Build","Build");
+		encontractManagement.SelectSearchOption(dataMap);
+		Reporter.log("Select Buiild Query Option in Advanced Search Tab");
+	
+		dataMap.put("Search","");
+		
+		encontractAdvancedSearch.buildquery(dataMap);
+		Reporter.log("Query searched");
+		
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(encontractManagement.advSearchtab());
+	
+		lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+		lavanteUtils.fluentwait(encontractManagement.editMSAbtn());
+		if(encontractManagement.dellist().size()>0){
+			lavanteUtils.click(encontractManagement.msatypelist().get(0));
+			lavanteUtils.click(encontractManagement.editDelBtn());
+			lavanteUtils.waitForTime(3000);
+			lavanteUtils.switchtoFrame(eneditContractManagement.DELIframe());
+			
+			lavanteUtils.fluentwait(eneditContractManagement.DELitemnumbr());
+			String expAccnum=LavanteUtils.randomnum(99)+"."+LavanteUtils.randomnum(99);
+			dataMap.remove("DELitemtype");
+			dataMap.put("DELaccnumber",expAccnum);
+			dataMap.put("save","");
+			
+			eneditContractManagement.fillDeliverableDetails(dataMap,"","");
+			eneditContractManagement.formActionDeliverable(dataMap);
+/*			
+			lavanteUtils.switchtoFrame(null);
+			
+			lavanteUtils.fluentwait(encontractManagement.editOKBtn());
+			lavanteUtils.click(encontractManagement.editOKBtn());
+*/			
+			lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+			lavanteUtils.fluentwait(encontractManagement.editMSAbtn());
+			if(encontractManagement.dellist().size()>0){
+					lavanteUtils.click(encontractManagement.dellist().get(0));
+					
+					lavanteUtils.switchtoFrame(eneditContractManagement.DELIframeView());
+				
+					String actaccnum=eneditContractManagement.DELViewAccnum().getText();
+					Reporter.log("DEL EDITION"+actaccnum+",Expected"+expAccnum);
+					softassert.assertEquals(actaccnum, expAccnum, "EDIT DEL not working");
+					
+					flag=true;			
+			}
+			
+		}else{
+			Reporter.log("Search Returned with No Delvirable");
+		}
+		
+		
+		if(flag==false){
+			softassert.assertTrue(false,"Test Failed,Recheck with the data");
+		}
+		softassert.assertAll();
+		System.out.println("----------Test Ended----------------");
+		Reporter.log("Test Ended at EDIT In contract:"+currenttime());
+	}
+
+	/**
+	 * Verify Main tab and Sub tab
+	 * 
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 */
+	@Test
+	public void SearchSupplierMainandSub007() throws Exception{	
+		System.out.println("SEARCH SUP");
+		Reporter.log("Test Started for Main and SUB Tab");
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String,String>();
+		
+		dataMap.put("AdvSearch","AdvSearch");
+		encontractManagement.selectSearchTab(dataMap);
+		Reporter.log("Navigated to Advanced Search Tab");
+		
+		//For CLicking Build Option
+		dataMap.put("Build","Build");
+		encontractManagement.SelectSearchOption(dataMap);
+		Reporter.log("Select Buiild Query Option in Advanced Search Tab");
+	
+		dataMap.put("Search","");
+		dataMap.put("msasuppliername","S");
+		dataMap.put("DPTYPESUPPMSA","Contains");
+		dataMap.put("ClearQuery","");		
+		encontractAdvancedSearch.buildquery(dataMap);
+		Reporter.log("Query searched");
+		
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(encontractManagement.advSearchtab());
+	
+		lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+		lavanteUtils.fluentwait(encontractManagement.editMSAbtn());
+		if(encontractManagement.supplist().size()>0){
+			Reporter.log("Search Returned with Supplier Name");
+			lavanteUtils.click(encontractManagement.supplist().get(0));
+			
+			/*lavanteUtils.switchtoFrame(encontractManagement.IFRAMESuppview());*/
+			lavanteUtils.switchtoFrame(null);
+			Reporter.log("SUPPLIER POPUP:");
+			
+			String main=null;
+			main=encontractManagement.mainTab().getText();
+			Reporter.log("Verification for Main Tab,in app"+main);
+			softassert.assertEquals(main, "Enterprise-Owned","Main Tab not matched,expected:Enterprise-Owned, in app:"+main);
+				
+			String sub=encontractManagement.subtab().getText();
+			Reporter.log("Verification for Sub Tab,in app"+sub);
+			softassert.assertEquals(sub, "Contract Management","Main Tab not matched,expected:Contract Management, in app:"+sub);
+			flag=true;
+			
+		}else {
+			Reporter.log("Search Returned with No Supplier Name");
+		}
+	
+		
+		if(flag==false){
+			softassert.assertTrue(false,"Test Failed,Recheck with the data");
+		}
+		softassert.assertAll();
+		System.out.println("----------Test Ended----------------");
+	}
+	
+	
+	
+	@AfterMethod
+	public void SetupAftermethod(){
+		enobjhomePage.backtoSearch();
+		refreshPage();
+	}
+	
+	/**
+	 * Logout Method and Driver Quitting the method
+	 * @author Piramanayagam.S
+	 * @param null
+	 * @return null
+	 */
+	@AfterClass
+	public void SetupafterClassmethod(){
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+
+}
+

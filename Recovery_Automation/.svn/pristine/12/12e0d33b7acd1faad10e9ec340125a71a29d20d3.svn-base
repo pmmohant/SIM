@@ -1,0 +1,212 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 44, Failures: 22, Errors: 0, Skipped: 16, Time elapsed: 502.633 sec <<< FAILURE! - in TestSuite
+verifyDashBoardClaims(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 11.976 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'openClaims' is not displayedUnable to locate element: {"method":"css selector","selector":"#open-claims td a"}
+Command duration or timeout: 10.08 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=43.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: f95c0ad4-e4f3-48c2-9d0f-d08a643dcfcc
+*** Element info: {Using=css selector, value=#open-claims td a}
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:241)
+	at lavante.recovery.pageobjects.DashBoard.ClaimsPage.verifyItemsForMySection(ClaimsPage.java:36)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardClaims(SanityTestSuite.java:72)
+
+verifyDashBoardSupplier(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 11.844 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'supplierLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.DashBoard.SupplierPage.verifySupplierLink(SupplierPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardSupplier(SanityTestSuite.java:90)
+
+verifyDashBoardCompliance(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 19.803 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'complainceLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.DashBoard.CompliancePage.verifycomplainceLink(CompliancePage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardCompliance(SanityTestSuite.java:122)
+
+verifyauditOutboundPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 19.769 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'currentMonCredits' is not displayedUnable to locate element: {"method":"css selector","selector":"a[href*='CurrentMonthCredits']"}
+Command duration or timeout: 10.06 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=43.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: f95c0ad4-e4f3-48c2-9d0f-d08a643dcfcc
+*** Element info: {Using=css selector, value=a[href*='CurrentMonthCredits']}
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:241)
+	at lavante.recovery.pageobjects.Audit.AuditOutboundPage.verifycurrentMonCredits(AuditOutboundPage.java:43)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyauditOutboundPage(SanityTestSuite.java:150)
+
+verifyauditInboundPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 11.898 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'inboundLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Audit.AuditInboundPage.verifyinboundLink(AuditInboundPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyauditInboundPage(SanityTestSuite.java:163)
+
+verifycontactEntryPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 16.875 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'contactEntry' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Audit.AuditContactEntryPage.verifycontactEntryLink(AuditContactEntryPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifycontactEntryPage(SanityTestSuite.java:248)
+
+verifyBatchingPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 16.832 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'batchingLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Audit.AuditBatchingPage.verifybatchingLink(AuditBatchingPage.java:21)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyBatchingPage(SanityTestSuite.java:262)
+
+verifyInvoicePage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 14.818 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'invoiceLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Audit.AuditInvoicePage.verifyinvoiceLink(AuditInvoicePage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyInvoicePage(SanityTestSuite.java:287)
+
+verifyPossibleDupesPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 16.783 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'possibleDupesLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Audit.AuditPossibleDupesPage.verifypossibleDupesLink(AuditPossibleDupesPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyPossibleDupesPage(SanityTestSuite.java:318)
+
+verifySummaryPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 14.894 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'summaryLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Audit.AuditSummaryPage.verifysummaryLink(AuditSummaryPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifySummaryPage(SanityTestSuite.java:341)
+
+verifyCheckRegistryPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 23.814 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'chkRegLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Audit.AuditCheckRegistryPage.verifychkRegLink(AuditCheckRegistryPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyCheckRegistryPage(SanityTestSuite.java:357)
+
+verifySetupPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 14.757 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'setUpLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Configuration.Setup.AuditPage.verifySetUpLink(AuditPage.java:29)
+	at lavante.recovery.testsuites.SanityTestSuite.verifySetupPage(SanityTestSuite.java:422)
+
+verifyFaxJobsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 11.83 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'configurationJobsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Configuration.Jobs.FaxJobPage.verifyConfigurationJobsLink(FaxJobPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyFaxJobsPage(SanityTestSuite.java:485)
+
+verifyAccountPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 14.804 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'accountLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Configuration.Account.UsersPage.verifyAccountLink(UsersPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyAccountPage(SanityTestSuite.java:503)
+
+verifyFinancePage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 14.81 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'financeLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Configuration.Finance.FinanceInvoicesPage.verifyFinanceLink(FinanceInvoicesPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyFinancePage(SanityTestSuite.java:546)
+
+verifyUploadsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 14.877 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'uploadsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Configuration.Uploads.UploadsPage.verifyUploadsLink(UploadsPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyUploadsPage(SanityTestSuite.java:570)
+
+verifyOthersPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 14.836 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'othersLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Configuration.Others.FaxCommentsPage.verifyOthersLink(FaxCommentsPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyOthersPage(SanityTestSuite.java:595)
+
+verifyMailerRegistryPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 14.791 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'mailerRegistryLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Configuration.MailerRegistry.MailerRegistryPage.verifyMailerRegistryLink(MailerRegistryPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyMailerRegistryPage(SanityTestSuite.java:633)
+
+verifyauditStatisticsAssignmentsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 26.784 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'auditStatsTable' is not displayedUnable to locate element: {"method":"css selector","selector":"#auditStatistics tr"}
+Command duration or timeout: 10.06 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=43.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: f95c0ad4-e4f3-48c2-9d0f-d08a643dcfcc
+*** Element info: {Using=css selector, value=#auditStatistics tr}
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:241)
+	at lavante.recovery.pageobjects.Assignments.AuditStatisticsPage.verifyauditStatsTable(AuditStatisticsPage.java:31)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyauditStatisticsAssignmentsPage(SanityTestSuite.java:653)
+
+verifyHoldsAssignmentsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 27.918 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'holdsTable' is not displayedUnable to locate element: {"method":"css selector","selector":".table_ab .table_ab_b"}
+Command duration or timeout: 10.07 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=43.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: f95c0ad4-e4f3-48c2-9d0f-d08a643dcfcc
+*** Element info: {Using=css selector, value=.table_ab .table_ab_b}
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:241)
+	at lavante.recovery.pageobjects.Assignments.HoldsPage.verifyHoldsTable(HoldsPage.java:47)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyHoldsAssignmentsPage(SanityTestSuite.java:663)
+
+verifyCreditsAssignmentsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 19.654 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'creditsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Assignments.CreditsPage.verifycreditsLink(CreditsPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyCreditsAssignmentsPage(SanityTestSuite.java:671)
+
+verifyStatementsAssignmentsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 31.727 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'statementsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)
+	at lavante.recovery.pageobjects.Assignments.StatementsPage.verifyStatementsLink(StatementsPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyStatementsAssignmentsPage(SanityTestSuite.java:683)
+

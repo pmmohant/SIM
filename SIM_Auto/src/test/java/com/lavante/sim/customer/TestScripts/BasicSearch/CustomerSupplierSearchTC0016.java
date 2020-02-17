@@ -1,0 +1,82 @@
+/**
+ * Company			: 	LAVANTE
+ * Project Name	   	:	Lavante SIM Application
+ * Automation		: 	Selenium Automation
+ * Author			: 	Venkata Ravi Majjari 
+ */
+
+package com.lavante.sim.customer.TestScripts.BasicSearch;
+
+import java.util.List;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import com.lavante.sim.Common.Util.ConfigPathFile;
+import com.lavante.sim.Common.Util.GetExcelFile;
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.Common.Util.setTestData;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class CustomerSupplierSearchTC0016 extends PageInitiator {
+
+
+	List<setTestData> objSupplierSearchData = null;
+	List<setTestData> objSupplier = null;
+	List<setTestData> objGmailTestData =null;
+		
+	GetExcelFile ge=new GetExcelFile();
+	
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+		
+	launchAppFromPOM(Platform,browser,Version);
+	initiate();
+	
+	openAPP();
+	
+	objSupplier = ge.getData(ConfigPathFile.SupplierSearchTestDataFile.getConstantValue(), ConfigPathFile.SUPPLIERS.getConstantValue());
+	objSupplierSearchData = ge.getData(ConfigPathFile.SupplierSearchTestDataFile.getConstantValue(), ConfigPathFile.SUPPLIERSEARCH.getConstantValue());
+	objGmailTestData = ge.getData(ConfigPathFile.TestDataForGmail.getConstantValue(), ConfigPathFile.Login.getConstantValue());
+
+
+}
+	
+	/**
+	 * Method Name :verify_SameContactEmail_VMFOutreachProcess
+	 * Purpose: Public method which includes logic related to Verify that same Contact Email used for Invite New Supplier
+	 * 			should not send strong link when Same Contact Email is provided while VMF upload - outreach process
+	 * 			within a customer. 
+	 * @return None
+	 */
+	@Test
+	public void verify_SameContactEmail_VMFOutreachProcess() {
+		Reporter.log("CustomerSupplierSearchTC0016 Started: ");
+		
+		try {
+			for (int i = 0; i < objSupplier.size(); i++) {
+				if (objLoginPage.userLogin(objSupplier.get(i)) == true) {
+					objSupplierSearchPage.verify_SameContactEmail_VMFOutreachProcess(objSupplierSearchData);
+					objLoginPage.logout();
+				}
+			}
+		} catch (Exception e) {
+			
+		//	log.severe("Exception in method verify_SameContactEmail_VMFOutreachProcess: " + e.getMessage());
+			Assert.assertTrue(false,"Exception in method verify_SameContactEmail_VMFOutreachProcess: " + e.getMessage());
+		}
+		Reporter.log("Execution of Test Case CustomerSupplierSearchTC0016 is completed: ");
+	}
+	
+	@AfterClass
+	public void close(){	
+		quitBrowser();
+	}
+}

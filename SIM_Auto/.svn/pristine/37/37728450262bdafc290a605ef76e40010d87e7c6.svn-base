@@ -1,0 +1,98 @@
+#PageTitle
+expectedPageTitle=Lavante SIM - On-boarding
+expCompliancePageTitle=Lavante SIM - Regulatory Compliance
+expectedSupplierPageTitle=Lavante SIM - Search
+
+#ID
+supplierSearch=searchText
+CustomerLogo=header_right
+suppliername=supplierName
+contactname=contactName
+email=email
+
+fax=fax
+invitingOrganization=invitingOrganization
+supplierGroup=.//*[@id='supplierGroup_chosen']/a/span
+clearBtn=button_clear
+inviteBtn=button_invite
+SuccessMessage=//div[@class='dialog undefined ui-dialog-content ui-widget-content']
+
+#XPath
+CompanyLogo=//img[contains(@src,'images_common/layout/logo.png')]
+Dashboard=//a[@title='Dashboard']
+Suppliers=//a[@title='Suppliers']
+Tasks=//a[@title='Tasks']
+ManageFiles=//a[@title='Manage Files']
+ManageUsers=//a[@title='Manage Users']
+Onboarding=//a[@title='On-boarding']
+Compliance=//a[@title='Regulatory Compliance']
+Diversity=//a[@title='Diversity']
+QuickLink=//div[contains(@style,'visible')]//button/..//span[contains(@class,'title')]
+CancelBtnForBroadCast=//button[@class='button_red']
+CancelBtn=//button[@class='button button_red cancel']
+OkBtn=//button[@class='button_green']
+errorMsg=//span[@class='error']
+#Dashboard-TO Do List
+dataNotFound=//td[@class='data_not_found']
+todolistrowCount=//td[contains(@class,'flx_28')]/div[1]//table[contains(@class,'grid')]//td[1]//a
+#//div/table[contains(@class,'data_table table_grid zebra')]/tbody/tr
+date=//div/table[contains(@class,'data_table table_grid zebra')]/tbody/tr[
+received=]/td[2]
+task=//div[contains(@id,'content')]/table/tbody/tr/td[1]/div[1]/div[2]/div/table/tbody/tr[
+description=]/td[1]
+workflow=//td[contains(@class,'flx_28')]/div[2]//table[contains(@class,'grid')]//td[1]//a
+#//div[@id='content']/table/tbody/tr/td[1]/div[2]/div[2]/div/table/tbody/tr[@class='odd']/td[1]
+alerts=//td[contains(@class,'flx_28')]/div[3]//table[contains(@class,'grid')]//td[1]//a
+#//div[@id='content']/table/tbody/tr/td[1]/div[3]/div[2]/div/table/tbody/tr[@class='odd']/td[1]
+#Dashboard-SUpplier_Outreach
+outreachpieChartBtn=//a[contains(@id,'cndKHf77BB_select_type')]
+outreachdataTableBtn=//span[contains(@id,'cndKHf77BB_select_type')]/a[contains(@title,'Data Table')]
+outreachtablerowCount=//div[@class='content chart_opt_collapse remove_padding']/descendant::table[@class='data_table table_grid zebra']
+outreachheadersCount=//div[contains(@id,'cndKHf77BB')]/div/div[2]/table/thead/tr/th
+outreachdataCount=//div[contains(@id,'cndKHf77BB')]/div/div[2]/table/tbody/tr/td
+outreachheader=//div[contains(@id,'cndKHf77BB')]/div/div[2]/table/thead/tr/th[
+outreachTable=//div[contains(@id,'cndKHf77BB')]/div/div[2]/table/tbody/tr/td[
+data=]
+outreachTblOption=//a[contains(@id,'cndKHf77BB_select_type')][contains(@class,'icon select_type select_type_table')]
+outreachVerification=//span[contains(@id,'total_records')]
+#Dashboard-Legal ID Authentication
+legalIdpieChartBtn=//a[contains(@id,'cndKHf77EE_select_type')]
+legalIddataTableBtn=//span[contains(@id,'cndKHf77EE_select_type')]/a[contains(@title,'Data Table')]
+legalIdtablerowCount=//div[@class='chart chart_minimized box_content_expanded']/descendant::table[@class='data_table table_grid zebra']
+legalIdheadersCount=//div[contains(@id,'cndKHf77EE')]/div/div[2]/table/thead/tr/th
+legalIddataCount=//div[contains(@id,'cndKHf77EE')]/div/div[2]/table/tbody/tr/td
+legalIdheader=//div[contains(@id,'cndKHf77EE')]/div/div[2]/table/thead/tr/th[
+legalIdTable=//div[contains(@id,'cndKHf77EE')]/div/div[2]/table/tbody/tr/td[
+legalIDTblOption=//a[contains(@id,'cndKHf77EE_select_type')][contains(@class,'icon select_type select_type_table')]
+legalIDPageTitle=Lavante SIM - Legal ID
+#Dashboard-OFAC SDN Screening
+ofacSdnpieChartBtn=//a[contains(@id,'cndKHf77FF_select_type')]
+ofacSdndataTableBtn=//span[contains(@id,'cndKHf77FF_select_type')]/a[contains(@title,'Data Table')]
+ofacSdntablerowCount=//div[@id='cndKHf77FF']/descendant::table[@class='data_table table_grid zebra']
+ofacSdnheadersCount=//div[contains(@id,'cndKHf77FF')]/div/div[2]/table/thead/tr/th
+ofacSdndataCount=//div[contains(@id,'cndKHf77FF')]/div/div[2]/table/tbody/tr/td
+ofacSdnheader=//div[contains(@id,'cndKHf77FF')]/div/div[2]/table/thead/tr/th[
+ofacSdnTable=//div[contains(@id,'cndKHf77FF')]/div/div[2]/table/tbody/tr/td[
+ofacSDNTblOption=//a[contains(@id,'cndKHf77FF_select_type')][contains(@class,'icon select_type select_type_table')]
+ofacPageTitle=Lavante SIM - OFAC
+#common
+legalIDOFACVerification=//span[contains(@class,'highlight_green')]
+
+#LinkText
+MyAccount=My Account
+InviteNewSupplier=Invite New Supplier
+SearchForSuppliers=Search for Supplier(s)
+BroadCastToSuppliers=Broadcast to Suppliers
+DownLoadCleanSupplierFile=Download Clean Supplier File
+
+#Frames
+iFrame=.//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+
+#Message
+expInviteSupplierSuccessMsg=An invitation has been sent to the Supplier specified by you.
+expBroadcastTitle=Confirm Broadcast to Suppliers
+expDownLoadFileTitle=Download Clean Supplier File
+supplierOutreachStaus=Supplier Outreach Status
+legalIDAuthentication=Legal ID Authentication
+ofacSdnScreening=OFAC SDN Screening
+

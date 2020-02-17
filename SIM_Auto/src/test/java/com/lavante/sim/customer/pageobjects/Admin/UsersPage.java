@@ -1,0 +1,569 @@
+package com.lavante.sim.customer.pageobjects.Admin;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+public class UsersPage {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+
+	public UsersPage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+	}
+
+	@FindBy(css = "a[href*='manageContacts']")
+	public WebElement UsersTab;
+
+	@FindBy(css = "div[class*='contain'] a[href*='Contact'][href*='add']")
+	public WebElement AddNewUserBtn;
+
+	@FindBy(css = "iframe[src*='contactSearch']")
+	private WebElement IFRAMESearchResult;
+	public WebElement IFRAMESearchResult(){
+		return IFRAMESearchResult;
+	}
+
+	@FindBy(css = "input[type*='check']")
+	public WebElement CreateUserAccountChkBox;
+	
+	@FindBy(xpath="//*[text()='Department']/../..//div[2]")
+	private WebElement DepartmentDrpDwn;
+	public WebElement DepartmentDrpDwn(){
+		return DepartmentDrpDwn;
+	}
+	
+	@FindBy(id = "userRole")
+	public WebElement UserRoleDropDwn;
+
+	@FindBy(css = "[id*='userGroup'] input")
+	public WebElement GroupDropDwn;
+
+	@FindBy(css = "[id*='userInvitingGroup'] input")
+	public WebElement InvitingOrgDropDwn;
+
+	@FindBy(xpath = "//*[text()='Division']/../..//div[2]")
+	public WebElement InvitingOrgSearchBox;
+	
+	@FindBy(css = "#associatedSupplier_chosen input")
+	public WebElement assctedSearchbox;
+
+	@FindBy(css = "button[type*='submit']")
+	public WebElement AddNewUserSaveBtn;
+
+	@FindBy(css = "button[class*='flat']")
+	public WebElement AddNewUserCancelBtn;
+
+	@FindBy(linkText = "Hide Inactive Users")
+	public WebElement HideInactiveUsersLink;
+
+	@FindBy(linkText = "Show Inactive Users")
+	public WebElement ShowInactiveUsersLink;
+
+	// Basic Search
+	@FindBy(id = "contactName")
+	public WebElement ContactNameSearchTxtBox;
+
+	@FindBy(id = "email")
+	public WebElement ContactEmailSearchTxtBox;
+
+	@FindBy(id = "phone")
+	public WebElement ContactPhoneSearchTxtBox;
+
+	@FindBy(id = "fax")
+	public WebElement ContactFaxSearchTxtBox;
+
+	@FindBy(css = "[id*='userAccountcreated'] a")
+	public WebElement AccountCreateddpdn;
+
+	@FindBy(css = "[id*='userRole'] a")
+	public WebElement UserRoledpdn;
+
+	@FindBy(css="[id*='userGroup'] input")
+	private WebElement UserGrpdpdn;
+
+	public WebElement UserGrpdpdn() {
+		return UserGrpdpdn;
+	}
+
+	@FindBy(css="[id*='userInvitingGroup'] input")
+	private WebElement divisiondpdn;
+
+	public WebElement divisiondpdn() {
+		return divisiondpdn;
+	}
+
+	@FindBy(css = "input~label[for*='showInactiveUsers']")
+	public WebElement showInactivechkbx;
+	
+	@FindBy(css = "input[name*='showInactiveUsers']")
+	public WebElement InputshowInactivechkbx;
+
+	
+	@FindBy(css = "[id*='search_manage_contact'] [type*='reset']")
+	public WebElement ContactNameresetBtn;
+	
+	@FindBy(name = "search")
+	public WebElement ContactNameSearchBtn;
+
+	// End of Search
+
+	//Actions button
+	
+	@FindBy(css = "form [id*='delete'][id*='Contact']")
+	public WebElement DeleteUserAction;
+
+	//Actions button
+	
+	@FindBy(css = "form li a[href*='Edit'][href*='Contact']")
+	public WebElement EditUserInformationIcon;
+
+	@FindBy(css = "a[href*='edit'][href*='Contact']")
+	public List<WebElement> ListEditUserInformationIcon;
+
+	@FindBy(xpath = "//*[@id='dLabel'][@aria-expanded='true']/..//a[contains(@href,'delete')]")
+	public WebElement DeleteUserIcon;
+
+	@FindBy(xpath = "//*[@id='dLabel'][@aria-expanded='true']/..//a[contains(@href,'delete')]")
+	public List<WebElement> ListDeleteUserIcon;
+
+	@FindBy(css = "a[href*='deleteSupplierAddress']")
+	public List<WebElement> ListDeleteAdressIcon;
+	
+	@FindBy(css = "div[class*='dialog'] td:nth-child(1)")
+	public List<WebElement> ReasonContactName;
+	
+	@FindBy(css = "div[class*='dialog'] td:nth-child(2)")
+	public List<WebElement> ReasonContactReason;
+	
+	
+	@FindBy(css = "button[class*='action_buttons']")
+	private WebElement ActionsDropDwn;
+	public WebElement ActionsDropDwn(){
+		return ActionsDropDwn;
+	}
+
+	@FindBy(id = "reset_password")
+	public WebElement ResetPasswordBtn;
+
+	@FindBy(id = "activate_contact")
+	public WebElement ActivateBtn;
+
+	@FindBy(id = "deactivate_contact")
+	public WebElement DeactivateBtn;
+
+	// Start of Table Data
+
+	@FindBy(css="#contact-details th")
+	private List<WebElement> Headers;
+	
+	@FindBy(css = "label[for*='contactId']")
+	public WebElement ContactNameChkBox;
+
+	@FindBy(css = "tr #dLabel")
+	public WebElement RowAction;
+	
+	@FindBy(css = "tr #dLabel")
+	public List<WebElement> RowActionList;
+	
+	// End of Table Data
+
+	@FindBy(css = "div[class*='dialog'] button[class*='primary']")
+	public WebElement OkBtn;
+
+	@FindBy(css = "#contact-details [class*='data_not_found'] td")
+	public WebElement GetNoDataAvailableTxt;
+
+	@FindBy(css = "table[id='contact-details'] a[href*='viewUserrContact']")
+	public List<WebElement> UserList;
+
+	@FindBy(css = "table[id='contact-details'] input")
+	public List<WebElement> UserListChkBox;
+
+	@FindBy(css = "button[class*='button_primary']")
+	public WebElement OKButton;
+
+	// Edit Profile table data
+	@FindBy(css = "[id*='contact-details'] tbody td:nth-child(2)")
+	public List<WebElement> ListOfContactName;
+	
+	//Admin UserPage
+
+	// Edit Profile table data
+	@FindBy(css = "table[class*='zebra'] td:nth-child(1)")
+	public List<WebElement> ListOfAddressName;
+
+	
+	//View User
+	@FindBy(css = "dl dt")
+	public List<WebElement> ViewUser;
+	
+	@FindBy(css = "a[href*='Contact'][class*='button']")
+	public WebElement ViewEdit;
+
+	
+
+	/**
+	 * MethodName : addNewUser : will add new user
+	 * 
+	 * @param testData
+	 *            : LinkedHashMap<String, String> testData
+	 */
+
+	public void addNewUser(LinkedHashMap<String, String> testData) {
+
+		Reporter.log("Adding new user");
+		clickAddUser();
+		nwfillUserDetail(testData);
+		formUserAction(testData);
+	}
+	
+	
+	public void nwfillUserDetail(LinkedHashMap<String, String> dataMap) {
+		//Created Dummy Text
+		lavanteUtils.fluentwait(AddNewUserSaveBtn);
+		String y="DUMMY";
+		String x="//*[contains(text(),'"+y+"')]/../..//input";
+		
+		if(dataMap.containsKey("ContactName")){
+			String n=dataMap.get("ContactName");
+			String a=x;
+			if(n.equalsIgnoreCase("ANY")){
+				n="Auto"+lavanteUtils.randomnum();
+				dataMap.put("ContactName", n);
+			}
+			a=a.replace(y, "User Name");
+			lavanteUtils.driver.findElement(By.xpath(a)).clear();
+			lavanteUtils.driver.findElement(By.xpath(a)).sendKeys(n);
+		}
+		if (dataMap.containsKey("Email")) {
+			String n=dataMap.get("Email");
+			String a=x;
+			a=a.replace(y, "Email");
+			if(!n.equalsIgnoreCase("ANY")){
+				n=lavanteUtils.randomnum(1000000) + dataMap.get("Email");
+				dataMap.put("Email", n);
+			}
+			lavanteUtils.driver.findElement(By.xpath(a)).clear();
+			lavanteUtils.driver.findElement(By.xpath(a)).sendKeys(n);
+		}
+		if (dataMap.containsKey("CreateAcc")) {
+			lavanteUtils.selectChkBox(CreateUserAccountChkBox, dataMap.get("CreateAcc"));
+		}
+		if (dataMap.containsKey("UserRole")) {
+			String n=dataMap.get("UserRole");
+			String a=x;
+			a=a.replace(y, "User Role");
+			a=a.replace("input", "div[2]");
+			if(!n.equalsIgnoreCase("ANY")){
+				lavanteUtils.driver.findElement(By.xpath(a)).click();
+				lavanteUtils.NwselectvalueFrmDpdn2(n);
+			}else{
+				a=a.replace("div[2]", "div[2]//select");
+				lavanteUtils.selectbyNumber(3, lavanteUtils.driver.findElement(By.xpath(a)));
+			}
+			
+		 }
+		if (dataMap.containsKey("Group")) {
+			
+			String n=dataMap.get("Group");
+			String a=x;
+			a=a.replace(y, "User Group");
+			a=a.replace("input", "div[2]");
+			if(!n.equalsIgnoreCase("ANY")){
+				lavanteUtils.driver.findElement(By.xpath(a)).click();
+				lavanteUtils.NwselectvalueFrmDpdn2(n);
+			}else{
+				a=a.replace("div[2]", "div[2]//select");
+				lavanteUtils.selectbyNumber(3, lavanteUtils.driver.findElement(By.xpath(a)));
+			}
+			
+		}
+		// OtherWise Called as division
+		if (dataMap.containsKey("InvitingOrg")) {
+			String n=dataMap.get("InvitingOrg");
+			String a=x;
+			a=a.replace(y, "Division");
+			a=a.replace("input", "div[2]");
+			if(!n.equalsIgnoreCase("ANY")){
+				lavanteUtils.driver.findElement(By.xpath(a)).click();
+				lavanteUtils.NwselectvalueFrmDpdn2(n);
+			}else{
+				a=a.replace("div[2]", "div[2]//select");
+				lavanteUtils.selectbyNumber(3, lavanteUtils.driver.findElement(By.xpath(a)));
+			}
+			
+		}
+		
+		if (dataMap.containsKey("AssociateSupplier")) {
+			String org = dataMap.get("AssociateSupplier");
+
+			if(org.contains("#")){
+				String[] s=org.split("#");
+				for(int ss=0;ss<s.length;ss++){
+					lavanteUtils.click(assctedSearchbox);
+					lavanteUtils.selectFrmDpdn(s[ss]);
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+
+	public void editUser(LinkedHashMap<String, String> testData) {
+
+		lavanteUtils.switchtoFrame(IFRAMESearchResult);
+		lavanteUtils.click(EditUserInformationIcon);
+		nwfillUserDetail(testData);
+		formUserAction(testData);
+		
+	}
+
+	private void clickAddUser() {
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.click(AddNewUserBtn);
+	}
+
+	public void formUserAction(LinkedHashMap<String, String> testData) {
+		lavanteUtils.fluentwait(AddNewUserSaveBtn);
+		if (testData.containsKey("Save")) {
+			lavanteUtils.click(AddNewUserSaveBtn);
+			lavanteUtils.switchtoFrame(null);
+		}
+		if (testData.containsKey("Cancel")) {
+			lavanteUtils.click( AddNewUserCancelBtn);
+		}
+		lavanteUtils.waitForTime(7000);
+		lavanteUtils.switchtoFrame(null);
+	}
+	
+	/**
+	 * MetodName : searchPerfromActions : Search for a user and perform actions
+	 * 
+	 * @param testData
+	 */
+	public void searchPerfromActions(LinkedHashMap<String, String> testData) {
+		searchUserContactName(testData);
+		otherActions(testData);
+	}
+
+	public void searchUserContactName(LinkedHashMap<String, String> testData) {
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(ContactNameSearchTxtBox);
+		if (testData.containsKey("ContactName")) {
+			ContactNameSearchTxtBox.clear();
+			lavanteUtils.typeString(testData.get("ContactName"), ContactNameSearchTxtBox);
+		}
+		if (testData.containsKey("Email")) {
+			lavanteUtils.typeString(testData.get("Email"), ContactEmailSearchTxtBox);
+		}
+		if (testData.containsKey("ContactPhone")) {
+			lavanteUtils.typeString(testData.get("ContactPhone"), ContactPhoneSearchTxtBox);
+		}
+		if (testData.containsKey("ContactFax")) {
+			lavanteUtils.typeString( testData.get("ContactFax"), ContactFaxSearchTxtBox);
+		}
+		if (testData.containsKey("CreateAcc")) {
+			lavanteUtils.clicks(AccountCreateddpdn);
+			lavanteUtils.selectvalueFrmDpdn(testData.get("CreateAcc"));
+		}
+		if (testData.containsKey("UserRole")) {
+			lavanteUtils.click(UserRoledpdn);
+			lavanteUtils.selectvalueFrmDpdn(testData.get("UserRole"));
+		}
+		if (testData.containsKey("UserGroup")) {
+			lavanteUtils.click(UserGrpdpdn);
+			lavanteUtils.selectFrmDpdn(testData.get("UserGroup"));
+		}
+		if (testData.containsKey("Division")) {
+			lavanteUtils.click(divisiondpdn);
+			lavanteUtils.selectvalueFrmDpdn(testData.get("Division"));
+		}
+		if (testData.containsKey("ShowInactive")) {
+			String text = testData.get("ShowInactive");
+			String att=InputshowInactivechkbx.getAttribute("Checked");
+			if(att==null){
+				if (text.equalsIgnoreCase("YES")) {
+					lavanteUtils.click(showInactivechkbx);
+				}
+			}else{
+				if (text.equalsIgnoreCase("NO")) {
+					lavanteUtils.click(showInactivechkbx);
+				}
+			}
+
+		}
+		
+		formAction(testData);
+
+		
+	}
+
+	public void formAction(LinkedHashMap<String, String> testData) {
+			if (testData.containsKey("ResetSearch")) {
+				lavanteUtils.click(ContactNameresetBtn);
+			} else {
+				lavanteUtils.click(ContactNameSearchBtn);
+			}
+		lavanteUtils.waitForTime(3000);
+		
+	}
+
+	public void otherActions(LinkedHashMap<String, String> testData) {
+		lavanteUtils.switchtoFrame(IFRAMESearchResult);
+		lavanteUtils.fluentwait(ContactNameChkBox);
+		lavanteUtils.click(RowAction);
+		Action(testData);
+	}
+	
+	
+	public LinkedHashMap<String, String>  Action(LinkedHashMap<String, String> testData) {
+		
+		if (testData.containsKey("ResetPassword")) {
+			lavanteUtils.click(ResetPasswordBtn);
+			lavanteUtils.waitForTime(5000);
+		}
+		if (testData.containsKey("DeleteUser")) {
+			lavanteUtils.click(DeleteUserIcon);
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.click(OkBtn);
+			lavanteUtils.waitForTime(5000);
+		}
+		if (testData.containsKey("Activate")) {
+			lavanteUtils.click(ActivateBtn);
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.click(OkBtn);
+			lavanteUtils.waitForTime(5000);
+		}
+		if (testData.containsKey("Deactivate")) {
+			lavanteUtils.click(DeactivateBtn);
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.click(OkBtn);
+			lavanteUtils.waitForTime(5000);
+		}
+		if (testData.containsKey("EditUser")) {
+			lavanteUtils.click(EditUserInformationIcon);
+			lavanteUtils.waitForTime(5000);
+		}if (testData.containsKey("DeleteUserAction")) {
+			lavanteUtils.click(DeleteUserAction);
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.click(OkBtn);
+			lavanteUtils.waitForTime(5000);
+		}
+		
+		lavanteUtils.waitForTime(4000);
+		return testData;
+	}
+	
+	public List<WebElement> iterateSearchHeaderFindColList(String col) {
+		List<WebElement> s = null;
+		int j = ColIdentify(col);
+		int y = j + 1;
+		String x = "#contact-details tr td:nth-child(" + j + ")";
+		s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		if ( col.contains("User Name") || col.contains("Email") ) {
+
+			x = "#contact-details tr td:nth-child(" + j + ") a";
+			s = lavanteUtils.driver.findElements(By.cssSelector(x));
+			//Supplier User Name is not hyperlink
+			if(!(s.size()>0)){
+				x = "#contact-details tr td:nth-child(" + j + ")";
+				s = lavanteUtils.driver.findElements(By.cssSelector(x));
+			}
+		}
+		
+		return s;
+	}
+	
+	private int ColIdentify(String col) {
+		int ki = 0;
+		boolean found = false;
+		lavanteUtils.fluentwait(Headers.get(0));
+		if (Headers.size() > 0) {
+			for (int i = 0; i < Headers.size(); i++) {
+				String x = Headers.get(i).getText().toLowerCase();
+				if (x.contains(col.toLowerCase())) {
+					ki = i;
+					// List start with 0 but need a number more than that to
+					// fetch in xpath
+					ki = i + 1;
+					found = true;
+					break;
+				}
+			}
+		}
+
+		if (found == false) {
+			Assert.assertTrue(found, "Col name not found" + col);
+		}
+		return ki;
+
+	}
+
+	
+	//View User
+
+	public String iterateViewUser(String col) {
+		String s = null;
+		lavanteUtils.switchtoFrame(null);
+		int j = viewUserIdentify(col);
+		//int y = j + 1;
+		String x = "//dl["+j+"]//dt/..//dd";
+		s=lavanteUtils.driver.findElements(By.xpath(x)).get(0).getText().trim();
+		return s;
+	}
+	
+	private int viewUserIdentify(String col) {
+		int ki = 0;
+		boolean found = false;
+		lavanteUtils.fluentwait(ViewUser.get(0));
+		if (ViewUser.size() > 0) {
+			for (int i = 0; i < ViewUser.size(); i++) {
+				String x = ViewUser.get(i).getText();
+				if (x.contains(col)) {
+					ki = i;
+					// List start with 0 but need a number more than that to
+					// fetch in xpath
+					ki = i + 1;
+					found = true;
+					break;
+				}
+			}
+		}
+
+		if (found == false) {
+			Assert.assertTrue(found, "Label name not found" + col);
+		}
+		return ki;
+
+	}
+
+
+	
+	
+	//End of View
+	
+	
+	//SANITY METHODS
+	public boolean verifyUsersSectionDisplayed() {
+		
+		boolean flag=false;
+		lavanteUtils.switchtoFrame(null);
+		flag=lavanteUtils.verifyElementDisplayed("Add User Button", AddNewUserBtn);
+		
+		return flag;
+	}
+
+	
+
+}

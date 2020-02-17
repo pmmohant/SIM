@@ -1,0 +1,699 @@
+package com.lavante.sim.customer.TestScripts.Supplier.EditProfile;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.CMDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 16-12-2015
+ * Created for Deliverable Test case
+ * Enhancement covered SIM -7108 ,SIM-7340,SIM-7341
+ * Ended on 04-02-2016
+ * @author Piramanayagam.S
+ *
+ */
+public class CMdelTC001 extends PageInitiator{
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+				
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		openAPP();	
+		//Assigning the driver to the object of lavante utils		
+		lavanteUtils.driver=driver;
+	
+		//Login
+		List listofdatafrm=lavanteUtils.login("DEL-1", browser);
+		LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String>();
+		LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+		String customerID=(String) listofdatafrm.get(1);
+		
+		String sname="select MAX(su.SupplierName) from Deliverable d,StatementOfWork s, Relationship R,Supplier su,MasterServiceAgreement m "
+				+ " where s.MSAID=m.MSAID and r.RelationShipID=m.RelationShipID and r.LavanteUID=su.LavanteUID and d.SowID=s.SowID "
+				+ " and r.CustomerID="+customerID;
+		sname=lavanteUtils.fetchDBdata(sname);
+		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String, String>();
+		dataMap.put("maintab","Supplier");
+		enobjhomePage.selectTab(dataMap);
+		
+		dataMap.put("profile", "");
+		dataMap.put("editProfile", "");
+		dataMap.put("Search", "");
+		dataMap.put("supplierName", sname);
+		dataMap.put("InactiveSup", "");
+		enobjsupplierBasicSearch.search(dataMap);		
+		enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+	
+		dataMap.put("tab", "enterpriseContract");
+		eneditProfile.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+
+	
+	}
+	
+	/**
+	 * Verify all error message and Save the deliverable
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@Test(dataProvider="SingleDELData",dataProviderClass=CMDataProvider.class)
+	public void SaveDeliverable001(LinkedHashMap<String,String> dataMap) throws Exception{	
+		Reporter.log("Test Started for Save Deliverable at:"+LavanteUtils.currenttime());
+		dataMap.put("save", "");
+		String ep=""+LavanteUtils.randomnum(999);
+		dataMap.put("DELinvamount", ep);
+		int amnt=eneditContractManagement.AddDelievarable(dataMap);
+		Reporter.log("Deliverable Added");
+		
+		String expamnt=""+amnt;
+		String expamntformat=".00";
+		int x=expamnt.length()-1;
+			for(int i=x;i>=0;i--)
+			{
+				
+				if(i==0){
+					expamntformat=expamnt.charAt(i)+","+expamntformat;
+				}else{
+					expamntformat=expamnt.charAt(i)+expamntformat;
+				}
+			}
+			
+		if(dataMap.containsKey("errormsg"))
+		{	
+			lavanteUtils.switchtoFrame(eneditContractManagement.DELIframe());
+			String appdata=dataMap.get("errormsg");
+			String act=eneditContractManagement.DELgetValidErrormsg().getText();
+			Assert.assertEquals(appdata, act);
+			dataMap.remove("save");
+			dataMap.put("clear", "");
+			eneditContractManagement.formActionDeliverable(dataMap);
+		}else {
+			int deliverable=2281;
+			deliverable=eneditContractManagement.deliverable;
+			String del=""+deliverable;
+			int is=0;
+			int j=0;
+			outr:for( is=0;is<eneditContractManagement.DELnolist().size();is++)
+			{
+				if(del.equalsIgnoreCase(eneditContractManagement.DELnolist().get(is).getText()))
+				{
+				/*
+				if(cmm.DELsownolist().get(is).getText().equalsIgnoreCase(SR))
+				{*/
+					j=is+1;
+					Reporter.log("Created Deliverable available in the list"+del);
+					String appamnt=driver.findElement(By.xpath("//tr["+j+"]//a[contains(@href,'viewDel')]/../..//td[8]")).getText();
+					Reporter.log("In app the amnt:"+appamnt+",expected:"+ep);
+					ep=ep+".00";
+					Assert.assertEquals(appamnt,ep,"Amount not matched in View Deliverable page,Actual:"+appamnt+"Expected:"+ep);
+					
+					break outr;
+				}
+			}
+				
+				
+				
+		}
+		
+		Reporter.log("Test Ended at:"+currenttime());
+	}
+	
+	/**
+	 * Verify 
+	 * Estimated Est TAX RATE IS displayed 
+	 * Estimated Est TAX RATE IS Read only 
+	 * Invoice amount IS displayed 
+	 * Expected to client IS displayed 
+	 * Expected to client IS Non selected 
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@Test
+	public void VerifyFields002() throws Exception{	
+			
+			Reporter.log("Test Started for Tax Field Non Editable at:"+currenttime());
+
+			SoftAssert softAssert = new SoftAssert();
+			LinkedHashMap<String,String> dataMap=new LinkedHashMap<String,String>();
+			eneditContractManagement.AddDelievarable(dataMap);
+			Reporter.log("Verify Est Tax"+eneditContractManagement.DELestTaxPercent().isDisplayed());
+			softAssert.assertTrue(eneditContractManagement.DELestTaxPercent().isDisplayed(), "Estimated Tax is not available in the DELIVERABLE page");
+			Reporter.log("Verify Est Tax Read only"+eneditContractManagement.DELesttaxRatereadonly().isDisplayed());
+			softAssert.assertTrue(eneditContractManagement.DELesttaxRatereadonly().isDisplayed(), "Estimated Tax is not readonly field in the DELIVERABLE page");
+			Reporter.log("Verify Invoice Amount only"+eneditContractManagement.DELinvamnt().isDisplayed());
+			softAssert.assertTrue(eneditContractManagement.DELinvamnt().isDisplayed(), "Invoice amount field available in the DELIVERABLE page");
+			Reporter.log("Verify Expense to Client"+eneditContractManagement.DELExptoClient().isDisplayed());
+			softAssert.assertTrue(eneditContractManagement.DELExptoClient().isDisplayed(), "Del Exp to client is available field in the DELIVERABLE page");
+		//	Reporter.log("Verify Selection of Expense to Client");
+		//	softAssert.assertFalse(eneditContractManagement.DELExptoClient().isSelected(), "Del Exp to client is selected by default in the DELIVERABLE page");
+			
+			softAssert.assertAll();
+			
+			Reporter.log("Test Ended for Tax Field Non Editable at:"+LavanteUtils.currenttime());
+			
+		}
+
+	/**
+	 * Copy Deliverable-check the same data appears or not
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 */
+	@Test(dataProvider="SingleDELValue",dataProviderClass=CMDataProvider.class)
+	public void VerifyCOPYDeliverable003(LinkedHashMap<String,String> dataMap) throws Exception{	
+		
+		Reporter.log("Test Started for Copy Deliverable at:"+LavanteUtils.currenttime());
+		
+		dataMap.put("save", "");
+		boolean flag=false;
+		String del=""+eneditContractManagement.AddDelievarable(dataMap);
+		
+		lavanteUtils.waitForTime(2000);
+		for(int i=eneditContractManagement.DELnolist().size()-1;i>=0;i--){
+			if(del.equalsIgnoreCase(eneditContractManagement.DELnolist().get(i).getText()))
+			{
+				Reporter.log("Created Deliverable Matched:"+del);
+				
+				lavanteUtils.click(eneditContractManagement.DELCopy().get(i));
+				Reporter.log("Clicked on Copy:");
+				
+				lavanteUtils.switchtoFrame(eneditContractManagement.DELIframeCopy());
+				SoftAssert softAssert = new SoftAssert();
+				Reporter.log("Verification of Deliverable ");
+				softAssert.assertEquals(eneditContractManagement.DELdeliverable().getAttribute("value"), del,
+						"Deliverable unmatched expected :"+del+"But value was:"+eneditContractManagement.DELdeliverable().getAttribute("value"));
+				Reporter.log("Verification of Deliverable Payment Status ");
+				softAssert.assertEquals(eneditContractManagement.DELpaymntstatusdpdn().getText(),dataMap.get("DELpaymentstatus"),
+						"DEL paymentstatus unmatched expected :"+dataMap.get("DELpaymentstatus")+"But value was:"+eneditContractManagement.DELpaymntstatusdpdn().getText());
+				Reporter.log("Verification of Deliverable Currency ");
+				softAssert.assertEquals(eneditContractManagement.DELcurrencydpdn().getText(),dataMap.get("DELcurrency"),
+						"DEL currency unmatched expected :"+dataMap.get("DELcurrency")+"But value was:"+eneditContractManagement.DELcurrencydpdn().getText());
+				Reporter.log("Verification of Deliverable Itemtype");
+				softAssert.assertEquals(eneditContractManagement.DELitemtypedpdn().getText(),dataMap.get("DELitemtype"),
+						"DEL itemtype unmatched expected :"+dataMap.get("DELitemtype")+"But value was:"+eneditContractManagement.DELitemtypedpdn().getText());
+				Reporter.log("Verification of Deliverable Location ");
+				softAssert.assertEquals(eneditContractManagement.DELdellocationdpdn().getText(),dataMap.get("DELdeliverablelocation"),
+						"DEL location unmatched expected :"+dataMap.get("DELdeliverablelocation")+"But value was:"+eneditContractManagement.DELdellocationdpdn().getText());
+				Reporter.log("Verification of MSA TYPE ");
+				softAssert.assertEquals(eneditContractManagement.Delmsatypedpdn().getText(),dataMap.get("MSATYPE"),
+						"DEL MSA TYPE unmatched expected :"+dataMap.get("MSATYPE")+"But value was:"+eneditContractManagement.Delmsatypedpdn().getText());
+				Reporter.log("Verification of MSA Num ");
+				softAssert.assertEquals(eneditContractManagement.Delmsanumdpdn().getText(),eneditContractManagement.MSANUMBER,
+						"DEL MSANUMBER unmatched expected :"+eneditContractManagement.MSANUMBER+"But value was:"+eneditContractManagement.Delmsanumdpdn().getText());
+				Reporter.log("Verification of SOW Num ");
+				softAssert.assertEquals(eneditContractManagement.DELsownumdpdn().getText(),eneditContractManagement.SOWNumber,
+						"DEL MSANUMBER unmatched expected :"+eneditContractManagement.SOWNumber+"But value was:"+eneditContractManagement.DELsownumdpdn().getText());
+				
+				softAssert.assertAll();
+				flag=true;
+				break;
+				
+			} 
+		}
+		
+		if(flag==false){
+				Assert.assertTrue(false);
+			
+		}
+		Reporter.log("Test Ended for Copy Deliverable at:"+LavanteUtils.currenttime());
+	}
+		
+	/**
+	 * Use Copy Deliverable to create new deliverable
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider="SingleDELData",dataProviderClass=CMDataProvider.class)
+	public void COPYDeliverable004(LinkedHashMap<String,String> dataMap) throws Exception{	
+		Reporter.log("Test Started for Copy Deliverable at:"+LavanteUtils.currenttime());
+		
+		dataMap.put("save", "");
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		eneditContractManagement.AddDelievarable(dataMap);
+		
+		int deliverable=2281;
+		deliverable=eneditContractManagement.deliverable;
+		String del=""+deliverable;
+		Reporter.log("Created New Deliverable:"+del);
+		
+		String x=del;
+		if(del.length()>1){
+			x = del.substring(0, Math.min(del.length(),2));
+		}
+		boolean old=false,nw=false;
+		
+		outr:for(int i=eneditContractManagement.DELnolist().size()-1;i>=0;i--){			
+			if(del.equalsIgnoreCase(eneditContractManagement.DELnolist().get(i).getText()))
+			{
+				Reporter.log("Created New Deliverable available in the list:"+del);	
+				
+				lavanteUtils.click(eneditContractManagement.DELCopy().get(i));
+				
+				Reporter.log("Clicked on Copy link:");
+				lavanteUtils.switchtoFrame(eneditContractManagement.DELIframe());
+				
+				int rand=Integer.parseInt(x)+1;
+				String nwdp=""+rand;
+				eneditContractManagement.DELdeliverable().clear();
+				lavanteUtils.typeinEdit(nwdp,eneditContractManagement.DELdeliverable());
+				eneditContractManagement.DELitemnumbr().clear();
+				lavanteUtils.typeinEdit(nwdp,eneditContractManagement.DELitemnumbr());
+				
+				eneditContractManagement.formActionDeliverable(dataMap);
+				Reporter.log("Created Copy of the Deliverable:"+nwdp);
+				lavanteUtils.waitForTime(2000);
+				
+				for(int ij=eneditContractManagement.DELnolist().size()-1;ij>=0;ij--){
+			
+					if(del.equalsIgnoreCase(eneditContractManagement.DELnolist().get(ij).getText()))
+					{ 	Reporter.log("Verification of Old Deliverable");
+						softassert.assertEquals(eneditContractManagement.DELnolist().get(ij).getText(), del,
+								"Deliverable unmatched expected :"+del+"But value was:"+eneditContractManagement.DELnolist().get(ij).getText());
+						old=true;
+					}
+					if(nwdp.equalsIgnoreCase(eneditContractManagement.DELnolist().get(ij).getText()))
+					{
+						Reporter.log("Verification of New Deliverable:");
+						softassert.assertEquals(eneditContractManagement.DELnolist().get(ij).getText(), nwdp,
+								"Deliverable unmatched expected :"+nwdp+"But value was:"+eneditContractManagement.DELnolist().get(ij).getText());
+						softassert.assertEquals(eneditContractManagement.DELitmnumbr().get(ij).getText(), nwdp,
+								"Deliverable unmatched expected :"+nwdp+"But value was:"+eneditContractManagement.DELitmnumbr().get(ij).getText());
+						
+						softassert.assertEquals(eneditContractManagement.DELsownolist().get(ij).getText(), eneditContractManagement.SOWNumber,
+								"Deliverable SOW Number unmatched expected :"+eneditContractManagement.SOWNumber+"But value was:"+eneditContractManagement.DELsownolist().get(ij).getText());
+						softassert.assertEquals(eneditContractManagement.DELmsanolist().get(ij).getText(), eneditContractManagement.MSANUMBER,
+								"Deliverable MSA Number unmatched expected :"+eneditContractManagement.MSANUMBER+"But value was:"+eneditContractManagement.DELmsanolist().get(ij).getText());
+						/*String currency=dataMap.get("DELcurrency");
+						if((currency.contains("(") & (currency.contains(")")))){
+							String[] das=currency.split("\\(");
+							String[] dase=das[1].split("\\)");
+							
+						softassert.assertEquals(cmm.DELcurrencylist().get(ij).getText(),dase[0],
+								"Deliverable Currency unmatched expected :"+dase[0]+"But value was:"+cmm.DELcurrencylist().get(ij).getText()); }*/
+						nw=true;
+					} 
+					Reporter.log(nw+":New Del Verification status ,Old Verifaction Status:"+old,true);
+					if(nw==true&&old==true){
+						flag=true;
+						 break outr;
+					}
+				}
+				
+			} 
+		}
+		
+		if(flag==false)
+		{
+			softassert.assertTrue(false,"Data not matched");
+		}
+		softassert.assertAll();
+		Reporter.log("Test Ended:"+currenttime());
+	}
+
+	/**
+	 * Delete deliverable-Delete the deliverable
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider="SingleDELData",dataProviderClass=CMDataProvider.class)
+	public void DelDeliverable005(LinkedHashMap<String,String> dataMap) throws Exception{	
+		Reporter.log("Test Started for Delete Deliverable at:"+LavanteUtils.currenttime());
+		SoftAssert softAssert=new SoftAssert();
+		dataMap.put("save", "");
+		boolean flag=false;
+		eneditContractManagement.AddDelievarable(dataMap);
+		
+		int deliverable=2281;
+		deliverable=eneditContractManagement.deliverable;
+		String del=""+deliverable;
+		
+		lavanteUtils.waitForTime(2000);
+		for(int i=eneditContractManagement.DELnolist().size()-1;i>=0;i--){
+			if(del.equalsIgnoreCase(eneditContractManagement.DELnolist().get(i).getText()))
+			{
+				Reporter.log("Created Deliverable available in the list:"+del);
+				//Delete the added deliverable
+				lavanteUtils.click(eneditContractManagement.DELdelete().get(i));
+				lavanteUtils.fluentwait(eneditContractManagement.DELdeleteOKbtn());
+				lavanteUtils.click(eneditContractManagement.DELdeleteOKbtn());
+				lavanteUtils.waitForTime(2000);
+				Reporter.log("Clicked on Delete:"+del);
+				
+				//Verification of Deleted deliverable not in the list
+				for(int ij=0;ij<eneditContractManagement.DELnolist().size();ij++){
+					
+					if(del.equalsIgnoreCase(eneditContractManagement.DELnolist().get(ij).getText()))
+					{ 	
+						Reporter.log("Deleted Deliverable Available in the list"+del);
+						softAssert.assertTrue(false,"Delete functionality not working");
+					} else{
+						softAssert.assertTrue(true,"Available");
+						flag=true;
+					} 
+				}
+			}
+		}
+		if(flag==false)
+		{
+			softAssert.assertTrue(false,"Data not matched");
+		}
+		softAssert.assertAll();
+		Reporter.log("Test Ended AT:"+LavanteUtils.currenttime());
+	}
+		
+	/**
+	 * Edit deliverable-edit itemnumber
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider="SingleDELData",dataProviderClass=CMDataProvider.class)
+	public void EditDeliverable006(LinkedHashMap<String,String> dataMap) throws Exception{	
+		Reporter.log("Test Started for Edit Deliverable at:"+LavanteUtils.currenttime());
+		dataMap.put("save", "");
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		eneditContractManagement.AddDelievarable(dataMap);
+		
+		int deliverable=2281;
+		deliverable=eneditContractManagement.deliverable;
+		String del=""+deliverable;
+		
+		
+		lavanteUtils.waitForTime(2000);
+		String x=del;
+		x = del.substring(0, Math.min(del.length(),2));
+		outr:for(int i=eneditContractManagement.DELnolist().size()-1;i>=0;i--){
+			if(del.equalsIgnoreCase(eneditContractManagement.DELnolist().get(i).getText()))
+			{
+				Reporter.log("Created New Deliverable available in the list:"+del);	 
+				//Edit the added deliverable
+				lavanteUtils.click(eneditContractManagement.DELedit().get(i));
+
+				lavanteUtils.switchtoFrame(eneditContractManagement.DELIframe());
+				
+				int rand=Integer.parseInt(x)+1;
+				String nwdp=""+rand;
+
+				eneditContractManagement.DELitemnumbr().clear();
+				lavanteUtils.typeinEdit(nwdp,eneditContractManagement.DELitemnumbr());
+				eneditContractManagement.formActionDeliverable(dataMap);
+				Reporter.log("Editing of Item number with new:"+nwdp);
+
+				//Verification of Edited deliverable  in the list
+				for(int ij=0;ij<eneditContractManagement.DELnolist().size();ij++){
+					
+					if(del.equalsIgnoreCase(eneditContractManagement.DELnolist().get(ij).getText()))
+					{ 	
+						Reporter.log("Deliverable Value:"+del+",Actual:"+eneditContractManagement.DELnolist().get(ij).getText());
+						softassert.assertEquals(eneditContractManagement.DELnolist().get(ij).getText(), del,
+								"Deliverable unmatched expected :"+del+"But value was:"+eneditContractManagement.DELnolist().get(ij).getText());
+						Reporter.log("Deliverable Item Number:"+nwdp+",Actual:"+eneditContractManagement.DELitmnumbr().get(ij).getText());
+						softassert.assertEquals(eneditContractManagement.DELitmnumbr().get(ij).getText(), nwdp,
+								"Deliverable item number not edited ,expected :"+nwdp+"But value was:"+eneditContractManagement.DELitmnumbr().get(ij).getText());
+						
+						flag=true;
+						break outr;
+					}
+				}
+			}
+		}
+		if(flag==false)
+		{
+			softassert.assertTrue(false,"Please Retest");
+		}
+		softassert.assertAll();
+		Reporter.log("Test Ended  Deliverable at:"+LavanteUtils.currenttime());
+	}
+
+	/**
+	 * Edit deliverable- Verify fields
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider="SingleDELValue",dataProviderClass=CMDataProvider.class)
+	public void VerifyEditDeliverable007(LinkedHashMap<String,String> dataMap) throws Exception{	
+		Reporter.log("Test Started for EDIT Deliverable at:"+LavanteUtils.currenttime());
+	
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		dataMap.put("save", "");	
+		int deliverable=eneditContractManagement.AddDelievarable(dataMap);
+		String del=""+deliverable;
+		
+		
+		Reporter.log("Created New Deliverable:"+del);
+		lavanteUtils.waitForTime(2000);
+		outr:for(int i=eneditContractManagement.DELnolist().size()-1;i>=0;i--){
+			if(del.equalsIgnoreCase(eneditContractManagement.DELnolist().get(i).getText()))
+			{
+			 	
+				Reporter.log("Created New Deliverable available in the list:"+del);	 	
+				lavanteUtils.click(eneditContractManagement.DELedit().get(i));
+				
+				lavanteUtils.waitForTime(6000);
+				lavanteUtils.switchtoFrame(eneditContractManagement.DELEditIframe());
+				
+				Reporter.log("In  Edit Page Verification:");
+				lavanteUtils.waitForTime(2000);
+						
+						Reporter.log("Deliverable");
+						softassert.assertEquals(eneditContractManagement.DELdeliverable().getAttribute("value"), del,
+								"Deliverable unmatched expected :"+del+"But value was:"+eneditContractManagement.DELdeliverable().getAttribute("value"));
+						Reporter.log("Deliverable Payment Status");
+						softassert.assertEquals(eneditContractManagement.DELpaymntstatusdpdn().getText(),dataMap.get("DELpaymentstatus"),
+								"DEL paymentstatus unmatched expected :"+dataMap.get("DELpaymentstatus")+"But value was:"+eneditContractManagement.DELpaymntstatusdpdn().getText());
+						Reporter.log("Deliverable Currency");
+						softassert.assertEquals(eneditContractManagement.DELcurrencydpdn().getText(),dataMap.get("DELcurrency"),
+								"DEL currency unmatched expected :"+dataMap.get("DELcurrency")+"But value was:"+eneditContractManagement.DELcurrencydpdn().getText());
+						Reporter.log("Deliverable Item Type");
+						softassert.assertEquals(eneditContractManagement.DELitemtypedpdn().getText(),dataMap.get("DELitemtype"),
+								"DEL itemtype unmatched expected :"+dataMap.get("DELitemtype")+"But value was:"+eneditContractManagement.DELitemtypedpdn().getText());
+						Reporter.log("Deliverable Location");
+						softassert.assertEquals(eneditContractManagement.DELdellocationdpdn().getText(),dataMap.get("DELdeliverablelocation"),
+								"DEL location unmatched expected :"+dataMap.get("DELdeliverablelocation")+"But value was:"+eneditContractManagement.DELdellocationdpdn().getText());
+					/*	softassert.assertEquals(dp.Delmsatypedpdn().getText(),dataMap.get("MSATYPE"),
+								"DEL MSA TYPE unmatched expected :"+dataMap.get("MSATYPE")+"But value was:"+dp.Delmsatypedpdn().getText());
+						softassert.assertEquals(dp.Delmsanumdpdn().getText(),dp.MSANUMBER,
+								"DEL MSANUMBER unmatched expected :"+dp.MSANUMBER+"But value was:"+dp.Delmsanumdpdn().getText());
+						softassert.assertEquals(dp.DELsownumdpdn().getText(),dp.SOWNumber,
+								"DEL MSANUMBER unmatched expected :"+dp.SOWNumber+"But value was:"+dp.DELsownumdpdn().getText());
+					*/	
+						
+						flag=true;
+						break outr;
+					}
+				
+		}
+		if(flag==false)
+		{
+			softassert.assertTrue(false,"Please Retest");
+		}
+		softassert.assertAll();
+		Reporter.log("Test Ended for edit Deliverable at:"+LavanteUtils.currenttime());
+	}
+	
+	/**
+	 * Edit Deliverable- Adding duplicate item number
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider="SingleDELData",dataProviderClass=CMDataProvider.class)
+	public void DuplicateDeliverable008(LinkedHashMap<String,String> dataMap) throws Exception{	
+		Reporter.log("Test Started for Copy Deliverable:"+LavanteUtils.currenttime());
+		
+		dataMap.put("save", "");
+		dataMap.put("emptyDel", "");
+		
+		boolean flag=false;
+		eneditContractManagement.AddDelievarable(dataMap);
+		
+		int deliverable=2281;
+		deliverable=eneditContractManagement.deliverable;
+		String del=""+deliverable;
+
+		dataMap.put("errormsg", "");
+		
+		lavanteUtils.waitForTime(2000);
+		for(int i=eneditContractManagement.DELnolist().size()-1;i>=0;i--){
+			if(del.equalsIgnoreCase(eneditContractManagement.DELnolist().get(i).getText()))
+			{
+				Reporter.log("Created New Deliverable available in the list:"+del);	
+			 	dataMap.put("DELitemNumber", eneditContractManagement.DELitmnumbr().get(i).getText());
+			 	dataMap.remove("emptyDel");
+			 	eneditContractManagement.AddDelievarable(dataMap);
+			 	lavanteUtils.waitForTime(2000);
+			 	Reporter.log("Same Item Number Test :");
+			 	/*Assert.assertTrue(eneditContractManagement.DELdeleteOKbtn().isDisplayed(),"Item number is not unique");
+			 	lavanteUtils.click(eneditContractManagement.DELdeleteOKbtn());*/
+			 	flag=true;
+			 	break;
+			 	
+			}
+		}
+		
+		if(flag==false)
+		{
+			Assert.assertTrue(false,"Data not matched");
+		}
+		
+		Reporter.log("Test Ended at:"+LavanteUtils.currenttime());
+	}
+
+	/**
+	 * 	Validate error message based on Item type dropdown selection
+	 * Verify List Price,Discount ,Cost Savings field displaying
+	 * 
+	 * @param dataMap
+	 * @author Piramanayagam.S
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider="CONDITIONALVERIFY",dataProviderClass=CMDataProvider.class)
+	public void ConditionalVerifyFields009(LinkedHashMap<String,String> dataMap) throws Exception{	
+	
+				Reporter.log("Test Started for Conditional Verify:"+LavanteUtils.currenttime());
+	
+				SoftAssert softassert=new SoftAssert();
+				if(dataMap.containsKey("DELitemtype"))
+				{
+					eneditContractManagement.AddDelievarable(dataMap);
+					Reporter.log("Clicked Save on Deliverable");
+					
+					lavanteUtils.switchtoFrame(eneditContractManagement.DELIframe());
+					
+					String sd= dataMap.get("DELitemtype");
+					if(sd.equalsIgnoreCase("Services"))
+					{		String apperrormsg=null;
+							if(dataMap.containsKey("errormsg")){
+							dataMap.put("save", "");
+							eneditContractManagement.formActionDeliverable(dataMap);
+							
+							lavanteUtils.switchtoFrame(eneditContractManagement.DELIframe());
+							
+							String experrormsg=dataMap.get("errormsg");
+							if(experrormsg.length()>0){
+							String[] sperrStrings=experrormsg.split("#");
+							String dataerr=null;
+								for(int j=0;j<sperrStrings.length;j++)
+								{ 	
+									List<WebElement> error=eneditContractManagement.DELgetErrormsgList();
+									for(int i=0;i<error.size();i++)
+									{
+										apperrormsg=error.get(i).getText();
+										dataerr=sperrStrings[j];
+										if(dataerr.equalsIgnoreCase(apperrormsg)){
+											dataerr=sperrStrings[j]; 
+											Reporter.log("Error msg,"+dataerr+",APP:"+apperrormsg);
+											softassert.assertEquals(apperrormsg,dataerr,"");
+										}
+									}
+								}
+							}
+							}else{
+								Reporter.log("Cost Savings PRICE"+eneditContractManagement.DELMandlistPrice().isDisplayed());
+								softassert.assertTrue(eneditContractManagement.DELMandlistPrice().isDisplayed(),"");
+								Reporter.log("Cost Savings PRICE"+eneditContractManagement.DELManddiscPrice().isDisplayed());
+								softassert.assertTrue(eneditContractManagement.DELManddiscPrice().isDisplayed(),"");
+								Reporter.log("Cost Savings PRICE"+eneditContractManagement.DELMandcostsaving().isDisplayed());
+								softassert.assertTrue(eneditContractManagement.DELMandcostsaving().isDisplayed(),"");
+							}
+							
+
+						
+					} else if(sd.equalsIgnoreCase("Materials")||sd.equalsIgnoreCase("Travel")  ){
+						Reporter.log("LIST PRICE"+eneditContractManagement.DELlistPrice().isDisplayed());
+						softassert.assertFalse(eneditContractManagement.DELlistPrice().isDisplayed(),"List price is displayed for Item type Materials and Travel");
+						Reporter.log("Discount PRICE"+eneditContractManagement.DELdiscountPrice().isDisplayed());
+						softassert.assertFalse(eneditContractManagement.DELdiscountPrice().isDisplayed(),"Discount price is displayed for Item type Materials and Travel");
+						Reporter.log("Cost Savings PRICE"+eneditContractManagement.DELcostingSavings().isDisplayed());
+						softassert.assertFalse(eneditContractManagement.DELcostingSavings().isDisplayed(),"Cost price is displayed for Item type Materials and Travel");
+					}
+					
+				
+				}
+				
+				softassert.assertAll();
+				Reporter.log("Test Ended for Conditional Verify:"+LavanteUtils.currenttime());
+			}
+	
+	
+	/**
+	 * After MEthod
+	 */
+	 @AfterMethod
+	public void aftermethod(){
+		 refreshPage();
+		enobjhomePage.popupclose();
+		
+		
+	}
+	
+	
+	@AfterClass
+	public void SetupafterClassmethod(){
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String,String>();
+		dataMap.put("SaveExit", "");
+		eneditProfile.formAction(dataMap);	
+		
+		enobjhomePage.popupclose();
+		enobjhomePage.logout();
+		
+		quitBrowser();
+	}
+
+
+}
+

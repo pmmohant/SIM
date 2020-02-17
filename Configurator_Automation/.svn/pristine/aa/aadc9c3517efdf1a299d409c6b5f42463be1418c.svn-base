@@ -1,0 +1,462 @@
+package com.lavante.configurator.TestScripts;
+
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.configurator.Common.Util.LavanteUtils;
+import com.lavante.configurator.pageobjects.pageInitiator;
+
+/**
+ * @author Piramanayagam
+ *
+ */
+public class ConfigSanity extends pageInitiator {
+
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void preCondition(@Optional(LavanteUtils.Platform) String platform,
+			@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String version)
+			throws Exception {
+
+		launchAppThroughPOM(platform, browser, version);
+		initiate();
+		openAPP();
+
+		loginPage.login();
+
+		waitForTime(3000);
+		homePage.SelectBuyer("ANY");
+
+		waitForTime(3000);
+	}
+
+	/**
+	 * Feature Sanity Test Verify all tab and all Element
+	 * 
+	 * @author Priyanka.Mohanty
+	 * @throws Exception
+	 */
+	@Test
+	public void FeatureSanityTest() throws Exception{
+		
+		SoftAssert softAssert=new SoftAssert();
+		boolean flag=false;
+		
+		
+		fluentwait(sanityTest.Menu_feature());
+		click(sanityTest.Menu_feature());
+
+		fluentwait(sanityTest.featuresettings_AlertsandNotification());
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_AlertsandNotification());
+		Reporter.log("Alerts And Notification in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Alerts And Notification in Feature Setting is not displayed");
+		
+		
+
+		flag=isElementDisplayed(sanityTest.featuresettings_AllowEditinviteafterinvitehasbeensent());
+		Reporter.log("Allow Edit invite after invite has been sent in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Allow Edit invite after invite has been sent in Feature Setting page is not displayed");
+		 
+		
+
+		flag=isElementDisplayed(sanityTest.featuresettings_Allowmultiplecontactsforinvite());
+		Reporter.log("Allow multiple contacts for invite in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Allow multiple contacts for invite in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_Autocreateinvoicefordeliverable());
+		Reporter.log("Auto create invoice for deliverable in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Auto create invoice for deliverable in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_Autocreateinvoicequery());
+		Reporter.log("Auto create invoice query in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Auto create invoice query in Feature Setting is not displayed");
+		
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_AutoPassLegalIDValidation());
+		Reporter.log("Auto Pass LegalID Validation in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Auto Pass LegalID Validation in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_BatchInvoiceRollbackStatus());
+		Reporter.log("Batch Invoice Rollback Status in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Batch Invoice Rollback Status in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_Blockmultipleclientnameinvoicebatching());
+		Reporter.log("Block multiple client name invoice batching in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Block multiple client name invoice batching in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_Cardpaymenttermnote());
+		Reporter.log("Card payment term note in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Card payment term note in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_ContactIdforpolarisintegrationoutreach());
+		Reporter.log("Contact Id for polar is integration outreach in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Contact Id for polar is integration outreach in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_ContractManagement());
+		Reporter.log("Contract Management in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Contract Management in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_CreditCardPaymentemailnote());
+		Reporter.log("Credit Card Payment email note in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Credit Card Payment email notein Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_CustomfieldmappingforPolarisIntegration());
+		Reporter.log("Custom field mapping for Polaris Integration in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Custom field mapping for Polaris Integration in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_CustomUIFieldIdforMSANumber());
+		Reporter.log("Custom UI Field Id for MSA Number in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Custom UI Field Id for MSA Number in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_CustomUIFieldIdforSOWNumber());
+		Reporter.log("Custom UI Field Id for SOW Number in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Custom UI Field Id for SOW Number in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_DisableExtendInvite());
+		Reporter.log("Disable Extend Invite in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Disable Extend Invite in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_DisableSmallBusinessDiversityCheck());
+		Reporter.log("Disable Small Business Diversity Check in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Disable Small Business Diversity Check in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_DisableVATorUIDValidation());
+		Reporter.log("Disable VAT or UIDValidation in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Disable VAT or UIDValidation in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_DisableVATValidation());
+		Reporter.log("Disable VA Validation in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Disable VA Validation in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_EnableInvoiceDeliverable());
+		Reporter.log("Enable Invoice Deliverable in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Enable Invoice Deliverable in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_Enableinvoiceupload());
+		Reporter.log("Enable invoice upload in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Enable invoice upload in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_EnableMultiSelectforPaymentCenterPayment());
+		Reporter.log("Enable Multi Select for Payment Center Payment in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Enable Multi Select for Payment Center Payment in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_Enableinvoiceviewforsupplier());
+		Reporter.log("Enable invoice view for supplier in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Enable invoice view for supplier in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_EnableOIGFederalList());
+		Reporter.log("Enable OIG Federal List in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Enable OIG Federal List in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_EnableOIGStateList());
+		Reporter.log("Enable OIG State List in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Enable OIG State List in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_EnablePaymentCenterDivisionbasedPayment());
+		Reporter.log("Enable Payment Center Division based Payment in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Enable Payment Center Division based Payment in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_Enableprescreening());
+		Reporter.log("Enable prescreening in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Enable prescreening in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_EnableSAM());
+		Reporter.log("Enable SAM in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Enable SAM in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_EnableTempApproval());
+		Reporter.log("Enable Temp Approval in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Enable Temp Approval in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_EnabletheCreditCardVendorRecordOnly());
+		Reporter.log("Enable the Credit Card Vendor Record Only in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Enable the Credit Card Vendor Record Only in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_EnabletheInvoiceBatchPaymentModule());
+		Reporter.log("Enable the Invoic eBatch Payment Module in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Enable the Invoic eBatch Payment Module in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_EnableW8());
+		Reporter.log("EnableW8 in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"EnableW8 in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_EnableW9());
+		Reporter.log("EnableW9 in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"EnableW9 in Feature Setting is not displayed");
+
+		flag=isElementDisplayed(sanityTest.featuresettings_Groupstonotifysupplierprofiledatachange());
+		Reporter.log("Groups to notify supplier profile data change in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Groups to notify supplier profile data change in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_Healthscorespendfileduration());
+		Reporter.log("Health score spend file duration in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Health score spend file duration in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_HideDeleteW8W9button());
+		Reporter.log("Hide Delete W8W9 button in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Hide Delete W8W9 button  in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_HideInsuranceTableOrJustification());
+		Reporter.log("Hide Insurance Table Or Justification in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Hide Insurance Table Or Justification in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_HideTakeControlButton());
+		Reporter.log("Hide Take Control Button in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Hide Take Control Button in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_Includespendfrominvoice());
+		Reporter.log("Include spend from invoice in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Include spend from invoice  in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IntegrationRest());
+		Reporter.log("Integration Rest in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Integration Rest in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IntegrationSave());
+		Reporter.log("Integration Save in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Integration Save in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_Intergration());
+		Reporter.log("Integration in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Integration in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_InviteSupplierEmailOrFaxCustomerSpecific());
+		Reporter.log("Invite Supplier Email Or Fax Customer Specific in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Invite Supplier Email Or Fax Customer Specific in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_InviteSupplierEmailRequired());
+		Reporter.log("Invite Supplier Email Required in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Invite Supplier Email Required in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_InviteSupplierFaxRequired());
+		Reporter.log("Invite Supplier Fax Requiredin Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Invite Supplier Fax Required in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_Invoice());
+		Reporter.log("Invoice in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Invoice in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_Invoicenumberprefixforautocreatedinvoice());
+		Reporter.log("Invoice number prefix for auto created invoice in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Invoice number prefix for auto created invoice in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IsDefaultsuppliersearchfilterconfigured());
+		Reporter.log("Is Default supplier search filter configured in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Default supplier search filter configured in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IsERPintegrationdisabled());
+		Reporter.log("Is ERP integration disabled in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is ERP integration disabled in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IsHealthScoreEnabled());
+		Reporter.log("Is Health Score Enabled in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Health Score Enabled in Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IsInviteConfirmationRequired());
+		Reporter.log("Is Multi ERP Systems enabledin Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Multi ERP Systems enabledin Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IsInvitePrefixConfigured());
+		Reporter.log("Is Invite Prefix Configured in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Invite Prefix Configured in Feature Setting is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IsInvitingOrganizationEnabled());
+		Reporter.log("Is Inviting Organization Enabled in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Inviting Organization Enabled in Feature Setting is not displayed");
+		
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IsMultiERPSystemsenabled());
+		Reporter.log("Is Multi ERP Systems enabledin Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Multi ERP Systems enabledin Feature Setting is not displayed");
+		
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IsPreferredPaymenttypeEFT());
+		Reporter.log("Is Preferred Payment type EFTin Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Preferred Payment type EFTin Feature Setting is not displayed");
+		
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IsSupplierERPIDnotshowninsearchresults());
+		Reporter.log("Is Supplier ERP ID not shown in search resultsin Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Supplier ERP ID not shown in search resultsin Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IsSupplierGroupRequired());
+		Reporter.log("Is Supplier Group Required in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Supplier Group Required in Feature Setting is not displayed");
+		
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IsTalentAgentRequired());
+		Reporter.log("Is Talent Agent Requiredin Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Talent Agent Requiredin Feature Setting is not displayed");
+		
+		
+		flag=isElementDisplayed(sanityTest.featuresettings_IsUploadInvoiceButtonEnabled());
+		Reporter.log("Is Upload Invoice Button Enabled in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Upload Invoice Button Enabled in Feature Setting is not displayed");
+		
+		
+
+		flag=isElementDisplayed(sanityTest.featuresettings_MultipleERPIntegration());
+		Reporter.log("Multiple ERP Integration in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Multiple ERP Integration in Feature Setting is not displayed");
+		
+
+		flag=isElementDisplayed(sanityTest.featuresettings_PaymodeXEnrollmentLink());
+		Reporter.log("Pay mode X Enrollment Link in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Pay mode X Enrollment Link in Feature Setting is not displayed");
+		
+
+		flag=isElementDisplayed(sanityTest.featuresettings_PaymodeXEnrollmentNumber());
+		Reporter.log("Is Upload Invoice Button Enabled in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Upload Invoice Button Enabled in Feature Setting is not displayed");
+		
+		
+
+		flag=isElementDisplayed(sanityTest.featuresettings_IsUploadInvoiceButtonEnabled());
+		Reporter.log("Is Upload Invoice Button Enabled in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Upload Invoice Button Enabled in Feature Setting is not displayed");
+		
+		
+
+		flag=isElementDisplayed(sanityTest.featuresettings_IsUploadInvoiceButtonEnabled());
+		Reporter.log("Is Upload Invoice Button Enabled in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Upload Invoice Button Enabled in Feature Setting is not displayed");
+		
+		
+
+		flag=isElementDisplayed(sanityTest.featuresettings_IsUploadInvoiceButtonEnabled());
+		Reporter.log("Is Upload Invoice Button Enabled in Feature Setting page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Is Upload Invoice Button Enabled in Feature Setting is not displayed");
+		
+		
+		
+		
+		softAssert.assertAll();
+		
+		
+		
+		
+	}
+
+	
+
+	/**
+	 * Role Sanity Test Verify all tab and all Element
+	 * 
+	 * @author Priyanka.Mohanty
+	 * @throws Exception
+	 */
+	@Test
+	public void RoleSanityTest() throws Exception{
+
+		Reporter.log("Test Started at:"+currenttime());
+
+		SoftAssert softAssert=new SoftAssert();
+		boolean flag=false;
+		
+		fluentwait(sanityTest.Menu_role());
+		click(sanityTest.Menu_role());
+
+		fluentwait(sanityTest.role_HeaderName());
+		
+		flag=isElementDisplayed(sanityTest.role_HeaderName());
+		Reporter.log("Header Name in Role page,display Status:"+flag,true);
+		softAssert.assertTrue(flag,"Header Name in Role page is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.role_HeaderDescription());
+		Reporter.log("Header Description in Role page,display Status:"+flag,true);
+		softAssert.assertTrue(flag,"Header Description in Role page is not displayed");
+
+		flag=isElementDisplayed(sanityTest.role_HeaderCreatedDate());
+		Reporter.log("Header Created Date in Role page,display Status:"+flag,true);
+		softAssert.assertTrue(flag,"Header Created Date in Role page is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.role_HeaderCreatedBy());
+		Reporter.log("Header Created By in Role page,display Status:"+flag,true);
+		softAssert.assertTrue(flag,"Header Created By in Role page is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.role_HeaderStatus());
+		Reporter.log("Header Status in Role page,display Status:"+flag,true);
+		softAssert.assertTrue(flag,"Header Status in Role page is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.role_HeaderActions());
+		Reporter.log("Header Actions in Role page,display Status:"+flag,true);
+		softAssert.assertTrue(flag,"Header Actions in Role page is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.role_DeleteRoles());
+		Reporter.log("Delete Roles in Role page,display Status:"+flag,true);
+		softAssert.assertTrue(flag,"Delete Roles in Role page is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.role_AddRoles());
+		Reporter.log("Add Roles in Role page,display Status:"+flag,true);
+		softAssert.assertTrue(flag,"Add Roles in Role page is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.role_PageBacktoBuyers());
+		Reporter.log("Page Back to Buyers in Role page,display Status:"+flag,true);
+		softAssert.assertTrue(flag,"Page Back to Buyers in Role page is not displayed");
+
+		flag=isElementDisplayed(sanityTest.role_PreviousPage());
+		Reporter.log("Previous Page in Role page,display Status:"+flag,true);
+		softAssert.assertTrue(flag,"Previous Page in Role page is not displayed");
+
+		flag=isElementDisplayed(sanityTest.role_NextPage());
+		Reporter.log("Next Page in Role page,display Status:"+flag);
+		softAssert.assertTrue(flag,"Next Page in Role page is not displayed");
+
+		flag=isElementDisplayed(sanityTest.role_SelectAllCustomer());
+		Reporter.log("Select All Customer in Role page,display Status:"+flag,true);
+		softAssert.assertTrue(flag,"Select All Customer in Role page is not displayed");
+		
+		flag=isElementDisplayed(sanityTest.role_FilterUserRoleName());
+		Reporter.log("Filter User Role Name in Role page,display Status:"+flag,true);
+		softAssert.assertTrue(flag,"Filter User Role Name in Role page is not displayed");
+		
+		
+		softAssert.assertAll();
+		Reporter.log("Test Ended at:"+currenttime());
+		
+		
+		
+	}
+	
+	/**
+	 * After Class Logout and Quit Method 
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	
+	@AfterClass
+	  public void QuitBrowser() {
+		  homePage.logout();
+		  quitBrowser();
+	  }
+	
+	
+}

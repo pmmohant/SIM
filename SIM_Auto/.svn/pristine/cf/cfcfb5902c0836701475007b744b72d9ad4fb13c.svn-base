@@ -1,0 +1,52 @@
+
+#Title
+expAccountsetupPageTitle=Lavante SIM
+#Expected Text
+expTextNotYourMail= Not your e-mail ID?
+expRegPageHeader=Registration
+expPageHeader=Account Setup:
+
+#ID
+tinEField=tin
+challengeQ=question
+challengeAnswer=answer
+checkBox=tc
+userName=username
+preferredLanguage=language
+password=password
+confirmPassword=confirmPassword
+#xpath
+preferredLanguageField=//form[contains(@id,'command')]/table/tbody/tr/td/label[contains(@for,'language')]
+userNameField=//form[contains(@id,'command')]/table/tbody/tr/td/label[contains(@for,'username')]
+setPwdField=//form[contains(@id,'command')]/table/tbody/tr/td/label[contains(@for,'password')]
+confermPwdField=//form[contains(@id,'command')]/table/tbody/tr/td/label[contains(@for,'confirmPassword')]
+questionField=//form[contains(@id,'command')]/table/tbody/tr/td/label[contains(@for,'question')]
+answerField=//form[contains(@id,'command')]/table/tbody/tr/td/label[contains(@for,'answer')]
+termConditionsField=//div/label[contains(@for,'tc')]
+classNameMandateField=required_field
+
+acceptRadioBtn=.//*[@id='invite_supplier_accept']/div[2]/input[1]
+declineRadioBtn=.//*[@id='invite_supplier_accept']/div[2]/input[2]
+acceptDeclineRadio=//div/span[contains(@class,'radio')]
+declineRadioBtnText=.//*[@id='invite_supplier_accept']/div[2]/span[2]
+acceptRadioBtnText=.//*[@id='invite_supplier_accept']/div[2]/span[1]
+acceptDeclineHeader=//div[contains(@class,'align_left')]/h2
+printTerms=//span/a[contains(@title,'Print Terms And Condition Document')]
+emailTerms=//span/a[contains(@title,'Email Terms And Condition Document')]
+iframeEmailPopup=.//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+helpChangeQ=.//*[@id='command']/table/tbody/tr[3]/td[2]/a
+helpSetPwd=.//*[@id='command']/table/tbody/tr[5]/td[2]/a
+headerNotYourEmail=//span[contains(@class,'ui-dialog-title')]
+accountSetupHeader=//h2[contains(@class,'sim_title')]
+fieldErrorMsg=//span[contains(@class,'error')]
+gratitude=//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-front dialog ui-dialog-buttons']/div[1]/span
+btnOk=.//*[@class='dialog undefined ui-dialog-content ui-widget-content']
+
+#CSS
+btnAcceptSubmit=input[class='button_green'][type='submit']
+btnAcceptReset=input[class='button_red'][type='reset']
+btnNext=input[class='button button_blue'][type='submit']
+btnOkEmailPopup=[class='button_green'][type='button']
+#LinkS
+linkTextTermsCondition=Terms And Conditions.
+notYourEmail=( Not your e-mail ID? )

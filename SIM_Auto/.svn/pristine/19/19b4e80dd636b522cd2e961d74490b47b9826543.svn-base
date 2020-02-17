@@ -1,0 +1,212 @@
+package com.lavante.sim.customer.TestScripts.Transactions.Invoices;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.InvoiceDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+
+/**
+ * Created on 20-03-2016
+ * Created for Invoice
+ * Enhancement covered SIM -7532
+ * Ended on 04-02-2016
+ * @author Piramanayagam.S
+ *
+ */
+public class  InvoiceTC003 extends PageInitiator  {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();	
+	String custID="";
+	
+	/**
+	 * This class all test starts using login page and driver initializatn
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+				
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		openAPP();	
+		lavanteUtils.driver=driver;
+		
+		List<?> listofdatafrm=lavanteUtils.login("Invoice",browser);
+		LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String>();
+		LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+		custID=(String) listofdatafrm.get(1);
+		
+		//Login		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+			
+	}
+	
+	/**
+	 * In this Class all test starts from Edit profile -Supplier contract management tab,hence navigated to the page
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeMethod
+	public void beforeMethod(){
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String, String>();
+		dataMap.put("maintab","Invoice");
+		dataMap.put("subtab", "InvoiceSearchResult");
+			
+		enobjhomePage.selectTab(dataMap);
+		
+		eninvoiceBasicSearch.formAction(dataMap);
+	}
+	
+	/**
+	 * Enhancement: SIM-7532 - multi select Deliverable in upload invoice
+	 * TC_02: Select an SOW Number.  
+	 * @author Piramanayagam S
+	 * @param dataMap
+	 * @throws Exception 
+	 */	
+	@Test(dataProvider="SubmitInvoice",dataProviderClass=InvoiceDataProvider.class)
+	public void MultiSelectDELUploadinvoice001(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		
+		Reporter.log("Test Started for Multi Select Deleiverable in upload invoice:"+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+		String invnum="AutoInv"+randomnum();
+
+		dataMap.put("InvNum", invnum);
+		dataMap.put("SelectSupplier","");
+		String supname=eninvoicePage.fetchDelSupplier(custID,2);
+		dataMap.put("supplierName",supname);
+		dataMap.put("InvSOWNum","ANY");
+		enuploadInvoice.UploadInvoice(dataMap);
+		
+		String exp="39";
+		String actual=enuploadInvoice.ListDelLineItm().get(0).getText();
+		Reporter.log("1 Line Item in upload Invoice,Expected :"+exp+",Actual:"+actual);
+		softassert.assertEquals(exp, actual,"1 Line Item Not Matched");
+		exp="98";
+		actual=enuploadInvoice.ListDelLineItm().get(1).getText();
+		Reporter.log("2 Line Item in upload Invoice,Expected :"+exp+",Actual:"+actual);
+		softassert.assertEquals(exp, actual,"1 Line Item Not Matched");
+		
+		//Itm Type Verification
+		exp="Services";
+		actual=enuploadInvoice.ListDelItmtype().get(0).getText();		
+		Reporter.log(" Item Type in upload Invoice,Expected :"+exp+",Actual:"+actual);
+		softassert.assertEquals(exp, actual,"Item Type Not Matched");
+		
+		actual=enuploadInvoice.ListDelItmtype().get(1).getText();		
+		Reporter.log(" 2 Item Type in upload Invoice,Expected :"+exp+",Actual:"+actual);
+		softassert.assertEquals(exp, actual,"2 Item Type Not Matched");
+
+		//Desc Verification
+		exp="89899";
+		actual=enuploadInvoice.ListDelDesc().get(0).getText();
+		Reporter.log("1 Del Description in upload Invoice,Expected :"+exp+",Actual:"+actual);
+		softassert.assertEquals(exp, actual,"1 Description  Not Matched");
+		
+		exp="DEL";
+		actual=enuploadInvoice.ListDelDesc().get(1).getText();
+		Reporter.log("2 Del Description in upload Invoice,Expected :"+exp+",Actual:"+actual);
+		softassert.assertEquals(exp, actual,"2 Description  Not Matched");
+		
+		Reporter.log("Test ended for multi select deliverables in upload invoices :"+currenttime());
+		
+	}
+	
+	/**
+	 * ViewinvoiceDEL002
+	 * 
+	 * Enhancement: SIM-7532 - multi select Deliverable in view invoice
+	 * TC_02: Select an SOW Number.  
+	 * @author Piramanayagam S
+	 * @param dataMap
+	 * @throws Exception 
+	 */	
+	@Test(dataProvider="SubmitInvoice",dataProviderClass=InvoiceDataProvider.class)
+	public void MultiSelectDELViewinvoice002(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		Reporter.log("Test Started for  Edit invoice:"+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+		String invnum="AutoInv"+randomnum();
+		Reporter.log("Created Nw Invoice:"+invnum);
+		dataMap.put("InvNum", invnum);
+		dataMap.put("SelectSupplier","");
+		dataMap.put("uploadSave", "");
+		dataMap.put("supplierName",eninvoicePage.fetchDelSupplier(custID,2));
+		dataMap.put("InvSOWNum","ANY");
+		enuploadInvoice.UploadInvoice(dataMap);
+		
+		dataMap.put("InvNum",invnum);
+		dataMap.put("Search","");
+		eninvoiceBasicSearch.Search(dataMap);
+		Reporter.log("Searched the created Nw Invoice:"+invnum);
+
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.waitForTime(3000);
+		lavanteUtils.fluentwait(eninvoicePage.TBLInvoicenumber());
+		lavanteUtils.waitForTime(4000);
+		
+		lavanteUtils.click(eninvoicePage.TBLInvoicenumber());
+		
+		String actlineitm=eninvoicePage.viewdelLineitm().get(0).getText();
+		String exp="39";
+		Reporter.log("Deliverabl Line item, Expected:"+exp+", Actual:"+actlineitm);	
+		softassert.assertEquals(actlineitm,exp,"Deliverables Line Item, not matched, Expected:"+exp+" ,Actual:"+actlineitm);
+		
+		actlineitm=eninvoicePage.viewdelItmtype().get(0).getText();
+		exp="Services";
+		Reporter.log("Deliverabl Item Type, Expected:"+exp+", Actual:"+actlineitm);	
+		softassert.assertEquals(actlineitm,exp,"Deliverables Item Type not matched, Expected:"+exp+" ,Actual:"+actlineitm);
+		
+		actlineitm=eninvoicePage.viewdelDesc().get(0).getText();
+		exp="89899";
+		Reporter.log("Deliverabl desc, Expected:"+exp+", Actual:"+actlineitm);	
+		softassert.assertEquals(actlineitm,exp,"Deliverables desc,not matched, Expected:"+exp+" ,Actual:"+actlineitm);
+	
+	
+		Reporter.log("Test Started for multi select deliverables:"+currenttime());
+		
+	}
+
+	
+	@AfterMethod
+	public void SetupAftermethod()
+	{
+		enobjhomePage.backtoSearch();
+	}
+	
+	
+	@AfterClass
+	public void SetupafterClassmethod(){
+		
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+
+
+}
+

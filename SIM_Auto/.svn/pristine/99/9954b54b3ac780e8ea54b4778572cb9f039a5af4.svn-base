@@ -1,0 +1,844 @@
+package com.lavante.sim.customer.TestScripts.Supplier.EditProfile;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.CMDataProvider;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.CMSearchDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 1-3-2016
+ * Created for Deliverable Test case
+ * Enhancement covered SIM-7339
+ * Ended on 5-3-2016
+ * @author Piramanayagam.S
+ *
+ */
+public class CMSowTC002 extends PageInitiator{
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	
+	LinkedHashMap<String, String> loginDataMap=new LinkedHashMap<String, String>();
+	String customerID="";
+	
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+				
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		openAPP();	
+		//Assigning the driver to the object of lavante utils		
+		lavanteUtils.driver=driver;
+		
+		List listofdatafrm=lavanteUtils.login("SOW-1",browser);
+		LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String>();
+		LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+		customerID=(String) listofdatafrm.get(1);
+		
+		String sname="select MAX(su.SupplierName) from StatementOfWork s, Relationship R,Supplier su,MasterServiceAgreement m "
+				+ " where s.MSAID=m.MSAID and r.RelationShipID=m.RelationShipID and r.LavanteUID=su.LavanteUID "
+				+ " and r.CustomerID="+customerID;
+		sname=lavanteUtils.fetchDBdata(sname);
+		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		//To Navigate to Contract Management Edit Supplier Page
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String, String>();
+		dataMap.put("maintab","Supplier");
+		enobjhomePage.selectTab(dataMap);	
+		
+		dataMap.put("Search", "");
+		dataMap.put("supplierName",sname);
+		dataMap.put("InactiveSup", "");
+		enobjsupplierBasicSearch.search(dataMap);
+
+		dataMap.put("profile", "");
+		dataMap.put("editProfile", "");
+		enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+	
+		lavanteUtils.waitForTime(3000);
+		
+		dataMap.put("tab", "enterpriseContract");
+		eneditProfile.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+
+	}
+	
+		
+	/**
+	 * Header Verification for SOW
+	 * 
+	 * */
+	@Test(dataProvider="SingleSearch",dataProviderClass=CMSearchDataProvider.class)
+	 public void SOWHeaderInfo001(LinkedHashMap<String,String> dataMap) throws Exception{	
+		SoftAssert softassert=new SoftAssert();  
+		
+		Reporter.log("Test Started for SOW header verify:"+currenttime());
+		
+		String MSA=eneditContractManagement.SOWheadMSAN().getText();
+		Reporter.log("MSA Number, Expected:MSA Number, Actual:"+MSA);	
+		softassert.assertEquals( MSA,"MSA Number","MSA Numberis not matched, Expected: ,Actual:"+MSA);
+		String SOWN=eneditContractManagement.SheadSOWNumber().getText();
+		Reporter.log("SOW Number, Expected:SOW Number, Actual:"+SOWN);	
+		softassert.assertEquals( SOWN,"SOW Number","SOW Numberis not matched, Expected: ,Actual:"+SOWN);
+		String Date=eneditContractManagement.SOWheadStdate().getText();
+		Reporter.log("Start Date, Expected:Start Date, Actual:"+Date);	
+		softassert.assertEquals( Date,"Start Date","Start Dateis not matched, Expected: ,Actual:"+Date);
+		String Des=eneditContractManagement.SOWheadDes().getText();
+		Reporter.log("Description, Expected:Description, Actual:"+Des);	
+		softassert.assertEquals( Des,"Description","Description is not matched, Expected: ,Actual:"+Des);
+		String Intc=eneditContractManagement.SOWheadIntcontact().getText();
+		Reporter.log("Internal Contact, Expected:Internal Contact, Actual:"+Intc);	
+		softassert.assertEquals( Intc,"Internal Contact","Internal Contact is not matched, Expected: ,Actual:"+Intc);
+		String status=eneditContractManagement.SOWheadstatus().getText();
+		Reporter.log("Status, Expected:Status, Actual:"+status);	
+		softassert.assertEquals( status,"Status","Status is not matched, Expected: ,Actual:"+status);
+		String payter=eneditContractManagement.SOWheadpayterms().getText();
+		Reporter.log("Payment Terms, Expected:Payment Terms, Actual:"+payter);	
+		softassert.assertEquals( payter,"Payment Terms","Payment Terms is not matched, Expected: ,Actual:"+payter);
+		String Nexamt=eneditContractManagement.SOWheadNotexceddamt().getText();
+		Reporter.log("Not-To-Exceed Amount, Expected:Not-To-Exceed Amount, Actual:"+Nexamt);	
+		softassert.assertEquals( Nexamt,"Not-To-Exceed Amount","Not-To-Exceed Amount is not matched, Expected: ,Actual:"+Nexamt);
+		String sowAct=eneditContractManagement.SOWheadActions().getText();
+		Reporter.log("Actions, Expected:Actions, Actual:"+sowAct);	
+		softassert.assertEquals( sowAct,"Actions","Actions is not matched, Expected: ,Actual:"+sowAct);
+		
+		List<WebElement> NOte=driver.findElements(By.xpath("//*[text()='Notes:']"));
+		Reporter.log("Notes field is not available");
+		softassert.assertTrue(NOte.size()<=0,"Note Column available");
+		
+	
+
+		softassert.assertAll();
+	
+		Reporter.log("Test Ended for SOW header at:"+currenttime());
+	}
+	
+	/**Verify client name is there or not in view sow  
+	 * SIM-7339
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider="SingleSOWData",dataProviderClass=CMDataProvider.class)
+	public void viewSOWclientname002(LinkedHashMap<String,String> dataMap) throws Exception{	
+		Reporter.log("Test Started for View SOW Client name at:"+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		dataMap.put("save", "");
+		boolean flag=false;
+	
+		//TO uniquely identify the SOW
+				String sowdesc="SP2257";
+				sowdesc=dataMap.get("SOWDescription")+LavanteUtils.randomnum();
+				dataMap.put("SOWDescription",sowdesc);
+				dataMap.put("SOWSave", "");
+				dataMap.put("SOWClientName",dataMap.get("msaclient"));
+				dataMap.put("CustomerID",customerID);
+				eneditContractManagement.AddSOW(dataMap);
+				
+				Reporter.log("Created SOW");
+				
+				outr:for(int i=eneditContractManagement.SOWDesclist().size()-1;i>=0;i--){
+					
+					if(sowdesc.equalsIgnoreCase(eneditContractManagement.SOWDesclist().get(i).getText()))
+						{		
+							Reporter.log("Created SOW available in the list");
+							lavanteUtils.click(eneditContractManagement.SOWnolist().get(i));
+							
+							lavanteUtils.waitForTime(4000);
+							
+							lavanteUtils.switchtoFrame(eneditContractManagement.SOWViewIframe());		
+							
+							lavanteUtils.waitForTime(2000);
+							Reporter.log("clent name in View SOW at:"+currenttime());
+							softassert.assertTrue(eneditContractManagement.SOWViewClientName().isDisplayed());
+							flag=true;
+							break outr;
+						} 
+				}
+		
+		if(flag==false){
+			softassert.assertTrue(false,"DATA NOT AVAILABLE");
+			
+		}
+		softassert.assertAll();
+		Reporter.log("Test ended to check client name in view sow at:"+currenttime());
+	}
+
+	/**Verify client name is there or not in Add sow  
+	 * SIM-7339
+		 * @param dataMap
+		 * @throws InvalidFormatException
+		 * @throws IOException
+	 */
+	@Test(dataProvider="SingleSOWData",dataProviderClass=CMDataProvider.class)
+	public void AddSOWclientname003(LinkedHashMap<String,String> dataMap) throws Exception{	
+			SoftAssert softassert=new SoftAssert();
+			Reporter.log("Test started to check client name in Add sow at:"+currenttime());
+
+			//Clear the datamap as we are not filling any 
+			dataMap.clear();
+			eneditContractManagement.createSOW(dataMap,"");
+			Reporter.log("In Add SOW Page:");
+			lavanteUtils.switchtoFrame(eneditContractManagement.SOWAddIframe());
+
+			Reporter.log("client name is diasplayed in Add SOW:"+eneditContractManagement.SOWClientnamedpdn().isDisplayed());
+			softassert.assertTrue(eneditContractManagement.SOWClientnamedpdn().isDisplayed());
+			softassert.assertAll();
+			Reporter.log("Test ended to check Client name in Add sow at:"+currenttime());
+		}
+		
+	/** Verify in edit sow page client name is displayed or not
+	 * SIM-7339
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider="SingleSOWData",dataProviderClass=CMDataProvider.class)
+	public void Editsowclient004(LinkedHashMap<String,String> dataMap) throws Exception{	
+
+		Reporter.log("Test Started for client name in  Edit sow :"+currenttime());
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		//TO uniquely identify the SOW
+		String sowdesc="SP6605";
+		sowdesc=dataMap.get("SOWDescription")+LavanteUtils.randomnum();
+		dataMap.put("SOWDescription",sowdesc);
+		dataMap.put("SOWSave", "");
+		dataMap.put("SOWClientName",dataMap.get("msaclient"));
+		dataMap.put("save", "");		
+		dataMap.put("CustomerID",customerID);
+		eneditContractManagement.AddSOW(dataMap);
+		Reporter.log("Created SOW");
+		
+		outr:for(int i=eneditContractManagement.SOWDesclist().size()-1;i>=0;i--){
+			
+			if(sowdesc.equalsIgnoreCase(eneditContractManagement.SOWDesclist().get(i).getText()))
+				{		
+						int j=i+1;
+						String select="tr:nth-child("+j+") a[title*='Edit Statement']";
+						lavanteUtils.click(lavanteUtils.driver.findElement(By.cssSelector(select)));
+						lavanteUtils.waitForTime(4000);
+						
+						lavanteUtils.switchtoFrame(eneditContractManagement.SOWEditIframe());		
+						
+						lavanteUtils.waitForTime(2000);
+						Reporter.log("clent name in View SOW at:"+eneditContractManagement.SOWViewClientName().isDisplayed());
+						softassert.assertTrue(eneditContractManagement.SOWViewClientName().isDisplayed());
+						flag=true;
+						break outr;
+				} 
+			}
+		
+		if(flag==false){
+			softassert.assertTrue(false,"DATA NOT AVAILABLE");
+		}
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended to check client name in Edit sow at:"+currenttime());
+	}
+	
+	/**  cofigured client name in edit sow
+	* SIM-7339
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider="SingleSOWData",dataProviderClass=CMDataProvider.class)
+	public void configureSOWeditclient005(LinkedHashMap<String,String> dataMap ) throws Exception{	
+		Reporter.log("Test Started for Configured client name for sow in view page:"+currenttime());
+		dataMap.put("save", "");
+		boolean flag=false;
+		
+		SoftAssert softassert=new SoftAssert();
+		
+		String i18Key ="AutoSPClientName"+LavanteUtils.randomnum();
+          String expClientNAme="AutoSP"+LavanteUtils.randomnum();
+          
+          String query1="Insert into I18NKey  (i18nKey) values ('"+i18Key+"')";
+          String query2="Insert into UserTranslation (i18nKey,LanguageID,UTFString,IsCustomerSpecific) "
+                       + " values ('"+i18Key+"',50,'"+ expClientNAme +"','')" ;
+          String query3= " Insert into ClientNames ( CustomerID   ,ClientNameI18Nkey,CreatedBy  ,CreatedOn)"
+                       + " values ("+customerID+",'"+i18Key+"','"+ expClientNAme +"' , 2/3/2015)" ;
+          
+          lavanteUtils.UpdateDB(query1);
+          lavanteUtils.UpdateDB(query2);
+          lavanteUtils.UpdateDB(query3);
+          Reporter.log("Created Custom Client Name and Inserted into DB:"+expClientNAme);
+		
+		String msanottoexc="17.38";
+		msanottoexc=dataMap.get("msanottoexceed");
+		if(msanottoexc.equalsIgnoreCase("ANY"))
+		{
+			msanottoexc=LavanteUtils.randomnum(99)+"."+LavanteUtils.randomnum(9)+LavanteUtils.randomnum(9);	
+			dataMap.put("msanottoexceed",msanottoexc);
+		}
+		
+		dataMap.put("MSASave", "");
+		dataMap.put("msaclient", expClientNAme);
+		eneditContractManagement.createMSA(dataMap);
+		String msanum="";
+		
+		outr:for(int i=eneditContractManagement.MSAnottoexceedList().size()-1;i>=0;i--){
+			if(msanottoexc.equalsIgnoreCase(eneditContractManagement.MSAnottoexceedList().get(i).getText()))
+				{		
+					
+					msanum=eneditContractManagement.MSANumTxt().get(i).getText();
+					break outr;
+				}
+		}
+		
+		//TO uniquely identify the SOW
+		String sowdesc="SP2257";
+		sowdesc=dataMap.get("SOWDescription")+LavanteUtils.randomnum();
+		dataMap.put("SOWDescription",sowdesc);
+		
+		dataMap.put("SOWClientName", expClientNAme);
+		dataMap.put("SOWSave", "");
+		dataMap.put("CustomerID",customerID);
+		eneditContractManagement.createSOW(dataMap, msanum);
+		Reporter.log("Created SOW");
+		
+		outr:for(int i=eneditContractManagement.SOWDesclist().size()-1;i>=0;i--){
+			if(sowdesc.equalsIgnoreCase(eneditContractManagement.SOWDesclist().get(i).getText()))
+				{		
+						Reporter.log("Created SOW available in the list:");
+						int j=i+1;
+						String select="tr:nth-child("+j+") a[title*='Edit Statement']";
+						lavanteUtils.click(lavanteUtils.driver.findElement(By.cssSelector(select)));
+						lavanteUtils.waitForTime(4000);
+					
+						lavanteUtils.switchtoFrame(eneditContractManagement.SOWEditIframe());		
+						Reporter.log("In Edit SOW:");
+						
+						Reporter.log("client name in edit SOW Expected,"+expClientNAme+",Actuals:"+eneditContractManagement.SOWViewClientName().getText());
+						softassert.assertEquals(eneditContractManagement.SOWViewClientName().getText(),expClientNAme,"Client Name Not matched");
+						flag=true;
+						break outr;
+				}			
+			}
+					
+		  query1="Delete from I18NKey where i18nKey ='"+i18Key+"'";
+          query2="Delete from UserTranslation where i18nKey ='"+i18Key+"'" ;
+          query3= "Delete from  ClientNames where ClientNameI18Nkey ='"+i18Key+"' and CustomerID= '"+customerID+"' " ;
+          String query4= "Delete from MasterServiceAgreement where "
+          		+ " ClientNameID= (select ClientNameID from ClientNames where ClientNameI18Nkey ='"+i18Key+"' and"
+          				+ " CustomerID= '"+customerID+"' ) ";
+         String query5=" Delete  from StatementOfWork where MSAID=( select MSAID from MasterServiceAgreement where ClientNameID="
+         		+ " ( select ClientNameID from ClientNames where ClientNameI18Nkey ='"+i18Key+"' and CustomerID= '"+customerID+"')) ";
+          
+         lavanteUtils.UpdateDB(query5);
+         lavanteUtils.UpdateDB(query4);
+         lavanteUtils.UpdateDB(query3);
+         lavanteUtils.UpdateDB(query2);
+         lavanteUtils.UpdateDB(query1);
+         
+         Reporter.log("Created Custom Client Name and deleted from DB:"+expClientNAme);
+		
+		
+		if(flag==false){
+			softassert.assertTrue(false,"Please Add DATA and RETEST");
+			
+		}
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended to check client MSA in view MSA at:"+currenttime());
+	}
+
+	/**  Configured client name in view sow
+	* SIM-7339
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider="SingleSOWData",dataProviderClass=CMDataProvider.class)
+	public void configureSOWviewclient006(LinkedHashMap<String,String> dataMap ) throws Exception{	
+		
+		Reporter.log("-Test Started for configured client name for sow in view page at"+currenttime());
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		  String i18Key ="AutoSPClientName"+LavanteUtils.randomnum();
+	      
+	      String query1="Insert into I18NKey  (i18nKey) values ('"+i18Key+"')";
+	      String query2="Insert into UserTranslation (i18nKey,LanguageID,UTFString,IsCustomerSpecific) "
+	                   + " values ('"+i18Key+"',50,'"+ i18Key +"','')" ;
+	      String query3= " Insert into ClientNames ( CustomerID   ,ClientNameI18Nkey,CreatedBy  ,CreatedOn)"
+	                   + " values ("+customerID+",'"+i18Key+"','"+ i18Key +"' , 2/3/2015)" ;
+	      
+	
+	      lavanteUtils.UpdateDB(query1);
+	      lavanteUtils.UpdateDB(query2);
+	      lavanteUtils.UpdateDB(query3);
+	      Reporter.log("Created Custom Client Name IN DB:"+i18Key);
+		
+		String msanottoexc="17.38";
+		msanottoexc=dataMap.get("msanottoexceed");
+		if(msanottoexc.equalsIgnoreCase("ANY"))
+		{
+			msanottoexc=LavanteUtils.randomnum(99)+"."+LavanteUtils.randomnum(9)+LavanteUtils.randomnum(9);	
+			dataMap.put("msanottoexceed",msanottoexc);
+		}
+
+		dataMap.put("save", "");
+		
+		dataMap.put("MSASave", i18Key);
+		dataMap.put("msaclient", i18Key);
+		eneditContractManagement.createMSA(dataMap);
+		Reporter.log("Created MSA");
+		
+		String msanum="";
+		
+		outr:for(int i=eneditContractManagement.MSAnottoexceedList().size()-1;i>=0;i--){
+			
+			if(msanottoexc.equalsIgnoreCase(eneditContractManagement.MSAnottoexceedList().get(i).getText()))
+				{		
+					
+					msanum=eneditContractManagement.MSANumTxt().get(i).getText();
+					break outr;
+				}
+		}
+		
+		
+		//TO uniquely identify the SOW
+		String sowdesc="SP2257";
+		sowdesc=dataMap.get("SOWDescription")+LavanteUtils.randomnum();
+		dataMap.put("SOWDescription",sowdesc);
+		
+		dataMap.put("SOWClientName", i18Key);
+		dataMap.put("SOWSave", "");
+		dataMap.put("CustomerID",customerID);
+		eneditContractManagement.createSOW(dataMap, msanum);
+		Reporter.log("Created SOW");
+		
+		innr:for(int i=eneditContractManagement.SOWDesclist().size()-1;i>=0;i--){
+			if(sowdesc.equalsIgnoreCase(eneditContractManagement.SOWDesclist().get(i).getText()))
+				{	
+					Reporter.log("Created SOW available in the list");						
+					lavanteUtils.click(eneditContractManagement.SOWnolist().get(i));
+					
+					lavanteUtils.waitForTime(4000);
+					
+					lavanteUtils.switchtoFrame(eneditContractManagement.SOWViewIframe());		
+					Reporter.log("In View Page:");
+					String actualclientname=eneditContractManagement.SOWViewClientName().getText();
+					Reporter.log("Configured Client for SOW Expected:"+i18Key+",Actual"+actualclientname);
+					softassert.assertEquals(actualclientname, i18Key);
+					flag=true;
+					break innr;
+				}			
+			}
+		
+		  query1="Delete from I18NKey  where i18nKey='"+i18Key+"'";
+          query2="Delete from UserTranslation where i18nKey='"+i18Key+"'" ;
+          query3= "Delete from  ClientNames where ClientNameI18Nkey ='"+i18Key+"' and CustomerID= '"+customerID+"' " ;
+          String query4= "Delete from MasterServiceAgreement where "
+          		+ " ClientNameID= (select ClientNameID from ClientNames where ClientNameI18Nkey ='"+i18Key+"' and"
+          				+ " CustomerID= '"+customerID+"' ) ";
+         String query5=" Delete  from StatementOfWork where MSAID=( select MSAID from MasterServiceAgreement where ClientNameID="
+         		+ " ( select ClientNameID from ClientNames where ClientNameI18Nkey ='"+i18Key+"' and CustomerID= '"+customerID+"')) ";
+          
+         lavanteUtils.UpdateDB(query5);
+         lavanteUtils.UpdateDB(query4);         
+         lavanteUtils.UpdateDB(query3);
+         lavanteUtils.UpdateDB(query2);
+          lavanteUtils.UpdateDB(query1);
+         
+		
+		if(flag==false){
+			softassert.assertTrue(false,"Please Add DATA and RETEST");
+			
+		}
+		
+		softassert.assertAll();
+		Reporter.log("Test ended to check configured clientname view sow at:"+currenttime());
+	}
+
+	/**  cofigured client name in Add sow
+	* SIM-7339
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider="SingleSOWData",dataProviderClass=CMDataProvider.class)
+	public void configureSOWAddclient007(LinkedHashMap<String,String> dataMap ) throws Exception{	
+		Reporter.log("Test Started for configured client name for sow in view page:"+currenttime());
+		dataMap.put("save", "");
+		
+		SoftAssert softassert=new SoftAssert();
+		
+		String i18Key ="AutoSPClientName"+LavanteUtils.randomnum();
+          
+          String query1="Insert into I18NKey  (i18nKey) values ('"+i18Key+"')";
+          String query2="Insert into UserTranslation (i18nKey,LanguageID,UTFString,IsCustomerSpecific) "
+                       + " values ('"+i18Key+"',50,'"+ i18Key +"','')" ;
+          String query3= " Insert into ClientNames ( CustomerID   ,ClientNameI18Nkey,CreatedBy  ,CreatedOn)"
+                       + " values ("+customerID+",'"+i18Key+"','"+ i18Key +"' , 2/3/2015)" ;
+          
+
+          lavanteUtils.UpdateDB(query1);
+          lavanteUtils.UpdateDB(query2);
+          lavanteUtils.UpdateDB(query3);
+          Reporter.log("Created Custom Client Name in DB:"+i18Key);
+	
+		
+		//TO uniquely identify the SOW
+		String sowdesc="SP2257";
+		sowdesc=dataMap.get("SOWDescription")+LavanteUtils.randomnum();
+		dataMap.put("SOWDescription",sowdesc);
+		
+		dataMap.clear();
+		dataMap.put("SOWClientName", i18Key);
+		eneditContractManagement.createSOW(dataMap, "");
+		Reporter.log("Verification in ADD SOW for Client Name:");
+					
+		lavanteUtils.switchtoFrame(eneditContractManagement.SOWAddIframe());		
+		
+		String actualclientname=eneditContractManagement.SOWClientnamedpdn().getText();
+		Reporter.log("Configured Client for SOW Expected:"+i18Key+",Actual"+actualclientname);
+		softassert.assertEquals(actualclientname, i18Key);
+			
+
+		  query1="Delete from I18NKey  where i18nKey='"+i18Key+"'";
+          query2="Delete from UserTranslation where i18nKey='"+i18Key+"'" ;
+          query3="Delete from ClientNames where ClientNameI18Nkey='"+i18Key+"'" ;
+         
+          lavanteUtils.UpdateDB(query3);
+          lavanteUtils.UpdateDB(query2);
+          lavanteUtils.UpdateDB(query1);
+        
+		softassert.assertAll();
+		Reporter.log("Test ended to check configured clientname view sow at:"+currenttime());
+	}
+
+	/**  comparison client name in view sow
+	* SIM-7339
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test
+	public void compareMSASOWClientNamest008() throws Exception{	
+		Reporter.log("Test Started for compare SOW And MSA client name :"+currenttime());
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String,String>();
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		List<String> explist=new ArrayList<String>();
+		List<String> actlist=new ArrayList<String>();
+	
+		eneditContractManagement.createMSA(dataMap);
+		Reporter.log("In Create MSA Page:");
+		lavanteUtils.fluentwait(eneditContractManagement.MSAClientName());
+		lavanteUtils.click(eneditContractManagement.MSAClientName());
+		lavanteUtils.waitForTime(2000);
+		lavanteUtils.switchtoFrame(null);
+		
+		List<WebElement> el=driver.findElements(By.cssSelector("div[class*='drop'] li"));
+		
+		for(int i=1;i<el.size();i++)
+		{
+			String app=el.get(i).getText();
+			explist.add(app);
+		}
+		
+		enobjhomePage.popupclose();
+		
+		//TO uniquely identify the SOW
+		lavanteUtils.switchtoFrame(null);
+		eneditContractManagement.createSOW(dataMap, "");
+		Reporter.log("In Create SOW Page:");
+		
+		lavanteUtils.switchtoFrame(eneditContractManagement.SOWAddIframe());
+		
+		lavanteUtils.click(eneditContractManagement.SOWClientnamedpdn());
+		lavanteUtils.waitForTime(2000);
+		lavanteUtils.switchtoFrame(null);
+		
+		List<WebElement> el2=driver.findElements(By.cssSelector("div[class*='drop'] li"));
+		
+		for(int i=1;i<el2.size();i++)
+		{
+			String app=el2.get(i).getText();
+			actlist.add(app);
+		}
+		
+		enobjhomePage.popupclose();
+		
+		for(int i=0;i<explist.size();i++){
+			String exp=explist.get(i);
+			Reporter.log("Exp Client Name from MSA:"+exp+",Actual from SOW:"+actlist.get(i)+",Matching:"+actlist.contains(exp));
+			softassert.assertTrue(actlist.contains(exp));
+			flag=true;
+		}
+		
+		if(flag==false){
+			softassert.assertTrue(false,"Please Add DATA and RETEST");
+			
+		}
+
+		softassert.assertAll();
+		Reporter.log("Test Ended for compare SOW And MSA client name :"+currenttime());
+	}
+
+	/**  Non editable fields in edit sow pop up
+	* SIM-7339
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	//@Test(dataProvider="SingleSOWData",dataProviderClass=CMDataProvider.class)
+	public void SOWnoneditfields009(LinkedHashMap<String,String> dataMap ) throws Exception{	
+		Reporter.log("Test Started SOW non Edit field"+currenttime());
+		dataMap.put("save", "");
+		boolean flag=false;
+		
+		SoftAssert softassert=new SoftAssert();
+		
+						
+		String msanottoexc="17.38";
+		msanottoexc=dataMap.get("msanottoexceed");
+		if(msanottoexc.equalsIgnoreCase("ANY"))
+		{
+			msanottoexc=LavanteUtils.randomnum(99)+"."+LavanteUtils.randomnum(9)+LavanteUtils.randomnum(9);	
+			dataMap.put("msanottoexceed",msanottoexc);
+		}
+		
+		dataMap.put("MSASave", "");
+		eneditContractManagement.createMSA(dataMap);
+		Reporter.log("Created MSA");
+		
+		String msanum="";
+		
+		innr:for(int i=eneditContractManagement.MSAnottoexceedList().size()-1;i>=0;i--){
+			
+			if(msanottoexc.equalsIgnoreCase(eneditContractManagement.MSAnottoexceedList().get(i).getText()))
+				{		
+					msanum=eneditContractManagement.MSANumTxt().get(i).getText();
+					break innr;
+				}
+		}
+		
+		
+		//TO uniquely identify the SOW
+		String sowdesc="SP2257";
+		sowdesc=dataMap.get("SOWDescription")+LavanteUtils.randomnum();
+		dataMap.put("SOWDescription",sowdesc);
+		
+		dataMap.put("SOWSave", "");
+		eneditContractManagement.createSOW(dataMap, msanum);
+		Reporter.log("Created SOW");
+		
+		outr:for(int i=eneditContractManagement.SOWDesclist().size()-1;i>=0;i--){
+			if(sowdesc.equalsIgnoreCase(eneditContractManagement.SOWDesclist().get(i).getText()))
+				{		
+						Reporter.log("Created SOW available in the list");
+				
+						int j=i+1;
+						String select="tr:nth-child("+j+") a[title*='Edit Statement']";
+						driver.findElement(By.cssSelector(select)).click();
+						lavanteUtils.waitForTime(4000);
+					
+						lavanteUtils.waitForTime(4000);
+						Reporter.log("In Edit SOW");
+						
+						lavanteUtils.switchtoFrame(eneditContractManagement.SOWEditIframe());		
+						
+						Reporter.log("client name in edit SOW Expected,true,Actuals:"+eneditContractManagement.SOWEditClientName().isDisplayed());
+						softassert.assertTrue(eneditContractManagement.SOWEditClientName().isDisplayed(),"Client Name Not matched");
+						
+						Reporter.log("MSA type in edit SOW Expected,true,Actuals:"+eneditContractManagement.SOWEditmsatype().isDisplayed());
+						softassert.assertTrue(eneditContractManagement.SOWEditmsatype().isDisplayed(),"MSA type Not matched");
+						
+
+						Reporter.log("MSA number in edit SOW Expected,true,Actuals:"+eneditContractManagement.SOWEditmsanumber().isDisplayed());
+						softassert.assertTrue(eneditContractManagement.SOWEditmsanumber().isDisplayed(),"MSA number Not matched");
+			
+
+						Reporter.log("sow number in edit SOW Expected,true,Actuals:"+eneditContractManagement.SOWEditsowNumber().isDisplayed());
+						softassert.assertTrue(eneditContractManagement.SOWEditsowNumber().isDisplayed(),"sow number Not matched");
+			
+						flag=true;	
+						break outr;
+				}
+		}
+		
+		if(flag==false){
+			softassert.assertTrue(false,"Please Add DATA and RETEST");
+			
+		}
+
+		softassert.assertAll();
+		Reporter.log("Test Ended SOW non Edit field"+currenttime());
+	}
+
+	/**SIM-7339  
+	 * The MSA Number display in SOW popup is based on the MSA Type
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider="SingleSOWData",dataProviderClass=CMDataProvider.class)
+	public void MSAnumbasedsowpopup010(LinkedHashMap<String,String> dataMap ) throws Exception{	
+			Reporter.log("MSA Popup Started"+currenttime());
+			dataMap.put("save", "");
+			SoftAssert softassert=new SoftAssert();
+			boolean flag=false;
+							
+			String msanottoexc="151,815.00";
+			msanottoexc=dataMap.get("msanottoexceed");
+			if(msanottoexc.equalsIgnoreCase("ANY"))
+			{
+				msanottoexc=LavanteUtils.randomnum(99)+"."+LavanteUtils.randomnum(9)+LavanteUtils.randomnum(9);	
+				dataMap.put("msanottoexceed",msanottoexc);
+			} 
+		
+	        String query1=" Update PopUpCustomerMetadata SET"
+	        		     + " IsRequiredField = '0' " 
+	        		     + " WHERE PopUpProfileMetadataID = 7501"
+                         + " AND CustomerID = "+customerID;
+        		        
+	        lavanteUtils.UpdateDB(query1);
+	        
+	        String query2=" Update PopUpCustomerMetadata SET"
+        		     + " IsRequiredField = '0' " 
+        		     + " WHERE PopUpProfileMetadataID = 7601"
+                    + " AND CustomerID ="+customerID;
+   		        
+	        lavanteUtils.UpdateDB(query2);
+        	
+	        
+			Reporter.log("Client Name field is removed as mandatory from DB");
+	        
+			dataMap.remove("msaclient");
+			dataMap.put("MSASave", "");
+			eneditContractManagement.createMSA(dataMap);
+			String msanum="";
+			
+			innr:for(int i=eneditContractManagement.MSAnottoexceedList().size()-1;i>=0;i--){
+				
+				if(msanottoexc.equalsIgnoreCase(eneditContractManagement.MSAnottoexceedList().get(i).getText()))
+					{		
+						
+						msanum=eneditContractManagement.MSANumTxt().get(i).getText();
+						break innr;
+					}
+			}
+			
+			//TO uniquely identify the SOW
+			String sowdesc="SP2257";
+			sowdesc=dataMap.get("SOWDescription")+LavanteUtils.randomnum();
+			dataMap.put("SOWDescription",sowdesc);
+			dataMap.remove("SOWClientName");
+			dataMap.put("CustomerID",customerID);
+			dataMap.put("SOWSave", "");
+			
+			eneditContractManagement.createSOW(dataMap, msanum);
+			Reporter.log("Created SOW");
+			outr:for(int k=eneditContractManagement.SOWDesclist().size()-1;k>=0;k--){
+				if(sowdesc.equalsIgnoreCase(eneditContractManagement.SOWDesclist().get(k).getText()))
+					{		
+							Reporter.log("In Edit Page:");
+							int j=k+1;
+							String select="tr:nth-child("+j+") a[title*='Edit Statement']";
+							lavanteUtils.click(lavanteUtils.driver.findElement(By.cssSelector(select)));
+							lavanteUtils.waitForTime(4000);
+						
+							lavanteUtils.waitForTime(4000);
+							
+							lavanteUtils.switchtoFrame(eneditContractManagement.SOWEditIframe());		
+															
+							Reporter.log("MSA type in edit sow,Expected :"+dataMap.get("MSATYPE")+",In app:"+eneditContractManagement.SOWEditmsatype().getText());
+							softassert.assertEquals(eneditContractManagement.SOWEditmsatype().getText(),dataMap.get("MSATYPE"),"MSA type not matched");
+							
+
+							Reporter.log("MSA number in edit sow,Expected :"+msanum+",In app:"+eneditContractManagement.SOWEditmsanumber().getText());
+							softassert.assertEquals(eneditContractManagement.SOWEditmsanumber().getText(),msanum,"MSA num not matched");
+							flag=true;
+							break outr;
+					}
+				}
+			
+			 String query3=" Update PopUpCustomerMetadata SET"
+        		     + " IsRequiredField = '1' " 
+        		     + " WHERE PopUpProfileMetadataID = 7501"
+                     + " AND CustomerID ="+customerID;
+    		        
+			 lavanteUtils.UpdateDB(query3);
+			 
+			 String query4=" Update PopUpCustomerMetadata SET"
+        		     + " IsRequiredField = '1' " 
+        		     + " WHERE PopUpProfileMetadataID = 7601"
+                     + " AND CustomerID = "+customerID;
+    		        
+			 lavanteUtils.UpdateDB(query4);
+			
+			
+			if(flag==false){
+				softassert.assertTrue(false,"Please Add DATA and RETEST");
+				
+			}
+			
+
+			softassert.assertAll();
+			Reporter.log("MSA Popup Mandatory field Ended at:"+currenttime());
+		}
+
+
+	/**
+	 * After MEthod
+	 */
+	 @AfterMethod
+	public void aftermethod(){
+		 refreshPage();
+		enobjhomePage.popupclose();
+		
+	}
+	
+	/**
+	 * After Class close the driver and logout from the application
+	 */
+	@AfterClass
+	public void SetupafterClassmethod(){
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String,String>();
+		dataMap.put("SaveExit", "");
+		eneditProfile.formAction(dataMap);
+		
+		enobjhomePage.close();
+		enobjhomePage.logout();
+		quitBrowser();
+		
+	}
+
+
+}
+

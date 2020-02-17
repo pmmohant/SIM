@@ -1,0 +1,331 @@
+package com.lavante.sim.customer.TestScripts.UserRoles;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.SupplierSearchDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created for Verifying Database related tests
+ * 
+ * @author Subhash.BV
+ *
+ */
+
+public class DatabaseTests extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String customerID = null;
+
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * 
+	 * @author Subhash.BV
+	 * 
+	 */
+
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		// Login
+		List<?> listofdatafrm = lavanteUtils.login("PreScreen", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		customerID = (String) listofdatafrm.get(1);
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+	}
+	
+	@BeforeMethod()
+	public void before(){
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(LdataMap);
+	}
+
+	/**
+	 * 
+	 * DBTest: Verify that Suppliers can be pre screened and prescreened
+	 * suppliers can be searched
+	 * 
+	 * @author Subhash.BV
+	 * @throws IOException
+	 * 
+	 * Invite New Supplier Code should be fixed then this code can be used #INVITE
+	 */
+	// @Test(dataProvider = "PreScreen", dataProviderClass =
+	// SupplierRegistrationDataProvider.class)
+	public void validatePreScreeningFeatureTest(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for validatePreScreeningFeatureTest :" + currenttime());
+
+		dataMap.put("invite", "");
+		dataMap.put("inviteorg", "111");
+		String[] data = enobjInvitenewSupplier.inviteNwSupp(dataMap);
+		Reporter.log("Invite New Supplier:" + data[0]);
+
+		dataMap.put("Prescreen", "");
+		eneditProfile.formAction(dataMap);
+		dataMap.remove("Prescreen");
+		dataMap.put("SaveExit", "");
+		eneditProfile.formAction(dataMap);
+
+		dataMap.put("supplierName", data[0]);
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		String actvalue = lavanteUtils.getText(enobjsupplierPage.ProfStatus().get(0));
+		String expected = "Prescreened";
+
+		Reporter.log("Verify that Suppliers can be pre screened and prescreened suppliers can be searched, Expected "	+ expected + ", Actual," + actvalue);
+		Assert.assertEquals(actvalue, expected,	"Verify that Suppliers can be pre screened and prescreened suppliers can be searched, Expected "		+ expected + ", Actual," + actvalue);
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	/**
+	 * 
+	 * DBTest: Verify Dynamically create dropdown list of Entities for Business
+	 * Structure based on Country of Registration
+	 * 
+	 * @author Subhash.BV
+	 * @throws IOException
+	 */
+	@Test
+	public void verifyBusinessStructueDropDwnTest() throws Exception {
+		Reporter.log("Test Started for verifyBusinessStructueDropDwnTest :" + currenttime());
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+		dataMap.put("Tab", "Legal");
+		dataMap.put("RegCountry", "Equals To,United States");
+
+		lavanteUtils.click(ensupplierAdvanced.buildqrybtn());
+		ensupplierAdvanced.fillDetails(dataMap);
+
+		lavanteUtils.click(ensupplierAdvanced.BusinessStructureDropDwn());
+		List<String> businessStructureUS = lavanteUtils.listelement(null);
+		dataMap.put("RegCountry", "Equals To,Canada");
+		ensupplierAdvanced.fillDetails(dataMap);
+
+		lavanteUtils.click(ensupplierAdvanced.BusinessStructureDropDwn());
+		List<String> businessStructureCanada = lavanteUtils.listelement(null);
+		Reporter.log("Verify Dynamically create dropdown list of Entities for Business Structure based on Country of Registration");
+		boolean matched = false;
+		if (businessStructureCanada.size() == businessStructureUS.size()) {
+			for (int i = 1; i < businessStructureUS.size(); i++) {
+				String exp = businessStructureUS.get(i);
+				System.out.println(exp + "EXPECt");
+				if (businessStructureCanada.get(i).contains(exp)) {
+					Reporter.log(" FAIL Report :" + exp + ",Matched in the list");
+					matched = false;
+				} else {
+					Reporter.log(" PASS Report :" + exp + ",Not Matched in the list");
+					matched = true;
+					Reporter.log("The business structure dropdown list of entities should be dynamically populated based on country of registration selected");
+					break;
+				}
+			}
+		} else {
+			matched = true;
+			Reporter.log("The business structure dropdown list of entities should be dynamically populated based on country of registration selected");
+		}
+		Assert.assertTrue(matched,"Verify Dynamically create dropdown list of Entities for Business Structure based on Country of Registration");
+
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	/**
+	 * 
+	 * DBTest: Verify Supplier ERP ID Is Not Empty operator with and without
+	 * Approved , able to fetch respective results on both
+	 * 
+	 * @author Subhash.BV
+	 * @throws IOException
+	 */
+	@Test
+	public void verifySupplierERPIDIsNotEmptyOperatorTest() throws Exception {
+		Reporter.log("Test Started for verifySupplierERPIDIsNotEmptyOperatorTest :" + currenttime());
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+
+		dataMap.put("Tab", "CustomerProfile");
+		dataMap.put("SupplierERPID", "Is Not Empty");
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		Reporter.log("Advance Search Done");
+		Boolean searchedSupplierERPID = false;
+		lavanteUtils.waitForTime(5000);
+		if (enobjsupplierPage.getColumnText("ERP", 0).length() > 0) {
+			searchedSupplierERPID = true;
+			Reporter.log(" Supplier ERP ID Is Not Empty operator with and without Approved , able to fetch respective results on both ");
+		}
+		Assert.assertTrue(searchedSupplierERPID,"Verify Supplier ERP ID Is Not Empty operator with and without Approved , able to fetch respective results on both");
+
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	/**
+	 * 
+	 * DBTest: Verify that existing functionality should also work for newly
+	 * added fields
+	 * 
+	 * @author Subhash.BV
+	 * @throws IOException
+	 */
+	@Test
+	public void verifyShowHideFieldTest() throws Exception {
+		Reporter.log("Test Started for verifyShowHideFieldTest :" + currenttime());
+		
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+		SoftAssert softAssert = new SoftAssert();
+		
+		dataMap.put("ProfStatus", "Pending#Pending Validation");
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		enobjsupplierPage.selectChangeView("Suppliers and Invites");
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		
+		String supplier = enobjsupplierPage.VerifyPendingWith();
+		dataMap.put("supplierName", supplier);
+		dataMap.put("profile", "");
+		dataMap.put("editProfile", "");
+		String sup = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+		Reporter.log("Supplier Name:" + sup);
+		String updateQuery = "update CustomerMetadata SET IsVisibleField = 0 WHERE CustomerID=" + customerID
+				+ " and ProfileMetadataID in (select ProfileMetadataID from ProfileMetadata where UIFieldID='productsServicesPerformedDescription')";
+		lavanteUtils.UpdateDB(updateQuery);
+
+		lavanteUtils.switchtoFrame(null);
+		dataMap.put("tab", "supplierRelationshipInfo");
+		eneditProfile.selectTab(dataMap);
+
+		Reporter.log("Existing functionality Summary should not be visible");
+		if (!lavanteUtils.isElementDisplayed(eneditCustomerProfile.GetSummaryLabel())) {
+			softAssert.assertTrue(true, "Existing functionality Summary should not be visible ");
+
+		} else {
+			softAssert.assertTrue(false, "Existing functionality Summary should not be visible ");
+
+		}
+		updateQuery = "update CustomerMetadata SET IsVisibleField = 1 WHERE CustomerID=" + customerID
+				+ " and ProfileMetadataID in (select ProfileMetadataID from ProfileMetadata where UIFieldID='productsServicesPerformedDescription')";
+		lavanteUtils.UpdateDB(updateQuery);
+		lavanteUtils.refreshPage();
+
+		lavanteUtils.fluentwait(eneditCustomerProfile.GetSummaryLabel());
+		String actual = lavanteUtils.getText(eneditCustomerProfile.GetSummaryLabel());
+		String expected = "Summary (Type of products or services you sell):";
+
+		Reporter.log("Existing functionality Summary should be visible");
+		softAssert.assertEquals(actual, expected,"Existing functionality Summary should be visible , Expected " + expected + " Actual " + actual);
+
+		softAssert.assertAll();
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	/**
+	 * 
+	 * DBTest: Verify that existing functionality should also work for newly
+	 * added fields( Advanced search, Saved search and Alerts Jobs)
+	 * 
+	 * 
+	 * @author Subhash.BV
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "AddAlert", dataProviderClass = SupplierSearchDataProvider.class)
+	public void verifyAddAlertTest(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for verifyAddAlertTest :" + currenttime());
+		enobjhomePage.Alertselect();
+		
+		objSupplierAlertPage.deleteAlertFromTable("AutoUSQUERY");
+
+		String query2 = "delete from SavedSearch where SavedSearchCriteria like '%840%' and SavedSearchCriteria like '%countryOfRegistration%' and CustomerID="+ customerID;
+		lavanteUtils.UpdateDB(query2);
+		
+		// Supplier Tab
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+		lavanteUtils.switchtoFrame(null);
+		ensupplierAdvanced.deleteSavedQueryByName("AutoUSQUERY");
+
+		String qname = "AutoUSQUERY" + randomnum();
+		dataMap.put("Tab", "Legal");
+		dataMap.put("RegCountry", "Equals To,United States");
+		dataMap.put("SaveQuery", "");
+		dataMap.put("saveqryname", qname);
+		dataMap.put("SavetheQuery", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		enobjhomePage.Alertselect();
+		
+		dataMap.put("SavedQuery", qname);
+		dataMap.put("AllAlertTab", "");
+		dataMap.put("AlertSave", "");
+		objSupplierAlertPage.addAlert(dataMap);
+
+		lavanteUtils.switchtoFrame(null);
+		boolean flag = false;
+		String actualAlertName = null;
+		int size = objSupplierAlertPage.AllAlertNameList().size();
+		for (int i = 0; i <= size - 1; i++) {
+			actualAlertName = lavanteUtils.getText(objSupplierAlertPage.AllAlertNameList().get(i));
+
+			if (qname.equals(actualAlertName)) {
+				Reporter.log("actualAlertName  Mathced " + actualAlertName + " expectedAlertName  " + qname,true);
+				flag = true;
+				break;
+			}
+		}
+
+		Assert.assertTrue(flag,	"Verify that existing functionality should also work for newly added fields( Advanced search, Saved search and Alerts Jobs), Expected AlertName "	+ qname + " Actual AlertName, " + actualAlertName);
+
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	@AfterMethod
+	public void SetupAftermethod() {
+		enobjhomePage.popupclose();
+		lavanteUtils.refreshPage();
+	}
+
+	@AfterClass
+	public void SetupafterClassmethod() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+}

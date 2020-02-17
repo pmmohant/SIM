@@ -1,0 +1,37 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 47, Failures: 1, Errors: 0, Skipped: 46, Time elapsed: 59.184 sec <<< FAILURE! - in TestSuite
+preCondition(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 59.025 sec  <<< FAILURE!
+org.openqa.selenium.UnhandledAlertException: Modal dialog present: You are about to view pages over a secure connection.
+Build info: version: '2.45.0', revision: '5017cb8', time: '2015-02-26 23:59:50'
+System info: host: 'WSR12LAVAQA03', ip: '192.168.21.79', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.ie.InternetExplorerDriver
+Capabilities [{browserAttachTimeout=0, enablePersistentHover=false, ie.forceCreateProcessApi=false, ie.usePerProcessProxy=false, ignoreZoomSetting=true, handlesAlerts=true, version=11, platform=WINDOWS, nativeEvents=false, ie.ensureCleanSession=false, elementScrollBehavior=0, ie.browserCommandLineSwitches=, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:13655/, takesScreenshot=true, javascriptEnabled=true, ignoreProtectedModeSettings=false, enableElementCacheCleanup=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=dismiss}]
+Session ID: be25ad10-8557-4d61-93d8-a59ae2d27266: You are about to view pages over a secure connection.
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{browserAttachTimeout=0, enablePersistentHover=false, ie.forceCreateProcessApi=false, ie.usePerProcessProxy=false, ignoreZoomSetting=true, handlesAlerts=true, version=11, platform=WINDOWS, nativeEvents=false, ie.ensureCleanSession=false, elementScrollBehavior=0, ie.browserCommandLineSwitches=, webdriver.remote.sessionid=9fc126ff-0e78-42e2-93ca-1fe9c60cc3b1, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:13655/, takesScreenshot=true, javascriptEnabled=true, ignoreProtectedModeSettings=false, enableElementCacheCleanup=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=dismiss}]
+Session ID: 9fc126ff-0e78-42e2-93ca-1fe9c60cc3b1
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
+	at org.openqa.selenium.remote.ErrorHandler.createUnhandledAlertException(ErrorHandler.java:187)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:154)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:701)
+	at org.openqa.selenium.remote.RemoteWebDriver.getScreenshotAs(RemoteWebDriver.java:335)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.openqa.selenium.remote.Augmenter$CompoundHandler.intercept(Augmenter.java:191)
+	at org.openqa.selenium.remote.RemoteWebDriver$$EnhancerByCGLIB$$7c197510.getScreenshotAs(<generated>)
+	at lavante.recovery.utilities.seleniumBaseClass.takeScreenshot(seleniumBaseClass.java:537)
+	at lavante.recovery.utilities.Report.fail(Report.java:22)
+	at lavante.recovery.utilities.seleniumBaseClass.launchAppThroughPOM(seleniumBaseClass.java:155)
+	at lavante.recovery.testsuites.SanityTestSuite.preCondition(SanityTestSuite.java:32)
+

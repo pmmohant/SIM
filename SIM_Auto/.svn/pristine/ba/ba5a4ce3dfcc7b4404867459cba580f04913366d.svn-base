@@ -1,0 +1,704 @@
+/**
+ * 
+ */
+package com.lavante.sim.customer.pageobjects;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.testng.Reporter;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+/**
+ * @author Piramanayagam.S
+ *
+ */
+public class Myhomepage {
+
+	public WebDriver driver;
+	LavanteUtils lavanteUtils = new LavanteUtils();
+
+	public Myhomepage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+		this.driver = driver;
+	}
+
+	
+	@FindBy(css = "iframe#search_results")
+	public WebElement SearchListIFRAME;
+	
+	@FindBy(id = "clientLogoTooltip")
+	public WebElement VerifyClientLogoToolTip;
+
+	@FindBy(css = "#allCustomers_chosen a")
+	private WebElement AllCustomersDropDwn;
+	public WebElement AllCustomersDropDwn(){
+		return AllCustomersDropDwn;
+	}
+	
+	@FindBy(css = "[id*='proxy'] a")
+	private WebElement RoleproxyDpdn;
+	public WebElement RoleproxyDpdn(){
+		return RoleproxyDpdn;
+	}
+	
+	@FindBy(css = ".chosen-drop>.chosen-search>input")
+	public WebElement AllCustomersDropDwnTxtBox;
+
+	@FindBy(id = "header_right")
+	public WebElement CustomerLogo;
+
+	@FindBy(css= "div[style*='block'] button[title*='close']")
+	private List<WebElement> closebtn1;
+
+	public List<WebElement> closebtn1() {
+		return closebtn1;
+	}
+	
+	//Few Popups dont have close button due to new implementation
+	@FindBy(css= "div[style*='block'] button[title*='close'][style*='none'] span:nth-child(1)")
+	private List<WebElement> Disabledclosebtn1;
+	public List<WebElement> Disabledclosebtn1() {
+		return Disabledclosebtn1;
+	}
+	
+	@FindBy(css= "div[class*='dialog'] button[class*='primary'] span")
+	private List<WebElement> okBtnlist;
+	public List<WebElement> okBtnlist() {
+		return okBtnlist;
+	}
+	
+	
+
+	@FindBy(css= "div[style*='block'][class*='notify'] button[title*='close']")
+	private List<WebElement> browsernotifyclose;
+
+	public List<WebElement> browsernotifyclose() {
+		return browsernotifyclose;
+	}
+	
+	@FindBy(css = "div[class*='login'] span:nth-child(3)")
+	private WebElement supportbannermsg;
+	public WebElement supportbannermsg(){
+		return supportbannermsg;
+	}
+	
+	@FindBy(css = "a[href*='return']")
+	private WebElement returntoSupport;
+	public WebElement returntoSupport(){
+		return returntoSupport;
+	}
+	
+
+	@FindBy(css= "a[href*='Search']")
+	private List<WebElement> backbtn;
+	public List<WebElement> backbtn(){
+		return backbtn;
+	}
+	
+	//Total Page
+	@FindBy(css= "[class='caption'] span")
+	private WebElement TotalCount;
+	public WebElement TotalCount(){
+		return TotalCount;
+	}
+	
+	@FindBy(xpath= "//a[contains(@href,'page')][not(contains(@href,'filterBy'))]")
+	private List<WebElement> TotalPage;
+	public List<WebElement> TotalPage(){
+		return TotalPage;
+	}
+	
+	
+	@FindBy(xpath= "//a[contains(@ng-click,'Page')][not(contains(@ng-click,'1'))]")
+	private List<WebElement> TotalPageNw;
+	public List<WebElement> TotalPageNw(){
+		return TotalPageNw;
+	}
+	
+	@FindBy(css= "a[class*='next'][href]")
+	private List<WebElement> Nextpagebtn;
+	public List<WebElement> Nextpagebtn(){
+		return Nextpagebtn;
+	}
+	
+	@FindBy(css = "ul[class*='agination'] li a")
+	public List<WebElement> PaginationSearchNextPgBtn;
+	
+	@FindBy(css="a[title*='Next'][href*='viewSupplier']")
+	private List<WebElement> nextSupp;
+	public List<WebElement> nextSupp(){
+		return nextSupp;
+	}
+	
+	@FindBy(css="span[class*='search']")
+	private WebElement SupplierSearchForm;
+	public WebElement SupplierSearchForm(){
+		return SupplierSearchForm;
+	}
+	
+	@FindBy(css="a[class*='user-info']")
+	private WebElement UserName;
+
+	public WebElement UserName() {
+		return UserName;
+	}
+	
+	@FindBy(css="li [href*='Alerts']")
+	private WebElement ManageAlertsBtn;
+
+	public WebElement ManageAlertsBtn() {
+		return ManageAlertsBtn;
+	}
+	
+	@FindBy(css="li [href*='Layouts']")
+	private WebElement ManageLayoutBtn;
+
+	public WebElement ManageLayoutBtn() {
+		return ManageLayoutBtn;
+	}
+	
+	@FindBy(css="li [id*='logout']")
+	private WebElement logoutbtn;
+
+	public WebElement logoutbtn() {
+		return logoutbtn;
+	}
+
+	@FindBy(css= "iframe[src*='logout']")
+	private WebElement IFRAMElogout;
+
+	public WebElement IFRAMElogout() {
+		return companylogo;
+	}
+	
+	@FindBy(css= "a[href*='logout']")
+	private List<WebElement> LogoutokBtnList;
+
+	public List<WebElement> LogoutokBtnList() {
+		return LogoutokBtnList;
+	}
+	
+
+	@FindBy(css= "header [href*='buyerHome.lvp']")
+	private WebElement companylogo;
+
+	public WebElement companylogo() {
+		return companylogo;
+	}
+	
+	@FindBy(css= "header [href*='buyerHome.lvp'] img")
+	private WebElement companylogoImg;
+
+	public WebElement companylogoImg() {
+		return companylogoImg;
+	}
+
+	@FindBy(css= "[class*='header_logo'] img")
+	private WebElement customerlogo;
+
+	public WebElement customerlogo() {
+		return customerlogo;
+	}
+
+	@FindBy(css= "#searchSelect_chosen a")
+	private WebElement searchtypedpdn;
+
+	public WebElement searchtypedpdn() {
+		return searchtypedpdn;
+	}
+
+	@FindBy(id= "searchText")
+	private WebElement searchtxt;
+
+	public WebElement searchtxt() {
+		return searchtxt;
+	}
+
+	@FindBy(id= "searchSupplier")
+	private WebElement searchSupplierbtn;
+
+	public WebElement searchSupplierbtn() {
+		return searchSupplierbtn;
+	}
+
+	@FindBy(css= "a[href*='inviteNew']")
+	private WebElement linkInviteNwsupp;
+
+	public WebElement linkInviteNwsupp() {
+		return linkInviteNwsupp;
+	}
+
+	@FindBy(css= "div[class='page-header']")
+	private WebElement pageHeader;
+
+	public WebElement pageHeader() {
+		return pageHeader;
+	}
+	
+	/**
+	 * For Verifying Outstanding task count
+	 * OS-Outstanding
+	 * PH-PageHeader
+	 * @author Girish.N
+	 */
+	
+	//Notification Icon in Page Header
+	@FindBy(css="div[class*='buyer-home'] ul li ")
+	private WebElement emptyTask;
+	public WebElement emptyTask() {
+		return emptyTask;
+	}
+	
+	@FindBy(css="div[class*='dropdown task-section']>a[class='dropdown-toggle']")
+	private WebElement OSTaskIcon;
+	public WebElement OSTaskIcon() {
+		return OSTaskIcon;
+	}
+	
+	@FindBy(css="sup[class*='badge']")
+	private WebElement totalOSTasksCountOnPH;
+	public WebElement totalOSTasksCountOnPH() {
+		return totalOSTasksCountOnPH;
+	}
+
+	@FindBy(css="div[class*='dropdown task-section'] a[class='stopNavigation']")
+	private List<WebElement> OSTasksInPHList;
+	public List<WebElement> OSTasksInPHList() {
+		return OSTasksInPHList;
+	}
+	
+	//The list includes "To Do's to complete" and "Alerts to review" as well if the same is present
+	@FindBy(css="div[class*='dropdown task-section'] span[class='badge']")
+	private List<WebElement> OSTasksCountsInPHList;
+	public List<WebElement> OSTasksCountsInPHList() {
+		return OSTasksCountsInPHList;
+	}
+	
+	//total no. of records displayed in header. Even though the  element present in different page, the same is captured in Home Page for Outstanding Task count verification test
+	@FindBy(css="div[class*='record'] span")
+	private WebElement totalRecords;
+	public WebElement totalRecords(){
+		return totalRecords;
+	}
+	
+	//Outstanding Tasks in Home Page
+	@FindBy(xpath="//div[@class='header']//span[contains(text(),'Outstanding tasks')]")
+	private WebElement totalOSTasksInHomePage;
+	public WebElement totalOSTasksInHomePage() {
+		return totalOSTasksInHomePage;
+	}
+
+	@FindBy(css="li>div:nth-child(2) a[href*='isHome=true']")
+	private List<WebElement> OSTasksInHomePageList;
+	public List<WebElement> OSTasksInHomePageList() {
+		return OSTasksInHomePageList;
+	}
+	
+	@FindBy(css="div[class='task-section'] span[class='badge']")
+	private List<WebElement> OSTasksCountsHomePageList;
+	public List<WebElement> OSTasksCountsHomePageList() {
+		return OSTasksCountsHomePageList;
+	}
+
+	@FindBy(css="header a[href='buyerHome.lvp']")
+	private WebElement prgxLogo;
+	public WebElement prgxLogo() {
+		return prgxLogo;
+	}
+	
+	@FindBy(css="div[class*='dial'] button[class*='prim']")
+	private WebElement dialogYes;
+	
+	
+	//End of Locator
+	
+	//Creation Of Reusable Method
+	
+	/**
+	 * To get Outstanding task from the icon in Page Header and the task page.
+	 * Method retrieves all the tasks and counts, concatenate the same in a string(one for each) with '#' separator and put the same in a dataMap.
+	 * Method also retrieves the total count present in a table header. 
+	 * @author Girish.N
+	 */
+	
+	public LinkedHashMap<String, String> getOutstdngTsksOnPH(LinkedHashMap<String, String> dataMap) {
+		
+		String dropDownTask="";
+		String dropDownTaskCounts="";
+		String actCountsOnTaskPage="";
+
+		int actTotalTaskCountOnPH=0;
+		for(int i=0; i<OSTasksInPHList.size();i++){
+			
+			lavanteUtils.click(OSTaskIcon);
+			
+			if(i<(OSTasksInPHList.size()-1)){
+				dropDownTask=dropDownTask + OSTasksInPHList.get(i).getText().trim() + "#";
+				dropDownTaskCounts=dropDownTaskCounts + OSTasksCountsInPHList.get(i).getText().trim() + "#";
+				
+			}else{
+				dropDownTask=dropDownTask + OSTasksInPHList.get(i).getText().trim();
+				dropDownTaskCounts=dropDownTaskCounts + OSTasksCountsInPHList.get(i).getText().trim();
+			}
+				
+			lavanteUtils.click(OSTasksInPHList.get(i));
+			lavanteUtils.waitforPageload(totalRecords);
+			lavanteUtils.fluentwait(totalRecords);
+			lavanteUtils.waitForTime(5000);
+			int count = lavanteUtils.getCount(totalRecords.getText());
+			actTotalTaskCountOnPH=actTotalTaskCountOnPH + count;
+			
+			if(i<(OSTasksInPHList.size()-1)){
+				actCountsOnTaskPage = actCountsOnTaskPage + String.valueOf(count) + "#";
+				
+			}else{
+				actCountsOnTaskPage = actCountsOnTaskPage + String.valueOf(count);
+			}			
+		}
+		
+		dataMap.put("OutstandingTaskOnDDL", dropDownTask);
+		dataMap.put("OutstandingTaskCountsOnDDL", dropDownTaskCounts);
+		dataMap.put("ActualTaskCounts", actCountsOnTaskPage);
+		dataMap.put("ActualTotalCountPH", String.valueOf(actTotalTaskCountOnPH));
+		
+		return dataMap;
+	}
+	
+	/**
+	 * To get Outstanding tasks from the Home Page and the task pages.
+	 * Method retrieves all the tasks and counts, concatenate the same in a string(one for each) with '#' separator and put the same in a dataMap.
+	 * Method also retrieves the total count present in a table header.
+	 * @author Girish.N
+	 */
+	
+	public LinkedHashMap<String, String> getOutstdngTsksOnHomePage(LinkedHashMap<String, String> dataMap) {
+		
+		String homePageTask="";
+		String homePageTaskCounts="";
+		String actCountsOnTaskPage1="";
+		int actTotalTaskCountOnHomePage=0;
+		int size=OSTasksInHomePageList.size();
+		for(int j=0; j<size;j++){
+			int xsize=size-1;
+			if(j<xsize){
+				homePageTask=homePageTask + OSTasksInHomePageList.get(j).getText().trim() + "#";
+				homePageTaskCounts=homePageTaskCounts + OSTasksCountsHomePageList.get(j).getText().trim() + "#";
+				
+			}else{
+				homePageTask=homePageTask + OSTasksInHomePageList.get(j).getText().trim();
+				homePageTaskCounts=homePageTaskCounts + OSTasksCountsHomePageList.get(j).getText().trim();
+			}
+				
+			lavanteUtils.waitForTime(1000);
+			lavanteUtils.click(OSTasksInHomePageList.get(j));
+			lavanteUtils.waitforPageload(totalRecords);
+			int count = lavanteUtils.getCount(totalRecords.getText());
+			actTotalTaskCountOnHomePage=actTotalTaskCountOnHomePage + count;
+			
+			selectTab(dataMap);
+			lavanteUtils.waitforPageload(pageHeader);
+			
+			if(j<(OSTasksInHomePageList.size()-1)){
+				actCountsOnTaskPage1 = actCountsOnTaskPage1 + String.valueOf(count) + "#";
+				
+			}else{
+				actCountsOnTaskPage1 = actCountsOnTaskPage1 + String.valueOf(count);
+				
+			}			
+			
+		}
+		
+		dataMap.put("OutstandingTaskOnHomePage", homePageTask);
+		dataMap.put("OutstandingTaskCountsOnHomePage", homePageTaskCounts);
+		dataMap.put("ActualTaskCounts1", actCountsOnTaskPage1);
+		dataMap.put("ActualTotalCountHomePage", String.valueOf(actTotalTaskCountOnHomePage));
+		
+		return dataMap;
+	}	
+	
+	
+	public void logout() {
+		   
+		userNameSelect();
+		lavanteUtils.click(logoutbtn);
+	}
+	
+	public void Alertselect() {
+		userNameSelect();
+		lavanteUtils.click(ManageAlertsBtn);
+	}
+	
+	public void Layoutselect() {
+		userNameSelect();
+		lavanteUtils.click(ManageLayoutBtn);
+	}
+	
+	public void userNameSelect() {
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.scrollup();
+		lavanteUtils.click(UserName);
+	}
+	
+	
+	public void logout(String x){
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.scrollup();
+		lavanteUtils.fluentwait(UserName);
+		lavanteUtils.click(UserName);
+		
+		lavanteUtils.fluentwait(logoutbtn);
+		lavanteUtils.click(logoutbtn);
+		
+		//For Supplier Login
+		if(x.length()>0){
+			lavanteUtils.switchtoFrame(IFRAMElogout);
+			if (LogoutokBtnList.size() > 0) {
+				lavanteUtils.click(LogoutokBtnList.get(0));
+				lavanteUtils.switchtoFrame(null);
+			}
+		}
+		
+
+	}
+
+	public boolean selectTab(LinkedHashMap<String, String> dataMap) {
+		boolean flag=true;
+		lavanteUtils.switchtoFrame(null);
+		String url=driver.getCurrentUrl();
+		if(dataMap.containsKey("subtab")){
+			if(!url.contains(dataMap.get("subtab"))){
+				if (dataMap.containsKey("maintab")) {
+					String x=dataMap.get("maintab");
+					x=x.toUpperCase();
+					if(x.equalsIgnoreCase("SUPPLIER")){
+						x="SUPPLIERS";
+					}else if(x.contains("RISK")){
+						x="COMPLIANCE";
+					}else if(x.contains("INVOICE")){
+						x="TRANSACTIONS";
+					}else if(x.contains("Admin")||x.contains("Files")){
+						x="ADMIN";
+					}
+					String main = "[id*='main']>ul>li>a";
+					List<WebElement> e=driver.findElements(By.cssSelector(main));
+					for(int i=0;i<e.size();i++){
+						if(e.get(i).getText().contains(x)){
+							lavanteUtils.click(e.get(i));
+							Reporter.log("Selected Main Tab:"+x,true);
+							break;
+						}
+					}
+				}
+				if (dataMap.containsKey("subtab")) {
+					lavanteUtils.waitForTime(1000);
+					String sub = "//*[@aria-expanded='true']/..//li//a[@href]";
+					List<WebElement> e=driver.findElements(By.xpath(sub));
+					for(int i=0;i<e.size();i++){
+						if(e.get(i).getAttribute("href").contains(dataMap.get("subtab"))){
+							lavanteUtils.click(e.get(i));
+							Reporter.log("Selected Sub Tab:"+dataMap.get("subtab"),true);
+							break;
+						}
+					}
+				}
+				lavanteUtils.waitForTime(4000);
+			}
+		}else {
+			if (dataMap.containsKey("maintab")) {
+				String main = "[id*='main']>ul>li>a";
+				String x=dataMap.get("maintab");
+				x=x.toUpperCase();
+				if(x.equalsIgnoreCase("SUPPLIER")){
+					x="SUPPLIERS";
+				}else if(x.contains("RISK")){
+					x="COMPLIANCE";
+				}else if(x.contains("INVOICE")){
+					x="TRANSACTIONS";
+				}
+				//Supp Login
+				if (dataMap.get("maintab").equalsIgnoreCase("INVOICES")){
+					x="INVOICES";
+				}
+				List<WebElement> e=driver.findElements(By.cssSelector(main));
+				for(int i=0;i<e.size();i++){
+					if(e.get(i).getText().contains(x)){
+						lavanteUtils.click(e.get(i));
+						Reporter.log("Selected Tab:"+x,true);
+						if(x.equalsIgnoreCase("SUPPLIER")){
+							lavanteUtils.switchtoFrame(SearchListIFRAME);
+							lavanteUtils.switchtoFrame(null);
+						}
+						break;
+					}
+				}
+			}
+			lavanteUtils.waitForTime(4000);
+		}
+		//Claims Lock Feature
+		if(url.contains("editClaimTask.lvp")){
+			//Used By Claims  Lock
+			if(!dataMap.containsKey("Skip"))
+			{
+				if(lavanteUtils.isElementDisplayed(dialogYes)){
+					lavanteUtils.click(dialogYes);
+					flag=false;
+				}
+			}
+		}
+		lavanteUtils.exception();
+		System.out.println("SELECTED TAB");
+		return flag;
+	}
+
+	public void search(LinkedHashMap<String, String> dataMap) {
+
+		if (dataMap.containsKey("type")) {
+			lavanteUtils.click(searchtypedpdn);
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("type"));
+		}
+		if (dataMap.containsKey("value")) {
+
+			lavanteUtils.typeinEdit(dataMap.get("value"), searchtxt);
+		}
+
+		lavanteUtils.click(searchSupplierbtn);
+
+	}
+
+	/**
+	 * Close button to close any popups available
+	 * 
+	 * @author Piramanayagam.S
+	 * @param null
+	 * @return null
+	 * 
+	 */
+	public void close() {
+
+		lavanteUtils.switchtoFrame(null);
+		int closesize = browsernotifyclose.size();
+		for (int i = 0; i < closesize; i++) {
+			lavanteUtils.fluentwait(browsernotifyclose.get(i));
+			lavanteUtils.fluentwait(browsernotifyclose.get(0));
+			lavanteUtils.click(browsernotifyclose.get(0));
+
+		}
+		lavanteUtils.fluentwait(UserName);
+	}
+
+	/**
+	 * Close button to close any popups available
+	 * 
+	 * @author Piramanayagam.S
+	 * @param null
+	 * @return null
+	 * 
+	 */
+	public void popupclose() {
+
+		int disabledclose=Disabledclosebtn1.size();
+		if(disabledclose>0){
+			if(okBtnlist().size()>0) {
+				lavanteUtils.click(okBtnlist.get(0));	
+			}
+			
+		}else{
+			int closebtn1 = closebtn1().size();
+			System.out.println("CLOSE SIZE" + closebtn1);
+			for (int i = closebtn1 - 1; i >= 0; i--) {
+				lavanteUtils.click(closebtn1().get(i));
+			}
+	
+			lavanteUtils.waitForTime(3000);
+	
+			lavanteUtils.switchtoFrame(null);
+	
+			closebtn1 = closebtn1().size();
+			System.out.println("Default CLOSE SIZE" + closebtn1);
+			for (int i = closebtn1 - 1; i >= 0; i--) {
+				lavanteUtils.click(closebtn1().get(i));
+			}
+		}
+		lavanteUtils.waitForTime(3000);
+
+	}
+
+	/**
+	 * for View Supplier Back Button
+	 */
+	public void backtoSearch() {
+		lavanteUtils.switchtoFrame(null);
+		if (backbtn.size() > 0) {
+			//while(backbtn.size()>0){
+				lavanteUtils.click(backbtn.get(0));
+				lavanteUtils.switchtoFrame(null);
+		//	}
+		}
+	}
+
+	public WebElement NavigateNextPage() {
+		if(Nextpagebtn.size()>0){
+			lavanteUtils.click(Nextpagebtn.get(0));
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Search Page Pagination
+	 * @author Piramanayagam.S
+	 * @return
+	 */
+	public boolean Pagination() {
+		boolean flag=true;
+		int size=PaginationSearchNextPgBtn.size();
+		if(size>2){
+			String x=PaginationSearchNextPgBtn.get(size-2).getText();
+			if(x.equalsIgnoreCase("Next")){
+				lavanteUtils.click(PaginationSearchNextPgBtn.get(size-2));
+			}
+		}else{
+			return false;
+		}
+		return flag;
+		
+	}
+	
+	/**
+	 * Search Page Pagination with Value
+	 * @author Piramanayagam.S
+	 * @return
+	 */
+	public boolean Pagination(String value) {
+		boolean flag=false;
+		int size=PaginationSearchNextPgBtn.size()-1;
+		for(int i=size;i>0;i--){
+			if(PaginationSearchNextPgBtn.get(i).getText().equalsIgnoreCase(value)){
+				String x=null;
+				x=PaginationSearchNextPgBtn.get(i).getAttribute("href");
+				if(x!=null && x.length()>0);
+				{
+					lavanteUtils.click(PaginationSearchNextPgBtn.get(i));
+					lavanteUtils.waitForTime(5000);
+					flag=true;
+					break;
+				}
+			}
+		}
+		
+		return flag;
+		
+	}
+	
+	
+
+}

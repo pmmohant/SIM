@@ -1,0 +1,281 @@
+/**
+ * 
+ */
+package com.lavante.sim.customer.pageobjects.Transactions.Invoices;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+/**
+ * @author Tejaswini AR
+ * Web Elements for Invoice advanced search.
+ */
+public class InvoiceAdvanceSearch 
+   {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	
+	public InvoiceAdvanceSearch(WebDriver driver){
+		lavanteUtils.driver=driver;
+		
+	}
+	
+	@FindBy(how=How.ID,using="adv_search_tab")
+	private WebElement AdvancedSearchTab;
+	public WebElement AdvancedSearchTab()
+	{
+		return AdvancedSearchTab;
+	}
+	
+	@FindBy(css="[href='loadInvoiceAdvanceSearch.lvp']")
+	private WebElement BuildQuerybtn;
+	public WebElement BuildQuerybtn()
+	{
+		return BuildQuerybtn;
+	}
+	
+	@FindBy(css="iframe[src*='InvoiceAdvanceSearch']")
+	private WebElement IframeInvoiceAdv;
+	public WebElement IframeInvoiceAdv()
+	{
+		return IframeInvoiceAdv;
+	}
+	
+	@FindBy(css="[title*='Clear']")
+	private WebElement ClearQuery;
+	public WebElement ClearQuery()
+	{
+		return ClearQuery;
+	}
+	
+	@FindBy(css="[title*='Search']")
+	private WebElement SearchQuery;
+	public WebElement SearchQuery()
+	{
+		return SearchQuery;
+	}
+	
+	@FindBy(css="[id*='InvoicesupplierID'] a")
+	private WebElement SupplierERPIDdpdn;
+	public WebElement SupplierERPIDdpdn()
+	{
+		return SupplierERPIDdpdn;
+	}
+	
+	@FindBy(css="input[name*='InvoicesupplierID']")
+	private WebElement SupplierERPIDtxt;
+	public WebElement SupplierERPIDtxt()
+	{
+		return SupplierERPIDtxt;
+	}
+	
+	@FindBy(css="[id*='invoiceNumber'] a")
+	private WebElement InvoiceNumberdpdn;
+	public WebElement InvoiceNumberdpdn()
+	{
+		return InvoiceNumberdpdn;
+	}
+	
+	@FindBy(css="input[name*='invoiceNumber']")
+	private WebElement InvoiceNumbertxt;
+	public WebElement InvoiceNumbertxt()
+	{
+		return InvoiceNumbertxt;
+	}
+	
+	@FindBy(css="[id*='poNumber'] a")
+	private WebElement PONumberdpdn;
+	public WebElement PONumberdpdn()
+	{
+		return PONumberdpdn;
+	}
+
+	@FindBy(css="input[name*='poNumber']")
+	private WebElement PONumbertxt;
+	public WebElement PONumbertxt()
+	{
+		return PONumbertxt;
+	}
+	
+	@FindBy(css="[id*='invoiceStatus'] input")
+	private WebElement invoiceStatusText;
+	public WebElement invoiceStatusText()
+	{
+		return invoiceStatusText;
+	}
+	
+	@FindBy(css="[id*='invoiceType'] input")
+	private WebElement invoiceTypeText;
+	public WebElement invoiceTypeText()
+	{
+		return invoiceTypeText;
+	}
+	 // Adding web elements for Invoice date part of SIM-10513
+	
+	@FindBy(css="[id*='invoiceDate'] a")
+	private WebElement Invoicedatedpdn;
+	public WebElement Invoicedatedpdn()
+	{
+		return Invoicedatedpdn;
+	}
+	
+	@FindBy(css="input[name*='invoiceDate']")
+	private WebElement Invoicedate;
+	public WebElement Invoicedate()
+	{
+		return Invoicedate;
+	}
+
+	// Web Elements for checking the field on the Invoice search results table.
+	
+	@FindBy(css="[id='invoiceDetails'] td:nth-child(2)")
+	private WebElement TBLSupplierERPID;
+	public WebElement TBLSupplierERPID()
+	{
+		return TBLSupplierERPID;
+	}
+	
+	@FindBy(css="[id='invoiceDetails'] td:nth-child(4)")
+	private WebElement TBLInvoiceNumber;
+	public WebElement TBLInvoiceNumber()
+	{
+		return TBLInvoiceNumber;
+	}
+	
+	@FindBy(css="[id='invoiceDetails'] td:nth-child(10)")
+	private WebElement TBLInvoiceCurrency;
+	public WebElement TBLInvoiceCurrency()
+	{
+		return TBLInvoiceCurrency;
+	}
+	
+	// Methods
+	
+	public void buildquery(LinkedHashMap<String, String> dataMap) throws IOException 
+	{
+		
+		lavanteUtils.switchtoFrame(IframeInvoiceAdv);
+		
+		if(dataMap.containsKey("ClearQuery")){
+			lavanteUtils.fluentwait(ClearQuery);
+			ClearQuery().click();
+		}
+		
+		buildingQuery(dataMap);
+		formAction(dataMap);
+	}
+	
+	private void buildingQuery(LinkedHashMap<String, String> dataMap) throws IOException 
+	{
+		lavanteUtils.fluentwait(SupplierERPIDdpdn);
+		if(dataMap.containsKey("SupplierERPID"))
+		{
+			String data=dataMap.get("SupplierERPID");
+			String[] x=splitString(data);
+			lavanteUtils.click(SupplierERPIDdpdn);
+			lavanteUtils.Scrollintoview(SupplierERPIDdpdn);
+			lavanteUtils.selectvalueFrmDpdn(x[0]);
+			lavanteUtils.switchtoFrame(IframeInvoiceAdv);
+			if(!x[0].contains("Is"))
+			{
+				lavanteUtils.fluentwait(SupplierERPIDtxt);
+				lavanteUtils.typeinEdit(x[1],SupplierERPIDtxt);
+			}
+		}
+
+		if(dataMap.containsKey("InvoiceNumber"))
+		{
+			lavanteUtils.click(InvoiceNumberdpdn);
+            String data=dataMap.get("InvoiceNumber");
+			String[] x=splitString(data);
+			lavanteUtils.selectvalueFrmDpdn(x[0]);
+			lavanteUtils.switchtoFrame(IframeInvoiceAdv);
+			if(!x[0].contains("Is"))
+			{
+				lavanteUtils.typeinEdit(x[1],InvoiceNumbertxt);
+			}
+		}
+		
+		if(dataMap.containsKey("InvoiceDate"))
+		{
+			lavanteUtils.click(Invoicedatedpdn);
+            String data=dataMap.get("InvoiceDate");
+			String[] x=splitString(data);
+			lavanteUtils.selectvalueFrmDpdn(x[0]);
+			lavanteUtils.switchtoFrame(IframeInvoiceAdv);
+			if(!x[0].contains("Is"))
+				
+			{
+				lavanteUtils.click(Invoicedate);
+				lavanteUtils.selectdate(x[1]);
+			}
+		}
+		if(dataMap.containsKey("InvStatus"))
+		{
+			lavanteUtils.typeString(dataMap.get("InvStatus"), invoiceStatusText);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("InvStatus"));
+			lavanteUtils.switchtoFrame(IframeInvoiceAdv);
+		}
+		if(dataMap.containsKey("InvoiceType"))
+		{
+			lavanteUtils.typeString(dataMap.get("InvoiceType"), invoiceTypeText);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("InvoiceType"));
+			lavanteUtils.switchtoFrame(IframeInvoiceAdv);
+		}
+		
+		
+		//Please check t
+		if(dataMap.containsKey("PONumber"))
+		{
+			lavanteUtils.click(PONumberdpdn);
+			
+            String data=dataMap.get("PONumber");
+			
+			String[] x=splitString(data);
+			lavanteUtils.selectvalueFrmDpdn(x[0]);
+			lavanteUtils.switchtoFrame(IframeInvoiceAdv);
+			if(!x[0].contains("Is"))
+				
+			{
+				lavanteUtils.fluentwait(PONumbertxt);
+				lavanteUtils.typeinEdit(x[1],PONumbertxt);
+			}
+			
+		}
+		
+			
+}
+
+
+	public String[] splitString(String data) {
+	
+		String[] x=new String[100];
+		if(data.contains(",")){
+			x=data.split(",");
+			System.out.println(x[0]+":"+x[1]);
+		}else{
+			x[0]=data;
+		}
+		return x;
+			
+	}
+
+public void formAction(LinkedHashMap<String, String> dataMap) 
+{
+	if(dataMap.containsKey("Search"))
+	{
+		lavanteUtils.switchtoFrame(IframeInvoiceAdv);
+		lavanteUtils.click(SearchQuery);
+		lavanteUtils.switchtoFrame(null);
+	}
+	
+}
+   
+}

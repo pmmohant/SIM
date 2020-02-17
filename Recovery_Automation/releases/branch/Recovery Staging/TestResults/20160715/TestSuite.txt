@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 46, Failures: 1, Errors: 0, Skipped: 45, Time elapsed: 4.535 sec <<< FAILURE! - in TestSuite
+preCondition(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 4.361 sec  <<< FAILURE!
+java.lang.NullPointerException: null
+	at org.openqa.selenium.remote.Augmenter.extractRemoteWebDriver(Augmenter.java:66)
+	at org.openqa.selenium.remote.BaseAugmenter.augment(BaseAugmenter.java:106)
+	at lavante.recovery.utilities.seleniumBaseClass.takeScreenshot(seleniumBaseClass.java:533)
+	at lavante.recovery.utilities.Report.fail(Report.java:22)
+	at lavante.recovery.utilities.seleniumBaseClass.launchAppThroughPOM(seleniumBaseClass.java:153)
+	at lavante.recovery.testsuites.SanityTestSuite.preCondition(SanityTestSuite.java:34)
+

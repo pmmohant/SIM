@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="">
+<head>
+  <title>Test Results Report - Log Output</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="description" content="TestNG unit test results." />
+  <link href="reportng.css" rel="stylesheet" type="text/css" />
+  </head>
+<body>
+  <h1>Log Output</h1>
+  <p>
+    Combined output from all calls to the log methods of the <a href="http://testng.org/javadocs/org/testng/Reporter.html">TestNG Reporter</a>.    
+  </p>
+
+  <div id="log">
+                  Pass: Confiig filejava.io.FileInputStream@51081592found
+                        Info: Broweser Parameters : Browser : firefox, Version :44
+                        Info: Remote Parameters : RemoteURL : http://192.168.21.20:4444, RemoteExecution :true
+                        Pass: Application is launched successfully.
+                        Pass: Confiig filejava.io.FileInputStream@76672ffdfound
+                        Pass: Confiig filejava.io.FileInputStream@664ad6c4found
+                        Pass: Confiig filejava.io.FileInputStream@2ff0eedefound
+                        Pass: Confiig filejava.io.FileInputStream@44b42cebfound
+                        Pass: Confiig filejava.io.FileInputStream@7d33f0e7found
+                        Pass: Confiig filejava.io.FileInputStream@716b4328found
+                        Pass: Confiig filejava.io.FileInputStream@21f9fa91found
+                        Pass: Confiig filejava.io.FileInputStream@700c7f22found
+                        Pass: Confiig filejava.io.FileInputStream@68692e7afound
+                        Pass: Confiig filejava.io.FileInputStream@802c938found
+                        Pass: Confiig filejava.io.FileInputStream@7c4c96dffound
+                        Pass: Confiig filejava.io.FileInputStream@5b44afd4found
+                        Pass: Confiig filejava.io.FileInputStream@2578ce1afound
+                        Pass: Confiig filejava.io.FileInputStream@11cd0405found
+                        Pass: Confiig filejava.io.FileInputStream@1dbbe077found
+                        Pass: Confiig filejava.io.FileInputStream@42e189ecfound
+                        Pass: Confiig filejava.io.FileInputStream@797fda67found
+                        Pass: Confiig filejava.io.FileInputStream@2606906dfound
+                        Pass: Confiig filejava.io.FileInputStream@33534d62found
+                        Pass: Confiig filejava.io.FileInputStream@7f2ff4a4found
+                        Pass: Confiig filejava.io.FileInputStream@22999922found
+                        Pass: Confiig filejava.io.FileInputStream@b26fa46found
+                        Pass: Confiig filejava.io.FileInputStream@29375489found
+                        Pass: Confiig filejava.io.FileInputStream@7b175c26found
+                        Pass: Confiig filejava.io.FileInputStream@63bbe898found
+                        Pass: Confiig filejava.io.FileInputStream@1e3d8af7found
+                        Pass: Confiig filejava.io.FileInputStream@9a6020ffound
+                        Pass: Confiig filejava.io.FileInputStream@74617016found
+                        Pass: Confiig filejava.io.FileInputStream@568889d7found
+                        Pass: Confiig filejava.io.FileInputStream@66e040abfound
+                        Pass: Confiig filejava.io.FileInputStream@2124a0f5found
+                        Pass: Confiig filejava.io.FileInputStream@2fa35e26found
+                        Pass: Confiig filejava.io.FileInputStream@1a4e21b6found
+                        Pass: Confiig filejava.io.FileInputStream@710241e8found
+                        Pass: Confiig filejava.io.FileInputStream@4cd905aefound
+                        Pass: Confiig filejava.io.FileInputStream@40945d9afound
+                        Pass: Confiig filejava.io.FileInputStream@6d27c8e5found
+                        Pass: Confiig filejava.io.FileInputStream@7e1e447ffound
+                        Pass: Confiig filejava.io.FileInputStream@7e094d7efound
+                        Pass: Confiig filejava.io.FileInputStream@4b922a82found
+                        Pass: Confiig filejava.io.FileInputStream@443bec5found
+                        Info: ------------Test ' loginWithValidCredentials ' Started------------
+                        Pass: 'adminuser1' is entered in userName_txtField
+                        Pass: 'lavante@123' is entered in password_TextField
+                        Pass: 'login_Button' is clicked
+                        Pass: 'quickSearch_Form' is displayed
+                        Pass: 'auditSelectbox' is clicked
+                        Pass: 'auditSelectbox' is displayed
+                        Pass: 'Kaiser Permanente' is entered in auditdrpDownTextBox
+                        Pass: 'auditdrpDownTextBox' is displayed
+                        Info: ------------Test ' loginWithValidCredentials ' Ended------------
+                        Pass: 'dashBoardLink' is displayed
+                        Pass: 'auditLink' is clicked
+                        Pass: https://recoveryqa39.lavante.com/recovery/outbound.lvp Page is working fine
+                        Pass: 'auditLink' is displayed
+                        Pass: 'claimsLink' is clicked
+                        Pass: https://recoveryqa39.lavante.com/recovery/claim.lvp Page is working fine
+                        Pass: 'totalClaimsTable' is displayed
+                        Pass: 'claimsListTable' is displayed
+                        Pass: 'invoicesLink' is clicked
+                        Pass: 'invoiceSummaryTable' is displayed
+                        Pass: 'invoiceSummaryDetailsTable' is displayed
+                        Pass: 'invoicesCreditLink' is clicked
+                        Pass: 'invoicesCreditTable' is displayed
+                        Pass: 'invoicesVoidLink' is clicked
+                        Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#void Page is working fine
+                        Pass: 'invoicesVoidTable' is displayed
+                        Pass: 'invoicesRefundLink' is clicked
+                        Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#refund Page is working fine
+                        Pass: 'invoicesRefundTable' is displayed
+                        Pass: 'configurationLink' is clicked
+                        Pass: https://recoveryqa39.lavante.com/recovery/configurationSetup.lvp Page is working fine
+                        Pass: 'assignmentsLink' is clicked
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'openClaims' is not displayedUnable to locate element: {"method":"css selector","selector":"#open-claims td a"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA01', ip: '192.168.21.81', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: driver.version: unknown
+Command duration or timeout: 15.53 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=44.0, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=d40edb6d-fd95-472a-a4cc-7b6d555d4435, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: d40edb6d-fd95-472a-a4cc-7b6d555d4435
+*** Element info: {Using=css selector, value=#open-claims td a}
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_13_23.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'supplierLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_13_37.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'complainceLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_13_58.png">Click Here</a>
+                        Fail: 'currentMonCredits' is not displayedUnable to locate element: {"method":"css selector","selector":"a[href*='CurrentMonthCredits']"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA01', ip: '192.168.21.81', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: driver.version: unknown
+Command duration or timeout: 10.98 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=44.0, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=d40edb6d-fd95-472a-a4cc-7b6d555d4435, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: d40edb6d-fd95-472a-a4cc-7b6d555d4435
+*** Element info: {Using=css selector, value=a[href*='CurrentMonthCredits']}
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_14_19.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'inboundLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_14_32.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'contactEntry' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_14_50.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'batchingLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_15_09.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'invoiceLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_15_25.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'possibleDupesLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_15_43.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'summaryLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_15_59.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'chkRegLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_16_15.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'setUpLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_16_31.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'configurationJobsLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_16_44.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'accountLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_17_00.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'financeLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_17_16.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'uploadsLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_17_32.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'othersLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_17_48.png">Click Here</a>
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                        Fail: 'mailerRegistryLink' is not displayed
+                        To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_18_04.png">Click Here</a>
+                        Pass: 'auditStatsTable' is displayed
+                        Pass: 'holdsLink' is clicked
+                        Pass: https://recoveryqa39.lavante.com/recovery/holdAssignments.lvp Page is working fine
+                        Pass: 'holdsTable' is displayed
+                        Pass: 'searchBtn' is displayed
+                        Pass: 'creditsLink' is clicked
+                        Pass: https://recoveryqa39.lavante.com/recovery/creditAssignments.lvp Page is working fine
+                        Pass: 'creditsTable' is displayed
+                        Pass: 'searchBtn' is displayed
+                        Pass: 'statementsLink' is clicked
+                        Pass: https://recoveryqa39.lavante.com/recovery/statementAssignments.lvp Page is working fine
+                        Pass: 'statementsTable' is displayed
+                        Pass: 'searchBtn' is displayed
+            </div>
+
+</body>
+</html>

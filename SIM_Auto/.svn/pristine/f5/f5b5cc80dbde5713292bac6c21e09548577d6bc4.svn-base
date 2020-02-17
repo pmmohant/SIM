@@ -1,0 +1,245 @@
+package com.lavante.sim.customer.pageobjects.Admin;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+/**
+ * 
+ * @author subhas.bv
+ *
+ */
+public class DataIngestionSummaryPage {
+
+	public WebDriver driver;
+	public LavanteUtils lavanteUtils = new LavanteUtils();
+
+	public DataIngestionSummaryPage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+		this.driver = driver;
+	}
+
+	@FindBy(css = "input#fileName")
+	public WebElement FileNameTxtBox;
+
+	public WebElement FileNameTxtBox() {
+		return FileNameTxtBox;
+	}
+
+	@FindBy(css = "div[id='fileType_chosen'] a")
+	public WebElement FileTypeDropDwn;
+
+	public WebElement FileTypeDropDwn() {
+		return FileTypeDropDwn;
+	}
+
+	@FindBy(css = "div[id='status_chosen'] a")
+	public WebElement StatusDropDwn;
+
+	public WebElement StatusDropDwn() {
+		return StatusDropDwn;
+	}
+
+	@FindBy(id = "totalRecord")
+	public WebElement TotalRecordsTxtBox;
+
+	public WebElement TotalRecTxtBox() {
+		return TotalRecordsTxtBox;
+	}
+
+	@FindBy(id = "uniqueRecord")
+	public WebElement InsertRecTxtBox;
+
+	public WebElement InsertRecordsTxtBox() {
+		return InsertRecTxtBox;
+	}
+
+	@FindBy(id = "duplicateRecord")
+	public WebElement DuplicateRecTxtBox;
+
+	public WebElement DuplicateRecordsTxtBox() {
+		return DuplicateRecTxtBox;
+	}
+
+	@FindBy(id = "errorRecord")
+	public WebElement ErrorneousRecTxtBox;
+
+	public WebElement ErrorneousRecTxtBox() {
+		return ErrorneousRecTxtBox;
+	}
+
+	@FindBy(css = "button[type='reset']")
+	public WebElement ResetBtn;
+
+	public WebElement ResetBtn() {
+		return ResetBtn;
+	}
+
+	@FindBy(css = "button[name='search']")
+	public WebElement SearchBtn;
+
+	public WebElement SearchBtn() {
+		return SearchBtn;
+	}
+
+	@FindBy(css = "iframe[src*='dataIngestionSummary']")
+	public WebElement IframeSearchResult;
+
+	public WebElement IframeSearchResult() {
+		return IframeSearchResult;
+	}
+
+	@FindBy(id = "getRecords")
+	private List<WebElement> ShowCountLink;
+
+	public List<WebElement> ShowCountLink() {
+		return ShowCountLink;
+	}
+
+	@FindBy(css = "[class='highlight_green']")
+	private WebElement GetCountNo;
+
+	public WebElement GetCountNo() {
+		return GetCountNo;
+	}
+
+	@FindBy(css = "#tableId th")
+	private List<WebElement> Headers;
+
+	/**
+	 * Basic Search
+	 * 
+	 * @author subhas.bv
+	 */
+	public void basicSearch(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.switchtoFrame(null);
+		fillDetails(dataMap);
+		formAction(dataMap);
+	}
+
+	/**
+	 * Basic Search fill details
+	 * 
+	 * @author subhas.bv
+	 */
+	public void fillDetails(LinkedHashMap<String, String> dataMap) {
+		if (dataMap.containsKey("FileName")) {
+			FileNameTxtBox.clear();
+			lavanteUtils.typeinEdit(dataMap.get("FileName"), FileNameTxtBox);
+		}
+		if (dataMap.containsKey("FileTemplate")) {
+			lavanteUtils.clicks(FileTypeDropDwn);
+			lavanteUtils.selectFrmDpdn(dataMap.get("FileTemplate"));
+		}
+		if (dataMap.containsKey("Status")) {
+			lavanteUtils.clicks(StatusDropDwn);
+			lavanteUtils.selectFrmDpdn(dataMap.get("Status"));
+		}
+		if (dataMap.containsKey("TotalRecords")) {
+			TotalRecordsTxtBox.clear();
+			lavanteUtils.typeinEdit(dataMap.get("TotalRecords"), TotalRecordsTxtBox);
+		}
+		if (dataMap.containsKey("InsertRecords")) {
+			InsertRecTxtBox.clear();
+			lavanteUtils.typeinEdit(dataMap.get("InsertRecords"), InsertRecTxtBox);
+		}
+		if (dataMap.containsKey("DuplicateRecords")) {
+			DuplicateRecTxtBox.clear();
+			lavanteUtils.typeinEdit(dataMap.get("DuplicateRecords"), DuplicateRecTxtBox);
+		}
+		if (dataMap.containsKey("ErrorneousRecords")) {
+			ErrorneousRecTxtBox.clear();
+			lavanteUtils.typeinEdit(dataMap.get("ErrorneousRecords"), ErrorneousRecTxtBox);
+		}
+	}
+
+	/**
+	 * Basic Search form actions
+	 * 
+	 * @author subhas.bv
+	 */
+	public void formAction(LinkedHashMap<String, String> dataMap) {
+		if (dataMap.containsKey("Reset")) {
+			lavanteUtils.clicks(ResetBtn);
+		}
+		if (dataMap.containsKey("Search")) {
+			lavanteUtils.clicks(SearchBtn);
+		}
+	}
+
+	public String getColumnText(String colname, int count) {
+		String x = "";
+		lavanteUtils.switchtoFrame(IframeSearchResult);
+		int size = iterateSearchHeaderFindColList(colname).size();
+		List<WebElement> sx = iterateSearchHeaderFindColList(colname);
+		outr: for (int i = 0; i < size; i++) {
+			System.out.println(sx.get(i) + "," + i + " COL TExt size: " + sx.size());
+			x = sx.get(i).getText();
+			System.out.println("Col Text:" + x);
+			if (count == 0) {
+				if (x.length() > 0) {
+					break outr;
+				}
+			} else {
+				x = sx.get(count).getText();
+				System.out.println("Exact I Value in col :" + x);
+				break outr;
+			}
+		}
+		return x;
+	}
+
+	public List<WebElement> iterateSearchHeaderFindColList(String col) {
+		List<WebElement> s = null;
+		int j = ColIdentify(col);
+	
+		int y = j + 1;
+	
+		String x = "#tableId tr td:nth-child(" + j + ")";
+		s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		System.out.println("Iterate col locator:" + x + ",Size:" + s.size());
+		if (col.contains("Reference") || col.contains("Invoice")) {
+			x = "#search_results tr td:nth-child(" + j + ") a";
+		
+			System.out.println("Iterate for name/contact:" + x);
+			s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		} else if (col.contains("Notes")) {
+			x = "#search_results tr td:nth-child(" + j + ") a";
+			s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		}
+		System.out.println("Iterate Search Col:" + col + ":" + s.size());
+		return s;
+	}
+
+	public int ColIdentify(String col) {
+		int ki = 0;
+		boolean found = false;
+		if (Headers.size() > 0) {
+			for (int i = 0; i < Headers.size(); i++) {
+				String x = Headers.get(i).getText().toLowerCase();
+				if (x.contains(col.toLowerCase())) {
+					ki = i;
+					// List start with 0 but need a number more than that to
+					// fetch in xpath
+					ki = i + 1;
+					System.out.println(col + ",Col Found at " + ki);
+					found = true;
+					break;
+				}
+			}
+		}
+
+		if (found == false) {
+			Assert.assertTrue(false, "Col name not found" + col);
+		}
+		return ki;
+
+	}
+}

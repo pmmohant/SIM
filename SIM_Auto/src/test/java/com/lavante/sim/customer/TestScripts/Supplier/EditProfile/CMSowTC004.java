@@ -1,0 +1,496 @@
+package com.lavante.sim.customer.TestScripts.Supplier.EditProfile;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.CMDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 6-3-2016 Created for SOW Test case Enhancement covered
+ * SIM-7238,7531,7324 Ended on 8-3-2016
+ * 
+ * @author Piramanayagam.S
+ *
+ */
+public class CMSowTC004 extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String supname = "";
+	String customerID = "";
+
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * 
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+					throws Exception {
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		List listofdatafrm = lavanteUtils.login("SOW-1", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		customerID = (String) listofdatafrm.get(1);
+
+		String sname="select MAX(su.SupplierName) from StatementOfWork s, Relationship R,Supplier su,MasterServiceAgreement m "
+				+ " where s.MSAID=m.MSAID and r.RelationShipID=m.RelationShipID and r.LavanteUID=su.LavanteUID "
+				+ " and r.CustomerID="+customerID;
+		supname=lavanteUtils.fetchDBdata(sname);
+		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+	}
+
+	@BeforeMethod
+	public void beforeMethod() throws Exception {
+		// To Start the Test from Supplier Search Tab
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("maintab", "Suppliers");
+		enobjhomePage.selectTab(dataMap);
+		
+		dataMap.put("supplierName", supname);
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		dataMap.put("profile", "");
+		dataMap.put("editProfile", "");
+		enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+
+		dataMap.put("tab", "enterpriseContract");
+		eneditProfile.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+		
+		Reporter.log("Supplier Name:"+supname,true);
+		
+	}
+
+	/**
+	 * SIM-7238 Verify if the user is able edit MSA number from Contract
+	 * management supplier result page *
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test( dataProvider = "SingleSOWData", dataProviderClass = CMDataProvider.class)
+	public void editMSAcmsuppresultpage001(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started to check whether user is able edit MSA number from Contract management supplier result page:"
+						+ currenttime());
+		boolean flag = false;
+		SoftAssert softassert = new SoftAssert();
+
+		String msanottoexc = "17.38";
+		msanottoexc = dataMap.get("msanottoexceed");
+		if (msanottoexc.equalsIgnoreCase("ANY")) {
+			msanottoexc = LavanteUtils.randomnum(99) + "." + LavanteUtils.randomnum(9) + LavanteUtils.randomnum(9);
+			dataMap.put("msanottoexceed", msanottoexc);
+		}
+
+		dataMap.put("MSASave", "");
+		eneditContractManagement.createMSA(dataMap);
+		Reporter.log("Created MSA");
+		outr: for (int i = eneditContractManagement.MSAnottoexceedList().size() - 1; i >= 0; i--) {
+
+			if (msanottoexc.equalsIgnoreCase(eneditContractManagement.MSAnottoexceedList().get(i).getText())) {
+				Reporter.log("Created MSA Available in the list");
+				String msanum = eneditContractManagement.MSAnolist().get(i).getText();
+				dataMap.put("EditCancel", "");
+				eneditProfile.formAction(dataMap);
+
+				lavanteUtils.switchtoFrame(null);
+				lavanteUtils.waitForTime(3000);
+				lavanteUtils.fluentwait(enobjhomePage.UserName());
+
+				dataMap.put("maintab", "Invoices");
+				dataMap.put("subtab", "ContractManagement");
+				enobjhomePage.selectTab(dataMap);
+				dataMap.clear();
+				dataMap.put("MSANum", msanum);
+				dataMap.put("Search", "Search");
+
+				encontractManagement.search(dataMap);
+				Reporter.log("Verification of created MSA in Contract Management basic Search:");
+
+				lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+
+				String appmsanumsearch = encontractManagement.msalist().get(0).getText();
+				Reporter.log("MSA number in contract management basic search Expected:" + msanum + ",Actuals:"
+						+ appmsanumsearch);
+				softassert.assertEquals(appmsanumsearch, msanum,
+						"MSA number in contract management basic search not matched");
+				flag = true;
+				break outr;
+
+			}
+		}
+
+		if (flag == false) {
+			softassert.assertTrue(false, "Please Add DATA and RETEST");
+
+		}
+
+		softassert.assertAll();
+		Reporter.log("Test ended for  “Request Management System (RMS)” custom field is added for SOW pop-up:"+ currenttime());
+	}
+
+	/**
+	 * SIM-7531 Verify if the user is able to search using the new SOW number in
+	 * basic
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test( dataProvider = "SingleSOWData", dataProviderClass = CMDataProvider.class)
+	public void sowbasicserachcm002(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started:" + currenttime());
+		boolean flag = false;
+
+		SoftAssert softassert = new SoftAssert();
+
+		// TO uniquely identify the SOW
+		String sowdesc = "SP";
+		sowdesc = dataMap.get("SOWDescription") + LavanteUtils.randomnum();
+		dataMap.put("SOWDescription", sowdesc);
+		dataMap.put("SOWSave", "");
+		dataMap.put("save", "");
+
+		String sowRMSNo = "SP";
+		sowRMSNo = sowRMSNo + LavanteUtils.randomnum(463);
+		dataMap.put("SOWRMSNo", sowRMSNo);
+		dataMap.put("CustomerID", customerID);
+		eneditContractManagement.AddSOW(dataMap);
+		Reporter.log("Created SOW");
+
+		outr: for (int i = eneditContractManagement.SOWDesclist().size() - 1; i >= 0; i--) {
+
+			if (sowdesc.equalsIgnoreCase(eneditContractManagement.SOWDesclist().get(i).getText())) {
+				String sownum = eneditContractManagement.SOWnolist().get(i).getText();
+
+				dataMap.put("EditCancel", "");
+				eneditProfile.formAction(dataMap);
+
+				lavanteUtils.switchtoFrame(null);
+				lavanteUtils.waitForTime(3000);
+				lavanteUtils.fluentwait(enobjhomePage.UserName());
+				
+				dataMap.put("maintab", "Invoices");
+				dataMap.put("subtab", "ContractManagement");
+				enobjhomePage.selectTab(dataMap);
+
+				dataMap.put("SOWNumber", sownum);
+				dataMap.put("Search", "Search");
+
+				encontractManagement.search(dataMap);
+				Reporter.log("Verification of SOW num in Basic Search of  contract Management:");
+
+				lavanteUtils.waitForTime(3000);
+				lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+
+				String appsownumsearch = encontractManagement.sowlist().get(0).getText();
+
+				Reporter.log("sow number in contract management basic search Expected:" + sownum + ",Actuals:"
+						+ appsownumsearch);
+				softassert.assertEquals(appsownumsearch, sownum,
+						"sow number in contract management basic search not matched");
+				flag = true;
+				break outr;
+			}
+
+		}
+
+		if (flag == false) {
+			softassert.assertTrue(false, "Please Add DATA and RETEST");
+
+		}
+
+		softassert.assertAll();
+		Reporter.log("Test ended for Request Management System (RMS) custom field is added for SOW pop-up:"	+ currenttime());
+	}
+
+	/**
+	 * SIM-7531 Verify if the user is able to search using the new SOW number in
+	 * advance
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test( dataProvider = "SingleSOWData", dataProviderClass = CMDataProvider.class)
+	public void sowadvanceserachcm003(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log(
+				"Test Started to check whether user is able to user is able to search using the new SOW number in advance:"
+						+ currenttime());
+
+		boolean flag = false;
+		SoftAssert softassert = new SoftAssert();
+
+		// TO uniquely identify the SOW
+		String sowdesc = "SP";
+		sowdesc = dataMap.get("SOWDescription") + LavanteUtils.randomnum();
+		dataMap.put("SOWDescription", sowdesc);
+		dataMap.put("SOWSave", "");
+
+		String sowRMSNo = "SP";
+		sowRMSNo = sowRMSNo + LavanteUtils.randomnum(463);
+		dataMap.put("SOWRMSNo", sowRMSNo);
+		dataMap.put("CustomerID", customerID);
+		eneditContractManagement.AddSOW(dataMap);
+		Reporter.log("Added SOW");
+
+		lavanteUtils.waitForTime(3000);
+		outr: for (int i = eneditContractManagement.SOWDesclist().size() - 1; i >= 0; i--) {
+			String x = eneditContractManagement.SOWDesclist().get(i).getText();
+			if (sowdesc.equalsIgnoreCase(x)) {
+				Reporter.log("Created SOW found in the list");
+				String sownum = eneditContractManagement.SOWnolist().get(i).getText();
+
+				dataMap.put("EditCancel", "");
+				eneditProfile.formAction(dataMap);
+				dataMap.clear();
+				lavanteUtils.switchtoFrame(null);
+				lavanteUtils.waitForTime(3000);
+				lavanteUtils.fluentwait(enobjhomePage.UserName());
+
+				dataMap.put("maintab", "Invoices");
+				dataMap.put("subtab", "ContractManagement");
+				enobjhomePage.selectTab(dataMap);
+				Reporter.log("Navigated to contract Management tab");
+
+				dataMap.clear();
+				dataMap.put("AdvSearch", "Search");
+				encontractManagement.selectSearchTab(dataMap);
+
+				dataMap.put("Build", "Build");
+				encontractManagement.SelectSearchOption(dataMap);
+
+				dataMap.put("SOWNumber", sownum);
+				dataMap.put("TypeSOWNumber", "Equals To");
+				dataMap.put("Search", "Search");
+				encontractAdvancedSearch.buildquery(dataMap);
+
+				Reporter.log("Verification of SOW num in Advanced Search of  contract Management:");
+
+				lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+
+				String appsownumsearch = encontractManagement.sowlist().get(0).getText();
+
+				Reporter.log("sow number in contract management Advanced search Expected:" + sownum + ",Actuals:"
+						+ appsownumsearch);
+				softassert.assertEquals(appsownumsearch, sownum,
+						"sow number in contract management basic search not matched");
+				flag = true;
+				break outr;
+			}
+
+		}
+
+		if (flag == false) {
+			softassert.assertTrue(false, "Please Add DATA and RETEST");
+
+		}
+
+		softassert.assertAll();
+		Reporter.log("Test ended for user is able to search using the new SOW number in advance:"			+ currenttime());
+	}
+
+	/**
+	 * [SIM-7324] SOW creation should depend on MSA/Addendum Add new MSA &
+	 * Addendum -> Add new SOW using newly created MSA -> Verify creation of SOW
+	 * is proper
+	 * 
+	 * @author Suresh.Muddu
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "SingleSOWData", dataProviderClass = CMDataProvider.class)
+	public void SOWCreationDependAddendum(LinkedHashMap<String, String> dataMap)
+			throws InvalidFormatException, IOException {
+		Reporter.log("Test Started for Addendum & SOW at:" + currenttime());
+		SoftAssert softassert = new SoftAssert();
+		String msanum = null;
+		boolean flag = false;
+		String msaamnt = LavanteUtils.randomnum(999) + "." + LavanteUtils.randomnum(9) + LavanteUtils.randomnum(9);
+
+		dataMap.put("msanottoexceed", msaamnt);
+		dataMap.put("MSASave", "");
+		eneditContractManagement.createMSA(dataMap);
+
+		innr: if (eneditContractManagement.MSAnottoexceedList().size() > 0) {
+			for (int i = eneditContractManagement.MSAnottoexceedList().size() - 1; i >= 0; i--) {
+				String msano = eneditContractManagement.MSAnottoexceedList().get(i).getText();
+				System.out.println(msano + ":" + msaamnt);
+				if (msano.equalsIgnoreCase(msaamnt)) {
+
+					msanum = eneditContractManagement.MSAnolist().get(i).getText();
+					Reporter.log("CREATED MSA:" + msanum);
+					break innr;
+				}
+			}
+		}
+
+		dataMap.put("addendum", "Yes");
+		dataMap.put("msanum", msanum);
+		String nwmsaamnt = LavanteUtils.randomnum(999) + "." + LavanteUtils.randomnum(99);
+		dataMap.put("msanottoexceed", nwmsaamnt);
+
+		eneditContractManagement.createMSA(dataMap);
+
+		outr: for (int i = eneditContractManagement.MSAnottoexceedList().size() - 1; i >= 0; i--) {
+			String msano = eneditContractManagement.MSAnottoexceedList().get(i).getText();
+			System.out.println(msano + nwmsaamnt);
+			if (msano.equalsIgnoreCase(nwmsaamnt)) {
+
+				String appmsanum = eneditContractManagement.MSAnolist().get(i).getText();
+				Reporter.log("CREATED ADDENDUM Successfully" + appmsanum);
+				Reporter.log("Expecting Addendum Number:" + msanum + ",In app:" + appmsanum);
+				softassert.assertTrue(appmsanum.contains(msanum), "Msa Num not matched");
+
+				String sowdesc = "SP6605";
+				sowdesc = dataMap.get("SOWDescription") + LavanteUtils.randomnum();
+				dataMap.put("SOWDescription", sowdesc);
+
+				dataMap.put("MSATYPE", "Addendum");
+				dataMap.put("SOWSave", "");
+				dataMap.put("CustomerID", customerID);
+				eneditContractManagement.createSOW(dataMap, appmsanum);
+
+				for (int j = eneditContractManagement.SOWDesclist().size() - 1; j >= 0; j--) {
+
+					if (sowdesc.equalsIgnoreCase(eneditContractManagement.SOWDesclist().get(j).getText())) {
+						String sowNUM = eneditContractManagement.SOWnolist().get(j).getAttribute("title");
+						Reporter.log("CREATED SOW:" + sowNUM);
+						String msanum2 = eneditContractManagement.SOWmsanolist().get(j).getText();
+
+						Reporter.log("Expected Addenum NUM for the SOW:" + msanum2 + ",In app:" + appmsanum);
+						softassert.assertEquals(msanum2, appmsanum, "Msa Num not matched");
+						flag = true;
+						break outr;
+					}
+				}
+
+			}
+		}
+
+		if (flag == false) {
+			softassert.assertTrue(false, "Please Recheck the Test");
+		}
+
+		softassert.assertAll();
+		Reporter.log("Test Ended for Addendum & SOW at:" + currenttime());
+
+	}
+
+	/**
+	 * [SIM-7324] SOW creation should depend on MSA/Addendum Add new MSA -> Add
+	 * new SOW using newly created MSA -> Verify creation of SOW is proper
+	 * 
+	 * @author Suresh.Muddu
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test( dataProvider = "SingleSOWData", dataProviderClass = CMDataProvider.class)
+	public void SOWCreateDependMSA(LinkedHashMap<String, String> dataMap) throws InvalidFormatException, IOException {
+		Reporter.log("Test Started for MSA & SOW at:" + currenttime());
+		SoftAssert softassert = new SoftAssert();
+		boolean flag = false;
+		String msaamnt = LavanteUtils.randomnum(999) + "." + LavanteUtils.randomnum(9) + LavanteUtils.randomnum(9);
+
+		dataMap.put("msanottoexceed", msaamnt);
+		dataMap.put("MSASave", "");
+		eneditContractManagement.createMSA(dataMap);
+
+		outr: for (int i = eneditContractManagement.MSAnottoexceedList().size() - 1; i >= 0; i--) {
+			String msano = eneditContractManagement.MSAnottoexceedList().get(i).getText();
+			if (msano.equalsIgnoreCase(msaamnt)) {
+
+				String appmsanum = eneditContractManagement.MSAnolist().get(i).getText();
+				Reporter.log("CREATED MSA Successfully:" + appmsanum);
+
+				String sowdesc = "SP6605";
+				sowdesc = dataMap.get("SOWDescription") + LavanteUtils.randomnum();
+				dataMap.put("SOWDescription", sowdesc);
+
+				dataMap.put("MSATYPE", "MSA");
+				dataMap.put("SOWSave", "");
+				dataMap.put("CustomerID", customerID);
+				eneditContractManagement.createSOW(dataMap, appmsanum);
+				for (int j = eneditContractManagement.SOWDesclist().size() - 1; j >= 0; j--) {
+					if (sowdesc.equalsIgnoreCase(eneditContractManagement.SOWDesclist().get(j).getText())) {
+						String sowNUM = eneditContractManagement.SOWnolist().get(j).getAttribute("title");
+						Reporter.log("CREATED SOW:" + sowNUM);
+						String msanum2 = eneditContractManagement.SOWmsanolist().get(j).getText();
+
+						Reporter.log("Expected MSA NUM for the SOW:" + appmsanum + ",In app:" + msanum2);
+						softassert.assertEquals(msanum2, appmsanum, "Msa Num not matched");
+						flag = true;
+						break outr;
+					}
+				}
+
+			}
+		}
+
+		if (flag == false) {
+			softassert.assertTrue(false, "Please Recheck the Test");
+		}
+
+		softassert.assertAll();
+		Reporter.log("Test Ended for MSA & SOW at:" + currenttime());
+
+	}
+
+	/**
+	 * After MEthod
+	 */
+	@AfterMethod
+	public void aftermethod() {
+		lavanteUtils.refreshPage();
+		enobjhomePage.popupclose();
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("SaveExit", "");
+		eneditProfile.formAction(dataMap);
+	}
+
+	/**
+	 * After Class close the driver and logout from the application
+	 */
+	@AfterClass
+	public void SetupafterClassmethod() {
+
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("SaveExit", "");
+		eneditProfile.formAction(dataMap);
+
+		enobjhomePage.close();
+		enobjhomePage.logout();
+
+		quitBrowser();
+	}
+
+}

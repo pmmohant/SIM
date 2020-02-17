@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Contract Management- MSA SOW DEL"  parallel="tests" preserve-order="true" thread-count="3" verbose="1">
+	
+	<listeners>
+		 <listener class-name="com.lavante.sim.Common.Util.ExtentReporterNG"/>
+	 </listeners>
+	 
+	<!-- Running on IE 11 -->
+	 <test preserve-order="false" thread-count="1"
+		name="Lavante SIM - Running on IE 11">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="internet Explorer" />
+		<parameter name="Version" value="11" />
+		<classes> 
+		<!-- 	<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMmsaTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMmsaTC002" />
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMsowTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMSowTC002" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMSowTC003" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMSowTC004" />
+			
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMdelTC001" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMdelTC003" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMdelTC004" />  -->		 	
+		</classes>
+	</test>
+		
+	<!-- Running on FF 35 -->
+	<test preserve-order="false" thread-count="1"
+		name="Lavante SIM - Running on Firefox v35">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="firefox" />
+		<parameter name="Version" value="34" />
+		<classes>
+			<!-- <class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMmsaTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMmsaTC002" />
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMsowTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMSowTC002" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMSowTC003" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMSowTC004" />
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMdelTC001" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMdelTC003" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMdelTC004" /> -->
+			
+		 	
+		</classes>
+	</test>  
+	
+    <!-- Running on Chrome 46 -->
+	<test preserve-order="true" thread-count="1"
+		name="Lavante SIM - Running on Chrome">	
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="chrome" />
+		<parameter name="Version" value="47" />
+		<classes>
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMmsaTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMmsaTC002" />
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMsowTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMSowTC002" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMSowTC003" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMSowTC004" />
+			
+			
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMdelTC001" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMdelTC003" />
+			<class name="com.lavante.sim.customer.TestScripts.Supplier.EditProfile.CMdelTC004" />
+			
+		 	<class name="com.lavante.sim.customer.TestScripts.Transactions.ContractManagement.CMAdvanceBASICSearch" />
+		 	<class name="com.lavante.sim.customer.TestScripts.Transactions.ContractManagement.CMAdvanceBASICSearch002" />
+		
+		</classes>
+	</test> 
+	
+ 	  
+</suite> 

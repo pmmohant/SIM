@@ -1,0 +1,42 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 15, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 689.531 sec <<< FAILURE! - in TestSuite
+verifyauditInboundPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 74.876 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'checksTable' is not displayedElement not found in the cache - perhaps the page has changed since it was looked up
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA01', ip: '192.168.21.81', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: driver.version: unknown
+Command duration or timeout: 10.38 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=44.0, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=ce918e7d-2df1-44eb-9ab4-7519bfc8f76a, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: ce918e7d-2df1-44eb-9ab4-7519bfc8f76a
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:204)
+	at lavante.recovery.pageobjects.Audit.AuditInboundPage.verifyChecksTable(AuditInboundPage.java:120)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyauditInboundPage(SanityTestSuite.java:216)
+
+verifySummaryPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 22.973 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'currMonthTable' is not displayedElement not found in the cache - perhaps the page has changed since it was looked up
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA01', ip: '192.168.21.81', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: driver.version: unknown
+Command duration or timeout: 12.52 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=44.0, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=ce918e7d-2df1-44eb-9ab4-7519bfc8f76a, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: ce918e7d-2df1-44eb-9ab4-7519bfc8f76a
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:204)
+	at lavante.recovery.pageobjects.Audit.AuditSummaryPage.verifycurrMonthTable(AuditSummaryPage.java:28)
+	at lavante.recovery.testsuites.SanityTestSuite.verifySummaryPage(SanityTestSuite.java:291)
+

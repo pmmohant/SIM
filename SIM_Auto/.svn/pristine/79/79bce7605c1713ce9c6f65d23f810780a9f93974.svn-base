@@ -1,0 +1,125 @@
+package com.lavante.sim.customer.pageobjects.Admin;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Reporter;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+public class DivisionPage {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	public WebDriver driver;
+	public DivisionPage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+	}
+	
+	@FindBy(css = "a[href*='buyerDivision']")
+	private WebElement DivisionTab;
+	public WebElement DivisionTab(){
+		return DivisionTab;
+	}
+
+	@FindBy(css = "button[class*='add_division']")
+	private WebElement AddDivision;
+	public WebElement AddDivision(){
+		return AddDivision;
+	}
+	
+	@FindBy(css = "input[data-label='Division Name']")
+	private WebElement DivisionNameTxtBox;
+	public WebElement DivisionNameTxtBox(){
+		return DivisionNameTxtBox;
+	}
+	
+	@FindBy(css = "div[class*='file_save']")
+	private WebElement SaveBtn;
+	public WebElement FileSaveBtn(){
+		return SaveBtn;
+	}
+	
+	@FindBy(css = "div[class*='dialog'] button[class*='primary']")
+	private WebElement DeleteBtn;
+	public WebElement DeleteBtn(){
+		return DeleteBtn;
+	}
+	
+	@FindBy(css = "span[class='error']")
+	private WebElement Errormsg;
+	public WebElement Errormsg(){
+		return Errormsg;
+	}
+	
+	@FindBy(className="bannerMessage")
+	private WebElement bannerMsg;
+	public WebElement bannerMsg(){
+		return bannerMsg;
+	}
+		
+	@FindBy(css = "div[name='divisionname']")
+	public List<WebElement> ListDivisionName;
+	
+	@FindBy(css = "input[data-label='Division Name']")
+	public List<WebElement> InputDivisionNameTxtBox;
+	
+	@FindBy(css = "div[class*='edit']")
+	public List<WebElement> ListEditDivision;
+	
+	@FindBy(css = "div[class*='checked']")
+	public List<WebElement> ListCheckedDivision;
+		
+	@FindBy(css = "a[href*='deleteBuyerData']")
+	public List<WebElement> ListDeleteDivision;
+	
+	/**
+	 * MethodName : addNewDivision : will add new division
+	 * 
+	 * @param testData
+	 *            : LinkedHashMap<String, String> testData
+	 */
+
+	public String addNewDivision(LinkedHashMap<String, String> testData) {
+
+		Reporter.log("Adding new division");
+		clickAddDivision();
+		String data = fillDivision(testData);
+		formUserAction(testData);
+		return data;
+	}
+
+	private void clickAddDivision() {
+		lavanteUtils.click(AddDivision);
+	}
+
+	public String fillDivision(LinkedHashMap<String, String> testData) {
+		LinkedHashMap<String, String> testData1=new LinkedHashMap<>();
+		String data = new String();
+		if (testData.containsKey("DivisionName")) {
+			DivisionNameTxtBox.clear();
+			data = lavanteUtils.typeString(testData.get("DivisionName"), DivisionNameTxtBox);
+			testData1.put("DivisionName", data);
+		}
+		return data;
+	}
+	
+	public void formUserAction(LinkedHashMap<String, String> testData) {
+		lavanteUtils.fluentwait(SaveBtn);
+		if (testData.containsKey("Save")) {
+			lavanteUtils.click(SaveBtn);
+			lavanteUtils.waitForTime(4000);
+		}
+	}
+	
+	
+	//Sanity
+	public void verifyDivisionPage() {
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.verifyElementDisplayed("Divison Button", AddDivision);
+	}
+		
+		
+}

@@ -1,0 +1,32 @@
+#links
+Suppliers=Suppliers
+SAM=SAM
+Help=Help
+what_is=What is SAM EPLS?
+#title
+samPage=Lavante SIM - SAM
+#xpath
+closehelp=/html/body/div[10]/div[1]/button
+details=//form[@id='suppliersamForm']/table/tbody/tr/td/div/div[1]/table/tbody/tr/td[1]
+runon=//table[@id='supplier_sam']/caption/div/div[@class='float_right']
+showdeactivetxt=//div[@class='deactivate-supplier float_right']/label[@class='show-deactivate']
+SendEmail=//button[@class='button_gold open_popup']
+Deactivate=//input[@class='button_red open_popup']
+Override=//input[@class='button_green open_popup']
+#frame
+helpframe=/html/body/div[10]/iframe
+
+#ID
+showDeactivatedSuppliers=showDeactivatedSuppliers
+editsearch=searchFilter
+searchbtn=supplierSearchSAM
+All=All
+awaitingchk=Awaiting Check
+noMatch=No Match
+requiresDispostion=Requires Disposition
+overriden=Overridden
+deactivated=Deactivated
+#text
+textdetails=Details of SAM EPLS Screening
+runontext=SAM EPLS Match Last Run on:
+

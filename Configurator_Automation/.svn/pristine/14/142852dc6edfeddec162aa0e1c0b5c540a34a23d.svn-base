@@ -1,0 +1,26 @@
+package com.lavante.configurator.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.lavante.configurator.Common.Util.LavanteUtils;
+
+
+public class CheckRegister {
+	
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	
+	public CheckRegister(WebDriver driver) {
+		lavanteUtils.driver = driver;
+	}
+	
+	@FindBy(id="frmQuickSearch")
+	private WebElement quickSearch_Form;
+	public WebElement quickSearch_Form(){
+		return quickSearch_Form;
+	}
+	
+	
+	
+}

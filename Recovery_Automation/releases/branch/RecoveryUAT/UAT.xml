@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Recovery Automation Smoke Test Suite" parallel="classes" 
+	thread-count="3" verbose="1">
+		
+	 <!-- Running on IE 10 -->
+    <test  name="Lavante - Recovery - Running on IE 10">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="internet explorer" />
+		<parameter name="Version" value="10" />	
+		<classes> 
+		  	 <class name="lavante.recovery.testsuites.SanityTestSuite" /> 
+		 <!--<class name="lavante.recovery.testsuites.Upload_CreditFile_TS03" />-->
+			<class name="lavante.recovery.testsuites.Reports_TS05" />
+			<class name="lavante.recovery.testsuites.Audit_Outbound_TS06" />
+			<class name="lavante.recovery.testsuites.Uploads_ReqLetter_TS10" />
+			<class name="lavante.recovery.testsuites.Dashbooard_TS15" />
+			<class name="lavante.recovery.testsuites.DashboardClaims_TS16" />
+			<class name="lavante.recovery.testsuites.Claims_TS17" />
+		<!-- <class name="lavante.recovery.testsuites.Uploads_Images_TS13" />  -->
+		 	<class name="lavante.recovery.testsuites.Audit_OutboundDataPage_TS04" />
+	 		<class name="lavante.recovery.testsuites.DataPage_Dlink_TS12" /> 
+			<class name="lavante.recovery.testsuites.Inbound_WorkFlow_TS01" />	
+		</classes>
+	</test>  
+		
+	<!-- Running on FF 44 -->
+	<test thread-count="1" name="Lavante - Recovery - Running on Firefox v45">		
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="firefox" />
+		<parameter name="Version" value="45" />
+		<classes> 
+		  	 <class name="lavante.recovery.testsuites.SanityTestSuite" /> 
+		 <!--<class name="lavante.recovery.testsuites.Upload_CreditFile_TS03" />  -->
+			<class name="lavante.recovery.testsuites.Reports_TS05" />
+			<class name="lavante.recovery.testsuites.Audit_Outbound_TS06" />
+			<class name="lavante.recovery.testsuites.Uploads_ReqLetter_TS10" />
+			<class name="lavante.recovery.testsuites.Dashbooard_TS15" />
+			<class name="lavante.recovery.testsuites.DashboardClaims_TS16" />
+			<class name="lavante.recovery.testsuites.Claims_TS17" />
+		<!-- <class name="lavante.recovery.testsuites.Uploads_Images_TS13" />  -->
+		 	<class name="lavante.recovery.testsuites.Audit_OutboundDataPage_TS04" />
+	 		<class name="lavante.recovery.testsuites.DataPage_Dlink_TS12" /> 
+			<class name="lavante.recovery.testsuites.Inbound_WorkFlow_TS01" />	
+		</classes>
+	</test>  
+	
+    <!-- Running on Chrome 45 -->
+	<test thread-count="1" name="Lavante - Recovery - Running on Chrome v45">	
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="chrome" />
+		<parameter name="Version" value="45" />
+		<classes> 
+		  	 <class name="lavante.recovery.testsuites.SanityTestSuite" /> 
+		 <!--<class name="lavante.recovery.testsuites.Upload_CreditFile_TS03" />  -->
+			<class name="lavante.recovery.testsuites.Reports_TS05" />
+			<class name="lavante.recovery.testsuites.Audit_Outbound_TS06" />
+			<class name="lavante.recovery.testsuites.Uploads_ReqLetter_TS10" />
+			<class name="lavante.recovery.testsuites.Dashbooard_TS15" />
+			<class name="lavante.recovery.testsuites.DashboardClaims_TS16" />
+			<class name="lavante.recovery.testsuites.Claims_TS17" />
+		<!-- <class name="lavante.recovery.testsuites.Uploads_Images_TS13" />  -->
+		 	<class name="lavante.recovery.testsuites.Audit_OutboundDataPage_TS04" />
+	 		<class name="lavante.recovery.testsuites.DataPage_Dlink_TS12" /> 
+			<class name="lavante.recovery.testsuites.Inbound_WorkFlow_TS01" />	
+		</classes> 
+	</test>
+</suite> 

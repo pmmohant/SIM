@@ -1,0 +1,58 @@
+#ID
+IDcurrentPwd=currentPassword
+IDnewPwd=newPassword
+IDconfirmPwd=confirmPassword
+IDchallengQ=challengeQuestion
+IDchallengA=challengeAnswer
+IDtimeZone=timeZoneID
+IDlanguage=languageID
+IDcontact=contactID
+IDlogOut=logout_link
+#Xpath
+timeZoneDrpEditBox=//div[@id='timeZoneID_chosen']/a
+timeZoneDrpEditBoxList=//div[@id='timeZoneID_chosen']/div/ul/li
+languageDrpDwn=//div[@id='languageID_chosen']/a[@class='chosen-single']
+languageDrpDwnList=//div[@id='languageID_chosen']/div/ul/li
+xIFrameNewLogout=.//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+xTimeZoneStatus=//div[contains(@id,'auth_status')]/strong
+xResetFieldErrorMsg=//td/span[contains(@class,'error')]
+xOkBtn=//button[contains(@class,'button_green')]
+xMyAccountPopup=//span[contains(@id,'ui-id')]
+xResetPwdTab=html/body/div[1]/div/div/div/div[1]/a[1]
+xMySettingTab=html/body/div[1]/div/div/div/div[1]/a[2]
+xResetPwdHeader=html/body/div[1]/div/form/h3[1]
+xChangeCQHeader=html/body/div[1]/div/form/h3[2]
+xMySettingsHeader=//*[@id='mySettingsBean']//a
+#html/body/div[1]/div/form/h3
+xResetPwdSucessMsg=//div[contains(@class,'dialog undefined ui-dialog-content ui-widget-content')]
+xManageFiles=.//*[@id='main-navigation']/a[4]
+xUploadedOn=html/body/div[1]/div/table/tbody/tr[2]/td[2]
+xRowsUploadedOn=//div[@id='uploadedFileDetailsDiv']/table/tbody/tr
+xMyAccount=.//*[@id='header_middle']/a
+xLogoutLinkText=.//*[@id='logout_link']
+xDashboard=.//*[@id='main-navigation']/a[1]
+xSuppliers=.//*[@id='main-navigation']/a[2]
+xTasks=.//*[@id='main-navigation']/a[3]
+xManageUsers=.//*[@id='main-navigation']/a[5]
+#For Customer props
+xHome=.//*[@id='main-navigation']/a[1]
+xProfiles=.//*[@id='main-navigation']/a[2]
+#CSS
+cssClearBtn=input[class='button button_red'][name='Clear']
+cssSaveBtn=input[class='button button_green'][name='save']
+cssCancelBtn=button[class='button button_red cancel'][title='Cancel']
+#LinkText
+helpLink=Help
+
+#Frame Names
+frameID00J=00J
+frameUploadFile=uploadedVMFFileDetails
+#Attribute
+atbtitle=bt-xtitle
+#Expected Msgs
+expeTimeZoneMsg=Settings updated successfully.
+expResetPwdSuccessMsg=Password updated successfully
+
+
+
+

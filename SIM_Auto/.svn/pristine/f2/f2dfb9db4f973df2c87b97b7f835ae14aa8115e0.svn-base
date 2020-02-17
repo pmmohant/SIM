@@ -1,0 +1,306 @@
+package com.lavante.sim.customer.TestScripts.SanityTest;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class SIMSanityTest01 extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP2();
+		lavanteUtils.driver = driver;
+		waitForTime(4000);
+	}
+
+	@Test(priority = 1)
+	public void loginTest() throws FileNotFoundException, IOException, SQLException {
+
+		// Verifying Login Page Displayed
+
+		objLoginPage.verifyLoginPageDisplayed();
+		List<?> listofdatafrm = lavanteUtils.login("Kroger", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+
+		enobjloginpage.logintoAPP(LdataMap);
+		objHomePage.verifyHomePageDisplayed();
+		lavanteUtils.fluentwait(enobjhomePage.UserName());
+
+	}
+
+	@Test(priority = 2, dependsOnMethods = { "loginTest" })
+	public void dashboardTest() throws InterruptedException {
+		Reporter.log("Test Started for Kroger Dashboard Test:" + currenttime(), true);
+
+		enobjdashBoard.krogerDashboard();
+
+		Reporter.log("Test Ended for Kroger Dashboard Test:" + currenttime(), true);
+	}
+
+	@Test(priority = 3, dependsOnMethods = { "loginTest" })
+	public void TaskPageTest() {
+
+		// Tasks -> Supplier registrations to approve
+		dataMap.put("maintab", "Tasks");
+		dataMap.put("subtab", "customerApprovals");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifySuppRegToAprvPageDtlsDisplayed();
+
+		// Tasks -> Supplier Invoices to Approve
+		dataMap.put("subtab", "getInvoiceTasks");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifyInvoicesToAprvPageDtlsDisplayed();
+
+		// Tasks -> Reassignment
+		dataMap.put("subtab", "viewApprovalTasks");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifyReassignmentPageDtlsDisplayed();
+
+		// Tasks --> Supplier registrations pending update
+		dataMap.put("subtab", "supplierProfileChangesToUpdate");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifySuppRegToAprvPageDtlsDisplayed();
+
+		//Tasks -->Supplier Profile Changes To Update 
+		
+		//does not exist
+		
+		
+		// Tasks--> Claims to approve
+		
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifyClaimsToApprovePageIsDisplayed();
+
+		/// 
+		
+		
+		// Tasks--> Claims pending update
+		dataMap.put("subtab", "ClaimPendingUpdate");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifyClaimsPendingUpdatePageIsDisplayed();
+
+		// Tasks--> Payments question to answer
+		dataMap.put("subtab", "PaymentQuesToAns");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifyPaymentQuestionsToAnswerPageIsDisplayed();
+
+		// Tasks -> Invoice Questions to Answer
+		if (!lavanteUtils.driver.getCurrentUrl().contains("simstaging.westus2")) {
+			dataMap.put("subtab", "getInvoiceQuesToAns");
+			enobjhomePage.selectTab(dataMap);
+			objtaskapproval.verifyInvoiceQuestsToAnsPageDtlsDisplayed();
+		}
+
+		// Tasks -> Track/Reassign Task
+		dataMap.put("subtab", "taskTracker");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifyTaskTrackerPageDtlsDisplayed();
+
+		// Tasks -> Invoice Pending Updates
+		dataMap.put("subtab", "getInvoicePendingUpdate");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifyInvoicesToUpdatePageDtlsDisplayed();
+
+	}
+
+	@Test(priority = 4, dependsOnMethods = { "loginTest" })
+	public void supplierTest() {
+		Reporter.log("Test Started for supplier Test:" + currenttime(), true);
+		dataMap.put("maintab", "Suppliers");
+		enobjhomePage.selectTab(dataMap);
+
+		objSupplierSearchPage.verifyBasicSearchTableDisplayed();
+		objSupplierSearchPage.verifyAdvanceSearchTableDisplayed();
+
+	}
+
+	@Test(priority = 5, dependsOnMethods = { "loginTest" })
+	public void TransactionTest() {
+		dataMap.put("maintab", "TRANSACTIONS");
+		dataMap.put("subtab", "Contract");
+		enobjhomePage.selectTab(dataMap);
+		encontractManagement.verifyContractManagementPage();
+
+		dataMap.put("subtab", "Invoice");
+		enobjhomePage.selectTab(dataMap);
+		eninvoicePage.verifyInvoicePage();
+
+		dataMap.put("subtab", "Payment");
+		enobjhomePage.selectTab(dataMap);
+		objPaymentsPage.verifyPaymentsPage();
+
+		dataMap.put("subtab", "Claim");
+		enobjhomePage.selectTab(dataMap);
+		enClaimsPage.verifyClaimsPage();
+
+	}
+
+	/**
+	 * Reports verification
+	 */
+	@Test(priority = 6, dependsOnMethods = { "loginTest" })
+	public void ReportsTest() {
+		dataMap.clear();
+		dataMap.put("maintab", "reports");
+		enobjhomePage.selectTab(dataMap);
+
+		enReportuserDefined.verifyAdminTablePresent();
+		/*
+		 * enReportuserDefined.verifyCustomerTablePresent();
+		 * enReportuserDefined.verifyUserDefineTablePresent();
+		 */
+	}
+
+	/**
+	 * Messages verification
+	 */
+
+	@Test(priority = 7, dependsOnMethods = { "loginTest" })
+	public void MessageTest() {
+		dataMap.clear();
+		dataMap.put("maintab", "message");
+		enobjhomePage.selectTab(dataMap);
+
+		enMessage.sanityCheck();
+	}
+
+	/**
+	 * Admin Test Verification
+	 * 
+	 */
+	@Test(priority = 8, dependsOnMethods = { "loginTest" })
+	public void AdminTest() {
+		Reporter.log("Test Started for sanity test in Admin page  : "+ currenttime(), true);
+		SoftAssert softassert = new SoftAssert();
+
+		dataMap.put("maintab", "Admin");
+		dataMap.put("subtab", "Upload");
+		enobjhomePage.selectTab(dataMap);
+		objManageFilesPage.verifyUploadFilesPageDetailsDisplayed();
+
+		dataMap.put("subtab", "Download");
+		enobjhomePage.selectTab(dataMap);
+		objManageFilesPage.verifyDownloadFilesPageDetailsDisplayed();
+
+		dataMap.put("subtab", "Contacts");
+		enobjhomePage.selectTab(dataMap);
+		objUserPage.verifyUsersSectionDisplayed();
+
+		dataMap.put("subtab", "claimGlCodes");
+		enobjhomePage.selectTab(dataMap);
+
+		fluentwait(glcode.addGLCodeButton());
+		boolean eValue = true;
+		boolean aValue = glcode.addGLCodeButton().isDisplayed();
+		softassert.assertEquals(aValue, eValue, "actual value" + aValue
+				+ "is not matching with expected value" + eValue);
+		Reporter.log("Verification for add GL Code button  : expected value "
+				+ eValue + "with actual value" + aValue);
+
+		aValue = glcode.GLCodeSearchbox().isDisplayed();
+		softassert.assertEquals(aValue, eValue, "actual value" + aValue				+ "is not matching with expected value" + eValue);
+		Reporter.log("Verification for GL Code Search : expected value "				+ eValue + "with actual value" + aValue);
+
+		aValue = glcode.searchbutton().isDisplayed();
+		softassert.assertEquals(aValue, eValue, "actual value" + aValue				+ "is not matching with expected value" + eValue);
+		Reporter.log("Verification for Search button : expected value "				+ eValue + "with actual value" + aValue);
+
+		aValue = glcode.GLCodeText().isDisplayed();
+		softassert.assertEquals(aValue, eValue, "actual value" + aValue				+ "is not matching with expected value" + eValue);
+		Reporter.log("Verification for GL CODE Text: expected value " + eValue				+ "with actual value" + aValue);
+
+		// Addresses
+		dataMap.put("maintab", "Admin");
+		dataMap.put("subtab", "manageAddress");
+		enobjhomePage.selectTab(dataMap);
+		objManageAddressesPage.verifyAddressPageDisplayed();
+
+		// Claim Resolution
+		dataMap.put("maintab", "Admin");
+		dataMap.put("subtab", "manageClaimResolution");
+		enobjhomePage.selectTab(dataMap);
+		objClaimResolutionPage.verifyClaimResolutionIsDisplayed();
+
+		// Claim Type
+		dataMap.put("subtab", "manageClaimType");
+		enobjhomePage.selectTab(dataMap);
+		objClaimTypePage.verifyClaimTypePageIsDisplayed();
+
+		// Claim Type Mapping
+		dataMap.put("subtab", "claimTypeMapping");
+		enobjhomePage.selectTab(dataMap);
+		objClaimTypeMapPage.verifyClaimTypeMappingSectionDisplayed();
+
+		// Deal Location Mapping
+		dataMap.put("subtab", "dealLocationMapping");
+		enobjhomePage.selectTab(dataMap);
+		objDealLocation.verifyDealLocationMappingSectionDisplayed();
+
+		// Department
+		dataMap.put("subtab", "department");
+		enobjhomePage.selectTab(dataMap);
+		objDepartments.verifyDepartmentSectionIsDisplayed();
+
+		// Divisions
+		dataMap.put("subtab", "buyerDivision");
+		enobjhomePage.selectTab(dataMap);
+		objDivisionPage.verifyDivisionPage();
+
+		// Gl code Mapping
+		dataMap.put("subtab", "glCodeMapping");
+		enobjhomePage.selectTab(dataMap);
+		glcodemapping.verifyGLCodeMappingPage();
+
+		// Payment Center
+		dataMap.put("subtab", "buyerPaymentCenter");
+		enobjhomePage.selectTab(dataMap);
+		objPaymentCenterPage.verifyPaymentCenterPage();
+
+		// Payment Center Mapping
+		dataMap.put("subtab", "buyerPaymentCenterMapping");
+		enobjhomePage.selectTab(dataMap);
+		objPayCntrMapPage.verifyPaymentCenterMappingPage();
+
+		// Payment Terms Group
+		dataMap.put("subtab", "buyerPaymentTerms");
+		enobjhomePage.selectTab(dataMap);
+		objPaymentTermPage.verifyPaymentTermsPage();
+
+		// Buyer Supplier Group
+		dataMap.put("subtab", "buyerSupplierGroup");
+		enobjhomePage.selectTab(dataMap);
+		objSupplierGroupPage.verifyBuyerSupplierGroupPage();
+
+		softassert.assertAll();
+		Reporter.log("Test Ended for sanity test in Admin page :"+ currenttime(), true);
+
+	}
+
+	@AfterClass
+	public void close() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+}

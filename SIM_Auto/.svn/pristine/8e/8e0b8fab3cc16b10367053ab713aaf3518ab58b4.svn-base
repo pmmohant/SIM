@@ -1,0 +1,165 @@
+/**
+ * 
+ */
+package com.lavante.sim.customer.pageobjects;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.testng.Reporter;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+
+/**
+ * @author Piramanayagam.S
+ *
+ */
+public class MyLoginpage {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	
+	public WebDriver driver;
+	public MyLoginpage(WebDriver driver){
+		lavanteUtils.driver=driver;
+		this.driver=driver;
+	}
+
+
+	@FindBy(id="username")
+	private WebElement usernameTxt;	
+	public WebElement usernameTxt(){
+		return usernameTxt;
+	}
+	
+	@FindBy(id="password")
+	private WebElement pwdTxtBox;	
+	public WebElement pwdTxtBox(){
+		return pwdTxtBox;
+	}
+	
+	@FindBy(how=How.CSS,using="[name='submit']")
+	private WebElement submitBtn;
+	
+	public WebElement submitBtn(){
+		return submitBtn;
+	}
+	
+	@FindBy(how=How.CSS,using="a[class*='user-info']")
+	private WebElement UserName;
+	
+	@FindBy(how=How.CSS,using="[id*='logout']")
+	private List<WebElement> logoutbtn;
+		
+	//Errormsg
+	@FindBy(css="[class*='danger'] span")
+	private WebElement errormsg;	
+	public WebElement errormsg(){
+		return errormsg;
+	}
+	
+	@FindBy(css="[id*='cas'] h3")
+	private WebElement MAXerrormsg;	
+	public WebElement MAXerrormsg(){
+		return MAXerrormsg;
+	}
+	
+		
+	//Links
+	@FindBy(css="[href*='specify']")
+	public WebElement NotRegisteredLink;
+
+	@FindBy(css="[href*='forgot']")
+	public WebElement ForgotPasswordLink;
+	
+	@FindBy(css="[href*='recovery']")
+	public WebElement RecoveryLink;
+	
+	@FindBy(css = "[class*='center']")
+	public WebElement CopyRights;
+	
+	@FindBy(css = "img[alt*='McAfee SECURE']")
+	public WebElement McAfeeLink;
+	
+	@FindBy(xpath = "//img[contains(@src,'digicert')]")
+	public WebElement DigiCertLink;
+		
+	@FindBy(css = "span[class*='green']")
+	public WebElement expiredText;
+	
+	@FindBy(css="[id*='content'] h4")
+	public WebElement DeactivatedMsg;
+	
+	public void logintoAPP(LinkedHashMap<String,String> dataMap) {
+		String x=lavanteUtils.currenttime();
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(usernameTxt);
+		enterUname(dataMap);
+		enterPassword(dataMap);
+		clickSubmit(dataMap);
+		String y=lavanteUtils.currenttime();
+		Integer z=Integer.parseInt(y)-Integer.parseInt(x);
+		if(dataMap.containsKey("username")){
+			Reporter.log("*************Time Taken for Login to App for  :"+dataMap.get("username")+"Time Take in [Seconds]:"+z+"******",true);
+		}
+	}
+
+
+
+
+	public void enterUname(LinkedHashMap<String,String> dataMap) {
+		if(dataMap.containsKey("username")){
+			usernameTxt.clear();
+			lavanteUtils.typeinEdit(dataMap.get("username"), usernameTxt);
+		}
+		
+	}
+	
+
+	public void enterPassword(LinkedHashMap<String,String> dataMap) {
+		if(dataMap.containsKey("password")){
+			pwdTxtBox.clear();
+			lavanteUtils.typeinEdit(dataMap.get("password"), pwdTxtBox);
+		}
+	}
+
+	public void clickSubmit(LinkedHashMap<String,String> dataMap) {
+		lavanteUtils.click(submitBtn);
+		lavanteUtils.waitForTime(3000);
+		int i=0;
+	
+		if(dataMap.containsKey("username")&&dataMap.containsKey("password")){
+			if(dataMap.get("username").length()>0&&dataMap.get("password").length()>0){
+				if(dataMap.containsKey("errormsg")){
+					//As we are incrementing below i have decremeented
+					i=8;
+				}
+					while(!(logoutbtn.size()>0)){
+						enterUname(dataMap);
+						enterPassword(dataMap);
+						lavanteUtils.click(submitBtn);
+						String url=lavanteUtils.driver.getCurrentUrl();
+						if(url.contains("westus2")){
+							lavanteUtils.waitForTime(6000);
+						}
+						System.out.println("i"+i);
+						i=i+1;
+						if(i==9){
+							System.out.println("BReak i"+i);
+							break;
+						}
+					}
+			}
+		}
+		if(logoutbtn.size()>0){
+			lavanteUtils.fluentwait(UserName);
+		}
+	}
+	
+
+
+}

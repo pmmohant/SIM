@@ -1,0 +1,211 @@
+package com.lavante.sim.customer.TestScripts.ManageUsers;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class PaymentCenterPageTests extends PageInitiator{
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * 
+	 * @author Vidya C
+	 * 
+	 */
+
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+					throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		// Login
+		//List listofdatafrm = lavanteUtils.login("UserRoleId14", browser);
+		List listofdatafrm = lavanteUtils.login("Discovery", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		LdataMap.put("maintab", "Admin");
+		LdataMap.put("subtab", "PaymentCenter");
+		enobjhomePage.selectTab(LdataMap);
+
+	}
+
+	/**
+	 * MangeRoles- Add & Edit Payment center
+	 * 
+	 * @author Vidya C
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+
+	@Test
+	public void addEditPaymentCenter() throws Exception {
+		Reporter.log("Test Started for addNewPaymentCenter: " + LavanteUtils.currenttime());
+		//lavanteUtils.fluentwait(objPaymentCenterPage.PaymentCenterTab());
+		SoftAssert softAssert = new SoftAssert();
+		
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+		
+		String payCntr1="AutoSG";
+		dataMap.put("Save", "");
+		dataMap.put("PaymentCenter", payCntr1);
+		
+		objPaymentCenterPage.addNewPaymentCenter(dataMap);
+		
+		boolean flagadd = false;
+		boolean flagedit = false;
+		String actualPaymentCntr;
+		int noRecords = objPaymentCenterPage.ListPaymentCenterName.size();
+		System.out.println(noRecords);
+		for (int i = 0; i <noRecords ; i++) {
+			actualPaymentCntr = objPaymentCenterPage.ListPaymentCenterName.get(i).getText();
+			System.out.println("Actual paymet center "+actualPaymentCntr);
+			if (actualPaymentCntr.equals(payCntr1)) {
+				flagadd = true;
+				Reporter.log("Payment Center name created " + actualPaymentCntr + "Expected Payment center name " + dataMap.get("PaymentCenter"),true);
+				
+				String payCntr2="AutoSG";
+				dataMap.put("PaymentCenter", payCntr2);
+				click(objPaymentCenterPage.ListEditPaymentCenter.get(i));
+				objPaymentCenterPage.fillPaymentCenter(dataMap);
+				click(objPaymentCenterPage.ListCheckedPaymentCenter.get(i));
+				lavanteUtils.waitForTime(3000);
+				
+				for ( i = 0; i < noRecords; i++) {
+					actualPaymentCntr = objPaymentCenterPage.ListPaymentCenterName.get(i).getText();
+					System.out.println("Actual payment center2 "+actualPaymentCntr);
+					if (actualPaymentCntr.equals(payCntr2)) {
+						Reporter.log("Payment center name edited " + actualPaymentCntr + "payment center name " + dataMap.get("PaymentCenter"),true);
+						flagedit = true;
+						payCntr1=payCntr2;
+					}
+				}				
+				
+			}
+		}
+		
+		softAssert.assertTrue(flagadd, "Payment center name created doesn't match are not created");
+		softAssert.assertTrue(flagedit, "Payment center name edited doesn't match");
+		softAssert.assertAll();
+		Reporter.log("Test Ended at:" + LavanteUtils.currenttime());
+	}
+	
+	@Test
+	public void addDeletePaymentCenter()throws Exception {
+		
+		Reporter.log("Test Started for addDeletePaymentCenter: " + LavanteUtils.currenttime());
+		SoftAssert softAssert = new SoftAssert();
+		
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+		String payCntr1="AutoSG"+lavanteUtils.currenttime();
+		dataMap.put("Save", "");
+		dataMap.put("PaymentCenter", payCntr1);
+		
+		objPaymentCenterPage.addNewPaymentCenter(dataMap);
+		
+		boolean flagadd = false;
+		//boolean flagdelete = false;
+		String actualPaymentCntr;
+		int noRecords = objPaymentCenterPage.ListPaymentCenterName.size();
+		System.out.println(noRecords);
+		for (int i = 0; i <noRecords ; i++) {
+			actualPaymentCntr = objPaymentCenterPage.ListPaymentCenterName.get(i).getText();
+			System.out.println("Actual paymet center "+actualPaymentCntr);
+			if (actualPaymentCntr.equals(payCntr1)) {
+				
+				Reporter.log("Payment Center name created " + actualPaymentCntr + "Expected Payment center name " + dataMap.get("PaymentCenter"),true);
+				fluentwait(objPaymentCenterPage.ListDeletePaymentCenter.get(i));
+				click(objPaymentCenterPage.ListDeletePaymentCenter.get(i));
+				fluentwait(objPaymentCenterPage.DeleteBtn());
+				click(objPaymentCenterPage.DeleteBtn());
+				//flagdelete = true;
+				flagadd = true;
+				
+		    }
+			softAssert.assertTrue(flagadd, "Payment center name is not created..!");
+			softAssert.assertAll();
+			Reporter.log("Test Ended for addDeletePaymentCenter at:" + LavanteUtils.currenttime());
+			
+		}
+		
+		
+	}
+	
+	@Test
+	public void duplicatePaymentCenter() throws Exception {
+		Reporter.log("Test Started for duplicatePaymentCenter: " + currenttime());
+		SoftAssert softAssert = new SoftAssert();
+		boolean flagduplicate = false;
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+		
+		//if(){}else{}
+		String  paymentcentername = objPaymentCenterPage.ListPaymentCenterName.get(0).getText();
+		
+		String payCntr1="AutoSG";
+		dataMap.put("Save", "");
+		dataMap.put("PaymentCenter", payCntr1);
+		objPaymentCenterPage.addNewPaymentCenter(dataMap);
+		
+		if(objPaymentCenterPage.Errormsg().isDisplayed()){
+			softAssert.assertTrue(objPaymentCenterPage.Errormsg().getText().contains("Payment Center with the name is already Exists"),"Error Msg Not matched");
+			Reporter.log("Error message:"+objPaymentCenterPage.Errormsg().getText(),true);
+			flagduplicate = true;
+		}
+		else {
+			flagduplicate = false;
+		}
+		
+		softAssert.assertTrue(flagduplicate, "Please recheck the test..!");
+		softAssert.assertAll();
+		Reporter.log("Test Ended at:" + currenttime());
+			
+		}
+			
+		
+		
+	@AfterMethod
+	public void SetupAftermethod() throws FileNotFoundException, IOException, SQLException {
+		lavanteUtils.switchtoFrame(null);
+		enobjhomePage.popupclose();
+		/*if(suppliergrp1.length()>0){
+			String delquery="delete from Customer_Address_Map where AddressID in (Select  AddressID   from Address where Address1='"+address1+"')";
+			lavanteUtils.UpdateDB(delquery);
+			delquery="delete from Address where Address1='"+address1+"'";
+			lavanteUtils.UpdateDB(delquery);
+		}*/
+		lavanteUtils.refreshPage();
+	}
+
+	@AfterClass
+	public void SetupafterClassmethod() {
+
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+}

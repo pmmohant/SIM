@@ -1,0 +1,886 @@
+package com.lavante.sim.customer.TestScripts.Transactions.ContractManagement;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.CMSearchDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 1-2-2016
+ * Created for Contract Management Advanced Search and Basic Search
+ * Enhancement verifcovered SIM-7528,SIM-7529,SIM-7153,SIM-7238
+ * Ended on 8-2-2016
+ * @author Piramanayagam.S
+ * 
+ */
+public class CMAdvanceBASICSearch extends PageInitiator {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+		
+		
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		openAPP();	
+		//Assigning the driver to the object of Lavante utils		
+		lavanteUtils.driver=driver;
+				
+		List<?> listofdatafrm=lavanteUtils.login("CMSearch", browser);
+		LinkedHashMap<String,String> LdataMap=new LinkedHashMap<String, String>();
+		LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+	//	customerid=(String) cusstomerid.get(1);		
+		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		
+	
+	}
+		
+	@BeforeMethod
+	public void beforeMethod(){
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String, String>();
+		dataMap.put("maintab","Invoices");
+		dataMap.put("subtab", "ContractManagement");
+		enobjhomePage.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+	}
+
+	/**
+	 * Verify Adv Search with various fields 
+	 *
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 */
+	@Test(dataProvider="AdvanceSearch",dataProviderClass=CMSearchDataProvider.class)
+	public void VerifyAdvSearch0001(LinkedHashMap<String,String> dataMap) throws Exception{	
+		dataMap.put("AdvSearch","AdvSearch");
+		encontractManagement.selectSearchTab(dataMap);
+		Reporter.log("Navigated to Advanced Search Tab");
+		//For CLicking Build Option
+		dataMap.put("Build","Build");
+		encontractManagement.SelectSearchOption(dataMap);
+		Reporter.log("Select Buiild Query Option in Advanced Search Tab");
+		//Search After Building the query.
+		dataMap.put("Search","Search");
+		encontractAdvancedSearch.buildquery(dataMap);
+		Reporter.log("Selected Search after  Buiilding the Query ");
+		
+		SoftAssert softAssert=new SoftAssert();
+		
+		lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+		lavanteUtils.fluentwait(encontractManagement.editMSAbtn());
+		boolean flag=false;
+		lavanteUtils.waitForTime(2000);
+		if(encontractManagement.msalist().size()>0){
+			
+			Reporter.log("Search Result Returned the data");
+			
+				//For Select the MSA/SOW/DEL/SUPP popup
+				if(dataMap.containsKey("MSANum"))
+				{
+					String actual=null;
+					
+					String type=dataMap.get("TypeMSANum");
+					System.out.println(type+actual+dataMap.get("MSANum"));
+					if(type.contains("Equ")){
+						actual=encontractManagement.msalist().get(0).getText();
+						Reporter.log("Verification for MSA Number,Table data, Equal test,in App:"+actual+",Expected:"+dataMap.get("MSANum"));
+						softAssert.assertEquals(actual, dataMap.get("MSANum"),"MSANum not matched"
+								+actual+dataMap.get("MSANum"));
+					
+					} else if(type.contains("Contain")) {
+						actual=encontractManagement.msalist().get(0).getText();
+						Reporter.log("Verification for MSA Number,Table data, Contain test,in App:"+actual+",Expected:"+dataMap.get("MSANum"));
+						softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("MSANum").toLowerCase()),"MSANum not matched"
+								+actual+dataMap.get("MSANum"));
+
+					} else if(type.contains("Is")) {
+						Reporter.log("Verification for MSA Number,Table data, empty test,in App:"+actual);
+						softAssert.assertTrue(encontractManagement.msalist().size()<0,"MSANum not matched for the "
+								+type+actual+dataMap.get("MSANum"));
+						
+						
+					}
+				}if(dataMap.containsKey("MSATYPE"))
+				{
+					String actual=null;
+					actual=encontractManagement.msatypelist().get(0).getText();
+					Reporter.log("Verification for MSA Type,Table data, Equal test,in App:"+actual+",Expected:"+dataMap.get("MSATYPE"));
+					softAssert.assertEquals(actual, dataMap.get("MSATYPE"),"MSATYPE not matched");
+					
+				}if(dataMap.containsKey("msasuppliername"))
+				{
+					
+					String supname=null;
+					String type=dataMap.get("DPTYPESUPPMSA");
+					if(type.contains("Equ")){
+						supname=encontractManagement.supplist().get(0).getText();
+						Reporter.log("Verification for Supplier Name,Table data, Equal test,in App:"+supname+",Expected:"+dataMap.get("msasuppliername"));
+						softAssert.assertEquals(supname, dataMap.get("msasuppliername"),"Supplier Name not matched"+supname+dataMap.get("msasuppliername"));
+						
+					} else if(type.contains("Contain")) {
+						supname=encontractManagement.supplist().get(0).getText();
+						Reporter.log("Verification for Supplier Name,Table data, Contain test,in App:"+supname+",Expected:"+dataMap.get("msasuppliername"));
+						softAssert.assertTrue(supname.toLowerCase().contains(dataMap.get("msasuppliername").toLowerCase()),"Supplier Name not matched"+supname+dataMap.get("msasuppliername"));
+					} else if(type.contains("Is")) {
+						Reporter.log("Verification for Supplier Name,Table data, empty test");
+						softAssert.assertTrue(encontractManagement.msalist().size()<=0,"Supplier Name not matched for the "+type+supname+dataMap.get("msasuppliername"));
+					}
+				} if(dataMap.containsKey("SOWNumber"))
+				{
+					String actual=null;
+					String type=dataMap.get("TypeSOWNumber");
+					if(type.contains("Equ")){
+						actual=encontractManagement.sowNoList().get(0).getText().toLowerCase();
+						Reporter.log("Verification for SOW number,Table data, Equal test,in App:"+actual+",Expected:"+dataMap.get("SOWNumber"));
+						softAssert.assertEquals(actual, dataMap.get("SOWNumber").toLowerCase(),"SOWNumber not matched"
+								+actual+dataMap.get("SOWNumber"));
+					} else if(type.contains("Contain")) {
+						actual=encontractManagement.sowNoList().get(0).getText();
+						Reporter.log("Verification for SOW number,Table data, Contain test,in App:"+actual+",Expected:"+dataMap.get("SOWNumber"));
+						softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("SOWNumber").toLowerCase()),"SOWNumber not matched"
+								+actual+dataMap.get("SOWNumber"));
+					} else if(type.contains("Is")) {
+						Reporter.log("Verification for SOW Number,Table data, empty test");
+						softAssert.assertTrue(encontractManagement.sowNoList().size()<=0,"SOWNumber not matched for the: "
+								+type+actual);
+					}
+				} if(dataMap.containsKey("SOWStatus"))
+				{
+					String actual=null;
+					actual=encontractManagement.SowStatus().get(0).getText();
+					Reporter.log("Verification for SOW Status,Table data, Equal test,in App:"+actual+",Expected:"+dataMap.get("SOWStatus"));
+					softAssert.assertTrue(dataMap.get("SOWStatus").contains(actual)
+							,"SOWStatus not matched"+ dataMap.get("SOWStatus")+actual);
+			
+				}if(dataMap.containsKey("DELdeliverable"))
+				{
+					String actual=null;
+					
+					String type=dataMap.get("TypeDel");
+					String delv= dataMap.get("DELdeliverable");
+					if(type.contains("Equ")){
+						actual=encontractManagement.dellist().get(0).getText();
+						Reporter.log("Verification for Deliverable,Table data, Equal test,in App:"+actual+",Expected:"+dataMap.get("DELdeliverable"));
+						softAssert.assertEquals(actual,delv,"DELdeliverable not matched"+
+											actual+delv);
+						flag=true;
+						
+					} else if(type.contains("Contain")) {
+						actual=encontractManagement.dellist().get(0).getText();
+						Reporter.log("Verification for Deliverable,Table data, Contain test,in App:"+actual+",Expected:"+dataMap.get("DELdeliverable"));
+						softAssert.assertTrue(actual.toLowerCase().contains(delv.toLowerCase()),"DELdeliverable not matched"+actual
+								+delv);
+						flag=true;
+					
+					} else if(type.contains("Is")) {
+						softAssert.assertFalse(encontractManagement.dellist().size()>0,"DELdeliverable not matched for the "+type+encontractManagement.dellist().size());
+						Reporter.log("Verification for Deliverable,Table data, empty test,In App:"+encontractManagement.dellist().size()); 
+						flag=true;
+					}
+				}
+				
+				
+				//MSA
+				if(dataMap.get("Searchtype").contains("MSA")){
+					
+						if(dataMap.containsKey("msaclient"))
+						{
+
+							lavanteUtils.click(encontractManagement.msalist().get(0));
+							lavanteUtils.switchtoFrame(eneditContractManagement.MSAViewIFRAME());
+							String MSAClientName=dataMap.get("msaclient");
+							String actual=eneditContractManagement.MSAViewClientName().getText();
+							
+							softAssert.assertEquals(actual, MSAClientName,
+									"msaclient not matched"+MSAClientName+actual);
+							Reporter.log("Verification for MSA Client Name,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+MSAClientName);
+							
+						}	if(dataMap.containsKey("MSATYPE"))
+						{
+
+							lavanteUtils.click(encontractManagement.msalist().get(0));
+							lavanteUtils.switchtoFrame(eneditContractManagement.MSAViewIFRAME());
+							
+							String actual=null;
+							actual=eneditContractManagement.MSAViewMSAtype().getText();
+							softAssert.assertEquals(actual, dataMap.get("MSATYPE"),"MSATYPE not matched");
+							Reporter.log("Verification for MSA Type ,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+dataMap.get("MSATYPE"));
+						} 	if(dataMap.containsKey("MSANum"))
+						{
+
+							lavanteUtils.click(encontractManagement.msalist().get(0));
+							lavanteUtils.switchtoFrame(eneditContractManagement.MSAViewIFRAME());
+							
+							String actual=null;
+							actual=eneditContractManagement.MSAViewMSAnum().getText();
+							String type=dataMap.get("TypeMSANum");
+							System.out.println(type+actual+dataMap.get("MSANum"));
+							if(type.contains("Equ")){
+								softAssert.assertEquals(actual, dataMap.get("MSANum"),"MSANum not matched"
+										+actual+dataMap.get("MSANum"));
+								Reporter.log("Verification for MSA Number,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+dataMap.get("MSANum"));
+							} else if(type.contains("Contain")) {
+								softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("MSANum").toLowerCase()),"MSANum not matched"
+										+actual+dataMap.get("MSANum"));
+								Reporter.log("Verification for MSA Number,Pop Up data:, Contain test,In App:"+actual+",Expected was:"+dataMap.get("MSANum"));
+							} else{
+								softAssert.assertTrue(actual.isEmpty(),"MSANum not Empty"
+										+actual+":"+actual.isEmpty());								
+								Reporter.log("Verification for MSA Number empty test,in App:"+actual);
+							}
+						}
+						if(dataMap.containsKey("MSAstatus"))
+						{
+
+							lavanteUtils.click(encontractManagement.msalist().get(0));
+							lavanteUtils.switchtoFrame(eneditContractManagement.MSAViewIFRAME());
+							
+							String actual=null;
+							actual=eneditContractManagement.MSAviewStatus().getText();
+							String data=dataMap.get("MSAstatus");
+					
+							softAssert.assertTrue(data.contains(actual)
+									,"MSAstatus not matched"+data+actual);
+							Reporter.log("Verification for MSA Status,Pop Up data,In App:"+actual+",Expected Should contain:"+dataMap.get("MSAstatus"));
+							
+						} 
+						flag=true;
+						lavanteUtils.switchtoFrame(null);
+						
+					
+				}
+				//SOW
+				if(dataMap.get("Searchtype").contains("SOW")){
+					
+					if(encontractManagement.sowlist().size()>0){
+				
+					
+							if(dataMap.containsKey("SOWNumber"))
+							{
+
+								lavanteUtils.click(encontractManagement.sowlist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.SOWViewIframe());
+								
+								String actual="";
+								
+								String type=dataMap.get("TypeSOWNumber");
+								if(type.contains("Equ")){
+									actual=eneditContractManagement.SOWViewSOWNum().getText();
+									Reporter.log("Verification for SOW Number,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+dataMap.get("SOWNumber"));
+									softAssert.assertEquals(actual, dataMap.get("SOWNumber"),"SOWNumber not matched"
+											+actual+dataMap.get("SOWNumber"));
+								} else if(type.contains("Contain")) {
+									actual=eneditContractManagement.SOWViewSOWNum().getText();
+									Reporter.log("Verification for SOW Number,Pop Up data:, Contain test,In App:"+actual+",Expected was:"+dataMap.get("SOWNumber"));
+									softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("SOWNumber").toLowerCase()),"SOWNumber not matched"
+											+actual+dataMap.get("SOWNumber"));
+								} else if(type.contains("Is"))  {
+									Reporter.log("Verification for SOW Number empty test,in App:"+actual);
+									softAssert.assertTrue(actual.length()<=0,"SOWNumber not Empty"
+											+actual+":"+actual.isEmpty());
+								}
+								
+							} 	if(dataMap.containsKey("SOWNotes"))
+							{
+
+								lavanteUtils.click(encontractManagement.sowlist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.SOWViewIframe());
+								
+								String actual="";
+								actual=eneditContractManagement.SOWViewNotes().getText();
+								String type=dataMap.get("TypeSOWNotes");
+								System.out.println(type+actual+dataMap.get("SOWNotes"));
+								if(type.contains("Equ")){
+									Reporter.log("Verification for SOW Notes,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+dataMap.get("SOWNotes"));
+									softAssert.assertEquals(actual.toLowerCase(), dataMap.get("SOWNotes").toLowerCase(),"SOWNotes not matched"
+											+actual+dataMap.get("SOWNotes"));
+								} else if(type.contains("Contain")) {
+									Reporter.log("Verification for SOW Notes,Pop Up data:, Contain test,In App:"+actual+",Expected was:"+dataMap.get("SOWNotes"));
+									softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("SOWNotes").toLowerCase()),"SOWNotes not matched"
+											+actual+dataMap.get("SOWNotes"));
+								}  else if(type.contains("Is")) {
+									Reporter.log("Verification for SOW Notes empty test,in App:"+actual);
+									softAssert.assertTrue(encontractManagement.sowNoList().size()<=0,"SOWNotes not Empty"
+											+"Exp 0"+":"+encontractManagement.sowNoList().size());
+								} 
+								
+							} 	if(dataMap.containsKey("SOWStatus"))
+							{
+
+								lavanteUtils.click(encontractManagement.sowlist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.SOWViewIframe());
+								
+								String actual=null;
+								actual=eneditContractManagement.SOWViewStatus().getText();
+								String org=dataMap.get("SOWStatus");
+								Reporter.log("Verification for SOW Status,Pop Up data, test,In App:"+actual+",Expected was:"+dataMap.get("SOWStatus"));
+								softAssert.assertTrue(org.contains(actual),	"SOWStatus not matched"+org+actual);
+								
+
+							} 	if(dataMap.containsKey("SOWDescription"))
+							{
+
+								lavanteUtils.click(encontractManagement.sowlist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.SOWViewIframe());
+								
+								String actual=null;
+								actual=eneditContractManagement.SOWViewDesc().getText();
+								String type=dataMap.get("TypeSOWDescription");
+								System.out.println(type+actual+dataMap.get("TypeSOWDescription"));
+								if(type.contains("Equ")){
+									Reporter.log("Verification for SOW Desc,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+dataMap.get("SOWDescription"));
+									softAssert.assertEquals(actual, dataMap.get("SOWDescription"),"SOWDescription not matched"
+											+actual+dataMap.get("SOWDescription"));
+								
+								} else if(type.contains("Contain")) {
+									Reporter.log("Verification for SOW Desc,Pop Up data Contain test,In App:"+actual+",Expected was:"+dataMap.get("SOWDescription"));
+									softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("SOWDescription").toLowerCase())
+											,"SOWDescription not matched"+actual+dataMap.get("SOWDescription"));
+									
+								} else {
+									Reporter.log("Verification for SOW Description empty test,in App:"+actual);
+									softAssert.assertTrue(actual.isEmpty(),"SOWDescription not Empty"
+											+actual+":"+actual.isEmpty());
+								}
+							}  if(dataMap.containsKey("SOWInternalContact"))
+							{
+
+								lavanteUtils.click(encontractManagement.sowlist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.SOWViewIframe());
+								
+								String actual=null;
+								actual=eneditContractManagement.SOWViewInternal().getText();
+								String type=dataMap.get("TYpeSOWInternalContact");
+								System.out.println(type+actual+dataMap.get("TYpeSOWInternalContact"));
+								if(type.contains("Equ")){
+									Reporter.log("Verification for SOW Internal Contact,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+dataMap.get("SOWInternalContact"));
+									softAssert.assertEquals(actual, dataMap.get("SOWInternalContact"),"SOWInternalContact not matched"
+											+actual+dataMap.get("SOWInternalContact"));
+								} else if(type.contains("Contain")) {
+									Reporter.log("Verification for SOW Internal Contact,Pop Up data:, Contain test,In App:"+actual+",Expected was:"+dataMap.get("SOWInternalContact"));
+									softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("SOWInternalContact").toLowerCase())
+											,"SOWInternalContact not matched"+actual+dataMap.get("SOWInternalContact"));
+									
+								}  else if(type.contains("Is")) {
+									Reporter.log("Verification for SOW internal Contact empty test,in App:"+actual);
+									softAssert.assertTrue(actual.isEmpty(),"SOWInternalContact not Empty"
+											+actual+":"+actual.isEmpty());
+								} 
+							}if(dataMap.containsKey("SOWPaymentStatus"))
+							{
+
+								lavanteUtils.click(encontractManagement.sowlist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.SOWViewIframe());
+								
+								String actual=null;
+								actual=eneditContractManagement.SOWViewPaymentyp().getText();
+								String org=dataMap.get("SOWPaymentStatus");
+								Reporter.log("Verification for SOW Payment Status,Pop Up data ,test,In App:"+actual+",Expected was:"+dataMap.get("SOWPaymentStatus"));
+								softAssert.assertTrue(org.toLowerCase().contains(actual.toLowerCase()), 
+											"SOW Payment Status not matched"+org+actual);
+							
+							}  if(dataMap.containsKey("SOWCreditCard"))
+							{
+
+								lavanteUtils.click(encontractManagement.sowlist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.SOWViewIframe());
+								
+								String acutalCredit=eneditContractManagement.SOWViewCredit().getText();
+								String ExpCredit=dataMap.get("SOWCreditCard");
+								Reporter.log("Verification for SOW CreditCard  Contact,Pop Up data Equal test,In App:"+acutalCredit+",Expected was:"+dataMap.get("SOWCreditCard"));								
+								softAssert.assertEquals(acutalCredit, ExpCredit,"CreditCard not matched"+ExpCredit+acutalCredit);
+								
+							}/*  if(dataMap.containsKey("SOWUpfront"))
+							{
+							
+								lavanteUtils.click(encontractManagement.sowlist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.SOWViewIframe());
+								
+								String SOWUpfront=dataMap.get("SOWUpfront");
+								String id=CommonUtils.getCustomIDQUERY("UP", "2");
+								String canxpath="//label[contains(@for,'"+id+"')]/../..//td[2]";
+								System.out.println(canxpath);
+								String sowUP=driver.findElement(By.xpath(canxpath)).getText();
+								Reporter.log("Verification for SOW Up Front  Contact,Pop Up data Equal test,In App:"+sowUP+",Expected was:"+dataMap.get("SOWUpfront"));
+								softAssert.assertEquals(sowUP, SOWUpfront,"SOWCreditCard not matched"+SOWUpfront+sowUP);
+								
+							}*/
+							flag=true;
+							lavanteUtils.switchtoFrame(null);
+					} else if(dataMap.containsKey("TypeSOWNumber")
+							||(dataMap.containsKey("TypeSOWDescription"))
+							||(dataMap.containsKey("TYpeSOWInternalContact"))
+							||(dataMap.containsKey("TypeSOWNotes"))
+							
+							)
+					{
+						if(dataMap.containsKey("TypeSOWNumber")) {
+							if((dataMap.get("TypeSOWNumber").contains("Is")))
+							{ 
+								Reporter.log("Verification for SOW IS Empty");
+								softAssert.assertTrue(true,"Data Not available with given search");
+								flag=true;
+							}
+						}	if(dataMap.containsKey("TypeSOWDescription")){
+							if((dataMap.get("TypeSOWDescription").contains("Is")))
+						
+								{ 
+									Reporter.log("Verification for SOW Desc IS Empty");
+									softAssert.assertTrue(true,"Data Not available with given search");
+									flag=true;
+								}
+						}if(dataMap.containsKey("TYpeSOWInternalContact")){
+							if((dataMap.get("TYpeSOWInternalContact").contains("Is")))
+									{
+										Reporter.log("Verification for No Data Available");
+										softAssert.assertTrue(true,"Data Not available with given search");
+										flag=true;
+								}
+						}if(dataMap.containsKey("TypeSOWNotes"))
+						{
+							if(dataMap.get("TypeSOWNotes").contains("Is")) {
+								Reporter.log("Verification for No Data Available for SOW");
+								softAssert.assertTrue(encontractManagement.sowNoList().size()<=0,"SOWNotes not Empty"
+										+"Exp 0"+":"+encontractManagement.sowNoList().size());
+								flag=true;
+							} 
+							
+						} 	
+						
+					
+					
+					}
+				}
+				
+				//Deliverable
+				if(dataMap.get("Searchtype").contains("DEL")){
+					
+					int count=encontractManagement.dellist().size();
+					
+					if(count>0){
+							if(dataMap.containsKey("DELdeliverable"))
+							{
+								lavanteUtils.click(encontractManagement.dellist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.DELIframeView());
+								
+								String actual=null;
+								actual=eneditContractManagement.DELViewDeliverable().getText();
+								String type=dataMap.get("TypeDel");
+								String delv= dataMap.get("DELdeliverable");
+								if(type.contains("Equ")){
+									Reporter.log("Verification for Deliverable,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+dataMap.get("DELdeliverable"));
+									softAssert.assertEquals(actual,delv,"DELdeliverable not matched"+
+														actual+delv);
+								} else if(type.contains("Contain")) {
+									Reporter.log("Verification for Deliverable,Pop Up data:, Contain test,In App:"+actual+",Expected was:"+delv);
+									softAssert.assertTrue(actual.toLowerCase().contains(delv.toLowerCase()),"DELdeliverable not matched"+actual
+											+delv);
+								} else if(type.contains("Is")) {
+									Reporter.log("Verification for Deliverable empty test,in App:"+actual);
+									softAssert.assertTrue(actual.isEmpty(),"DELdeliverable not matched for the "+type+actual
+											+delv);
+								}
+							}  if(dataMap.containsKey("DELdeliverablelocation"))
+							{
+								lavanteUtils.click(encontractManagement.dellist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.DELIframeView());
+								
+								String actual=null;
+								actual=eneditContractManagement.DELViewdeliverableLocation().getText();
+								Reporter.log("Verification for Deliverable Location,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+dataMap.get("DELdeliverablelocation"));
+								softAssert.assertTrue(actual.contains(dataMap.get("DELdeliverablelocation")),"DELdeliverablelocation not matched");
+							}  if(dataMap.containsKey("DELitemtype"))
+							{
+								lavanteUtils.click(encontractManagement.dellist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.DELIframeView());
+								
+								String actual=null;
+								actual=eneditContractManagement.DELViewitemType().getText();
+								Reporter.log("Verification for Deliverable Item Type,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+dataMap.get("DELitemtype"));
+								softAssert.assertEquals(actual, dataMap.get("DELitemtype"),"DELitemtype not matched");
+							}  if(dataMap.containsKey("DELaccnumber"))
+							{
+								lavanteUtils.click(encontractManagement.dellist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.DELIframeView());
+								
+								String actual=null;
+								actual=eneditContractManagement.DELViewAccnum().getText();
+								String exp=dataMap.get("DELaccnumber");
+								if(dataMap.get("TypeAcc").contains("Equ")) {
+									Reporter.log("Verification for Deliverable Acc Num,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+dataMap.get("DELaccnumber"));
+									softAssert.assertEquals(actual,exp,
+											"DELaccnumber not matched"+actual+exp);
+									}
+									if(dataMap.get("TypeAcc").contains("Contain")) {
+										Reporter.log("Verification for Deliverable Acc Num,Pop Up data Contain test,In App:"+actual+",Expected was:"+dataMap.get("DELaccnumber"));
+										softAssert.assertTrue(actual.toLowerCase().contains(exp.toLowerCase()),"DELaccnumber not matched"+actual
+												+exp);
+
+									}if(dataMap.get("TypeAcc").contains("Is"))  {
+										Reporter.log("Verification for Deliverable Acc number ,in App:"+actual+",Expected was"	+dataMap.get("DELaccnumber"));
+										softAssert.assertTrue(actual.length()<=0,
+												"DELaccnumber not matched"+actual+exp);
+											
+									}
+							} 	if(dataMap.containsKey("DELPaymentStatus"))
+							{
+								lavanteUtils.click(encontractManagement.dellist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.DELIframeView());
+								
+								String actual=null;
+								actual=eneditContractManagement.DELViewPaymntStatus().getText();
+								String org=dataMap.get("DELPaymentStatus");
+								Reporter.log("Verification for Deliverable Payment Status,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+dataMap.get("DELPaymentStatus"));
+								softAssert.assertTrue(org.contains(actual), 
+											"DELPaymentStatus not matched"+org+actual);
+								
+							} if(dataMap.containsKey("DELBudgetCode"))
+							{
+								lavanteUtils.click(encontractManagement.dellist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.DELIframeView());
+								
+								String actual=null;
+								actual=eneditContractManagement.DELViewBudgtCode().getText();
+								if(dataMap.get("TypeDELBudgetCode").contains("Eq")) {
+									Reporter.log("Verification for Deliverable Budget Code,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+dataMap.get("DELBudgetCode"));
+									softAssert.assertEquals(actual, dataMap.get("DELBudgetCode"),
+										"DELBudgetCode not matched"+actual+dataMap.get("DELBudgetCode"));
+								}else if(dataMap.get("TypeDELBudgetCode").contains("Con")) { 
+									Reporter.log("Verification for Deliverable Budget Code,Pop Up data:, Contains test,In App:"+actual+",Expected was:"+dataMap.get("DELBudgetCode"));
+									softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("DELBudgetCode").toLowerCase()),
+											"DELBudgetCode not matched"+actual+dataMap.get("DELBudgetCode"));
+								}else if(dataMap.get("TypeDELBudgetCode").contains("Is")) { 
+									Reporter.log("Verification for Deliverable Budget Code empty test,in App:"+actual);
+									softAssert.assertTrue(actual.isEmpty(),
+											"DELBudgetCode not matched"+actual+dataMap.get("DELBudgetCode"));
+								}
+							} if(dataMap.containsKey("DELOrgCode"))
+							{
+								lavanteUtils.click(encontractManagement.dellist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.DELIframeView());
+								
+								String actual=null;
+								actual=eneditContractManagement.DELViewOrgCode().getText();
+								if(dataMap.get("TypeDELOrgCode").contains("Eq")) {
+									Reporter.log("Verification for Deliverable Org Code,in App:"+actual+",Expected was"	+dataMap.get("DELOrgCode"));
+									softAssert.assertEquals(actual, dataMap.get("DELOrgCode"),
+											"DELOrgCode not matched"+actual+dataMap.get("DELOrgCode"));
+									
+								}else if(dataMap.get("TypeDELOrgCode").contains("Con")) { 
+									Reporter.log("Verification for Deliverable Org Code,Pop Up data:, Contains test,In App:"+actual+",Expected was:"+dataMap.get("DELBudgetCode"));
+									softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("DELOrgCode").toLowerCase()),
+											"DELOrgCode not matched"+actual+dataMap.get("DELOrgCode"));
+									
+								}if(dataMap.get("TypeDELOrgCode").contains("Is")) {
+									Reporter.log("Verification for Deliverable Org Code empty test,in App:"+actual);
+									softAssert.assertTrue(actual.isEmpty(),
+											"DELOrgCode not matched"+actual+dataMap.get("DELOrgCode"));									
+								}
+							
+							} if(dataMap.containsKey("DELexpenseNottoClient"))
+							{
+								lavanteUtils.click(encontractManagement.dellist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.DELIframeView());
+								
+								String actual=null;
+								actual=eneditContractManagement.DELViewExptoClient().getText();
+								String expExpense=dataMap.get("DELexpenseNottoClient");
+								if(expExpense.equalsIgnoreCase("Yes")){
+									expExpense="Agree";
+								}else{
+									expExpense="";
+								}
+								Reporter.log("Verification for Deliverable Expenses Not to Client,in App:"+actual+",Expected was:"+expExpense);
+								softAssert.assertEquals(actual, expExpense,	"DELexpenseNottoClient not matched"+actual+expExpense);
+								flag=true;
+								
+								
+							}   
+							flag=true;
+							lavanteUtils.switchtoFrame(null);
+					}else if(
+							dataMap.containsKey("TypeDel")||(dataMap.containsKey("DPTYPESUPPMSA"))||(dataMap.containsKey("TypeSOWNumber"))
+							||(dataMap.containsKey("TYpeSOWInternalContact"))
+							||(dataMap.containsKey("TypeAcc"))
+							
+						){
+							if(dataMap.containsKey("TypeAcc")){
+								if((dataMap.get("TypeAcc").contains("Is")))
+										{
+											Reporter.log("Verification for No Data Available");	
+											softAssert.assertTrue(true,"Data Not available with given search");
+											flag=true;
+										} 
+								}
+									if(dataMap.containsKey("TypeDel")){
+											if((dataMap.get("TypeDel").contains("Is")))
+											{ 
+												Reporter.log("Verification for No Data Available");
+												softAssert.assertTrue(true,"Data Not available with given search");
+												flag=true;
+											}
+								}
+					
+						}
+				}
+		
+		
+		}else{
+			if(dataMap.containsKey("TypeMSANum")){
+				if((dataMap.get("TypeMSANum").contains("Is")))
+				{ 
+					Reporter.log("Verification for No Data Available");
+					softAssert.assertTrue(true,"Data Not available with given search");
+					flag=true;
+				}
+			}
+			if(dataMap.containsKey("DPTYPESUPPMSA")){
+				if((dataMap.get("DPTYPESUPPMSA").contains("Is")))
+				{ 
+					Reporter.log("Verification for No Data Available");
+					softAssert.assertTrue(true,"Data Not available with given search");
+					flag=true;
+				}
+			}
+			
+		}
+		if(flag==false){
+			Reporter.log("Data Not available,Please add data and Retest");
+			softAssert.assertFalse(true,"Data Not available with given search");
+		}
+		softAssert.assertAll();
+		Reporter.log("Test Ended:"+currenttime());
+	}
+		
+	/**
+	 * Verify Basic Search with various fields
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 */
+	@Test(dataProvider="BasicSearch",dataProviderClass=CMSearchDataProvider.class)
+	public void VerifyBasicSearch0002(LinkedHashMap<String,String> dataMap) throws Exception{	
+		Reporter.log("Test Started for Basic Search"+currenttime());
+		SoftAssert softAssert=new SoftAssert();
+		
+		//Clear the Search data 
+		dataMap.put("BasicSearch","BasicSearch");
+		encontractManagement.selectSearchTab(dataMap);
+		
+		dataMap.put("Clear","Clear");
+		encontractManagement.formactionSearch(dataMap);
+		
+		//Removing the Clear
+		dataMap.remove("Clear");
+		//Search After Building the query.
+		dataMap.put("Search","Search");
+		encontractManagement.search(dataMap);
+		Reporter.log("Search Completed:");
+		
+		lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+		lavanteUtils.fluentwait(encontractManagement.editMSAbtn());
+		boolean flag=false;
+		lavanteUtils.waitForTime(2000);
+		if(encontractManagement.msalist().size()>0){
+			
+			Reporter.log("Search Result Returned the data:");
+			
+				if(dataMap.containsKey("MSANum"))
+				{
+					String actual=null;
+					actual=encontractManagement.msalist().get(0).getText();
+					Reporter.log("Verification for MSA Number,Table data, Contain test,in App:"+actual+",Expected:"+dataMap.get("MSANum"));
+					softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("MSANum").toLowerCase()),"MSANum not matched"
+							+actual+dataMap.get("MSANum"));
+					
+					
+				}if(dataMap.containsKey("MSATYPE"))
+				{
+					String actual=null;
+					actual=encontractManagement.msatypelist().get(0).getText();
+					Reporter.log("Verification for MSA Type,Table data, Equal test,in App:"+actual+",Expected:"+dataMap.get("MSATYPE"));
+					softAssert.assertEquals(actual, dataMap.get("MSATYPE"),"MSATYPE not matched");
+					
+				}if(dataMap.containsKey("msasuppliername"))
+				{
+					
+					String supname=null;
+					supname=encontractManagement.supplist().get(0).getText();
+					String s=dataMap.get("msasuppliername");
+					Reporter.log("Verification for Supplier Name,Table data, test,in App:"+supname+",Expected:"+dataMap.get("msasuppliername"));
+					softAssert.assertTrue(supname.toLowerCase().contains(s.toLowerCase()),"Supplier Name not matched:"+supname+s);
+					
+				} if(dataMap.containsKey("SOWNumber"))
+				{
+							String actual=null;
+							actual=encontractManagement.sowNoList().get(0).getText();
+							Reporter.log("Verification for SOW number,Table data,  test,in App:"+actual+",Expected:"+dataMap.get("SOWNumber"));
+							softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("SOWNumber").toLowerCase()),"SOWNumber not matched"+actual+dataMap.get("SOWNumber"));
+							
+							
+				} if(dataMap.containsKey("SOWStatus"))
+				{
+					String actual=null;
+					actual=encontractManagement.SowStatus().get(0).getText();
+					Reporter.log("Verification for SOW Status,Table data,  test,in App:"+actual+",Expected:"+dataMap.get("SOWStatus"));
+					softAssert.assertTrue(dataMap.get("SOWStatus").toLowerCase().contains(actual.toLowerCase())	,"SOWStatus not matched"+ dataMap.get("SOWStatus")+actual);
+					
+
+				}
+				
+				//MSA
+				if(dataMap.get("Searchtype").contains("MSA")){
+					
+							if(dataMap.containsKey("MSATYPE"))
+						{
+							lavanteUtils.click(encontractManagement.msalist().get(0));
+							lavanteUtils.switchtoFrame(eneditContractManagement.MSAViewIFRAME());
+							Reporter.log("MSA POPUP:");
+							
+							String actual=null;
+							actual=eneditContractManagement.MSAViewMSAtype().getText();
+							Reporter.log("Verification for MSA Type ,Pop Up data:, Equal test,In App:"+actual+",Expected was:"+dataMap.get("MSATYPE"));
+							softAssert.assertEquals(actual, dataMap.get("MSATYPE"),"MSATYPE not matched");
+						
+						} 	if(dataMap.containsKey("MSANum"))
+						{
+							lavanteUtils.click(encontractManagement.msalist().get(0));
+							lavanteUtils.switchtoFrame(eneditContractManagement.MSAViewIFRAME());
+							Reporter.log("MSA POPUP:");
+							
+							String actual=null;
+							actual=eneditContractManagement.MSAViewMSAnum().getText();
+							Reporter.log("Verification for MSA Number,Pop Up data test,In App:"+actual+",Expected was:"+dataMap.get("MSANum"));
+							softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("MSANum").toLowerCase()),"MSANum not matched"
+										+actual+dataMap.get("MSANum"));
+						}
+						flag=true;
+						lavanteUtils.switchtoFrame(null);
+					
+				}
+				//SOW
+				if(dataMap.get("Searchtype").contains("SOW")){
+					
+					if(encontractManagement.sowlist().size()>0){
+						
+							if(dataMap.containsKey("SOWNumber"))
+							{
+
+								lavanteUtils.click(encontractManagement.sowlist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.SOWViewIframe());
+								Reporter.log("SOW POPUP:");
+								
+								String actual=null;
+								actual=eneditContractManagement.SOWViewSOWNum().getText();
+								Reporter.log("Verification for SOW Number,Pop Up data test,In App:"+actual+",Expected was:"+dataMap.get("SOWNumber"));
+								softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("SOWNumber").toLowerCase()),"SOWNumber not matched"
+											+actual+dataMap.get("SOWNumber"));
+								
+								
+							}  if(dataMap.containsKey("SOWInternalContact"))
+							{
+
+								lavanteUtils.click(encontractManagement.sowlist().get(0));
+								lavanteUtils.switchtoFrame(eneditContractManagement.SOWViewIframe());
+								Reporter.log("SOW POPUP:");
+								
+								String actual=null;
+								actual=eneditContractManagement.SOWViewInternal().getText();
+								Reporter.log("Verification for SOW Internal Contact,Pop Up data test,In App:"+actual+",Expected was:"+dataMap.get("SOWInternalContact"));
+								softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("SOWInternalContact").toLowerCase())
+											,"SOWInternalContact not matched"+actual+dataMap.get("SOWInternalContact"));
+							}
+							flag=true;
+							lavanteUtils.switchtoFrame(null);
+					}
+				}
+				if(dataMap.get("Searchtype").contains("Sup")){
+					if(encontractManagement.supplist().size()>0){
+					
+							if(dataMap.containsKey("msasuppliername"))
+						{
+							lavanteUtils.click(encontractManagement.supplist().get(0));
+							Reporter.log("SUPPLIER POPUP:");
+							
+							dataMap.put("maintab", "CompanyDetails");
+							enviewSupplier.selectTab(dataMap);
+							
+							lavanteUtils.fluentwait(enviewSupplier.supplierName());
+							String actual=null;
+							actual=enviewSupplier.supplierName().getAttribute("title");
+							Reporter.log("Verification for SUPPLIER NAME  ,Pop Up data test,In App:"+actual+",Expected was:"+dataMap.get("msasuppliername"));
+							softAssert.assertTrue(actual.toLowerCase().contains(dataMap.get("msasuppliername").toLowerCase()),"Supplier Name not matched"+actual.toLowerCase()+","+dataMap.get("msasuppliername").toLowerCase());
+							enobjhomePage.backtoSearch();
+						} 
+							
+						flag=true;
+					}
+				}
+				
+		}
+		
+		if(flag==false){
+			Reporter.log("Data Not available,Please add data and Retest");
+			softAssert.assertFalse(true,"Data Not available with given search");
+		}
+		
+		softAssert.assertAll();
+		Reporter.log("Test Ended for Basic Search:"+currenttime());
+	}
+	
+	@AfterMethod
+	public void SetupAftermethod(){
+		lavanteUtils.refreshPage();
+		enobjhomePage.popupclose();
+		enobjhomePage.backtoSearch();
+		lavanteUtils.fluentwait(encontractManagement.advSearchtab());
+		int size=encontractManagement.clearbtnlist().size();
+		if(size>0){
+			lavanteUtils.click(encontractManagement.clearbtnlist().get(0));
+		}
+		
+	}
+	
+	/**
+	 * Logout Method and Driver Quitting the method
+	 * @author Piramanayagam.S
+	 * @param null
+	 * @return null
+	 */
+	@AfterClass
+	public void SetupafterClassmethod(){
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+
+}
+

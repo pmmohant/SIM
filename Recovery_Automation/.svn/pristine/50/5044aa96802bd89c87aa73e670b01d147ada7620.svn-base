@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="">
+<head>
+  <title>Test Results Report - Log Output</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="description" content="TestNG unit test results." />
+  <link href="reportng.css" rel="stylesheet" type="text/css" />
+  </head>
+<body>
+  <h1>Log Output</h1>
+  <p>
+    Combined output from all calls to the log methods of the <a href="http://testng.org/javadocs/org/testng/Reporter.html">TestNG Reporter</a>.    
+  </p>
+
+  <div id="log">
+                  Pass: Confiig filejava.io.FileInputStream@5034c75afound<br />
+                        Info: Broweser Parameters : Browser : firefox, Version :44<br />
+                        Info: Remote Parameters : RemoteURL : http://192.168.21.20:4445, RemoteExecution :true<br />
+                        Pass: Application is launched successfully.<br />
+                        Pass: Confiig filejava.io.FileInputStream@6c614904found<br />
+                        Pass: Confiig filejava.io.FileInputStream@ba539fcfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@5d69029cfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@5f2b5747found<br />
+                        Pass: Confiig filejava.io.FileInputStream@1b9805c3found<br />
+                        Pass: Confiig filejava.io.FileInputStream@4ab33322found<br />
+                        Pass: Confiig filejava.io.FileInputStream@68ea72d8found<br />
+                        Pass: Confiig filejava.io.FileInputStream@7fe3a807found<br />
+                        Pass: Confiig filejava.io.FileInputStream@49d5f4cafound<br />
+                        Pass: Confiig filejava.io.FileInputStream@52536a6cfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@5710302efound<br />
+                        Pass: Confiig filejava.io.FileInputStream@3c96d47ffound<br />
+                        Pass: Confiig filejava.io.FileInputStream@744169c2found<br />
+                        Pass: Confiig filejava.io.FileInputStream@752ffb09found<br />
+                        Pass: Confiig filejava.io.FileInputStream@1d29b27cfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@6f51b943found<br />
+                        Pass: Confiig filejava.io.FileInputStream@130af15ffound<br />
+                        Pass: Confiig filejava.io.FileInputStream@73577c24found<br />
+                        Pass: Confiig filejava.io.FileInputStream@74386cf3found<br />
+                        Pass: Confiig filejava.io.FileInputStream@5facdf59found<br />
+                        Pass: Confiig filejava.io.FileInputStream@3f72bc31found<br />
+                        Pass: Confiig filejava.io.FileInputStream@776e16found<br />
+                        Pass: Confiig filejava.io.FileInputStream@72bd4706found<br />
+                        Pass: Confiig filejava.io.FileInputStream@3122aa41found<br />
+                        Pass: Confiig filejava.io.FileInputStream@569c78b4found<br />
+                        Pass: Confiig filejava.io.FileInputStream@bb91f91found<br />
+                        Pass: Confiig filejava.io.FileInputStream@7c8ea488found<br />
+                        Pass: Confiig filejava.io.FileInputStream@7e60e79cfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@2f1fca5ffound<br />
+                        Pass: Confiig filejava.io.FileInputStream@5ac1e5effound<br />
+                        Pass: Confiig filejava.io.FileInputStream@49249909found<br />
+                        Pass: Confiig filejava.io.FileInputStream@1a2da45ffound<br />
+                        Pass: Confiig filejava.io.FileInputStream@28606ce0found<br />
+                        Pass: Confiig filejava.io.FileInputStream@2601e6b9found<br />
+                        Pass: Confiig filejava.io.FileInputStream@42cf5034found<br />
+                        Pass: Confiig filejava.io.FileInputStream@774b4bb2found<br />
+                        Pass: Confiig filejava.io.FileInputStream@3f1aba60found<br />
+                        Pass: Confiig filejava.io.FileInputStream@7ecc49d9found<br />
+                        Pass: Confiig filejava.io.FileInputStream@73c63463found<br />
+                        Info: ------------Test &apos; loginWithValidCredentials &apos; Started------------<br />
+                        Pass: &apos;adminuser1&apos; is entered in userName_txtField<br />
+                        Pass: &apos;lavante@123&apos; is entered in password_TextField<br />
+                        Pass: &apos;login_Button&apos; is clicked<br />
+                        Pass: &apos;quickSearch_Form&apos; is displayed<br />
+                        Pass: &apos;auditSelectbox&apos; is clicked<br />
+                        Pass: &apos;auditSelectbox&apos; is displayed<br />
+                        Pass: &apos;Lafarge 2008&apos; is entered in auditdrpDownTextBox<br />
+                        Pass: &apos;auditdrpDownTextBox&apos; is displayed<br />
+                        Info: ------------Test &apos; loginWithValidCredentials &apos; Started------------<br />
+                        Pass: &apos;assignmentsLink&apos; is clicked<br />
+                        Pass: &apos;auditStatisticsLink&apos; is clicked<br />
+                        Pass: &apos;auditStatsTable&apos; is displayed<br />
+                        Pass: &apos;holdsLink&apos; is clicked<br />
+                        Fail: &apos;holdsTable&apos; is not displayedUnable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#holdAssignmentData tr td&quot;}<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA03&apos;, ip: &apos;192.168.21.79&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: unknown<br/>
+Command duration or timeout: 10.90 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=783782e9-361c-47e3-83d3-7722fd4dcffa, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]<br/>
+Session ID: 783782e9-361c-47e3-83d3-7722fd4dcffa<br/>
+*** Element info: {Using=css selector, value=#holdAssignmentData tr td}<br />
+                        Pass: &apos;creditsLink&apos; is clicked<br />
+                        Fail: &apos;creditsTable&apos; is not displayedUnable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#creditAssignmentSearchForm #creditAssignmentData tr td&quot;}<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA03&apos;, ip: &apos;192.168.21.79&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: unknown<br/>
+Command duration or timeout: 10.82 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=783782e9-361c-47e3-83d3-7722fd4dcffa, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]<br/>
+Session ID: 783782e9-361c-47e3-83d3-7722fd4dcffa<br/>
+*** Element info: {Using=css selector, value=#creditAssignmentSearchForm #creditAssignmentData tr td}<br />
+                        Pass: &apos;statementsLink&apos; is clicked<br />
+                        Fail: &apos;statementsTable&apos; is not displayedUnable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#statementAssignmentSearchForm div:nth-child(2) tr&quot;}<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA03&apos;, ip: &apos;192.168.21.79&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: unknown<br/>
+Command duration or timeout: 10.37 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=783782e9-361c-47e3-83d3-7722fd4dcffa, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]<br/>
+Session ID: 783782e9-361c-47e3-83d3-7722fd4dcffa<br/>
+*** Element info: {Using=css selector, value=#statementAssignmentSearchForm div:nth-child(2) tr}<br />
+            </div>
+
+</body>
+</html>

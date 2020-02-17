@@ -1,0 +1,544 @@
+package com.lavante.sim.customer.TestScripts.Supplier.ViewSupplier;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.EditProfDataProvider;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.SupplierSearchDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 20-09-2016 Created for UAT View Supplier Test Ended on 29-09-2016
+ * 
+ * @author Piramanayagam.S
+ *
+ */
+public class UATViewSupplierTest extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String customerid = "";
+	String contact = "";
+
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * 
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		List listofdatafrm = lavanteUtils.login("Search-Supp", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		customerid = (String) listofdatafrm.get(1);
+
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+	}
+
+	@BeforeMethod
+	public void before() {
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+		
+		enobjsupplierBasicSearch.formAction(dataMap);
+
+		lavanteUtils.waitForTime(3000);
+	}
+
+	/**
+	 * Select a Supplier ->Disable Notification->Verify in View Page
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 * @throws SQLException
+	 * 
+	 */
+	@Test
+	public void viewDisablenotification() throws Exception {
+
+		Reporter.log("Test Started for View Disable notification  Check at:" + currenttime());
+
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		enobjsupplierPage.searchResultsFilterBy("ANY");
+		enobjsupplierPage.selectChangeView("Suppliers and Invites");
+
+		dataMap.put("Notification", "");
+		dataMap.put("disable", "");
+		String sup = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+
+		Reporter.log("Supplier :" + sup + ",Disabled ");
+		dataMap.put("supplierName", sup);
+		dataMap.put("Search", "");
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		enobjsupplierBasicSearch.search(dataMap);
+
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		enviewSupplier.clickOnSupplier(sup);
+
+		enviewSupplier.selectTab(dataMap);
+
+		if (enviewSupplier.Listnotificationdisabledicon().size() > 0) {
+			System.out.println("Notification icon Found for disabled supplier");
+			Reporter.log("Notification icon Found for disabled supplier");
+			Assert.assertEquals(enviewSupplier.Listnotificationdisabledicon().size(), 1," Supplier Status not changed");
+		} else {
+			System.out.println("Notification icon Not Found for disabled supplier");
+			Reporter.log("Notification icon is not found for disabled supplier");
+			Assert.assertTrue(false, " Notification icon did not appear");
+		}
+
+		Reporter.log("Test Ended for Notification icon:" + currenttime());
+		System.out.println("----------Test Ended---for Notification icon--------");
+	}
+
+	/**
+	 * Select a Supplier ->Enable Notification->Verify in View Page
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 * @throws SQLException
+	 * 
+	 */
+	@Test
+	public void viewEnableNotification() throws Exception {
+
+		Reporter.log("Test Started for Enable Notification at:" + currenttime());
+
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		enobjsupplierPage.searchResultsFilterBy("ANY");
+		enobjsupplierPage.selectChangeView("Suppliers and Invites");
+		dataMap.put("Notification", "");
+		dataMap.put("enable", "");
+		String sup = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+
+		Reporter.log("Supplier :" + sup + ",Enabled ");
+
+		dataMap.put("supplierName", sup);
+		dataMap.put("Search", "");
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		enobjsupplierBasicSearch.search(dataMap);
+
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0));
+
+		lavanteUtils.switchtoFrame(null);
+
+		lavanteUtils.waitForTime(3000);
+
+		if (enviewSupplier.Listnotificationdisabledicon().size() > 0) {
+			System.out.println("Notification icon Found for Notification Enabled supplier");
+			Reporter.log("Notification icon is  found for Notification Enabled supplier");
+			Assert.assertTrue(false, " Notification icon appeared");
+		} else {
+			System.out.println("Notification icon Not Found for Notification Enabled  supplier");
+			Reporter.log("Notification icon is Not found for Notification Enabled supplier");
+			Assert.assertEquals(enviewSupplier.Listnotificationdisabledicon().size(), 0,"  Notification icon appeared");
+
+		}
+
+		Reporter.log("Test Ended for Enable Notification :" + currenttime());
+		System.out.println("----------Test Ended---for Enable Notification --------");
+	}
+
+	/**
+	 * Edit Profile->Add a contact->View in Enterprise owned tab
+	 * 
+	 * Disabled as They removed the contact form enterprise tab and Contact
+	 * verification can be done in Sep Test Note :Can be deleted.
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 * @throws SQLException
+	 * 
+	 */
+	// @Test(ReadJAVADoccomments
+	// dataProvider="Pending",dataProviderClass=SupplierSearchDataProvider.class)
+	public void SupplierContact(LinkedHashMap<String, String> dataMap) throws Exception {
+
+		Reporter.log("Test Started for Supplier Contact at:" + currenttime());
+
+		boolean flag = false;
+		SoftAssert softAssert = new SoftAssert();
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		dataMap.put("Search", "");
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		enobjsupplierBasicSearch.search(dataMap);
+
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		dataMap.put("profile", "");
+		dataMap.put("editProfile", "");
+		String supname = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+		Reporter.log("Supp Name:" + supname);
+
+		dataMap.put("tab", "supplierRelationshipEnterpriseInfo");
+		eneditProfile.selectTab(dataMap);
+
+		lavanteUtils.fluentwait(eneditProfile.cancelBtn());
+
+		dataMap.put("UserName", "ANY");
+		dataMap.put("UserEmail", "ANY");
+		dataMap.put("SaveUser", "");
+		String[] d = eneditEnterprise.addnwuser(dataMap);
+		contact = d[0];
+		dataMap.put("SaveExit", "");
+		eneditProfile.formAction(dataMap);
+
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0));
+
+		lavanteUtils.switchtoFrame(null);
+
+		dataMap.put("maintab", "Enterprise");
+		dataMap.put("subtab", "Enterprise");
+		enviewSupplier.selectTab(dataMap);
+
+		lavanteUtils.fluentwait(enviewSupplier.VMFsuppname());
+		for (int i = enviewSupplier.ContactsupplierName().size(); i > 0; i--) {
+			String s = enviewSupplier.ContactsupplierName().get(i - 1).getText();
+
+			if (s.equalsIgnoreCase(d[0])) {
+				System.out.println("Supplier Contact Name,Expected," + d[0] + ",Actual:" + s);
+				Reporter.log("Supplier Contact Name,Expected," + d[0] + ",Actual:" + s);
+				softAssert.assertEquals(s, d[0], "Contact Name,,Expected," + d[0] + ",Actual:" + s);
+
+				String em = enviewSupplier.ContactsupplierEmail().get(i - 1).getText();
+				System.out.println("Supplier Contact Email,Expected," + d[1] + ",Actual:" + em);
+				Reporter.log("Supplier Contact Email,Expected," + d[1] + ",Actual:" + em);
+				softAssert.assertEquals(em, d[1], "Supplier Contact Email,Expected," + d[1] + ",Actual:" + em);
+
+				enobjhomePage.popupclose();
+				flag = true;
+				break;
+			}
+
+		}
+
+		if (flag == false) {
+			softAssert.assertTrue(false, "Supplier Contact Not Available,Please retest");
+		}
+		softAssert.assertAll();
+		Reporter.log("Test Ended for Supplier Contact:" + currenttime());
+		System.out.println("----------Test Ended---for Supplier Contact --------");
+	}
+
+	/**
+	 * View Supplier->Mandatory Fields ->Prof Percent Edit Profile->>Mandatory
+	 * Fields ->Prof Percent Compare both
+	 * 
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @author Piramanayagam.S
+	 * @throws SQLException
+	 * 
+	 */
+	//@Test(dataProvider = "Pending", dataProviderClass = SupplierSearchDataProvider.class)
+	public void MandatoryfieldViewEditSync(LinkedHashMap<String, String> dataMap) throws Exception {
+
+		Reporter.log("Test Started for Supplier Contact at:" + currenttime());
+
+		dataMap.put("Search", "");
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		enobjsupplierBasicSearch.search(dataMap);
+
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		String supname = enobjsupplierPage.getColumnText("Name", 0);
+		Reporter.log("Supplier Name:" + supname);
+		enviewSupplier.clickOnSupplier(supname);
+
+		lavanteUtils.switchtoFrame(null);
+
+		dataMap.put("maintab", "ProfileStageHistory");
+		dataMap.put("subtab", "Required");
+		enviewSupplier.selectTab(dataMap);
+
+		String percent = enviewSupplier.ProfPercent().getText();
+		int size = enviewSupplier.ListReqdField().size();
+		String[] expMandatFields = new String[size];
+
+		for (int i = 0; i < size; i++) {
+			String fl = enviewSupplier.ListReqdField().get(i).getText();
+			expMandatFields[i] = fl;
+		}
+
+		enobjhomePage.backtoSearch();
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		dataMap.put("supplierName", supname);
+		dataMap.put("profile", "");
+		dataMap.put("editProfile", "");
+
+		String sup = enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+
+		lavanteUtils.switchtoFrame(eneditProfile.iframe_todo());
+
+		String actProfPercent = eneditProfile.profpercent().getText();
+		System.out.println(sup + ",Required list,Expected:" + percent + ",Actual:" + actProfPercent);
+		Reporter.log(sup + ",Profile Percent,Expected:" + percent + ",Actual:" + actProfPercent);
+		Assert.assertEquals(actProfPercent, percent, sup + "Percentage not matching");
+
+		for (int j = 0; j < eneditProfile.todolist().size(); j++) {
+			String acttodo = eneditProfile.todolist().get(j).getText();
+
+			System.out.println("Required list,Expected:" + expMandatFields[j] + ",Actual:" + acttodo);
+			Reporter.log("Required list,Expected:" + expMandatFields[j] + ",Actual:" + acttodo);
+			if (acttodo.equalsIgnoreCase(expMandatFields[j])) {
+				Assert.assertEquals(acttodo, expMandatFields[j]);
+			} else {
+				Assert.assertEquals(acttodo, expMandatFields[j], "Required list of view and to do not matching");
+				break;
+			}
+		}
+
+		Reporter.log("Test Ended for Supplier Required Fields:" + currenttime());
+		System.out.println("----------Test Ended---for Supplier Required Fields --------");
+	}
+
+	/**
+	 * EIN Number Edit Profile Verify in View Page
+	 *
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "USINCOMEYES", dataProviderClass = EditProfDataProvider.class)
+	public void EINNumberView(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for EIN Number VIew--:" + currenttime());
+
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+
+		dataMap.put("Search", "");
+		dataMap.put("Tab", "Legal");
+		dataMap.put("RegCountry", "Equals To,Austria");
+		dataMap.put("usincome", "Yes");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Query Returned with Search data");
+
+			String sup = enobjsupplierPage.VerifyManagedBy("Profile Managed By");
+
+			dataMap.put("profile", "");
+			dataMap.put("editProfile", "");
+			dataMap.put("supplierName", sup);
+			enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+
+			dataMap.put("tab", "CompanyDetails");
+			eneditProfile.selectTab(dataMap);
+
+			dataMap.put("VATNUM", "");
+			String[] ds = eneditLegal.fillLegal(dataMap);
+
+			dataMap.put("SaveExit", "");
+			eneditProfile.formAction(dataMap);
+
+			lavanteUtils.fluentwait(enobjsupplierPage.SearchListIFRAME());
+			lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+			enviewSupplier.clickOnSupplier(sup);
+			lavanteUtils.fluentwait(enviewSupplier.USIncomeBusinessName());
+
+			String usbusname = enviewSupplier.USIncomeBusinessName().getText();
+			System.out.println("US Businee Name ,Expected:" + ds[0] + ",in app:" + usbusname);
+			Reporter.log("US Businee Name ,Expected:" + ds[0] + ",in app:" + usbusname);
+			softAssert.assertEquals(ds[0], usbusname,"US BUSINESS NAME not matched ,Expected" + ds[0] + ",But in app:" + usbusname);
+
+			String EINNUM = enviewSupplier.EINNUM().getText();
+			ds[1] = lavanteUtils.replaceString(ds[1], "*", "");
+			System.out.println("EIN Number ,Expected:" + ds[1] + ",in app:" + EINNUM);
+			Reporter.log("EIN Number ,Expected:" + ds[1] + ",in app:" + EINNUM);
+			softAssert.assertTrue(EINNUM.contains(ds[1]),"EINNUm not Matched ,Expected" + ds[1] + ",But in app:" + EINNUM);
+			flag = true;
+
+		} else {
+			Reporter.log("No Supplier Found for this Search");
+
+		}
+
+		if (flag == false) {
+			softAssert.assertTrue(false, "DATA NOT AVAILABLE");
+			Reporter.log("Please Add test data for this Search and RETEST");
+		}
+
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for EIN Number at:" + currenttime());
+	}
+
+	/**
+	 * Configure Comment Type id DB Verify the Note Comment Added in view
+	 * Supplier
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test
+	public void configureComment() throws Exception {
+		Reporter.log("Test Started for Configure Comment Type:" + currenttime());
+
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		lavanteUtils.fluentwait(ensupplierAdvanced.advtab());
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		enobjsupplierPage.searchResultsFilterBy("ANY");
+		String comm = "";
+		String i18nkey="";
+		String query1="";
+		String query2="";
+		String query3="";
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Query Returned with Search data");
+
+			 i18nkey = "AutoSP" + randomnum() + customerid;
+
+			 query1 = " Insert into I18NKey ( i18nKey) VALUES (   '" + i18nkey + "')";
+
+			 query2 = " INSERT INTO UserTranslation (i18nKey  ,LanguageID  ,UTFString  ,IsCustomerSpecific) VALUES "
+					+ " ('" + i18nkey + "'   ,50    ,'" + i18nkey + "'   ,'' )";
+
+			 query3 = " insert into NoteType  (NoteTypeID, NoteType  ,CreatedBy  ,CreatedOn  ,UpdatedBy "
+					+ "  ,UpdatedOn  ,NoteType_i18nKey  ,CustomerID  ,NoteTypeVisibility_KVID) VALUES ( " + " "
+					+ generateRandomNumber9OnLength(9) + ",  '" + i18nkey + "'  ,''  ,''   ,''   ,''  ,'"
+					+ i18nkey + "'  " + "   ," + customerid + "   , 12001 ) ";
+
+			lavanteUtils.UpdateDB(query1);
+			lavanteUtils.UpdateDB(query2);
+			lavanteUtils.UpdateDB(query3);
+			String supp = enobjsupplierPage.getColumnText("Name", 0);
+			Reporter.log("Supplier Clicked  :" + supp);
+
+			lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Notes").get(0));
+			comm = "AutoSP Added new comment on" + randomnum() + customerid;
+
+			LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+			dataMap.put("NoteType", i18nkey);
+			dataMap.put("NoteDesc", comm);
+			enviewSupplier.addNotes(dataMap);
+
+			lavanteUtils.waitForTime(4000);
+			List<WebElement> d = driver.findElements(By.xpath("//*[contains(text(),'" + i18nkey + "')]//..//td[4]"));
+			for (int i = 0; i < d.size(); i++) {
+				String tx = d.get(i).getText();
+				if (tx.equalsIgnoreCase(comm)) {
+					
+					Reporter.log("Comment Added ,Expected:" + comm + ",in app:" + tx,true);
+					softAssert.assertEquals(tx, comm,"Comment Added Not Matched ,Expected" + comm + ",But in app:" + tx);
+					
+					flag = true;
+					break;
+				}
+			}
+
+		}else{
+			softAssert.assertTrue(false, "DATA NOT AVAILABLE");
+			flag = true;
+		}
+
+		if (flag == false) {
+			softAssert.assertTrue(false, "DATA NOT AVAILABLE");
+			Reporter.log("Please Add test data for this Search and RETEST");
+		}
+
+		lavanteUtils.UpdateDB("delete from Note where Note='" + comm + "'");
+		lavanteUtils.UpdateDB("delete from NoteType where NoteType='" + i18nkey + "'");
+		lavanteUtils.UpdateDB("delete from UserTranslation where i18nKey='" + i18nkey + "'");
+		lavanteUtils.UpdateDB("delete from I18NKey where i18nKey='" + i18nkey + "'");
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for Comment  Type at:" + currenttime());
+	}
+
+	/**
+	 * SetupAfter method closes any popup
+	 * 
+	 * @author Piramanayagam.S
+	 * @throws SQLException
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
+	@AfterMethod
+	public void SetupAftermethod() throws FileNotFoundException, IOException, SQLException {
+		enobjhomePage.backtoSearch();
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("SaveExit", "");
+		eneditProfile.formAction(dataMap);
+		if (contact.length() > 0) {
+			String del = "delete From Supplier_Contact_Map where ContactID in (select ContactID From Contact where ContactName='"
+					+ contact + "')";
+			lavanteUtils.UpdateDB(del);
+			del = "delete  From Contact where ContactName='" + contact + "'";
+			lavanteUtils.UpdateDB(del);
+		}
+		lavanteUtils.refreshPage();
+	}
+
+	/**
+	 * SetupAfter Class closes any popup and Closes the Browser and Driver
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@AfterClass
+	public void SetupafterClassmethod() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+}

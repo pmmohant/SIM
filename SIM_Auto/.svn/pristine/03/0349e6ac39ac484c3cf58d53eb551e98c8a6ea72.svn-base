@@ -1,0 +1,776 @@
+/**
+ * 
+ */
+package com.lavante.sim.customer.pageobjects.Transactions.Invoices;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+public class InvoicePage {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+
+	public InvoicePage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+	}
+
+	@FindBy(css = "iframe[src*='tagforpayments']")
+	private WebElement IFRAMETagforPayment;
+
+	public WebElement IFRAMETagforPayment() {
+		return IFRAMETagforPayment;
+	}
+	
+	@FindBy(css="a[class*='chosen-single'] span")
+	private WebElement ViewDrpdwn;
+	public WebElement ViewDrpdwn(){
+		return ViewDrpdwn;
+	}
+
+	@FindBy(css = "iframe[id*='search']")
+	private WebElement IFRAMEsearchresult;
+
+	public WebElement IFRAMEsearchresult() {
+		return IFRAMEsearchresult;
+	}
+
+	@FindBy(css = "table#invoiceDetails th")
+	private List<WebElement> Headers;
+
+	@FindBy(css = "#resultbody td")
+	private WebElement NoData;
+
+	public WebElement NoData() {
+		return NoData;
+	}
+
+	@FindBy(css = "Iframe[src*='Invoice']")
+	private WebElement IFRAMEviewinvoice;
+
+	public WebElement IFRAMEviewinvoice() {
+		return IFRAMEviewinvoice;
+	}
+
+	@FindBy(css = "iframe[src*='Notes']")
+	private WebElement IFRAMEComments;
+
+	public WebElement IFRAMEComments() {
+		return IFRAMEComments;
+	}
+
+	@FindBy(css = "a[class*='dots']")
+	private WebElement tblactnbtn;
+
+	public WebElement tblactnbtn() {
+		return tblactnbtn;
+	}
+
+	// viewDrpdn
+	@FindBy(css = "[id*='changeMode'] a")
+	private WebElement viewDrpdn;
+
+	public WebElement viewDrpdn() {
+		return viewDrpdn;
+	}
+
+	@FindBy(css = "button[class*='action']")
+	private WebElement actnbtn;
+
+	public WebElement actnbtn() {
+		return actnbtn;
+	}
+
+	@FindBy(id = "uploadInvoice")
+	private WebElement uploadInvoicebtn;
+
+	public WebElement uploadInvoicebtn() {
+		return uploadInvoicebtn;
+	}
+
+	// Web elements as part of SIM-10513
+	@FindBy(id = "tagforpayments")
+	private WebElement TagforPayment;
+
+	public WebElement TagforPayment() {
+		return TagforPayment;
+	}
+
+	@FindBy(id = "batchDescription")
+	private WebElement batchDescription;
+
+	public WebElement batchDescription() {
+		return batchDescription;
+	}
+
+	@FindBy(id = "invoiceBatchPaymentSave")
+	private WebElement invoiceBatchPaymentSave;
+
+	public WebElement invoiceBatchPaymentSave() {
+		return invoiceBatchPaymentSave;
+	}
+
+	@FindBy(css = "[class*='dialog-content']")
+	private WebElement Confirmationmessage;
+
+	public WebElement Confirmationmessage() {
+		return Confirmationmessage;
+	}
+
+	// Adding the web elements for select invoice and submit
+
+	@FindBy(name = "bulkSelect")
+	private WebElement InvoiceBulkSelect;
+
+	public WebElement InvoiceBulkSelect() {
+		return InvoiceBulkSelect;
+	}
+
+	@FindBy(css = "#invoiceDetails tbody td:nth-child(2)")
+	private WebElement selectfirstinvrecord;
+
+	public WebElement selectfirstinvrecord() {
+		return selectfirstinvrecord;
+	}
+
+	// Grid data of Invoice in Search page
+
+	@FindBy(css = "a[href*='InvoiceDetails']")
+	private WebElement TBLInvoicenumber;
+
+	public WebElement TBLInvoicenumber() {
+		return TBLInvoicenumber;
+	}
+
+	@FindBy(css = "a[href*='InvoiceDetails']")
+	private List<WebElement> TBLInvoicenumberList;
+
+	public List<WebElement> TBLInvoicenumberList() {
+		return TBLInvoicenumberList;
+	}
+
+	// INvoice and Payments
+
+	@FindBy(css = "a[href*='CustomerInvoiceDetails']")
+	private List<WebElement> TBLPayinvamnt;
+
+	public List<WebElement> TBLPayinvamnt() {
+		return TBLPayinvamnt;
+	}
+
+	@FindBy(css = "[id='invoiceDetails'] a[href*='Notes']")
+	private WebElement invComments;
+
+	public WebElement invComments() {
+		return invComments;
+	}
+
+	// Search Page Comment/Respond comment
+	@FindBy(id = "comment")
+	private WebElement invCommentTextArea;
+
+	@FindBy(css = "input[type*='submit']")
+	private WebElement submitComment;
+
+	@FindBy(css = "form[action*='Notes'] td:nth-child(4)")
+	private List<WebElement> CommentComment;
+
+	public List<WebElement> CommentComment() {
+		return CommentComment;
+	}
+
+	// End of Search page/Respond Comment
+	@FindBy(css = "a[name*='edit'][href*='Invoice']")
+	private WebElement EditInvoicebtn;
+
+	public WebElement EditInvoicebtn() {
+		return EditInvoicebtn;
+	}
+	
+	@FindBy(css = "#submit_question")
+	private WebElement SubmitQuestionbtn;
+
+	public WebElement SubmitQuestionbtn() {
+		return SubmitQuestionbtn;
+	}
+
+	@FindBy(id = "submitInvoice1")
+	private WebElement Submitinvoice;
+
+	public WebElement Submitinvoice() {
+		return Submitinvoice;
+	}
+
+	@FindBy(css = "[role*='dialog'] [class*='primary']")
+	private WebElement ClickOkey;
+
+	public WebElement ClickOkey() {
+		return ClickOkey;
+	}
+
+	@FindBy(css = "a[id*='dLabel'][class*='horizontal']")
+	private List<WebElement> actinbtn;
+
+	public List<WebElement> actinbtn() {
+		return actinbtn;
+	}
+
+	@FindBy(css = "a[class*='horiz']")
+	private List<WebElement> formactinbtn;
+
+	public List<WebElement> formactinbtn() {
+		return formactinbtn;
+	}
+
+	@FindBy(css = "a[href*='delete']")
+	private WebElement deleteinvoice;
+
+	public WebElement deleteinvoice() {
+		return deleteinvoice;
+	}
+
+	@FindBy(css = "a[href*='upload']")
+	private List<WebElement> editinvoice;
+
+	public List<WebElement> editinvoice() {
+		return editinvoice;
+	}
+
+	@FindBy(css = "a[href*='delete'][href*='invoice']")
+	private List<WebElement> listdeleteinvoice;
+
+	public List<WebElement> listdeleteinvoice() {
+		return listdeleteinvoice;
+	}
+
+	@FindBy(css = "a[href*='download']")
+	private List<WebElement> downloadinvoice;
+
+	public List<WebElement> downloadinvoice() {
+		return downloadinvoice;
+	}
+
+	@FindBy(css = "a[href*='CustomerInvoiceDetails']")
+	private List<WebElement> Listinvnum;
+
+	public List<WebElement> Listinvnum() {
+		return Listinvnum;
+	}
+
+	// net amount in edit invoice page
+	@FindBy(css = "td:nth-child(6)")
+	private WebElement netAmnt;
+
+	public WebElement netAmnt() {
+		return netAmnt;
+	}
+
+	@FindBy(css = "div[class*='dial'] [class*='primary']")
+	private WebElement popupok;
+
+	public WebElement popupok() {
+		return popupok;
+	}
+
+	@FindBy(css = "[class*='primary'][role*='button']")
+	private WebElement deleteok1;
+
+	public WebElement deleteok1() {
+		return deleteok1;
+	}
+
+	// View Invoice
+	
+	@FindBy(css = "div[class*='work']  [class*='button']")
+	public WebElement ViewEdit;
+
+	@FindBy(css = "[class*='primary'][role*='button']")
+	private WebElement ViewID;
+
+	public WebElement ViewID() {
+		return ViewID;
+	}
+
+	@FindBy(xpath = "//span[contains(text(),'ERP')]/../..//dd")
+	private WebElement suppid;
+
+	public WebElement suppid() {
+		return suppid;
+	}
+
+	@FindBy(xpath = "//span[contains(text(),'Name')]/../..//dd")
+	private WebElement suppname;
+
+	public WebElement suppname() {
+		return suppname;
+	}
+
+	@FindBy(xpath = "//span[contains(text(),'Invoice Number')]/../..//dd")
+	private WebElement invnumb;
+
+	public WebElement invnumb() {
+		return invnumb;
+	}
+
+	@FindBy(xpath = "//span[contains(text(),'Invoice Date')]/../..//dd")
+	private WebElement invdate;
+
+	public WebElement invdate() {
+		return invdate;
+	}
+
+	@FindBy(xpath = "//span[contains(text(),'Net')]/../..//dd")
+	private WebElement netamnt;
+
+	public WebElement netamnt() {
+		return netamnt;
+	}
+
+	@FindBy(xpath = "//span[contains(text(),'Tax')]/../..//dd")
+	private WebElement taxamnt;
+
+	public WebElement taxamnt() {
+		return taxamnt;
+	}
+
+	@FindBy(xpath = "//span[contains(text(),'Freight')]/../..//dd")
+	private WebElement freightamnt;
+
+	public WebElement freightamnt() {
+		return freightamnt;
+	}
+
+	@FindBy(xpath = "//span[contains(text(),'Total')]/../..//dd")
+	private WebElement totinvamnt;
+
+	public WebElement totinvamnt() {
+		return totinvamnt;
+	}
+
+	@FindBy(xpath = "//span[contains(text(),'Currency')]/../..//dd")
+	private WebElement currency;
+
+	public WebElement currency() {
+		return currency;
+	}
+
+	@FindBy(css = "a[href*='invoiceStatus']")
+	private WebElement invstatus;
+
+	public WebElement invstatus() {
+		return invstatus;
+	}
+
+	@FindBy(xpath = "//span[contains(text(),'SOW')]/../..//dd")
+	private WebElement invSOWNumber;
+
+	public WebElement invSOWNumber() {
+		return invSOWNumber;
+	}
+
+	@FindBy(xpath = "//*[contains(text(),'Coding Details')]/../../..//div[2]//td[1]")
+	private List<WebElement> viewdelLineitm;
+
+	public List<WebElement> viewdelLineitm() {
+		return viewdelLineitm;
+	}
+
+	@FindBy(xpath = "//*[contains(text(),'Coding Details')]/../../..//div[2]//td[2]")
+	private List<WebElement> viewdelItmtype;
+
+	public List<WebElement> viewdelItmtype() {
+		return viewdelItmtype;
+	}
+
+	@FindBy(xpath = "//*[contains(text(),'Coding Details')]/../../..//div[2]//td[3]")
+	private List<WebElement> viewdelDesc;
+
+	public List<WebElement> viewdelDesc() {
+		return viewdelDesc;
+	}
+
+	@FindBy(xpath = "//*[contains(text(),'Coding Details')]/../../..//div[2]//td[4]")
+	private List<WebElement> viewdelAmnt;
+
+	public List<WebElement> viewdelAmnt() {
+		return viewdelAmnt;
+	}
+
+	@FindBy (css = ".notification-block.info")
+	private WebElement notificationBar;
+	public WebElement notificationBar() {
+		return notificationBar;
+	}
+	
+	// COMMENTS Section
+	@FindBy(id = "addComments")
+	private WebElement addCommentBtn;
+
+	public WebElement addCommentBtn() {
+		return addCommentBtn;
+	}
+
+	@FindBy(id = "flex")
+	private WebElement EnterCommentsTxtArea;
+
+	public WebElement EnterCommentsTxtArea() {
+		return EnterCommentsTxtArea;
+	}
+
+	@FindBy(css = "textarea#flex")
+	private WebElement addCommentTxt;
+
+	public WebElement addCommentTxt() {
+		return addCommentTxt;
+	}
+
+	@FindBy(id = "public_user")
+	private WebElement publicRadioBtn;
+
+	public WebElement publicRadioBtn() {
+		return publicRadioBtn;
+	}
+
+	@FindBy(id = "private_user")
+	private WebElement privateRadioBtn;
+
+	public WebElement privateRadioBtn() {
+		return privateRadioBtn;
+	}
+
+	@FindBy(id = "addComments")
+	private WebElement AddCommentBtn;
+
+	public WebElement AddCommentBtn() {
+		return AddCommentBtn;
+	}
+
+	@FindBy(css = "button[class='button_primary']")
+	private WebElement AddCommentsBtn;
+
+	public WebElement AddCommentsBtn() {
+		return AddCommentsBtn;
+	}
+
+	@FindBy(css = "div[data-ng-if*='isPrivate']+p[class*='commentUserText']")
+	private List<WebElement> PrivateCommentsList;
+
+	public List<WebElement> PrivateCommentsList() {
+		return PrivateCommentsList;
+	}
+
+	@FindBy(css = "p[class*='commentUserText']")
+	private List<WebElement> PublicCommentsList;
+
+	public List<WebElement> PublicCommentsList() {
+		return PublicCommentsList;
+	}
+
+	//Submit Question section
+	@FindBy(css="[class*='submitQuestionTextArea']")
+	private WebElement QuestionsTextArea;
+	
+	public WebElement QuestionsTextArea() {
+		return QuestionsTextArea;
+	}
+	
+	@FindBy(css="div[class*='buttons-container'] button[class*='button_primary ng-binding']")
+	private WebElement QuestSaveBtn;
+	
+	public WebElement QuestSaveBtn() {
+		return QuestSaveBtn;
+	}
+	
+	@FindBy(css = ".bannerMessage")
+	private WebElement BannerMsg;
+
+	public WebElement BannerMsg() {
+		return BannerMsg;	
+	}
+	// popUp section
+
+	@FindBy(css = "iframe[src*='customerInvoiceDetails']")
+	private WebElement IframePopUp;
+
+	public WebElement IframePopUp() {
+		return IframePopUp;
+	}
+
+	@FindBy(css = "button[title='close'] span:nth-child(2)")
+	private WebElement PopUpCloseBtn;
+
+	public WebElement PopUpCloseBtn() {
+		return PopUpCloseBtn;
+	}
+
+	@FindBy(css = "a[class*='user-info']")
+	private WebElement UserName;
+
+	public WebElement UserName() {
+		return UserName;
+	}
+
+	@FindBy(css = "div a img[src*='ic_comment_black']")
+	private List<WebElement> CommentImg;
+
+	public List<WebElement> CommentImg() {
+		return CommentImg;
+	}
+
+	@FindBy(css = "div a sup[id='readUnreadComments']")
+	private List<WebElement> GetCommentCount;
+
+	public List<WebElement> GetCommentCount() {
+		return GetCommentCount;
+	}
+
+	// Reusable Methods
+
+	public void ViewSelection(String view) {
+		lavanteUtils.switchtoFrame(IFRAMEsearchresult);
+		if (view.contains("Payments")) {
+			view = "Invoice & Payments";
+		}
+		// lavanteUtils.click(viewDrpdn);
+		lavanteUtils.refreshPage();
+		lavanteUtils.scrollup();
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.Scrollintoview(UserName);
+		lavanteUtils.switchtoFrame(IFRAMEsearchresult);
+		viewDrpdn.click();
+		// SAME FRAME SELECTING DROPDOWN
+		lavanteUtils.SameFrameselectvalueFrmDpdn(view);
+	}
+
+	public void selectSupplierFormAction(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.switchtoFrame(IFRAMEsearchresult);
+
+		if (dataMap.containsKey("InvoiceNumber")) {
+
+		} else if (dataMap.containsKey("SelectallInvoice")) {
+			lavanteUtils.clickJavaScriptNoWait(InvoiceBulkSelect);
+		} else {
+			lavanteUtils.click(selectfirstinvrecord);
+		}
+
+		formAction(dataMap);
+	}
+
+	public void formAction(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.switchtoFrame(null);
+
+		if (dataMap.containsKey("Upload")) {
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.click(uploadInvoicebtn);
+		}
+
+		if (dataMap.containsKey("Submit")) {
+			lavanteUtils.switchtoFrame(IFRAMEsearchresult);
+			lavanteUtils.click(actnbtn);
+			lavanteUtils.click(Submitinvoice);
+			lavanteUtils.waitForTime(3000);
+			lavanteUtils.switchtoFrame(null);
+		}
+		if (dataMap.containsKey("Edit")) {
+			lavanteUtils.switchtoFrame(IFRAMEsearchresult);
+			lavanteUtils.click(actnbtn);
+			lavanteUtils.click(EditInvoicebtn);
+		}
+		if (dataMap.containsKey("SubmitQuestion")) {
+			lavanteUtils.switchtoFrame(IFRAMEsearchresult);
+			lavanteUtils.click(actnbtn);
+			lavanteUtils.click(SubmitQuestionbtn);
+			SubmitQuestion(dataMap);
+		}
+		if (dataMap.containsKey("TagForPayment")) {
+			lavanteUtils.switchtoFrame(IFRAMEsearchresult);
+			lavanteUtils.click(actnbtn);
+			lavanteUtils.click(TagforPayment);
+			lavanteUtils.switchtoFrame(IFRAMETagforPayment);
+			if (dataMap.containsKey("BatchDescription")) {
+				lavanteUtils.typeinEdit(dataMap.get("BatchDescription"), batchDescription);
+				lavanteUtils.click(invoiceBatchPaymentSave);
+			}
+
+		}
+	}
+	
+	private void SubmitQuestion(LinkedHashMap<String, String>dataMap) {
+		lavanteUtils.switchtoFrame(null);
+		if(dataMap.containsKey("Question")) {
+			lavanteUtils.typeinEdit(dataMap.get("Question"), EnterCommentsTxtArea);
+			lavanteUtils.click(QuestSaveBtn);
+			lavanteUtils.fluentwait(BannerMsg);
+			dataMap.put("QuesBannerMsg", BannerMsg.getText());
+		}
+		
+	}
+
+	/**
+	 * Add comments from search Page/Respond page from task
+	 * 
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	public void CommentSearch(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.switchtoFrame(IFRAMEComments);
+		if (dataMap.containsKey("EnterComment")) {
+			lavanteUtils.typeinEdit(dataMap.get("EnterComment"), invCommentTextArea);
+		}
+		// As No Use Case would be just to enter putting both
+		lavanteUtils.clicks(submitComment);
+	}
+
+	/**
+	 * Add private/public comments
+	 * 
+	 * @author subhas.bv
+	 * 
+	 */
+	public void addCommentView(LinkedHashMap<String, String> dataMap) {
+
+		lavanteUtils.switchtoFrame(null);
+		if (lavanteUtils.isElementDisplayed(addCommentBtn)) {
+			lavanteUtils.clicks(AddCommentBtn);
+		}
+		if (dataMap.containsKey("EnterComment")) {
+			lavanteUtils.typeinEdit(dataMap.get("EnterComment"), EnterCommentsTxtArea);
+		}
+		if (dataMap.containsKey("PrivateComment")) {
+			lavanteUtils.clicks(privateRadioBtn);
+		}
+		if (dataMap.containsKey("PublicComment")) {
+			lavanteUtils.clicks(publicRadioBtn);
+		}
+		lavanteUtils.clicks(AddCommentsBtn);
+	}
+
+	public String getColumnText(String colname, int count) {
+		String x = "";
+		lavanteUtils.switchtoFrame(IFRAMEsearchresult());
+		int size = iterateSearchHeaderFindColList(colname).size();
+		List<WebElement> sx = iterateSearchHeaderFindColList(colname);
+		outr: for (int i = 0; i < size; i++) {
+			x = sx.get(i).getText();
+			if (count == 0) {
+				if (x.length() > 0) {
+					break outr;
+				}
+			} else {
+				x = sx.get(count).getText();
+				break outr;
+			}
+		}
+		return x;
+	}
+
+	public String getColumnAttribute(String colname, String att) {
+		String x = "";
+		lavanteUtils.switchtoFrame(IFRAMEsearchresult);
+		int size = iterateSearchHeaderFindColList(colname).size();
+		List<WebElement> sx = iterateSearchHeaderFindColList(colname);
+		outr: for (int i = 0; i < size; i++) {
+			x = sx.get(i).getText();
+			if (x.length() > 0) {
+				x = sx.get(0).getAttribute(att);
+				break outr;
+			}
+		}
+		return x;
+	}
+
+	public List<WebElement> iterateSearchHeaderFindColList(String col) {
+		lavanteUtils.switchtoFrame(IFRAMEsearchresult);
+		List<WebElement> s = null;
+		int j = ColIdentify(col);
+		String x = "#invoiceDetails tr td:nth-child(" + j + ")";
+
+		if (col.contains("Invoice Number")) {
+			x = "#invoiceDetails tr td:nth-child(" + j + ") a";
+		}
+		s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		return s;
+	}
+
+	public int ColIdentify(String col) {
+		int ki = 0;
+		boolean found = false;
+		if (Headers.size() > 0) {
+			for (int i = 0; i < Headers.size(); i++) {
+				String x = Headers.get(i).getText().toLowerCase();
+				if (x.contains(col.toLowerCase())) {
+					ki = i;
+					// List start with 0 but need a number more than that to
+					// fetch in xpath
+					ki = i + 1;
+					found = true;
+					break;
+				}
+			}
+		}
+
+		if (found == false) {
+			Assert.assertTrue(false, "Col name not found" + col);
+		}
+		return ki;
+
+	}
+
+	public String fetchPoSupplier(String cust) throws FileNotFoundException, IOException, SQLException {
+		String x = " select MAX(S.SupplierName) From  Relationship r, Supplier s,Invite I ,Relationship_ERP_Map rem "
+				+ "where s.LavanteUID = r.LavanteUID and r.CustomerID=" + cust
+				+ "  and I.relationShipID=r.RelationshipID and r.RelationshipID=rem.RelationshipID "
+				+ " and r.RelationshipID not in  (Select RelationshipId from MasterServiceAgreement ) and I.IsSupplierApproved=1 "
+				+ " and I.profileStageID!=10  and rem.SupplierERPID  is not null";
+		x = lavanteUtils.fetchDBdata(x);
+		return x;
+	}
+
+	public String fetchDelSupplier(String cust) throws FileNotFoundException, IOException, SQLException {
+		String x = " select MAX(S.SupplierName) From  Relationship r, Supplier s,Invite I ,Relationship_ERP_Map rem "
+				+ " where s.LavanteUID = r.LavanteUID and r.CustomerID=" + cust
+				+ "  and I.relationShipID=r.RelationshipID and r.RelationshipID=rem.RelationshipID "
+				+ " and r.RelationshipID in  (Select RelationshipId from MasterServiceAgreement where MSAID in (Select MSAID from StatementOfWork where SOWID in ( "
+				+ " Select SOWID from Deliverable ) ) ) and I.IsSupplierApproved=1 "
+				+ " and I.profileStageID!=10  and rem.SupplierERPID  is not null";
+		x = lavanteUtils.fetchDBdata(x);
+		return x;
+	}
+
+	public String fetchDelSupplier(String cust, int count) throws FileNotFoundException, IOException, SQLException {
+		String x = " select MAX(S.SupplierName) From  Relationship r, Supplier s,Invite I ,Relationship_ERP_Map rem "
+				+ " where s.LavanteUID = r.LavanteUID and r.CustomerID=" + cust
+				+ "  and I.relationShipID=r.RelationshipID and r.RelationshipID=rem.RelationshipID "
+				+ " and r.RelationshipID in  (Select RelationshipId from MasterServiceAgreement where MSAID in (Select MSAID from StatementOfWork where SOWID in ( "
+				+ " Select SOWID from Deliverable )  and  SOWID in (Select SOWID from Deliverable group by SOWID HAving Count(SOWID)>"
+				+ count + ") ) ) and I.IsSupplierApproved=1 "
+				+ " and I.profileStageID!=10  and rem.SupplierERPID  is not null";
+		x = lavanteUtils.fetchDBdata(x);
+		return x;
+	}
+	
+	/**
+	 * @author Thejaswi.Bhat
+	 */
+	public boolean verifyInvoicePage() {
+		boolean flag=false;
+		
+		lavanteUtils.switchtoFrame(null);
+		flag=lavanteUtils.verifyElementDisplayed("Upload Invoice", uploadInvoicebtn);
+	//	lavanteUtils.verifyElementDisplayed("Search button", searchBtn);
+		
+		return flag;
+		
+	}
+
+}

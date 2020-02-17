@@ -1,0 +1,136 @@
+package com.lavante.sim.customer.TestScripts.Admin;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Creation of Departments
+ * 
+ * @author Piramanayagam.S
+ *
+ */
+
+public class DepartmentsTest01 extends PageInitiator {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+	String deptName="";
+	
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+		
+	 launchAppFromPOM(Platform,browser,Version);
+	 initiate();	
+	 openAPP1();
+	 waitForTime(4000);
+	 lavanteUtils.driver=driver;
+	 
+	 objLoginPage.verifyLoginPageDisplayed();
+	 List<?> listofdatafrm=lavanteUtils.login("Kroger", browser);
+	 LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String>();
+	 LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+	 enobjloginpage.logintoAPP(LdataMap);
+	 waitForTime(3000);
+	 objHomePage.verifyHomePageDisplayed();
+	 
+	}
+	
+	@BeforeMethod
+	public void before(){
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("maintab", "Admin");
+		dataMap.put("subtab", "department");
+		enobjhomePage.selectTab(dataMap);
+	}
+	
+	/** 
+	 * @author Piramanayagam.S
+	 * 
+	 * Test to verify addition and deletion of Departments
+	 * 
+	 */
+	  @Test(priority=1)
+	  public void AddDeleteDepartment(){
+		    Reporter.log("Test Started for creation of Department and deletion of Department: "+ currenttime(),true);
+		    SoftAssert softassert =new SoftAssert();
+					   
+			//Adding Department
+			String deptName = "AutoTest1"+randomnum();
+			dataMap.put("Department", deptName);
+			dataMap.put("Save", "");
+			objDepartments.createDepartment(dataMap);
+			
+			//FOR DB DELETE aFter MEthod
+			deptName=deptName;
+			
+			waitForTime(4000);
+			//Searching the Department
+			dataMap.put("Search", deptName); 
+			objDepartments.search(dataMap);
+		    
+			//Verifying created Department availability in Department table
+			String actGLCodeV = objDepartments.deptNameValue().getText().trim();
+			softassert.assertEquals(actGLCodeV,  deptName,"Actual Department" + actGLCodeV+ " is not matching with expected Department "+ deptName);
+			Reporter.log("Verification : expected glcode "+ deptName + "with actual Department" +actGLCodeV,true);
+			
+			//Deletion of Department
+			click(objDepartments.deptDelete());
+			click(objDepartments.deleteConfirmButton());
+			waitForTime(5000);
+			
+			waitForTime(4000);
+			//Searching the Department
+			dataMap.put("Search", deptName); 
+			objDepartments.search(dataMap);
+		    			
+			//Verifying deleted Department availability in Department table
+			fluentwait(objDepartments.noResultsText());
+			String actdata = objDepartments.noResultsText().getAttribute("innerText");
+			String expdata = "No Results";
+			softassert.assertEquals(actdata,  expdata, "expected data " +expdata + "is not matching with actual data " +actdata);
+			Reporter.log("Verification : expected data "+ expdata + "with actual data" +actdata);
+			softassert.assertAll();
+			Reporter.log("Test Ended for creation of Department and deltion of Department :" + currenttime(),true);
+	  }
+	  
+	  /**
+	   * AfterMethod - Delete the Department from the dB
+	   * @throws FileNotFoundException
+	   * @throws IOException
+	   * @throws SQLException
+	   */
+	  @AfterMethod
+	  public void afterMethod() throws FileNotFoundException, IOException, SQLException{
+		  if(deptName.length()>0){
+			  String x="delete From Department where Code='"+deptName+"'";
+			  lavanteUtils.UpdateDB(x);
+			  deptName="";
+		  }
+	  }
+	  
+	  
+	  @AfterClass
+	  public void close(){
+		    enobjhomePage.logout();
+			quitBrowser();
+		}
+  
+}

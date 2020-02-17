@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Manage Users Test " parallel="tests" preserve-order="true"
+	thread-count="3" verbose="1">
+	
+	<listeners>
+		 <listener class-name="com.lavante.sim.Common.Util.ExtentReporterNG"/>
+	 </listeners>
+	
+	<test preserve-order="true" thread-count="1"
+		name="Lavante SIM - Running on chrome">	
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="chrome" />
+		<!-- <parameter name="Version" value="36" /> -->
+		
+		<classes>				
+			<!-- Manage Users Module	 -->		
+		<!-- <class name="com.lavante.sim.customer.TestScripts.ManageFiles.ManageUsersTC0001" />
+			<class name="com.lavante.sim.customer.TestScripts.ManageFiles.ManageUsersTC0002" /> -->
+			
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UserPageTests" /> 
+			<class name="com.lavante.sim.customer.TestScripts.Admin.AddressPageTests" />
+
+			<class name="com.lavante.sim.customer.TestScripts.Admin.PaymentCenterPageTests" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.PaymentCenterMappingPageTests" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.PaymentTermsPageTests" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.DivisionPageTests" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.SupplierGroupPageTests" />
+			
+			<class name="com.lavante.sim.customer.TestScripts.Admin.DealLocationMappingTests" />
+											
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UserBasicSearch" />
+			
+			<class name="com.lavante.sim.supplier.TestScripts.SupplierUserPageTests" /> 
+			
+		</classes>
+		
+	</test> 
+	 
+</suite> 

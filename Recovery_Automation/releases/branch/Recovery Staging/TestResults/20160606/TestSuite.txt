@@ -1,0 +1,100 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 20, Failures: 7, Errors: 0, Skipped: 0, Time elapsed: 798.278 sec <<< FAILURE! - in TestSuite
+verifyReportsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 30.147 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'runBtn' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:186)
+	at lavante.recovery.pageobjects.ReportsPage.verifyrunBtn(ReportsPage.java:54)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyReportsPage(SanityTestSuite.java:385)
+
+verifySetupPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 168.747 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'faxJobsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:186)
+	at lavante.recovery.pageobjects.Configuration.Jobs.FaxJobPage.verifyFaxJobsLink(FaxJobPage.java:28)
+	at lavante.recovery.testsuites.SanityTestSuite.verifySetupPage(SanityTestSuite.java:430)
+
+verifyHoldsAssignmentsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 3.01 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'assignmentsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:186)
+	at lavante.recovery.pageobjects.Assignments.HoldsPage.verifyAssignmentsLink(HoldsPage.java:18)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyHoldsAssignmentsPage(SanityTestSuite.java:527)
+
+verifyCreditsAssignmentsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 3.012 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'creditsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:186)
+	at lavante.recovery.pageobjects.Assignments.CreditsPage.verifycreditsLink(CreditsPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyCreditsAssignmentsPage(SanityTestSuite.java:541)
+
+verifyStatementsAssignmentsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 20.012 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'statementsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:186)
+	at lavante.recovery.pageobjects.Assignments.StatementsPage.verifyStatementsLink(StatementsPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyStatementsAssignmentsPage(SanityTestSuite.java:553)
+
+verifyauditStatisticsAssignmentsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 15.009 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'auditStatisticsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:186)
+	at lavante.recovery.pageobjects.Assignments.AuditStatisticsPage.verifyauditStatisticsLink(AuditStatisticsPage.java:21)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyauditStatisticsAssignmentsPage(SanityTestSuite.java:565)
+
+clean(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 15.188 sec  <<< FAILURE!
+org.openqa.selenium.WebDriverException: Session [642d72b9-c0fa-4922-98eb-a1d5abd9df3b] was terminated due to TIMEOUT
+Command duration or timeout: 7 milliseconds
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{browserAttachTimeout=0, enablePersistentHover=false, ie.forceCreateProcessApi=false, ie.usePerProcessProxy=false, ignoreZoomSetting=true, handlesAlerts=true, version=11, platform=WINDOWS, nativeEvents=false, ie.ensureCleanSession=false, elementScrollBehavior=0, ie.browserCommandLineSwitches=, webdriver.remote.sessionid=642d72b9-c0fa-4922-98eb-a1d5abd9df3b, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:42298/, takesScreenshot=true, javascriptEnabled=true, ignoreProtectedModeSettings=true, enableElementCacheCleanup=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=dismiss}]
+Session ID: 642d72b9-c0fa-4922-98eb-a1d5abd9df3b
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:701)
+	at org.openqa.selenium.remote.RemoteWebDriver.quit(RemoteWebDriver.java:526)
+	at lavante.recovery.utilities.seleniumBaseClass.quitBrowser(seleniumBaseClass.java:72)
+	at lavante.recovery.testsuites.SanityTestSuite.clean(SanityTestSuite.java:573)
+Caused by: org.openqa.selenium.WebDriverException: Session [642d72b9-c0fa-4922-98eb-a1d5abd9df3b] was terminated due to TIMEOUT
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: driver.version: unknown
+	at org.openqa.grid.internal.ActiveTestSessions.getExistingSession(ActiveTestSessions.java:105)
+	at org.openqa.grid.internal.Registry.getExistingSession(Registry.java:425)
+	at org.openqa.grid.web.servlet.handler.RequestHandler.getSession(RequestHandler.java:240)
+	at org.openqa.grid.web.servlet.handler.RequestHandler.process(RequestHandler.java:120)
+	at org.openqa.grid.web.servlet.DriverServlet.process(DriverServlet.java:83)
+	at org.openqa.grid.web.servlet.DriverServlet.doDelete(DriverServlet.java:73)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:713)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+	at org.seleniumhq.jetty9.servlet.ServletHolder.handle(ServletHolder.java:808)
+	at org.seleniumhq.jetty9.servlet.ServletHandler.doHandle(ServletHandler.java:587)
+	at org.seleniumhq.jetty9.server.session.SessionHandler.doHandle(SessionHandler.java:221)
+	at org.seleniumhq.jetty9.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+	at org.seleniumhq.jetty9.servlet.ServletHandler.doScope(ServletHandler.java:515)
+	at org.seleniumhq.jetty9.server.session.SessionHandler.doScope(SessionHandler.java:185)
+	at org.seleniumhq.jetty9.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+	at org.seleniumhq.jetty9.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.seleniumhq.jetty9.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+	at org.seleniumhq.jetty9.server.Server.handle(Server.java:499)
+	at org.seleniumhq.jetty9.server.HttpChannel.handle(HttpChannel.java:310)
+	at org.seleniumhq.jetty9.server.HttpConnection.onFillable(HttpConnection.java:257)
+	at org.seleniumhq.jetty9.io.AbstractConnection$2.run(AbstractConnection.java:540)
+	at org.seleniumhq.jetty9.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.seleniumhq.jetty9.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Unknown Source)
+

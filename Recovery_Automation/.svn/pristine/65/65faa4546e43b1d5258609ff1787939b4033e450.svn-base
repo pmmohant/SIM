@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="">
+<head>
+  <title>Test Results Report - Lavante - Recovery - Running on Firefox v44</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="description" content="TestNG unit test results." />
+  <link href="reportng.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="reportng.js"></script>
+</head>
+<body>
+<h1>Lavante - Recovery - Running on Firefox v44</h1>
+<p>
+  Test duration: 202.063s
+</p>
+
+
+
+  <table class="resultsTable">
+    <tr><th colspan="3" class="header failed">Failed Tests</th></tr>
+          <tr>
+        <td colspan="3" class="group">lavante.recovery.testsuites.SanityTestSuite</td>
+      </tr>
+            
+<tr>
+  <td class="method">
+                  verifyCreditsAssignmentsPage
+      </td>
+  <td class="duration">
+    24.470s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;creditsLink&apos; is clicked<br />
+                                Fail: &apos;creditsTable&apos; is not displayedUnable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#creditAssignmentSearchForm #creditAssignmentData tr td&quot;}<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA03&apos;, ip: &apos;192.168.21.79&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: unknown<br/>
+Command duration or timeout: 10.82 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=783782e9-361c-47e3-83d3-7722fd4dcffa, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]<br/>
+Session ID: 783782e9-361c-47e3-83d3-7722fd4dcffa<br/>
+*** Element info: {Using=css selector, value=#creditAssignmentSearchForm #creditAssignmentData tr td}<br />
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-0', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;creditsTable&apos; is not displayedUnable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#creditAssignmentSearchForm #creditAssignmentData tr td&quot;}<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA03&apos;, ip: &apos;192.168.21.79&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: unknown<br/>
+Command duration or timeout: 10.82 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=783782e9-361c-47e3-83d3-7722fd4dcffa, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]<br/>
+Session ID: 783782e9-361c-47e3-83d3-7722fd4dcffa<br/>
+*** Element info: {Using=css selector, value=#creditAssignmentSearchForm #creditAssignmentData tr td}</b></a><br />
+    <div class="stackTrace" id="exception-0">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:20)<br />
+              lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:204)<br />
+              lavante.recovery.pageobjects.Assignments.CreditsPage.verifycreditsTable(CreditsPage.java:28)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyCreditsAssignmentsPage(SanityTestSuite.java:374)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyHoldsAssignmentsPage
+      </td>
+  <td class="duration">
+    25.289s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;holdsLink&apos; is clicked<br />
+                                Fail: &apos;holdsTable&apos; is not displayedUnable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#holdAssignmentData tr td&quot;}<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA03&apos;, ip: &apos;192.168.21.79&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: unknown<br/>
+Command duration or timeout: 10.90 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=783782e9-361c-47e3-83d3-7722fd4dcffa, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]<br/>
+Session ID: 783782e9-361c-47e3-83d3-7722fd4dcffa<br/>
+*** Element info: {Using=css selector, value=#holdAssignmentData tr td}<br />
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-1', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;holdsTable&apos; is not displayedUnable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#holdAssignmentData tr td&quot;}<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA03&apos;, ip: &apos;192.168.21.79&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: unknown<br/>
+Command duration or timeout: 10.90 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=783782e9-361c-47e3-83d3-7722fd4dcffa, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]<br/>
+Session ID: 783782e9-361c-47e3-83d3-7722fd4dcffa<br/>
+*** Element info: {Using=css selector, value=#holdAssignmentData tr td}</b></a><br />
+    <div class="stackTrace" id="exception-1">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:20)<br />
+              lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:204)<br />
+              lavante.recovery.pageobjects.Assignments.HoldsPage.verifyHoldsTable(HoldsPage.java:28)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyHoldsAssignmentsPage(SanityTestSuite.java:363)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyStatementsAssignmentsPage
+      </td>
+  <td class="duration">
+    69.491s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;statementsLink&apos; is clicked<br />
+                                Fail: &apos;statementsTable&apos; is not displayedUnable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#statementAssignmentSearchForm div:nth-child(2) tr&quot;}<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA03&apos;, ip: &apos;192.168.21.79&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: unknown<br/>
+Command duration or timeout: 10.37 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=783782e9-361c-47e3-83d3-7722fd4dcffa, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]<br/>
+Session ID: 783782e9-361c-47e3-83d3-7722fd4dcffa<br/>
+*** Element info: {Using=css selector, value=#statementAssignmentSearchForm div:nth-child(2) tr}<br />
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-2', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;statementsTable&apos; is not displayedUnable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#statementAssignmentSearchForm div:nth-child(2) tr&quot;}<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA03&apos;, ip: &apos;192.168.21.79&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: unknown<br/>
+Command duration or timeout: 10.37 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=783782e9-361c-47e3-83d3-7722fd4dcffa, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]<br/>
+Session ID: 783782e9-361c-47e3-83d3-7722fd4dcffa<br/>
+*** Element info: {Using=css selector, value=#statementAssignmentSearchForm div:nth-child(2) tr}</b></a><br />
+    <div class="stackTrace" id="exception-2">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:20)<br />
+              lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:204)<br />
+              lavante.recovery.pageobjects.Assignments.StatementsPage.verifyStatementsTable(StatementsPage.java:28)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyStatementsAssignmentsPage(SanityTestSuite.java:386)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+      </table>
+
+
+  <table class="resultsTable">
+    <tr><th colspan="3" class="header passed">Passed Tests</th></tr>
+          <tr>
+        <td colspan="3" class="group">lavante.recovery.testsuites.SanityTestSuite</td>
+      </tr>
+            
+<tr>
+  <td class="method">
+                  verifyauditStatisticsAssignmentsPage
+      </td>
+  <td class="duration">
+    51.956s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: &apos;assignmentsLink&apos; is clicked<br />
+                                Pass: &apos;auditStatisticsLink&apos; is clicked<br />
+                                Pass: &apos;auditStatsTable&apos; is displayed<br />
+                  </div>
+    
+
+      </td>
+</tr>
+      </table>
+  
+</body>
+</html>

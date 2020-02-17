@@ -1,0 +1,25 @@
+linkSuppliers=Suppliers
+linkOIG=OIG
+linkHelp=Help
+linkWhatOIGLEIE=What is OIG LEIE?
+showDeactivatedSuppliers=showDeactivatedSuppliers
+deactivated=Deactivated
+overridden=Overridden
+requiresDisposition=Requires Disposition
+noMatch=No Match
+awaitingCheck=Awaiting Check
+all=All
+supplierSearchOIG=supplierSearchOIG
+searchFilter=searchFilter
+
+#xpath
+popUpOIGLEIEHeadTxt=//form[@id='supplieroigForm']/table/tbody/tr/td/div/div[1]/table/tbody/tr/td[1]
+inActiveSupplierBox=//label[@class='show-deactivate']
+lastRunOnTxt=//table[@id='supplier_oig']/caption/div/div[@class='float_right']
+sendMailBtn=//button[@class='button_gold open_popup']
+deActivatedBtn=//input[@class='button_red open_popup']
+overrideBtn=//input[@class='button_green open_popup']
+
+helpLinkPopupCloseBtn=/html/body/div[10]/div[1]/button
+#Class
+recordsCount=highlight_green

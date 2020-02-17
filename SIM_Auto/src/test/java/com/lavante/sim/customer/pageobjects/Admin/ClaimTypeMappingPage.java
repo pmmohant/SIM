@@ -1,0 +1,238 @@
+package com.lavante.sim.customer.pageobjects.Admin;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Reporter;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+
+public class ClaimTypeMappingPage{
+	
+	LavanteUtils lavanteUtils = new LavanteUtils();
+
+	public ClaimTypeMappingPage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+		
+	}
+		
+	/**
+	 * 
+	 * @author Priyanka
+	 */
+	/**
+	 * click on Admin -> ClaimTypeMapping
+	 */
+		@FindBy(css = "a[href*='claimTypeMapping']")
+		private WebElement ClaimTypeMappingTab;
+		public WebElement ClaimTypeMappingTab(){
+			return ClaimTypeMappingTab ;
+		
+		}
+				
+		@FindBy(css = "a[href*='addClaimTypeMapping']")
+		private WebElement AddClaimTypeMapping;
+		public WebElement AddClaimTypeMapping(){
+			return AddClaimTypeMapping;
+		}
+		
+		
+		@FindBy(css = "iframe[src*='addClaimTypeMapping']")
+		private WebElement IframeAddClaimTypeMapping;
+		public WebElement IframeAddClaimTypeMapping(){
+			
+			return IframeAddClaimTypeMapping;
+		}
+		
+		@FindBy(css = "div[id*='customerOrganizations']>ul>li")
+		private WebElement DivisionSearchBox;
+		public WebElement DivisionSearchBox(){
+			return DivisionSearchBox;
+			
+		}
+
+		@FindBy(css = "div[id*='claimTypes']>ul>li")
+		private WebElement ClaimTypeSearchbox;
+		public WebElement ClaimTypeSearchbox(){
+			return ClaimTypeSearchbox;
+			
+		}
+
+		@FindBy(css = "button[value='Save']")
+		private WebElement AddClaimtypeMappingSaveBtn;
+		public WebElement AddClaimtypeMappingSaveBtn(){
+			return AddClaimtypeMappingSaveBtn;
+		}
+		
+		@FindBy(css = "button[class*='cancel']")
+		private WebElement CancelBtn;
+		public WebElement CancelBtn(){
+			return CancelBtn;
+			
+		}
+		
+		@FindBy(css = "a[href*='deleteClaimTypeMapping']")
+		private WebElement DeleteLink;
+		public WebElement DeleteLink(){
+			return DeleteLink;
+			
+		}
+		
+		@FindBy(css="div[class*='dialog'] button[class*='primary']")
+		private WebElement deleteBtn;
+		public WebElement deleteBtn(){
+			return deleteBtn;
+		}
+		
+		
+		
+		@FindBy(css = "a[href*='editClaimTypeMapping']")
+		private WebElement EditClaimTypeMapping;
+		public WebElement EditClaimTypeMapping(){
+			return EditClaimTypeMapping;
+			
+		}
+		
+		
+		@FindBy(id="claimTypeOrDivision")
+		private WebElement searchTxtBox;
+		public WebElement searchTxtBox(){
+			return searchTxtBox;
+			
+		}
+		
+		@FindBy(css = "input[id*='searchClaimType']")
+		private WebElement searchBtn;
+		public WebElement searchBtn(){
+			return searchBtn;
+		}
+		
+		@FindBy(css = "span[class='error']")
+		private WebElement Errormsg;
+		public WebElement Errormsg(){
+			return Errormsg;
+		}
+		
+		//@FindBy(css = "div[class='bootstrap-wrapper bannerError']")
+		@FindBy(id="bannerDiv")
+		private WebElement BannerMessage;
+		public WebElement BannerMessage(){
+			return BannerMessage;
+			
+		}
+		
+		@FindBy(css = "table[class*='table_grid zebra'] tbody td:nth-child(1)")
+		public List<WebElement> ListDivisionName;
+		
+		@FindBy(css = "table[class*='table_grid zebra'] tbody td:nth-child(2)")
+		public List<WebElement> ListClaimType;
+		
+		@FindBy(css = "a[href*='editClaimTypeMapping']")
+		public List<WebElement> ListEditClaimTypeMapping;
+		
+	
+		@FindBy(css = "a[href*='delete']")
+		public List<WebElement> ListDeleteClaimTypeMapping;
+		
+		/**
+		 * MethodName : AddClaimTypeMapping : will add claim type mapping 
+		 * @param testData
+		 *            : LinkedHashMap<String, String> testData
+		 *            
+		 * @author Priyanka
+		 */
+
+		public void addClaimTypeMapping(LinkedHashMap<String, String> testData) {
+			
+			Reporter.log("Add ClaimType Mapping");
+			
+			clickAddClaimTypeMapping();
+			fillClaimtypeMapping(testData);
+			formAction(testData);
+		}
+		
+		private void clickAddClaimTypeMapping() {
+			lavanteUtils.fluentwait(AddClaimTypeMapping);
+			lavanteUtils.click(AddClaimTypeMapping());
+		}
+		
+		public void fillClaimtypeMapping(LinkedHashMap<String, String> testData) {
+			String[] data = new String[6];
+			lavanteUtils.waitForTime(4000);
+			lavanteUtils.switchtoFrame(IframeAddClaimTypeMapping);
+			lavanteUtils.fluentwait(DivisionSearchBox);
+			
+			if (testData.containsKey("Division")) {
+				String org = testData.get("Division");
+				lavanteUtils.click(DivisionSearchBox);
+				data[1]=lavanteUtils.selectContainFrmDpdn(org);
+				testData.put("Division", org);
+				lavanteUtils.switchtoFrame(IframeAddClaimTypeMapping);
+				}
+			
+			if (testData.containsKey("ClaimType")) {
+				String claimtype = testData.get("ClaimType");
+				lavanteUtils.fluentwait(ClaimTypeSearchbox);
+				lavanteUtils.click(ClaimTypeSearchbox());
+				data[1]=lavanteUtils.selectContainFrmDpdn(claimtype);
+				testData.put("ClaimType", data[1]);
+				lavanteUtils.switchtoFrame(IframeAddClaimTypeMapping);
+				}
+		
+		}
+		
+		public void formAction(LinkedHashMap<String, String> testData) {
+			lavanteUtils.switchtoFrame(IframeAddClaimTypeMapping);
+			lavanteUtils.fluentwait(AddClaimtypeMappingSaveBtn);
+			if (testData.containsKey("Save")) {
+				lavanteUtils.click(AddClaimtypeMappingSaveBtn);
+				lavanteUtils.switchtoFrame(null);
+				lavanteUtils.waitForTime(5000);
+			}
+			
+			if(testData.containsKey("Cancel")) {
+				lavanteUtils.click(CancelBtn);
+				lavanteUtils.switchtoFrame(null);
+			}
+				
+		}
+		
+		public void searchClaimtypeMapping(LinkedHashMap<String, String> testData) throws IOException {
+			String searchText="";
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.fluentwait(searchTxtBox);
+			if(testData.containsKey("SearchText")){
+				searchText=testData.get("SearchText");
+				searchTxtBox.clear();
+				lavanteUtils.typeString(searchText, searchTxtBox);
+				lavanteUtils.click(searchBtn);
+				lavanteUtils.waitForTime(3000);
+			}	
+		}
+			
+		
+		
+		
+		//Sanity
+		public boolean verifyClaimTypeMappingSectionDisplayed() {
+			boolean flag=false;
+			lavanteUtils.switchtoFrame(null);
+			boolean flag1=lavanteUtils.verifyElementDisplayed("AddClaimTypeMappingButton", AddClaimTypeMapping);
+			boolean flag2=lavanteUtils.verifyElementDisplayed("searchTxtBox", searchTxtBox);
+			boolean flag3=lavanteUtils.verifyElementDisplayed("searchBtn", searchBtn);
+			
+			if(flag1 && flag2 && flag3 ){
+				flag=true;
+			}
+			return flag;
+		}
+		
+
+	}
+	
+

@@ -1,0 +1,547 @@
+package com.lavante.sim.supplier.TestScripts;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 10-09-18 Completed on 10-09-18
+ * LATM-558 - SIM-18981  
+ * SIM-20832  for Action on View Page Started on 11-10 and completed on 11-10
+ * 
+ * @author Piramanayagam.S
+ */
+public class SupplierItemMaster extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String itemCode="";
+	String uname="";
+	
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		// Login
+		List<?> listofdatafrm = lavanteUtils.login("SupplierKroger", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		uname=LdataMap.get("username");
+
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+	}
+	
+	@BeforeMethod
+	public void Before() {
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("maintab", "ITEMS");
+		enobjhomePage.selectTab(dataMap);
+		
+		dataMap.put("Clear","");
+		objItemSearch.formBasicSearchDetails(dataMap);
+	}
+
+	/**
+	 * Add Edit item
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@Test
+	public void AddEditItem(){
+		Reporter.log("Test Started for AddEditItem: " + currenttime(),true);
+		
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag=false;
+		
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		
+		dataMap.put("ManualItem", "");
+		objItemSearch.AddItem(dataMap);
+		
+		itemCode="Au"+randomnum();
+		dataMap.put("ItemCode", itemCode);
+		dataMap.put("GTINType", "EAN-8");
+		dataMap.put("ItemDesc", "233Auto");
+		dataMap.put("CaseGTIN", "Au"+randomnum());
+		dataMap.put("Save", "");
+		objItemPage.CreateItem(dataMap);
+		
+		dataMap.put("Search","");
+		objItemSearch.basicSearch(dataMap);
+		
+		int size = objItemSearch.iterateSearchHeaderFindColList("Item Code").size() ;
+		if (size> 0) {
+				String x=itemCode;
+				outr:for (int i = 0; i < size; i++) {
+					String appitemCode = objItemSearch.iterateSearchHeaderFindColList("Item Code").get(i).getText();
+					if (appitemCode.equalsIgnoreCase(x)) {
+						Reporter.log("Item code ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Case GTIN").get(i).getText();
+						String expected=dataMap.get("CaseGTIN");
+						softAssert.assertEquals(appitemCode, expected,"Case GTIN not matched ");
+						Reporter.log("GTIN ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Item Description").get(i).getText();
+						expected=dataMap.get("ItemDesc");
+						softAssert.assertEquals(appitemCode, expected,"ItemDesc not matched ");
+						Reporter.log("ItemDesc ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						break outr;
+					}
+				}
+			}else{
+				Assert.assertTrue(false,"Add Search Failed ");
+			}
+
+		
+		dataMap.put("Action","Edit Item");
+		objItemSearch.ItemSelectionAction(dataMap);
+		
+		dataMap.clear();
+		dataMap.put("CaseGTIN", "Au"+randomnum());
+		dataMap.put("Save", "");
+		objItemPage.fillItem(dataMap);
+		objItemPage.formAction(dataMap);
+		
+		dataMap.put("Clear","");
+		objItemSearch.formBasicSearchDetails(dataMap);
+		
+		dataMap.remove("clear");
+		dataMap.put("Search","");
+		objItemSearch.basicSearch(dataMap);
+		
+		size = objItemSearch.iterateSearchHeaderFindColList("Item Code").size() ;
+		if (size> 0) {
+				String x=itemCode;
+				outr:for (int i = 0; i <= size; i++) {
+					String appitemCode = objItemSearch.iterateSearchHeaderFindColList("Item Code").get(i).getText();
+					if (appitemCode.equalsIgnoreCase(x)) {
+						Reporter.log("Item code ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Case GTIN").get(i).getText();
+						String expected=dataMap.get("CaseGTIN");
+						softAssert.assertEquals(appitemCode, expected,"Case GTIN not matched ");
+						Reporter.log("GTIN ,Expected:"+expected+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Item Description").get(i).getText();
+						expected=dataMap.get("ItemDesc");
+						softAssert.assertEquals(appitemCode, expected,"ItemDesc not matched ");
+						Reporter.log("ItemDesc ,Expected:"+x+",Actuals:"+appitemCode,true);
+						flag=true;
+						break outr;
+					}
+				}
+			}else{
+				Assert.assertTrue(false,"Edit Search Failed ");
+			}
+		
+		softAssert.assertTrue(flag,"Please Retest");
+		softAssert.assertAll();
+		
+		Reporter.log("Test Ended for Add at:" + currenttime(),true);
+	}
+
+	/**
+	 * Add Delete item
+	 * @author Piramanayagam.S
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	@Test
+	public void AddDeleteItem() throws FileNotFoundException, IOException, SQLException{
+		Reporter.log("Test Started for AddDeleteItem: " + currenttime(),true);
+		
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag=false;
+		
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		
+		dataMap.put("ManualItem", "");
+		objItemSearch.AddItem(dataMap);
+		
+		itemCode="Au"+randomnum();
+		dataMap.put("ItemCode", itemCode);
+		dataMap.put("GTINType", "EAN-8");
+		dataMap.put("ItemDesc", "233Auto");
+		dataMap.put("CaseGTIN", "Au"+randomnum());
+		dataMap.put("Save", "");
+		objItemPage.CreateItem(dataMap);
+		
+		dataMap.put("Search","");
+		objItemSearch.basicSearch(dataMap);
+		
+		int size = objItemSearch.iterateSearchHeaderFindColList("Item Code").size() ;
+		if (size> 0) {
+				String x=itemCode;
+				outr:for (int i = 0; i <size; i++) {
+					String appitemCode = objItemSearch.iterateSearchHeaderFindColList("Item Code").get(i).getText();
+					if (appitemCode.equalsIgnoreCase(x)) {
+						Reporter.log("Item code ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Case GTIN").get(i).getText();
+						String expected=dataMap.get("CaseGTIN");
+						softAssert.assertEquals(appitemCode, expected,"Case GTIN not matched ");
+						Reporter.log("GTIN ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Item Description").get(i).getText();
+						expected=dataMap.get("ItemDesc");
+						softAssert.assertEquals(appitemCode, expected,"ItemDesc not matched ");
+						Reporter.log("ItemDesc ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						break outr;
+					}
+				}
+			}else{
+				Assert.assertTrue(false,"Add Search Failed ");
+			}
+
+		
+		dataMap.put("Action","Delete");
+		objItemSearch.ItemSelectionAction(dataMap);
+		
+		dataMap.put("Search","");
+		objItemSearch.basicSearch(dataMap);
+		
+		size = objItemSearch.iterateSearchHeaderFindColList("Item Code").size() ;
+		if (size> 0) {
+				flag=false;
+			}else{
+				String x="select ItemCode  from RelationshipItemMaster where ItemCode='"+itemCode+"'";
+				x=lavanteUtils.fetchDBdata(x);
+				System.out.println(x);
+				if(x==null || !(x.length()>0)){
+					itemCode="";
+					flag=true;
+				}
+				
+			}
+		
+		softAssert.assertTrue(flag,"Please Retest");
+		softAssert.assertAll();
+		
+		Reporter.log("Test Ended for Delete Item at:" + currenttime(),true);
+	}
+
+	/**
+	 * Add item Deactivate And then Activate
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@Test
+	public void ActivateDeactivateItem(){
+		Reporter.log("Test Started for ActivateDeactivateItem: " + currenttime(),true);
+		
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag=false;
+		
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		
+		dataMap.put("ManualItem", "");
+		objItemSearch.AddItem(dataMap);
+		
+		itemCode="Au"+randomnum();
+		dataMap.put("ItemCode", itemCode);
+		dataMap.put("GTINType", "EAN-8");
+		dataMap.put("ItemDesc", "233Auto");
+		dataMap.put("CaseGTIN", "Au"+randomnum());
+		dataMap.put("Save", "");
+		objItemPage.CreateItem(dataMap);
+		
+		dataMap.put("Search","");
+		objItemSearch.basicSearch(dataMap);
+		
+		int size = objItemSearch.iterateSearchHeaderFindColList("Item Code").size() ;
+		if (size> 0) {
+				String x=itemCode;
+				outr:for (int i = 0; i < size; i++) {
+					String appitemCode = objItemSearch.iterateSearchHeaderFindColList("Item Code").get(i).getText();
+					if (appitemCode.equalsIgnoreCase(x)) {
+						Reporter.log("Item code ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Case GTIN").get(i).getText();
+						String expected=dataMap.get("CaseGTIN");
+						softAssert.assertEquals(appitemCode, expected,"Case GTIN not matched ");
+						Reporter.log("GTIN ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Item Description").get(i).getText();
+						expected=dataMap.get("ItemDesc");
+						softAssert.assertEquals(appitemCode, expected,"ItemDesc not matched ");
+						Reporter.log("ItemDesc ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						break outr;
+					}
+				}
+			}else{
+				Assert.assertTrue(false,"Add Search Failed ");
+			}
+
+		
+		dataMap.put("Action","Deactivate");
+		objItemSearch.ItemSelectionAction(dataMap);
+		
+		dataMap.put("Search","");
+		objItemSearch.basicSearch(dataMap);
+		
+		size = objItemSearch.iterateSearchHeaderFindColList("Item Code").size() ;
+		if (size> 0) {
+				String x=itemCode;
+				outr:for (int i = 0; i <= size; i++) {
+					String appitemCode = objItemSearch.iterateSearchHeaderFindColList("Item Code").get(i).getText();
+					if (appitemCode.equalsIgnoreCase(x)) {
+						Reporter.log("Item code ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Case GTIN").get(i).getText();
+						String expected=dataMap.get("CaseGTIN");
+						softAssert.assertEquals(appitemCode, expected,"Case GTIN not matched ");
+						Reporter.log("GTIN ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Status").get(i).getText();
+						expected="Inactive";
+						softAssert.assertEquals(appitemCode, expected,"Deactivated not matched ");
+						Reporter.log("Deactivated ,Expected:"+x+",Actuals:"+appitemCode,true);
+						flag=true;
+						break outr;
+					}
+				}
+			}
+		
+		
+		dataMap.put("Action","Activate");
+		objItemSearch.ItemSelectionAction(dataMap);
+		
+		dataMap.put("Search","");
+		objItemSearch.basicSearch(dataMap);
+		
+		size = objItemSearch.iterateSearchHeaderFindColList("Item Code").size() ;
+		if (size> 0) {
+				String x=itemCode;
+				outr:for (int i = 0; i <= size; i++) {
+					String appitemCode = objItemSearch.iterateSearchHeaderFindColList("Item Code").get(i).getText();
+					if (appitemCode.equalsIgnoreCase(x)) {
+						Reporter.log("Item code ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Case GTIN").get(i).getText();
+						String expected=dataMap.get("CaseGTIN");
+						softAssert.assertEquals(appitemCode, expected,"Case GTIN not matched ");
+						Reporter.log("GTIN ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Status").get(i).getText();
+						expected="Active";
+						softAssert.assertEquals(appitemCode, expected,"After Active not matched ");
+						Reporter.log("After Active ,Expected:"+x+",Actuals:"+appitemCode,true);
+						flag=true;
+						break outr;
+					}
+				}
+			}
+		
+		
+		
+		softAssert.assertTrue(flag,"Please Retest");
+		softAssert.assertAll();
+		
+		Reporter.log("Test Ended for ActivateDeactivateItem at:" + currenttime(),true);
+	}
+
+	/**SIM-20832 Action in Item Details page
+	 * View and Edit the item
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@Test
+	public void ViewEditItem(){
+		Reporter.log("Test Started for AddEditItem: " + currenttime(),true);
+		
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag=false;
+		
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		
+		dataMap.put("ManualItem", "");
+		objItemSearch.AddItem(dataMap);
+		
+		itemCode="Au"+randomnum();
+		dataMap.put("ItemCode", itemCode);
+		dataMap.put("GTINType", "EAN-8");
+		dataMap.put("ItemDesc", "233Auto");
+		dataMap.put("CaseGTIN", "Au"+randomnum());
+		dataMap.put("Save", "");
+		objItemPage.CreateItem(dataMap);
+		
+		dataMap.put("Search","");
+		objItemSearch.basicSearch(dataMap);
+		
+		int size = objItemSearch.iterateSearchHeaderFindColList("Item Code").size() ;
+		if (size> 0) {
+				String x=itemCode;
+				outr:for (int i = 0; i <size; i++) {
+					String appitemCode = objItemSearch.iterateSearchHeaderFindColList("Item Code").get(i).getText();
+					if (appitemCode.equalsIgnoreCase(x)) {
+						Reporter.log("Item code ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Case GTIN").get(i).getText();
+						String expected=dataMap.get("CaseGTIN");
+						softAssert.assertEquals(appitemCode, expected,"Case GTIN not matched ");
+						Reporter.log("GTIN ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						appitemCode = objItemSearch.iterateSearchHeaderFindColList("Item Description").get(i).getText();
+						expected=dataMap.get("ItemDesc");
+						softAssert.assertEquals(appitemCode, expected,"ItemDesc not matched ");
+						Reporter.log("ItemDesc ,Expected:"+x+",Actuals:"+appitemCode,true);
+						
+						lavanteUtils.click(objItemSearch.iterateSearchHeaderFindColList("Item Code").get(i));
+						break outr;
+					}
+				}
+			}else{
+				Assert.assertTrue(false,"Add Search Failed ");
+			}
+		
+		lavanteUtils.switchtoFrame(null);
+		String actItemCode=objItemSearch.iterateViewItem("Item Code");
+		Reporter.log("itemCode Created: " + itemCode + ",and actual Code from View:"+ actItemCode,true);
+		softAssert.assertEquals(actItemCode, itemCode,	"Item Code is not displayed on View");
+		
+		softAssert.assertTrue(lavanteUtils.isElementDisplayed(objItemSearch.ViewEdit),	"Edit option is not displayed");
+		
+		lavanteUtils.click(objItemSearch.ViewEdit);
+		
+		dataMap.clear();
+		String CaseGTIN="Au"+randomnum();
+		dataMap.put("CaseGTIN",CaseGTIN);
+		dataMap.put("Save", "");
+		objItemPage.fillItem(dataMap);
+		objItemPage.formAction(dataMap);
+		
+		lavanteUtils.switchtoFrame(null);
+		softAssert.assertTrue(lavanteUtils.isElementDisplayed(objItemSearch.ViewEdit),	"Edit option is not displayed");
+		
+		actItemCode=objItemSearch.iterateViewItem("Item Code");
+		Reporter.log("itemCode Created: " + itemCode + ",and actual Code from View:"+ actItemCode,true);
+		softAssert.assertEquals(actItemCode, itemCode,	"Item Code Not Matched");
+		softAssert.assertTrue(lavanteUtils.isElementDisplayed(objItemSearch.ViewEdit),	"Edit option is not displayed");
+		
+		actItemCode=objItemSearch.iterateViewItem("Case GTIN");
+		Reporter.log("CASE GTIN Created: " + CaseGTIN + ",and actual Code from View:"+ actItemCode,true);
+		softAssert.assertEquals(actItemCode, CaseGTIN,	"CASE GTIN Not Matched");
+		
+		actItemCode=objItemSearch.iterateViewItem("Created by");
+		Reporter.log("Created by Exp: " + uname + ",and actual Created by from View:"+ actItemCode,true);
+		softAssert.assertTrue(actItemCode.contains(uname),	"Created by Not Matched");
+		
+		softAssert.assertAll();
+		
+		Reporter.log("Test Ended for View User at:" + currenttime(),true);
+	}
+
+	/**SIM-20832 Action in Item Details page
+	 * View and Edit the item
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@Test
+	public void ViewMultipleItem(){
+		Reporter.log("Test Started for AddEditItem: " + currenttime(),true);
+		
+		SoftAssert softAssert = new SoftAssert();
+		
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		
+		int size = objItemSearch.iterateSearchHeaderFindColList("Item Code").size() ;
+		if (size> 0) {
+				for (int i = 0; i <size; i++) {
+						String appitemCode = objItemSearch.iterateSearchHeaderFindColList("Item Code").get(i).getText();
+						dataMap.put(appitemCode+"#Item Code",appitemCode);
+						String gte = objItemSearch.iterateSearchHeaderFindColList("Case GTIN").get(i).getText();
+						dataMap.put(appitemCode+"#Case GTIN",gte);
+						
+						gte = objItemSearch.iterateSearchHeaderFindColList("Item Description").get(i).getText();
+						dataMap.put(appitemCode+"#Item Description",gte);
+					}
+			}else{
+				Assert.assertTrue(false,"No enough data to do the test ");
+			}
+		boolean flag=false;
+		
+		if (size> 0) {
+			lavanteUtils.click(objItemSearch.iterateSearchHeaderFindColList("Item Code").get(0));
+			lavanteUtils.switchtoFrame(null);
+			
+			String actItemCode="";
+			
+			for (String key : dataMap.keySet()) {
+				actItemCode=objItemSearch.iterateViewItem("Item Code");
+				if(!key.contains(actItemCode)){
+					if(objItemSearch.nextRecord.size()>0){
+						lavanteUtils.click(objItemSearch.nextRecord.get(0));
+						lavanteUtils.waitForTime(4000);
+						actItemCode=objItemSearch.iterateViewItem("Item Code");
+						flag=true;
+					}else{
+						break;
+					}
+				}
+				if(key.contains(actItemCode)&&(key.contains("#"))){
+					if(dataMap.containsKey(key)){
+						String expValue=dataMap.get(key);
+						String[] ads=key.split("#");
+						String actValue=objItemSearch.iterateViewItem(ads[1]);
+					
+						Reporter.log("Actual Value"+actValue+",Exp:"+expValue,true);
+						softAssert.assertEquals(actValue, expValue,ads[1]+"Not matched:"+actValue+",Exp:"+expValue);
+					
+					}
+				}
+			}
+		}
+		softAssert.assertTrue(flag,"No Next Record");
+		
+		softAssert.assertAll();
+		
+		Reporter.log("Test Ended for View User at:" + currenttime(),true);
+	}
+
+	
+	
+	@AfterMethod
+	public void afterMethod() throws FileNotFoundException, IOException, SQLException{
+		if(itemCode.length()>0){
+			String x="delete from RelationshipItemMaster where ItemCode='"+itemCode+"'";
+			lavanteUtils.UpdateDB(x);
+		}
+		
+	}
+	
+	@AfterClass
+	public void SetupafterClassmethod() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+}

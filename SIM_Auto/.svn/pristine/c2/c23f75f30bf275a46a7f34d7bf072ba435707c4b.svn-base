@@ -1,0 +1,122 @@
+package com.lavante.sim.customer.TestScripts.UserRoles;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class CustomerPropertySupplierLogin extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String customerID = null;
+	LinkedHashMap<String, String> LdataMap = null;
+
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * 
+	 * @author Subhash.BV
+	 * 
+	 */
+
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		// Login
+		List listofdatafrm = lavanteUtils.login("Supplier", browser);
+		LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		customerID = (String) listofdatafrm.get(1);
+
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+	}
+
+	/**
+	 * @author subhas.bv
+	 * 
+	 *         IS_TAULIA_INVOICE
+	 * 
+	 * @throws SQLException
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 * 
+	 */
+	@Test
+	public void IS_TAULIA_INVOICETest() throws FileNotFoundException, IOException, SQLException {
+		Reporter.log("Test Started for IS_TAULIA_INVOICE Test:" + currenttime());
+		SoftAssert softAssert = new SoftAssert();
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+
+		String delete = "Delete from CustomerPropertyValue where CustomerID=50 and CustomerPropertyID in (select CustomerPropertyID from CustomerProperty where PropertyName='IS_TAULIA_INVOICE' ) ";
+		lavanteUtils.UpdateDB(delete);
+		lavanteUtils.refreshPage();
+		boolean flag = false;
+		if (!lavanteUtils.isElementDisplayed("//a[@href='https://qa7-portal.taulia.com/supplier/invoice/search']")) {
+			flag = true;
+		}
+
+		Reporter.log("Taulia Invoice tab dispalyed , Expected : true , Actual :" + flag);
+		softAssert.assertTrue(flag, "Taulia Invoice tab dispalyed , Expected : true , Actual :" + flag);
+
+		String insert = "Insert into CustomerPropertyValue ( CustomerPropertyID, CustomerID, PropertyValue, IsActive,CreatedBy, CreatedOn ) VALUES (95, 50, 'true', 1, 'Admin', getdate())";
+		lavanteUtils.UpdateDB(insert);
+		lavanteUtils.refreshPage();
+
+		flag = false;
+		WebElement ele = driver.findElement(By.cssSelector("a[href*='portal.taulia.com/supplier/invoice']"));
+		if (lavanteUtils.isElementDisplayed(ele)) {
+			flag = true;
+		}
+
+		Reporter.log("Taulia Invoice tab not dispalyed, Expected : true , Actual :" + flag);
+		softAssert.assertTrue(flag, "Taulia Invoice tab not dispalyed, Expected : true , Actual :" + flag);
+		softAssert.assertAll();
+		Reporter.log("Test Ended for IS_TAULIA_INVOICE Test:" + currenttime());
+	}
+
+	/**
+	 * SetupAfter method closes any popup
+	 * 
+	 * @author subhas.bv
+	 */
+	@AfterMethod
+	public void SetupAfterMethod() {
+		lavanteUtils.refreshPage();
+	}
+
+	/**
+	 * SetupAfter Class closes any popup and Closes the Browser and Driver
+	 * 
+	 * @author subhas.bv
+	 */
+	@AfterClass
+	public void SetupafterClassMethod() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+}

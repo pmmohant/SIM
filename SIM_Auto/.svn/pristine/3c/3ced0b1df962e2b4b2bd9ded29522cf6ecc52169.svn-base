@@ -1,0 +1,58 @@
+#PageTitle
+expHomePageTitle=Lavante SIM - On-boarding
+expManageFilesPageTitle=Lavante SIM - Upload Files
+
+#ID
+searchSupplier=searchSupplier
+
+#XPATH
+manageFiles=//a[contains(@title,'Manage Files')]
+uploadFiles=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Upload Files')]
+downloadFiles=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Download Files')]
+templatesTable=//div[contains(@class,'content ')]/div[1]/table/tbody/tr[1]/td[3]/div/table/tbody/tr/th/table/tbody/tr[1]/td[1]
+#upload Files
+uploadFileTypeTable=//table[contains(@class,'data_table')]/tbody/tr[1]/td/ol/li
+#Download Files
+downloadFileTypeTable=//table[contains(@class,'data_table')]/tbody/tr/td/ul/li
+#common
+closeOption=]/a
+popupTitlebar=//div[contains(@class,'ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix')]/span
+refreshBtn=//*[@id='content']//button[contains(@class,'refresh')]
+#//button[contains(@class,'button button_blue refresh_iframe')]
+
+#Upload Type
+fileType_chosen=//form[contains(@id,'file_upload_form')]/div/table/tbody/tr[1]/td[1]/div[2]
+fileTypeDropDownFiled=//div[contains(@id,'fileType_chosen')]/div/ul/li
+upload_button=//form[contains(@id,'file_upload_form')]/div[2]/input[contains(@id,'upload_button')]
+#Upload File
+multipartFile=//input[contains(@id,'multipartFile')]
+
+fileHistoryTbl=//div[contains(@id,'uploadedFileDetailsDiv')]/table
+
+uploadDialogPopup=//div[contains(@class,'dialog undefined ui-dialog-content ui-widget-content')]
+uploadOKButton=//div[contains(@class,'ui-dialog-buttonset')]/button[contains(@type,'button')]
+
+#Download Type
+specify_data_chosen=//form[contains(@id,'file_download_form')]/div[1]/table/tbody/tr[1]/td[2]/div[2]
+download_Data_Chosen_DrpDwn=//form[contains(@id,'file_download_form')]/div[1]/table/tbody/tr[1]/td[2]/div[2]/div[1]/ul/li
+specific_data_change_chosen=//form[contains(@id,'file_download_form')]/div[1]/table/tbody/tr[2]/td[2]/div[2]
+data_Change_Chosen_DrpDwn=//form[contains(@id,'file_download_form')]/div[1]/table/tbody/tr[2]/td[2]/div[2]/div[1]/ul/li
+requestBtn=//form[contains(@id,'file_download_form')]/div[2]/input[contains(@title,'Request the selected file')]
+
+downloadFileHistoryTbl=//div[contains(@id,'downloadFileDetailsDiv')]/table
+
+#Quick Search
+drpdownSelection=//form[contains(@id,'search_form')]/div[2]/a/span
+supplierDrpDwnType=//div[contains(@class,'chosen-drop')]/ul/li
+
+searchTexts=//input[contains(@id,'searchText')]
+
+#CSS
+popupCloseBtn=button[title='close'][type='button']
+
+#IFrames
+fileHistoryTableFrame=.//iframe[@class='iframe_page']
+
+#expected Message
+fileUploadSuccessMsg=File uploaded successfully
+

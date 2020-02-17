@@ -1,0 +1,249 @@
+/**
+ * 
+ */
+package com.lavante.sim.customer.pageobjects.Dashboard;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+/**
+ * @author Piramanayagam.S
+ *
+ */
+public class Dashboard {
+	
+	public WebDriver driver;
+	public LavanteUtils lavanteUtils=new LavanteUtils();
+	
+	public Dashboard(WebDriver driver){
+		lavanteUtils.driver=driver;
+		this.driver=driver;
+	}
+	
+	
+	@FindBy(css="[class*='table_ab_b'] span[title]")
+	private List<WebElement> claimchats;
+	
+	@FindBy(css="a[href='customerDashboard.lvp']")
+	private WebElement OnBoarding;
+	
+	@FindBy(css="a[href*='customerValidation']")
+	private WebElement RegulatoryCompliance;
+	
+	@FindBy(css="a[href*='Diversity']")
+	private WebElement expiringCertification;
+	
+	@FindBy(css="a[href*='USPSValidation']")
+	private WebElement Validations;
+	
+	@FindBy(css="a[href*='customerDashboard']")
+	private WebElement customerDashboardlnk;
+	public WebElement customerDashboardlnk(){
+		return customerDashboardlnk;
+	}
+	
+	@FindBy(css="#content dd a")
+	private WebElement FrequentlyAskedQuestionsSection;
+	
+	//Headlines
+	@FindBy(xpath="//div[@class='panel-body']//tr/td/div[@class='count']")
+	private List<WebElement> headLinesCountList;
+	
+	public List<WebElement> headLinesCountList() {
+		return headLinesCountList;
+	}
+	
+	@FindBy(xpath="//div[contains(text(),'Suppliers loaded')]/../div[@class='count']")
+	private WebElement supplierLoaded;
+	public WebElement supplierLoaded() {
+		return supplierLoaded;
+	}
+	
+	@FindBy(xpath="//div[contains(text(),'Suppliers invited')]/../div[@class='count']")
+	private WebElement supplierInvited;
+	public WebElement supplierInvited() {
+		return supplierInvited;
+	}
+	
+	@FindBy(xpath="//div[contains(text(),'complete invitations')]/../div[@class='count']")
+	private WebElement supplierCompleteInv;
+	public WebElement supplierCompleteInv() {
+		return supplierCompleteInv;
+	}
+	
+	@FindBy(xpath="//div[contains(text(),'completed all invitations')]/../div[@class='count']")
+	private WebElement supplierCompleteAllInv;
+	public WebElement supplierCompleteAllInv() {
+		return supplierCompleteAllInv;
+	}
+	
+	@FindBy(xpath="//div[contains(text(),'Suppliers approved')]/../div[@class='count']")
+	private WebElement supplierApprovedByAll;
+	public WebElement supplierApprovedByAll() {
+		return supplierApprovedByAll;
+	}
+	
+	@FindBy(css="[class*='quick_links']")
+	private WebElement QuickLinksSection;
+	
+	@FindBy(xpath="//div[@id='content']//td[contains(text(),'To Do List')]")
+	private WebElement ToDoListSection;
+	
+	@FindBy(xpath="//div[@id='content']//td[contains(text(),'Alerts')]")
+	private WebElement AlertsSection;
+	
+	@FindBy(xpath="//span[contains(text(),'Supplier invitations vs. registration')]")
+	private WebElement SupplierInvitationsvsRegistration;
+	
+	@FindBy(xpath="//span[contains(text(),'Supplier invitation status')]")
+	private WebElement SupplierInvitationStatus;
+	
+	@FindBy(xpath="//span[contains(text(),'New supplier on-boarding')]")
+	private WebElement NewSupplierOnboarding;
+	
+
+	
+	@FindBy(xpath="//span[contains(text(),'OFAC SDN screening')]")
+	private WebElement OFACSDNScreening;
+	
+	@FindBy(xpath="//span[contains(text(),'FATCA compliance')]")
+	private WebElement FATCACompliance;
+	
+	@FindBy(xpath="//span[contains(text(),'Compliance by foreign country')]")
+	private WebElement CompliancebyForeignCountry;	
+	
+	@FindBy(xpath="//span[contains(text(),'Spend by diversity')]")
+	private WebElement SpendbyDiversity;
+	
+	@FindBy(xpath="//span[contains(text(),'Small business expiry')]")
+	private WebElement SmallBusinessExpiry;
+	
+	@FindBy(xpath="//span[contains(text(),'Insurance certificate expiry')]")
+	private WebElement InsuranceCertificateExpiry;
+	
+	//MinorityExpiry renamed to Diverse & Disadvantaged Certificate Expiry
+	@FindBy(xpath="//span[contains(text(),'Diverse & disadvantaged certificate expiry')]")
+	private WebElement MinorityBusinessExpiry;
+	
+	@FindBy(xpath="//span[contains(text(),'Legal ID authentication')]")
+	private WebElement LegalIDAuthentication;
+	
+	@FindBy(xpath="//span[contains(text(),'USPS address validation')]")
+	private WebElement USPSAddressValidation;
+	
+	@FindBy(xpath="//span[contains(text(),'Swift code validation')]")
+	private WebElement SwiftCodeValidation;
+	
+	@FindBy(xpath="//span[contains(text(),'Account number validation')]")
+	private WebElement AccountNumberValidation;
+	
+	@FindBy(css="button[class*='dashboard']")
+	private WebElement btnDashboard;
+	public WebElement btnDashboard(){
+		return btnDashboard;
+	}
+	
+	@FindBy(linkText="Invite New Supplier")
+	private WebElement InviteNewSupplier;
+	
+	@FindBy(id="supplierInviteJustification")
+	private WebElement ReasonNewSuppmandatoryField;
+		
+	public List<WebElement> claimchats(){
+		return claimchats;
+	}
+	
+	
+	
+	public void selectTab(LinkedHashMap<String, String> dataMap) {
+		
+		if(dataMap.containsKey("maintab")){
+			System.out.println(dataMap.get("maintab"));
+			String main="//*[contains(@id,'main')]//*[contains(@href,'"+dataMap.get("maintab").toString()+"')]";
+			lavanteUtils.fluentwait(driver.findElement(By.xpath(main)));
+			driver.findElement(By.xpath(main)).click();
+			System.out.println(main+driver);
+		}
+	
+	}
+	
+	
+	public void verifyOnBoardingDashboardItemsDisplayed() throws InterruptedException {
+		
+		lavanteUtils.fluentwait(QuickLinksSection);
+		lavanteUtils.verifyElementDisplayed("FrequentlyAskedQuestionsSection", FrequentlyAskedQuestionsSection);
+		lavanteUtils.verifyElementDisplayed("QuickLinksSection", QuickLinksSection);
+		
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<>();
+		 // Navigating sub menu items under Dashboard menu
+		dataMap.put("Dashboard", "Onboarding");
+		switchDashboard(dataMap);
+		
+		lavanteUtils.fluentwait(SupplierInvitationsvsRegistration);
+		//lavanteUtils.verifyElementDisplayed("ToDoListSection", ToDoListSection);
+		//lavanteUtils.verifyElementDisplayed("AlertsSection", AlertsSection);
+		lavanteUtils.verifyElementDisplayed("SupplierInvitationsvsRegistration", SupplierInvitationsvsRegistration);
+		lavanteUtils.verifyElementDisplayed("NewSupplierOnboarding", NewSupplierOnboarding);		
+		lavanteUtils.verifyElementDisplayed("SupplierOutreachStatuses", SupplierInvitationStatus);
+
+	}
+	
+	public void verifyRegulatoryComplianceItemsDisplayed()	{
+		
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(OFACSDNScreening);
+		lavanteUtils.verifyElementDisplayed("OFACSDNScreening",OFACSDNScreening);
+		lavanteUtils.verifyElementDisplayed("FATCACompliance",FATCACompliance);
+		lavanteUtils.verifyElementDisplayed("CompliancebyForeignCountry", CompliancebyForeignCountry);
+	}
+	
+	public void verifyExpiringCeritifcationDisplayed() {
+		
+		lavanteUtils.fluentwait(SpendbyDiversity);
+		lavanteUtils.verifyElementDisplayed("InsuranceCertificateExpiry",InsuranceCertificateExpiry);
+		lavanteUtils.verifyElementDisplayed("SpendbyDiversity",SpendbyDiversity);
+		lavanteUtils.verifyElementDisplayed("SmallBusinessExpiry",SmallBusinessExpiry);
+		lavanteUtils.verifyElementDisplayed("MinorityBusinessExpiry",MinorityBusinessExpiry);
+		
+		
+	}
+	
+	public void verifyValidationsItemsDisplayed()
+	{
+		lavanteUtils.fluentwait(LegalIDAuthentication);
+		lavanteUtils.verifyElementDisplayed("LegalIDAuthentication",LegalIDAuthentication);
+		lavanteUtils.verifyElementDisplayed("USPSAddressValidation",USPSAddressValidation);
+		lavanteUtils.verifyElementDisplayed("SwiftCodeValidation",SwiftCodeValidation);
+		lavanteUtils.verifyElementDisplayed("AccountNumberValidation",AccountNumberValidation);
+		
+	}
+	
+	
+	public void navigateToInviteSupplier()
+	{
+		lavanteUtils.click(InviteNewSupplier);
+	}
+
+
+
+	public void switchDashboard(LinkedHashMap<String, String> dataMap) {
+		if(dataMap.containsKey("Dashboard")){
+			String x=dataMap.get("Dashboard");
+			lavanteUtils.click(btnDashboard);
+			lavanteUtils.selectvalueFrmDpdn(x,"div[class*='open'] ul li a");
+			
+			lavanteUtils.waitForTime(4000);
+		}
+		
+	}
+	
+
+
+}

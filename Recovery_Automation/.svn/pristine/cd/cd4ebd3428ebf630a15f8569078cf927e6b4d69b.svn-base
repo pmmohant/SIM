@@ -1,0 +1,902 @@
+<html>
+<head>
+<title>TestNG:  Default test</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Default test</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>43/1/0</td>
+</tr><tr>
+<td>Started on:</td><td>Mon Jul 25 11:12:31 IST 2016</td>
+</tr>
+<tr><td>Total time:</td><td>588 seconds (588293 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardClaims()'><b>verifyDashBoardClaims</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-392918519" onClick='toggleBox("Output-392918519", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-392918519" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-392918519">
+Pass: 'openClaims' is displayed<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/claimDashboard.lvp#claims Page is working fine<br/>
+Fail: 'batchedClaimslink' is not displayed<br/>
+To View Screenshot <a href="file:///null/2016_25_Jul_11_13_07.png">Click Here</a><br/>
+</div>
+</td>
+<td><div><pre>java.lang.AssertionError: Fail: &apos;batchedClaimslink&apos; is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:236)
+	at lavante.recovery.pageobjects.DashBoard.ClaimsPage.verifyBatchedClaimsLink(ClaimsPage.java:46)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardClaims(SanityTestSuite.java:74)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:823)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:778)
+	at org.testng.TestRunner.run(TestRunner.java:632)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1225)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1150)
+	at org.testng.TestNG.runSuites(TestNG.java:1075)
+	at org.testng.TestNG.run(TestNG.java:1047)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:75)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:46)
+</pre></div><a href='#' onClick='toggleBox("stack-trace392918519", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace392918519'><pre>java.lang.AssertionError: Fail: &apos;batchedClaimslink&apos; is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:236)
+	at lavante.recovery.pageobjects.DashBoard.ClaimsPage.verifyBatchedClaimsLink(ClaimsPage.java:46)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardClaims(SanityTestSuite.java:74)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:823)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:778)
+	at org.testng.TestRunner.run(TestRunner.java:632)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1225)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1150)
+	at org.testng.TestNG.runSuites(TestNG.java:1075)
+	at org.testng.TestNG.run(TestNG.java:1047)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:75)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:46)
+</pre></div></td>
+<td>2</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyAccountAuditGroupsPage()'><b>verifyAccountAuditGroupsPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-259630944" onClick='toggleBox("Output-259630944", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-259630944" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-259630944">
+Pass: 'auditGroupsLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/auditGroupSetUp.lvp Page is working fine<br/>
+Pass: 'auditGroupsTable' is displayed<br/>
+Pass: 'addNewBtn' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>4</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyAccountNotificationPage()'><b>verifyAccountNotificationPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1311292881" onClick='toggleBox("Output-1311292881", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1311292881" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1311292881">
+Pass: 'notificationsLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/batchInvoiceNotification.lvp Page is working fine<br/>
+Pass: 'notificationsTable' is displayed<br/>
+Pass: 'addNewBtn' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>4</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyAccountPage()'><b>verifyAccountPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-677120200" onClick='toggleBox("Output-677120200", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-677120200" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-677120200">
+Pass: 'accountLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/accountConfiguration.lvp Page is working fine<br/>
+</div>
+</td>
+<td></td>
+<td>4</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyAccountUserGroupsPage()'><b>verifyAccountUserGroupsPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-935160003" onClick='toggleBox("Output-935160003", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-935160003" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-935160003">
+Pass: 'userGroupsLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/userGroupConfiguration.lvp Page is working fine<br/>
+Pass: 'userGroupsTable' is displayed<br/>
+Pass: 'addNewBtn' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>4</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyAccountUsersPage()'><b>verifyAccountUsersPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1197498159" onClick='toggleBox("Output-1197498159", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1197498159" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1197498159">
+Pass: 'usersListTable' is displayed<br/>
+Pass: 'addNewBtn' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>3</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyAssignmentsPage()'><b>verifyAssignmentsPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-593768538" onClick='toggleBox("Output-593768538", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-593768538" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-593768538">
+Pass: 'assignmentsLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine<br/>
+</div>
+</td>
+<td></td>
+<td>9</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyAuditLink()'><b>verifyAuditLink</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-980364771" onClick='toggleBox("Output-980364771", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-980364771" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-980364771">
+Pass: 'auditLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/outbound.lvp Page is working fine<br/>
+Pass: 'auditLink' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>12</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyBackGroundJobsPage()'><b>verifyBackGroundJobsPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1394010463" onClick='toggleBox("Output-1394010463", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1394010463" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1394010463">
+Pass: 'backgroundJobsLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/backgroundJobs.lvp Page is working fine<br/>
+Pass: 'backgroundJobsTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>6</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyBatchingPage()'><b>verifyBatchingPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1660325375" onClick='toggleBox("Output-1660325375", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1660325375" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1660325375">
+Pass: 'batchingLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/batchingPage.lvp Page is working fine<br/>
+Info: Switched successfully to frame :0<br/>
+Pass: 'unBatchedCreditsTable' is displayed<br/>
+Info: Switched successfully to frame :1<br/>
+Pass: 'batchedClaimsTable' is displayed<br/>
+Info: Switched successfully to frame :2<br/>
+Pass: 'batchSummaryTable' is displayed<br/>
+Info: Switched successfully to frame :3<br/>
+Pass: 'batchedDetailsTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>21</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyCheckRegistryPage()'><b>verifyCheckRegistryPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-576894497" onClick='toggleBox("Output-576894497", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-576894497" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-576894497">
+Pass: 'chkRegLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/checkRequest.lvp Page is working fine<br/>
+Pass: 'chkRegList' is displayed<br/>
+Pass: 'addNewBtn' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>4</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyClaimsPage()'><b>verifyClaimsPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-406749219" onClick='toggleBox("Output-406749219", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-406749219" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-406749219">
+Pass: 'claimsLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/claim.lvp Page is working fine<br/>
+Pass: 'totalClaimsTable' is displayed<br/>
+Pass: 'claimsListTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>7</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyConfigTab()'><b>verifyConfigTab</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-248710794" onClick='toggleBox("Output-248710794", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-248710794" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-248710794">
+Pass: 'configurationLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/configurationSetup.lvp Page is working fine<br/>
+</div>
+</td>
+<td></td>
+<td>4</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyCreditrejectionPage()'><b>verifyCreditrejectionPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1459016715" onClick='toggleBox("Output-1459016715", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1459016715" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1459016715">
+Pass: 'othersCreditRejectionLink' is clicked<br/>
+Pass: 'othersCreditRejectionTable' is displayed<br/>
+Pass: 'addNewBtn' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>7</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyCreditsAssignmentsPage()'><b>verifyCreditsAssignmentsPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1115013644" onClick='toggleBox("Output-1115013644", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1115013644" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1115013644">
+Pass: 'creditsLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/creditAssignments.lvp Page is working fine<br/>
+Pass: 'creditsTable' is displayed<br/>
+Pass: 'searchBtn' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>18</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardCompliance()'><b>verifyDashBoardCompliance</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1878413714" onClick='toggleBox("Output-1878413714", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1878413714" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1878413714">
+Pass: 'complainceLink' is clicked<br/>
+Pass: 'complainceLink' is displayed<br/>
+Pass: 'compliantTable' is displayed<br/>
+Pass: 'complianceSummary' is displayed<br/>
+Pass: 'noncompliantLink' is clicked<br/>
+Pass: 'noncompliantLink' is displayed<br/>
+Pass: 'complianceSummary' is displayed<br/>
+Pass: 'complianceBySpendChart' is displayed<br/>
+Pass: 'complianceByCountChart' is displayed<br/>
+Pass: 'complianceBySpendRankChart' is displayed<br/>
+Pass: 'OFACChart' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>5</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardLink()'><b>verifyDashBoardLink</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-674019271" onClick='toggleBox("Output-674019271", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-674019271" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-674019271">
+Pass: 'dashBoardLink' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>7</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardSupplier()'><b>verifyDashBoardSupplier</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1152606315" onClick='toggleBox("Output-1152606315", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1152606315" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1152606315">
+Pass: 'supplierLink' is clicked<br/>
+Pass: 'supplierLink' is displayed<br/>
+Pass: 'CreditTopSuppliers' is displayed<br/>
+Pass: 'FileStatistics' is displayed<br/>
+Pass: 'supplierSpendLink' is clicked<br/>
+Pass: 'supplierSpendLink' is displayed<br/>
+Pass: 'SpendTopSuppliers' is displayed<br/>
+Pass: 'FileStatistics' is displayed<br/>
+Pass: 'chkReqLink' is clicked<br/>
+Pass: 'chkReqLink' is displayed<br/>
+Pass: 'chkReqTopSuppliers' is displayed<br/>
+Pass: 'FileStatistics' is displayed<br/>
+Pass: 'supplierExcludedChart' is displayed<br/>
+Pass: 'supplierTargetChart' is displayed<br/>
+Pass: 'supplierChangeChart' is displayed<br/>
+Pass: 'relSupChart' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>9</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyFaxJobsPage()'><b>verifyFaxJobsPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-251520863" onClick='toggleBox("Output-251520863", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-251520863" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-251520863">
+Pass: 'configurationJobsLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/jobConfiguration.lvp Page is working fine<br/>
+Pass: 'faxJobsTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>102</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyFinContractDetailsPage()'><b>verifyFinContractDetailsPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1807176280" onClick='toggleBox("Output-1807176280", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1807176280" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1807176280">
+Pass: 'finContractDetailsLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/contractDetails.lvp Page is working fine<br/>
+Pass: 'finContractDetailsTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>7</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyFinInvoicesPage()'><b>verifyFinInvoicesPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-628392976" onClick='toggleBox("Output-628392976", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-628392976" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-628392976">
+Pass: 'finInvoicesTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>0</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyFinancePage()'><b>verifyFinancePage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-2023917549" onClick='toggleBox("Output-2023917549", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-2023917549" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-2023917549">
+Pass: 'financeLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/financeConfiguration.lvp Page is working fine<br/>
+</div>
+</td>
+<td></td>
+<td>4</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyHoldsAssignmentsPage()'><b>verifyHoldsAssignmentsPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1491522744" onClick='toggleBox("Output-1491522744", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1491522744" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1491522744">
+Pass: 'holdsLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/holdAssignments.lvp Page is working fine<br/>
+Pass: 'holdsTable' is displayed<br/>
+Pass: 'searchBtn' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>17</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyInvoicePage()'><b>verifyInvoicePage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-751608431" onClick='toggleBox("Output-751608431", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-751608431" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-751608431">
+Pass: 'invoiceLink' is clicked<br/>
+Info: Switched successfully to frame :0<br/>
+Pass: 'invoicesTable' is displayed<br/>
+Info: Switched successfully to frame :1<br/>
+Pass: 'invoiceSummaryTable' is displayed<br/>
+Info: Switched successfully to frame :2<br/>
+Pass: 'invoiceCreditLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/invoicingPage.lvp Page is working fine<br/>
+Pass: 'invoiceCreditTable' is displayed<br/>
+Info: Switched successfully to frame :2<br/>
+Pass: 'invoiceVoidLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/invoicingPage.lvp Page is working fine<br/>
+Pass: 'invoiceVoidTable' is displayed<br/>
+Info: Switched successfully to frame :2<br/>
+Pass: 'invoiceRefundLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/invoicingPage.lvp Page is working fine<br/>
+Pass: 'invoiceRefundTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>23</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyInvoicesPage()'><b>verifyInvoicesPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-523211332" onClick='toggleBox("Output-523211332", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-523211332" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-523211332">
+Pass: 'invoicesLink' is clicked<br/>
+Pass: 'invoiceSummaryTable' is displayed<br/>
+Pass: 'invoiceSummaryDetailsTable' is displayed<br/>
+Pass: 'invoicesCreditLink' is clicked<br/>
+Pass: 'invoicesCreditTable' is displayed<br/>
+Pass: 'invoicesVoidLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#void Page is working fine<br/>
+Pass: 'invoicesRefundLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#refund Page is working fine<br/>
+</div>
+</td>
+<td></td>
+<td>12</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyMailerRegistryPage()'><b>verifyMailerRegistryPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1527254842" onClick='toggleBox("Output-1527254842", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1527254842" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1527254842">
+Pass: 'mailerRegistryLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/mailerRegistry.lvp Page is working fine<br/>
+Pass: 'mailerRegistryTable' is displayed<br/>
+Pass: 'addNewBtn' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>7</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyOthersFaxCommentsPage()'><b>verifyOthersFaxCommentsPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1061448687" onClick='toggleBox("Output-1061448687", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1061448687" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1061448687">
+Pass: 'othersFaxCommentsLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/otherConfiguration.lvp Page is working fine<br/>
+Pass: 'othersFaxCommentsTable' is displayed<br/>
+Pass: 'addNewBtn' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>6</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyOthersPage()'><b>verifyOthersPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-194415222" onClick='toggleBox("Output-194415222", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-194415222" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-194415222">
+Pass: 'othersLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/otherConfiguration.lvp Page is working fine<br/>
+</div>
+</td>
+<td></td>
+<td>4</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyPhoneExtensionPage()'><b>verifyPhoneExtensionPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-103787801" onClick='toggleBox("Output-103787801", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-103787801" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-103787801">
+Pass: 'othersPhoneExtensionLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/phoneExtension.lvp Page is working fine<br/>
+Pass: 'othersPhoneExtensionTable' is displayed<br/>
+Pass: 'addNewBtn' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>7</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyPossibleDupesPage()'><b>verifyPossibleDupesPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-839771540" onClick='toggleBox("Output-839771540", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-839771540" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-839771540">
+Pass: 'possibleDupesLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/creditMatch.lvp Page is working fine<br/>
+Info: Switched successfully to frame :0<br/>
+Pass: 'possDupSummaryTable' is displayed<br/>
+Info: Switched successfully to frame :1<br/>
+Pass: 'preBatchTable' is displayed<br/>
+Info: Switched successfully to frame :2<br/>
+Pass: 'postBatchTable' is displayed<br/>
+Info: Switched successfully to frame :3<br/>
+Pass: 'possDupDetailsTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>20</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifySetupAuditPage()'><b>verifySetupAuditPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-41092582" onClick='toggleBox("Output-41092582", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-41092582" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-41092582">
+Pass: 'addNewBtn' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>0</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifySetupBUPage()'><b>verifySetupBUPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1098986569" onClick='toggleBox("Output-1098986569", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1098986569" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1098986569">
+Pass: 'businessUnitLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/businessUnit.lvp Page is working fine<br/>
+Pass: 'businessUnitTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>4</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifySetupClientPage()'><b>verifySetupClientPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1950800085" onClick='toggleBox("Output-1950800085", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1950800085" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1950800085">
+Pass: 'clientLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/clientConfiguration.lvp Page is working fine<br/>
+Pass: 'clientTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>7</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifySetupManageCurrencyPage()'><b>verifySetupManageCurrencyPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-422409467" onClick='toggleBox("Output-422409467", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-422409467" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-422409467">
+Pass: 'manCurrencyLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/manageCurrency.lvp Page is working fine<br/>
+Pass: 'manageCurrencyTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>7</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifySetupPage()'><b>verifySetupPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-2066892165" onClick='toggleBox("Output-2066892165", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-2066892165" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-2066892165">
+Pass: 'setUpLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/configurationSetup.lvp Page is working fine<br/>
+</div>
+</td>
+<td></td>
+<td>4</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifySetupPreferencesPage()'><b>verifySetupPreferencesPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-259251414" onClick='toggleBox("Output-259251414", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-259251414" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-259251414">
+Pass: 'preferencesLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/automationConfiguration.lvp Page is working fine<br/>
+Pass: 'preferencesTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>7</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifySetupReqLetterPage()'><b>verifySetupReqLetterPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-348132918" onClick='toggleBox("Output-348132918", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-348132918" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-348132918">
+Pass: 'reqLetterLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/requestLetters.lvp Page is working fine<br/>
+Pass: 'reqLetterTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>7</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyStatementsAssignmentsPage()'><b>verifyStatementsAssignmentsPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-739264372" onClick='toggleBox("Output-739264372", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-739264372" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-739264372">
+Pass: 'statementsLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/statementAssignments.lvp Page is working fine<br/>
+Pass: 'statementsTable' is displayed<br/>
+Pass: 'searchBtn' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>50</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifySummaryPage()'><b>verifySummaryPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-565881091" onClick='toggleBox("Output-565881091", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-565881091" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-565881091">
+Pass: 'summaryLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/auditSummary.lvp Page is working fine<br/>
+Pass: 'currMonthTable' is displayed<br/>
+Pass: 'custSummaryTable' is displayed<br/>
+Pass: 'OutReachgrph' is displayed<br/>
+Pass: 'statementProcessedgrph' is displayed<br/>
+Pass: 'openClaimsBySpendGrph' is displayed<br/>
+Pass: 'openClaimsByCountGrph' is displayed<br/>
+Pass: 'subClaimsBySpendGrph' is displayed<br/>
+Pass: 'subClaimsByCountGrph' is displayed<br/>
+Pass: 'totalCreditsgrph' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>11</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyUploadsPage()'><b>verifyUploadsPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-367967231" onClick='toggleBox("Output-367967231", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-367967231" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-367967231">
+Pass: 'uploadsLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/uploadConfiguration.lvp#supplier_files Page is working fine<br/>
+Pass: 'uploadFilesTable' is displayed<br/>
+Pass: 'templatesTable' is displayed<br/>
+Pass: 'uploadSuppFilesLink' is clicked<br/>
+Info: Switched successfully to frame :0<br/>
+Pass: 'uploadSuppFilesTable' is displayed<br/>
+Pass: 'uploadReqLetterLink' is clicked<br/>
+Info: Switched successfully to frame :1<br/>
+Pass: 'uploadReqLetterTable' is displayed<br/>
+Pass: 'uploadCreditFileLink' is clicked<br/>
+Info: Switched successfully to frame :2<br/>
+Pass: 'creditFilesTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>15</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyauditInboundPage()'><b>verifyauditInboundPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-500618423" onClick='toggleBox("Output-500618423", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-500618423" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-500618423">
+Pass: 'inboundLink' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine<br/>
+Pass: 'inboundLink' is displayed<br/>
+Pass: 'inboundDocumentStatistics' is displayed<br/>
+Pass: 'inboundDocumentSummary' is displayed<br/>
+Pass: 'recognizedfax' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine<br/>
+Pass: 'statements' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine<br/>
+Pass: 'verifications' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine<br/>
+Pass: 'statements' is displayed<br/>
+Pass: 'verificationsTable' is displayed<br/>
+Pass: 'checks' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine<br/>
+Pass: 'checksTable' is displayed<br/>
+Pass: 'correspondence' is clicked<br/>
+Pass: 'correspondenceTable' is displayed<br/>
+Pass: 'duplicate' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine<br/>
+Pass: 'duplicateTable' is displayed<br/>
+Pass: 'profiles' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine<br/>
+Pass: 'profilesTable' is displayed<br/>
+Pass: 'unrecognizedfax' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine<br/>
+Pass: 'statements' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine<br/>
+Pass: 'verifications' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine<br/>
+Pass: 'statements' is displayed<br/>
+Pass: 'verificationsTable' is displayed<br/>
+Pass: 'checks' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine<br/>
+Pass: 'checksTable' is displayed<br/>
+Pass: 'correspondence' is clicked<br/>
+Pass: 'correspondenceTable' is displayed<br/>
+Pass: 'duplicate' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine<br/>
+Pass: 'duplicateTable' is displayed<br/>
+Pass: 'profiles' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine<br/>
+Pass: 'profilesTable' is displayed<br/>
+Pass: 'dna' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#DNA Page is working fine<br/>
+Pass: 'statements' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#DNA Page is working fine<br/>
+Pass: 'verifications' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#DNA Page is working fine<br/>
+Pass: 'statements' is displayed<br/>
+Pass: 'verificationsTable' is displayed<br/>
+Pass: 'checks' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#DNA Page is working fine<br/>
+Pass: 'checksTable' is displayed<br/>
+Pass: 'correspondence' is clicked<br/>
+Pass: 'correspondenceTable' is displayed<br/>
+Pass: 'duplicate' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#DNA Page is working fine<br/>
+Pass: 'duplicateTable' is displayed<br/>
+Pass: 'profiles' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#DNA Page is working fine<br/>
+Pass: 'profilesTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>61</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyauditOutboundPage()'><b>verifyauditOutboundPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1233327519" onClick='toggleBox("Output-1233327519", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1233327519" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1233327519">
+Pass: 'currentMonCredits' is displayed<br/>
+Pass: 'auditContactDetails' is displayed<br/>
+Pass: 'furureCreditsGrph' is displayed<br/>
+Pass: 'claimHistoryGrph' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/outbound.lvp Page is working fine<br/>
+Pass: 'claimHistoryGrph' is displayed<br/>
+Pass: 'supplierStatus' is displayed<br/>
+Pass: 'pendingCorrespondence' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>9</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifyauditStatisticsAssignmentsPage()'><b>verifyauditStatisticsAssignmentsPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-475394679" onClick='toggleBox("Output-475394679", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-475394679" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-475394679">
+Pass: 'auditStatsTable' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>15</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+<tr>
+<td title='lavante.recovery.testsuites.SanityTestSuite.verifycontactEntryPage()'><b>verifycontactEntryPage</b><br>Test class: lavante.recovery.testsuites.SanityTestSuite<br/>
+<a href="#Output-1027319653" onClick='toggleBox("Output-1027319653", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1027319653" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1027319653">
+Pass: 'contactEntry' is clicked<br/>
+Pass: https://recoveryqa39.lavante.com/recovery/dataentry.lvp Page is working fine<br/>
+Pass: 'docQueueTable' is displayed<br/>
+Pass: 'supDetailsTable' is displayed<br/>
+Pass: 'docDetails' is displayed<br/>
+</div>
+</td>
+<td></td>
+<td>7</td>
+<td>lavante.recovery.testsuites.SanityTestSuite@3f49dace</td></tr>
+</table><p>
+</body>
+</html>

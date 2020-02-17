@@ -1,0 +1,96 @@
+<h2>Methods run, sorted chronologically</h2><h3>&gt;&gt; means before, &lt;&lt; means after</h3><p/><br/><em>Default suite</em><p/><small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table border="1">
+<tr><th>Time</th><th>Delta (ms)</th><th>Suite<br>configuration</th><th>Test<br>configuration</th><th>Class<br>configuration</th><th>Groups<br>configuration</th><th>Method<br>configuration</th><th>Test<br>method</th><th>Thread</th><th>Instances</th></tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:22:18</td>   <td>0</td> <td>&nbsp;</td><td>&nbsp;</td><td title="&lt;&lt;SanityTestSuite.clean()[pri:0, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">&lt;&lt;clean</td> 
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:12:31</td>   <td>-587307</td> <td>&nbsp;</td><td>&nbsp;</td><td title="&gt;&gt;SanityTestSuite.preCondition(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">&gt;&gt;preCondition</td> 
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:19:18</td>   <td>-179906</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyAccountAuditGroupsPage()[pri:28, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyAccountAuditGroupsPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:19:23</td>   <td>-175694</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyAccountNotificationPage()[pri:29, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyAccountNotificationPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:19:07</td>   <td>-191599</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyAccountPage()[pri:25, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyAccountPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:19:14</td>   <td>-184108</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyAccountUserGroupsPage()[pri:27, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyAccountUserGroupsPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:19:11</td>   <td>-187210</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyAccountUsersPage()[pri:26, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyAccountUsersPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:20:26</td>   <td>-111875</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyAssignmentsPage()[pri:39, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyAssignmentsPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:13:22</td>   <td>-535996</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyAuditLink()[pri:3, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyAuditLink</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:19:00</td>   <td>-198314</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyBackGroundJobsPage()[pri:24, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyBackGroundJobsPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:14:53</td>   <td>-445526</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyBatchingPage()[pri:7, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyBatchingPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:16:11</td>   <td>-367476</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyCheckRegistryPage()[pri:11, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyCheckRegistryPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:16:15</td>   <td>-363068</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyClaimsPage()[pri:12, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyClaimsPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:16:35</td>   <td>-343500</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyConfigTab()[pri:15, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyConfigTab</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:20:04</td>   <td>-134030</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyCreditrejectionPage()[pri:36, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyCreditrejectionPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:21:09</td>   <td>-68870</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyCreditsAssignmentsPage()[pri:42, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyCreditsAssignmentsPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:13:05</td>   <td>-553098</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyDashBoardClaims()[pri:0, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyDashBoardClaims</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:13:16</td>   <td>-541900</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyDashBoardCompliance()[pri:2, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyDashBoardCompliance</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:12:57</td>   <td>-560803</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyDashBoardLink()[pri:-1, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyDashBoardLink</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:13:07</td>   <td>-550981</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyDashBoardSupplier()[pri:1, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyDashBoardSupplier</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:17:17</td>   <td>-301140</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyFaxJobsPage()[pri:23, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyFaxJobsPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:19:31</td>   <td>-167128</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyFinContractDetailsPage()[pri:32, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyFinContractDetailsPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:19:31</td>   <td>-167178</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyFinInvoicesPage()[pri:31, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyFinInvoicesPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:19:27</td>   <td>-171184</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyFinancePage()[pri:30, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyFinancePage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:20:51</td>   <td>-86856</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyHoldsAssignmentsPage()[pri:41, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyHoldsAssignmentsPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:15:14</td>   <td>-423851</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyInvoicePage()[pri:8, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyInvoicePage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:16:23</td>   <td>-355587</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyInvoicesPage()[pri:13, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyInvoicesPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:20:19</td>   <td>-119152</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyMailerRegistryPage()[pri:38, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyMailerRegistryPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:19:58</td>   <td>-140333</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyOthersFaxCommentsPage()[pri:35, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyOthersFaxCommentsPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:19:54</td>   <td>-144545</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyOthersPage()[pri:34, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyOthersPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:20:12</td>   <td>-126703</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyPhoneExtensionPage()[pri:37, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyPhoneExtensionPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:15:38</td>   <td>-400135</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyPossibleDupesPage()[pri:9, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyPossibleDupesPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:16:44</td>   <td>-334393</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifySetupAuditPage()[pri:17, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifySetupAuditPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:16:51</td>   <td>-327061</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifySetupBUPage()[pri:19, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifySetupBUPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:16:44</td>   <td>-334360</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifySetupClientPage()[pri:18, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifySetupClientPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:17:10</td>   <td>-308379</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifySetupManageCurrencyPage()[pri:22, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifySetupManageCurrencyPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:16:40</td>   <td>-338667</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifySetupPage()[pri:16, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifySetupPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:16:55</td>   <td>-322804</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifySetupPreferencesPage()[pri:20, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifySetupPreferencesPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:17:03</td>   <td>-315630</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifySetupReqLetterPage()[pri:21, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifySetupReqLetterPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:21:28</td>   <td>-50712</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyStatementsAssignmentsPage()[pri:43, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyStatementsAssignmentsPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:15:59</td>   <td>-379423</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifySummaryPage()[pri:10, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifySummaryPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:19:39</td>   <td>-159663</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyUploadsPage()[pri:33, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyUploadsPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:13:44</td>   <td>-514548</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyauditInboundPage()[pri:5, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyauditInboundPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:13:35</td>   <td>-523557</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyauditOutboundPage()[pri:4, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyauditOutboundPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:20:36</td>   <td>-101900</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifyauditStatisticsAssignmentsPage()[pri:40, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifyauditStatisticsAssignmentsPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+<tr bgcolor="6dabbc">  <td>16/07/25 11:14:46</td>   <td>-452682</td> <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td title="SanityTestSuite.verifycontactEntryPage()[pri:6, instance:lavante.recovery.testsuites.SanityTestSuite@3f49dace]">verifycontactEntryPage</td> 
+  <td>main@923219673</td>   <td></td> </tr>
+</table>

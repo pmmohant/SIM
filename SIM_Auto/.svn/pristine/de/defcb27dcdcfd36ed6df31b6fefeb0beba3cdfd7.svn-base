@@ -1,0 +1,543 @@
+package com.lavante.sim.customer.TestScripts.Transactions.Invoices;
+
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.InvoiceDataProvider;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.InvoiceSearchDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+
+/**
+ * Created on 01-12-2016
+ * Created for Invoice Test Enhancement Split
+ * Enhancement covered SIM - 8101
+ * Ended on 03-12-2016
+ * @author Piramanayagam.S
+ *
+ */
+public class  UATInvoiceTC005 extends PageInitiator {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	String customerid="";
+	
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+				
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		openAPP();	
+		//Assigning the driver to the object of lavante utils		
+		lavanteUtils.driver=driver;
+		
+		//Login
+		List listofdatafrm=lavanteUtils.login("Invoice",browser);
+		LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String>();
+		LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+		customerid=(String) listofdatafrm.get(1);
+		//Login		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		
+	}
+	
+	/**
+	 * In this Class all test starts from Edit profile -Supplier contract management tab,hence navigated to the page
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeMethod
+	public void beforeClassMethod(){
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String, String>();
+		dataMap.put("maintab","Invoice");
+		dataMap.put("subtab", "InvoiceSearchResult");
+		
+		enobjhomePage.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+	}
+	
+	/**
+	 * Enhancement-SIM-8101 
+	 * UI Verification on Split Invoice in Upload Invoice Page
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws Exception 
+	 */
+	@Test(dataProvider="SplitInvoiceAmnt",dataProviderClass=InvoiceDataProvider.class)
+	public void UIUploadInvoiceSplitDeliverableTC001(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		
+		Reporter.log("Test Started for UI Verification of Split Deliverable  in Upload  Invoice:"+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+		
+		String data=dataMap.get("InvDel");
+		
+		String invnum="AutoSP"+randomnum()+customerid;
+		
+		dataMap.put("InvNum", invnum);
+		dataMap.put("SelectSupplier","");
+		dataMap.remove("InvDel");
+		dataMap.put("uploadSave", "");
+		dataMap.put("ErrMSG", "");
+		enuploadInvoice.UploadInvoice(dataMap);
+		lavanteUtils.switchtoFrame(enuploadInvoice.IFRAMEuploadinvoice());
+		
+		String lineitm=enuploadInvoice.lineitmlbl().getText();	
+		String itmtyp=enuploadInvoice.itmtyplbl().getText();	
+		String desc=enuploadInvoice.desclbl().getText();	
+		
+		String exp1="Line Item";
+		String exp2="Item Type";
+		String exp3="Description";
+
+		Reporter.log(exp1+" label, Expected:"+exp1+", Actual:"+lineitm,true);	
+		softassert.assertEquals(lineitm,exp1," label, Expected:"+exp1+", Actual:"+lineitm);
+		
+		Reporter.log(exp2+" label, Expected:"+exp2+", Actual:"+itmtyp,true);	
+		softassert.assertEquals(itmtyp,exp2," label, Expected:"+exp2+", Actual:"+itmtyp);
+
+		Reporter.log(exp3+" label, Expected:"+exp3+", Actual:"+desc,true);	
+		softassert.assertEquals(desc,exp3," label, Expected:"+exp2+", Actual:"+desc);
+		
+		String act=enuploadInvoice.errmsg().getText();
+		String exp="Select atleast one line item deliverable";
+		
+		Reporter.log("Exp Error Msg,"+exp+",Actual:"+act,true);
+		softassert.assertEquals(act,exp,"Error Message Not Matched");
+		
+		dataMap.clear();
+		
+		String[] ds=data.split("-");
+		System.out.println(ds[0]);
+		dataMap.put("InvDel", ds[0]);
+		enuploadInvoice.UploadInvoice(dataMap);
+		lavanteUtils.switchtoFrame(enuploadInvoice.IFRAMEuploadinvoice());
+		
+		String actamnt=enuploadInvoice.lineitemdeliverableAmnt().get(0).getAttribute("value");
+		String expamnt=enuploadInvoice.invoiceTotInvAmnt().getAttribute("value");
+				
+		Reporter.log("Total Invoice Amnt for Single Select Deliverable,"+expamnt+",Actual:"+actamnt,true);
+		softassert.assertEquals(actamnt,expamnt,"Total Invoice Amnt for Single Select Deliverable");
+
+		String actdisable=enuploadInvoice.lineitemdeliverableAmnt().get(0).getAttribute("disabled");
+		String expdisable="true";
+		
+		Reporter.log("Total Invoice Amnt for Single Select Deliverable Diasbled status,"+expdisable+",Actual:"+actdisable,true);
+		softassert.assertEquals(actdisable,expdisable,"Total Invoice Amnt for Single Select Deliverable Diasbled status");
+
+		lavanteUtils.click(enuploadInvoice.selectdeliverable().get(0));
+		lavanteUtils.click(enuploadInvoice.selectdeliverable().get(0));
+		String amnt=enuploadInvoice.lineitemdeliverableAmnt().get(0).getAttribute("value");
+		lavanteUtils.click(enuploadInvoice.selectdeliverable().get(0));
+		
+		if(amnt.contains(".00")){
+			amnt=amnt.replace(".00", "");
+		}if(amnt.contains(",")){
+			amnt=amnt.replace(",", "");
+		}
+		int f=Integer.parseInt(amnt);
+		
+		dataMap.put("Amnt1",""+f);
+		f=1;
+		dataMap.put("Amnt2",""+f);
+		dataMap.put("InvDel", data);
+		dataMap.put("uploadSave", "");		
+		dataMap.put("ErrMSG", "");
+		enuploadInvoice.UploadInvoice(dataMap);
+		lavanteUtils.switchtoFrame(enuploadInvoice.IFRAMEuploadinvoice());
+		
+		actamnt=enuploadInvoice.lineitemdeliverableAmnt().get(0).getText();
+		actamnt=enuploadInvoice.lineitemdeliverableAmnt().get(0).getAttribute("value");
+		actdisable=enuploadInvoice.lineitemdeliverableAmnt().get(0).getAttribute("disabled");
+		expdisable=null;
+
+		if(expamnt.contains(".00")){
+			expamnt=expamnt.replace(".00", "");
+		}if(expamnt.contains(",")){
+			expamnt=expamnt.replace(",", "");
+		}
+		Reporter.log("Total Invoice Amnt After Multi Select Deliverable,"+expamnt+",Actual:"+actamnt,true);
+		softassert.assertEquals(actamnt,expamnt,"Total Invoice Amnt After Multi Select Deliverable");
+	
+		Reporter.log("Total Invoice Amnt After Multi Select Deliverable Diasbled status,"+expdisable+",Actual:"+actdisable,true);
+		softassert.assertEquals(actdisable,expdisable,"Total Invoice Amnt After Multi Select Deliverable Diasbled status");
+
+		 act=enuploadInvoice.errmsg().getText();
+		 exp="Sum of split amount should be same as Total invoice amount";
+		
+		Reporter.log("Exp Error Msg of Sum deliverable,"+exp+",Actual:"+act,true);
+		softassert.assertEquals(act,exp,"Error Message for Sum of Deliverable Not Matched");
+		
+		Reporter.log("Test Started for UI Verification of Split Deliverable  in Upload  Invoice:"+currenttime());
+		softassert.assertAll();
+	
+	}
+
+	/**
+	 * Enhancement-SIM-8101 
+	 * UI Verification on Split Invoice in Edit Invoice Page
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws Exception 
+	 */
+	@Test(dataProvider="SplitInvoiceAmnt",dataProviderClass=InvoiceDataProvider.class)
+	public void UIEditInvoiceSplitDeliverableTC001(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		
+		Reporter.log("Test Started for UI Verification of Split Deliverable  in Edit  Invoice:"+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		boolean flag=false;
+		
+		dataMap.put("Search","");
+		dataMap.remove("InvNum");
+		dataMap.put("InvStatus","Not Submitted");
+		dataMap.put("supplierName",eninvoicePage.fetchDelSupplier(customerid,2));
+		dataMap.put("InvSOWNum","ANY");
+		eninvoiceBasicSearch.Search(dataMap);
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		if(eninvoicePage.Listinvnum().size()>0){
+			Reporter.log("Searched Invoice Found:");
+			String data=dataMap.get("InvDel");
+			
+			String invnum="AutoSP"+randomnum()+customerid;
+			dataMap.put("Edit", "");
+			eninvoicePage.selectSupplierFormAction(dataMap);
+
+			lavanteUtils.switchtoFrame(enuploadInvoice.IFRAMEuploadinvoice());
+			
+			String lineitm=enuploadInvoice.lineitmlbl().getText();	
+			String itmtyp=enuploadInvoice.itmtyplbl().getText();	
+			String desc=enuploadInvoice.desclbl().getText();	
+			
+			String exp1="Line Item";
+			String exp2="Item Type";
+			String exp3="Description";
+	
+			Reporter.log(exp1+" label, Expected:"+exp1+", Actual:"+lineitm,true);	
+			softassert.assertEquals(lineitm,exp1," label, Expected:"+exp1+", Actual:"+lineitm);
+			
+			Reporter.log(exp2+" label, Expected:"+exp2+", Actual:"+itmtyp,true);	
+			softassert.assertEquals(itmtyp,exp2," label, Expected:"+exp2+", Actual:"+itmtyp);
+	
+			Reporter.log(exp3+" label, Expected:"+exp3+", Actual:"+desc,true);	
+			softassert.assertEquals(desc,exp3," label, Expected:"+exp2+", Actual:"+desc);
+			
+			/*dataMap.clear();
+			dataMap.put("InvDel","ANYSplit");
+			enuploadInvoice.fillInvoiceDetails(dataMap);
+			*/
+			/*for(int i=0;i<enuploadInvoice.selectdeliverable().size();i++){
+				lavanteUtils.click(enuploadInvoice.selectdeliverable().get(i));	
+				break;
+			}*/
+			
+			dataMap.put("InvNum", invnum);
+			dataMap.put("SelectSupplier","");
+			dataMap.put("uploadSave", "");
+			
+			dataMap.clear();
+			dataMap.put("uploadSave", "");
+			dataMap.put("ErrMSG","");
+			enuploadInvoice.formInvoiceDetails(dataMap);
+			lavanteUtils.switchtoFrame(enuploadInvoice.IFRAMEuploadinvoice());
+			
+			String act=enuploadInvoice.errmsg().getText();
+			String exp="Select atleast one line item deliverable";
+			
+			System.out.println("Exp Error Msg,"+exp+",Actual:"+act);
+			Reporter.log("Exp Error Msg,"+exp+",Actual:"+act);
+			softassert.assertEquals(act,exp,"Error Message Not Matched");
+			
+			dataMap.clear();
+			
+			String[] ds=data.split("-");
+			System.out.println(ds[0]);
+			dataMap.put("InvDel", ds[0]);
+			enuploadInvoice.UploadInvoice(dataMap);
+			lavanteUtils.switchtoFrame(enuploadInvoice.IFRAMEuploadinvoice());
+			
+			String actamnt=enuploadInvoice.lineitemdeliverableAmntvalue().get(0).getAttribute("value");
+			 actamnt=enuploadInvoice.lineitemdeliverableAmnt().get(0).getAttribute("value");
+			String expamnt=enuploadInvoice.invoiceTotInvAmnt().getAttribute("value");
+					
+			Reporter.log("Total Invoice Amnt for Single Select Deliverable,"+expamnt+",Actual:"+actamnt,true);
+			softassert.assertEquals(actamnt,expamnt,"Total Invoice Amnt for Single Select Deliverable");
+	
+			String actdisable=enuploadInvoice.lineitemdeliverableAmnt().get(0).getAttribute("disabled");
+			String expdisable="true";
+			
+			Reporter.log("Total Invoice Amnt for Single Select Deliverable Diasbled status,"+expdisable+",Actual:"+actdisable,true);
+			softassert.assertEquals(actdisable,expdisable,"Total Invoice Amnt for Single Select Deliverable Diasbled status");
+	
+			lavanteUtils.click(enuploadInvoice.selectdeliverable().get(0));
+			lavanteUtils.click(enuploadInvoice.selectdeliverable().get(0));
+			String amnt=enuploadInvoice.lineitemdeliverableAmnt().get(0).getAttribute("value");
+			lavanteUtils.click(enuploadInvoice.selectdeliverable().get(0));
+			
+			if(amnt.contains(".00")){
+				amnt=amnt.replace(".00", "");
+			}if(amnt.contains(",")){
+				amnt=amnt.replace(",", "");
+			}
+			int f=Integer.parseInt(amnt);
+			dataMap.put("Amnt1",""+f);
+			f=1;
+			dataMap.put("Amnt2",""+f);
+			dataMap.put("InvDel", data);
+			dataMap.put("uploadSave", "");		
+			dataMap.put("ErrMSG", "");	
+			enuploadInvoice.UploadInvoice(dataMap);
+			lavanteUtils.switchtoFrame(enuploadInvoice.IFRAMEuploadinvoice());
+			
+			actamnt=enuploadInvoice.lineitemdeliverableAmnt().get(0).getText();
+			actamnt=enuploadInvoice.lineitemdeliverableAmnt().get(0).getAttribute("value");
+			actdisable=enuploadInvoice.lineitemdeliverableAmnt().get(0).getAttribute("disabled");
+			expdisable=null;
+	
+			if(expamnt.contains(".00")){
+				expamnt=expamnt.replace(".00", "");
+			}if(expamnt.contains(",")){
+				expamnt=expamnt.replace(",", "");
+			}
+			Reporter.log("Total Invoice Amnt After Multi Select Deliverable,"+expamnt+",Actual:"+actamnt,true);
+			softassert.assertEquals(actamnt,expamnt,"Total Invoice Amnt After Multi Select Deliverable");
+		
+			Reporter.log("Total Invoice Amnt After Multi Select Deliverable Diasbled status,"+expdisable+",Actual:"+actdisable,true);
+			softassert.assertEquals(actdisable,expdisable,"Total Invoice Amnt After Multi Select Deliverable Diasbled status");
+	
+			 act=enuploadInvoice.errmsg().getText();
+			 exp="Sum of split amount should be same as Total invoice amount";
+			
+			Reporter.log("Exp Error Msg of Sum deliverable,"+exp+",Actual:"+act,true);
+			softassert.assertEquals(act,exp,"Error Message for Sum of Deliverable Not Matched");
+			flag=true;
+		}
+		
+		softassert.assertTrue(flag,"Data Not Found");
+		
+		Reporter.log("Test Started for UI Verification of Split Deliverable  in Edit  Invoice:"+currenttime());
+		softassert.assertAll();
+	
+	}
+
+	/**
+	 * Enhancement-SIM-8101 
+	 * UI Verification on Split Invoice in Edit Invoice Page
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws Exception 
+	 */
+	//All invoice not having Deliverable@Test(dataProvider="SplitInvoiceAmnt",dataProviderClass=InvoiceDataProvider.class)
+	public void SearchInvDeliverableTC001(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		
+		Reporter.log("Test Started for UI Verification of Split Deliverable  in Edit  Invoice:"+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		boolean flag=false;
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		
+		
+		if(eninvoicePage.Listinvnum().size()>0){
+			Reporter.log("Searched Invoice");
+			String invnum=eninvoicePage.TBLInvoicenumber().getText();
+			String invdate=eninvoicePage.getColumnText("Invoice Date",0);
+			String invStatus=eninvoicePage.getColumnText("Invoice Status",0);
+			String invamnt=eninvoicePage.getColumnText("Invoice Amount",0);
+			String supname=eninvoicePage.getColumnText("Supplier Name",0);
+
+			lavanteUtils.click(eninvoicePage.TBLInvoicenumber());
+			String sownum=eninvoicePage.invSOWNumber().getText();
+			String del=eninvoicePage.viewdelLineitm().get(0).getText();
+			String delinvamnt="";
+			
+			for(int i=0;i<eninvoicePage.viewdelLineitm().size();i++)
+				{
+					if(eninvoicePage.viewdelLineitm().get(i).getText().equalsIgnoreCase(del))
+					{
+						delinvamnt=eninvoicePage.viewdelAmnt().get(i).getText();
+					}
+				}
+
+			enobjhomePage.popupclose();
+			dataMap.put("maintab", "Invoices");
+			dataMap.put("subtab", "ContractManagement");
+			enobjhomePage.selectTab(dataMap);
+			
+			dataMap.put("SOWNumber", sownum);
+			dataMap.put("msasuppliername", supname);
+			dataMap.put("Search","Search");
+			encontractManagement.search(dataMap);
+			lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+			
+			
+			if(encontractManagement.DELDel().size()>0){
+			
+				outr:for(int i=0;i<encontractManagement.DELDel().size();i++){
+					String x=encontractManagement.DELDel().get(i).getText();
+					if(x.equalsIgnoreCase(del)){
+						lavanteUtils.click(encontractManagement.dellist().get(i));
+						lavanteUtils.switchtoFrame(eneditContractManagement.DELIframeView());
+						
+						for(int j=eneditContractManagement.DELViewInvoiceList().size()-1;j>0;j--){
+							 x=eneditContractManagement.DELViewInvoiceList().get(j).getText();
+							 System.out.println(x+":"+invnum);
+							if(x.equalsIgnoreCase(invnum)){
+								
+									String actamnt=eneditContractManagement.DELViewInvoiceList().get(j).getText();
+									softassert.assertEquals(actamnt,invnum ,"Invoice num CM page Not Matched");
+									System.out.println("Invoice Num CM Page,Expected:"+invnum+",Actuals:"+actamnt);
+									Reporter.log("Invoice Num CM Page,Expected:"+invnum+",Actuals:"+actamnt);
+									
+									actamnt=eneditContractManagement.DELViewInvoiceamntList().get(j).getText();
+									System.out.println("Invoice Amount CM Page,Expected:"+delinvamnt+",Actuals:"+actamnt);
+									softassert.assertEquals(actamnt,delinvamnt ,"Invoice Amnt CM page Not Matched");
+									Reporter.log("Invoice Amount CM Page,Expected:"+delinvamnt+",Actuals:"+actamnt);
+											
+									actamnt=eneditContractManagement.DELViewInvoiceStatusList().get(j).getText();
+									softassert.assertEquals(actamnt,invStatus ,"Invoice Status CM page Not Matched");
+									System.out.println("Invoice Status CM Page,Expected:"+invStatus+",Actuals:"+actamnt);
+									Reporter.log("Invoice Status CM Page,Expected:"+invStatus+",Actuals:"+actamnt);
+											
+									actamnt=eneditContractManagement.DELViewInvoicedateList().get(j).getText();
+									softassert.assertEquals(actamnt,invdate ,"Invoice Date CM page Not Matched");
+									System.out.println("Invoice Date CM Page,Expected:"+invdate+",Actuals:"+actamnt);
+									Reporter.log("Invoice Date CM Page,Expected:"+invdate+",Actuals:"+actamnt);
+									
+									lavanteUtils.click(eneditContractManagement.DELViewInvoiceList().get(j));
+									
+									lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEviewinvoice());
+									actamnt=eninvoicePage.totinvamnt().getText();
+									System.out.println("Invoice Amnt CM-Inv Page,Expected:"+invamnt+",Actuals:"+actamnt);
+									Reporter.log("Invoice Amount CM-Inv Page,Expected:"+invamnt+",Actuals:"+actamnt);
+									softassert.assertEquals(actamnt,invamnt ,"Invoice Amnt CM-Inv Not Matched");
+									
+									flag=true;
+									break outr;
+								}
+							}
+						}
+					}
+				}
+				
+			}
+		
+			
+		
+		softassert.assertTrue(flag,"Data Not Found");
+		
+		
+		Reporter.log("Test Started for UI Verification of Split Deliverable  in Edit  Invoice:"+currenttime());
+		softassert.assertAll();
+	
+	}
+
+	/**
+	 * Enhancement-SIM-8101 
+	 * UI Verification on Empty Deliverable Section in Upload Invoice Page
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws Exception 
+	 */
+	@Test
+	public void UINoDeliverabaleUploadInvoiceTC001() throws Exception
+	{
+		
+		Reporter.log("Test Started for UI Verification of Empty Deliverable in Upload Invoice:"+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String>();
+		
+		
+		String sow="select MAX(SOWNumber) from StatementOfWork where SOWID not in (select SOWID from Deliverable) "
+				+ "and MSAID in"
+				+ " (select MSAID From MasterServiceAgreement where RelationshipId in "
+				+ " (select RelationshipID from Relationship where CustomerID="+customerid+" and ProfileStatusID not in (8) )"
+				+ " and RelationshipID in (select RelationshipID from Relationship_ERP_Map ) )";
+		sow=lavanteUtils.fetchDBdata(sow);
+		
+		String supname="select SupplierName from Supplier where LavanteUID in "
+				+ " (select LavanteUID from Relationship where RelationshipID in"
+				+ " (select RelationshipId from MasterServiceAgreement  where MSAID in "
+				+ " (select MSAID from StatementOfWork where SOWNumber='"+sow+"')))";
+		
+		supname=lavanteUtils.fetchDBdata(supname);
+		
+		String update="update Relationship set VendorTypeID=1 where LavanteUID in (select LavanteUID from Supplier where SupplierName='"+supname+"');";
+		lavanteUtils.UpdateDB(update);
+		
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+		
+		dataMap.put("InvSOWNum",sow);
+		dataMap.put("supplierName",supname);
+		dataMap.put("SelectSupplier","");
+		enuploadInvoice.UploadInvoice(dataMap);
+		lavanteUtils.switchtoFrame(enuploadInvoice.IFRAMEuploadinvoice());
+		
+		
+		String nodatamsg=enuploadInvoice.nodata().getText();	
+		String expmsg="No data available";
+		
+		softassert.assertEquals(nodatamsg,expmsg ,"Empty Del Verification Not Matched");
+		System.out.println("Empty Del Verification,Expected:"+expmsg+",Actuals:"+nodatamsg);
+		Reporter.log("Empty Del Verification,Expected:"+expmsg+",Actuals:"+nodatamsg);
+		
+		
+		softassert.assertAll();
+		Reporter.log("Test Started for UI Verification of Empty Deliverable in Upload Invoice:"+currenttime());
+		
+	
+	}
+
+
+	
+	@AfterMethod
+	public void SetupAftermethod()
+	{
+		enobjhomePage.popupclose();
+		lavanteUtils.refreshPage();	
+	}
+	
+	
+	
+	@AfterClass
+	public void SetupafterClassmethod(){
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+
+
+}
+

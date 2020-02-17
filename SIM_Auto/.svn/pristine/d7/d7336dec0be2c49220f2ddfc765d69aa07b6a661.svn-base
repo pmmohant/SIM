@@ -1,0 +1,148 @@
+package com.lavante.sim.customer.TestScripts.Supplier.Search;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.SupplierSearchDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 23-07-2018 
+ *  Created for Supplier Search
+ *  Other Class uses northrop and northrop admin has diff role so used it for Discovery 
+ *   
+ *  Ended on 23-07-2018
+ *  
+ * 
+ * @author Piramanayagam.S
+ *
+ */
+public class SupplierAdvancedSearchTC03 extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String customerId = "";
+	
+	
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * 
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		List<?> listofdatafrm = lavanteUtils.login("MSA-1", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		customerId=(String) listofdatafrm.get(1);
+		
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+	}
+
+	@BeforeMethod
+	public void before() {
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+
+		lavanteUtils.waitForTime(3000);
+
+	}
+
+	/**
+	 * Supplier PaymentInfoSearch
+	 * 
+	 * Replica of CustomerSupplierAdvanceSearchTC0008
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "PaymentInfoSearch", dataProviderClass = SupplierSearchDataProvider.class)
+	public void PaymentInfoSearch01(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for Payment Info Adv Search:"+ currenttime());
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+		dataMap.put("Clear", "");
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Query Returned with Search data");
+
+			lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0));
+
+			dataMap.put("maintab", "Supplier Managed");
+			dataMap.put("subtab", "Treasury");
+			enviewSupplier.selectTab(dataMap);
+
+			lavanteUtils.fluentwait(enviewSupplier.PaymentType());
+			String act = enviewSupplier.Discountoffer().getText();
+			Reporter.log("Discount Offer Expected:"	+ dataMap.get("OfferEarlyDiscount") + ",actual" + act);
+			softAssert.assertEquals(act,dataMap.get("OfferEarlyDiscount"),"Discount Offer Not Matched,Expected:"+ dataMap.get("OfferEarlyDiscount") + ",actual"	+ act);
+
+			act = enviewSupplier.PaymentType().getText();
+			Reporter.log("Payment Type Expected:" + dataMap.get("PaymentType")	+ ",actual" + act);
+			softAssert.assertTrue(act.contains(dataMap.get("PaymentType")),"Payment Type Not Matched,Expected:" + act);
+
+			flag = true;
+
+		} else {
+			Reporter.log("No Supplier Found for this Search");
+			softAssert.assertTrue(flag, "DATA NOT AVAILABLE");
+			flag=true;
+		}
+
+		softAssert.assertTrue(flag, "Please Retest");
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for Supplier Payment Info Search at:"	+ currenttime());
+
+	}
+
+
+	/**
+	 * SetupAfter Class closes any popup and Closes the Browser and Driver
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@AfterClass
+	public void SetupafterClassmethod() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+}

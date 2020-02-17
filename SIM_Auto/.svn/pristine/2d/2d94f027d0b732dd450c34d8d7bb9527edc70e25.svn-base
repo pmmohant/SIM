@@ -1,0 +1,501 @@
+package com.lavante.sim.customer.TestScripts.Transactions.Claims;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.ClaimSearchDataProvider;
+/*import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.ListenerTest;*/
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+
+public class ClaimsAdvanceSearchTest extends PageInitiator{
+	
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String qname="";
+			
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * @author Vidya.C
+	 * 
+	 * * SIM-16382  Changes to My Claim Filter  @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception
+	{
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		openAPP1();	
+		lavanteUtils.driver=driver;
+		
+		List<?> listofdatafrm=lavanteUtils.login("CustomerKrogerAdmin",browser);
+		LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String>();
+		LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+		
+		//Login		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+				
+	}
+	
+	@BeforeMethod
+	public void setup() {
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String, String>();
+		lavanteUtils.refreshPage();
+		dataMap.put("maintab","TRANSACTIONS");
+		dataMap.put("subtab", "customerClaimResult");
+		enobjhomePage.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+		
+		lavanteUtils.click(enClaimsAdvanceSearch.AdvanceSearchTab());
+	}
+	
+	/**
+	 * Do an advance search using build query
+	 * @author Vidya.C
+	 * @throws Exception
+	 */
+	@Test(dataProvider = "AdvSearch", dataProviderClass = ClaimSearchDataProvider.class)
+	public void AdvanceSearchBuildQuery(LinkedHashMap<String , String> dataMap ) throws Exception
+	{
+		Reporter.log("Test Started for Advance Search using Build Query: "+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		boolean flag=false;
+		
+		lavanteUtils.switchtoFrame(enClaimsPage.IFrameSearchResults());
+		boolean myClaim=enClaimsPage.myClaimsRadBtn1().isSelected();
+		boolean AllClaim=enClaimsPage.allClaimsRadBtn1().isSelected();
+		
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.click(enClaimsAdvanceSearch.BuildQueryBtn());
+
+		dataMap.put("ClearQuery", "");
+		dataMap.put("Search", "");
+		enClaimsAdvanceSearch.AdvanceSearch(dataMap);
+		
+		
+		lavanteUtils.waitForTime(5000);
+		String data="";
+
+		softassert.assertEquals(enClaimsPage.myClaimsRadBtn1().isSelected(),myClaim,"My Claim Selection Not done");
+		softassert.assertEquals(enClaimsPage.allClaimsRadBtn1().isSelected(),AllClaim,"All Claim Selection Not done");
+		
+		List<WebElement> claimTypeList = enClaimsPage.iterateSearchHeaderFindColList("Claim Type");
+		
+		if(claimTypeList.size()>0){
+			for(int i=0; i<claimTypeList.size(); i++) {
+				if(dataMap.containsKey("ClaimType")){
+					data=dataMap.get("ClaimType");
+					Reporter.log("Search results of criteria1, Expected: "+data+" Actual: "+claimTypeList.get(i).getText(),true);
+					softassert.assertTrue(data.contains(claimTypeList.get(i).getText()),"Search results of criteria1, Expected: "+data+" Actual: "+claimTypeList.get(i).getText());
+					flag=true;
+				}
+				if(dataMap.containsKey("ClaimStatus")){
+					data=dataMap.get("ClaimStatus");
+					List<WebElement> claimStatusList = enClaimsPage.iterateSearchHeaderFindColList("Claim Status");
+					Reporter.log("Search results of criteria2, Expected: "+data+" Actual: "+claimStatusList.get(i).getText());
+					softassert.assertTrue(data.contains(claimStatusList.get(i).getText()),"Search results of criteria2, Expected: "+data+" Actual: "+claimStatusList.get(i).getText());
+					flag=true;
+				}
+				
+				break;
+			}
+		}else {
+			softassert.assertEquals("No results", enClaimsPage.NoData().getText());
+		}
+		
+		if(flag == false) {
+			Reporter.log("Search results are not matching");
+		}
+				
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Advance Claims Search: "+currenttime());
+	}
+	
+	/**
+	 * Do an advance search using Build query, Save the search and delete the saved search
+	 * @author Vidya.C
+	 * @throws Exception
+	 */
+	@Test(dataProvider = "AdvSaveSearch", dataProviderClass = ClaimSearchDataProvider.class)
+	public void AdvanceSearchSaveQuery(LinkedHashMap<String , String> dataMap) throws Exception
+	{
+		//lt.DBDBQUERY(dataMap);
+		Reporter.log("Test Started for Advance Search using Build Query and Saving the query: "+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		boolean flag=false;
+		
+		lavanteUtils.clicks(enClaimsAdvanceSearch.BuildQueryBtn());
+		
+		lavanteUtils.switchtoFrame(enClaimsAdvanceSearch.IframeClaimsAdvSearch());
+		lavanteUtils.click(enClaimsAdvanceSearch.ClearQuerybtn());
+		lavanteUtils.waitForTime(4000);
+		lavanteUtils.click(enClaimsAdvanceSearch.SearchBtn());
+		
+		lavanteUtils.switchtoFrame(null);
+		String x=enClaimsAdvanceSearch.AlertText().getText();
+		Reporter.log("Error MSG Verification,Actuals:"+x+", Exp:Please enter at least one search criterion.");
+		softassert.assertEquals(x, "Please enter at least one search criterion.","Alert Text is not matching");
+		lavanteUtils.click(enClaimsAdvanceSearch.AlertOk());
+	
+		dataMap.put("ClearQuery", "");
+		dataMap.put("SaveSearch", "");
+		qname="testQuery"+randomnum();
+		dataMap.put("SpecifyQuery", qname);
+		dataMap.put("ErrMessage", "");
+		enClaimsAdvanceSearch.AdvanceSearch(dataMap);
+
+		lavanteUtils.switchtoFrame(enClaimsPage.IFrameSearchResults());
+		
+		String expSaveErrMsg = "'Specify Query Name' cannot be left blank.";
+		Reporter.log("Error Msg Verification,Actuals:"+dataMap.get("ErrMessage")+",Exp:"+expSaveErrMsg);
+		softassert.assertEquals(dataMap.get("ErrMessage"), expSaveErrMsg,"Save Query Error meassage does not match, Actual is: "+dataMap.get("ErrMessage"));
+		String expClaimType = "CD - Cash Discount#CV - CRV Repays";
+		String expClaimStatus = "Closed";
+		
+		List<WebElement> claimTypeList = enClaimsPage.iterateSearchHeaderFindColList("Claim Type");
+		
+		if(claimTypeList.size()>0){
+			for(int i=0; i<claimTypeList.size(); i++) {
+				List<WebElement> claimStatusList = enClaimsPage.iterateSearchHeaderFindColList("Claim Status");
+				Reporter.log("Search results of criteria1, Expected: "+expClaimType+" Actual: "+claimTypeList.get(i).getText());
+				softassert.assertTrue(expClaimType.contains(claimTypeList.get(i).getText()),"Search results of criteria1, Expected: "+expClaimType	+" Actual: "+claimTypeList.get(i).getText());
+				Reporter.log("Search results of criteria2, Expected: "+expClaimStatus+" Actual: "+claimStatusList.get(i).getText());
+				softassert.assertTrue(expClaimStatus.contains(claimStatusList.get(i).getText()),"Search results of criteria2, Expected: "+expClaimStatus	+" Actual: "+claimStatusList.get(i).getText());
+				flag=true;
+				break;
+			}
+		}else {
+			softassert.assertEquals("No results", enClaimsPage.NoData().getText());
+		}
+		
+		
+		
+		if(flag == false) {
+			Reporter.log("Search results are not matching");
+		}
+				
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Advance Claims Search: "+currenttime());
+	}
+	
+	/**
+	 * Do an advance search Save the search, edit and delete the saved search
+	 * @author Vidya.C
+	 * @throws Exception
+	 */
+	@Test(dataProvider = "AdvSaveSearch", dataProviderClass = ClaimSearchDataProvider.class)
+	public void AdvanceSearchEditSaveQuery(LinkedHashMap<String , String> dataMap) throws Exception
+	{
+		//lt.DBDBQUERY(dataMap);
+		Reporter.log("Test Started for Advance Search Edit Save Query: "+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		boolean flag=false;
+		
+		lavanteUtils.click(enClaimsAdvanceSearch.BuildQueryBtn());
+		
+		dataMap.put("ClearQuery", "");
+		dataMap.put("SaveSearch", "");
+		qname="testQuery"+randomnum();
+		dataMap.put("SpecifyQuery", qname);
+		enClaimsAdvanceSearch.AdvanceSearch(dataMap);
+		
+		lavanteUtils.switchtoFrame(enClaimsPage.IFrameSearchResults());
+		dataMap.remove("ClearQuery");
+		dataMap.remove("ClaimType");
+		dataMap.remove("SaveSearch");
+		dataMap.put("EditQuery", "");
+		enClaimsAdvanceSearch.savedQueryActions(dataMap);
+		dataMap.remove("SpecifyQuery");
+		
+		String expClaimStatus = "Pending Update";
+		dataMap.put("ClaimStatus", expClaimStatus);
+		dataMap.put("SaveSearch", "");
+		enClaimsAdvanceSearch.AdvanceSearch(dataMap);
+		
+		String expClaimType = "CD - Cash Discount#CV - CRV Repays";
+		if(dataMap.containsKey("ClaimType")){
+			expClaimType=dataMap.get("ClaimType");
+		}if(dataMap.containsKey("ClaimStatus")){
+			expClaimStatus=dataMap.get("ClaimStatus");
+		}
+		
+		lavanteUtils.switchtoFrame(enClaimsPage.IFrameSearchResults());
+		List<WebElement> claimTypeList = enClaimsPage.iterateSearchHeaderFindColList("Claim Type");
+		if(claimTypeList.size()>0){
+			for(int i=0; i<claimTypeList.size(); i++) {
+				List<WebElement> claimStatusList = enClaimsPage.iterateSearchHeaderFindColList("Claim Status");
+				Reporter.log("Search results of criteria1, Expected: "+expClaimType+" Actual: "+claimTypeList.get(i).getText(),true);
+				softassert.assertTrue(expClaimType.contains(claimTypeList.get(i).getText()),"Search results of criteria1, Expected: "+expClaimType	+" Actual: "+claimTypeList.get(i).getText());
+				Reporter.log("Search results of criteria2, Expected: "+expClaimStatus+" Actual: "+claimStatusList.get(i).getText(),true);
+				softassert.assertTrue(expClaimStatus.contains(claimStatusList.get(i).getText()),"Search results of criteria2, Expected: "+expClaimStatus+" Actual: "+claimStatusList.get(i).getText());
+				flag=true;
+			}
+		}else {
+			softassert.assertEquals("No results", enClaimsPage.NoData().getText());
+			flag=true;
+		}
+		
+		if(flag == false) {
+			Reporter.log("Search results are not matching");
+		}
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Advance Search of Claims Edit Saved Query: "+currenttime());
+	}
+
+	/**
+	 * Do an advance search Save the search, run and delete the saved search
+	 * @author Vidya.C
+	 * @throws Exception
+	 */
+	@Test(dataProvider = "AdvSaveSearch", dataProviderClass = ClaimSearchDataProvider.class)
+	public void AdvanceSearchRunDeleteQuery(LinkedHashMap<String , String> dataMap ) throws Exception
+	{
+		//lt.DBDBQUERY(dataMap);
+		Reporter.log("Test Started for Advance Search, Run Saved Query: "+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		boolean flag=false;
+
+		lavanteUtils.click(enClaimsAdvanceSearch.BuildQueryBtn());
+
+		dataMap.put("ClearQuery", "");
+		dataMap.put("SaveSearch", "");
+		qname="testQuery"+randomnum();
+		dataMap.put("SpecifyQuery", qname);
+		enClaimsAdvanceSearch.AdvanceSearch(dataMap);
+		lavanteUtils.waitForTime(5000);
+
+		dataMap.put("RunQuery", "");
+		enClaimsAdvanceSearch.savedQueryActions(dataMap);
+		String expClaimStatus = "Pending";
+		String expClaimType = "CD - Cash Discount#CV - CRV Repays";
+		if(dataMap.containsKey("ClaimType")){
+			expClaimType=dataMap.get("ClaimType");
+		}if(dataMap.containsKey("ClaimStatus")){
+			expClaimStatus=dataMap.get("ClaimStatus");
+		}
+		
+		
+		lavanteUtils.switchtoFrame(enClaimsPage.IFrameSearchResults());
+		List<WebElement> claimTypeList = enClaimsPage.iterateSearchHeaderFindColList("Claim Type");
+		
+		if(claimTypeList.size()>0){
+			for(int i=0; i<claimTypeList.size(); i++) {
+				List<WebElement> claimStatusList = enClaimsPage.iterateSearchHeaderFindColList("Claim Status");
+				Reporter.log("Search results of criteria1, Expected: "+expClaimType+" Actual: "+claimTypeList.get(i).getText());
+				softassert.assertTrue(expClaimType.contains(claimTypeList.get(i).getText()),"Search results of criteria1, Expected: "+expClaimType	+" Actual: "+claimTypeList.get(i).getText());
+				Reporter.log("Search results of criteria2, Expected: "+expClaimStatus+" Actual: "+claimStatusList.get(i).getText());
+				softassert.assertTrue(expClaimStatus.contains(claimStatusList.get(i).getText()),"Search results of criteria2, Expected: "+expClaimStatus+" Actual: "+claimStatusList.get(i).getText());
+				flag=true;
+				break;
+			}
+		}else {
+			softassert.assertEquals("No results", enClaimsPage.NoData().getText());
+		}
+		
+		if(flag == false) {
+			Reporter.log("Search results are not matching");
+		}
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of AdvanceSearch of Claims, Run Saved Query: "+currenttime());
+		
+	}
+	
+	/**
+	 * Do an advance search using build query, save the search using Save Query button in 
+	 * Advance Search tab and delete the saved search
+	 * @author Vidya.C
+	 * @throws Exception
+	 */
+	@Test(dataProvider = "AdvSaveSearch", dataProviderClass = ClaimSearchDataProvider.class)
+	public void AdvanceSearchSaveQuery2(LinkedHashMap<String , String> dataMap) throws Exception
+	{		
+		Reporter.log("Test Started for Advance Search using Save Query in Advance Search tab: "+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		boolean flag=false;
+		
+		lavanteUtils.clicks(enClaimsAdvanceSearch.BuildQueryBtn());
+		
+		dataMap.put("ClearQuery", "");
+		dataMap.put("Search", "");
+		enClaimsAdvanceSearch.AdvanceSearch(dataMap);
+		
+		dataMap.remove("Search","");
+		dataMap.put("SaveQuery", "");
+		qname="testQuery"+randomnum();
+		dataMap.put("SpecifyQuery", qname);
+		enClaimsAdvanceSearch.formActions(dataMap);
+		
+		lavanteUtils.switchtoFrame(enClaimsPage.IFrameSearchResults());
+		String expClaimType = "CD - Cash Discount#CV - CRV Repays";
+		String expClaimStatus = "Pending";
+		if(dataMap.containsKey("ClaimType")){
+			expClaimType=dataMap.get("ClaimType");
+		}if(dataMap.containsKey("ClaimStatus")){
+			expClaimStatus=dataMap.get("ClaimStatus");
+		}
+		
+		List<WebElement> claimTypeList = enClaimsPage.iterateSearchHeaderFindColList("Claim Type");
+		if(claimTypeList.size()>0){
+			for(int i=0; i<claimTypeList.size(); i++) {
+				List<WebElement> claimStatusList = enClaimsPage.iterateSearchHeaderFindColList("Claim Status");
+				Reporter.log("Search results of criteria1, Expected: "+expClaimType+" Actual: "+claimTypeList.get(i).getText());
+				softassert.assertTrue(expClaimType.contains(claimTypeList.get(i).getText()),"Search results of criteria1, Expected: "+expClaimType+" Actual: "+claimTypeList.get(i).getText());
+				Reporter.log("Search results of criteria2, Expected: "+expClaimStatus+" Actual: "+claimStatusList.get(i).getText());
+				softassert.assertTrue(expClaimStatus.contains(claimStatusList.get(i).getText()),"Search results of criteria2, Expected: "+expClaimStatus+" Actual: "+claimStatusList.get(i).getText());
+				flag=true;
+				break;
+			}
+		}else {
+			softassert.assertEquals("No results", enClaimsPage.NoData().getText());
+		}
+		
+		if(flag == false) {
+			Reporter.log("Search results are not matching");
+		}
+			
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Advance Search of Claims using Save Query: "+currenttime());
+	}
+	
+	/**
+	 * Do an advance search using Build query, Save the search as private and verify in private queruy
+	 * @author Ramya Raj
+	 * @throws Exception
+	 */
+	@Test
+	public void AdvanceSearchSavePrivateQuery() throws Exception
+	{
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		Reporter.log("Test Started for Advance Search using Build Query , Save query and verify in private query: "+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		
+		lavanteUtils.click(enClaimsAdvanceSearch.clear());
+		lavanteUtils.clicks(enClaimsAdvanceSearch.BuildQueryBtn());
+		lavanteUtils.switchtoFrame(enClaimsAdvanceSearch.IframeClaimsAdvSearch());
+		dataMap.put("ClaimType", "FR - Freight");
+		dataMap.put("ClaimStatus", "Pending");
+		dataMap.put("SaveSearch","");
+		qname = "testQuery"+randomnum();
+		dataMap.put("SpecifyQuery", qname);
+		enClaimsAdvanceSearch.AdvanceSearch(dataMap);
+		
+		lavanteUtils.waitForTime(4000);
+	    lavanteUtils.fluentwait(enClaimsAdvanceSearch.BuildQueryBtn());
+		boolean flag1= lavanteUtils.isElementDisplayed(lavanteUtils.driver.findElement(By.xpath("//table[@id='private_queries']/tbody/..//td[@title='"+dataMap.get("SpecifyQuery")+ "']")));
+	    softassert.assertTrue(flag1,"Query exist in private queries:"+dataMap.get("SpecifyQuery"));
+						
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Advance Claims Search private query: "+currenttime());
+	}
+	
+	/**
+	 * Do an advance search using Build query, Save the search as public and verify in public queruy
+	 * @author Ramya Raj
+	 * @throws Exception
+	 */
+	@Test
+	public void AdvanceSearchSavePublicQuery() throws Exception
+	{
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		Reporter.log("Test Started for Advance Search using Build Query , Save query and verify in public query: "+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		
+		lavanteUtils.click(enClaimsAdvanceSearch.clear());
+		lavanteUtils.clicks(enClaimsAdvanceSearch.BuildQueryBtn());
+		lavanteUtils.switchtoFrame(enClaimsAdvanceSearch.IframeClaimsAdvSearch());
+		
+		dataMap.put("ClaimType", "FR - Freight");
+		dataMap.put("SaveSearch","");
+		qname = "testQuery"+randomnum();
+		dataMap.put("SpecifyQuery", qname);
+		dataMap.put("SharewithUsers", "");
+		enClaimsAdvanceSearch.AdvanceSearch(dataMap);
+		
+	    lavanteUtils.fluentwait(enClaimsAdvanceSearch.BuildQueryBtn());
+		boolean flag1= lavanteUtils.isElementDisplayed(lavanteUtils.driver.findElement(By.xpath("//table[@id='public_queries']/tbody/..//td[@title='"+dataMap.get("SpecifyQuery")+ "']")));
+	    softassert.assertTrue(flag1,"Query exist in public queries:"+dataMap.get("SpecifyQuery"));
+						
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Advance Claims Search public query: "+currenttime());
+	}
+	
+	/**
+	 * Do an advance search using Build query, Save query and verify for duplicate message
+	 * @author Ramya Raj
+	 * @throws Exception
+	 */
+	@Test
+	public void AdvanceSearchSaveDuplicateQuery() throws Exception
+	{
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		Reporter.log("Test Started for Advance Search using Build Query , Save query and verify for duplcate message : "+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		
+		lavanteUtils.click(enClaimsAdvanceSearch.clear());
+		lavanteUtils.clicks(enClaimsAdvanceSearch.BuildQueryBtn());
+
+		dataMap.put("ClaimType", "FR - Freight");
+		dataMap.put("SaveSearch","");
+		qname = "testQuery"+randomnum();
+		dataMap.put("SpecifyQuery", qname);
+		dataMap.put("SharewithUsers", "");
+		enClaimsAdvanceSearch.AdvanceSearch(dataMap);
+
+		lavanteUtils.fluentwait(enClaimsAdvanceSearch.BuildQueryBtn());
+		boolean flag1= lavanteUtils.isElementDisplayed(lavanteUtils.driver.findElement(By.xpath("//table[@id='public_queries']/tbody/..//td[@title='"+dataMap.get("SpecifyQuery")+ "']")));
+	    softassert.assertTrue(flag1,"Query exist in public queries:"+dataMap.get("SpecifyQuery"));
+	  
+	    lavanteUtils.switchtoFrame(null);
+	    lavanteUtils.click(enClaimsAdvanceSearch.clear());
+		lavanteUtils.clicks(enClaimsAdvanceSearch.BuildQueryBtn());
+
+		String qname1 = "testQuery"+randomnum();
+		dataMap.put("SpecifyQuery", qname1);
+		enClaimsAdvanceSearch.AdvanceSearch(dataMap);
+		
+		lavanteUtils.switchtoFrame(null);
+		String alertText = enClaimsAdvanceSearch.alertDuplicateText().getText().trim();
+		Reporter.log("Error MSG Verification,Actuals:"+alertText+", Exp:Query is duplicate by search criteria, please enter a different query or use the saved query:");
+		softassert.assertEquals(alertText,"Query is duplicate by search criteria, please enter a different query or use the saved query: " + qname);
+					
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Advance Claims Search ,save query and verify for duplicate error message: "+currenttime());
+	}
+	
+	
+	@AfterMethod
+	public void SetupAftermethod() {
+		
+		if(qname.length()>0){
+			LinkedHashMap<String , String> dataMap = new LinkedHashMap<>();
+			dataMap.put("SpecifyQuery",qname);
+			dataMap.put("DeleteQuery","");
+			enClaimsAdvanceSearch.savedQueryActions(dataMap);
+		}	
+	}
+	
+	@AfterClass
+	public void SetupafterClassmethod(){
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+}

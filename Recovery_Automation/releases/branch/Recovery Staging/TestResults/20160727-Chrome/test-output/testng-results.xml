@@ -1,0 +1,2111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="5" total="45" passed="40">
+  <reporter-output>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@6a4f787bfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Application is launched successfully.]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@ea6147efound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@614ca7dffound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@66d3eec0found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@1af2d44afound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@618425b5found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@4fb3ee4efound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@25fb8912found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@2c35e847found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@21e360afound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@58d75e99found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@741a8937found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@52af26eefound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@4f2b503cfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@209da20dfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@1b2abca6found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@2ed2d9cbfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@43dac38ffound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@c88a337found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@485966ccfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@54bff557found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@5a56cdacfound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@57cf54e1found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@37d4349ffound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@6e0f5f7ffound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@3ee37e5afound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@3a44431afound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@194bcebffound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@f0da945found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@ffaa6affound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@316bcf94found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@3e11f9e9found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@729d991efound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@957e06found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@2c1b194afound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@66f57048found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@21282ed8found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@7bab3f1afound]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@23c30a20found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@3cebbb30found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@290222c1found]]>
+    </line>
+    <line>
+      <![CDATA[Pass: Confiig filejava.io.FileInputStream@6253c26found]]>
+    </line>
+    <line>
+      <![CDATA[Info: ------------Test ' loginWithValidCredentials ' Started------------]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'adminuser1' is entered in userName_txtField]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'lavante#123' is entered in password_TextField]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'login_Button' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'quickSearch_Form' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'auditSelectbox' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'auditSelectbox' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'Kaiser Permanente' is entered in auditdrpDownTextBox]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'auditdrpDownTextBox' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Info: ------------Test ' loginWithValidCredentials ' Ended------------]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'dashBoardLink' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'openClaims' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'batchedClaimslink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'batchedClaimslink' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'batchedClaimslink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'batchedClaimslink' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'supplierLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/supplierDashboard.lvp#Credit Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Fail: 'complainceLink' is not displayed]]>
+    </line>
+    <line>
+      <![CDATA[To View Screenshot <a href="file:///null/2016_27_Jul_11_57_42.png">Click Here</a>]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'auditLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/supplierDashboard.lvp#Credit Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'auditLink' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'currentMonCredits' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'auditContactDetails' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'furureCreditsGrph' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'claimHistoryGrph' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/outbound.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'claimHistoryGrph' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'supplierStatus' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'pendingCorrespondence' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'inboundLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/outbound.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'inboundLink' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'inboundDocumentStatistics' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'inboundDocumentSummary' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'recognizedfax' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'statements' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'verifications' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'statements' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'verificationsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'checks' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'checksTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'correspondence' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'correspondenceTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'duplicate' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'duplicateTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'profiles' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'profilesTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'unrecognizedfax' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'statements' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'verifications' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'statements' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'verificationsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'checks' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Fail: 'checksTable' is not displayedstale element reference: element is not attached to the page document
+  (Session info: chrome=51.0.2704.106)
+  (Driver info: chromedriver=2.14.313457 (3d645c400edf2e2c500566c9aa096063e707c9cf),platform=Windows NT 6.1 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 25 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.80', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={userDataDir=C:\Users\TALLUR~1.SRI\AppData\Local\Temp\scoped_dir9460_27791}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.106, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 4bb8099db623f6dd24cb3ca7be6ab937]]>
+    </line>
+    <line>
+      <![CDATA[To View Screenshot <a href="file:///null/2016_27_Jul_11_58_39.png">Click Here</a>]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'contactEntry' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'docQueueTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'supDetailsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'docDetails' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'batchingLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/dataentry.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Info: Switched successfully to frame :0]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'unBatchedCreditsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Info: Switched successfully to frame :1]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'batchedClaimsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Info: Switched successfully to frame :2]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'batchSummaryTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Info: Switched successfully to frame :3]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'batchedDetailsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'invoiceLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Info: Switched successfully to frame :0]]>
+    </line>
+    <line>
+      <![CDATA[Fail: 'invoicesTable' is not displayedno such element
+  (Session info: chrome=51.0.2704.106)
+  (Driver info: chromedriver=2.14.313457 (3d645c400edf2e2c500566c9aa096063e707c9cf),platform=Windows NT 6.1 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 10.03 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.80', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={userDataDir=C:\Users\TALLUR~1.SRI\AppData\Local\Temp\scoped_dir9460_27791}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.106, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 4bb8099db623f6dd24cb3ca7be6ab937
+*** Element info: {Using=css selector, value=#Invoice_List tr td}]]>
+    </line>
+    <line>
+      <![CDATA[To View Screenshot <a href="file:///null/2016_27_Jul_11_59_28.png">Click Here</a>]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'possibleDupesLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/invoicingPage.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Info: Switched successfully to frame :0]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'possDupSummaryTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Info: Switched successfully to frame :1]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'preBatchTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Info: Switched successfully to frame :2]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'postBatchTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Info: Switched successfully to frame :3]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'possDupDetailsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'summaryLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/creditMatch.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'currMonthTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'custSummaryTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'OutReachgrph' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'statementProcessedgrph' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'openClaimsBySpendGrph' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'openClaimsByCountGrph' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'subClaimsBySpendGrph' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'subClaimsByCountGrph' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'totalCreditsgrph' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'chkRegLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/auditSummary.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'chkRegList' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'addNewBtn' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'claimsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/checkRequest.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'totalClaimsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'claimsListTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'invoicesLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'invoiceSummaryTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'invoiceSummaryDetailsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'invoicesCreditLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'invoicesCreditTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'invoicesVoidLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#void Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'invoicesRefundLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#refund Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'reportsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#refund Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'reportsData' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'configurationLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/report.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'setUpLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/configurationSetup.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'addNewBtn' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'clientLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/configurationSetup.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'clientTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'businessUnitLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/businessUnit.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'businessUnitTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'preferencesLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/businessUnit.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'preferencesTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'reqLetterLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/automationConfiguration.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'reqLetterTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'manCurrencyLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/requestLetters.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'manageCurrencyTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'configurationJobsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/manageCurrency.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'faxJobsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'backgroundJobsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/jobConfiguration.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'backgroundJobsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'accountLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/backgroundJobs.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'usersListTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'addNewBtn' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'userGroupsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/accountConfiguration.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'userGroupsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'addNewBtn' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'auditGroupsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/userGroupConfiguration.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'auditGroupsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'addNewBtn' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'notificationsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/auditGroupSetUp.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'notificationsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'addNewBtn' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'financeLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/batchInvoiceNotification.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'finInvoicesTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'finContractDetailsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/financeConfiguration.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'finContractDetailsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'uploadsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/contractDetails.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'uploadFilesTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'templatesTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'uploadSuppFilesLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Info: Switched successfully to frame :0]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'uploadSuppFilesTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'uploadReqLetterLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Info: Switched successfully to frame :1]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'uploadReqLetterTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'uploadCreditFileLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Info: Switched successfully to frame :2]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'creditFilesTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'othersLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/uploadConfiguration.lvp#credit_files Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'othersFaxCommentsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/otherConfiguration.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'othersFaxCommentsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'addNewBtn' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'othersCreditRejectionLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'othersCreditRejectionTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'addNewBtn' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'othersPhoneExtensionLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/creditRejectionReason.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'othersPhoneExtensionTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'addNewBtn' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'mailerRegistryLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/phoneExtension.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'mailerRegistryTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'addNewBtn' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'assignmentsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/mailerRegistry.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'auditStatsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'holdsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'holdsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'searchBtn' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'creditsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/holdAssignments.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'creditsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'searchBtn' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'statementsLink' is clicked]]>
+    </line>
+    <line>
+      <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/creditAssignments.lvp Page is working fine]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'statementsTable' is displayed]]>
+    </line>
+    <line>
+      <![CDATA[Pass: 'searchBtn' is displayed]]>
+    </line>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="601275" started-at="2016-07-27T06:26:20Z" finished-at="2016-07-27T06:36:21Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="601275" started-at="2016-07-27T06:26:20Z" finished-at="2016-07-27T06:36:21Z">
+      <class name="lavante.recovery.testsuites.SanityTestSuite">
+        <test-method status="PASS" signature="preCondition(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="preCondition" is-config="true" duration-ms="18807" started-at="2016-07-27T11:56:20Z" finished-at="2016-07-27T11:56:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Windows]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[45.0]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: Application is launched successfully.]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@ea6147efound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@614ca7dffound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@66d3eec0found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@1af2d44afound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@618425b5found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@4fb3ee4efound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@25fb8912found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@2c35e847found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@21e360afound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@58d75e99found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@741a8937found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@52af26eefound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@4f2b503cfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@209da20dfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@1b2abca6found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@2ed2d9cbfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@43dac38ffound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@c88a337found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@485966ccfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@54bff557found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@5a56cdacfound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@57cf54e1found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@37d4349ffound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@6e0f5f7ffound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@3ee37e5afound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@3a44431afound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@194bcebffound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@f0da945found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@ffaa6affound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@316bcf94found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@3e11f9e9found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@729d991efound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@957e06found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@2c1b194afound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@66f57048found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@21282ed8found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@7bab3f1afound]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@23c30a20found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@3cebbb30found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@290222c1found]]>
+            </line>
+            <line>
+              <![CDATA[Pass: Confiig filejava.io.FileInputStream@6253c26found]]>
+            </line>
+            <line>
+              <![CDATA[Info: ------------Test ' loginWithValidCredentials ' Started------------]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'adminuser1' is entered in userName_txtField]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'lavante#123' is entered in password_TextField]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'login_Button' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'quickSearch_Form' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'auditSelectbox' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'auditSelectbox' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'Kaiser Permanente' is entered in auditdrpDownTextBox]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'auditdrpDownTextBox' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Info: ------------Test ' loginWithValidCredentials ' Ended------------]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- preCondition -->
+        <test-method status="PASS" signature="verifyDashBoardLink()[pri:-1, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyDashBoardLink" duration-ms="44958" started-at="2016-07-27T11:56:39Z" finished-at="2016-07-27T11:57:24Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'dashBoardLink' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyDashBoardLink -->
+        <test-method status="FAIL" signature="verifyDashBoardClaims()[pri:0, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyDashBoardClaims" duration-ms="10861" started-at="2016-07-27T11:57:24Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardLink" finished-at="2016-07-27T11:57:35Z">
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Timed out after 10 seconds waiting for element to be clickable: [[ChromeDriver: chrome on XP (4bb8099db623f6dd24cb3ca7be6ab937)] -> css selector: #claimsTable tr td]
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.80', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={userDataDir=C:\Users\TALLUR~1.SRI\AppData\Local\Temp\scoped_dir9460_27791}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.106, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 4bb8099db623f6dd24cb3ca7be6ab937]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: Timed out after 10 seconds waiting for element to be clickable: [[ChromeDriver: chrome on XP (4bb8099db623f6dd24cb3ca7be6ab937)] -> css selector: #claimsTable tr td]
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.80', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={userDataDir=C:\Users\TALLUR~1.SRI\AppData\Local\Temp\scoped_dir9460_27791}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.106, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 4bb8099db623f6dd24cb3ca7be6ab937
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:261)
+	at lavante.recovery.utilities.seleniumBaseClass.ExplicitWaitforLinksClick(seleniumBaseClass.java:472)
+	at lavante.recovery.pageobjects.DashBoard.ClaimsPage.verifyBatchedClaims(ClaimsPage.java:59)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardClaims(SanityTestSuite.java:73)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:823)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:778)
+	at org.testng.TestRunner.run(TestRunner.java:632)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1225)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1150)
+	at org.testng.TestNG.runSuites(TestNG.java:1075)
+	at org.testng.TestNG.run(TestNG.java:1047)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:75)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:46)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'openClaims' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'batchedClaimslink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'batchedClaimslink' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'batchedClaimslink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'batchedClaimslink' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyDashBoardClaims -->
+        <test-method status="FAIL" signature="verifyDashBoardSupplier()[pri:1, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyDashBoardSupplier" duration-ms="5225" started-at="2016-07-27T11:57:35Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardLink" finished-at="2016-07-27T11:57:40Z">
+          <exception class="org.openqa.selenium.StaleElementReferenceException">
+            <message>
+              <![CDATA[stale element reference: element is not attached to the page document
+  (Session info: chrome=51.0.2704.106)
+  (Driver info: chromedriver=2.14.313457 (3d645c400edf2e2c500566c9aa096063e707c9cf),platform=Windows NT 6.1 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 7 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.80', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={userDataDir=C:\Users\TALLUR~1.SRI\AppData\Local\Temp\scoped_dir9460_27791}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.106, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 4bb8099db623f6dd24cb3ca7be6ab937]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.StaleElementReferenceException: stale element reference: element is not attached to the page document
+  (Session info: chrome=51.0.2704.106)
+  (Driver info: chromedriver=2.14.313457 (3d645c400edf2e2c500566c9aa096063e707c9cf),platform=Windows NT 6.1 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 7 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.80', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={userDataDir=C:\Users\TALLUR~1.SRI\AppData\Local\Temp\scoped_dir9460_27791}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.106, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 4bb8099db623f6dd24cb3ca7be6ab937
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:327)
+	at org.openqa.selenium.remote.RemoteWebElement.isDisplayed(RemoteWebElement.java:368)
+	at sun.reflect.GeneratedMethodAccessor1.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at com.sun.proxy.$Proxy9.isDisplayed(Unknown Source)
+	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:302)
+	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:41)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:288)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:285)
+	at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:696)
+	at org.openqa.selenium.support.ui.ExpectedConditions$23.apply(ExpectedConditions.java:689)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:238)
+	at lavante.recovery.utilities.seleniumBaseClass.ExplicitWaitforLinksClick(seleniumBaseClass.java:472)
+	at lavante.recovery.pageobjects.DashBoard.SupplierPage.verifySupplierLink(SupplierPage.java:20)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardSupplier(SanityTestSuite.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:823)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:778)
+	at org.testng.TestRunner.run(TestRunner.java:632)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1225)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1150)
+	at org.testng.TestNG.runSuites(TestNG.java:1075)
+	at org.testng.TestNG.run(TestNG.java:1047)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:75)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:46)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.StaleElementReferenceException -->
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'supplierLink' is clicked]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyDashBoardSupplier -->
+        <test-method status="FAIL" signature="verifyDashBoardCompliance()[pri:2, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyDashBoardCompliance" duration-ms="2167" started-at="2016-07-27T11:57:40Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardLink" finished-at="2016-07-27T11:57:42Z">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Fail: 'complainceLink' is not displayed]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Fail: 'complainceLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:237)
+	at lavante.recovery.pageobjects.DashBoard.CompliancePage.verifycomplainceLink(CompliancePage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardCompliance(SanityTestSuite.java:121)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:823)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:778)
+	at org.testng.TestRunner.run(TestRunner.java:632)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1225)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1150)
+	at org.testng.TestNG.runSuites(TestNG.java:1075)
+	at org.testng.TestNG.run(TestNG.java:1047)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:75)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:46)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/supplierDashboard.lvp#Credit Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Fail: 'complainceLink' is not displayed]]>
+            </line>
+            <line>
+              <![CDATA[To View Screenshot <a href="file:///null/2016_27_Jul_11_57_42.png">Click Here</a>]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyDashBoardCompliance -->
+        <test-method status="PASS" signature="verifyAuditLink()[pri:3, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyAuditLink" duration-ms="16134" started-at="2016-07-27T11:57:42Z" finished-at="2016-07-27T11:57:58Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'auditLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/supplierDashboard.lvp#Credit Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'auditLink' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyAuditLink -->
+        <test-method status="PASS" signature="verifyauditOutboundPage()[pri:4, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyauditOutboundPage" duration-ms="8575" started-at="2016-07-27T11:57:58Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAuditLink" finished-at="2016-07-27T11:58:07Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'currentMonCredits' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'auditContactDetails' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'furureCreditsGrph' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'claimHistoryGrph' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/outbound.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'claimHistoryGrph' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'supplierStatus' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'pendingCorrespondence' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyauditOutboundPage -->
+        <test-method status="FAIL" signature="verifyauditInboundPage()[pri:5, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyauditInboundPage" duration-ms="32555" started-at="2016-07-27T11:58:07Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAuditLink" finished-at="2016-07-27T11:58:40Z">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Fail: 'checksTable' is not displayedstale element reference: element is not attached to the page document
+  (Session info: chrome=51.0.2704.106)
+  (Driver info: chromedriver=2.14.313457 (3d645c400edf2e2c500566c9aa096063e707c9cf),platform=Windows NT 6.1 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 25 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.80', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={userDataDir=C:\Users\TALLUR~1.SRI\AppData\Local\Temp\scoped_dir9460_27791}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.106, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 4bb8099db623f6dd24cb3ca7be6ab937]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Fail: 'checksTable' is not displayedstale element reference: element is not attached to the page document
+  (Session info: chrome=51.0.2704.106)
+  (Driver info: chromedriver=2.14.313457 (3d645c400edf2e2c500566c9aa096063e707c9cf),platform=Windows NT 6.1 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 25 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.80', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={userDataDir=C:\Users\TALLUR~1.SRI\AppData\Local\Temp\scoped_dir9460_27791}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.106, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 4bb8099db623f6dd24cb3ca7be6ab937
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:257)
+	at lavante.recovery.pageobjects.Audit.AuditInboundPage.verifyChecksTable(AuditInboundPage.java:126)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyauditInboundPage(SanityTestSuite.java:203)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:823)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:778)
+	at org.testng.TestRunner.run(TestRunner.java:632)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1225)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1150)
+	at org.testng.TestNG.runSuites(TestNG.java:1075)
+	at org.testng.TestNG.run(TestNG.java:1047)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:75)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:46)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'inboundLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/outbound.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'inboundLink' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'inboundDocumentStatistics' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'inboundDocumentSummary' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'recognizedfax' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'statements' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'verifications' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'statements' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'verificationsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'checks' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'checksTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'correspondence' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'correspondenceTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'duplicate' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'duplicateTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'profiles' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'profilesTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'unrecognizedfax' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'statements' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'verifications' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'statements' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'verificationsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'checks' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Fail: 'checksTable' is not displayedstale element reference: element is not attached to the page document
+  (Session info: chrome=51.0.2704.106)
+  (Driver info: chromedriver=2.14.313457 (3d645c400edf2e2c500566c9aa096063e707c9cf),platform=Windows NT 6.1 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 25 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.80', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={userDataDir=C:\Users\TALLUR~1.SRI\AppData\Local\Temp\scoped_dir9460_27791}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.106, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 4bb8099db623f6dd24cb3ca7be6ab937]]>
+            </line>
+            <line>
+              <![CDATA[To View Screenshot <a href="file:///null/2016_27_Jul_11_58_39.png">Click Here</a>]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyauditInboundPage -->
+        <test-method status="PASS" signature="verifycontactEntryPage()[pri:6, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifycontactEntryPage" duration-ms="7955" started-at="2016-07-27T11:58:40Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAuditLink" finished-at="2016-07-27T11:58:47Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'contactEntry' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'docQueueTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'supDetailsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'docDetails' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifycontactEntryPage -->
+        <test-method status="PASS" signature="verifyBatchingPage()[pri:7, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyBatchingPage" duration-ms="20742" started-at="2016-07-27T11:58:47Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAuditLink" finished-at="2016-07-27T11:59:08Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'batchingLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/dataentry.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Info: Switched successfully to frame :0]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'unBatchedCreditsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Info: Switched successfully to frame :1]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'batchedClaimsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Info: Switched successfully to frame :2]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'batchSummaryTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Info: Switched successfully to frame :3]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'batchedDetailsTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyBatchingPage -->
+        <test-method status="FAIL" signature="verifyInvoicePage()[pri:8, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyInvoicePage" duration-ms="20399" started-at="2016-07-27T11:59:08Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAuditLink" finished-at="2016-07-27T11:59:29Z">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Fail: 'invoicesTable' is not displayedno such element
+  (Session info: chrome=51.0.2704.106)
+  (Driver info: chromedriver=2.14.313457 (3d645c400edf2e2c500566c9aa096063e707c9cf),platform=Windows NT 6.1 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 10.03 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.80', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={userDataDir=C:\Users\TALLUR~1.SRI\AppData\Local\Temp\scoped_dir9460_27791}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.106, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 4bb8099db623f6dd24cb3ca7be6ab937
+*** Element info: {Using=css selector, value=#Invoice_List tr td}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Fail: 'invoicesTable' is not displayedno such element
+  (Session info: chrome=51.0.2704.106)
+  (Driver info: chromedriver=2.14.313457 (3d645c400edf2e2c500566c9aa096063e707c9cf),platform=Windows NT 6.1 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 10.03 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.80', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={userDataDir=C:\Users\TALLUR~1.SRI\AppData\Local\Temp\scoped_dir9460_27791}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.106, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 4bb8099db623f6dd24cb3ca7be6ab937
+*** Element info: {Using=css selector, value=#Invoice_List tr td}
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:257)
+	at lavante.recovery.pageobjects.Audit.AuditInvoicePage.verifyinvoicesTable(AuditInvoicePage.java:29)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyInvoicePage(SanityTestSuite.java:289)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:823)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:778)
+	at org.testng.TestRunner.run(TestRunner.java:632)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1225)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1150)
+	at org.testng.TestNG.runSuites(TestNG.java:1075)
+	at org.testng.TestNG.run(TestNG.java:1047)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:75)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:46)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'invoiceLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Info: Switched successfully to frame :0]]>
+            </line>
+            <line>
+              <![CDATA[Fail: 'invoicesTable' is not displayedno such element
+  (Session info: chrome=51.0.2704.106)
+  (Driver info: chromedriver=2.14.313457 (3d645c400edf2e2c500566c9aa096063e707c9cf),platform=Windows NT 6.1 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 10.03 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.80', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={userDataDir=C:\Users\TALLUR~1.SRI\AppData\Local\Temp\scoped_dir9460_27791}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.106, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 4bb8099db623f6dd24cb3ca7be6ab937
+*** Element info: {Using=css selector, value=#Invoice_List tr td}]]>
+            </line>
+            <line>
+              <![CDATA[To View Screenshot <a href="file:///null/2016_27_Jul_11_59_28.png">Click Here</a>]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyInvoicePage -->
+        <test-method status="PASS" signature="verifyPossibleDupesPage()[pri:9, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyPossibleDupesPage" duration-ms="20209" started-at="2016-07-27T11:59:29Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAuditLink" finished-at="2016-07-27T11:59:49Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'possibleDupesLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/invoicingPage.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Info: Switched successfully to frame :0]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'possDupSummaryTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Info: Switched successfully to frame :1]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'preBatchTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Info: Switched successfully to frame :2]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'postBatchTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Info: Switched successfully to frame :3]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'possDupDetailsTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyPossibleDupesPage -->
+        <test-method status="PASS" signature="verifySummaryPage()[pri:10, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifySummaryPage" duration-ms="8533" started-at="2016-07-27T11:59:49Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAuditLink" finished-at="2016-07-27T11:59:57Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'summaryLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/creditMatch.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'currMonthTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'custSummaryTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'OutReachgrph' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'statementProcessedgrph' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'openClaimsBySpendGrph' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'openClaimsByCountGrph' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'subClaimsBySpendGrph' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'subClaimsByCountGrph' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'totalCreditsgrph' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifySummaryPage -->
+        <test-method status="PASS" signature="verifyCheckRegistryPage()[pri:11, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyCheckRegistryPage" duration-ms="5747" started-at="2016-07-27T11:59:57Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAuditLink" finished-at="2016-07-27T12:00:03Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'chkRegLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/auditSummary.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'chkRegList' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'addNewBtn' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyCheckRegistryPage -->
+        <test-method status="PASS" signature="verifyClaimsPage()[pri:12, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyClaimsPage" duration-ms="33192" started-at="2016-07-27T12:00:03Z" finished-at="2016-07-27T12:00:36Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'claimsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/checkRequest.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'totalClaimsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'claimsListTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyClaimsPage -->
+        <test-method status="PASS" signature="verifyInvoicesPage()[pri:13, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyInvoicesPage" duration-ms="12663" started-at="2016-07-27T12:00:36Z" finished-at="2016-07-27T12:00:49Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'invoicesLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'invoiceSummaryTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'invoiceSummaryDetailsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'invoicesCreditLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'invoicesCreditTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'invoicesVoidLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#void Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'invoicesRefundLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#refund Page is working fine]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyInvoicesPage -->
+        <test-method status="PASS" signature="verifyReportsPage()[pri:14, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyReportsPage" duration-ms="5083" started-at="2016-07-27T12:00:49Z" finished-at="2016-07-27T12:00:54Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'reportsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#refund Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'reportsData' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyReportsPage -->
+        <test-method status="PASS" signature="verifyConfigTab()[pri:15, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyConfigTab" duration-ms="4673" started-at="2016-07-27T12:00:54Z" finished-at="2016-07-27T12:00:59Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'configurationLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/report.lvp Page is working fine]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyConfigTab -->
+        <test-method status="PASS" signature="verifySetupPage()[pri:16, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifySetupPage" duration-ms="3943" started-at="2016-07-27T12:00:59Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyConfigTab" finished-at="2016-07-27T12:01:03Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'setUpLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/configurationSetup.lvp Page is working fine]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifySetupPage -->
+        <test-method status="PASS" signature="verifySetupAuditPage()[pri:17, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifySetupAuditPage" duration-ms="98" started-at="2016-07-27T12:01:03Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifySetupPage" finished-at="2016-07-27T12:01:03Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'addNewBtn' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifySetupAuditPage -->
+        <test-method status="PASS" signature="verifySetupClientPage()[pri:18, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifySetupClientPage" duration-ms="7279" started-at="2016-07-27T12:01:03Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifySetupPage" finished-at="2016-07-27T12:01:10Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'clientLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/configurationSetup.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'clientTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifySetupClientPage -->
+        <test-method status="PASS" signature="verifySetupBUPage()[pri:19, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifySetupBUPage" duration-ms="4045" started-at="2016-07-27T12:01:10Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifySetupPage" finished-at="2016-07-27T12:01:14Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'businessUnitLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/businessUnit.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'businessUnitTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifySetupBUPage -->
+        <test-method status="PASS" signature="verifySetupPreferencesPage()[pri:20, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifySetupPreferencesPage" duration-ms="7037" started-at="2016-07-27T12:01:14Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifySetupPage" finished-at="2016-07-27T12:01:21Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'preferencesLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/businessUnit.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'preferencesTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifySetupPreferencesPage -->
+        <test-method status="PASS" signature="verifySetupReqLetterPage()[pri:21, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifySetupReqLetterPage" duration-ms="7072" started-at="2016-07-27T12:01:21Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifySetupPage" finished-at="2016-07-27T12:01:28Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'reqLetterLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/automationConfiguration.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'reqLetterTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifySetupReqLetterPage -->
+        <test-method status="PASS" signature="verifySetupManageCurrencyPage()[pri:22, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifySetupManageCurrencyPage" duration-ms="7002" started-at="2016-07-27T12:01:28Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifySetupPage" finished-at="2016-07-27T12:01:35Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'manCurrencyLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/requestLetters.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'manageCurrencyTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifySetupManageCurrencyPage -->
+        <test-method status="PASS" signature="verifyFaxJobsPage()[pri:23, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyFaxJobsPage" duration-ms="101963" started-at="2016-07-27T12:01:35Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyConfigTab" finished-at="2016-07-27T12:03:17Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'configurationJobsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/manageCurrency.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'faxJobsTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyFaxJobsPage -->
+        <test-method status="PASS" signature="verifyBackGroundJobsPage()[pri:24, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyBackGroundJobsPage" duration-ms="6735" started-at="2016-07-27T12:03:17Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyFaxJobsPage" finished-at="2016-07-27T12:03:24Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'backgroundJobsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/jobConfiguration.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'backgroundJobsTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyBackGroundJobsPage -->
+        <test-method status="PASS" signature="verifyAccountPage()[pri:25, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyAccountPage" duration-ms="4364" started-at="2016-07-27T12:03:24Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyConfigTab" finished-at="2016-07-27T12:03:28Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'accountLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/backgroundJobs.lvp Page is working fine]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyAccountPage -->
+        <test-method status="PASS" signature="verifyAccountUsersPage()[pri:26, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyAccountUsersPage" duration-ms="3179" started-at="2016-07-27T12:03:28Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAccountPage" finished-at="2016-07-27T12:03:31Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'usersListTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'addNewBtn' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyAccountUsersPage -->
+        <test-method status="PASS" signature="verifyAccountUserGroupsPage()[pri:27, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyAccountUserGroupsPage" duration-ms="4311" started-at="2016-07-27T12:03:31Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAccountPage" finished-at="2016-07-27T12:03:36Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'userGroupsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/accountConfiguration.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'userGroupsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'addNewBtn' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyAccountUserGroupsPage -->
+        <test-method status="PASS" signature="verifyAccountAuditGroupsPage()[pri:28, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyAccountAuditGroupsPage" duration-ms="4028" started-at="2016-07-27T12:03:36Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAccountPage" finished-at="2016-07-27T12:03:40Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'auditGroupsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/userGroupConfiguration.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'auditGroupsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'addNewBtn' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyAccountAuditGroupsPage -->
+        <test-method status="PASS" signature="verifyAccountNotificationPage()[pri:29, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyAccountNotificationPage" duration-ms="4261" started-at="2016-07-27T12:03:40Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAccountPage" finished-at="2016-07-27T12:03:44Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'notificationsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/auditGroupSetUp.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'notificationsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'addNewBtn' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyAccountNotificationPage -->
+        <test-method status="PASS" signature="verifyFinancePage()[pri:30, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyFinancePage" duration-ms="3984" started-at="2016-07-27T12:03:44Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyConfigTab" finished-at="2016-07-27T12:03:48Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'financeLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/batchInvoiceNotification.lvp Page is working fine]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyFinancePage -->
+        <test-method status="PASS" signature="verifyFinInvoicesPage()[pri:31, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyFinInvoicesPage" duration-ms="160" started-at="2016-07-27T12:03:48Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyFinancePage" finished-at="2016-07-27T12:03:48Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'finInvoicesTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyFinInvoicesPage -->
+        <test-method status="PASS" signature="verifyFinContractDetailsPage()[pri:32, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyFinContractDetailsPage" duration-ms="7434" started-at="2016-07-27T12:03:48Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyFinancePage" finished-at="2016-07-27T12:03:56Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'finContractDetailsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/financeConfiguration.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'finContractDetailsTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyFinContractDetailsPage -->
+        <test-method status="PASS" signature="verifyUploadsPage()[pri:33, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyUploadsPage" duration-ms="14950" started-at="2016-07-27T12:03:56Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyConfigTab" finished-at="2016-07-27T12:04:11Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'uploadsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/contractDetails.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'uploadFilesTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'templatesTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'uploadSuppFilesLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Info: Switched successfully to frame :0]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'uploadSuppFilesTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'uploadReqLetterLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Info: Switched successfully to frame :1]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'uploadReqLetterTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'uploadCreditFileLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Info: Switched successfully to frame :2]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'creditFilesTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyUploadsPage -->
+        <test-method status="PASS" signature="verifyOthersPage()[pri:34, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyOthersPage" duration-ms="4088" started-at="2016-07-27T12:04:11Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyConfigTab" finished-at="2016-07-27T12:04:15Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'othersLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/uploadConfiguration.lvp#credit_files Page is working fine]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyOthersPage -->
+        <test-method status="PASS" signature="verifyOthersFaxCommentsPage()[pri:35, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyOthersFaxCommentsPage" duration-ms="6048" started-at="2016-07-27T12:04:15Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyOthersPage" finished-at="2016-07-27T12:04:21Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'othersFaxCommentsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/otherConfiguration.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'othersFaxCommentsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'addNewBtn' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyOthersFaxCommentsPage -->
+        <test-method status="PASS" signature="verifyCreditrejectionPage()[pri:36, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyCreditrejectionPage" duration-ms="6171" started-at="2016-07-27T12:04:21Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyOthersPage" finished-at="2016-07-27T12:04:27Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'othersCreditRejectionLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'othersCreditRejectionTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'addNewBtn' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyCreditrejectionPage -->
+        <test-method status="PASS" signature="verifyPhoneExtensionPage()[pri:37, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyPhoneExtensionPage" duration-ms="8018" started-at="2016-07-27T12:04:27Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyOthersPage" finished-at="2016-07-27T12:04:35Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'othersPhoneExtensionLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/creditRejectionReason.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'othersPhoneExtensionTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'addNewBtn' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyPhoneExtensionPage -->
+        <test-method status="PASS" signature="verifyMailerRegistryPage()[pri:38, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyMailerRegistryPage" duration-ms="7098" started-at="2016-07-27T12:04:35Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyConfigTab" finished-at="2016-07-27T12:04:42Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'mailerRegistryLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/phoneExtension.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'mailerRegistryTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'addNewBtn' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyMailerRegistryPage -->
+        <test-method status="PASS" signature="verifyAssignmentsPage()[pri:39, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyAssignmentsPage" duration-ms="8068" started-at="2016-07-27T12:04:42Z" finished-at="2016-07-27T12:04:50Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'assignmentsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/mailerRegistry.lvp Page is working fine]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyAssignmentsPage -->
+        <test-method status="PASS" signature="verifyauditStatisticsAssignmentsPage()[pri:40, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyauditStatisticsAssignmentsPage" duration-ms="15079" started-at="2016-07-27T12:04:50Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAssignmentsPage" finished-at="2016-07-27T12:05:05Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'auditStatsTable' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyauditStatisticsAssignmentsPage -->
+        <test-method status="PASS" signature="verifyHoldsAssignmentsPage()[pri:41, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyHoldsAssignmentsPage" duration-ms="16992" started-at="2016-07-27T12:05:05Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAssignmentsPage" finished-at="2016-07-27T12:05:22Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'holdsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'holdsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'searchBtn' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyHoldsAssignmentsPage -->
+        <test-method status="PASS" signature="verifyCreditsAssignmentsPage()[pri:42, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyCreditsAssignmentsPage" duration-ms="16999" started-at="2016-07-27T12:05:22Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAssignmentsPage" finished-at="2016-07-27T12:05:39Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'creditsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/holdAssignments.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'creditsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'searchBtn' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyCreditsAssignmentsPage -->
+        <test-method status="PASS" signature="verifyStatementsAssignmentsPage()[pri:43, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="verifyStatementsAssignmentsPage" duration-ms="40952" started-at="2016-07-27T12:05:39Z" depends-on-methods="lavante.recovery.testsuites.SanityTestSuite.verifyAssignmentsPage" finished-at="2016-07-27T12:06:20Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Pass: 'statementsLink' is clicked]]>
+            </line>
+            <line>
+              <![CDATA[Pass: https://recoveryqa39.lavante.com/recovery/creditAssignments.lvp Page is working fine]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'statementsTable' is displayed]]>
+            </line>
+            <line>
+              <![CDATA[Pass: 'searchBtn' is displayed]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyStatementsAssignmentsPage -->
+        <test-method status="PASS" signature="clean()[pri:0, instance:lavante.recovery.testsuites.SanityTestSuite@490ab905]" name="clean" is-config="true" duration-ms="1389" started-at="2016-07-27T12:06:20Z" finished-at="2016-07-27T12:06:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clean -->
+      </class> <!-- lavante.recovery.testsuites.SanityTestSuite -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

@@ -1,0 +1,746 @@
+package com.lavante.sim.customer.TestScripts.Transactions.Invoices;
+
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.InvoiceDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+
+/**
+ * Created on 16-12-2015
+ * Created for Invoice Test case
+ * Enhancement covered SIM -7414,SIM-7526
+ * Ended on 04-02-2016
+ * @author Piramanayagam.S
+ *
+ */
+public class  InvoiceTC001 extends PageInitiator {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	String customerid="";
+	String i18nkey="";
+	
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+				
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		openAPP();	
+		//Assigning the driver to the object of lavante utils		
+		lavanteUtils.driver=driver;
+		
+		//Login
+		List<?> listofdatafrm=lavanteUtils.login("Invoice",browser);
+		LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String>();
+		LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+		customerid=(String) listofdatafrm.get(1);
+		//Login		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		
+	}
+	
+	/**
+	 * In this Class all test starts from Edit profile -Supplier contract management tab,hence navigated to the page
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeMethod
+	public void beforeClassMethod(){
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String, String>();
+		dataMap.put("maintab","Invoice");
+		dataMap.put("subtab", "InvoiceSearchResult");
+		
+		enobjhomePage.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+	}
+	
+	/**
+	 * * Enhancement: SIM-7414	Invoice approval - combine Save and Approve as one action
+	 * TC_01: Upload an Invoice (PO/Non-PO) and Submit for Approval.
+	 * @author tejaswini.ar
+	 * @param dataMap
+	 * @throws Exception 
+	 */
+	@Test(dataProvider="POInvoice",dataProviderClass=InvoiceDataProvider.class)
+	public void uploadInvoiceTC001(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		Reporter.log("Test Started for Verification of Status:"+currenttime());
+		
+		SoftAssert softassert=new SoftAssert();
+		
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+		
+		String supp=eninvoicePage.fetchPoSupplier(customerid);
+		dataMap.put("SuppName",supp);
+		dataMap.put("Upload", "");
+		dataMap.put("SelectSupplier","");
+		dataMap.put("supplierName",supp);
+		String invnum="TEJ"+randomnum();
+		dataMap.put("PONum", currenttime());
+		dataMap.put("InvNum",invnum);
+		dataMap.put("uploadSave","");
+		enuploadInvoice.UploadInvoice(dataMap);
+		
+		dataMap.put("InvNum",invnum);
+		dataMap.put("Search","");
+		eninvoiceBasicSearch.Search(dataMap);
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.fluentwait(eninvoicePage.TBLInvoicenumber());
+		String expStatus="Not Submitted";
+		String appStatus=eninvoicePage.getColumnText("Invoice Status",0);
+		Reporter.log("Status for Uploaded Invoice,Verification,Expected:"+expStatus+"In app,"+appStatus);
+		softassert.assertEquals(appStatus, expStatus,"Status Not Matched for the Invoice");
+		
+	// Compare total invoice amount with Sum of (Net+Tax+Freight) 
+		
+		String Totalinvamount=eninvoicePage.getColumnAttribute("Total Invoice","title");
+		Reporter.log("Totalinvamount for Uploaded Invoice,Intial before formatting:"+Totalinvamount);
+		Totalinvamount=LavanteUtils.replaceString(Totalinvamount,",","");
+		if(Totalinvamount.contains(" ")){ 
+			String[] x=Totalinvamount.split(" "); 
+			Totalinvamount=x[1];
+		}
+		Double intTotalinvamount=Double.parseDouble(Totalinvamount);
+		Reporter.log("Totalinvamount for Uploaded Invoice,Intial After formatting:"+intTotalinvamount);
+		
+		String NetAmount=eninvoicePage.getColumnText("Net Amount",0);
+		NetAmount=LavanteUtils.replaceString(NetAmount,",","");
+		Double intNetAmount=Double.parseDouble(NetAmount);
+		
+		String TaxAmount=eninvoicePage.getColumnText("Tax Amount",0);
+		TaxAmount=LavanteUtils.replaceString(TaxAmount,",","");
+		Double intTaxAmount=Double.parseDouble(TaxAmount);
+		
+		String FreightAmount=eninvoicePage.getColumnText("Freight Amount",0);
+		FreightAmount=LavanteUtils.replaceString(FreightAmount,",","");
+		Double intFreightAmount=Double.parseDouble(FreightAmount);
+		
+		Double SumAmount=intNetAmount+intTaxAmount+intFreightAmount;
+		Reporter.log("Total Invoice Amnt Verification,Actual:"+intTotalinvamount+",Expected"+SumAmount);
+		softassert.assertEquals(intTotalinvamount, SumAmount,"Total Invoice Amount is not matching.");
+		
+		lavanteUtils.click(eninvoicePage.selectfirstinvrecord());
+		
+		dataMap.remove("Upload");
+		dataMap.put("Submit", "");
+		eninvoicePage.formAction(dataMap);
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.fluentwait(eninvoicePage.TBLInvoicenumber());
+		
+		String nwstatus="Under Review";
+		String nwappstatus=eninvoicePage.getColumnText("Invoice Status",0);
+		Reporter.log("Status for Submitted Invoice,Verification,Expected:"+nwstatus+"In app,"+nwappstatus);
+		softassert.assertEquals(nwstatus, nwappstatus,"Status Not Matched for the Invoice");
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Status and TotalInvoiceAmount:"+currenttime());
+		
+	}
+	
+	/**
+	 * 7.1  Enhancement LATM 500
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws Exception 
+	 */
+	@Test(dataProvider="POInvoice",dataProviderClass=InvoiceDataProvider.class)
+	public void uploadSubmitInvoiceTC02(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		Reporter.log("Test Started for Verification of Status:"+currenttime());
+		
+		SoftAssert softassert=new SoftAssert();
+		
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+		
+		String invnum="TEJ"+randomnum();
+		String supp=eninvoicePage.fetchPoSupplier(customerid);
+		dataMap.put("SuppName",supp);
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+
+		dataMap.put("SelectSupplier","");
+		dataMap.put("supplierName",supp);
+		dataMap.put("POQuestion","YES");
+		dataMap.put("PONum", currenttime());
+		dataMap.put("InvNum",invnum);
+		dataMap.put("uploadSubmit","");
+		enuploadInvoice.UploadInvoice(dataMap);
+
+		dataMap.put("InvNum",invnum);
+		dataMap.put("Search","");
+		eninvoiceBasicSearch.Search(dataMap);
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.fluentwait(eninvoicePage.TBLInvoicenumber());
+		String expStatus="Under Review";
+		String appStatus=eninvoicePage.getColumnText("Invoice Status",0);
+		Reporter.log("Status for Uploaded Invoice,Verification,Expected:"+expStatus+"In app,"+appStatus);
+		softassert.assertEquals(appStatus, expStatus,"Status Not Matched for the Invoice");
+		
+	// Compare total invoice amount with Sum of (Net+Tax+Freight) 
+		String Totalinvamount=eninvoicePage.getColumnAttribute("Total Invoice","title");
+		if(Totalinvamount.contains(" ")){ 
+			String[] x=Totalinvamount.split(" "); 
+			Totalinvamount=x[1];
+		} 
+		Totalinvamount=LavanteUtils.replaceString(Totalinvamount,",","");
+		Double intTotalinvamount=Double.parseDouble(Totalinvamount);
+
+		String NetAmount=eninvoicePage.getColumnText("Net Amount",0);
+		NetAmount=LavanteUtils.replaceString(NetAmount,",","");
+		Double intNetAmount=Double.parseDouble(NetAmount);
+		
+		String TaxAmount=eninvoicePage.getColumnText("Tax Amount",0);
+		TaxAmount=LavanteUtils.replaceString(TaxAmount,",","");
+		Double intTaxAmount=Double.parseDouble(TaxAmount);
+		
+		String FreightAmount=eninvoicePage.getColumnText("Freight Amount",0);
+		FreightAmount=LavanteUtils.replaceString(FreightAmount,",","");
+		Double intFreightAmount=Double.parseDouble(FreightAmount);
+		
+		Double SumAmount=intNetAmount+intTaxAmount+intFreightAmount;
+		Reporter.log("Total Invoice Amnt Verification,Actual:"+intTotalinvamount+",Expected"+SumAmount);
+		softassert.assertEquals(intTotalinvamount, SumAmount,"Total Invoice Amount is not matching.");
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Status and TotalInvoiceAmount:"+currenttime());
+		
+	}
+
+	/**
+	 * 7.1  Enhancement LATM 500
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws Exception 
+	 */
+	@Test
+	public void EditSubmitInvoiceTC03() throws Exception
+	{
+		Reporter.log("Test Started for Verification of Status:"+currenttime());
+		
+		SoftAssert softassert=new SoftAssert();
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String>();
+		dataMap.put("InvStatus","Not Submitted");
+		dataMap.put("Search","");
+		eninvoiceBasicSearch.Search(dataMap);
+
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.fluentwait(eninvoicePage.TBLInvoicenumber());
+		String appStatus=eninvoicePage.getColumnText("Invoice Status",0);
+		Reporter.log("Status for Uploaded Invoice,Verification,Expected:Not Submitted In app,"+appStatus);
+		softassert.assertEquals(appStatus, "Not Submitted","Status Not Matched for the Invoice");
+		
+		String invnum="";
+		outr:if(eninvoicePage.Listinvnum().size()>0){
+			for(int i=0;i<eninvoicePage.Listinvnum().size();i++){
+				invnum=eninvoicePage.Listinvnum().get(i).getText();
+
+				dataMap.put("Edit","");
+				eninvoicePage.selectSupplierFormAction(dataMap);
+				
+				dataMap.put("uploadSubmit","");
+				enuploadInvoice.formInvoiceDetails(dataMap);
+				
+				break outr;
+			}
+		}
+
+		dataMap.put("InvNum",invnum);
+		dataMap.put("InvStatus","Under Review");
+		dataMap.put("Search","");
+		eninvoiceBasicSearch.Search(dataMap);
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.fluentwait(eninvoicePage.TBLInvoicenumber());
+		String expStatus="Under Review";
+		appStatus=eninvoicePage.getColumnText("Invoice Status",0);
+		Reporter.log("Status for Uploaded Invoice,Verification,Expected:"+expStatus+"In app,"+appStatus);
+		softassert.assertEquals(appStatus, expStatus,"Status Not Matched for the Invoice");
+		
+	// Compare total invoice amount with Sum of (Net+Tax+Freight) 
+		String Totalinvamount=eninvoicePage.getColumnAttribute("Total Invoice","title");
+		if(Totalinvamount.contains(" ")){ 
+			String[] x=Totalinvamount.split(" "); 
+			Totalinvamount=x[1];
+		} 
+		Totalinvamount=LavanteUtils.replaceString(Totalinvamount,",","");
+		Double intTotalinvamount=Double.parseDouble(Totalinvamount);
+
+		String NetAmount=eninvoicePage.getColumnText("Net Amount",0);
+		NetAmount=LavanteUtils.replaceString(NetAmount,",","");
+		Double intNetAmount=Double.parseDouble(NetAmount);
+		
+		String TaxAmount=eninvoicePage.getColumnText("Tax Amount",0);
+		TaxAmount=LavanteUtils.replaceString(TaxAmount,",","");
+		Double intTaxAmount=Double.parseDouble(TaxAmount);
+		
+		String FreightAmount=eninvoicePage.getColumnText("Freight Amount",0);
+		FreightAmount=LavanteUtils.replaceString(FreightAmount,",","");
+		Double intFreightAmount=Double.parseDouble(FreightAmount);
+		
+		Double SumAmount=intNetAmount+intTaxAmount+intFreightAmount;
+		Reporter.log("Total Invoice Amnt Verification,Actual:"+intTotalinvamount+",Expected"+SumAmount);
+		softassert.assertEquals(intTotalinvamount, SumAmount,"Total Invoice Amount is not matching.");
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Status and TotalInvoiceAmount:"+currenttime());
+		
+	}
+	
+	/**
+	 * * Enhancement: SIM-7414	Invoice approval - combine Save and Approve as one action
+	 * TC_02: Search for Supplier name, Compare the Invoice Number & edit the Invoice - Save And Approve
+	 * @author tejaswini.ar
+	 * @param dataMap
+	 * @throws Exception 
+	 * 
+	 * Hence Marking not to run Workflow Need to be configure
+	 */
+	//@Test(enabled=false,dataProvider="SubmitInvoice",dataProviderClass=InvoiceDataProvider.class)
+	public void ApproveNonPOTC04(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		
+		Reporter.log("Test Started for Verification of Status:"+currenttime());
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+		
+		String invnum="TEJ"+randomnum();
+		
+		dataMap.put("InvNum", invnum);
+		dataMap.put("uploadSave","");
+		dataMap.put("SelectSupplier","");
+		
+		enuploadInvoice.UploadInvoice(dataMap);
+				
+		dataMap.put("InvNum",invnum);
+		dataMap.put("Search","");
+		
+		eninvoiceBasicSearch.Search(dataMap);
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.fluentwait(eninvoicePage.TBLInvoicenumber());
+		String expStatus=" Not Submitted";
+		String appStatus=eninvoicePage.getColumnText("Invoice Status",0);
+		Reporter.log("Status for Uploaded Invoice,Verification,Expected:"+expStatus+"In app,"+appStatus);
+		softassert.assertEquals(appStatus, expStatus,"Status Not Matched for the Invoice");
+		
+		lavanteUtils.click(eninvoicePage.selectfirstinvrecord());
+		
+		dataMap.remove("Upload");
+		dataMap.put("Submit", "");
+	
+		eninvoicePage.formAction(dataMap);
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.fluentwait(eninvoicePage.TBLInvoicenumber());
+		
+		String nwstatus="Under Review";
+		String nwappstatus=eninvoicePage.getColumnText("Invoice Status",0);
+		Reporter.log("Status for Submitted Invoice,Verification,Expected:"+nwstatus+"In app,"+nwappstatus);
+		softassert.assertEquals(nwstatus, nwappstatus,"Status Not Matched for the Invoice");
+	
+
+		dataMap.put("maintab","TASKS");
+		dataMap.put("subtab", "getInvoiceTasks");
+		enobjhomePage.selectTab(dataMap);
+
+		lavanteUtils.waitForTime(3000);
+		lavanteUtils.switchtoFrame(null);
+		
+		enTaskinvoicestoApprve.Search(dataMap);
+		
+		String appinum="";
+		int i=0;
+		int j=0;
+		Reporter.log("Trying From:"+currenttime());
+		outr:do{
+			lavanteUtils.click(enTaskinvoicestoApprve.Search());
+			lavanteUtils.waitForTime(4000);
+			for(i=0;i<enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Invoice Number").size();i++){
+				appinum=enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Invoice Number").get(i).getText();
+				if(appinum.equalsIgnoreCase(invnum)){
+					Reporter.log("Found the Invoice in the list");
+					flag=true;
+					break outr;
+				}
+			}j++;
+		}while(!(invnum.equalsIgnoreCase(appinum))&&(j<50)); 
+		Reporter.log("Try Ended:"+currenttime());
+		if(flag==true){
+			flag=false;
+			lavanteUtils.click(enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Task ID").get(i));
+			lavanteUtils.click(ensplitInvoice.Actnbtn());
+			lavanteUtils.click(enTaskinvoicestoApprve.EditInvoice());
+		
+			dataMap.put("SaveAndApprove", "");
+			dataMap.put("SubmitComment", "");
+			enTaskinvoicestoApprve.TaskInvoice(dataMap);
+			
+			dataMap.clear();
+			dataMap.put("maintab","Supplier");
+			dataMap.put("subtab", "InvoiceSearchResult");
+			
+			enobjhomePage.selectTab(dataMap);
+			
+			dataMap.put("InvNum",invnum);
+			dataMap.put("Search","");
+			
+			eninvoiceBasicSearch.Search(dataMap);
+			
+			lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+			lavanteUtils.fluentwait(eninvoicePage.TBLInvoicenumber());
+			expStatus="Approved";
+			appStatus=eninvoicePage.getColumnText("Invoice Status",0);
+			Reporter.log("Status for Uploaded Invoice,Verification,Expected:"+expStatus+"In app,"+appStatus);
+			softassert.assertEquals(appStatus, expStatus,"Status Not Matched for the Invoice");
+			flag=true;
+		
+		}
+		
+		if(flag==false){
+			softassert.assertTrue(false,"Please RETEST");
+			
+		}
+		
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Status:"+currenttime());
+		
+	}
+	
+	/**
+	 * Enhancement: SIM-7526 - Invoice Upload - 'Deliverable' selection should not be shown until SOW selection
+	 * TC_01: No SOW Selection 
+	 * @author tejaswini.ar
+	 * @param dataMap
+	 * @throws Exception 
+	 */	
+	@Test(dataProvider="EmptySOW",dataProviderClass=InvoiceDataProvider.class)
+	public void EmptySOW05(LinkedHashMap<String, String> dataMap) throws Exception
+   {
+		
+		Reporter.log("Test Started for Verification of SOW:"+currenttime());
+		
+		System.out.println(dataMap);
+		SoftAssert softassert=new SoftAssert();
+		
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+		
+		String supp=eninvoicePage.fetchDelSupplier(customerid);
+		dataMap.put("supplierName",supp);
+		dataMap.put("SelectSupplier","");
+		dataMap.put("InvSOWNum","ANY");dataMap.remove("InvSOWNum");
+		dataMap.put("SelectSupplier","");
+		enuploadInvoice.UploadInvoice(dataMap);
+		
+		Reporter.log("SOW Number field display:"+enuploadInvoice.selectSOW().isDisplayed());	
+		softassert.assertTrue(enuploadInvoice.selectSOW().isDisplayed(),"SOW is Not Available");
+		
+		Reporter.log("Deliverable field display:"+enuploadInvoice.selectdeliverable().size());
+		
+		softassert.assertTrue(enuploadInvoice.selectdeliverable().size()==0,"Deliverable is Available:"+enuploadInvoice.selectdeliverable().size());
+		
+		softassert.assertAll();
+		
+			
+		
+		Reporter.log("Test Ended for Verification of SOW:"+currenttime());
+	}
+	
+	/**
+	 * Enhancement: SIM-7526 - Invoice Upload - 'Deliverable' selection should not be shown until SOW selection
+	 * Select SOW & Deliverable will be displayed
+	 * TC_02: Select an SOW Number.  
+	 * @author tejaswini.ar
+	 * @param dataMap
+	 * @throws Exception 
+	 */	
+	@Test(dataProvider="EmptyDEL",dataProviderClass=InvoiceDataProvider.class)
+	public void EMPTYDEL06(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		
+		Reporter.log("Test Started for Verification of SOW & Deliverables:"+currenttime());
+		
+		SoftAssert softassert=new SoftAssert();
+		
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+		
+		String supp=eninvoicePage.fetchDelSupplier(customerid);
+		dataMap.put("supplierName",supp);
+		dataMap.put("SelectSupplier","");
+		dataMap.put("InvSOWNum","ANY");
+		enuploadInvoice.UploadInvoice(dataMap);		
+		
+		softassert.assertTrue(enuploadInvoice.selectSOW().isDisplayed(),"SOW is Not Available");
+		softassert.assertTrue(enuploadInvoice.selectdeliverable().size()>0,"Deliverable is not Available");
+		
+		Reporter.log("SOW Number field  displayed,exp true,Actual:"+enuploadInvoice.selectSOW().isDisplayed());	
+		Reporter.log("Deliverable field displayed,exp 0,Actual:"+enuploadInvoice.selectdeliverable().size() );	
+		
+		softassert.assertAll();
+		
+		Reporter.log("Test Started for Verification of SOW & Deliverables:"+currenttime());
+		
+	}
+	
+	/**Create Custom Field and enter the data and upload invoice
+	 * Verify the Value in the invoice page
+	 * * Custom Field Upload Invoice Test
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws Exception 
+	 */
+	@Test(dataProvider="POInvoice",dataProviderClass=InvoiceDataProvider.class)
+	public void customfieluploadInvoiceTC07(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		Reporter.log("Test Started for Custom  Field Verification:"+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		
+		i18nkey="AutoSP"+randomnum()+customerid;
+		
+		String query1=" Insert into I18NKey ( i18nKey) VALUES (   '"+i18nkey+"')";
+		
+		String query2=" INSERT INTO UserTranslation (i18nKey  ,LanguageID  ,UTFString  ,IsCustomerSpecific) VALUES "
+				+ " ('"+i18nkey+"'   ,50    ,'"+i18nkey+"'   ,'' )";
+		
+		String query3=" insert into CFE_Definition (    CFE_PageInfoID  ,CustomerID  ,Label_i18nKey  ,FieldDataTypeID   ,DisplayOrder  ,UIFieldId  ,KeyCategoryID  ,ValidationRegEx  ,MaxSize  ,IsApplicationRequired"
+				+ "	,IsViewableBySupplier  ,TemplateURL  ,HelpText_i18nKey  ,TemplateDisplayText_i18nKey   ,IsExcludeFromTable  ,IsVisible  ,CreatedBy  ,CreatedOn  ,UpdatedBy  ,UpdatedOn  ,IsDisplayOnTop  ,IsNotify"
+				+ "  ,IsNotifyApprove) VALUES ( "
+				+ "  5    ,"+customerid+"  "
+				+ "  ,'"+i18nkey+"'   ,1     ,10  "
+				+ "  ,'"+i18nkey+"'   ,NULL    ,N'' "
+				+ "  ,0    ,''    ,''  "
+				+ "  ,''  ,'"+i18nkey+"'  ,'"+i18nkey+"'  "
+				+ "  ,''   ,'1'   ,'' ,''  "
+				+ "  ,''  ,''   ,''   ,''    ,''  ) ";
+
+		lavanteUtils.UpdateDB(query1);
+		lavanteUtils.UpdateDB(query2);
+		lavanteUtils.UpdateDB(query3);
+		
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+		
+		String supp=eninvoicePage.fetchPoSupplier(customerid);
+		dataMap.put("SuppName",supp);
+		String invnum="TEJ"+randomnum();
+		dataMap.put("Upload", "");
+		dataMap.put("SelectSupplier","");
+		eninvoicePage.formAction(dataMap);
+		dataMap.put("supplierName",supp);
+		dataMap.put("PONum", currenttime());
+		dataMap.put("InvNum",invnum);
+		enuploadInvoice.fillInvoiceDetails(dataMap);
+
+		driver.findElement(By.id(i18nkey)).sendKeys(i18nkey);
+		
+		dataMap.put("uploadSave","");
+		enuploadInvoice.formInvoiceDetails(dataMap);
+		
+		dataMap.put("InvNum",invnum);
+		dataMap.put("Search","");
+		eninvoiceBasicSearch.Search(dataMap);
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.fluentwait(eninvoicePage.TBLInvoicenumber());
+		String appStatus=driver.findElement(By.cssSelector("tbody [title*='"+i18nkey+"']")).getText();
+
+		Reporter.log("Custom Field,Verification,Expected:"+i18nkey+"In app,"+appStatus,true);
+		softassert.assertEquals(appStatus, i18nkey,"Status Not Matched for the Invoice");
+		
+		lavanteUtils.UpdateDB("delete from CFE_Value WhERe FieldValue='"+i18nkey+"'");
+		lavanteUtils.UpdateDB("delete from CFE_Definition where Label_i18nKey='"+i18nkey+"'");
+		lavanteUtils.UpdateDB("delete from CFE_Value WhERe FieldValue='"+i18nkey+"'");
+		lavanteUtils.UpdateDB("delete from UserTranslation where i18nKey='"+i18nkey+"'");
+		lavanteUtils.UpdateDB("delete from I18NKey where i18nKey='"+i18nkey+"'");
+		i18nkey="";
+		softassert.assertAll();
+		Reporter.log("Test Ended for Custom Verification:"+currenttime());
+		
+	}
+
+	/**
+	 * Upload Invalid File and Verify the error Message
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws Exception 
+	 */
+	@Test(dataProvider="InvalidUpload",dataProviderClass=InvoiceDataProvider.class)
+	public void invalidupload08(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		
+		Reporter.log("Test Started for Status for Non PDF File while Upload Invoice:"+currenttime());
+		SoftAssert softassert=new SoftAssert();
+		
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+		
+		String invnum="TEJ"+randomnum();
+		String supp=eninvoicePage.fetchDelSupplier(customerid);
+		dataMap.put("supplierName",supp);
+		dataMap.put("InvNum", invnum);
+		dataMap.put("InvSOWNum", "ANY");
+		dataMap.put("InvDel", "ANY");
+		dataMap.put("SelectSupplier","");
+		enuploadInvoice.fillInvoiceDetails(dataMap);
+		
+		lavanteUtils.click(enuploadInvoice.Uploadinvoicebtn());
+		lavanteUtils.waitForTime(3000);
+		
+		String nwstatus="The file(s) ("+dataMap.get("Invfile")+") uploaded by you is not in a valid format.";
+		String nwappstatus=enuploadInvoice.errmsg().getText();
+		Reporter.log("Status for Non PDF File while Upload Invoice,Verification,Expected:"+nwstatus+"In app,"+nwappstatus,true);
+		softassert.assertEquals(nwstatus, nwappstatus,"Status for Non PDF File while Upload Invoice");
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended for Verification of Status for Non PDF File while Upload Invoice:"+currenttime());
+		
+		
+	}
+
+	/**
+	 * Add Comments to the uploaded invoice
+	 * 
+	 * @author Piramanayagam S
+	 * @param dataMap
+	 * @throws Exception 
+	 */
+	@Test(dataProvider="SubmitInvoice",dataProviderClass=InvoiceDataProvider.class)
+	public void AddCommentsInvoice09(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		
+		Reporter.log("Test Started for Verification of Status:"+currenttime());
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+
+		String invnum="TEJ"+randomnum();
+		String appStatus="";
+		String expStatus=appStatus;
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		int size=eninvoicePage.Listinvnum().size();
+		if(!(size>0)){
+			dataMap.put("Upload", "");
+			eninvoicePage.formAction(dataMap);
+			
+			dataMap.put("InvNum", invnum);
+			dataMap.put("uploadSave","");
+			dataMap.put("SelectSupplier","");
+			enuploadInvoice.UploadInvoice(dataMap);
+			appStatus="Not Submitted";
+		}else{
+			invnum=eninvoicePage.Listinvnum().get(0).getText();
+			appStatus=eninvoicePage.getColumnText("Invoice Status",0);
+		}
+		dataMap.put("InvNum",invnum);
+		dataMap.put("Search","");
+		eninvoiceBasicSearch.Search(dataMap);
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.fluentwait(eninvoicePage.TBLInvoicenumber());
+		expStatus=appStatus;
+		Reporter.log("Inv Num Created:"+invnum);
+		appStatus=eninvoicePage.getColumnText("Invoice Status",0);
+		Reporter.log("Status for Uploaded Invoice,Verification,Expected:"+expStatus+"In app,"+appStatus);
+		softassert.assertEquals(appStatus, expStatus,"Status Not Matched for the Invoice");
+		
+		outr:if(eninvoicePage.Listinvnum().size()>0){
+			for(int i=0;i<eninvoicePage.Listinvnum().size();i++){
+				String act=eninvoicePage.Listinvnum().get(i).getText();
+				if(act.equalsIgnoreCase(invnum)){		
+					lavanteUtils.click(eninvoicePage.Listinvnum().get(i));
+					lavanteUtils.fluentwait(eninvoicePage.taxamnt());
+					
+					String x="AutoSP"+randomnum()+customerid;
+					dataMap.put("EnterComment", x);
+					dataMap.put("PublicComment", "");
+					eninvoicePage.addCommentView(dataMap);
+
+					lavanteUtils.waitForTime(4000);
+					lavanteUtils.fluentwait(eninvoicePage.taxamnt());
+					for(int j=0;j<eninvoicePage.PublicCommentsList().size();j++){
+					act=eninvoicePage.PublicCommentsList().get(j).getText();
+					Reporter.log(act,true);
+					if(act.equalsIgnoreCase(x)){
+						Reporter.log("Comment Added"+act+",Expected:"+x);
+						softassert.assertTrue(true,"Comment Not Matched");
+						flag=true;
+						break outr;
+						}
+					}
+				}
+			}
+		}else {
+			softassert.assertTrue(false,"No Data Available");
+			flag=true;
+		}
+		
+		softassert.assertTrue(flag,"Please Re-test");
+		softassert.assertAll();
+		Reporter.log("Test Ended for Add Comment:"+currenttime());
+	}
+	
+	@AfterMethod
+	public void SetupAftermethod()
+	{
+		enobjhomePage.popupclose();
+		lavanteUtils.refreshPage();
+		
+	}
+	
+	@AfterClass
+	public void SetupafterClassmethod() throws FileNotFoundException, IOException, SQLException{
+		if(i18nkey.length()>0){
+			lavanteUtils.UpdateDB("delete from CFE_Value WhERe FieldValue='"+i18nkey+"'");
+			lavanteUtils.UpdateDB("delete from CFE_Definition where Label_i18nKey='"+i18nkey+"'");
+			lavanteUtils.UpdateDB("delete from CFE_Value WhERe FieldValue='"+i18nkey+"'");
+			lavanteUtils.UpdateDB("delete from UserTranslation where i18nKey='"+i18nkey+"'");
+			lavanteUtils.UpdateDB("delete from I18NKey where i18nKey='"+i18nkey+"'");
+		}
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+
+
+}
+

@@ -1,0 +1,14 @@
+
+o
+squid:S106";Replace this usage of System.out or System.err by a logger.(±Í»ú8ô­²£-H©®?RMAJORZ
+CODE_SMELL
+o
+squid:S106";Replace this usage of System.out or System.err by a logger.(çíÈ8Îà²£-Hª®?RMAJORZ
+CODE_SMELL
+o
+squid:S106";Replace this usage of System.out or System.err by a logger.(ş¥‰8ô­²£-H«®?RMAJORZ
+CODE_SMELL
+rsquid:S1197"8Move the array designator from the variable to the type.(®Ü¢œùÿÿÿÿ8ô­²£-H¬®?RMINORZ
+CODE_SMELL
+^squid:S1172"*Remove this unused method parameter "num".(ı¨ño8ô­²£-H­®?RMAJORZ
+CODE_SMELL

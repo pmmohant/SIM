@@ -1,0 +1,463 @@
+package com.lavante.sim.customer.pageobjects.Messages;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Reporter;
+import org.testng.Assert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+/**
+ * Message
+ * @author Piramanayagam.S
+ *
+ */
+
+public class Message {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+
+	public Message(WebDriver driver){
+		lavanteUtils.driver=driver;
+	}
+	
+	@FindBy(css="table-grid thead th")
+	private List<WebElement> Headers;
+	
+	@FindBy(css="#Sent th")
+	private List<WebElement> SentHeaders;
+	
+	@FindBy(css="button[class*='action_buttons']")
+	private WebElement actionBtn;
+	public WebElement actionBtn(){
+		return actionBtn;
+	}
+	
+	@FindBy(css=".page-header")
+	private WebElement pageHeader;
+	public WebElement pageHeader(){
+		return pageHeader;
+	}
+	
+	//Sent to Me/Not to me
+	@FindBy(css="div[class='header'] form-select:nth-child(1)  select")
+	private WebElement tasksViewDDL;
+	public WebElement tasksViewDDL(){
+		return tasksViewDDL;
+	}
+	
+	//Tab Selection
+	@FindBy(css="a[href*='Inbox']")
+	private WebElement TabInbox;
+	public WebElement TabInbox(){
+		return TabInbox;
+	}
+	
+	@FindBy(css="a[href*='Sent']")
+	private WebElement TabSent;
+	public WebElement TabSent(){
+		return TabSent;
+	}
+	
+	
+	
+	//total no. of records displayed in header
+	@FindBy(css="span[class='highlight_green']")
+	private WebElement totalRecords;
+	public WebElement totalRecords(){
+		return totalRecords;
+	}
+	
+	//Pagination
+	@FindBy(css="ul[class='pagination']")
+	private WebElement paginationBox;
+	public WebElement paginationBox(){
+		return paginationBox;
+	}
+	
+	@FindBy(css="[class*='pagination'] li a[ng-click*='+ 1']")
+	private List<WebElement> paginationBtns;
+	public List<WebElement> paginationBtns(){
+		return paginationBtns;
+	}
+	
+	//Search
+	@FindBy(css="#Sent button[class*='primary']")
+	private WebElement sentSearchbtn;
+	public WebElement sentSearchbtn(){
+		return sentSearchbtn;
+	}
+	
+	@FindBy(css="#Inbox button[class*='primary']")
+	private WebElement Inboxsearchbtn;
+	public WebElement Inboxsearchbtn(){
+		return Inboxsearchbtn;
+	}	
+	
+	//End of Search
+	@FindBy(css="table-grid[event-handler*='inbox'] span[ng-click*='Bulk']")
+	private WebElement InboxFrwrdOption;
+	public WebElement InboxFrwrdOption(){
+		return InboxFrwrdOption;
+	}	
+	
+	@FindBy(css="table-grid[event-handler*='sent'] span[ng-click*='Bulk']")
+	private WebElement SentResendOption;
+	public WebElement SentResendOption(){
+		return SentResendOption;
+	}	
+	
+
+	@FindBy(css="table-grid[event-handler*='sent'] span[ng-click*='Bulk']:nth-child(3)")
+	private WebElement SentFrwrdOption;
+	public WebElement SentFrwrdOption(){
+		return SentFrwrdOption;
+	}	
+	
+	@FindBy(css="textarea[type*='text']")
+	private WebElement textAreaMail;
+	public WebElement textAreaMail(){
+		return textAreaMail;
+	}
+	
+	@FindBy(css="div[data-ng-show*='!uiData.isConsentVisible'] button[class*='primary']")
+	private WebElement sendEmail;
+	public WebElement sendEmail(){
+		return sendEmail;
+	}
+
+	@FindBy(css="div[class*='dialog'] button[class*='primary']")
+	private WebElement OKbtn;
+	public WebElement OKbtn(){
+		return OKbtn;
+	}	
+	
+	
+	//End of Locators
+	
+	//Method 
+
+	/**
+	 * Swithching between Inbox and Sent Items 
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 */
+	public void switchTabandView(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.waitForTime(5000);
+		lavanteUtils.fluentwait(pageHeader);
+		if(dataMap.containsKey("Tab")){
+			String x=dataMap.get("Tab");
+			if(! (lavanteUtils.driver.getCurrentUrl().contains("Inbox") ) && (x.contains("Inbox")) ){
+					lavanteUtils.click(TabInbox);
+			} else if(! (lavanteUtils.driver.getCurrentUrl().contains("Sent") ) && (!x.contains("Inbox")) ){//Sent Items
+				lavanteUtils.click(TabSent);
+			}
+		}else{
+			lavanteUtils.click(TabSent);
+		}
+		lavanteUtils.fluentwait(pageHeader);
+		switchView(dataMap);
+		
+	}
+	
+	/**
+	 * Method to search a claim and perform an action.
+	 * @author girish.n 
+	 */
+	
+	public LinkedHashMap<String, String> actiononMessages(LinkedHashMap<String, String> dataMap) throws IOException {
+		
+		String index="";
+		dataMap=searchMessage(dataMap);
+		
+		if(dataMap.containsKey("Index")){
+			index=dataMap.get("Index");
+		}
+		if(!index.equalsIgnoreCase("-1")){	
+			Reporter.log("Message is found in Message Page at index:"+index,true);
+			selectAction(dataMap);
+			dataMap.put("flag","true");
+		}
+		else{
+			Reporter.log("Message is not present",true);
+			dataMap.put("flag","false");
+		}
+		
+		return dataMap;
+	
+	}	
+	/**
+	 * Method to search claim. Pagination is handled.
+	 * 
+	 * @param dataMap
+	 * @return
+	 */
+	public LinkedHashMap<String, String> searchMessage(LinkedHashMap<String, String> dataMap) {
+		int ind=-1;
+		boolean flag=false;
+		do{
+			dataMap=searchMessages(dataMap);
+			if(dataMap.containsKey("Index")){
+				ind=Integer.parseInt(dataMap.get("Index"));
+			}
+			if(ind!=-1)
+			{
+				break;
+			}
+			if(paginationBtns.size()>0){
+		//		if(paginationBtns.get(paginationBtns.size()-2).getAttribute("href")!=null)
+				{
+					flag=true;
+					lavanteUtils.click(paginationBtns.get(0));
+					lavanteUtils.waitforPageload(pageHeader);
+				}//else{
+				//	flag=false;
+				//}
+			}
+		}while(flag);
+		return dataMap;
+	}
+	
+	private LinkedHashMap<String, String> searchMessages(LinkedHashMap<String, String> dataMap) {
+		switchView(dataMap);
+		search(dataMap);
+		int index=-1;
+		dataMap.put("Index", String.valueOf(index));
+		if(iterateSearchHeaderFindColList("Subject").size()>0){
+			if (dataMap.containsKey("Subject")){
+					String data=dataMap.get("Subject");
+					if (data.equalsIgnoreCase("Any")){
+						outr: for(int i=0;i<iterateSearchHeaderFindColList("Subject").size();i++){
+							String x=iterateSearchHeaderFindColList("Subject").get(i).getText();
+							x=x.trim();
+							if(x.length()>0){
+								dataMap.put("Index", String.valueOf(i));
+								dataMap.put("Subject", x);
+								break outr;
+							}
+						}
+						return dataMap;
+					}else{
+						for(int i=0;i<iterateSearchHeaderFindColList("Subject").size();i++){
+							if(data.equals(iterateSearchHeaderFindColList("Subject").get(i).getText().trim())){
+								index=i;
+								dataMap.put("Index", String.valueOf(index));
+								return dataMap;
+							}
+						}
+					}
+			}
+		}	
+		return dataMap;
+	}
+	
+	/**
+	 * Search on Claims to Approve
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 */
+	public void search(LinkedHashMap<String, String> dataMap) {
+		fillSearchDetails(dataMap);
+		formSearchDetails(dataMap);
+		
+	}
+
+	private void fillSearchDetails(LinkedHashMap<String, String> dataMap) {
+		//Created Dummy Text
+		lavanteUtils.fluentwait(pageHeader);
+		String y="DUMMY";
+		String aa=lavanteUtils.driver.getCurrentUrl();
+		String ads="";
+		if(aa.contains("Sent")){
+			ads="//*[@id='Sent']";
+		}
+		String x=ads+"//*[contains(text(),'"+y+"')]/../following-sibling::div//input";
+		
+		if(dataMap.containsKey("Subject")){
+			if(!dataMap.get("Subject").equalsIgnoreCase("ANY")){
+				String a=x;
+				a=a.replace(y, "Subject");
+				lavanteUtils.driver.findElement(By.xpath(a)).clear();
+				lavanteUtils.driver.findElement(By.xpath(a)).sendKeys(dataMap.get("Subject"));
+			}
+		}
+		
+		if(dataMap.containsKey("Type")){
+			if(!dataMap.get("Type").equalsIgnoreCase("ANY")){
+				String a=x;
+				a=a.replace(y, "Type");
+				lavanteUtils.driver.findElement(By.xpath(a)).clear();
+				lavanteUtils.driver.findElement(By.xpath(a)).sendKeys(dataMap.get("Type"));
+			}
+		}
+		
+		if(dataMap.containsKey("Recipient")){
+			if(!dataMap.get("Recipient").equalsIgnoreCase("ANY")){
+				String a=x;
+				a=a.replace(y, "Recipient");
+				lavanteUtils.driver.findElement(By.xpath(a)).clear();
+				lavanteUtils.driver.findElement(By.xpath(a)).sendKeys(dataMap.get("Recipient"));
+			}
+		}
+		
+	}
+
+	private void formSearchDetails(LinkedHashMap<String, String> dataMap) {
+		
+		if(dataMap.containsKey("SentSearch")){
+			lavanteUtils.click(sentSearchbtn);
+		}
+		if(dataMap.containsKey("InboxSearch")){
+			lavanteUtils.click(Inboxsearchbtn);
+		}
+	}
+
+	private void selectAction(LinkedHashMap<String, String> dataMap){
+		
+		int index=Integer.parseInt(dataMap.get("Index"));
+		
+		lavanteUtils.click(iterateSearchHeaderFindColList("Type").get(index));
+		lavanteUtils.waitForTime(2000);
+		
+		String action = dataMap.get("Action");
+		
+		if(action.equalsIgnoreCase("InboxForward")){
+			lavanteUtils.click(InboxFrwrdOption);
+			lavanteUtils.waitForTime(3000);
+		}
+		
+		if(action.equalsIgnoreCase("SentResent")){
+			lavanteUtils.click(SentResendOption);
+			lavanteUtils.waitForTime(3000);
+			lavanteUtils.click(OKbtn);
+		}
+		
+		if(action.equalsIgnoreCase("SentForward")){
+			lavanteUtils.click(SentFrwrdOption);
+			lavanteUtils.waitForTime(3000);
+			ForwardMail(dataMap);
+		}
+		
+		
+	}
+	
+	private void ForwardMail(LinkedHashMap<String, String> dataMap) {
+		if(dataMap.containsKey("SentForward")){
+			lavanteUtils.typeinEdit(dataMap.get("SentForward"),textAreaMail);
+			lavanteUtils.click(sendEmail);
+		}
+		
+	}
+
+
+	/**
+	 * Method to switch view "Sent To Me" and "Not only to me"
+	 * 
+	 * By default , Not only to me
+	 *@author Piramanayagam.S 
+	 */
+	public void switchView(LinkedHashMap<String, String> dataMap){
+		lavanteUtils.waitForTime(5000);
+		lavanteUtils.fluentwait(pageHeader);
+		//All Task
+		String x="nofilter";
+		if (dataMap.containsKey("MessageView")){
+			x=dataMap.get("MessageView");
+			if(x.contains("Sent To Me")){
+				x="sentToMe";
+			}
+		}
+		lavanteUtils.selectbyvalue(x,tasksViewDDL);
+		lavanteUtils.waitforPageload(pageHeader);
+		lavanteUtils.waitForTime(4000);
+	}
+	
+
+	
+	public List<WebElement> iterateSearchHeaderFindColList(String col) {
+		List<WebElement> s = null;
+		int j = ColIdentify(col);
+		String yx="";
+		String a=lavanteUtils.driver.getCurrentUrl();
+		if (a.contains("Sent")){
+			yx="#Sent ";
+		}
+		String x = yx+"tbody td:nth-child(" + j + ")";
+		s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		System.out.println("Iterate col locator:" + x + ",Size:" + s.size());
+		if (col.contains("Subject")||col.contains("Sender") ||col.contains("Recipient")  ) {
+			x = yx+"tbody td:nth-child(" + j + ") a";
+			System.out.println("Iterate for name/contact:" + x);
+			s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		}
+		System.out.println("Iterate Search Col:" + col + ":" + s.size());
+		return s;
+	}
+	
+	public int ColIdentify(String col) {
+		int ki = 0;
+		boolean found = false;
+		String a=lavanteUtils.driver.getCurrentUrl();
+		List<WebElement> head=Headers;
+		if (a.contains("Sent")){
+			head=SentHeaders;
+		}
+		if (head.size() > 0) {
+			for (int i = 0; i < head.size(); i++) {
+				String x = head.get(i).getText().toLowerCase();
+				if (x.contains(col.toLowerCase())) {
+					ki = i;
+					// List start with 0 but need a number more than that to
+					// fetch in xpath
+					ki = i + 1;
+					System.out.println(col + ",Col Found at " + ki);
+					found = true;
+					break;
+				}
+			}
+		}
+
+		if (found == false) {
+			Assert.assertTrue(false, "Col name not found" + col);
+		}
+		return ki;
+
+	}
+
+
+	/**
+	 * Used for Sanity Check for Message Tab
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	public boolean sanityCheck() {
+		
+		boolean flag=false;
+		boolean flag1=lavanteUtils.verifyElementDisplayed("Inbox Search Btn",Inboxsearchbtn);
+		boolean flag2=lavanteUtils.verifyElementDisplayed("Page Header Inbox Items",pageHeader);
+		
+		lavanteUtils.click(TabSent);
+		boolean flag3=lavanteUtils.verifyElementDisplayed("Sent Search Btn",sentSearchbtn);
+		boolean flag4=lavanteUtils.verifyElementDisplayed("Page Header of Sent Items",pageHeader);
+		
+		if(flag1&& flag2 && flag3 && flag4){
+			flag=true;
+		}
+		return flag;
+		
+		
+	}
+
+
+
+
+	
+}

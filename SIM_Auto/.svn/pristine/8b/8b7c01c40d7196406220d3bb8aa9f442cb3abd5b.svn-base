@@ -1,0 +1,150 @@
+package com.lavante.sim.customer.TestScripts.Transactions.Claims;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class SupplierClaimsActionTests extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String customerID = "";
+	String Uname="";
+
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * 
+	 * @author subhas.bv
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP1();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		List<?> listofdatafrm = lavanteUtils.login("KrogerSupplier", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		customerID = fetchSupplierCustomer(LdataMap.get("username"));
+		Uname=LdataMap.get("username");
+
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+	}
+
+	@BeforeMethod
+	public void Before() {
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("maintab", "PAYMENTS");
+		enobjhomePage.selectTab(dataMap);
+	}
+
+	/**
+	 * @author subhas.bv
+	 * 
+	 *         createClaimTest
+	 * @throws SQLException
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
+	@Test
+	public void createClaimTest() throws FileNotFoundException, IOException, SQLException {
+		Reporter.log("Test Started for create claim :" + currenttime());
+
+		SoftAssert softAssert = new SoftAssert();
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+		String getInvoiceNo = "  select max(InvoiceNumber) from InvoiceHeader where CustomerID="+customerID+"  and InvoiceHeaderID in (select InvoiceHeaderID from Payment where"
+				+ "  PaymentID not in (Select PaymentID from Claim )) "
+				+ "  and LavanteUID in ( Select LavanteUID from Supplier_Contact_Map where ContactID in (Select ContactID from Contact Where Email"
+				+ "  like '"+Uname+"'))";
+		String invoiceNum = lavanteUtils.fetchDBdata(getInvoiceNo).toString().trim();
+		
+		String pymntrefNum=objPaymentsPage.fetchPaymentRef(getInvoiceNo,Uname);
+		
+		dataMap.put("InvoiceNumber", invoiceNum);
+		
+		dataMap.put("Search", "");
+		objPaymentsPage.basicSearch(dataMap);
+		String getInvoiceNum = objPaymentsPage.getColumnText("Invoice Number", 0);
+		Reporter.log("Invoice is not equal to the searched Invoice number, Expected : " + invoiceNum+ ", Actual : " + getInvoiceNum);
+		Assert.assertEquals(getInvoiceNum, invoiceNum,"Invoice number is not equall to the searched Invoice number, Expected : "	+ invoiceNum + ", Actual : " + getInvoiceNum);
+
+		dataMap.put("CreateClaim","");
+		objPaymentsPage.selectPaymentAction(dataMap);
+
+		dataMap.put("ClaimType", "WV-Wrong Vendor");
+		dataMap.put("ClaimAmount", "10");
+		dataMap.put("SaveClaim", "");
+		objCreateClaimPage.createClaim(dataMap);
+
+		lavanteUtils.fluentwait(objPaymentsPage.IframeResultsPage());
+		dataMap.put("maintab", "CLAIMS");
+		enobjhomePage.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+
+		boolean flag = false;
+		dataMap.put("InvoiceNo", invoiceNum);
+		dataMap.put("Search", "");
+		enClaimsBasicSearch.Search(dataMap);
+
+		lavanteUtils.switchtoFrame(enClaimsPage.IFrameSearchResults());
+		List<WebElement> criteria = enobjsupplierPage.iterateSearchHeaderFindColList("Invoice Number");
+		if (criteria.size() > 0) {
+			for (int i = 0; i < criteria.size(); i++) {
+				Reporter.log("Search results, Expected: " + dataMap.get("InvoiceNo") + " Actual: "+ criteria.get(i).getText());
+				softAssert.assertEquals(criteria.get(i).getText(), dataMap.get("InvoiceNo"),"Search results are not matching, Expected: " + dataMap.get("InvoiceNo") + " Actual: "		+ criteria.get(i).getText());
+
+				Reporter.log("Search results, Expected: " + dataMap.get("ClaimType") + " Actual: "	+ enobjsupplierPage.iterateSearchHeaderFindColList("Claim Type").get(i).getText());
+				softAssert.assertEquals(enobjsupplierPage.iterateSearchHeaderFindColList("Claim Type").get(i).getText(),dataMap.get("ClaimType"),"Search results are not matching, Expected: " + dataMap.get("ClaimType") + " Actual: "	+ enobjsupplierPage.iterateSearchHeaderFindColList("Claim Type").get(i).getText());
+
+				flag = true;
+			}
+		} else {
+			softAssert.assertEquals("No results", enClaimsPage.NoData().getText());
+			flag = true;
+		}
+
+		if (flag == false) {
+			Reporter.log("Search results are not matching");
+		}
+		
+		softAssert.assertAll();
+		Reporter.log("Test Ended for create claim:" + currenttime());
+	}
+
+
+	/**
+	 * SetupAfter Class closes any popup and Closes the Browser and Driver
+	 * 
+	 * @author subhas.bv
+	 */
+	@AfterClass
+	public void SetupafterClassMethod() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+}

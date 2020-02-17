@@ -1,0 +1,41 @@
+
+#Application URL
+APPURL=https://recoveryqa39.lavante.com/recovery/login.lvp
+DriverPath =.\\resources
+
+#G mail URL
+GMAILURL=https://accounts.google.com/ServiceLogin?service=mail
+
+		 
+lavante.db.driver=com.mysql.jdbc.Driver
+
+#SIM DB Details
+sim.dbURL=192.168.21.17
+#sim.dbURL=192.168.21.17
+sim.dbUser=SIM_AppUser_QA
+sim.dbPass=simqa678!**
+sim.dbport=7462
+
+#Recovery DB details
+db.url=192.168.21.17
+db.User=SIM_AppUser_QA
+db.Password="simqa678!**";
+db.dbName=SIM_5.13
+db.port=7322
+sim.dbName=SIM_5.13
+#SIM_Automation
+
+#Created for Reading Email
+GMAIL_HOST_NAME =pop.gmail.com
+GMAIL_HOST_PORT =995
+GMAIL_AUTH_USER =simsupplierqa42@gmail.com
+GMAIL_AUTH_PWD =lavante123
+GMAIL_HOST_PROTOCAL =ON		
+
+#Linux
+lf.hostname=192.168.21.42
+lf.username=lavante
+lf.password=indecomm@123
+
+#Linux Folder
+exportContractManagement=D:/FILEREPO/exportContractManagement

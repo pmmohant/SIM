@@ -1,0 +1,660 @@
+/**
+ * 
+ */
+package com.lavante.sim.customer.pageobjects.Transactions.Invoices;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+/**
+ * @author Tejaswini A R
+ * 
+ */
+public class UploadInvoice 
+  
+   {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	
+	public UploadInvoice(WebDriver driver)
+	{
+		lavanteUtils.driver=driver;
+	}
+	
+	
+	//Creation of web element for upload invoice 
+	
+	@FindBy (css = ".notification-block.info")
+	private WebElement notificationBar;
+	public WebElement notificationBar() {
+		return notificationBar;
+	}
+
+	@FindBy(id="supplierName")
+	private WebElement entersupplierName;	
+	public WebElement entersupplierName()
+	{
+		return entersupplierName;
+	}
+	
+	@FindBy(id="erpId")
+	private WebElement entersupplierID;	
+	public WebElement entersupplierID()
+	{
+		return entersupplierID;
+	}
+	
+	@FindBy(css="#search_supplier_form [type*='submit']")
+	private WebElement Suppliersearchgobtn;	
+	public WebElement Suppliersearchgobtn()
+	{
+		return Suppliersearchgobtn;
+	}
+	
+	@FindBy(css="#supp_result_table td:nth-child(2)")
+	private List<WebElement> ListSuppNameSearch;	
+	public List<WebElement> ListSuppNameSearch()
+	{
+		return ListSuppNameSearch;
+	}
+	
+	@FindBy(css="#supp_result_table td:nth-child(3)")
+	private List<WebElement> ListSuppIDSearch;	
+	public List<WebElement> ListSuppIDSearch()
+	{
+		return ListSuppIDSearch;
+	}
+	
+	
+	@FindBy(id="searchSupplier")
+	private WebElement SearchName;	
+	public WebElement SearchName()
+	{
+		return SearchName;
+	}
+	
+	
+	@FindBy(css="iframe[src*='searchSuppliersByName']")
+	private WebElement IFRAMEsearchSuppliersByName;	
+	public WebElement IFRAMEsearchSuppliersByName()
+	{
+		return IFRAMEsearchSuppliersByName;
+	}
+	
+	@FindBy(css="input[name*='supplierId']~label[class*='box-image']")
+	private WebElement SelectSupplier;	
+	public WebElement SelectSupplier()
+	{
+		return SelectSupplier;
+	}
+	
+	
+	@FindBy(id="select-supplier")
+	private WebElement Selectinsearch;	
+	public WebElement Selectinsearch()
+	{
+		return Selectinsearch;
+	}
+	
+	@FindBy(css="[class*='cancel'] ")
+	private WebElement Close;	
+	public WebElement Close()
+	{
+		return Close;
+	}
+	
+	
+	
+	@FindBy(css="[id*='divisionId'] a")
+	private WebElement divisionIDdpdn;	
+	public WebElement divisionIDdpdn()
+	{
+		return divisionIDdpdn;
+	}
+	
+	@FindBy(id="invoiceNumber")
+	private WebElement enterinvoiceNumber;	
+	public WebElement enterinvoiceNumber()
+	{
+		return enterinvoiceNumber;
+	}
+	
+	@FindBy(id="invoiceDate")
+	private WebElement selectinvoicedate;	
+	public WebElement selectinvoicedate()
+	{
+		return selectinvoicedate;
+	}
+	
+	@FindBy(css="[id*='date'] a[class*='high']")
+	private WebElement selecttodaydate;	
+	public WebElement selecttodaydate()
+	{
+		return selecttodaydate;
+	}
+	
+	
+	@FindBy(id="invoiceNetAmount")
+	private WebElement EnterinvoiceNetAmount;	
+	public WebElement EnterinvoiceNetAmount()
+	{
+		return EnterinvoiceNetAmount;
+	}
+	
+	@FindBy(id="invoiceTaxAmount")
+	private WebElement EnterinvoiceTaxAmount;	
+	public WebElement EnterinvoiceTaxAmount()
+	{
+		return EnterinvoiceTaxAmount;
+	}
+	
+	@FindBy(id="invoiceShippingAmount")
+	private WebElement EnterinvoiceShippingAmount;	
+	public WebElement EnterinvoiceShippingAmount()
+	{
+		return EnterinvoiceShippingAmount;
+	}
+	
+	@FindBy(id="invoiceAmount")
+	private WebElement invoiceTotInvAmnt;	
+	public WebElement invoiceTotInvAmnt()
+	{
+		return invoiceTotInvAmnt;
+	}
+	
+	@FindBy(id="PONumber")
+	private WebElement PONumbertxt;	
+	public WebElement PONumbertxt()
+	{
+		return PONumbertxt;
+	}
+	
+	
+	
+	@FindBy(css="[id*='currency'] a")
+	private WebElement selectCurrency;	
+	public WebElement selectCurrency()
+	{
+		return selectCurrency;
+	}
+	
+	@FindBy(css="div[class*='drop'] li")
+	private List<WebElement> drpdn;	
+	public List<WebElement> drpdn()
+	{
+		return drpdn;
+	}
+	
+	@FindBy(id="invoiceFile")
+	private WebElement AttachFile;	
+	public WebElement AttachFile()
+	{
+		return AttachFile;
+	}
+	
+	@FindBy(css="[id*='statement'] a")
+	private WebElement selectSOW;	
+	public WebElement selectSOW()
+	{
+		return selectSOW;
+	}
+	
+	@FindBy(css="#lineItemDeliverableTable tbody td")
+	private WebElement nodata;	
+	public WebElement nodata()
+	{
+		return nodata;
+	}
+	
+	@FindBy(css="[id*='lineItemDeliverable'] tbody td:nth-child(2)")
+	private List<WebElement> lineitemdeliverable;	
+	public List<WebElement> lineitemdeliverable()
+	{
+		return lineitemdeliverable;
+	}
+	
+	@FindBy(css="[id*='lineItemDeliverable'] tbody td:nth-child(3)")
+	private List<WebElement> lineitemtype;	
+	public List<WebElement> lineitemtype()
+	{
+		return lineitemtype;
+	}
+	
+	@FindBy(css="[id*='lineItemDeliverable'] tbody td:nth-child(4)")
+	private List<WebElement> lineitemdesc;	
+	public List<WebElement> lineitemdesc()
+	{
+		return lineitemdesc;
+	}
+	
+	@FindBy(css="[id*='lineItemDeliverable'] tbody td:nth-child(5)")
+	private List<WebElement> lineitemdeliverableAmntvalue;	
+	public List<WebElement> lineitemdeliverableAmntvalue()
+	{
+		return lineitemdeliverableAmntvalue;
+	}
+	
+	@FindBy(css="[id*='lineItemDeliverable'] tbody td:nth-child(5) input")
+	private List<WebElement> lineitemdeliverableAmnt;	
+	public List<WebElement> lineitemdeliverableAmnt()
+	{
+		return lineitemdeliverableAmnt;
+	}
+	
+
+	//for item type,item number,description @ top of Deliverable
+	
+	@FindBy(css="[id*='deliverable'] th ")
+	private List<WebElement> deliverableheader;	
+	public  List<WebElement> deliverableheader(){
+		return deliverableheader;
+	}
+	
+	//for item type,item number,description @ Deliverable
+
+	@FindBy(css="#lineItemDeliverableTable th:nth-child(2)")
+	private WebElement lineitmlbl;
+	public WebElement lineitmlbl(){
+		return lineitmlbl;
+	}
+	
+	@FindBy(css="#lineItemDeliverableTable th:nth-child(3)")
+	private WebElement itmtyplbl;
+	public WebElement itmtyplbl(){
+		return itmtyplbl;
+	}
+	
+	@FindBy(css="#lineItemDeliverableTable th:nth-child(4)")
+	private WebElement desclbl;
+	public WebElement desclbl(){
+		return desclbl;
+	}
+	//#lineItemDeliverableTable tr td:nth-child(1) input
+	//.x-editable tr:nth-child(2) td:nth-child(1) input
+	
+	@FindBy(css="#lineItemDeliverableTable tr td:nth-child(1) input~label")
+	private List<WebElement> selectdeliverable;	
+	public List<WebElement> selectdeliverable()
+	{
+		return selectdeliverable;
+	}	
+	
+	@FindBy(css="[ng-bind='row.lineItem']")
+	private List<WebElement> ListDelLineItm;	
+	public List<WebElement> ListDelLineItm()
+	{
+		return ListDelLineItm;
+	}
+	
+	@FindBy(css="[ng-bind='row.itemType']")
+	private List<WebElement> ListDelItmtype;	
+	public List<WebElement> ListDelItmtype()
+	{
+		return ListDelItmtype;
+	}
+	
+	@FindBy(css="[ng-bind='row.description']")
+	private List<WebElement> ListDelDesc;	
+	public List<WebElement> ListDelDesc()
+	{
+		return ListDelDesc;
+	}
+		
+	@FindBy(css="#deliverable option")
+	private List<WebElement> deloptin;
+	public List<WebElement> deloptin()
+	{
+		return deloptin;
+	}
+	
+	@FindBy(css="[id*='havePONumber']")
+	private List<WebElement> POQuestion;
+	public List<WebElement> POQuestion()
+	{
+		return POQuestion;
+	}
+	
+	
+	@FindBy(id="uploadSupplierInvoice")
+	private WebElement Uploadinvoicebtn;	
+	public WebElement Uploadinvoicebtn()
+	{
+		return Uploadinvoicebtn;
+	}
+	
+	@FindBy(css="a[class*='user-info'] span:nth-child(2) strong")
+	private WebElement homePageContactName;
+	
+	@FindBy(id="lightPopup_checkBox_message")
+	private WebElement reminderPopupMsg;
+	public WebElement reminderPopupMsg() {
+		return reminderPopupMsg;
+	}
+	
+	@FindBy(css="label[for='lightPopup_checkBox'].box-image")
+	private WebElement doNotShowChkbox;
+	public WebElement doNotShowChkbox() {
+		return doNotShowChkbox;
+	}
+	
+	@FindBy(css="[id*='Popup'] button[class*='primary']")
+	private WebElement continueBtn;	
+	public WebElement continueBtn()
+	{
+		return continueBtn;
+	}
+	
+	@FindBy(id="Submit")
+	private WebElement Uploadsubmitbtn;	
+	public WebElement Uploadsubmitbtn()
+	{
+		return Uploadsubmitbtn;
+	}
+
+	@FindBy(id = "saveAndSubmit")
+	private WebElement saveAndSubmitBtn;
+
+	public WebElement saveAndSubmitBtn() {
+		return saveAndSubmitBtn;
+	}
+
+	@FindBy(id = "bannerDiv")
+	private WebElement bannerMsg;
+	public WebElement bannerMsg(){
+		return bannerMsg;
+	}
+	
+	@FindBy(css="[role*='dialog'] [class*='primary']")
+	private List<WebElement> OKAfterUpload;	
+	public List<WebElement> OKAfterUpload()
+	{
+		return OKAfterUpload;
+	}
+	
+	@FindBy(css="span[class*='error']")
+	private WebElement errmsg;	
+	public WebElement errmsg()
+	{
+		return errmsg;
+	}
+	
+	
+	
+	//Reusable  Method
+	
+	
+	public int[] UploadInvoice(LinkedHashMap<String, String> dataMap) throws IOException
+	{		
+		int[] s=new int[10];
+		s=fillInvoiceDetails(dataMap);
+		formInvoiceDetails(dataMap);
+		return s;
+	}
+
+// fill invoice details (Methods)
+	public int[] fillInvoiceDetails(LinkedHashMap<String, String> dataMap) throws IOException 
+	{
+		int[] s=new int[10];
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(Uploadinvoicebtn);
+		
+		if(dataMap.containsKey("supplierName"))
+		{
+			entersupplierName.clear();
+			lavanteUtils.typeinEdit(dataMap.get("supplierName"), entersupplierName);
+			lavanteUtils.click(SearchName);
+			
+			if(dataMap.containsKey("SelectSupplier"))
+			{
+				lavanteUtils.switchtoFrame(IFRAMEsearchSuppliersByName);
+				if(dataMap.containsKey("supplierName")){
+					/*Implement Click on GO 
+					 * entersupplierName.clear();
+					lavanteUtils.typeinEdit(dataMap.get("supplierName"), entersupplierName);*/
+				}
+				lavanteUtils.click(SelectSupplier);
+				lavanteUtils.click(Selectinsearch);
+			}
+		
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.fluentwait(entersupplierName);
+	    }
+		if(dataMap.containsKey("Division"))
+		{
+			lavanteUtils.clicks(divisionIDdpdn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("Division"));
+	    }
+		
+		if(dataMap.containsKey("InvNum"))
+		{
+			enterinvoiceNumber.clear();
+			lavanteUtils.typeinEdit(dataMap.get("InvNum"), enterinvoiceNumber);
+	    }
+	
+		if(dataMap.containsKey("InvDate"))
+		{
+			lavanteUtils.clicks(selectinvoicedate);
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.click(selecttodaydate);
+			/*Actions s=new Actions(driver);
+			s.moveToElement(selecttodaydate).click();
+			s.perform();
+			//selecttodaydate().click();
+			 	*/			
+		}
+		
+		if(dataMap.containsKey("NetAmnt"))
+		{
+			EnterinvoiceNetAmount.clear();
+			lavanteUtils.typeinEdit(dataMap.get("NetAmnt"), EnterinvoiceNetAmount);
+		}
+		
+		if(dataMap.containsKey("TaxAmnt"))
+		{
+			EnterinvoiceTaxAmount.clear();
+			lavanteUtils.typeinEdit(dataMap.get("TaxAmnt"), EnterinvoiceTaxAmount);
+		}
+		
+		if(dataMap.containsKey("FreightAmnt"))
+		{
+			EnterinvoiceShippingAmount.clear();
+			lavanteUtils.typeinEdit(dataMap.get("FreightAmnt"), EnterinvoiceShippingAmount);
+		}
+		
+		if(dataMap.containsKey("Currency")){
+			lavanteUtils.click(selectCurrency);
+
+			lavanteUtils.switchtoFrame(null);
+			String xx=dataMap.get("Currency");
+			for(int i=1;i<drpdn.size();i++){
+			String sg=drpdn.get(i).getText();
+				System.out.println(sg+":"+xx);
+				if(sg.length()==xx.length()){
+					lavanteUtils.click(drpdn.get(i));
+					break;
+				}		
+			} 
+		}
+		
+		
+	/* File Upload is failing hence commenting
+	 	if(dataMap.containsKey("Invfile"))
+		{
+			lavanteUtils.uploadFile(dataMap.get("Invfile"),AttachFile);
+		}*/
+		
+		if(dataMap.containsKey("POQuestion"))
+		{
+			if(dataMap.get("POQuestion").length()>2)
+			{
+				lavanteUtils.clickJavaScriptNoWait(POQuestion.get(0));
+				if(dataMap.containsKey("PONum"))
+				{
+					lavanteUtils.typeinEdit(dataMap.get("PONum"), PONumbertxt);
+				}
+				
+			}else {
+				lavanteUtils.clickJavaScriptNoWait(POQuestion.get(1));
+				}
+			
+		}
+
+	   
+		
+		if(dataMap.containsKey("InvSOWNum"))
+		{
+			lavanteUtils.click(selectSOW);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("InvSOWNum"));
+			lavanteUtils.waitForTime(4000);
+		}
+		
+		if(dataMap.containsKey("InvDel"))
+		{
+			lavanteUtils.waitForTime(4000);
+			String deliverable=dataMap.get("InvDel");
+			
+			if(deliverable.length()>0 && deliverable.contains("#"))
+			{
+					  String[] Deliverablelist=deliverable.split("#");
+					  for(int i=0;i<Deliverablelist.length;i++)
+						{
+							String x=lineitemdeliverable.get(i).getText();
+							if(Deliverablelist[i].contains(x)){
+									if(i!=1){
+										lavanteUtils.click(selectdeliverable.get(i));
+									}
+								
+									if(i==0){
+										lavanteUtils.click(selectdeliverable.get(1));
+									}
+						
+								if(i==0 && dataMap.containsKey("ANYSplit") ){
+										String amnt=lineitemdeliverableAmnt.get(i).getAttribute("value");
+										if(amnt.contains(".00")){
+											amnt=amnt.replace(".00", "");
+										}if(amnt.contains(",")){
+											amnt=amnt.replace(",", "");
+										}
+										int f=Integer.parseInt(amnt);
+										int sda=f-Deliverablelist.length;
+										sda=sda+1;
+										s[0]=sda;
+										lineitemdeliverableAmnt.get(0).clear();
+										lavanteUtils.typeinEdit(""+s[0],lineitemdeliverableAmnt.get(0));
+								}else if( !dataMap.containsKey("Amnt1") )  {
+									s[i]=i;
+									lineitemdeliverableAmnt.get(i).clear();
+									lavanteUtils.typeinEdit(""+s[i],lineitemdeliverableAmnt.get(i));
+								}
+								
+								if( dataMap.containsKey("Amnt1") && (i==0) ){
+									lineitemdeliverableAmnt.get(0).clear();
+									lavanteUtils.typeinEdit(""+dataMap.get("Amnt1"),lineitemdeliverableAmnt.get(0));
+								}
+								if( dataMap.containsKey("Amnt2") && (i==1) ){
+									lineitemdeliverableAmnt.get(1).clear();
+									lavanteUtils.typeinEdit(""+dataMap.get("Amnt2"),lineitemdeliverableAmnt.get(1));
+								}
+								
+							}	
+						}
+			}else
+			{
+				lavanteUtils.fluentwait(selectdeliverable.get(0));
+				lavanteUtils.Scrollintoview(selectdeliverable.get(0));
+				lavanteUtils.click(selectdeliverable.get(0));
+				
+				//Created for Fetching the amount value 
+				if(dataMap.containsKey("SingleSplit")){
+					if(selectdeliverable.size()>0){
+						lavanteUtils.fluentwait(selectdeliverable.get(1));
+						lavanteUtils.Scrollintoview(selectdeliverable.get(1));
+						lavanteUtils.click(selectdeliverable.get(1));
+					}
+					String amnt=lineitemdeliverableAmnt.get(0).getAttribute("value");
+					if(amnt.contains(".00")){
+						amnt=amnt.replace(".00", "");
+					}if(amnt.contains(",")){
+						amnt=amnt.replace(",", "");
+					}
+					s[0]=Integer.parseInt(amnt);
+					if(selectdeliverable.size()>0){
+						lavanteUtils.click(selectdeliverable.get(1));
+					}
+				}
+				
+				if(dataMap.containsKey("EDITINV")){
+					lavanteUtils.click(selectdeliverable.get(0));
+				}
+					
+			}	
+		}
+		
+		return s;
+			
+	}
+	
+	// Save/Upload Invoice 
+	public void formInvoiceDetails(LinkedHashMap<String, String> dataMap)	{
+		lavanteUtils.switchtoFrame(null);
+		
+		if(dataMap.containsKey("SubjectNotification")){
+			dataMap.put("SubjectNotification", notificationBar.getText());
+		}
+		
+		if(dataMap.containsKey("uploadSave"))
+		{
+			lavanteUtils.click(Uploadinvoicebtn);
+			lavanteUtils.switchtoFrame(null);
+			
+			if(dataMap.containsKey("DoNotShowPopup")) {
+				lavanteUtils.click(doNotShowChkbox);
+				lavanteUtils.click(continueBtn);
+			}
+			//Added for Warning Message
+			String xc=homePageContactName.getText().trim();
+			String das="select MAX(LoginID) from Login where ContactID in (Select MAX(ContactID) from contact where ContactName='"+xc+"')";
+			try {
+				das=lavanteUtils.fetchDBdata(das);
+			} catch (Exception e) { 			} 
+			if(das!=null){
+				das="select MAX(LOGINID) from UserAgreementLog where UserAgreementPolicyType_KVID=17502 and LoginID="+das;
+				try {
+					das=lavanteUtils.fetchDBdata(das);
+				} catch (Exception e) {  } 
+				
+				if(das==null){
+					lavanteUtils.click(continueBtn);
+				} 
+			}
+			
+			lavanteUtils.waitForTime(4000);
+		}
+		if(dataMap.containsKey("uploadSubmit"))
+		{
+			lavanteUtils.click(Uploadsubmitbtn);
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.fluentwait(bannerMsg);
+			dataMap.put("BannerMsg", bannerMsg.getText());
+		}
+		
+		if (dataMap.containsKey("SaveAndSubmit")) {
+			lavanteUtils.click(saveAndSubmitBtn);
+			if(!dataMap.containsKey("errorMsg")){
+				lavanteUtils.fluentwait(bannerMsg);
+				dataMap.put("BannerMsg", bannerMsg.getText());
+			}
+		}
+		
+		
+	}
+
+	
+}
+	

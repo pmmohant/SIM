@@ -1,0 +1,65 @@
+#Text For verification
+LegalIDPage=Lavante SIM - Legal ID
+
+#IDs
+all=All
+withLegalID=With Legal ID
+noLegalID=No Legal ID
+autoValidated=Auto Validated
+mismatch=Mismatch
+pendingValidation=Pending Validation
+manuallyValidated=Manually Validated
+autoPassed=Auto Passed
+cannotBeValidated=Cannot Be Validated
+notProvidedRadioBtn=Not Provided
+unknownRadioBtn=Unknown
+
+
+inActiveSupplier=showDeactivatedSuppliers
+searchFilter=searchFilter
+supplierSearch=supplierSearch
+comment=comment
+
+#LinkS
+supplierManagedTab=Supplier Managed
+regulatoryTab=Regulatory
+suppliers=Suppliers
+legalID=Legal ID
+
+#Xpath
+radioBtnListName=//div[contains(@id,'with_legalID')]/label
+notProvided=//table[contains(@class,'data_table table_outer_grid')]/tbody/tr[5]/td[2]
+addressDetails=//table[contains(@style,'table-layout: auto')]/tbody/tr/td/span[contains(@class,'highlight_green')]
+supplierLocation=.//*[@id='supplierLocation_chosen']/a/span
+selectSupplierLocation=//div[@id='supplierLocation_chosen']/div[contains(@class,'chosen-drop')]/ul/li
+legalIDDataRows=//table[contains(@id,'supplier_legalID')]/tbody/tr
+selectSupLocationRadioBtns=//div/table[contains(@id,'supplier_legalID')]/caption/div/table/tbody/tr/td/input
+supplierNameLinkPrefix=html/body/div[6]/div/div/form/table/tbody/tr/td/div/div[2]/table/tbody/tr[
+supplierNameLinkSuffix=]/td[3]/a
+supplierStatusSuffix=]/td[7]
+radioBtnList=//div/table[contains(@id,'supplier_legalID')]/caption/div/table/tbody/tr/td[2]/div/input
+noDataAvailableRows=//table[contains(@id,'supplier_legalID')]/tbody/tr[contains(@class,'data_not_found')]
+autoValidatedIcon=//span[contains(@class,'icon_checked')]
+mismatchIcon=//span[contains(@class,'icon_reject')]
+pendingValidationIcon=//span[contains(@class,'icon_pending')]
+unknown=//table[contains(@class,'data_table table_outer_grid')]/tbody/tr[4]/td[2]
+manuallyValidatedIcon=//span[contains(@class,'icon_checked_yellow')]
+cannotBeValidatedRows=//span[contains(@class,'icon_info')]cannotBeValidatedRows=//span[contains(@class,'icon_info')]
+deactivatebtn=.//*[@id='supplierLegalIDForm']/div/button[contains(@class,'button_red open_popup') and contains(@title,'Deactivate')]
+sendmail=.//*[@id='supplierLegalIDForm']/div/button[contains(@class,'button_gold open_popup') and contains(@title,'Send Email')]
+markasValidated=.//*[@id='supplierLegalIDForm']/div/button[contains(@class,'button_green open_popup') and contains(@title,'Mark as Validated')]
+override=.//*[@id='supplierLegalIDForm']/div/button[contains(@class,'button_green open_popup') and contains(@title,'Override')]
+frstSuplrChkBx=.//*[@id='supplier_legalID']/tbody/tr/td/input[contains(@id,'relationShipID')]
+frstSuplr=.//*[@id='supplier_legalID']/tbody/tr/td[@class='align_left']/a
+overridesave=//*[@id='legalIdActionForm']//*[@title='Save']
+#.//*[@id='legalIdActionForm']/div[@class='align_right button_set']/button[@title='Save']
+
+
+#CSS
+popupCloseBtn=button[title='close'][type='button']
+#IFrame
+supBodyDisFrame=//iframe[contains(@class,'popup_iframe ui-dialog-content ui-widget-content')]
+overridefrm=.//*[@class='popup_iframe ui-dialog-content ui-widget-content']
+markasValidatedframe=//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+
+

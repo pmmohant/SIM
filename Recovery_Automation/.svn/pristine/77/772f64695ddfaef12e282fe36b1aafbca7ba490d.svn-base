@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="">
+<head>
+  <title>Test Results Report - Log Output</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="description" content="TestNG unit test results." />
+  <link href="reportng.css" rel="stylesheet" type="text/css" />
+  </head>
+<body>
+  <h1>Log Output</h1>
+  <p>
+    Combined output from all calls to the log methods of the <a href="http://testng.org/javadocs/org/testng/Reporter.html">TestNG Reporter</a>.    
+  </p>
+
+  <div id="log">
+                  Pass: Confiig filejava.io.FileInputStream@51081592found<br />
+                        Info: Broweser Parameters : Browser : internet Explorer, Version :11<br />
+                        Info: Remote Parameters : RemoteURL : http://192.168.21.20:4445, RemoteExecution :true<br />
+                        Pass: Confiig filejava.io.FileInputStream@36cc8f9efound<br />
+                        Pass: Confiig filejava.io.FileInputStream@fe762ffound<br />
+                        Pass: Confiig filejava.io.FileInputStream@37be4e95found<br />
+                        Pass: Confiig filejava.io.FileInputStream@5585eb6found<br />
+                        Pass: Confiig filejava.io.FileInputStream@9e0690bfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@242ef46afound<br />
+                        Pass: Confiig filejava.io.FileInputStream@319418befound<br />
+                        Pass: Confiig filejava.io.FileInputStream@2fcf9021found<br />
+                        Pass: Confiig filejava.io.FileInputStream@3284f501found<br />
+                        Pass: Confiig filejava.io.FileInputStream@104ac131found<br />
+                        Pass: Confiig filejava.io.FileInputStream@47725f2found<br />
+                        Pass: Confiig filejava.io.FileInputStream@39a1179dfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@625d4770found<br />
+                        Pass: Confiig filejava.io.FileInputStream@c1a0074found<br />
+                        Pass: Confiig filejava.io.FileInputStream@1ed825f7found<br />
+                        Pass: Confiig filejava.io.FileInputStream@488cf3a4found<br />
+                        Pass: Confiig filejava.io.FileInputStream@358439aafound<br />
+                        Pass: Confiig filejava.io.FileInputStream@446a7e6efound<br />
+                        Pass: Confiig filejava.io.FileInputStream@58e7f144found<br />
+                        Pass: Confiig filejava.io.FileInputStream@178893cfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@7c1284adfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@1f52d620found<br />
+                        Pass: Confiig filejava.io.FileInputStream@2d15b70afound<br />
+                        Pass: Confiig filejava.io.FileInputStream@4a9e0d1cfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@5c48dc38found<br />
+                        Pass: Confiig filejava.io.FileInputStream@496bb0ffound<br />
+                        Pass: Confiig filejava.io.FileInputStream@6e5ada38found<br />
+                        Pass: Confiig filejava.io.FileInputStream@34ada6affound<br />
+                        Pass: Confiig filejava.io.FileInputStream@33c43c0efound<br />
+                        Pass: Confiig filejava.io.FileInputStream@7e1d07c6found<br />
+                        Pass: Confiig filejava.io.FileInputStream@5a08503efound<br />
+                        Pass: Confiig filejava.io.FileInputStream@90e0f10found<br />
+                        Pass: Confiig filejava.io.FileInputStream@2813ed2dfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@16a05f6bfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@75c69fcfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@1f663eefound<br />
+                        Pass: Confiig filejava.io.FileInputStream@592e5de8found<br />
+                        Pass: Confiig filejava.io.FileInputStream@3779f9b4found<br />
+                        Pass: Confiig filejava.io.FileInputStream@6fb89362found<br />
+                        Pass: Confiig filejava.io.FileInputStream@2dcaabcfound<br />
+                        Pass: Confiig filejava.io.FileInputStream@7fe8d5b8found<br />
+                        Info: ------------Test &apos; loginWithValidCredentials &apos; Started------------<br />
+                        Pass: &apos;adminuser1&apos; is entered in userName_txtField<br />
+                        Pass: &apos;lavante@123&apos; is entered in password_TextField<br />
+                        Pass: &apos;login_Button&apos; is clicked<br />
+                        Pass: &apos;quickSearch_Form&apos; is displayed<br />
+                        Pass: &apos;auditSelectbox&apos; is clicked<br />
+                        Pass: &apos;auditSelectbox&apos; is displayed<br />
+                        Pass: &apos;Lafarge 2008&apos; is entered in auditdrpDownTextBox<br />
+                        Pass: &apos;auditdrpDownTextBox&apos; is displayed<br />
+                        Info: ------------Test &apos; loginWithValidCredentials &apos; Ended------------<br />
+                        Pass: &apos;dashBoardLink&apos; is displayed<br />
+                        Pass: &apos;claimsLink&apos; is displayed<br />
+                        Pass: &apos;openClaims&apos; is displayed<br />
+                        Pass: &apos;batchedClaimslink&apos; is clicked<br />
+                        Pass: &apos;batchedClaimslink&apos; is displayed<br />
+                        Pass: &apos;batchedClaimslink&apos; is clicked<br />
+                        Pass: &apos;batchedClaimslink&apos; is displayed<br />
+                        Pass: &apos;batchedClaims&apos; is displayed<br />
+                        Pass: &apos;invoiceslink&apos; is clicked<br />
+                        Pass: &apos;invoiceslink&apos; is displayed<br />
+                        Pass: &apos;invoiceslink&apos; is clicked<br />
+                        Pass: &apos;invoiceslink&apos; is displayed<br />
+                        Pass: &apos;invoices&apos; is displayed<br />
+                        Pass: &apos;claimsByStatusChart&apos; is displayed<br />
+                        Pass: &apos;claimsByTypeChart&apos; is displayed<br />
+                        Pass: &apos;allClaimsChart&apos; is displayed<br />
+                        Pass: &apos;claimsByOrgChart&apos; is displayed<br />
+                        Pass: &apos;supplierLink&apos; is clicked<br />
+                        Pass: &apos;supplierLink&apos; is displayed<br />
+                        Pass: &apos;supplierCreditLink&apos; is clicked<br />
+                        Pass: &apos;supplierCreditLink&apos; is displayed<br />
+                        Pass: &apos;supplierCreditLink&apos; is clicked<br />
+                        Pass: &apos;supplierCreditLink&apos; is displayed<br />
+                        Pass: &apos;CreditTopSuppliers&apos; is displayed<br />
+                        Pass: &apos;supplierCreditLink&apos; is clicked<br />
+                        Pass: &apos;supplierCreditLink&apos; is displayed<br />
+                        Pass: &apos;FileStatistics&apos; is displayed<br />
+                        Pass: &apos;supplierSpendLink&apos; is clicked<br />
+                        Pass: &apos;supplierSpendLink&apos; is displayed<br />
+                        Pass: &apos;supplierSpendLink&apos; is clicked<br />
+                        Pass: &apos;supplierSpendLink&apos; is displayed<br />
+                        Pass: &apos;SpendTopSuppliers&apos; is displayed<br />
+                        Pass: &apos;supplierSpendLink&apos; is clicked<br />
+                        Pass: &apos;supplierSpendLink&apos; is displayed<br />
+                        Pass: &apos;FileStatistics&apos; is displayed<br />
+                        Pass: &apos;chkReqLink&apos; is clicked<br />
+                        Pass: &apos;chkReqLink&apos; is displayed<br />
+                        Pass: &apos;chkReqLink&apos; is clicked<br />
+                        Pass: &apos;chkReqLink&apos; is displayed<br />
+                        Pass: &apos;chkReqTopSuppliers&apos; is displayed<br />
+                        Pass: &apos;chkReqLink&apos; is clicked<br />
+                        Pass: &apos;chkReqLink&apos; is displayed<br />
+                        Pass: &apos;FileStatistics&apos; is displayed<br />
+                        Pass: &apos;supplierExcludedChart&apos; is displayed<br />
+                        Pass: &apos;supplierTargetChart&apos; is displayed<br />
+                        Pass: &apos;supplierChangeChart&apos; is displayed<br />
+                        Pass: &apos;relSupChart&apos; is displayed<br />
+                        Pass: &apos;complainceLink&apos; is clicked<br />
+                        Pass: &apos;complainceLink&apos; is displayed<br />
+                        Pass: &apos;compliantLink&apos; is clicked<br />
+                        Pass: &apos;compliantLink&apos; is displayed<br />
+                        Pass: &apos;compliantTable&apos; is displayed<br />
+                        Pass: &apos;complianceSummary&apos; is displayed<br />
+                        Pass: &apos;noncompliantLink&apos; is clicked<br />
+                        Pass: &apos;noncompliantLink&apos; is displayed<br />
+                        Pass: &apos;noncompliantTable&apos; is displayed<br />
+                        Pass: &apos;complianceSummary&apos; is displayed<br />
+                        Pass: &apos;complianceBySpendChart&apos; is displayed<br />
+                        Pass: &apos;complianceByCountChart&apos; is displayed<br />
+                        Pass: &apos;complianceBySpendRankChart&apos; is displayed<br />
+                        Pass: &apos;OFACChart&apos; is displayed<br />
+                        Pass: &apos;auditLink&apos; is clicked<br />
+                        Pass: &apos;auditLink&apos; is displayed<br />
+                        Pass: &apos;outboundLink&apos; is clicked<br />
+                        Pass: &apos;outboundLink&apos; is displayed<br />
+                        Pass: &apos;currentMonCredits&apos; is displayed<br />
+                        Pass: &apos;auditContactDetails&apos; is displayed<br />
+                        Pass: &apos;furureCreditsGrph&apos; is displayed<br />
+                        Pass: &apos;claimHistoryGrph&apos; is clicked<br />
+                        Pass: &apos;claimHistoryGrph&apos; is displayed<br />
+                        Pass: &apos;supplierStatus&apos; is displayed<br />
+                        Pass: &apos;pendingCorrespondence&apos; is displayed<br />
+                        Pass: &apos;auditLink&apos; is clicked<br />
+                        Pass: &apos;auditLink&apos; is displayed<br />
+                        Pass: &apos;inboundLink&apos; is clicked<br />
+                        Pass: &apos;inboundLink&apos; is displayed<br />
+                        Pass: &apos;inboundDocumentStatistics&apos; is displayed<br />
+                        Pass: &apos;inboundDocumentSummary&apos; is displayed<br />
+                        Pass: &apos;recognizedfax&apos; is clicked<br />
+                        Pass: &apos;statements&apos; is clicked<br />
+                        Pass: &apos;verifications&apos; is clicked<br />
+                        Pass: &apos;statements&apos; is displayed<br />
+                        Pass: &apos;verificationsTable&apos; is displayed<br />
+                        Pass: &apos;checks&apos; is clicked<br />
+                        Pass: &apos;checksTable&apos; is displayed<br />
+                        Pass: &apos;correspondence&apos; is clicked<br />
+                        Pass: &apos;correspondenceTable&apos; is displayed<br />
+                        Pass: &apos;duplicate&apos; is clicked<br />
+                        Pass: &apos;duplicateTable&apos; is displayed<br />
+                        Pass: &apos;profiles&apos; is clicked<br />
+                        Pass: &apos;profilesTable&apos; is displayed<br />
+                        Pass: &apos;unrecognizedfax&apos; is clicked<br />
+                        Pass: &apos;statements&apos; is clicked<br />
+                        Pass: &apos;verifications&apos; is clicked<br />
+                        Pass: &apos;statements&apos; is displayed<br />
+                        Pass: &apos;verificationsTable&apos; is displayed<br />
+                        Pass: &apos;checks&apos; is clicked<br />
+                        Pass: &apos;checksTable&apos; is displayed<br />
+                        Pass: &apos;correspondence&apos; is clicked<br />
+                        Pass: &apos;correspondenceTable&apos; is displayed<br />
+                        Pass: &apos;duplicate&apos; is clicked<br />
+                        Pass: &apos;duplicateTable&apos; is displayed<br />
+                        Pass: &apos;profiles&apos; is clicked<br />
+                        Pass: &apos;profilesTable&apos; is displayed<br />
+                        Pass: &apos;dna&apos; is clicked<br />
+                        Pass: &apos;statements&apos; is clicked<br />
+                        Pass: &apos;verifications&apos; is clicked<br />
+                        Pass: &apos;statements&apos; is displayed<br />
+                        Pass: &apos;verificationsTable&apos; is displayed<br />
+                        Pass: &apos;checks&apos; is clicked<br />
+                        Pass: &apos;checksTable&apos; is displayed<br />
+                        Pass: &apos;correspondence&apos; is clicked<br />
+                        Pass: &apos;correspondenceTable&apos; is displayed<br />
+                        Pass: &apos;duplicate&apos; is clicked<br />
+                        Pass: &apos;duplicateTable&apos; is displayed<br />
+                        Pass: &apos;profiles&apos; is clicked<br />
+                        Pass: &apos;profilesTable&apos; is displayed<br />
+                        Pass: &apos;contactEntry&apos; is clicked<br />
+                        Pass: &apos;docQueueTable&apos; is displayed<br />
+                        Pass: &apos;supDetailsTable&apos; is displayed<br />
+                        Pass: &apos;docDetails&apos; is displayed<br />
+                        Pass: &apos;batchingLink&apos; is clicked<br />
+                        Info: Switched successfully to frame :0<br />
+                        Pass: &apos;unBatchedCreditsTable&apos; is displayed<br />
+                        Info: Switched successfully to frame :1<br />
+                        Pass: &apos;batchedClaimsTable&apos; is displayed<br />
+                        Info: Switched successfully to frame :2<br />
+                        Pass: &apos;batchSummaryTable&apos; is displayed<br />
+                        Info: Switched successfully to frame :3<br />
+                        Pass: &apos;batchedDetailsTable&apos; is displayed<br />
+                        Pass: &apos;invoiceLink&apos; is clicked<br />
+                        Info: Switched successfully to frame :0<br />
+                        Pass: &apos;invoicesTable&apos; is displayed<br />
+                        Info: Switched successfully to frame :1<br />
+                        Pass: &apos;invoiceSummaryTable&apos; is displayed<br />
+                        Info: Switched successfully to frame :2<br />
+                        Pass: &apos;invoiceCreditLink&apos; is clicked<br />
+                        Pass: &apos;invoiceCreditTable&apos; is displayed<br />
+                        Info: Switched successfully to frame :2<br />
+                        Pass: &apos;invoiceVoidLink&apos; is clicked<br />
+                        Pass: &apos;invoiceVoidTable&apos; is displayed<br />
+                        Info: Switched successfully to frame :2<br />
+                        Pass: &apos;invoiceRefundLink&apos; is clicked<br />
+                        Pass: &apos;invoiceRefundTable&apos; is displayed<br />
+                        Pass: &apos;possibleDupesLink&apos; is clicked<br />
+                        Info: Switched successfully to frame :0<br />
+                        Pass: &apos;possDupSummaryTable&apos; is displayed<br />
+                        Info: Switched successfully to frame :1<br />
+                        Pass: &apos;preBatchTable&apos; is displayed<br />
+                        Info: Switched successfully to frame :2<br />
+                        Pass: &apos;postBatchTable&apos; is displayed<br />
+                        Info: Switched successfully to frame :3<br />
+                        Pass: &apos;possDupDetailsTable&apos; is displayed<br />
+                        Pass: &apos;summaryLink&apos; is clicked<br />
+                        Pass: &apos;currMonthTable&apos; is displayed<br />
+                        Pass: &apos;custSummaryTable&apos; is displayed<br />
+                        Pass: &apos;OutReachgrph&apos; is displayed<br />
+                        Pass: &apos;statementProcessedgrph&apos; is displayed<br />
+                        Pass: &apos;openClaimsBySpendGrph&apos; is displayed<br />
+                        Pass: &apos;openClaimsByCountGrph&apos; is displayed<br />
+                        Pass: &apos;subClaimsBySpendGrph&apos; is displayed<br />
+                        Pass: &apos;subClaimsByCountGrph&apos; is displayed<br />
+                        Pass: &apos;totalCreditsgrph&apos; is displayed<br />
+                        Pass: &apos;chkRegLink&apos; is clicked<br />
+                        Pass: &apos;chkRegList&apos; is displayed<br />
+                        Pass: &apos;addNewBtn&apos; is displayed<br />
+                        Pass: &apos;claimsLink&apos; is clicked<br />
+                        Pass: &apos;totalClaimsTable&apos; is displayed<br />
+                        Pass: &apos;claimsListTable&apos; is displayed<br />
+                        Pass: &apos;invoicesLink&apos; is clicked<br />
+                        Fail: &apos;invoiceSummaryTable&apos; is not displayedUnable to find element with css selector == #invoiceSummary tr td (WARNING: The server did not provide any stacktrace information)<br/>
+Command duration or timeout: 10.15 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA02&apos;, ip: &apos;192.168.21.80&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.ie.InternetExplorerDriver<br/>
+Capabilities [{browserAttachTimeout=0, enablePersistentHover=false, ie.forceCreateProcessApi=false, ie.usePerProcessProxy=false, ignoreZoomSetting=true, handlesAlerts=true, version=11, platform=WINDOWS, nativeEvents=false, ie.ensureCleanSession=false, elementScrollBehavior=0, ie.browserCommandLineSwitches=, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:27031/, takesScreenshot=true, javascriptEnabled=true, ignoreProtectedModeSettings=true, enableElementCacheCleanup=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=dismiss}]<br/>
+Session ID: 02fe53cf-b8a2-4386-aaf6-c96d9359e492<br/>
+*** Element info: {Using=css selector, value=#invoiceSummary tr td}<br/>
+Command duration or timeout: 10.30 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{browserAttachTimeout=0, enablePersistentHover=false, ie.forceCreateProcessApi=false, ie.usePerProcessProxy=false, ignoreZoomSetting=true, handlesAlerts=true, version=11, platform=WINDOWS, nativeEvents=false, ie.ensureCleanSession=false, elementScrollBehavior=0, ie.browserCommandLineSwitches=, webdriver.remote.sessionid=0b7651ae-28ba-48a0-96e9-4c0dcbca8b87, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:27031/, takesScreenshot=true, javascriptEnabled=true, ignoreProtectedModeSettings=true, enableElementCacheCleanup=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=dismiss}]<br/>
+Session ID: 0b7651ae-28ba-48a0-96e9-4c0dcbca8b87<br/>
+*** Element info: {Using=css selector, value=#invoiceSummary tr td}<br />
+                        Fail: &apos;reportsLink&apos; is not displayed<br />
+                        Fail: &apos;configurationLink&apos; is not displayed<br />
+                        Fail: &apos;assignmentsLink&apos; is not displayed<br />
+                        Fail: &apos;creditsLink&apos; is not displayed<br />
+                        Fail: &apos;statementsLink&apos; is not displayed<br />
+                        Fail: &apos;auditStatisticsLink&apos; is not displayed<br />
+            </div>
+
+</body>
+</html>

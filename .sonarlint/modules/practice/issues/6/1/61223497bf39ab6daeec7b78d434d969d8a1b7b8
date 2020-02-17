@@ -1,0 +1,12 @@
+
+esquid:S1854
+"7Remove this useless assignment to local variable "obj".(¥•Úõ8üö›±£-H¤®?RMAJORZBUG
+Ksquid:S1118"Hide this public constructor.(ÓâÎöH¥®?RMAJORZ
+CODE_SMELL
+]squid:S1481
+"(Remove this unused "obj" local variable.(¥•Úõ8üö›±£-H¦®?RMINORZ
+CODE_SMELL
+rsquid:S1197	"8Move the array designator from the variable to the type.(¡şÏÖøÿÿÿÿ8²Œ±£-H§®?RMINORZ
+CODE_SMELL
+¹squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÓâÎö8„î—±£-H¨®?RCRITICALZ
+CODE_SMELL

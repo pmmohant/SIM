@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Campaigns Test" parallel="tests" preserve-order="true" thread-count="3"	verbose="1">
+	
+	<!-- Running on IE 11 -->
+	 <test preserve-order="true" 
+		name="Lavante SIM - Running on IE 11">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="internet Explorer" />
+		<!-- <parameter name="Version" value="11" /> -->
+		<classes>
+		
+		 </classes>
+	</test>  
+		
+	<!-- Running on FF 35 -->
+	<test preserve-order="true" name="Lavante SIM - Running on Firefox ">
+	
+		
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="firefox" />
+		<!-- <parameter name="Version" value="35" /> -->
+		<classes>
+
+		 </classes>
+	</test>  
+	
+ 	<!--    Running on Chrome 46 -->
+	<test preserve-order="true" name="Lavante SIM - Running on Chrome ">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="chrome" />
+			<classes>
+			
+				<class name="com.lavante.sim.customer.TestScripts.Dashboard.CampaignDashboardTest" />
+			
+				<class name="com.lavante.sim.customer.TestScripts.Campaign.CampaignBasicSearch" />
+				<class name="com.lavante.sim.customer.TestScripts.Campaign.CampaignAdvancedSearch" />
+				
+				<class name="com.lavante.sim.customer.TestScripts.Campaign.CampaignsActionsTests" />
+				<class name="com.lavante.sim.customer.TestScripts.Campaign.PaidCampaignsTests" />
+				
+		  </classes>
+	</test> 
+	
+</suite> 

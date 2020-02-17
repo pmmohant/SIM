@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="UAT-Customer Dashboard Module" parallel="tests" preserve-order="true"
+	thread-count="3" verbose="1">
+	
+	<listeners>
+		 <listener class-name="com.lavante.sim.Common.Util.ExtentReporterNG"/>
+	 </listeners>
+
+	 <test preserve-order="true" thread-count="1"
+	 		name="Lavante SIM - Running on IE">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="internet Explorer" />
+		<!-- <parameter name="Version" value="11" /> -->
+		<classes>
+
+	</classes>
+	</test> 
+	
+	<!-- Running on FF 35 -->
+	<test preserve-order="true" thread-count="1"
+		name="Lavante SIM - Running on Firefox">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="firefox" />
+		<!-- <parameter name="Version" value="34" /> -->
+		<classes>
+		</classes>
+	</test>
+
+	<!-- Running on Chrome 46 -->
+	<test preserve-order="true" thread-count="1"
+		name="Lavante SIM - Running on Chrome">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="chrome" />
+		<!-- <parameter name="Version" value="47" /> -->
+		<classes>
+			<!-- CustomerDashboard Module -->
+			<class name="com.lavante.sim.customer.TestScripts.Dashboard.CustomerDashBoard" />
+			<class name="com.lavante.sim.customer.TestScripts.Dashboard.ExpiringCertificationsChart001" />
+			<class name="com.lavante.sim.customer.TestScripts.Dashboard.OnboardingProgressTests" />
+			
+			<class name="com.lavante.sim.customer.TestScripts.Dashboard.SupportContactDetails" />
+			
+			
+		<!-- Old App	<class name="com.lavante.sim.customer.TestScripts.CustomerDashboard.CustomerDashboardTC0001" />
+			<class name="com.lavante.sim.customer.TestScripts.CustomerDashboard.CustomerDashboardTC0002" />
+			<class name="com.lavante.sim.customer.TestScripts.CustomerDashboard.CustomerDashboardTC0003" />
+			<class name="com.lavante.sim.customer.TestScripts.CustomerDashboard.CustomerDashboardTC0004" />
+ 			<class name="com.lavante.sim.customer.TestScripts.CustomerDashboard.CustomerDashboardTC0005" />
+			<class name="com.lavante.sim.customer.TestScripts.CustomerDashboard.CustomerDashboardTC0006" />
+			
+ -->
+		</classes>
+
+	</test> 
+
+
+</suite> 

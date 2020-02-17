@@ -1,0 +1,49 @@
+#title
+approvalstitle=Lavante SIM - Approvals
+#links
+task=Tasks
+approval=Approvals
+
+#id
+search=searchText
+searchbtn=searchSupplier
+#xpath
+dropSearch=//div[@id='searchSelect_chosen']/a/div
+listSearch=//div[@id='searchSelect_chosen']//ul[@class='chosen-results']/li[2]
+Editprofile=//input[@title='Edit Profile']
+Reject=//input[@title='Reject']
+Reassign=//input[@title='Reassign']
+Approve=//input[@title='Approve']
+dropFilter=//div[@id='filterWorkflow_chosen']/a/div
+#//form[@id='approve_customer']//div[@class='chosen-drop']/ul/li
+listFilter=//div[@class='chosen-drop']/ul/li
+frameReassign=//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+dropdwngroupbtn=//div[@id='customerGroup_chosen']/a
+dropdwnuserbtn=//div[@id='groupUser_chosen']/a
+clearbtn=//form[@id='customerReassignForm']//input[@title='Clear']
+reassignbtn=//*[@id='customerReassignForm']//input[@type='submit']
+#//form[@id='customerReassignForm']//input[@title='Reassign']
+listgroup=//div[@id='customerGroup_chosen']//ul/li
+listuser=//div[@id='groupUser_chosen']/div/ul/li
+frameApprove=//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+clearbtn=//input[@title='Clear']
+submitbtn=//input[@title='Submit']
+comment=//textarea[@id='comment']
+close=//div[12]/div[1]/button[starts-with(@class,'ui-button ui-widget') and contains(@class,'close')]/span[1]
+close1=//div[10]/div[1]/button[starts-with(@class,'ui-button ui-widget') and contains(@class,'close')]/span[1]
+TableHeaders=//table[@id='new-supplier-approval']/thead/tr
+TableHeader=//table[@id='new-supplier-approval']/thead/tr/th
+tableRows=//table[@id='new-supplier-approval']/tbody/tr
+tableradiobtn1=//table[@id='new-supplier-approval']/tbody/tr[
+tableradiobtn2=]/td[1]/input
+tableRows2=//table[@id='new-supplier-approval']/tbody/tr/td[
+RequiredRow1=//table[@id='new-supplier-approval']/tbody/tr[
+RequiredRow2=]/td[
+tableradiobtn1=//table[@id='new-supplier-approval']/tbody/tr[
+tableradiobtn2=]/td[1]/input
+popupOK=//div[@class='ui-dialog-buttonset']/button[@class='button_green']
+frameReject=//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+
+
+#class
+clsDataNotFound=data_not_found

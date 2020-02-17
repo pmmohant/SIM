@@ -1,0 +1,35 @@
+#PageTitle
+expectedPageTitle=Gmail
+expectedGoogleAccountsPageTitle=Google Accounts
+expGmailHomePageTitle=simsupplierqa4@gmail.com - Gmail
+#ID
+next=next
+email=Email
+passwd=Passwd
+btnsignIn=signIn
+radioBtn=PersistentCookie
+sim_title align_left
+#Xpath
+#logoutLogoBtn=//div/a/span[contains(@class,'gb_da gbii')]
+#logoutLogoBtn=//div/a/span[contains(@class,'gb_ea gbii')]
+logoutLogoBtn=//*[contains(@href,'SignOut')]
+#//div/a/span[starts-with(@class,'gb_') and contains(@class,'gbii')]
+
+signOutBtn=//div/a[@id='gb_71']
+expInvalidLoginErrors=//span[contains(@id,'errormsg')]
+btnInbox=//div/span/a[contains(@title,'Inbox')]
+btnPrimaryMailTab=//div[contains(@class,'aKx')]/div[contains(@id,':36')]
+inboxMailRows=//div[contains(@class,'Cp')]/div/table/tbody/tr
+inboxMailRowsPrefix=//div[contains(@class,'Cp')]/div/table/tbody/tr[
+inboxMailRowsSuffix=]
+subjectLine=//h2[contains(@class,'hP')]
+#Link Text
+accountSetupPage=Account Setup Page
+clickHere=here
+link=Help
+#CSS
+input[class='button button_red'][type='reset']
+
+
+ 
+

@@ -1,0 +1,99 @@
+#LinkS
+suppliers=Suppliers
+home=Home
+editProfile=Edit Profile
+viewProfile=View Profile
+
+#ID
+searchtab=search_tab
+checkBoxAgree=conwayCustomField4
+saveExitBtn=saveexit_button
+advSearchTab=adv_search_tab
+comment=comment
+#Xpath
+buildQueryBtn=//button[@name='adv_search'][@class='button_green open_popup']
+paymentDetails=//*[@id='payment_discount_details']
+profileTabArrowBtn=//table[@id='profile_tab']/tbody/tr/td[3]/button[@class='trail-next'][@disabled='']
+profileTabArrowVisibleBtn=//table[@id='profile_tab']/tbody/tr/td[3]/button[@class='trail-next']
+supNameRows=//table[contains(@id,'search_results')]/tbody/tr
+supplierManagedTab=.//*[@id='main-navigation']/a[1]
+supplierEnterpriseOwnedTab=.//*[@id='main-navigation']/a[2]
+supplierVMFViewTab=.//*[@id='sub-navigation']/a[3]
+supplierContactTab=.//*[@id='sub-navigation']/a[6]
+paymentInfoTab=.//*[@id='sub-navigation']/a[4]
+agreeTxt=//div[@class='toggle_content']/div/table/tbody/tr/td[2]
+supplierNameField=//form[contains(@id,'search_supplier_form')]/div/table/tbody/tr[2]/td[2]/input[contains(@id,'supplierName')]
+basicSearchBtn=//form[contains(@id,'search_supplier_form')]/div[2]/button[contains(@title,'Search Suppliers')]
+supNameRowsOne=//table[contains(@id,'search_results')]/tbody/tr[
+supNameRowsTwo=]/td[1]
+profileBlueBtn=//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[1]/button
+paymentInfoWizardTab=//a[contains(@class,'evt-trail-evt trail-item')]/div/h2[contains(@class,'wizard_tab_title')]
+popupSavedTxt=//div[contains(@class,'dialog undefined ui-dialog-content ui-widget-content')]
+popupOkBtn=//div/div/button[contains(@class,'button_green')][contains(@type,'button')]
+supplierNameDropDown=//div[@id='supplier_name_chosen']/a[contains(@class,'chosen-single')]
+paymentInformationTab=a[title='Payment Information'][class='tab']
+eTFTermsField=//div[@id='CF_conwayCustomField4_chosen']/a[contains(@class,'chosen-single')]
+eTFTermsDropDownList=//div[@id='CF_conwayCustomField4_chosen']/div[contains(@class,'chosen-drop')]/ul/li
+supplierNameList=//div[@id='supplier_name_chosen']/div[contains(@class,'chosen-drop')]/ul/li
+statusHistoryTab=.//*[@id='main-navigation']/a[3]
+requiredFieldsTab=.//*[@id='sub-navigation']/a[1]
+listRequiredFields=//div[contains(@class,'todo_rows align_left')]/ul/li/i
+profileCompletionStatus=.//*[@id='profile_percentage']
+supplierDetailsPageHeader=//span[contains(@class,'ui-dialog-title')]
+customerNameDropDownField=//div[@id='customer_chosen']//a
+#//div[@id='customer_chosen']/a[contains(@class,'chosen-single')]
+customerNameDropDownList=//div[@id='customer_chosen']/div[contains(@class,'chosen-drop')]/ul/li
+requiredFieldListNames=//div[contains(@class,'trail-container horizontal-tab')]/ul/li/ul
+vMFRowsData=//table[contains(@class,'data_table table_grid zebra')]/tbody/tr/td
+noteCommentsTab=.//*[@id='sub-navigation']/a[2]
+commentTypeField=//div[@id='commentType_chosen']/a[contains(@class,'chosen-single')]
+commentTypeDropDown=//div[@id='commentType_chosen']/div[contains(@class,'chosen-drop')]/ul/li
+listUpadtedComment=//h3[contains(@class,'toggle_header')]
+commentsList=//table[contains(@class,'data_table table_grid zebra dynamic_table toggle_content')]/tbody/tr/td[4]
+contactNameColumn=//th[contains(@id,'contactName')]
+designationColumn=//th[contains(@id,'designation')]
+departmentColumn=//th[contains(@id,'department')]
+phoneNumberColumn=//th[contains(@id,'phoneNumber')]
+faxNumberColumn=//th[contains(@id,'faxNumber')]
+emailColumn=//th[contains(@id,'email')]
+addressColumn=//th[contains(@id,'address')]
+contactTypeColumn=//th[contains(@id,'contactType')]
+tinNumber=//table[contains(@class,'data_table table_outer_grid')]/tbody/tr[10]/td[2]
+usIncomeFieldLabel=//table[contains(@class,'data_table table_outer_grid')]/tbody/tr[8]/td[1]
+usIncomeFieldLabelText=//table[contains(@class,'data_table table_outer_grid')]/tbody/tr[8]/td[2]
+subTabRowsPrefix=.//*[@id='sub-navigation']/a[
+subTabRowsSuffix=]
+requiredFieldList=//*[@id='dialog']//label[contains(@class,'field_required')]
+#//table[contains(@class,'data_table table_outer_grid')]/tbody/tr/td/label[contains(@class,'field_required')]
+
+#iframe
+searchresults=search_results
+supBodyDisFrame=//iframe[contains(@class,'popup_iframe ui-dialog-content ui-widget-content')]
+iframepage=//iframe[contains(@class,'iframe_page')]
+
+
+#CSS
+popupCloseBtn=button[title='close'][type='button']
+profileEditBtn=button[value='Edit Profile'][class='buttons_group_button']
+#input[value='Edit Profile'][class='buttons_group_button']
+
+
+editSupNameField=input[type='text'][name='supplier_name_field']
+buildQuerySearchBtn=input[title='Search'][type='submit']
+commentSaveBtn=button[type='submit'][title='Save']
+#Exp Texts
+name=Name
+designation=Designation
+department=Department
+phoneNumber=Phone Number
+faxNumber=Fax Number
+email=Email
+address=Address
+contactType=Contact Type
+expProfileSavedMsgTxt=Profile is successfully saved
+expAgreeTxt=Agree
+expSupplierDetailsPageHeader=Supplier Details for
+expBuildQueryPageHeader=Build Query
+
+
+

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Claims Test" parallel="tests" preserve-order="true" 	thread-count="3"	verbose="1">
+	
+	<listeners>
+		 <listener class-name="com.lavante.sim.Common.Util.ExtentReporterNG"/>
+	 </listeners>
+	
+ 	<!--    Running on Chrome 46 -->
+	<test preserve-order="true" name="Lavante SIM - Running on Chrome ">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="chrome" />
+		<!-- <parameter name="Version" value="44" /> -->
+			<classes>
+			
+				<class name="com.lavante.sim.customer.TestScripts.Transactions.Payments.PaymentsSearchTestCases" />
+				<class name="com.lavante.sim.customer.TestScripts.Transactions.Payments.SupplierPaymentsSearchTestCases" />
+				<class name="com.lavante.sim.customer.TestScripts.Transactions.Payments.PaymentsAddCommentsTests" />
+				<class name="com.lavante.sim.customer.TestScripts.Transactions.Payments.PaymentSubmitQnToAnsTests" />
+				
+				<!-- 		<class name="com.lavante.sim.customer.TestScripts.Transactions.Payments.BuyerAddDocumentsTests" />
+				<class name="com.lavante.sim.customer.TestScripts.Transactions.Payments.SupplierAddDocumentsTests" />
+							<class name="com.lavante.sim.customer.TestScripts.Transactions.Invoices.BuyerInvoiceAddDocumentsTests" />
+				<class name="com.lavante.sim.customer.TestScripts.Transactions.Invoices.SupplierInvoiceAddDocumentsTests" /> -->
+				
+				<!-- <class name="com.lavante.sim.customer.TestScripts.Admin.DataIngestionSummaryTests" /> -->
+				
+				<class name="com.lavante.sim.customer.TestScripts.Transactions.Claims.ClaimBasicSearchTest" />
+				<class name="com.lavante.sim.customer.TestScripts.Transactions.Claims.ClaimsAdvanceSearchTest" />
+				<class name="com.lavante.sim.customer.TestScripts.Transactions.Claims.MyClaimsFilterTest" />
+				
+				<class name="com.lavante.sim.customer.TestScripts.Transactions.Claims.ClaimsActionTests" />
+				
+				<class name="com.lavante.sim.customer.TestScripts.Tasks.Claims.TasksClaimPageTest" />
+				<class name="com.lavante.sim.customer.TestScripts.Tasks.Claims.TaskClaimLockTest" />
+				<class name="com.lavante.sim.customer.TestScripts.Tasks.PendingUpdate.PendingUpdateTest" />
+				<class name="com.lavante.sim.customer.TestScripts.Tasks.Invoice.RequestUpdateTest01" />
+		
+				<class name="com.lavante.sim.customer.TestScripts.Tasks.TaskTracker.TaskTrackerSearchActionTest" />
+		
+				<class name="com.lavante.sim.customer.TestScripts.Dashboard.ClaimsDashboardTests" />
+				<class name="com.lavante.sim.customer.TestScripts.Dashboard.SupplierClaimsDashboardTests" />
+				<class name="com.lavante.sim.customer.TestScripts.Transactions.Claims.SupplierClaimsSearchTestsCases" />
+				<class name="com.lavante.sim.customer.TestScripts.Transactions.Claims.SupplierClaimsActionTests" />
+				
+				<class name="com.lavante.sim.customer.TestScripts.Messages.MessageSearchActionTest" />
+				
+		  </classes>
+	</test> 
+	
+</suite> 

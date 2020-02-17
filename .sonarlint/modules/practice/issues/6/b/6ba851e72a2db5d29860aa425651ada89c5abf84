@@ -1,0 +1,15 @@
+
+Zsquid:S1481"&Remove this unused "t" local variable.(î‘Ë8şê†±£-H®?RMINORZ
+CODE_SMELL
+`squid:S1481"&Remove this unused "s" local variable.(Œ‰—›üÿÿÿÿ8şê†±£-H®?RMINORZ
+CODE_SMELL
+`squid:S1481"&Remove this unused "r" local variable.(¢î®÷ûÿÿÿÿ8şê†±£-HŸ®?RMINORZ
+CODE_SMELL
+hsquid:S1854"5Remove this useless assignment to local variable "s".(Œ‰—›üÿÿÿÿ8şê†±£-H ®?RMAJORZBUG
+dsquid:S1172
+"*Remove this unused method parameter "num".(´Àà­üÿÿÿÿ8şê†±£-H¡®?RMAJORZ
+CODE_SMELL
+bsquid:S1481"(Remove this unused "sum" local variable.(Ó‰êÁûÿÿÿÿ8şê†±£-H¢®?RMINORZ
+CODE_SMELL
+osquid:S1118":Add a private constructor to hide the implicit public one.(îô‹»8şê†±£-H£®?RMAJORZ
+CODE_SMELL

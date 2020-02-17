@@ -1,0 +1,76 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 19, Failures: 7, Errors: 0, Skipped: 0, Time elapsed: 1,474.92 sec <<< FAILURE! - in TestSuite
+verifyInvoicesPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 18.498 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'invoiceSummaryTable' is not displayedUnable to find element with css selector == #invoiceSummary tr td (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 10.15 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA02', ip: '192.168.21.80', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.ie.InternetExplorerDriver
+Capabilities [{browserAttachTimeout=0, enablePersistentHover=false, ie.forceCreateProcessApi=false, ie.usePerProcessProxy=false, ignoreZoomSetting=true, handlesAlerts=true, version=11, platform=WINDOWS, nativeEvents=false, ie.ensureCleanSession=false, elementScrollBehavior=0, ie.browserCommandLineSwitches=, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:27031/, takesScreenshot=true, javascriptEnabled=true, ignoreProtectedModeSettings=true, enableElementCacheCleanup=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=dismiss}]
+Session ID: 02fe53cf-b8a2-4386-aaf6-c96d9359e492
+*** Element info: {Using=css selector, value=#invoiceSummary tr td}
+Command duration or timeout: 10.30 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{browserAttachTimeout=0, enablePersistentHover=false, ie.forceCreateProcessApi=false, ie.usePerProcessProxy=false, ignoreZoomSetting=true, handlesAlerts=true, version=11, platform=WINDOWS, nativeEvents=false, ie.ensureCleanSession=false, elementScrollBehavior=0, ie.browserCommandLineSwitches=, webdriver.remote.sessionid=0b7651ae-28ba-48a0-96e9-4c0dcbca8b87, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:27031/, takesScreenshot=true, javascriptEnabled=true, ignoreProtectedModeSettings=true, enableElementCacheCleanup=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=dismiss}]
+Session ID: 0b7651ae-28ba-48a0-96e9-4c0dcbca8b87
+*** Element info: {Using=css selector, value=#invoiceSummary tr td}
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:216)
+	at lavante.recovery.pageobjects.InvoicesPage.verifyinvoiceSummaryTable(InvoicesPage.java:28)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyInvoicesPage(SanityTestSuite.java:367)
+
+verifyReportsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 13.621 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'reportsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:198)
+	at lavante.recovery.pageobjects.ReportsPage.verifyreportsLink(ReportsPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyReportsPage(SanityTestSuite.java:381)
+
+verifySetupPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 13.334 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'configurationLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:198)
+	at lavante.recovery.pageobjects.Configuration.Setup.AuditPage.verifyconfigurationLink(AuditPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifySetupPage(SanityTestSuite.java:393)
+
+verifyHoldsAssignmentsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 15.24 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'assignmentsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:198)
+	at lavante.recovery.pageobjects.Assignments.HoldsPage.verifyAssignmentsLink(HoldsPage.java:18)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyHoldsAssignmentsPage(SanityTestSuite.java:527)
+
+verifyCreditsAssignmentsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 13.383 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'creditsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:198)
+	at lavante.recovery.pageobjects.Assignments.CreditsPage.verifycreditsLink(CreditsPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyCreditsAssignmentsPage(SanityTestSuite.java:541)
+
+verifyStatementsAssignmentsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 30.376 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'statementsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:198)
+	at lavante.recovery.pageobjects.Assignments.StatementsPage.verifyStatementsLink(StatementsPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyStatementsAssignmentsPage(SanityTestSuite.java:553)
+
+verifyauditStatisticsAssignmentsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 25.247 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'auditStatisticsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:198)
+	at lavante.recovery.pageobjects.Assignments.AuditStatisticsPage.verifyauditStatisticsLink(AuditStatisticsPage.java:21)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyauditStatisticsAssignmentsPage(SanityTestSuite.java:565)
+

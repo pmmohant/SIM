@@ -1,0 +1,11 @@
+
+Browser=chrome
+#Application URL
+APPURL=http://simqa36.lavante.com:9080/cassim/login?service=http%3A%2F%2Fsimqa36.lavante.com%3A9080%2Fsim%2Flogin.lvp
+IEDriver = .\\src\\test\\resources\\IEDriverServer.exe
+
+ChromeDriver=.\\src\\test\\resources\\ChromeDriver.exe
+
+#G mail URL
+GMAILURL=https://accounts.google.com/ServiceLogin?service=mail
+		 

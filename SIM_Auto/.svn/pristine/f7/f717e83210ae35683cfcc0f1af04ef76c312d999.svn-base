@@ -1,0 +1,142 @@
+package com.lavante.sim.customer.pageobjects.Tasks.Campaigns;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+
+public class TasksCampaignsPage {
+
+	WebDriver driver;
+	LavanteUtils lavanteUtils = new LavanteUtils();
+
+	public TasksCampaignsPage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+		this.driver = driver;
+	}
+
+	@FindBy(css = "table[id='campaign-approval-task'] td label")
+	private List<WebElement> ListCheckBox;
+
+	public List<WebElement> ListCheckBox() {
+		return ListCheckBox;
+	}
+
+	@FindBy(css = "#campaign-approval-task th")
+	private List<WebElement> Headers;
+
+	// Actions options
+	@FindBy(css = "button[class*='action_buttons']")
+	private WebElement ActionsDropDwn;
+
+	public WebElement ActionsDropDwn() {
+		return ActionsDropDwn;
+	}
+
+	@FindBy(name = "approveSupplier")
+	private WebElement ApproveLink;
+
+	public WebElement ApproveLink() {
+		return ApproveLink;
+	}
+
+	@FindBy(id = "comment")
+	private WebElement CommentTxtArea;
+
+	public WebElement CommentTxtArea() {
+		return CommentTxtArea;
+	}
+
+	@FindBy(css = "input[class*='primary']")
+	private WebElement SubmitBtn;
+
+	public WebElement SubmitBtn() {
+		return SubmitBtn;
+	}
+
+	@FindBy(css = "iframe[src*='customerApprovalsForm']")
+	private WebElement IframePopUp;
+
+	public WebElement IframePopUp() {
+		return IframePopUp;
+	}
+
+	public String getColumnText(String colname, int count) {
+		String x = "";
+		int size = iterateSearchHeaderFindColList(colname).size();
+		List<WebElement> sx = iterateSearchHeaderFindColList(colname);
+		outr: for (int i = 0; i < size; i++) {
+			System.out.println(sx.get(i) + "," + i + "COL TExt size:" + sx.size());
+			x = sx.get(i).getText();
+			System.out.println("Col Text:" + x);
+			if (count == 0) {
+				if (x.length() > 0) {
+					break outr;
+				}
+			} else {
+				x = sx.get(count).getText();
+				System.out.println("Exact I Value in col :" + x);
+				break outr;
+			}
+		}
+		return x;
+	}
+
+	public List<WebElement> iterateSearchHeaderFindColList(String col) {
+		lavanteUtils.switchtoFrame(null);
+		int j = ColIdentify(col);
+		int y = j + 1;
+		String x = "#campaign-approval-task tr td:nth-child(" + j + ")";
+		List<WebElement> s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		System.out.println("Iterate Search Col:" + col + ":" + s.size());
+		return s;
+	}
+
+	public int ColIdentify(String col) {
+		int ki = 0;
+		boolean found = false;
+		if (Headers.size() > 0) {
+			for (int i = 0; i < Headers.size(); i++) {
+				String x = Headers.get(i).getText().toLowerCase();
+				if (x.contains(col.toLowerCase())) {
+					ki = i;
+					// List start with 0 but need a number more than that to
+					// fetch in xpath
+					ki = i + 1;
+					found = true;
+					break;
+				}
+			}
+		}
+
+		if (found == false) {
+			Assert.assertTrue(false, "Col name not found" + col);
+		}
+		return ki;
+
+	}
+
+	/**
+	 * @author Subhas.BV
+	 * 
+	 *         Select options from the actions drop down
+	 */
+	public void selectAction(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.clicks(ActionsDropDwn);
+		if (dataMap.containsKey("Approve")) {
+			lavanteUtils.click(ApproveLink);
+			lavanteUtils.switchtoFrame(IframePopUp);
+			String comment = "Auto_SP" + lavanteUtils.generateRandomNumber9OnLength(10);
+			lavanteUtils.typeinEdit(comment, CommentTxtArea);
+			lavanteUtils.clicks(SubmitBtn);
+			lavanteUtils.switchtoFrame(null);
+		}
+	}
+}

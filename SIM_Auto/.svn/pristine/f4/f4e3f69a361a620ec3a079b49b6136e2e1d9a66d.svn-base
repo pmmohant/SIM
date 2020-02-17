@@ -1,0 +1,24 @@
+#title
+pagetitle=Lavante SIM - Add Supplier ID
+
+#link
+linkTasks=Tasks
+linkAddsupplierID=Add Supplier ID
+
+#xpath
+table=//table[@id='add_supplierID']
+popupOKbtn=//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-front dialog ui-dialog-buttons']//button[@class='button_green']
+popupcancelbtn=//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-front dialog ui-dialog-buttons']//button[@class='button_red']
+existingSupplierIDlink=//a[contains(@class,'open_popup') and contains(@href,'getERPSupplier')]
+iframeExistingSupplierIDpopup=//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+tableExistingSupplierheader=//table[@class='data_table table_grid zebra']/tbody/tr/th
+tableExistingSupplierdata=//table[@class='data_table table_grid zebra']/tbody/tr/td
+textComment=//textarea[@id='comment']
+btnResolve=//input[@class='button_green']
+addsupplierIDpopup=//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-front dialog ui-dialog-buttons']
+
+#id
+addsupplierIDbtn=actionButton
+
+#class
+noDatafound=data_not_found

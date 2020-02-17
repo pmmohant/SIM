@@ -1,0 +1,203 @@
+package com.lavante.sim.customer.TestScripts.Dashboard;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class CustomerDashBoard extends PageInitiator {
+  
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String customerid="";
+	
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+		
+	launchAppFromPOM(Platform,browser,Version);
+	initiate();	
+	openAPP();
+	
+	//Assigning the driver to the object of lavante utils		
+	lavanteUtils.driver=driver;
+	
+	// Login
+	List<?> listofdatafrm = lavanteUtils.login("Sanity", browser);
+	LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+	LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+	customerid= (String) listofdatafrm.get(1);
+	
+	// Login
+	enobjloginpage.logintoAPP(LdataMap);
+	enobjhomePage.close();
+
+	
+	}
+	
+	 @Test(priority=1)
+	 public void dashboardTest() throws FileNotFoundException, IOException, SQLException {
+		 SoftAssert softAssert=new SoftAssert();
+		 
+		//enobjhomePage.userNameSelect();
+		lavanteUtils.fluentwait(enobjhomePage.UserName());
+		boolean flag=lavanteUtils.isElementDisplayed(enobjhomePage.UserName());
+		softAssert.assertTrue(flag,"User Name Found");
+		
+		lavanteUtils.fluentwait(enobjhomePage.SupplierSearchForm());
+		flag=lavanteUtils.isElementDisplayed(enobjhomePage.SupplierSearchForm());
+		softAssert.assertTrue(flag);
+		
+		String complogo=enobjhomePage.companylogoImg().getAttribute("title");
+		softAssert.assertTrue(complogo.contains("Lavante"),"Company logo not present"+complogo);
+		
+		String custlogo=enobjhomePage.customerlogo().getAttribute("src");
+		if(custlogo.contains("\""))
+		{
+			String[] da=custlogo.split("\"");
+			custlogo=da[1];
+		}
+	
+		String query="select CustomerLogoUrl from Customer where CustomerID="+customerid;
+		String data=lavanteUtils.fetchDBdata(query);
+		Reporter.log("Customer Logo Expected,"+data+",Actual:"+custlogo,true);
+		softAssert.assertTrue(custlogo.contains(data),"Customer Logo Not Matched for Customer ID:"+customerid+custlogo+data);
+		
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<>();
+		 // Navigating sub menu items under Dashboard menu
+		dataMap.put("Dashboard", "Regulatory Compliance");
+		enobjdashBoard.switchDashboard(dataMap);
+		   
+		enobjdashBoard.verifyRegulatoryComplianceItemsDisplayed();
+		
+		softAssert.assertAll();
+		Reporter.log("Test Ended for Dashboard:"+currenttime());
+	}
+
+	/**
+	 * OutStanding Task Verification 
+	 * Failed for the count hence commented
+	 * 
+	 * @author Girish.N
+	 */
+	 @Test 
+		public void OutstandingTaskCountVerificationTest(){
+			Reporter.log("<---------------------Test Started for OutstandingTaskCountVerificationTest: " + currenttime(),true);
+			
+			SoftAssert softAssert = new SoftAssert();
+			LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+			boolean flag=false;
+			
+			
+			if(enobjhomePage.OSTaskIcon().getText().trim().length()>0){
+				Reporter.log("<------------- Outstanding Task Verification on Page Header Notification Icon",true);
+				
+				enobjhomePage.getOutstdngTsksOnPH(dataMap);	
+				
+				String outStandingTasksOnDDL = dataMap.get("OutstandingTaskOnDDL");
+				String outStandingTaskCountsOnDDL = dataMap.get("OutstandingTaskCountsOnDDL");
+				String actualTaskCount = dataMap.get("ActualTaskCounts");
+				String actualTotalCount = dataMap.get("ActualTotalCountPH");
+				
+				Reporter.log("OutstandingTaskOnDDL: "+outStandingTasksOnDDL,true);
+				Reporter.log("OutstandingTaskCountsOnDDL: "+outStandingTaskCountsOnDDL,true);
+				Reporter.log("ActualTaskCounts: "+actualTaskCount,true);
+				Reporter.log("ActualTotalCountPH: "+actualTotalCount,true);
+					
+				String[] expOutTasksOnDDL=outStandingTasksOnDDL.split("#");
+				String[] expOutTaskCountsOnDDL=outStandingTaskCountsOnDDL.split("#");
+				String[] actTaskCounts=actualTaskCount.split("#");
+				
+				softAssert.assertEquals(outStandingTaskCountsOnDDL, actualTaskCount,"Outstanding Vs Actual Page Header Count Verification failed");
+				
+				int actTaskCountTotal=0;
+				for(int i=0;i<expOutTaskCountsOnDDL.length;i++){
+					actTaskCountTotal = actTaskCountTotal + Integer.parseInt(expOutTaskCountsOnDDL[i]);
+					Reporter.log("Outstanding Task: "+expOutTasksOnDDL[i],true);
+					Reporter.log("Outstanding Task Count on DDL: "+expOutTaskCountsOnDDL[i],true);
+					Reporter.log("Outstanding Task Count on the Table: "+actTaskCounts[i],true);
+				}
+				String totalTasksCountOnIcon="";
+				totalTasksCountOnIcon=enobjhomePage.totalOSTasksCountOnPH().getText().trim();
+				Reporter.log("Outstanding Task Expected(Displayed on Icon): "+totalTasksCountOnIcon,true);
+				softAssert.assertEquals(actualTotalCount,totalTasksCountOnIcon);
+				Reporter.log("Total Outstanding Task Count Expected (Displayed on Icon):"+totalTasksCountOnIcon+"::Actual Total Count:"+actualTotalCount,true);
+				
+				softAssert.assertEquals(actualTotalCount,String.valueOf(actTaskCountTotal));
+				Reporter.log("Total Outstanding Task Count Expected (Displayed on DDL):"+String.valueOf(actTaskCountTotal)+"::Actual Total Count:"+actualTotalCount,true);
+				
+				dataMap.put("maintab", "Home");
+				enobjhomePage.selectTab(dataMap);
+				waitforPageload(enobjhomePage.pageHeader());
+				
+				Reporter.log("<--- Outstanding Task Verification on Home Page",true);
+				
+				enobjhomePage.getOutstdngTsksOnHomePage(dataMap);	
+				
+				String outStandingTasksOnHP = dataMap.get("OutstandingTaskOnHomePage");
+				String outStandingTaskCountsOnHP = dataMap.get("OutstandingTaskCountsOnHomePage");
+				String actualTaskCount1 = dataMap.get("ActualTaskCounts1");
+				String actualTotalCount1 = dataMap.get("ActualTotalCountHomePage");
+				
+				Reporter.log("OutstandingTaskOnHomePage: "+outStandingTasksOnHP,true);
+				Reporter.log("OutstandingTaskCountsOnHomePage: "+outStandingTaskCountsOnHP,true);
+				Reporter.log("ActualTaskCounts1: "+actualTaskCount1,true);
+				Reporter.log("ActualTotalCountHomePage: "+actualTotalCount1,true);
+				
+				String[] expOutTasksOnHP=outStandingTasksOnHP.split("#");
+				String[] expOutTaskCountsOnHP=outStandingTaskCountsOnHP.split("#");
+				String[] actTaskCounts1=actualTaskCount1.split("#");
+				
+				softAssert.assertEquals(outStandingTaskCountsOnDDL, actualTaskCount);
+				
+				int actTaskCountTotal1=0;
+				for(int i=0;i<expOutTaskCountsOnHP.length;i++){
+					actTaskCountTotal1 = actTaskCountTotal1 + Integer.parseInt(expOutTaskCountsOnHP[i]);
+					Reporter.log("Outstanding Task: "+expOutTasksOnHP[i],true);
+					Reporter.log("Outstanding Task Count in Home Page: "+expOutTaskCountsOnHP[i],true);
+					Reporter.log("Outstanding Task Count on the Table: "+actTaskCounts1[i],true);
+				}
+
+				String totalTasksCountOnHP=enobjhomePage.totalOSTasksInHomePage().getText().trim().replace("Outstanding Tasks", "").trim();
+				Reporter.log("Outstanding Task Expected(Displayed on Icon): "+totalTasksCountOnHP,true);
+				softAssert.assertEquals(actualTotalCount1,totalTasksCountOnHP);
+				Reporter.log("Total Outstanding Task Count Expected (Displayed in Home Page):"+totalTasksCountOnHP+"::Actual Total Count:"+actualTotalCount1,true);
+				
+				softAssert.assertEquals(actualTotalCount1,String.valueOf(actTaskCountTotal1));
+				Reporter.log("Total Outstanding Task Count Expected (Displayed on Home Page):"+String.valueOf(actTaskCountTotal1)+"::Actual Total Count:"+actualTotalCount1,true);
+				
+				flag=true;
+			}else{
+				softAssert.assertTrue(flag,"No Data Found");
+				Reporter.log("There is no outstanding tasks for the logged in user",true);
+				flag=true;
+			}
+			
+			softAssert.assertTrue(flag,"Please Retest");
+			softAssert.assertAll();
+			
+			Reporter.log("Test Ended for OutstandingTaskCountVerificationTest at:" + currenttime(),true);
+		}
+
+	 
+	 @AfterClass
+	 public void close(){
+		 	enobjhomePage.logout();
+			quitBrowser();
+	}
+	 
+}

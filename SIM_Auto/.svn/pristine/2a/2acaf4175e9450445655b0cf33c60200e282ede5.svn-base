@@ -1,0 +1,2 @@
+ERP System Name,Supplier ERP ID,Supplier Name,Supplier Legal Name,Legal Id,Business Unit,Supplier Group,Supplier Location Id,Supplier Location Type,Address1,Address2,Address3,City,State or Province,Postal Code,Country,Company Phone,Company Fax,Company Email,Currency,Recovery LavanteUID,Country of Registration,LegalID Type,County,DUNS Number
+SAP,8523645,Auto,legal,995871857,bu,sg,sl,Remit To,503,SP add2,SP add3,Huntsville,,9985971,USA,cp,1234,ce@gmail.com,cur,22,United States,EIN,COUNTY,987654321

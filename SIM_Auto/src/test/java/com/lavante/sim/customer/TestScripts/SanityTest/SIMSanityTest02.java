@@ -1,0 +1,130 @@
+package com.lavante.sim.customer.TestScripts.SanityTest;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class SIMSanityTest02 extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		List<?> listofdatafrm = lavanteUtils.login("Campaigns", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+	}
+
+	/**
+	 * @author Subhas.BV Campaigns Test Verification
+	 * @throws SQLException
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 * 
+	 */
+	@Test
+	public void campaignsTest() throws FileNotFoundException, IOException, SQLException {
+		Reporter.log("Test Started for sanity test in Camapigns page  : " + currenttime(), true);
+		SoftAssert softassert = new SoftAssert();
+
+		dataMap.put("maintab", "CAMPAIGNS");
+		dataMap.put("subtab", "campaignSearchSetup");
+		enobjhomePage.selectTab(dataMap);
+		
+		Reporter.log("Verification of Search Fields:");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignBasicSearchPage.campaignID()),	"Webelement objCampaignBasicSearchPage.campaignID not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignBasicSearchPage.campaignName()),	"Webelement objCampaignBasicSearchPage.campaignName not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignBasicSearchPage.campaignType()),"Webelement objCampaignBasicSearchPage.campaignType not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignBasicSearchPage.CampaignStatusDropDwn()),"Webelement objCampaignBasicSearchPage.CampaignStatusDropDwn not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignBasicSearchPage.requestingDivision()),"Webelement objCampaignBasicSearchPage.requestingDivision not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignBasicSearchPage.campaignOwner()),	"Webelement objCampaignBasicSearchPage.campaignOwner not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignBasicSearchPage.supplierPaymentRequired()),"Webelement objCampaignBasicSearchPage.supplierPaymentRequired not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignBasicSearchPage.ClearBtn()),"Webelement objCampaignBasicSearchPage.ClearBtn not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignBasicSearchPage.SearchBtn()),	"Webelement objCampaignBasicSearchPage.SearchBtn not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignPage.CreateCampaignBtn()),	"Webelement objCampaignBasicSearchPage.CreateCampaignBtn not present");
+
+		lavanteUtils.switchtoFrame(objCampaignBasicSearchPage.IframeSearchResult());
+		List<String> headers = new ArrayList<String>();
+		List<String> headersUI = new ArrayList<String>();
+		headers.add("Campaign ID");
+		headers.add("Campaign Name");
+		headers.add("Campaign Type");
+		headers.add("Campaign Start Date");
+		headers.add("Campaign Initation Date");
+		headers.add("Campaign End Date");
+		headers.add("Requesting Division(s)");
+		headers.add("Suppliers in Scope");
+		headers.add("Campaign Status");
+		headers.add("Activities");
+		headers.add("Actions");
+		
+		List<WebElement> headerList = objCampaignBasicSearchPage.Headers();
+		String tableHeader = "";
+		for (int i = 1; i < headerList.size(); i++) {
+			tableHeader = lavanteUtils.getText(headerList.get(i));
+			headersUI.add(tableHeader);
+		}
+		Collections.sort(headers);
+		Collections.sort(headersUI);
+		Reporter.log("Verification of Search Table Header Fields:");
+		softassert.assertTrue(headersUI.equals(headersUI), " Table headers not matching ");
+		
+		lavanteUtils.switchtoFrame(null);
+		objCampaignPage.clickAddCampaign();
+		
+		lavanteUtils.fluentwait(objCampaignPage.CampaignNameText());
+		Reporter.log("Verification of Create Campaing Fields:");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignPage.CampaignNameText()),"Webelement objCampaignBasicSearchPage.CampaignNameText not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignPage.CampaignDescriptionText()),"Webelement objCampaignBasicSearchPage.CampaignDescriptionText not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignPage.CampaignTypeSel()),"Webelement objCampaignBasicSearchPage.CampaignTypeDrpdwn not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignPage.PlannedStartDate()),"Webelement objCampaignBasicSearchPage.PlannedStartDate not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignPage.PlannedEndDate()),"Webelement objCampaignBasicSearchPage.PlannedEndDate not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignPage.CampaignOwnerDrpdwn()),	"Webelement objCampaignBasicSearchPage.CampaignOwnerDrpdwn not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignPage.RequestingDivisionDropDwn()),"Webelement objCampaignBasicSearchPage.RequestingDivisionDropDwn not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignPage.SelectQueryDrpdwn()),	"Webelement objCampaignBasicSearchPage.SelectQueryDrpdwn not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignPage.EmailTempleteDropDwn()),	"Webelement objCampaignBasicSearchPage.EmailTempleteDropDwn not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignPage.SaveExitBtn()),	"Webelement objCampaignBasicSearchPage.SaveExitBtn not present");
+		softassert.assertTrue(lavanteUtils.isElementDisplayed(objCampaignPage.SubmitApprovalBtn()),	"Webelement objCampaignBasicSearchPage.SubmitApprovalBtn not present");
+
+		softassert.assertAll();
+		Reporter.log("Test Ended for sanity test in Camapigns page :" + currenttime(), true);
+	}
+
+	@AfterClass
+	public void close() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+}

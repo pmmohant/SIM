@@ -1,0 +1,298 @@
+/**
+ * 
+ */
+package com.lavante.sim.customer.pageobjects.Suppliers.Search;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+/**
+ * @author Piramanayagam.S
+ *
+ */
+public class SupplierBasicSearchPage {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+
+	public SupplierBasicSearchPage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+	}
+
+	@FindBy(id="search_tab")
+	public WebElement BasicSearchTab;
+
+	@FindBy(linkText = "Search")
+	private WebElement Search;
+
+	@FindBy(id = "search_results")
+	private WebElement BasicSearchTableIFrame;
+
+	@FindBy(id = "supplierSearchResultForm")
+	private WebElement BasicSearchTable;
+
+	@FindBy(id = "adv_search_tab")
+	private WebElement AdvanceSearchTab;
+
+	@FindBy(xpath = "//div[@id='advance_search']//button[2]")
+	private WebElement BuildQuery;
+
+	@FindBy(xpath = "//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']")
+	private WebElement BuildQueryIFrame;
+
+	@FindBy(xpath = "//form[@id='advanceSearch']//button[2]")
+	private WebElement BuildQueryCanceButton;
+
+	// Supplier Search
+	@FindBy(id="supplierERPId")
+	private WebElement suppID;
+
+	public WebElement suppID() {
+		return suppID;
+	}
+
+	@FindBy(id="locationID")
+	private WebElement LocationERPIdTxtBox;
+
+	public WebElement LocationERPIdTxtBox() {
+		return LocationERPIdTxtBox;
+	}
+
+	@FindBy(id="supplierName")
+	private WebElement suppNametxt;
+
+	public WebElement suppNametxt() {
+		return suppNametxt;
+	}
+
+	@FindBy(id = "inviteId")
+	private WebElement invitationIdtxt;
+
+	public WebElement invitationIdtxt() {
+		return invitationIdtxt;
+	}
+
+	@FindBy(id="taxIdNumber")
+	private WebElement taxidtxt;
+
+	public WebElement taxidtxt() {
+		return taxidtxt;
+	}
+	
+	@FindBy(css = "div#invitingOrgID_chosen>a")
+	private WebElement inviteOrg;
+
+	public WebElement inviteOrg() {
+		return inviteOrg;
+	}
+
+	@FindBy(id = "contactName")
+	private WebElement BusinessNameTxtBox;
+
+	public WebElement BusinessNameTxtBox() {
+		return BusinessNameTxtBox;
+	}
+	
+	@FindBy(id = "supplierGroupID_chosen")
+	private WebElement SupplierGrpDrpDown;
+	public WebElement SupplierGrpDrpDown(){
+		return SupplierGrpDrpDown;
+	}
+	
+	@FindBy(css="[id*='profileStatus'] input")
+	private WebElement profstatusdpdn;
+
+	public WebElement profstatusdpdn() {
+		return profstatusdpdn;
+	}
+
+	@FindBy(css="label[for*='showDeactivatedSuppliers']")
+	private WebElement InactiveSupChkbx;
+
+	public WebElement InactiveSupChkbx() {
+		return InactiveSupChkbx;
+	}
+
+	@FindBy(css="button[type='submit'][class*='primary']")
+	private WebElement searchbtn;
+
+	public WebElement searchbtn() {
+		return searchbtn;
+	}
+
+	@FindBy(css="[id*='search'] button[name='clear']")
+	private WebElement resetbtn;
+
+	public WebElement resetbtn() {
+		return resetbtn;
+	}
+
+	@FindBy(id="total_records")
+	private WebElement searchcount;
+
+	public WebElement searchcount() {
+		return searchcount;
+	}
+
+	// Count
+
+	@FindBy(id="total_pages")
+	private WebElement totalsearchcount;
+
+	public WebElement totalsearchcount() {
+		return totalsearchcount;
+	}
+
+	@FindBy(css="li[class='active']>a")
+	private WebElement gotopage;
+
+	public WebElement gotopage() {
+		return gotopage;
+	}
+	
+	//Reusable method Starts
+
+
+	// Methods for BASIC SEARCH
+
+	public void search(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.switchtoFrame(BasicSearchTableIFrame);
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.waitforPageload(searchbtn);
+		fillDetails(dataMap);
+		formAction(dataMap);
+	}
+
+	private void fillDetails(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.fluentwait(searchbtn);
+		if (dataMap.containsKey("SupplierID")) {
+			lavanteUtils.fluentwait(suppID);
+			suppID.clear();
+			lavanteUtils.typeinEdit(dataMap.get("SupplierID"), suppID);
+		}
+		if (dataMap.containsKey("LocationID")) {
+			lavanteUtils.fluentwait(LocationERPIdTxtBox);
+			lavanteUtils.typeinEdit(dataMap.get("LocationID"), LocationERPIdTxtBox);
+		}
+
+		if (dataMap.containsKey("supplierName")) {
+			lavanteUtils.fluentwait(suppNametxt);
+			suppNametxt().clear();
+			lavanteUtils.typeinEdit(dataMap.get("supplierName"), suppNametxt);
+		}
+		if (dataMap.containsKey("invitationId")) {
+			lavanteUtils.fluentwait(invitationIdtxt);
+			invitationIdtxt.clear();
+			lavanteUtils.typeinEdit(dataMap.get("invitationId"), invitationIdtxt);
+		}
+		if (dataMap.containsKey("TaxID")) {
+			lavanteUtils.typeinEdit(dataMap.get("TaxID"), taxidtxt);
+		}
+		if (dataMap.containsKey("InviteOrg")) {
+			String org = dataMap.get("InviteOrg");
+			lavanteUtils.click(inviteOrg);
+			lavanteUtils.switchtoFrame(null);
+			
+			if(org.contains("#")){
+				
+			}else{
+				lavanteUtils.waitForTime(3000);
+				lavanteUtils.selectValueFrmdropdown(org);
+			}
+			
+		}
+		if (dataMap.containsKey("BusinessName")) {
+			lavanteUtils.typeinEdit(dataMap.get("BusinessName"), BusinessNameTxtBox);
+		}
+
+		if (dataMap.containsKey("ProfStatus")) {
+			String status = dataMap.get("ProfStatus");
+
+			if (status.contains("#")) {
+
+				String[] profileStatus = status.split("#");
+				for (String profile : profileStatus) {
+
+					lavanteUtils.fluentwait(profstatusdpdn);
+					lavanteUtils.typeinEdit(profile, profstatusdpdn);
+					lavanteUtils.waitForTime(3000);
+					lavanteUtils.selectvalueFrmDpdn(profile);
+				}
+			} else {
+				lavanteUtils.click(profstatusdpdn);
+				lavanteUtils.typeinEdit(status, profstatusdpdn);
+				lavanteUtils.waitForTime(3000);
+				lavanteUtils.selectvalueFrmDpdn(status);
+			}
+
+		}
+		if (dataMap.containsKey("InactiveSup")) {
+			lavanteUtils.fluentwait(InactiveSupChkbx);
+			lavanteUtils.click(InactiveSupChkbx);
+		}
+
+	}
+
+	public void formAction(LinkedHashMap<String, String> dataMap) {
+		if (dataMap.containsKey("Search")) {
+			lavanteUtils.fluentwait(searchbtn);
+			lavanteUtils.click(searchbtn);
+			lavanteUtils.waitForTime(3000);
+		} else {
+			lavanteUtils.fluentwait(resetbtn);
+			lavanteUtils.click(resetbtn);
+			lavanteUtils.waitForTime(3000);
+		}
+	}
+
+	public void verifyBasicSearchTableDisplayed() {
+
+		lavanteUtils.click(Search);
+		lavanteUtils.waitForTime(10000);
+		lavanteUtils.click(BasicSearchTab);
+		lavanteUtils.switchtoFrame(BasicSearchTableIFrame);
+		lavanteUtils.verifyElementDisplayed("BasicSearchTable", BasicSearchTable);
+		lavanteUtils.switchtoFrame(null);
+
+	}
+
+	public void verifyAdvanceSearchTableDisplayed() {
+
+		lavanteUtils.waitForTime(10000);
+		lavanteUtils.click("AdvanceSearchTab", AdvanceSearchTab);
+		lavanteUtils.waitForTime(10000);
+		lavanteUtils.click("BuildQuery", BuildQuery);
+		lavanteUtils.switchtoFrame(BuildQueryIFrame);
+		lavanteUtils.click("BuildQueryCanceButton", BuildQueryCanceButton);
+		lavanteUtils.switchtoFrame(null);
+
+	}
+
+	public void pageNavigate(String number) {
+		if (number.length() > 0) {
+			String total = lavanteUtils.getText(totalsearchcount);
+			int totalPage = Integer.parseInt(total);
+			int expPage = Integer.parseInt(number);
+			if (expPage < totalPage) {
+				gotopage.clear();
+				lavanteUtils.typeinEdit(number, gotopage);
+				gotopage.sendKeys(Keys.ENTER );
+				lavanteUtils.waitForTime(4000);
+				lavanteUtils.waitforPageload(gotopage);
+				
+			} else {
+				int das = totalPage - 1;
+				lavanteUtils.typeinEdit("" + das, gotopage);
+			}
+		}
+
+	}
+
+}

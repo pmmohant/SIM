@@ -1,0 +1,210 @@
+package com.lavante.sim.customer.TestScripts.Dashboard;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class SupplierClaimsDashboardTests extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String uname = "";
+	String customerID = "";
+	String expSuppName = "";
+	String claimID = "";
+
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * 
+	 * @author subhas.bv
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP1();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		List listofdatafrm = lavanteUtils.login("KrogerSupplier", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		uname = LdataMap.get("username");
+		customerID = (String) listofdatafrm.get(1);
+
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("maintab", "HOME");
+		enobjhomePage.selectTab(dataMap);
+	}
+
+	/**
+	 * @author subhas.bv
+	 * 
+	 *         Supplier claims dashboard chart count
+	 * @throws SQLException
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
+	@Test
+	public void verifySupClaimsDashboardChartCountTest() throws FileNotFoundException, IOException, SQLException {
+		Reporter.log("Test Started for verifyClaimsDashboardChartCount Test :" + currenttime());
+
+		SoftAssert softAssert = new SoftAssert();
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+
+		String expClaimsToBeSubmittedCount = lavanteUtils.getText(objSupClaimsDashboard.ClaimsToBeSubmittedCount());
+		expClaimsToBeSubmittedCount = "(" + expClaimsToBeSubmittedCount + ")";
+		String expClaimsAwaitingApprovalCount = lavanteUtils.getText(objSupClaimsDashboard.ClaimsAwaitingApprovalCount());
+		expClaimsAwaitingApprovalCount = "(" + expClaimsAwaitingApprovalCount + ")";
+		String expClaimsRepaidCount = lavanteUtils.getText(objSupClaimsDashboard.ClaimsRepaidCount());
+		expClaimsRepaidCount = "(" + expClaimsRepaidCount + ")";
+		String expClaimsDeniedCount = lavanteUtils.getText(objSupClaimsDashboard.ClaimsDeniedCount());
+		expClaimsDeniedCount = "(" + expClaimsDeniedCount + ")";
+
+		
+		if(!expClaimsToBeSubmittedCount.equalsIgnoreCase("()")){
+		
+			lavanteUtils.click(objSupClaimsDashboard.ClaimsToBeSubmittedLink());
+			lavanteUtils.switchtoFrame(enClaimsPage.IFrameSearchResults());
+			String actClaimsToBeSubmittedCount = "";
+			if (objPaymentsPage.ShowCountLink().size() > 0) {
+				lavanteUtils.clicks(objPaymentsPage.ShowCountLink().get(0));
+				actClaimsToBeSubmittedCount = lavanteUtils.getText(objPaymentsPage.GetCountNo());
+				if (!actClaimsToBeSubmittedCount.contains("(")) {
+					lavanteUtils.clicks(objPaymentsPage.ShowCountLink().get(0));
+				}
+			}
+			actClaimsToBeSubmittedCount = lavanteUtils.getText(objPaymentsPage.GetCountNo());
+			Reporter.log("Suppliers Claims dashboard chart Claims To Be Submitted Count, Expected : "+ expClaimsToBeSubmittedCount + ", Actual : " + actClaimsToBeSubmittedCount);
+			softAssert.assertEquals(actClaimsToBeSubmittedCount, expClaimsToBeSubmittedCount,"Suppliers Claims dashboard chart Claims To Be Submitted Count, Expected : "	+ expClaimsToBeSubmittedCount + ", Actual : " + actClaimsToBeSubmittedCount);
+			
+			lavanteUtils.switchtoFrame(null);
+			
+			lavanteUtils.clicks(enClaimsBasicSearch.Clearbtn());
+		}else{
+			dataMap.put("maintab","Claim");
+			enobjhomePage.selectTab(dataMap);
+		}
+		dataMap.clear();
+		dataMap.put("ClaimStatus", "Pending#Pending Update");
+		dataMap.put("Search", "");
+		enClaimsBasicSearch.Search(dataMap);
+
+		lavanteUtils.switchtoFrame(enClaimsPage.IFrameSearchResults());
+		String actClaimsAwaitingApprovalCount = "";
+		if (objPaymentsPage.ShowCountLink().size() > 0) {
+			lavanteUtils.clicks(objPaymentsPage.ShowCountLink().get(0));
+			actClaimsAwaitingApprovalCount = lavanteUtils.getText(objPaymentsPage.GetCountNo());
+			if (!actClaimsAwaitingApprovalCount.contains("(")) {
+				lavanteUtils.clicks(objPaymentsPage.ShowCountLink().get(0));
+			}
+		}
+		actClaimsAwaitingApprovalCount = lavanteUtils.getText(objPaymentsPage.GetCountNo());
+		if(expClaimsAwaitingApprovalCount.equalsIgnoreCase("()")){
+			expClaimsAwaitingApprovalCount="(0)";
+		}
+		Reporter.log("Suppliers Claims dashboard chart Claims Awaiting Approval Count, Expected : "	+ expClaimsAwaitingApprovalCount + ", Actual : " + actClaimsAwaitingApprovalCount);
+		softAssert.assertEquals(actClaimsAwaitingApprovalCount, expClaimsAwaitingApprovalCount,	"Suppliers Claims dashboard chart Claims Awaiting Approval Count, Expected : "	+ expClaimsAwaitingApprovalCount + ", Actual : " + actClaimsAwaitingApprovalCount);
+
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.clicks(enClaimsBasicSearch.Clearbtn());
+
+		dataMap.clear();
+		dataMap.put("ClaimStatus", "Closed");
+		dataMap.put("ClaimResolution", "Partially Paid#Paid");
+		dataMap.put("Search", "");
+		enClaimsBasicSearch.Search(dataMap);
+
+		lavanteUtils.switchtoFrame(enClaimsPage.IFrameSearchResults());
+		String actClaimsRepaidCount = "";
+		if (objPaymentsPage.ShowCountLink().size() > 0) {
+			lavanteUtils.clicks(objPaymentsPage.ShowCountLink().get(0));
+			actClaimsRepaidCount = lavanteUtils.getText(objPaymentsPage.GetCountNo());
+			if (!actClaimsRepaidCount.contains("(")) {
+				lavanteUtils.clicks(objPaymentsPage.ShowCountLink().get(0));
+			}
+		}
+		actClaimsRepaidCount = lavanteUtils.getText(objPaymentsPage.GetCountNo());
+		if(expClaimsRepaidCount.equalsIgnoreCase("()")){
+			expClaimsRepaidCount="(0)";
+		}
+		Reporter.log("Suppliers Claims dashboard chart Claims Repaid Count, Expected : " + expClaimsRepaidCount	+ ", Actual : " + actClaimsRepaidCount);
+		softAssert.assertEquals(actClaimsRepaidCount, expClaimsRepaidCount,	"Suppliers Claims dashboard chart Claims Repaid Count, Expected : " + expClaimsRepaidCount	+ ", Actual : " + actClaimsRepaidCount);
+
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.clicks(enClaimsBasicSearch.Clearbtn());
+
+		dataMap.clear();
+		dataMap.put("ClaimStatus", "Closed");
+		dataMap.put("ClaimResolution", "Denied");
+		dataMap.put("Search", "");
+		enClaimsBasicSearch.Search(dataMap);
+
+		lavanteUtils.switchtoFrame(enClaimsPage.IFrameSearchResults());
+		String actClaimsDeniedCount = "";
+		if (objPaymentsPage.ShowCountLink().size() > 0) {
+			lavanteUtils.clicks(objPaymentsPage.ShowCountLink().get(0));
+			actClaimsDeniedCount = lavanteUtils.getText(objPaymentsPage.GetCountNo());
+			if (!actClaimsDeniedCount.contains("(")) {
+				lavanteUtils.clicks(objPaymentsPage.ShowCountLink().get(0));
+			}
+		}
+		actClaimsDeniedCount = lavanteUtils.getText(objPaymentsPage.GetCountNo());
+		if(expClaimsDeniedCount.equalsIgnoreCase("()")){
+			expClaimsDeniedCount="(0)";
+		}
+		Reporter.log("Suppliers Claims dashboard chart Claims Denied Count, Expected : " + expClaimsDeniedCount + ", Actual : " + actClaimsDeniedCount);
+		softAssert.assertEquals(actClaimsDeniedCount, expClaimsDeniedCount,	"Suppliers Claims dashboard chart Claims Denied Count, Expected : " + expClaimsDeniedCount	+ ", Actual : " + actClaimsDeniedCount);
+
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for verifyClaimsDashboardChartCount Test :" + currenttime());
+	}
+
+	/**
+	 * SetupAfter method closes any popup
+	 * 
+	 * @author subhas.bv
+	 */
+	@AfterMethod
+	public void SetupAfterMethod() {
+		lavanteUtils.refreshPage();
+		lavanteUtils.switchtoFrame(null);
+
+	}
+
+	/**
+	 * SetupAfter Class closes any popup and Closes the Browser and Driver
+	 * 
+	 * @author subhas.bv
+	 */
+	@AfterClass
+	public void SetupafterClassMethod() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+}

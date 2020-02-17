@@ -1,0 +1,528 @@
+package com.lavante.sim.supplier.TestScripts;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.ManageUsers;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 19-07-2018 Created for Verifying SIM-16596
+ * 
+ * Ended on 19-07-2018
+ *
+ */
+public class SupplierUserPageTests extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String username="";
+	String orgUserName="";
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * 
+	 * 
+	 */
+
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		// Login
+		List<?> listofdatafrm = lavanteUtils.login("SupplierAgent", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		orgUserName= LdataMap.get("username");
+		
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+		LdataMap.put("maintab", "Admin");
+		LdataMap.put("subtab", "Contacts");
+		enobjhomePage.selectTab(LdataMap);
+
+	}
+
+	/**
+	 * UserRoles- Supplier User - Account management-Add Edit User
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "SupplierUser", dataProviderClass = ManageUsers.class,priority=1)
+	public void AddeditUserTest(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for removeUserTest:" + currenttime());
+
+		dataMap.put("Save", "");
+		objUserPage.addNewUser(dataMap);
+		String x=dataMap.get("ContactName");
+		String y=dataMap.get("Email");
+		username=x;
+		String email=y;
+		
+		boolean flag=false;
+		SoftAssert softAssert=new SoftAssert();
+		
+		for(int i=0;i<objUserPage.iterateSearchHeaderFindColList("User Name").size();i++){
+			String actualContactName = objUserPage.iterateSearchHeaderFindColList("User Name").get(i).getText();
+			
+			if(actualContactName.equalsIgnoreCase(username)){
+				Reporter.log("User name created " + username + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, username, " User " + username + " is not Created ");
+				
+				actualContactName=objUserPage.iterateSearchHeaderFindColList("Email").get(i).getText();
+				Reporter.log("Email created " + email + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, email, " Emai " + username + " is not matchedd ");
+				
+				
+				lavanteUtils.click(objUserPage.RowActionList.get(i));
+				flag=true;
+			}
+			
+		}
+		
+		softAssert.assertTrue(flag,"Created User Not Found");
+		Reporter.log("Created User:"+username);		
+		
+
+		dataMap.put("EditUser", "");
+		objUserPage.Action(dataMap);
+		
+		username = username + "editedUserConatctName";
+		dataMap.put("ContactName", username);
+		dataMap.remove("Email");
+		objUserPage.fillUserDetails(dataMap);
+		objUserPage.formUserAction(dataMap);
+		
+		Reporter.log("Edited User:"+username);
+		flag=false;
+		
+		for(int i=0;i<objUserPage.iterateSearchHeaderFindColList("User Name").size();i++){
+			String actualContactName = objUserPage.iterateSearchHeaderFindColList("User Name").get(i).getText();
+			if(actualContactName.equalsIgnoreCase(username)){
+				Reporter.log("User name created " + username + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, username, " User " + username + " is not Created ");
+				
+				actualContactName=objUserPage.iterateSearchHeaderFindColList("Email").get(i).getText();
+				Reporter.log("Email created " + email + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, email, " Emai " + username + " is not matchedd ");
+				flag=true;
+				break;
+			}
+		}
+		
+		softAssert.assertTrue(flag,"Edited User Not Found");
+		softAssert.assertAll();
+		
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+	
+	/**
+	 * UserRoles- Supplier User - Account management-Remove User
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "SupplierUser", dataProviderClass = ManageUsers.class,priority=2)
+	public void removeCreatedUserTest(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for removeUserTest:" + currenttime());
+
+		dataMap.put("Save", "");
+		objUserPage.addNewUser(dataMap);
+		String x=dataMap.get("ContactName");
+		String y=dataMap.get("Email");
+		username=x;
+		String email=y;
+		
+		boolean flag=false;
+		SoftAssert softAssert=new SoftAssert();
+		
+		for(int i=0;i<objUserPage.iterateSearchHeaderFindColList("User Name").size();i++){
+			String actualContactName = objUserPage.iterateSearchHeaderFindColList("User Name").get(i).getText();
+			
+			if(actualContactName.equalsIgnoreCase(username)){
+				Reporter.log("User name created " + username + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, username, " User " + username + " is not Created ");
+				
+				actualContactName=objUserPage.iterateSearchHeaderFindColList("Email").get(i).getText();
+				Reporter.log("Email created " + email + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, email, " Emai " + username + " is not matchedd ");
+				
+				
+				lavanteUtils.click(objUserPage.RowActionList.get(i));
+				flag=true;
+			}
+			
+		}
+		
+		softAssert.assertTrue(flag,"Created User Not Found");
+		Reporter.log("Created User:"+username);		
+		
+
+		dataMap.put("DeleteUser", "");
+		objUserPage.Action(dataMap);
+		
+		Reporter.log("Created User:"+username);
+		flag=true;
+		
+		for(int i=0;i<objUserPage.iterateSearchHeaderFindColList("User Name").size();i++){
+			String actualContactName = objUserPage.iterateSearchHeaderFindColList("User Name").get(i).getText();
+			if(actualContactName.equalsIgnoreCase(username)){
+				flag=false;
+			}
+		}
+		
+		softAssert.assertTrue(flag,"Deleted User Not Removed");
+		softAssert.assertAll();
+		
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	/**
+	 * UserRoles- Supplier User - Account management-Reset Password User
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "SupplierUser", dataProviderClass = ManageUsers.class,priority=3)
+	public void resetPassword(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for removeUserTest:" + currenttime());
+
+		dataMap.put("Save", "");
+		objUserPage.addNewUser(dataMap);
+		String x=dataMap.get("ContactName");
+		String y=dataMap.get("Email");
+		username=x;
+		String email=y;
+		
+		boolean flag=false;
+		SoftAssert softAssert=new SoftAssert();
+		
+		for(int i=0;i<objUserPage.iterateSearchHeaderFindColList("User Name").size();i++){
+			String actualContactName = objUserPage.iterateSearchHeaderFindColList("User Name").get(i).getText();
+			
+			if(actualContactName.equalsIgnoreCase(username)){
+				Reporter.log("User name created " + username + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, username, " User " + username + " is not Created ");
+				
+				actualContactName=objUserPage.iterateSearchHeaderFindColList("Email").get(i).getText();
+				Reporter.log("Email created " + email + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, email, " Emai " + username + " is not matchedd ");
+				
+				lavanteUtils.click(objUserPage.RowActionList.get(i));
+				flag=true;
+			}
+			
+		}
+		
+		softAssert.assertTrue(flag,"Created User Not Found");
+		Reporter.log("Created User:"+username);		
+		
+
+		dataMap.put("ResetPassword", "");
+		objUserPage.Action(dataMap);
+		
+		x="select IsResetPassword from Login where ContactID in (select ContactID From Contact where Email='"+email+"')";
+		x=fetchDBdata(x);
+		
+		softAssert.assertEquals(x,""+1,"Reset Password");
+		softAssert.assertAll();
+		
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+	
+	/**
+	 * UserRoles- Supplier User - Account management-Reset Password User
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "SupplierUser", dataProviderClass = ManageUsers.class,priority=4)
+	public void deactivateActivateUser(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for activateUser:" + currenttime());
+
+		dataMap.put("Save", "");
+		objUserPage.addNewUser(dataMap);
+		String x=dataMap.get("ContactName");
+		String y=dataMap.get("Email");
+		username=x;
+		String email=y;
+		
+		boolean flag=false;
+		SoftAssert softAssert=new SoftAssert();
+		
+		for(int i=0;i<objUserPage.iterateSearchHeaderFindColList("User Name").size();i++){
+			String actualContactName = objUserPage.iterateSearchHeaderFindColList("User Name").get(i).getText();
+			if(actualContactName.equalsIgnoreCase(username)){
+				Reporter.log("User name created " + username + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, username, " User " + username + " is not Created ");
+				
+				actualContactName=objUserPage.iterateSearchHeaderFindColList("Email").get(i).getText();
+				Reporter.log("Email created " + email + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, email, " Emai " + username + " is not matchedd ");
+				
+				lavanteUtils.click(objUserPage.RowActionList.get(i));
+				flag=true;
+				break;
+			}
+			
+		}
+		
+		softAssert.assertTrue(flag,"Created User Not Found");
+		Reporter.log("Created User:"+username);		
+
+		dataMap.put("Deactivate", "");
+		objUserPage.Action(dataMap);
+		dataMap.remove("Deactivate");
+		
+		Reporter.log("Created User:"+username);
+		flag=false;
+		
+		for(int i=0;i<objUserPage.iterateSearchHeaderFindColList("User Name").size();i++){
+			String actualContactName = objUserPage.iterateSearchHeaderFindColList("User Name").get(i).getText();
+			if(actualContactName.equalsIgnoreCase(username)){
+				Reporter.log("User name created " + username + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, username, " User " + username + " is not Created ");
+				
+				actualContactName=objUserPage.iterateSearchHeaderFindColList("Email").get(i).getText();
+				Reporter.log("Email created " + email + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, email, " Emai " + username + " is not matchedd ");
+				
+				actualContactName=objUserPage.iterateSearchHeaderFindColList("Active User").get(i).getText();
+				Reporter.log("After Deactivate, created No and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, "No", " Activate " + username + " is not matchedd ");
+				
+				lavanteUtils.click(objUserPage.RowActionList.get(i));
+				flag=true;
+				break;
+			}
+		}
+		
+		dataMap.put("Activate", "");
+		objUserPage.Action(dataMap);
+		
+		Reporter.log("Created User:"+username);
+		flag=false;
+		
+		for(int i=0;i<objUserPage.iterateSearchHeaderFindColList("User Name").size();i++){
+			String actualContactName = objUserPage.iterateSearchHeaderFindColList("User Name").get(i).getText();
+			if(actualContactName.equalsIgnoreCase(username)){
+				Reporter.log("User name created " + username + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, username, " User " + username + " is not Created ");
+				
+				actualContactName=objUserPage.iterateSearchHeaderFindColList("Email").get(i).getText();
+				Reporter.log("Email created " + email + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, email, " Emai " + username + " is not matchedd ");
+				
+				actualContactName=objUserPage.iterateSearchHeaderFindColList("Active User").get(i).getText();
+				Reporter.log("After Activate, created Yes and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, "Yes", " Activate " + username + " is not matchedd ");
+				
+				flag=true;
+				break;
+			}
+		}
+		
+		
+		softAssert.assertTrue(flag,"Deactivate Password");
+		softAssert.assertAll();
+		
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	/**
+	 * UserRoles- Supplier User - Account management-Associate Multiple Supplier
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "SupplierUser", dataProviderClass = ManageUsers.class,priority=5)
+	public void AssociateUserMultiple(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for AssociateUser:" + currenttime());
+
+		dataMap.put("Save", "");
+		String x="select S.SupplierName from Supplier s,Supplier_Contact_Map scm,Contact C,Relationship r "
+				+ " 	 where SCM.ContactID=C.ContactID and scm.lavanteUID=r.lavanteUID "
+				+ "	 and S.lavanteUID=r.lavanteUID  and C.Email='"+orgUserName+"' and R.ProfileManagedBy_KVID not in (5104)"
+				+ "	 group by S.SupplierName";
+		List<String> xx=lavanteUtils.fetchDBlistdata(x);
+		
+		String jac="Deselect All";
+		for(int hi=0;hi<xx.size();hi++){
+			jac=jac+"#"+xx.get(hi);
+			System.out.println(jac);
+		}
+		dataMap.put("AssociateSupplier",jac);
+		objUserPage.addNewUser(dataMap);
+		Reporter.log("Created User:"+username);		
+		
+		x=dataMap.get("ContactName");
+		String y=dataMap.get("Email");
+		username=x;
+		String email=y;
+		
+		boolean flag=false;
+		SoftAssert softAssert=new SoftAssert();
+		
+		for(int i=0;i<objUserPage.iterateSearchHeaderFindColList("User Name").size();i++){
+			String actualContactName = objUserPage.iterateSearchHeaderFindColList("User Name").get(i).getText();
+			if(actualContactName.equalsIgnoreCase(username)){
+				Reporter.log("User name created " + username + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, username, " User " + username + " is not Created ");
+				
+				actualContactName=objUserPage.iterateSearchHeaderFindColList("Email").get(i).getText();
+				Reporter.log("Email created " + email + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, email, "Email " + username + " is not matchedd ");
+
+				actualContactName=objUserPage.iterateSearchHeaderFindColList("Contact Type").get(i).getText();
+				Reporter.log("Contact Type created Supplier Agent ,Actual: " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, "Supplier Agent", "Supplier Agent" + username + " is not matchedd ");
+				
+				x="select IsTalentAgent From contact where Email ='"+email+"'";
+				x=lavanteUtils.fetchDBdata(x);
+				Reporter.log("Contact Type DB Verify, Supplier Agent Exp: 1 ,Actual: " + x,true);
+				softAssert.assertEquals(x, ""+1, "Supplier Agent" + username + " is not matchedd ");
+				
+				//Need to Add Email.
+				
+				flag=true;
+				break;
+			}
+			
+		}
+		
+		softAssert.assertTrue(flag,"Created User Not Found");
+	
+
+		softAssert.assertAll();
+		
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	/**
+	 * UserRoles- Supplier User - Account management-Associate Multiple Supplier
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "SupplierUser", dataProviderClass = ManageUsers.class,priority=6)
+	public void AssociateUserSingle(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for AssociateUser:" + currenttime());
+
+		dataMap.put("Save", "");
+		String x="select MAX(S.SupplierName) from Supplier s,Supplier_Contact_Map scm,Contact C,Relationship r "
+				+ " 	 where SCM.ContactID=C.ContactID and scm.lavanteUID=r.lavanteUID "
+				+ "	 and S.lavanteUID=r.lavanteUID  and C.Email='"+orgUserName+"' and R.ProfileManagedBy_KVID not in (5104)"
+				+ "	 group by S.SupplierName";
+		x=lavanteUtils.fetchDBdata(x);
+		
+		String jac="Deselect All";
+		jac=jac+"#"+x;
+		
+		dataMap.put("AssociateSupplier",jac);
+		objUserPage.addNewUser(dataMap);
+		Reporter.log("Created User:"+username);		
+		x=dataMap.get("ContactName");
+		String y=dataMap.get("Email");
+		username=x;
+		String email=y;
+		
+		boolean flag=false;
+		SoftAssert softAssert=new SoftAssert();
+		
+		for(int i=0;i<objUserPage.iterateSearchHeaderFindColList("User Name").size();i++){
+			String actualContactName = objUserPage.iterateSearchHeaderFindColList("User Name").get(i).getText();
+			if(actualContactName.equalsIgnoreCase(username)){
+				Reporter.log("User name created " + username + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, username, " User " + username + " is not Created ");
+				
+				actualContactName=objUserPage.iterateSearchHeaderFindColList("Email").get(i).getText();
+				Reporter.log("Email created " + email + "and actual user name from UI while search " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, email, " Email " + username + " is not matchedd ");
+
+				actualContactName=objUserPage.iterateSearchHeaderFindColList("Contact Type").get(i).getText();
+				Reporter.log("Contact Type created Supplier Contact ,Actual: " + actualContactName,true);
+				softAssert.assertEquals(actualContactName, "Supplier Contact", "Supplier Agent" + username + " is not matchedd ");
+				
+				x="select IsTalentAgent From contact where Email ='"+email+"'";
+				x=lavanteUtils.fetchDBdata(x);
+				Reporter.log("Contact Type DB Verify, Supplier Contact Exp: 0  ,Actual: " + x,true);
+				softAssert.assertEquals(x, ""+0,"Supplier Contact" + username + " is not matchedd ");
+				
+				//Need to Add Email.
+				
+				flag=true;
+				break;
+			}
+			
+		}
+		
+		softAssert.assertTrue(flag,"Created User Not Found");
+	
+
+		softAssert.assertAll();
+		
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+	
+	@AfterMethod
+	public void SetupAftermethod() throws FileNotFoundException, IOException, SQLException {
+		enobjhomePage.popupclose();
+		lavanteUtils.refreshPage();
+		
+		if(username.length()>0){
+			String q = " delete from LoginInvitingOrgMap where LoginID in (select LoginID from [Login]  where ContactID in (select ContactID from Contact where ContactName='" + username+ "'))";
+			String q1 = "delete from ReceiverMessage where RecieverLoginID in (select LoginID From Login where ContactID in (select ContactID from Contact where ContactName='" + username+ "'))";
+			String q2 = "delete from Login where ContactID in (select ContactID from Contact where ContactName='" + username+ "')";
+			String q3 = "delete from Supplier_Contact_Map  where ContactID in (select ContactID from Contact where ContactName='"+ username + "')";
+			String q4 = "delete from  Contact where ContactName='" + username + "'";
+	
+			lavanteUtils.UpdateDB(q);
+			lavanteUtils.UpdateDB(q1);
+			lavanteUtils.UpdateDB(q2);
+			lavanteUtils.UpdateDB(q3);
+			lavanteUtils.UpdateDB(q4);
+		}
+	}
+
+	@AfterClass
+	public void SetupafterClassmethod() {
+
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+}

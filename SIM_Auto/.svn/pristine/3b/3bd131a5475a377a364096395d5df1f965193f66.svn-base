@@ -1,0 +1,94 @@
+package com.lavante.sim.customer.TestScripts.SanityTest;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+
+public class SIMSanityTest01 extends PageInitiator {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+	
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+		
+	 launchAppFromPOM(Platform,browser,Version);
+	 initiate();	
+	 openAPP2();
+	 lavanteUtils.driver=driver;
+	 waitForTime(4000);
+	 objLoginPage.verifyLoginPageDisplayed();
+	 List listofdatafrm=lavanteUtils.login("Kroger", browser);
+	 LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String>();
+	 LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+	 enobjloginpage.logintoAPP(LdataMap);
+	 waitForTime(3000);
+	 objHomePage.verifyHomePageDisplayed();
+	
+	
+	}
+	
+	/**
+	 * Admin Test Verification
+	 * 
+	 */
+	@Test(priority=1)
+	 public void AdminTest(){
+		    Reporter.log("Test Started for sanity test in GL code page  : "+ currenttime(),true);
+		    SoftAssert softassert =new SoftAssert();
+		    
+		  	dataMap.put("maintab", "Admin");
+		     dataMap.put("subtab", "claimTypeMapping");
+			 enobjhomePage.selectTab(dataMap);
+			 objClaimTypeMapPage.verifyClaimTypeMappingSectionDisplayed();	
+			 
+		  	dataMap.put("maintab", "Admin");
+			dataMap.put("subtab", "claimGlCodes");
+			enobjhomePage.selectTab(dataMap);
+			
+			fluentwait(glcode.addGLCodeButton());
+			boolean eValue = true;
+			boolean aValue = glcode.addGLCodeButton().isDisplayed();
+			softassert.assertEquals(aValue, eValue,"actual value"+aValue + "is not matching with expected value"+eValue);
+			Reporter.log("Verification for add GL Code button  : expected value "+ eValue + "with actual value" +aValue);
+						
+			aValue = glcode.GLCodeSearchbox().isDisplayed();
+			softassert.assertEquals(aValue, eValue,"actual value"+aValue + "is not matching with expected value"+eValue);
+			Reporter.log("Verification for GL Code Search : expected value "+ eValue + "with actual value" +aValue);
+			
+			aValue = glcode.searchbutton().isDisplayed();
+			softassert.assertEquals(aValue, eValue,"actual value"+aValue + "is not matching with expected value"+eValue);
+			Reporter.log("Verification for Search button : expected value "+ eValue + "with actual value" +aValue);
+			
+			aValue = glcode.GLCodeText().isDisplayed();
+			softassert.assertEquals(aValue, eValue,"actual value"+aValue + "is not matching with expected value"+eValue);
+			Reporter.log("Verification for GL CODE Text: expected value "+ eValue + "with actual value" +aValue);
+			
+			softassert.assertAll();
+			Reporter.log("Test Ended for sanity test in GL code page :" + currenttime(),true);
+			
+	  }
+	
+	  
+	  @AfterClass
+	  public void close(){
+		    enobjhomePage.logout();
+			quitBrowser();
+		}
+} 
+	  
+	  

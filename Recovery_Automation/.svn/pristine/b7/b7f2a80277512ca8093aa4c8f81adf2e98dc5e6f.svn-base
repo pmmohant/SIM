@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="">
+<head>
+  <title>Test Results Report - Lavante - Recovery - Running on IE 11</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="description" content="TestNG unit test results." />
+  <link href="reportng.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="reportng.js"></script>
+</head>
+<body>
+<h1>Lavante - Recovery - Running on IE 11</h1>
+<p>
+  Test duration: 0.001s
+</p>
+
+  <table class="resultsTable configTable">
+    <tr><th colspan="3" class="header failedConfig">Failed Configuration</th></tr>
+              <tr class="group">
+        <td colspan="3">lavante.recovery.testsuites.SanityTestSuite</td>
+      </tr>
+            
+<tr>
+  <td class="method">
+                  preCondition
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+        
+          <i>Method arguments: </i><span class="arguments">"Windows", "internet Explorer", "11"</span><br />
+    
+            <div class="testOutput">
+                        Info: Broweser Parameters : Browser : internet Explorer, Version :11<br />
+                                Info: Remote Parameters : RemoteURL : http://192.168.21.20:4445, RemoteExecution :true<br />
+                                Pass: Confiig filejava.io.FileInputStream@14c4d212found<br />
+                                Pass: Confiig filejava.io.FileInputStream@49bab07found<br />
+                                Pass: Confiig filejava.io.FileInputStream@4f2729ccfound<br />
+                                Pass: Confiig filejava.io.FileInputStream@6fed386dfound<br />
+                                Pass: Confiig filejava.io.FileInputStream@71defed9found<br />
+                                Pass: Confiig filejava.io.FileInputStream@756e14b6found<br />
+                                Pass: Confiig filejava.io.FileInputStream@300e62f8found<br />
+                                Pass: Confiig filejava.io.FileInputStream@46d2ee35found<br />
+                                Pass: Confiig filejava.io.FileInputStream@72ac7f5cfound<br />
+                                Pass: Confiig filejava.io.FileInputStream@4aff12cfound<br />
+                                Pass: Confiig filejava.io.FileInputStream@12084da9found<br />
+                                Pass: Confiig filejava.io.FileInputStream@5442f9fcfound<br />
+                                Pass: Confiig filejava.io.FileInputStream@7b67652dfound<br />
+                                Pass: Confiig filejava.io.FileInputStream@6dbe7293found<br />
+                                Pass: Confiig filejava.io.FileInputStream@16deab6dfound<br />
+                                Pass: Confiig filejava.io.FileInputStream@212eb027found<br />
+                                Pass: Confiig filejava.io.FileInputStream@135d72e6found<br />
+                                Pass: Confiig filejava.io.FileInputStream@2b6df072found<br />
+                                Pass: Confiig filejava.io.FileInputStream@7a1f4663found<br />
+                                Pass: Confiig filejava.io.FileInputStream@77aba6ddfound<br />
+                                Pass: Confiig filejava.io.FileInputStream@1b32deaafound<br />
+                                Pass: Confiig filejava.io.FileInputStream@b4ba819found<br />
+                                Pass: Confiig filejava.io.FileInputStream@680e1207found<br />
+                                Pass: Confiig filejava.io.FileInputStream@7c90b744found<br />
+                                Pass: Confiig filejava.io.FileInputStream@2329fc9afound<br />
+                                Pass: Confiig filejava.io.FileInputStream@1e38364cfound<br />
+                                Pass: Confiig filejava.io.FileInputStream@3389d145found<br />
+                                Pass: Confiig filejava.io.FileInputStream@57b74d57found<br />
+                                Pass: Confiig filejava.io.FileInputStream@34a74f3bfound<br />
+                                Pass: Confiig filejava.io.FileInputStream@456b1c5ffound<br />
+                                Pass: Confiig filejava.io.FileInputStream@4f032584found<br />
+                                Pass: Confiig filejava.io.FileInputStream@233203ecfound<br />
+                                Pass: Confiig filejava.io.FileInputStream@2fe2b5defound<br />
+                                Pass: Confiig filejava.io.FileInputStream@119b611ffound<br />
+                                Pass: Confiig filejava.io.FileInputStream@e50942ffound<br />
+                                Pass: Confiig filejava.io.FileInputStream@4f59efa8found<br />
+                                Pass: Confiig filejava.io.FileInputStream@455d96cffound<br />
+                                Pass: Confiig filejava.io.FileInputStream@47d72486found<br />
+                                Pass: Confiig filejava.io.FileInputStream@15df5df4found<br />
+                                Pass: Confiig filejava.io.FileInputStream@3140b694found<br />
+                                Pass: Confiig filejava.io.FileInputStream@82ee972found<br />
+                                Info: ------------Test &apos; loginWithValidCredentials &apos; Started------------<br />
+                                Pass: &apos;adminuser1&apos; is entered in userName_txtField<br />
+                                Pass: &apos;lavante@123&apos; is entered in password_TextField<br />
+                                Pass: &apos;login_Button&apos; is clicked<br />
+                                Pass: &apos;quickSearch_Form&apos; is displayed<br />
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-0', 'block')" title="Click to expand/collapse"><b>org.openqa.selenium.NoSuchElementException: Unable to find element with css selector == div[style*=&apos;block&apos;] [title*=&apos;close&apos;] (WARNING: The server did not provide any stacktrace information)<br/>
+Command duration or timeout: 10.23 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA02&apos;, ip: &apos;192.168.21.80&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.ie.InternetExplorerDriver<br/>
+Capabilities [{browserAttachTimeout=0, enablePersistentHover=false, ie.forceCreateProcessApi=false, ie.usePerProcessProxy=false, ignoreZoomSetting=true, handlesAlerts=true, version=11, platform=WINDOWS, nativeEvents=false, ie.ensureCleanSession=false, elementScrollBehavior=0, ie.browserCommandLineSwitches=, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:39070/, takesScreenshot=true, javascriptEnabled=true, ignoreProtectedModeSettings=true, enableElementCacheCleanup=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=dismiss}]<br/>
+Session ID: ddaf21f4-fd0c-4fd0-975d-8256a985f217<br/>
+*** Element info: {Using=css selector, value=div[style*=&apos;block&apos;] [title*=&apos;close&apos;]}<br/>
+Command duration or timeout: 10.42 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{browserAttachTimeout=0, enablePersistentHover=false, ie.forceCreateProcessApi=false, ie.usePerProcessProxy=false, ignoreZoomSetting=true, handlesAlerts=true, version=11, platform=WINDOWS, nativeEvents=false, ie.ensureCleanSession=false, elementScrollBehavior=0, ie.browserCommandLineSwitches=, webdriver.remote.sessionid=a1a5f858-3142-4896-88e8-7c1a0f0bf556, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:39070/, takesScreenshot=true, javascriptEnabled=true, ignoreProtectedModeSettings=true, enableElementCacheCleanup=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=dismiss}]<br/>
+Session ID: a1a5f858-3142-4896-88e8-7c1a0f0bf556<br/>
+*** Element info: {Using=css selector, value=div[style*=&apos;block&apos;] [title*=&apos;close&apos;]}</b></a><br />
+    <div class="stackTrace" id="exception-0">
+              sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)<br />
+              sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)<br />
+              java.lang.reflect.Constructor.newInstance(Constructor.java:422)<br />
+              org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)<br />
+              org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)<br />
+              org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)<br />
+              org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)<br />
+              org.openqa.selenium.remote.RemoteWebDriver.findElementByCssSelector(RemoteWebDriver.java:492)<br />
+              org.openqa.selenium.By$ByCssSelector.findElement(By.java:430)<br />
+              org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)<br />
+              org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)<br />
+              org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)<br />
+              com.sun.proxy.$Proxy6.isDisplayed(Unknown Source)<br />
+              lavante.recovery.pageobjects.HomePage.verifyBrowserStartPopUp(HomePage.java:28)<br />
+              lavante.recovery.testsuites.SanityTestSuite.preCondition(SanityTestSuite.java:46)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:564)<br />
+              org.testng.internal.Invoker.invokeConfigurations(Invoker.java:213)<br />
+              org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)<br />
+              org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:175)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:107)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                    <b>Caused by: </b> <a href="javascript:toggleElement('exception-1', 'block')" title="Click to expand/collapse">org.openqa.selenium.remote.ScreenshotException: Screen shot has been taken<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: RemoteWebDriver</a><br />
+        <div class="stackTrace" id="exception-1">
+                      org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:138)<br />
+                      org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)<br />
+                      org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)<br />
+                      org.openqa.selenium.remote.RemoteWebDriver.findElementByCssSelector(RemoteWebDriver.java:492)<br />
+                      org.openqa.selenium.By$ByCssSelector.findElement(By.java:430)<br />
+                      org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)<br />
+                      org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)<br />
+                      org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)<br />
+                      com.sun.proxy.$Proxy6.isDisplayed(Unknown Source)<br />
+                      lavante.recovery.pageobjects.HomePage.verifyBrowserStartPopUp(HomePage.java:28)<br />
+                      lavante.recovery.testsuites.SanityTestSuite.preCondition(SanityTestSuite.java:46)<br />
+                      sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+                      sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+                      sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+                      java.lang.reflect.Method.invoke(Method.java:497)<br />
+                      org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+                      org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:564)<br />
+                      org.testng.internal.Invoker.invokeConfigurations(Invoker.java:213)<br />
+                      org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)<br />
+                      org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:175)<br />
+                      org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:107)<br />
+                      org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+                      org.testng.TestRunner.run(TestRunner.java:617)<br />
+                      org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+                      org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+                      org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+                      org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+                      java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+                      java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+                      java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+                      java.lang.Thread.run(Thread.java:745)<br />
+                  </div>
+              <b>Caused by: </b> <a href="javascript:toggleElement('exception-2', 'block')" title="Click to expand/collapse">org.openqa.selenium.NoSuchElementException: Unable to find element with css selector == div[style*=&apos;block&apos;] [title*=&apos;close&apos;] (WARNING: The server did not provide any stacktrace information)<br/>
+Command duration or timeout: 10.23 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA02&apos;, ip: &apos;192.168.21.80&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.ie.InternetExplorerDriver<br/>
+Capabilities [{browserAttachTimeout=0, enablePersistentHover=false, ie.forceCreateProcessApi=false, ie.usePerProcessProxy=false, ignoreZoomSetting=true, handlesAlerts=true, version=11, platform=WINDOWS, nativeEvents=false, ie.ensureCleanSession=false, elementScrollBehavior=0, ie.browserCommandLineSwitches=, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:39070/, takesScreenshot=true, javascriptEnabled=true, ignoreProtectedModeSettings=true, enableElementCacheCleanup=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=dismiss}]<br/>
+Session ID: ddaf21f4-fd0c-4fd0-975d-8256a985f217<br/>
+*** Element info: {Using=css selector, value=div[style*=&apos;block&apos;] [title*=&apos;close&apos;]}<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: EventFiringWebDriver</a><br />
+        <div class="stackTrace" id="exception-2">
+                      sun.reflect.GeneratedConstructorAccessor19.newInstance(Unknown Source)<br />
+                      sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)<br />
+                      java.lang.reflect.Constructor.newInstance(Unknown Source)<br />
+                      org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)<br />
+                      org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)<br />
+                      org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)<br />
+                      org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)<br />
+                      org.openqa.selenium.remote.RemoteWebDriver.findElementByCssSelector(RemoteWebDriver.java:492)<br />
+                      org.openqa.selenium.By$ByCssSelector.findElement(By.java:430)<br />
+                      org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)<br />
+                      sun.reflect.GeneratedMethodAccessor8.invoke(Unknown Source)<br />
+                      sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)<br />
+                      java.lang.reflect.Method.invoke(Unknown Source)<br />
+                      org.openqa.selenium.support.events.EventFiringWebDriver$2.invoke(EventFiringWebDriver.java:103)<br />
+                      com.sun.proxy.$Proxy1.findElement(Unknown Source)<br />
+                      org.openqa.selenium.support.events.EventFiringWebDriver.findElement(EventFiringWebDriver.java:188)<br />
+                      org.openqa.selenium.remote.server.handler.FindElement.call(FindElement.java:48)<br />
+                      org.openqa.selenium.remote.server.handler.FindElement.call(FindElement.java:1)<br />
+                      java.util.concurrent.FutureTask.run(Unknown Source)<br />
+                      org.openqa.selenium.remote.server.DefaultSession$1.run(DefaultSession.java:176)<br />
+                      java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)<br />
+                      java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)<br />
+                      java.lang.Thread.run(Unknown Source)<br />
+                  </div>
+          </div>
+      </td>
+</tr>
+    
+          <tr><td colspan="3">&nbsp;</td></tr>
+      <tr><td colspan="3" class="header skippedConfig">Skipped Configuration</td></tr>
+                    <tr>
+          <td colspan="3" class="group">lavante.recovery.testsuites.SanityTestSuite</td>
+        </tr>
+                
+<tr>
+  <td class="method">
+                  clean
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+            </table>
+
+
+
+  <table class="resultsTable" width="100%">
+    <tr><th colspan="3" class="header skipped">Skipped Tests</th></tr>
+          <tr>
+        <td colspan="3" class="group">lavante.recovery.testsuites.SanityTestSuite</td>
+      </tr>
+            
+<tr>
+  <td class="method">
+                  verifyBatchingPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyCheckRegistryPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyClaimsPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyCreditsAssignmentsPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyDashBoardClaims
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyDashBoardCompliance
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyDashBoardSupplier
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyHoldsAssignmentsPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyInvoicePage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyInvoicesPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyPossibleDupesPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyReportsPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifySetupPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyStatementsAssignmentsPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifySummaryPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyauditInboundPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyauditOutboundPage
+      </td>
+  <td class="duration">
+    0.001s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyauditStatisticsAssignmentsPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifycontactEntryPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                               
+    
+        
+
+      </td>
+</tr>
+      </table>
+
+  
+</body>
+</html>

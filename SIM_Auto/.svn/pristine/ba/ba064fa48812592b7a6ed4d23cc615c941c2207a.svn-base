@@ -1,0 +1,128 @@
+package com.lavante.sim.customer.TestScripts.Invite;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 25-11-2016 Created for UpdateInviteOrganization
+ * For Invite New Supplier Page
+ * @author Subhash.BV
+ *
+ */
+public class UpdateInviteOrganization001 extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String customerID = null;
+
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * 
+	 * @author Subhash.BV
+	 * 
+	 */
+
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+					throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+		// Login
+		List listofdatafrm = lavanteUtils.login("DefaultPayments", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		customerID = (String) listofdatafrm.get(1);
+
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+		LdataMap.put("maintab", "Contacts");
+		enobjhomePage.selectTab(LdataMap);
+	}
+
+	/**
+	 * SIM-9403 
+	 * Add inviting org via user , And Check in Invite New Supplier Page 
+	 * 
+	 * @throws IOException
+	 * @author Subhas.BV
+	 */
+	@Test
+	public void validateInviteOrgInSupplierByAdminLoginTest() throws Exception {
+		Reporter.log("Test Started for validateInviteOrgInSupplierByCustomerLoginTest:" + LavanteUtils.currenttime());
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+
+		String creditName = "AutoSub" + lavanteUtils.randomnum() + customerID;
+		String crediti18 = "Insert into I18NKey  (i18nKey) values ('" + creditName + "')";
+		lavanteUtils.UpdateDB(crediti18);
+		String uteft = "Insert into UserTranslation (i18nKey  ,LanguageID ,IsCustomerSpecific  ,UTFString) VALUES ( '"
+				+ creditName + "'   ,50 ,0 ,'" + creditName + "')";
+		lavanteUtils.UpdateDB(uteft);
+
+		String CustOrgID = lavanteUtils.generateRandomNumber9OnLength(9);
+		String insertNewOrg = "Insert into CustomerOrganization (CustomerOrganizationID, OrganizationName, CustomerID, CreatedBy, CreatedOn, OrganizationName_i18nKey) VALUES ("
+				+ CustOrgID + ",'" + creditName + "', " + customerID + ", 'admin', getdate(), '" + creditName + "')";
+		lavanteUtils.UpdateDB(insertNewOrg);
+
+		dataMap.put("ContactName", "" + creditName + "");
+		dataMap.put("Email", "newOrg@org.com");
+		dataMap.put("CreateAcc", "yes");
+		dataMap.put("UserRole", "Super SIM Customer");
+		dataMap.put("InvitingOrg", "" + creditName + "");
+		dataMap.put("Save", "");
+		objUserPage.addNewUser(dataMap);
+
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+
+		lavanteUtils.fluentwait(enobjInvitenewSupplier.InviteNewSupplierLinkKbtn());
+		lavanteUtils.click(enobjInvitenewSupplier.InviteNewSupplierLinkKbtn());
+		
+		lavanteUtils.fluentwait(enobjInvitenewSupplier.inviteorg());
+		lavanteUtils.click(enobjInvitenewSupplier.inviteorg());
+		String actualInvite = null;
+		boolean flag = false;
+		List<String> invOrgs = lavanteUtils.listelement(null);
+		for (String orgs : invOrgs) {
+			if (creditName.equals(orgs)) {
+				System.out.println(creditName + " invite Supplier " + orgs);
+				actualInvite = orgs;
+				flag = true;
+				break;
+			}
+		}
+		Reporter.log("Inviting Orgs is not available for a logged in user(admin/support) which should be available to be selected when inviting a supplier, Expected : "
+						+ creditName + ", Actual : " + actualInvite);
+		Assert.assertTrue(flag,"Inviting Orgs is not available for a logged in user(admin/support) which should be available to be selected when inviting a supplier, Expected : "
+						+ creditName + ", Actual : " + actualInvite);
+
+		Reporter.log("Test Ended at:" + LavanteUtils.currenttime());
+	}
+
+	@AfterClass
+	public void SetupafterClassmethod() {
+		lavanteUtils.refreshPage();
+		enobjInvitenewSupplier.cancel();
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+}

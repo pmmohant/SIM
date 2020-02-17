@@ -1,0 +1,283 @@
+package com.lavante.sim.customer.TestScripts.SanityTest;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class SIMSanityTest extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+		
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();	
+		openAPP();
+		lavanteUtils.driver = driver;
+
+	}
+
+	@Test(priority = 1)
+	public void loginTest() throws FileNotFoundException, IOException,SQLException {
+
+		// Verifying Login Page Displayed
+
+		objLoginPage.verifyLoginPageDisplayed();
+		List<?> listofdatafrm = lavanteUtils.login("Sanity", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+
+		enobjloginpage.logintoAPP(LdataMap);
+		objHomePage.verifyHomePageDisplayed();
+		lavanteUtils.fluentwait(enobjhomePage.UserName());
+
+	}
+
+	@Test(priority = 2, dependsOnMethods = { "loginTest" })
+	public void dashboardTest() throws InterruptedException {
+		Reporter.log("Test Started for Dashboard Test:" + currenttime(), true);
+		// Navigating sub menu items under Dashboard menu
+
+		lavanteUtils.fluentwait(enobjdashBoard.QuickLinksSection);
+		lavanteUtils.verifyElementDisplayed("FrequentlyAskedQuestionsSection", enobjdashBoard.FrequentlyAskedQuestionsSection);
+		lavanteUtils.verifyElementDisplayed("QuickLinksSection", enobjdashBoard.QuickLinksSection);
+		
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<>();
+		 // Navigating sub menu items under Dashboard menu
+		dataMap.put("Dashboard", "Onboarding");
+		enobjdashBoard.switchDashboard(dataMap);
+		
+		enobjdashBoard.verifyOnBoardingDashboardItemsDisplayed();
+		dataMap.put("Dashboard", "Validation Results");
+		enobjdashBoard.switchDashboard(dataMap);
+		
+		enobjdashBoard.verifyValidationsItemsDisplayed();
+		
+		dataMap.put("Dashboard", "Expiring Certifications");
+		enobjdashBoard.switchDashboard(dataMap);
+		
+		enobjdashBoard.verifyExpiringCeritifcationDisplayed();
+
+		 // Navigating sub menu items under Dashboard menu
+		dataMap.put("Dashboard", "Regulatory Compliance");
+		enobjdashBoard.switchDashboard(dataMap);
+		   
+		enobjdashBoard.verifyRegulatoryComplianceItemsDisplayed();
+		
+		Reporter.log("Test Ended for Dashboard Test:" + currenttime(), true);
+	}
+
+	@Test(priority = 3, dependsOnMethods = { "loginTest" })
+	public void TaskPageTest() {
+
+		// Tasks -> Supplier registrations to approve
+		dataMap.put("maintab", "Tasks");
+		dataMap.put("subtab", "customerApprovals");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifySuppRegToAprvPageDtlsDisplayed();
+
+		// Tasks -> Supplier ERP IDs to update
+		dataMap.put("subtab", "addSupplierERPID");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifySuppERPIDToUpdtPageDtlsDisplayed();
+
+		// Tasks -> Supplier Invoices to Approve
+		dataMap.put("subtab", "getInvoiceTasks");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifyInvoicesToAprvPageDtlsDisplayed();
+
+		// Tasks -> Profile Data change approvals to approve
+		dataMap.put("subtab", "supplierDataChangesToApprove");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifySuppDataChngsToAprvPageDtlsDisplayed();
+
+		// Tasks -> Reassignment
+		dataMap.put("subtab", "viewApprovalTasks");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifyReassignmentPageDtlsDisplayed();
+
+		// Tasks ->Supp reg pending update
+		dataMap.put("subtab", "ProfileChangesToUpdate");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifySupplierRegistrationsPendingUpdate();
+
+		// Tasks -> Invoice Questions to Answer
+		if (!lavanteUtils.driver.getCurrentUrl().contains("simstaging.westus2")) {
+			dataMap.put("subtab", "getInvoiceQuesToAns");
+			enobjhomePage.selectTab(dataMap);
+			objtaskapproval.verifyInvoiceQuestsToAnsPageDtlsDisplayed();
+		}
+
+		// Tasks -> Supplier invites to approve
+		dataMap.put("subtab", "supplierInvitesToApprove");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifySuppInvitesToAprvPageDtlsDisplayed();
+
+		// Tasks -> Track/Reassign Task
+		dataMap.put("subtab", "taskTracker");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifyTaskTrackerPageDtlsDisplayed();
+
+		// Tasks -> Invoice Pending Updates
+		dataMap.put("subtab", "getInvoicePendingUpdate");
+		enobjhomePage.selectTab(dataMap);
+		objtaskapproval.verifyInvoicesToUpdatePageDtlsDisplayed();
+
+	}
+
+	@Test(priority = 4, dependsOnMethods = { "loginTest" })
+	public void supplierTest() {
+		Reporter.log("Test Started for supplier Test:" + currenttime(), true);
+		dataMap.put("maintab", "Suppliers");
+		enobjhomePage.selectTab(dataMap);
+
+		objSupplierSearchPage.verifyBasicSearchTableDisplayed();
+		objSupplierSearchPage.verifyAdvanceSearchTableDisplayed();
+
+	}
+
+	// Campaign needs to be entered here
+
+	@Test(priority = 5, dependsOnMethods = { "loginTest" })
+	public void RiskPageTest() {
+		dataMap.put("maintab", "Risks");
+		dataMap.put("subtab", "Legal");
+		enobjhomePage.selectTab(dataMap);
+		objSupplierSearchPage.verifyLegalIDSeachDetailsDisplayed();
+
+		dataMap.put("subtab", "OFAC");
+		enobjhomePage.selectTab(dataMap);
+		objSupplierSearchPage.verifyOFACPageDetailsDisplayed();
+
+		dataMap.put("subtab", "Address");
+		enobjhomePage.selectTab(dataMap);
+		objSupplierSearchPage.verifyAddressDetailsPageDetailsDisplayed();
+
+	}
+
+	@Test(priority = 6, dependsOnMethods = { "loginTest" })
+	public void TransactionTest() {
+		dataMap.put("subtab", "Contract");
+		enobjhomePage.selectTab(dataMap);
+		encontractManagement.verifyContractManagementPage();
+
+		dataMap.put("maintab", "Invoices");
+		dataMap.put("subtab", "Invoice");
+		enobjhomePage.selectTab(dataMap);
+		eninvoicePage.verifyInvoicePage();
+
+		dataMap.put("maintab", "Payment");
+		dataMap.put("subtab", "Payment");
+		enobjhomePage.selectTab(dataMap);
+		objPaymentsPage.verifyPaymentsPage();
+
+		/*
+		 * as of now it is not showing the menu in simdev env only
+		 * dataMap.put("subtab", "BatchPayment");
+		 * enobjhomePage.selectTab(dataMap);
+		 * objSupplierSearchPage.verifyPaymentDetailsPageDisplayed();
+		 */
+	}
+
+	@Test(priority = 7, dependsOnMethods = { "loginTest" })
+	public void ReportsTest() {
+		dataMap.clear();
+		dataMap.put("maintab", "reports");
+		enobjhomePage.selectTab(dataMap);
+
+		enReportuserDefined.verifyAdminTablePresent();
+		/*
+		 * enReportuserDefined.verifyCustomerTablePresent();
+		 * enReportuserDefined.verifyUserDefineTablePresent();
+		 */
+	}
+
+	// Vendor Request needs to be entered
+
+	@Test(priority = 8, dependsOnMethods = { "loginTest" })
+	public void MessageTest() {
+		dataMap.clear();
+		dataMap.put("maintab", "message");
+		enobjhomePage.selectTab(dataMap);
+
+		enMessage.sanityCheck();
+	}
+
+	@Test(priority = 9, dependsOnMethods = { "loginTest" })
+	public void AdminPageTest() {
+		Reporter.log("Test Started for sanity test in Admin page  : "+ currenttime(), true);
+
+		dataMap.put("maintab", "Admin");
+		dataMap.put("subtab", "Upload");
+		enobjhomePage.selectTab(dataMap);
+		objManageFilesPage.verifyUploadFilesPageDetailsDisplayed();
+
+		dataMap.put("subtab", "Download");
+		enobjhomePage.selectTab(dataMap);
+		objManageFilesPage.verifyDownloadFilesPageDetailsDisplayed();
+
+		dataMap.put("subtab", "Contacts");
+		enobjhomePage.selectTab(dataMap);
+		objUserPage.verifyUsersSectionDisplayed();
+
+		dataMap.put("subtab", "Address");
+		enobjhomePage.selectTab(dataMap);
+		objManageAddressesPage.verifyAddressPageDisplayed();
+
+		// Department
+		dataMap.put("subtab", "department");
+		enobjhomePage.selectTab(dataMap);
+		objDepartments.verifyDepartmentSectionIsDisplayed();
+
+		// Division
+		dataMap.put("subtab", "Division");
+		enobjhomePage.selectTab(dataMap);
+		objDivisionPage.verifyDivisionPage();
+
+		// Payment Center
+		dataMap.put("subtab", "buyerPaymentCenter");
+		enobjhomePage.selectTab(dataMap);
+		objPaymentCenterPage.verifyPaymentCenterPage();
+
+		// Payment Center Mapping
+		dataMap.put("subtab", "buyerPaymentCenterMapping");
+		enobjhomePage.selectTab(dataMap);
+		objPayCntrMapPage.verifyPaymentCenterMappingPage();
+
+		// Payment Terms Group
+		dataMap.put("subtab", "buyerPaymentTerms");
+		enobjhomePage.selectTab(dataMap);
+		objPaymentTermPage.verifyPaymentTermsPage();
+
+		// Buyer Supplier Group
+		dataMap.put("subtab", "buyerSupplierGroup");
+		enobjhomePage.selectTab(dataMap);
+		objSupplierGroupPage.verifyBuyerSupplierGroupPage();
+
+		Reporter.log("Test Ended for sanity test in Admin page :"+ currenttime(), true);
+
+	}
+
+	@AfterClass
+	public void close() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+}

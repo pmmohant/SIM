@@ -1,0 +1,39 @@
+#Page Tilte
+expectedTitle=Lavante SIM - Manage Users
+
+#Xpath
+ManageUsersLink=//a[@title='Manage Users']
+UserTbl=//table[@id='contact-details']/tbody
+AddressTbl=//table[@class='data_table table_grid zebra']/tbody
+editBtn=//table[contains(@id,'contact-details')]/tbody/tr[1]/td[9]/a[contains(@class,'icon_edit open_popup')]
+addressTblEditBtn=//div[contains(@id,'content')]/table/tbody/tr/td[1]/div/div[3]/table/tbody/tr[1]/td[8]/a[contains(@class,'icon_edit open_popup')]
+AddNewUser=//button[@title='Add New User']
+AddNewAddress=//button[@title='Add New']
+
+DialogTitle=//span[@class='ui-dialog-title']
+CancelBtn=//div[@class='align_right button_set']/descendant::button[@title='Cancel']
+#ClearBtn=//div[@class='align_right button_set']/descendant::input[@type='reset']
+ClearBtn=//*[@id='command']//*[@type='reset']
+SaveBtn=//*[@id='command']//*[@type='submit']
+#//div[@class='align_right button_set']/descendant::input[@type='submit']					
+ErrorMessage=//span[@class='error']
+
+edit=//div[contains(@id,'content')]/table/tbody/tr/td[1]/div/div[3]/table/tbody/tr[
+option=]/td[8]/a[contains(@class,'icon_edit open_popup')]
+
+#LinkText
+UserLink=Users
+AddressLink=Addresses
+
+#ID
+Name=contactName
+Email=email
+Address1=address1
+City=city
+Country=countryId_chosen
+State=stateId_chosen
+PostalCode=zipCode
+
+#Frame
+iFrame=.//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+

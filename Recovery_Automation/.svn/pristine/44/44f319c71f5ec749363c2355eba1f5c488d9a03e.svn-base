@@ -1,0 +1,1389 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="">
+<head>
+  <title>Test Results Report - Lavante - Recovery - Running on Firefox v44</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="description" content="TestNG unit test results." />
+  <link href="reportng.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="reportng.js"></script>
+</head>
+<body>
+<h1>Lavante - Recovery - Running on Firefox v44</h1>
+<p>
+  Test duration: 516.129s
+</p>
+
+
+
+  <table class="resultsTable">
+    <tr><th colspan="3" class="header failed">Failed Tests</th></tr>
+          <tr>
+        <td colspan="3" class="group">lavante.recovery.testsuites.SanityTestSuite</td>
+      </tr>
+            
+<tr>
+  <td class="method">
+                  verifyAccountPage
+      </td>
+  <td class="duration">
+    16.046s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'accountLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_17_00.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-0', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;accountLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-0">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Configuration.Account.UsersPage.verifyAccountLink(UsersPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyAccountPage(SanityTestSuite.java:503)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyBatchingPage
+      </td>
+  <td class="duration">
+    18.256s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'batchingLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_15_09.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-1', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;batchingLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-1">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Audit.AuditBatchingPage.verifybatchingLink(AuditBatchingPage.java:21)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyBatchingPage(SanityTestSuite.java:262)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyCheckRegistryPage
+      </td>
+  <td class="duration">
+    15.872s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'chkRegLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_16_15.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-2', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;chkRegLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-2">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Audit.AuditCheckRegistryPage.verifychkRegLink(AuditCheckRegistryPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyCheckRegistryPage(SanityTestSuite.java:357)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyDashBoardClaims
+      </td>
+  <td class="duration">
+    18.040s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Fail: 'openClaims' is not displayedUnable to locate element: {"method":"css selector","selector":"#open-claims td a"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA01', ip: '192.168.21.81', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: driver.version: unknown
+Command duration or timeout: 15.53 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=44.0, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=d40edb6d-fd95-472a-a4cc-7b6d555d4435, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: d40edb6d-fd95-472a-a4cc-7b6d555d4435
+*** Element info: {Using=css selector, value=#open-claims td a}
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_13_23.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-3', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;openClaims&apos; is not displayedUnable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#open-claims td a&quot;}<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA01&apos;, ip: &apos;192.168.21.81&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: unknown<br/>
+Command duration or timeout: 15.53 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=44.0, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=d40edb6d-fd95-472a-a4cc-7b6d555d4435, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]<br/>
+Session ID: d40edb6d-fd95-472a-a4cc-7b6d555d4435<br/>
+*** Element info: {Using=css selector, value=#open-claims td a}</b></a><br />
+    <div class="stackTrace" id="exception-3">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:241)<br />
+              lavante.recovery.pageobjects.DashBoard.ClaimsPage.verifyItemsForMySection(ClaimsPage.java:36)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardClaims(SanityTestSuite.java:72)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyDashBoardCompliance
+      </td>
+  <td class="duration">
+    21.077s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'complainceLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_13_58.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-4', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;complainceLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-4">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.DashBoard.CompliancePage.verifycomplainceLink(CompliancePage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardCompliance(SanityTestSuite.java:122)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyDashBoardSupplier
+      </td>
+  <td class="duration">
+    13.160s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'supplierLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_13_37.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-5', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;supplierLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-5">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.DashBoard.SupplierPage.verifySupplierLink(SupplierPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyDashBoardSupplier(SanityTestSuite.java:90)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyFaxJobsPage
+      </td>
+  <td class="duration">
+    13.052s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'configurationJobsLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_16_44.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-6', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;configurationJobsLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-6">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Configuration.Jobs.FaxJobPage.verifyConfigurationJobsLink(FaxJobPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyFaxJobsPage(SanityTestSuite.java:485)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyFinancePage
+      </td>
+  <td class="duration">
+    15.908s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'financeLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_17_16.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-7', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;financeLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-7">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Configuration.Finance.FinanceInvoicesPage.verifyFinanceLink(FinanceInvoicesPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyFinancePage(SanityTestSuite.java:546)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyInvoicePage
+      </td>
+  <td class="duration">
+    16.519s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'invoiceLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_15_25.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-8', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;invoiceLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-8">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Audit.AuditInvoicePage.verifyinvoiceLink(AuditInvoicePage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyInvoicePage(SanityTestSuite.java:287)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyMailerRegistryPage
+      </td>
+  <td class="duration">
+    16.087s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'mailerRegistryLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_18_04.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-9', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;mailerRegistryLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-9">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Configuration.MailerRegistry.MailerRegistryPage.verifyMailerRegistryLink(MailerRegistryPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyMailerRegistryPage(SanityTestSuite.java:633)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyOthersPage
+      </td>
+  <td class="duration">
+    15.980s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'othersLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_17_48.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-10', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;othersLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-10">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Configuration.Others.FaxCommentsPage.verifyOthersLink(FaxCommentsPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyOthersPage(SanityTestSuite.java:595)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyPossibleDupesPage
+      </td>
+  <td class="duration">
+    18.201s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'possibleDupesLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_15_43.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-11', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;possibleDupesLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-11">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Audit.AuditPossibleDupesPage.verifypossibleDupesLink(AuditPossibleDupesPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyPossibleDupesPage(SanityTestSuite.java:318)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifySetupPage
+      </td>
+  <td class="duration">
+    16.019s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'setUpLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_16_31.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-12', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;setUpLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-12">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Configuration.Setup.AuditPage.verifySetUpLink(AuditPage.java:29)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifySetupPage(SanityTestSuite.java:422)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifySummaryPage
+      </td>
+  <td class="duration">
+    16.036s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'summaryLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_15_59.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-13', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;summaryLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-13">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Audit.AuditSummaryPage.verifysummaryLink(AuditSummaryPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifySummaryPage(SanityTestSuite.java:341)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyUploadsPage
+      </td>
+  <td class="duration">
+    16.014s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'uploadsLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_17_32.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-14', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;uploadsLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-14">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Configuration.Uploads.UploadsPage.verifyUploadsLink(UploadsPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyUploadsPage(SanityTestSuite.java:570)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyauditInboundPage
+      </td>
+  <td class="duration">
+    13.258s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'inboundLink' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_14_32.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-15', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;inboundLink&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-15">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Audit.AuditInboundPage.verifyinboundLink(AuditInboundPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyauditInboundPage(SanityTestSuite.java:163)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyauditOutboundPage
+      </td>
+  <td class="duration">
+    20.932s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Fail: 'currentMonCredits' is not displayedUnable to locate element: {"method":"css selector","selector":"a[href*='CurrentMonthCredits']"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA01', ip: '192.168.21.81', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: driver.version: unknown
+Command duration or timeout: 10.98 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=44.0, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=d40edb6d-fd95-472a-a4cc-7b6d555d4435, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: d40edb6d-fd95-472a-a4cc-7b6d555d4435
+*** Element info: {Using=css selector, value=a[href*='CurrentMonthCredits']}
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_14_19.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-16', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;currentMonCredits&apos; is not displayedUnable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;a[href*=&apos;CurrentMonthCredits&apos;]&quot;}<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;<br/>
+System info: host: &apos;WSR12LAVAQA01&apos;, ip: &apos;192.168.21.81&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: driver.version: unknown<br/>
+Command duration or timeout: 10.98 seconds<br/>
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html<br/>
+Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;<br/>
+System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;<br/>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver<br/>
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=44.0, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=d40edb6d-fd95-472a-a4cc-7b6d555d4435, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]<br/>
+Session ID: d40edb6d-fd95-472a-a4cc-7b6d555d4435<br/>
+*** Element info: {Using=css selector, value=a[href*=&apos;CurrentMonthCredits&apos;]}</b></a><br />
+    <div class="stackTrace" id="exception-16">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:241)<br />
+              lavante.recovery.pageobjects.Audit.AuditOutboundPage.verifycurrentMonCredits(AuditOutboundPage.java:43)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifyauditOutboundPage(SanityTestSuite.java:150)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifycontactEntryPage
+      </td>
+  <td class="duration">
+    18.009s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                                Fail: 'contactEntry' is not displayed
+                                To View Screenshot <a href="file:///D:\Recovery_Auto_Workspace\Recovery_Automation/TestResults/Screenshots/2016_28_Jun_18_14_50.png">Click Here</a>
+                  </div>
+    
+
+        <a href="javascript:toggleElement('exception-17', 'block')" title="Click to expand/collapse"><b>java.lang.AssertionError: Fail: &apos;contactEntry&apos; is not displayed</b></a><br />
+    <div class="stackTrace" id="exception-17">
+              org.testng.Assert.fail(Assert.java:94)<br />
+              lavante.recovery.utilities.Report.fail(Report.java:23)<br />
+              lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:221)<br />
+              lavante.recovery.pageobjects.Audit.AuditContactEntryPage.verifycontactEntryLink(AuditContactEntryPage.java:19)<br />
+              lavante.recovery.testsuites.SanityTestSuite.verifycontactEntryPage(SanityTestSuite.java:248)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+              sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br />
+              sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+              java.lang.reflect.Method.invoke(Method.java:497)<br />
+              org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)<br />
+              org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br />
+              org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br />
+              org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br />
+              org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br />
+              org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br />
+              org.testng.TestRunner.privateRun(TestRunner.java:767)<br />
+              org.testng.TestRunner.run(TestRunner.java:617)<br />
+              org.testng.SuiteRunner.runTest(SuiteRunner.java:348)<br />
+              org.testng.SuiteRunner.access$000(SuiteRunner.java:38)<br />
+              org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:382)<br />
+              org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)<br />
+              java.util.concurrent.FutureTask.run(FutureTask.java:266)<br />
+              java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br />
+              java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br />
+              java.lang.Thread.run(Thread.java:745)<br />
+                </div>
+      </td>
+</tr>
+      </table>
+
+  <table class="resultsTable" width="100%">
+    <tr><th colspan="3" class="header skipped">Skipped Tests</th></tr>
+          <tr>
+        <td colspan="3" class="group">lavante.recovery.testsuites.SanityTestSuite</td>
+      </tr>
+            
+<tr>
+  <td class="method">
+                  verifyAccountAuditGroupsPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifyAccountPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyAccountNotificationPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifyAccountPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyAccountUserGroupsPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifyAccountPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyAccountUsersPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifyAccountPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyBackGroundJobsPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifyFaxJobsPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyCreditrejectionPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifyOthersPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyFinContractDetailsPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifyFinancePage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyFinInvoicesPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifyFinancePage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyOthersFaxCommentsPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifyOthersPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyPhoneExtensionPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifyOthersPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifySetupAuditPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifySetupPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifySetupBUPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifySetupPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifySetupClientPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifySetupPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifySetupManageCurrencyPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifySetupPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifySetupPreferencesPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifySetupPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifySetupReqLetterPage
+      </td>
+  <td class="duration">
+    0.000s
+  </td>
+  <td class="result">
+                             <i>Depends on method(s): </i>
+        <span class="dependency">lavante.recovery.testsuites.SanityTestSuite.verifySetupPage</span>
+                
+    
+        
+
+      </td>
+</tr>
+      </table>
+
+  <table class="resultsTable">
+    <tr><th colspan="3" class="header passed">Passed Tests</th></tr>
+          <tr>
+        <td colspan="3" class="group">lavante.recovery.testsuites.SanityTestSuite</td>
+      </tr>
+            
+<tr>
+  <td class="method">
+                  verifyAssignmentsPage
+      </td>
+  <td class="duration">
+    10.479s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: 'assignmentsLink' is clicked
+                                Pass: https://recoveryqa39.lavante.com/recovery/auditStastics.lvp Page is working fine
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyAuditLink
+      </td>
+  <td class="duration">
+    9.911s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: 'auditLink' is clicked
+                                Pass: https://recoveryqa39.lavante.com/recovery/outbound.lvp Page is working fine
+                                Pass: 'auditLink' is displayed
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyClaimsPage
+      </td>
+  <td class="duration">
+    8.327s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: 'claimsLink' is clicked
+                                Pass: https://recoveryqa39.lavante.com/recovery/claim.lvp Page is working fine
+                                Pass: 'totalClaimsTable' is displayed
+                                Pass: 'claimsListTable' is displayed
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyConfigTab
+      </td>
+  <td class="duration">
+    5.256s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: 'configurationLink' is clicked
+                                Pass: https://recoveryqa39.lavante.com/recovery/configurationSetup.lvp Page is working fine
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyCreditsAssignmentsPage
+      </td>
+  <td class="duration">
+    19.654s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: 'creditsLink' is clicked
+                                Pass: https://recoveryqa39.lavante.com/recovery/creditAssignments.lvp Page is working fine
+                                Pass: 'creditsTable' is displayed
+                                Pass: 'searchBtn' is displayed
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyDashBoardLink
+      </td>
+  <td class="duration">
+    8.256s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: 'dashBoardLink' is displayed
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyHoldsAssignmentsPage
+      </td>
+  <td class="duration">
+    19.289s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: 'holdsLink' is clicked
+                                Pass: https://recoveryqa39.lavante.com/recovery/holdAssignments.lvp Page is working fine
+                                Pass: 'holdsTable' is displayed
+                                Pass: 'searchBtn' is displayed
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyInvoicesPage
+      </td>
+  <td class="duration">
+    14.616s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: 'invoicesLink' is clicked
+                                Pass: 'invoiceSummaryTable' is displayed
+                                Pass: 'invoiceSummaryDetailsTable' is displayed
+                                Pass: 'invoicesCreditLink' is clicked
+                                Pass: 'invoicesCreditTable' is displayed
+                                Pass: 'invoicesVoidLink' is clicked
+                                Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#void Page is working fine
+                                Pass: 'invoicesVoidTable' is displayed
+                                Pass: 'invoicesRefundLink' is clicked
+                                Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp#refund Page is working fine
+                                Pass: 'invoicesRefundTable' is displayed
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyStatementsAssignmentsPage
+      </td>
+  <td class="duration">
+    43.533s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: 'statementsLink' is clicked
+                                Pass: https://recoveryqa39.lavante.com/recovery/statementAssignments.lvp Page is working fine
+                                Pass: 'statementsTable' is displayed
+                                Pass: 'searchBtn' is displayed
+                  </div>
+    
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  verifyauditStatisticsAssignmentsPage
+      </td>
+  <td class="duration">
+    15.449s
+  </td>
+  <td class="result">
+        
+    
+            <div class="testOutput">
+                        Pass: 'auditStatsTable' is displayed
+                  </div>
+    
+
+      </td>
+</tr>
+      </table>
+  
+</body>
+</html>

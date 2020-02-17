@@ -1,0 +1,542 @@
+package com.lavante.sim.customer.TestScripts.Tasks.Invoice;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class RequestUpdateTest01 extends PageInitiator{
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String username ="";
+	
+	/**
+	 * This class all test starts using login page and driver intialization
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;				
+	}
+	
+	@BeforeMethod
+	public void BeforeMethod() throws FileNotFoundException, IOException, SQLException {
+		List<?> listofdatafrm = lavanteUtils.login("Kroger", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0); 
+		
+		//Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+		dataMap.put("maintab", "Tasks");
+		dataMap.put("subtab", "claimTasks");
+		enobjhomePage.selectTab(dataMap);
+		
+		if(!(objTasksClaimPage.iterateSearchHeaderFindColList("Claim ID").size()>1)){
+
+			dataMap.put("subtab", "viewApprovalTasks");
+			enobjhomePage.selectTab(dataMap);
+			
+			LdataMap.put("filterby","Claims to approve");
+			LdataMap.put("ALLSupplier","");
+			LdataMap.put("ReAssign","");
+			LdataMap.put("AssginTo","User");
+			LdataMap.put("User",LdataMap.get("username")); 
+			enReassign.selectSupplierFormAction(LdataMap);
+			
+			dataMap.put("subtab", "InvoiceTasks");
+			enobjhomePage.selectTab(dataMap);
+		}
+		
+		dataMap.put("maintab", "Tasks");
+		dataMap.put("subtab", "InvoiceTasks");
+		enobjhomePage.selectTab(dataMap);
+		
+		if(!(enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Invoice Number").size()>2)){
+
+			dataMap.put("subtab", "viewApprovalTasks");
+			enobjhomePage.selectTab(dataMap);
+			
+			LdataMap.put("filterby","Supplier Invoices to approve");
+			LdataMap.put("ALLSupplier","");
+			LdataMap.put("ReAssign","");
+			LdataMap.put("AssginTo","User");
+			LdataMap.put("User",LdataMap.get("username")); 
+			enReassign.selectSupplierFormAction(LdataMap);
+			
+			dataMap.put("subtab", "InvoiceTasks");
+			enobjhomePage.selectTab(dataMap);
+		}
+
+	}
+	
+	/**
+	 * @author: Vidya.C
+	 * 	Buyer does a request update of Invoice to supplier, Supplier edits 
+	 *  and submits it back to buyer
+	 * @throws Exception 
+	 * 
+	 * @FileNotFoundException
+	 * @IOException
+	 * @SQLException
+	 * 
+	 */
+	@Test 
+	public void VerifySuplierInvoiceRequestUpdate() throws Exception {
+		Reporter.log("Test Started for VerifySuplierInvoiceRequestUpdate: "+currenttime());
+		
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		List<?> listofdatafrm = lavanteUtils.login("KrogerSupplier", browser);
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0); 
+		username = LdataMap.get("username");
+		
+		String query = "select MAX(S.SupplierName) from Supplier s,Supplier_Contact_Map scm,Contact C,Relationship r "
+				+ "      where SCM.ContactID=C.ContactID and scm.lavanteUID=r.lavanteUID and S.lavanteUID=r.lavanteUID  "
+				+ "   and C.Email='"+username+"' and R.ProfileManagedBy_KVID  not in (5104) group by S.SupplierName";
+		String supName = lavanteUtils.fetchDBdata(query);
+		
+		SoftAssert softAssert = new SoftAssert();
+		
+		boolean flag = false;
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+		String subject = "Auto test request update"+randomnum();
+		String mesg = "Please update the invoice with required details"+randomnum();
+		dataMap.put("InvoiceNumber", "ANY");
+		dataMap.put("supplierName", supName);
+		dataMap.put("Recipient", username);
+		dataMap.put("View", "My Tasks");
+		dataMap.put("RequestUpdate", "");
+		dataMap.put("MandatoryChecks", "");
+		dataMap.put("Subject", subject);
+		dataMap.put("Message", mesg);
+		enTaskinvoicestoApprve.selectInvoiceMethod(dataMap);
+		
+		Reporter.log("Mandatory check error for subject, Expected: 'Subject' cannot be left blank. Actual: "+dataMap.get("SubjectErr"));
+		softAssert.assertEquals(dataMap.get("SubjectErr").trim(), "'Subject' cannot be left blank.","Mandatory check error for subject, Expected: 'Subject' cannot be left blank. Actual: "+dataMap.get("SubjectErr"));
+		Reporter.log("Mandatory check error for subject, Expected: 'Message' cannot be left blank. Actual: "+dataMap.get("MessageErr"));
+		softAssert.assertEquals(dataMap.get("MessageErr").trim(), "'Message' cannot be left blank.","Mandatory check error for subject, Expected: 'Message' cannot be left blank. Actual: "+dataMap.get("MessageErr"));
+		Reporter.log("Message after submitting a request, Expected: Requested update successfully. Actual: "+dataMap.get("BannerMsg"));
+		softAssert.assertEquals(dataMap.get("BannerMsg").trim(), "Requested update successfully","Message after submitting a request, Expected: Requested update successfully Actual: "+dataMap.get("BannerMsg"));
+
+		lavanteUtils.waitForTime(4000);
+		String invNum = dataMap.get("InvoiceNumber");
+		enTaskinvoicestoApprve.search(dataMap);
+
+		List<WebElement> invList = enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Invoice Number");
+		if(invList.size()>0) {
+			flag = false;
+		} else {
+			softAssert.assertEquals("No Results", enTaskinvoicestoApprve.NoData().getText());
+			flag = true;
+		}
+		
+		if(!flag) {
+			Reporter.log("Invoice is still in Invoice to approve Page");
+			softAssert.assertTrue(flag, "Invoice is still in Invoice to approve Page");
+		}
+		
+		enobjhomePage.logout();
+		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		lavanteUtils.fluentwait(enobjhomePage.pageHeader());
+		dataMap.put("Id", invNum);
+		dataMap.put("TaskDescription","");
+		enObjSupplierHomePage.OutStandingTaskSelection(dataMap);
+		
+		Reporter.log("Invoice Id in OutStanding Task Should be Found on Supplier Home Page:"+dataMap.containsKey("flag"));
+		Assert.assertTrue(dataMap.containsKey("flag"),"Claim Id in OutStanding Task Not Found on Supplier Home Page");
+		
+		dataMap.remove("flag");
+		
+		dataMap.put("uploadSave","");
+		enuploadInvoice.formInvoiceDetails(dataMap);
+		
+		enObjSupplierHomePage.OutStandingTaskSelection(dataMap);
+		Reporter.log("Invoice should be displayed in OutStanding Task after Saving the Invoice Only:"+dataMap.containsKey("flag"));
+		softAssert.assertTrue(dataMap.containsKey("flag"),"Invoice is not found in OutStanding Task after Saving the Invoice Only");
+		
+		dataMap.remove("flag");
+		dataMap.remove("uploadSave");
+		dataMap.put("uploadSubmit","");
+		dataMap.put("SubjectNotification", "");
+		enuploadInvoice.formInvoiceDetails(dataMap);
+		
+		Reporter.log("Subject for request update, Expected: "+subject+" Actual: "+dataMap.get("SubjectNotification"));
+		softAssert.assertEquals(dataMap.get("SubjectNotification").trim(), subject,"Subject for request update is not matching, Expected: "+subject+" Actual: "+dataMap.get("SubjectNotification"));
+		Reporter.log("Message after submitting the invoice by Supplier, Expected: Invoice has been submitted for approval. Actual: "+dataMap.get("BannerMsg"));
+		softAssert.assertEquals(dataMap.get("BannerMsg").trim(), "Invoice has been submitted for approval.","Message after submitting the invoice by Supplier, Expected: Invoice has been submitted for approval. Actual: "+dataMap.get("BannerMsg"));
+		
+		lavanteUtils.waitForTime(3000);
+		dataMap.remove("TaskDescription");
+		enObjSupplierHomePage.OutStandingTaskSelection(dataMap);
+		Reporter.log("Invoice is not displayed in OutStanding Task after Submitting the Invoice Only:"+dataMap.containsKey("flag"));
+		softAssert.assertFalse(dataMap.containsKey("flag"),"Invoice is found in OutStanding Task after Submitting the Invoice Only");
+
+		enobjhomePage.logout();
+		
+		listofdatafrm = lavanteUtils.login("Kroger", browser);
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0); 
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		dataMap.put("maintab", "Tasks");
+		dataMap.put("subtab", "InvoiceTasks");
+		enobjhomePage.selectTab(dataMap);
+		
+		flag = false;
+		lavanteUtils.fluentwait(enTaskinvoicestoApprve.Search());
+		invNum = dataMap.get("InvoiceNumber");
+		enTaskinvoicestoApprve.search(dataMap);
+		invList = enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Invoice Number");
+		if(invList.size()>0) {
+			Reporter.log("Invoice is submitted successfully by supplier after updating, Invoice Num: "+invNum);
+			softAssert.assertEquals(invList.get(0).getText(), invNum,"Invoice is submitted successfully by supplier after updating, Invoice Num: "+invNum);
+			flag = true;
+		} else {
+			softAssert.assertEquals("No Results", enTaskinvoicestoApprve.NoData().getText());
+			flag = false;
+		}
+		
+		softAssert.assertTrue(flag,"Invoice has not come to the Buyer for approval");
+		softAssert.assertAll();
+		Reporter.log("Test Ended for VerifySuplierInvoiceRequestUpdate: "+currenttime());
+	}
+
+	/**
+	 * @author: Vidya.C Buyer does a request update of Claim to supplier,
+	 *          Supplier edits and submits it back to buyer
+	 * @throws Exception
+	 * 
+	 * @FileNotFoundException
+	 * @IOException
+	 * @SQLException
+	 * 
+	 */
+	@Test
+	public void VerifySuplierClaimsRequestUpdate() throws Exception {
+		Reporter.log("Test Started for VerifySuplierClaimsRequestUpdate: "+ currenttime());
+
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+		dataMap.put("maintab", "Tasks");
+		dataMap.put("subtab", "claimTasks");
+		enobjhomePage.selectTab(dataMap);
+		
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		List<?> listofdatafrm = lavanteUtils.login("KrogerSupplier", browser);
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		username = LdataMap.get("username");
+
+		String query = "select MAX(S.SupplierName) from Supplier s,Supplier_Contact_Map scm,Contact C,Relationship r "
+				+ "      where SCM.ContactID=C.ContactID and scm.lavanteUID=r.lavanteUID and S.lavanteUID=r.lavanteUID  "
+				+ "   and C.Email='"+ username+ "' and R.ProfileManagedBy_KVID  not in (5104) group by S.SupplierName";
+		String supName = lavanteUtils.fetchDBdata(query);
+
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+		String subject = "Auto test claims request update"+randomnum();
+		String mesg = "Please update the claims and submit"+randomnum();
+		dataMap.put("TaskView", "My Task");
+		dataMap.put("SupplierName", supName);
+		dataMap.put("Search", "");
+		dataMap.put("ClaimId", "Any");
+		dataMap.put("Action", "RequestUpdate");
+		dataMap.put("Recipient", username);
+		dataMap.put("MandatoryChecks", "");
+		dataMap.put("Subject", subject);
+		dataMap.put("Message", mesg);
+		dataMap.put("ReqUpdate", mesg);
+		objTasksClaimPage.actionOnTasksClaims(dataMap);
+
+		Reporter.log("Mandatory check error for subject, Expected: 'Subject' cannot be left blank. Actual: "+ dataMap.get("SubjectErr"));
+		softAssert.assertEquals(dataMap.get("SubjectErr").trim(),"'Subject' cannot be left blank.",	"Mandatory check error for subject, Expected: 'Subject' cannot be left blank. Actual: "	+ dataMap.get("SubjectErr"));
+		Reporter.log("Mandatory check error for subject, Expected: 'Message' cannot be left blank. Actual: "+ dataMap.get("MessageErr"));
+		softAssert.assertEquals(dataMap.get("MessageErr").trim(),"'Message' cannot be left blank.","Mandatory check error for subject, Expected: 'Message' cannot be left blank. Actual: "+ dataMap.get("MessageErr"));
+		Reporter.log("Message after submitting a request, Expected: Requested update successfully. Actual: "+ dataMap.get("BannerMsg"));
+		softAssert.assertEquals(dataMap.get("BannerMsg").trim(),"Requested update successfully","Message after submitting a request, Expected: Requested update successfully Actual: "+ dataMap.get("BannerMsg"));
+
+		lavanteUtils.waitForTime(4000);
+		String claimId = dataMap.get("ClaimId");
+		dataMap.put("ClaimId", claimId);
+		objTasksClaimPage.basicSearch(dataMap);
+
+		List<WebElement> claimList = objTasksClaimPage.iterateSearchHeaderFindColList("Claim ID");
+		if (claimList.size() > 0) {
+			flag = false;
+		} else {
+			softAssert.assertEquals("No Results", objTasksClaimPage.NoData().getText());
+			flag = true;
+		}
+
+		if (!flag) {
+			Reporter.log("Claim is still in Tasks page");
+			softAssert.assertTrue(flag, "Claim is still in Tasks page");
+		}
+
+		enobjhomePage.logout();
+
+		enobjloginpage.logintoAPP(LdataMap);
+
+		lavanteUtils.fluentwait(enobjhomePage.pageHeader());
+		dataMap.put("Id", claimId);
+		dataMap.put("TaskDescription", "");
+		enObjSupplierHomePage.OutStandingTaskSelection(dataMap);
+
+		Reporter.log("Claim Id in OutStanding Task Should be Found on Supplier Home Page:"+ dataMap.containsKey("flag"));
+		Assert.assertTrue(dataMap.containsKey("flag"),"Claim Id in OutStanding Task Not Found on Supplier Home Page");
+
+		dataMap.remove("flag");
+
+		dataMap.put("SaveClaim", "");
+		objCreateClaimPage.formAction(dataMap);
+
+		lavanteUtils.fluentwait(enObjSupplierHomePage.PublicProfileSettingsLink());
+		
+		enObjSupplierHomePage.OutStandingTaskSelection(dataMap);
+		Reporter.log("Claim id should be displayed in OutStanding Task after Saving the Claim Only:"+ dataMap.containsKey("flag"));
+		softAssert.assertTrue(dataMap.containsKey("flag"),"Claim id is not found in OutStanding Task after Saving the Claim Only");
+
+		dataMap.remove("flag");
+		dataMap.remove("SaveClaim");
+		dataMap.put("SubmitClaim", "");
+		dataMap.put("SubjectNotification", "");
+		objCreateClaimPage.formAction(dataMap);
+		
+		Reporter.log("Subject for request update, Expected: " + subject	+ " Actual: " + dataMap.get("SubjectNotification"));
+		softAssert.assertEquals(dataMap.get("SubjectNotification").trim(),subject,"Subject for request update is not matching, Expected: "+ subject + " Actual: "	+ dataMap.get("SubjectNotification"));
+		Reporter.log("Message after submitting the claim by Supplier, Expected: Claim successfully submitted Actual: "+ dataMap.get("BannerMsg"));
+		softAssert.assertEquals(dataMap.get("BannerMsg").trim(),"Claim successfully submitted",	"Message after submitting the claim by Supplier, Expected: Claim successfully submitted Actual: "+ dataMap.get("BannerMsg"));
+
+		dataMap.remove("TaskDescription");
+		enObjSupplierHomePage.OutStandingTaskSelection(dataMap);
+		Reporter.log("Claim Id is not displayed in OutStanding Task after Submitting the claim Only:"+ dataMap.containsKey("flag"));
+		softAssert.assertFalse(dataMap.containsKey("flag"),"Claim Id is found in OutStanding Task after Submitting the claim Only");
+
+		enobjhomePage.logout();
+
+		listofdatafrm = lavanteUtils.login("Kroger", browser);
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+		dataMap.put("maintab", "Tasks");
+		dataMap.put("subtab", "claimTasks");
+		enobjhomePage.selectTab(dataMap);
+
+		flag = false;
+		lavanteUtils.fluentwait(objTasksClaimPage.basicsearchbtn());
+		objTasksClaimPage.basicSearch(dataMap);
+
+		claimList = objTasksClaimPage.iterateSearchHeaderFindColList("Claim ID");
+		if (claimList.size() > 0) {
+			Reporter.log("Claim is submitted successfully by supplier after updating, Claim Id: "+ claimId);
+			softAssert.assertEquals(claimList.get(0).getText(), claimId,"Claim is submitted successfully by Clerk after updating, Claim Num: "+ claimId);
+			flag = true;
+		} else {
+			softAssert.assertEquals("No Results", objTasksClaimPage.NoData().getText());
+			flag = false;
+		}
+
+		softAssert.assertTrue(flag,"Claim has not come to the Buyer for approval");
+		softAssert.assertAll();
+		Reporter.log("Test Ended for VerifySuplierClaimsRequestUpdate: "+ currenttime());
+	}
+	
+	/**
+	 * @author: Vidya.C
+	 * 	Buyer does a request update of Invoice to prgx clerk, he edits 
+	 *  and submits it back to admin
+	 * @throws Exception 
+	 * 
+	 * @FileNotFoundException
+	 * @IOException
+	 * @SQLException
+	 * 
+	 */
+	@Test 
+	public void VerifyBuyerInvoiceRequestUpdate() throws Exception {
+		Reporter.log("Test Started for VerifyBuyerInvoiceRequestUpdate: "+currenttime());
+		
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		List<?> listofdatafrm = lavanteUtils.login("KrogerPRGXClerk", browser);
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0); 
+		username = LdataMap.get("username");
+		
+		SoftAssert softAssert = new SoftAssert();
+		
+		boolean flag = false;
+		String subject = "Auto test request update,"+randomnum();
+		String mesg = "Please update the invoice with required details"+randomnum();
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+		dataMap.put("InvoiceNumber", "ANY");
+		dataMap.put("supplierName", "ANY");
+		dataMap.put("Recipient", username);
+		dataMap.put("View", "My Tasks");
+		dataMap.put("RequestUpdate", "");
+		dataMap.put("MandatoryChecks", "");
+		dataMap.put("Subject", subject);
+		dataMap.put("Message", mesg);
+		enTaskinvoicestoApprve.selectInvoiceMethod(dataMap);
+		
+		Reporter.log("Mandatory check error for subject, Expected: 'Subject' cannot be left blank. Actual: "+dataMap.get("SubjectErr"));
+		softAssert.assertEquals(dataMap.get("SubjectErr").trim(), "'Subject' cannot be left blank.","Mandatory check error for subject, Expected: 'Subject' cannot be left blank. Actual: "+dataMap.get("SubjectErr"));
+		Reporter.log("Mandatory check error for subject, Expected: 'Message' cannot be left blank. Actual: "+dataMap.get("MessageErr"));
+		softAssert.assertEquals(dataMap.get("MessageErr").trim(), "'Message' cannot be left blank.","Mandatory check error for subject, Expected: 'Message' cannot be left blank. Actual: "+dataMap.get("MessageErr"));
+		Reporter.log("Message after submitting a request, Expected: Requested update successfully. Actual: "+dataMap.get("BannerMsg"));
+		softAssert.assertEquals(dataMap.get("BannerMsg").trim(), "Requested update successfully","Message after submitting a request, Expected: Requested update successfully Actual: "+dataMap.get("BannerMsg"));
+
+		lavanteUtils.waitForTime(4000);
+		String invNum = dataMap.get("InvoiceNumber");
+		String supName = dataMap.get("supplierName");
+		enTaskinvoicestoApprve.search(dataMap);
+
+		List<WebElement> invList = enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Invoice Number");
+		if(invList.size()>0) {
+			flag = false;
+		} else {
+			softAssert.assertEquals("No Results", enTaskinvoicestoApprve.NoData().getText());
+			flag = true;
+		}
+		
+		if(!flag) {
+			Reporter.log("Invoice is still in Invoice to approve Page");
+			softAssert.assertTrue(flag, "Invoice is still in Invoice to approve Page");
+		}
+		
+		enobjhomePage.logout();
+		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		dataMap.put("maintab", "Tasks");
+		dataMap.put("subtab", "InvoicePendingUpdate");
+		enobjhomePage.selectTab(dataMap);
+		
+		dataMap.remove("View");
+		dataMap.put("InvoiceNumber", invNum);
+		dataMap.put("supplierName", supName);
+		dataMap.put("EditInvoice", "");
+		objInvoicePendingUpdatePage.selectInvoiceMethod(dataMap);
+		
+		dataMap.put("uploadSave","");
+		enuploadInvoice.formInvoiceDetails(dataMap);
+		
+		flag = false;
+		objInvoicePendingUpdatePage.search(dataMap);
+		
+		invList = objInvoicePendingUpdatePage.iterateSearchHeaderFindColList("Invoice Number");
+		if(invList.size()>0) {
+			Reporter.log("Invoice is Saved successfully by Prgx clerk after updating, Invoice Num: "+invNum);
+			softAssert.assertEquals(invList.get(0).getText(), invNum,"Invoice is Saved successfully by Prgx Clerk after updating, Invoice Num: "+invNum);
+			flag = true;
+		} else {
+			softAssert.assertEquals("No Results", enTaskinvoicestoApprve.NoData().getText());
+			flag = false;
+		}
+		
+		Reporter.log("Invoice should be displayed in Pending update page after Saving the Invoice Only: "+flag);
+		Assert.assertTrue(flag,"Invoice is not found in Pending update page after Saving the Invoice Only");
+		
+		dataMap.put("EditInvoice", "");
+		objInvoicePendingUpdatePage.selectInvoiceMethod(dataMap);
+		
+		dataMap.remove("uploadSave");
+		dataMap.put("uploadSubmit","");
+		dataMap.put("SubjectNotification", "");
+		enuploadInvoice.formInvoiceDetails(dataMap);
+		
+		Reporter.log("Subject for request update, Expected: "+subject+" Actual: "+dataMap.get("SubjectNotification"));
+		softAssert.assertEquals(dataMap.get("SubjectNotification").trim(), subject,"Subject for request update is not matching, Expected: "+subject+" Actual: "+dataMap.get("SubjectNotification"));
+		Reporter.log("Message after submitting the invoice by Supplier, Expected: Invoice has been submitted for approval. Actual: "+dataMap.get("BannerMsg"));
+		softAssert.assertEquals(dataMap.get("BannerMsg").trim(), "Invoice has been submitted for approval.","Message after submitting the invoice by Supplier, Expected: Invoice has been submitted for approval. Actual: "+dataMap.get("BannerMsg"));
+		
+		flag = false;
+		lavanteUtils.waitForTime(3000);
+		objInvoicePendingUpdatePage.search(dataMap);
+		invList = objInvoicePendingUpdatePage.iterateSearchHeaderFindColList("Invoice Number");
+		if(invList.size()>0) {
+			flag = false;
+		} else {
+			softAssert.assertEquals("No Results", enTaskinvoicestoApprve.NoData().getText());
+			flag = true;
+		}	
+		
+		Reporter.log("Invoice should not be displayed in Pending update page after Submitting the Invoice Only: "+flag);
+		Assert.assertTrue(flag,"Invoice is found in Pending update page after Submitting the Invoice Only");
+		
+		enobjhomePage.logout();
+		
+		listofdatafrm = lavanteUtils.login("Kroger", browser);
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0); 
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		dataMap.put("maintab", "Tasks");
+		dataMap.put("subtab", "InvoiceTasks");
+		enobjhomePage.selectTab(dataMap);
+		
+		flag = false;
+		lavanteUtils.fluentwait(enTaskinvoicestoApprve.Search());
+		invNum = dataMap.get("InvoiceNumber");
+		enTaskinvoicestoApprve.search(dataMap);
+		invList = enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Invoice Number");
+		if(invList.size()>0) {
+			Reporter.log("Invoice is submitted successfully by Prgx clerk after updating, Invoice Num: "+invNum);
+			softAssert.assertEquals(invList.get(0).getText(), invNum,"Invoice is submitted successfully by Prgx Clerk after updating, Invoice Num: "+invNum);
+			flag = true;
+		} else {
+			softAssert.assertEquals("No Results", enTaskinvoicestoApprve.NoData().getText());
+		}
+		
+		softAssert.assertTrue(flag,"Invoice has not come to the Buyer for approval");
+		softAssert.assertAll();
+		Reporter.log("Test Ended for VerifyBuyerInvoiceRequestUpdate: "+currenttime());
+	}
+	
+	/**
+	 * SetupAfter method closes any popup
+	 * 
+	 * @author subhas.bv
+	 */
+	@AfterMethod
+	public void SetupAfterMethod() {
+		enobjhomePage.logout();
+	}
+
+	/**
+	 * SetupAfter Class closes any popup and Closes the Browser and Driver
+	 * 
+	 * @author subhas.bv
+	 */
+	@AfterClass
+	public void SetupafterClassMethod() {
+		quitBrowser();
+	}
+
+}

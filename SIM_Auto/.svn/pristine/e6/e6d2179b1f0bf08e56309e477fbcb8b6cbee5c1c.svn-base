@@ -1,0 +1,359 @@
+#Page Title
+expectedPageTitle=Lavante SIM - Search
+
+#ID
+leavePopupBtn=leave
+supProfileSaveBtn=save_button
+btnSaveExit=saveexit_button
+zipCode=zipCode
+cityEditField=city
+address1EditField=address1
+btnContinue=button_create
+checkBoxTakeControl=isTakeControlOfsupplierProfile
+inviteBtn=button_invite
+contactName=contactName
+invitingOrganization=invitingOrganization
+fax=fax
+profileStatus=profileStatus
+deactivatedSuppliers=showDeactivatedSuppliers
+supplierName=supplierName
+contact=contact
+searchtab=search_tab
+email=email
+advancedTab=adv_search_tab
+profileStage=profileStage
+takeControlChkBox=isTakeControlOfsupplierProfile
+supplierContactInfo=supplier_Contact
+Country=countryId_chosen
+State=stateId_chosen
+taxIDDrpDwn=legalIdentifier_chosen
+legalIDDocDrpDwn=legalIdDocumentW9Provided_chosen
+specifyQueryTxtBox=//div[contains(@id,'dialog')]/form[contains(@id,'adv_search')]/div/table/tbody/tr[1]/td[2]/input[contains(@id,'specify_query')]
+privateQueryChkBox=private_query
+availableSuppDocBox=box1View
+toRightBtn=toRight
+invitedBy=supplierInvitedBy_chosen
+approved=isApproved_chosen
+sendinviteBtn=sendinvite
+supplierInviteJustification=supplierInviteJustification
+supplierListCheckConfirmation=supplierListCheckConfirmation
+companyLegalName_chosen=primaryCont_chosen
+preScreen=preScreen
+
+#specify_query
+#Xpath
+#supplierProfile
+addNewDrpDwnBtnPrefix=//div[@id='
+addNewDrpDwnBtnSuffix=']/a
+addNewDrpDwnListSuffix=']/div[1]/ul/li
+
+
+supTableRowList=//table[@id='search_results']/tbody/tr
+profileEditBtn=button[value='Edit Profile'][class='buttons_group_button']
+#input[value='Edit Profile'][class='buttons_group_button']
+profileTab1=.//*[@id='profile_tab']/tbody/tr/td[2]/div/div/a[3]
+errorMsgList=//span[contains(@class,'error')]
+btnSaveAddress=[class='button_green'][type='submit']
+stateDrpDwnList=//div[contains(@id,'stateId_chosen')]/div/ul/li
+stateDrpDwn=.//*[@id='stateId_chosen']/a
+countryDrpDwnList=//div[contains(@id,'countryId_chosen')]/div[1]/ul/li
+countryDrpDwn=.//*[@id='countryId_chosen']/a
+addressDrpDwn=.//*[@id='headquarterAddressId_chosen']/a
+addressDrpDwnList=//div[contains(@id,'headquarterAddressId_chosen')]/div[1]/ul/li
+editProfileTabTitlesList=//a[contains(@class,'evt-trail-evt trail-item')]/div/h2[contains(@class,'wizard_tab_title')]
+btnCancel=//button[contains(@class,'button')][contains(@title,'Cancel')]
+btnOk=//button[contains(@class,'button_green')][contains(@role,'button')]
+supplierGroupList=//div[contains(@id,'supplierGroup_chosen')]/div[1]/ul/li
+errorMsg=//span[@class='error']
+#supplierGroup=//div[1]/form/div[1]/table/tbody/tr[6]/td[2]/div[2]/a/span
+supplierGroup=.//*[@id='supplierGroup_chosen']/a
+supplierNameField=//form[contains(@id,'search_supplier_form')]/div/table/tbody/tr[2]/td[2]/input[contains(@id,'supplierName')]
+supNameRows=//table[contains(@id,'search_results')]/tbody/tr
+supNameRowsOne=//table[contains(@id,'search_results')]/tbody/tr[
+supNameRowsTwo=]/td[1]
+supplierslink=//a[@title='Suppliers']
+Dashboard=//a[@title='Dashboard']
+manageFiles=//div[contains(@id,'main-navigation')]/a[contains(@title,'Manage Files')]
+downloadFiles=//a[@title='Download Files']
+SearchBtn=//form[contains(@id,'search_supplier_form')]/div[2]/button[contains(@title,'Search Suppliers')]
+ErrorMessage=//span[@class='error']
+ClearBtn=//*[@id='msg_to_supplier']//*[@type='reset']
+#//div[@class='align_right button_set']/descendant::input[@type='reset']
+
+#Activate & De-activate Functionality
+tableRowCount=//*[@id='search_results']//tbody//tr
+#//form[@id='supplierSearchResultForm']/div[1]/div/div[2]/table/tbody/tr
+dataNotFound=//form[@id='supplierSearchResultForm']//tr[contains(@class,'data_not_found')]
+#//form[@id='supplierSearchResultForm']/div[1]/div/div[2]/table/tbody/tr[contains(@class,'data_not_found odd')]
+noData=//form[@id='supplierSearchResultForm']//tr[contains(@class,'data_not_found')]
+#//form[@id='supplierSearchResultForm']/div[1]/div/div[2]/table/tbody/tr[contains(@class,'data_not_found odd')]/td
+headerCount=//div/table[contains(@id,'search_results')]/thead/tr/th
+dataCount=//div/table[contains(@id,'search_results')]/tbody/tr[1]/td
+select=//div/table[contains(@id,'search_results')]/tbody/tr[
+option=]/td[1]
+accountBtn=//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[2]/button
+activateOption=//*[@id='supplierSearchResultForm']//*[@title='Activate']
+#//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[2]/div/input[contains(@title,'Activate')]
+deactivateOption=//*[@id='supplierSearchResultForm']//*[@title='Deactivate']
+#//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[2]/div/input[contains(@title,'Deactivate')]
+dialogPopup=//div[@class='dialog undefined ui-dialog-content ui-widget-content']
+resetBtn=//form[contains(@id,'search_supplier_form')]/div[2]/button[contains(@title,'Reset Search')]
+//---
+okBtn=//button[@class='button_green'][@type='button']
+//---
+comment=//form[contains(@id,'activateDeactivateSupplierForm')]/div/table/tbody/tr[4]/td[2]/div/textarea[contains(@id,'comment')]
+saveBtn=//*[@id='activateDeactivateSupplierForm']//*[@type='submit']
+#//form[contains(@id,'activateDeactivateSupplierForm')]/div[2]/input[contains(@title,'Save')]
+supplierTblName=//div/table[contains(@id,'search_results')]/tbody/tr[1]/td[3]/a[contains(@id,'supplier')]
+businessContact=//div/table[contains(@id,'search_results')]/tbody/tr[1]/td[4]
+successMsg=//div[contains(@class,'dialog undefined ui-dialog-content ui-widget-content')]
+status=//div/table[contains(@id,'search_results')]/tbody/tr[1]/td[8]
+profileCompletePercentage=//div/table[contains(@id,'search_results')]/tbody/tr[
+ValueOption=]/td[9]
+supplierProfile=//div/table[contains(@id,'search_results')]/tbody/tr[
+ChkBoxName=]/td[3]/a[contains(@id,'supplier')]
+contactEmailColumn=//div/table[contains(@id,'search_results')]/tbody/tr[
+optionName=]/td[6]
+
+supplierStatus=//div/table[contains(@id,'search_results')]/tbody/tr[
+rowOption=]/td[8]
+
+samecontactEmail=//*[contains(@id,'search_results')]//td[6]
+#//div/table[contains(@id,'search_results')]/tbody/tr[2]/td[6]
+
+#SendEmail
+communicateBtn=//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[3]/button
+sendEmailOption=//*[@id='supplierSearchResultForm']//*[@title='Send Email']
+#//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[3]/div/input[contains(@title,'Send Email')]
+fromDropdown=//form[contains(@id,'msg_to_supplier')]/div/table/tbody/tr/td[2]/div[contains(@id,'from_chosen')]/a
+subject=//form[contains(@id,'msg_to_supplier')]/div/table/tbody/tr[3]/td[2]/input[contains(@id,'subject')]
+bodyMessage=//form[contains(@id,'msg_to_supplier')]/div[1]/table/tbody/tr[5]/td/div/div/div/div[contains(@class,'jqte_editor')]
+sendBtn=//*[@id='msg_to_supplier']//*[@id='send_message']
+#//form[contains(@id,'msg_to_supplier')]/div[3]/input[contains(@class,'button_green')]
+okEmailBtn=//div[contains(@class,'ui-dialog-buttonset')]/button[contains(@class,'button_green')]
+fromChosen=//*[@id='from_chosen']//ul/li
+#//div[contains(@id,'from_chosen')]/div[1]/ul/li
+
+
+#Re-Invite
+reInviteOption=//*[@id='supplierSearchResultForm']//*[@title='Re-invite']
+#//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[3]/div/input[contains(@title,'Re-invite')]
+reInviteDialogPopup=//form[contains(@id,'reinvite_supplier')]/div/div[1]/strong
+labelName=//form[contains(@id,'reinvite_supplier')]/div[1]/div/table/tbody/tr[2]/td[2]/label
+emailContact=//div/table[contains(@id,'search_results')]/tbody/tr[1]/td[6]
+
+#Auto Suggest
+autoSuggestTblName=//div[contains(@id,'suggestions')]/table[contains(@id,'supp_email_table')]
+autoSuggestMsg=//div[contains(@id,'suggestions')]/table[contains(@id,'supp_email_table')]/caption
+autoSuggestSupplierName=//div[contains(@id,'suggestions')]/table[contains(@id,'supp_email_table')]/tbody/tr/td[1]
+cancelBtn=//*[@id='invite_New_supplier']//*[@title='Cancel']
+#//form[contains(@id,'invite_New_supplier')]/div[2]/button[1]
+
+#Outreach
+buildQueryBtn=//form[contains(@id,'advanceSearchExecute')]//button[contains(@title,'Build Query')]
+#//form[contains(@id,'advanceSearchExecute')]/div[4]/button[contains(@title,'Build Query')]
+enterpriseDataTab=//form[contains(@id,'advanceSearch')]/div/div[2]/a[contains(@title,'Enterprise Generated Data')]
+advanceSearchBtn=//*[@id='advanceSearch']//input[@type='submit'][@title='Search']
+#//form[contains(@id,'advanceSearch')]/div[2]/div/input[contains(@title,'Search')]
+outreachOption=//*[@id='supplierSearchResultForm']//button[contains(@title,'Start Outreach')]
+#//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[3]/div/input[contains(@title,'Start Outreach')]
+initiateProcessMsg=//form[contains(@id,'startOutreachForm')]/div[1]/p
+outreachBtn=//*[@id='dialog']//*[@title='Outreach']
+#//form[contains(@id,'startOutreachForm')]/div[2]/input[contains(@class,'button_green')]
+
+#CreateNewSupplier_popup
+NewSupplierPopupLabel=//form[contains(@id,'invite_New_supplier')]/div/table/tbody/tr[10]/td/label
+newSupplierCancelBtn=//form[contains(@id,'invite_New_supplier')]/div[2]/button[contains(@title,'Cancel')]
+
+#Sync_AdvSearch_BasicSearch
+companyProfileTab=//form[contains(@id,'advanceSearch')]/div/div[2]/a[contains(@title,'Company Profile')]
+SupplierDrpDwn=//div[contains(@id,'supplier_name_chosen')]/a/span
+suppliertxtField=//input[contains(@name,'supplier_name_field')]
+
+customerSpecificProfileTab=//form[contains(@id,'advanceSearch')]/div/div[2]/a[contains(@title,'Customer Specific Profile')]
+businessContactDrpDwn=//div[contains(@id,'primaryCont_chosen')]/a/span
+businessContactTxtField=//input[contains(@name,'primaryCont_field')]
+
+#No Duplicate Emails
+profileBtn=//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[1]/button
+editProfile=//*[contains(@id,'supplierSearchResultForm')]//*[contains(@title,'Edit Profile')]
+#//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[1]/div/input[contains(@title,'Edit Profile')]
+takeControl=//*[@id='supplierSearchResultForm']//*[@value='Take Control']
+#//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[1]/div/input[contains(@title,'Take Control')]
+enterpriseOwnedTab=//table[contains(@id,'profile_tab')]/tbody/tr/td[2]/div/div/a[1]
+editUserInfoIcon=//table[contains(@id,'supplier_Contact_Information')]/tbody/tr/td[8]/a[contains(@title,'Edit User Information')]
+saveEditUserBtn=//*[@id='command']//*[contains(@value,'Save')]
+#//form[contains(@id,'command')]/div/input[contains(@value,'Save')]
+editUserCancelBtn=//*[@id='command']//*[contains(@title,'Cancel')]
+editUserErrorMsg=//form[contains(@id,'command')]/table/tbody/tr[7]/td[2]/span
+businessContactName=//div[contains(@id,'cs_profile')]/table[1]/tbody/tr[1]/td/input[contains(@name,'primaryCont_field')]
+
+#Supplier profile Complete
+otherAction=//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[5]/button
+moveToProfileComplete=//*[@id='supplierSearchResultForm']//button[@title='Move to Profile Complete']
+#//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[5]/div/input[contains(@title,'Move to Profile Complete')]
+downloadDocuments=//form[contains(@id,'supplierSearchResultForm')]/div[2]/div[5]/div/input[contains(@value,'Download Documents')]
+
+#Retained Previous Results
+advCancelBtn=//form[contains(@id,'command')]/div/a[contains(@title,'Cancel')]
+
+
+#Advanced Search
+supplierManaged=//div[contains(@id,'main-navigation')]/a[contains(@title,'Supplier Managed')]
+enterpriseOwned=//div[contains(@id,'main-navigation')]/a[contains(@title,'Enterprise-Owned')]
+statusAndHistory=//div[contains(@id,'main-navigation')]/a[contains(@title,'Status and History')]
+coreProfile=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Core Profile')]
+regulatory=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Regulatory')]
+contact=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Contact')]
+relationSpecificProfile=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Relation Specific Profile')]
+paymentInformation=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Payment Information')]
+headerInformation=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Header Information')]
+profileAndApprovalHistory=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Profile & Approval History')]
+
+stateField=//div[contains(@id,'dialog')]/div[7]/table[2]/tbody/tr/td[5]
+countryField=//div[contains(@id,'dialog')]/div[7]/table[2]/tbody/tr/td[7]
+dateClearField=//div[contains(@id,'filters')]/table/tbody/tr/th/table/tbody/tr/td[2]/input[contains(@title,'Clear')]
+
+companyLegalID=//form[contains(@id,'advanceSearch')]/div/div[2]/a[contains(@title,'Company Legal ID')]
+
+legalIDlabelName=//div[contains(@id,'dialog')]/table/tbody/tr[4]/td/label
+legalIDIdentifierStatus=//div[contains(@id,'dialog')]/table/tbody/tr[4]/td[2]
+pdfName=//table[contains(@class,'data_table table_grid zebra dynamic_table')]/tbody/tr/td[1]
+
+saveQuery=//form[contains(@id,'advanceSearch')]/div[2]/div/input[contains(@title,'Save Query')]
+saveQuerySaveBtn=//form[contains(@id,'adv_search')]/div[2]/input[contains(@title,'Save')]
+
+privateQueryCaption=//table[contains(@id,'private_queries')]/caption
+privateQueryRunBtn=//table[contains(@id,'private_queries')]/tbody/tr[1]/td/a[contains(@class,'icon_note_run run_query')]
+privateDeleteBtn=//table[contains(@id,'private_queries')]/tbody/tr[1]/td/a[contains(@class,'icon_note_delete')]
+
+publicQueryCaption=//table[contains(@id,'public_queries')]/caption
+publicQueryRunBtn=//table[contains(@id,'public_queries')]/tbody/tr[1]/td/a[contains(@class,'icon_note_run run_query')]
+publicQueryDeleteBtn=//table[contains(@id,'public_queries')]/tbody/tr[1]/td/a[contains(@class,'icon_note_delete')]
+
+keySuppInfoName=//div[contains(@id,'dialog')]/table[1]/tbody/tr[6]/td[2]
+keySupInfoTbl=//table[contains(@class,'data_table table_outer_grid')]
+
+uploadDocOKBtn=//*[contains(@id,'save_request_doc_form')]//*[contains(@value,'OK')]
+#//form[contains(@id,'save_request_doc_form')]/div[2]/input[contains(@value,'OK')]
+
+downloadFileRowCount=//div[contains(@id,'downloadFileDetailsDiv')]/table/tbody/tr
+downloadFileColumnCount=//div[contains(@id,'downloadFileDetailsDiv')]/table/tbody/tr[1]/td
+
+downloadFileName=//div[contains(@id,'downloadFileDetailsDiv')]/table/tbody/tr[1]/td[1]
+downloadedOn=//div[contains(@id,'downloadFileDetailsDiv')]/table/tbody/tr[1]/td[2]
+downloadedRecordsCount=//div[contains(@id,'downloadFileDetailsDiv')]/table/tbody/tr[2]/td[5]
+downloadStatus=//div[contains(@id,'downloadFileDetailsDiv')]/table/tbody/tr[1]/td[6]
+
+approvalStatusTbl=//div[contains(@id,'dialog')]/table[2]/tbody/tr
+actionType=//div[contains(@id,'dialog')]/table[2]/tbody/tr[1]/td[1]
+profileStageStatus=//div[contains(@id,'dialog')]/table[2]/tbody/tr[1]/td[2]
+timeStamp=//div[contains(@id,'dialog')]/table[2]/tbody/tr[1]/td[3]
+approveNoData=//div[contains(@id,'dialog')]/table/tbody/tr[contains(@class,'data_not_found')]/td
+
+sendInvitePopupBtn=//input[contains(@title,'Send Invite')]
+
+#Pre Screening
+prescreenTitlebar=//div[contains(@class,'ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix')]/span
+prescreenOKBtn=//button[contains(@class,'button_green')]
+
+#TimeFormat
+SupplierStatusDateFormat=MM/dd/yyyy
+GenericTimeZone=GMT-7:00
+
+#LinkText
+basicsearchLink=Basic Search
+advancedsearchLink=Advanced Search
+inviteNewSupplier=Invite New Supplier
+createNewSupplier=Create New Supplier
+profileTab=Profile
+
+#CSS
+popupCloseBtn=button[title='close'][type='button']
+profileEditBtn=button[value='Edit Profile'][class='buttons_group_button']
+#input[value='Edit Profile'][class='buttons_group_button']
+#Frames
+searchresults=search_results
+supplierTableFrame=.//iframe[@class='iframe_page']
+activatePopupFrame=.//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+
+#Expected Messages
+activateMsg=The selected Supplier has been activated successfully.
+deactivateMsg=Selected Supplier has been de-activated successfully.
+activatePopupMsg=Note that only those suppliers who are in Inactive status and whose Supplier ID is not duplicate can be activated. Activation will result in suppliers reverting back to the status they were in before Deactivation was enforced. Are you sure you want to continue?
+#Are you sure you want to continue?
+deactivatePopupMsg=Are you sure you want to Deactivate the selected supplier(s)?
+sendEmailPopupMsg=Are you sure you want to send this email to
+sendEmailSuccessMsg=Email sent successfully.
+reInvitePopupMsg=Select the contact(s) whom you would like to invite.
+reInviteSuccessMsg=An invitation has been sent to the Supplier's contact(s) specified by you.
+autosuggestMsg=Email address already exists. The invitation will be sent to the below supplier's contact.
+outreachPopupMsg=Are you sure you want to initiate the Outreach process?
+outreachSuccessMsg=The Outreach Process has now been initiated.
+createNewSupplierPopuplbl=Take Control of this Supplier's Profile:
+contactEmailMsg=Another contact with the same Email exists
+profileCompletePopupMsg=Only suppliers in "Incomplete" can be moved
+profileCompleteSuccessMsg=Successfully moved to "Complete".
+extractDocPopupsMsg=The Extract Documents download process as specified by you has been initiated.
+#extractDocPopupsMsg=A previous Extract Documents request is currently in progress. Please request a new file, only after this request is processed.
+profileSavedPopupsMsg=Profile is successfully saved
+takeControlDialogPopUp=You have successfully taken control of this supplier's profile. Press Ok to edit supplier's profile.
+inviteNewSupplierSuccessMsg=An invitation has been sent to the Supplier specified by you.
+
+#added
+#links
+InviteNewSupplier=Invite New Supplier
+Supplier=Suppliers
+Search=Search
+#text
+SupplierPage=Lavante SIM - Search
+
+#id
+suppliername=supplierName
+contactname=contactName
+clearBtn=button_clear
+
+QuickLink=//div/span[contains(@id,'ui-id') and contains(@class,'ui-dialog-title']
+SuccessMessage=//div[@class='dialog undefined ui-dialog-content ui-widget-content']
+
+iFrame=.//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+
+#For invite
+#ID
+btnAddNew=supplier_group_button
+#Xpath
+iframeaddnew=//iframe[@data-iname='getNAICSInfo.lvp']
+
+table2=//table[@class='data_table table_grid zebra dynamic_table'][1]
+table1=//table[@class='data_table table_outer_grid'][1]
+supplierdetailtitle=//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-front dialog ui-draggable ui-resizable']/div/span
+supplierdetailsframe=//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+clsNodata=data_not_found
+expandOption=//h3[contains(@id,'select_4')]/a
+
+commenttype=//div[@id='commentType_chosen']/a
+
+#link text
+vmfdata=As Supplied VMF View
+notesncomments=Notes & Comments
+contractmanage=Contract Management
+headermanage=Header Information
+suppliermanaged=Supplier Managed
+enterpriseowned=Enterprise-Owned
+statusnhistory=Status and History
+certification=Certifications
+coreprofile=Core Profile
+diversity=Diversity
+#regulatory=Regulatory
+paymentinfo=Payment Information
+relationsprofile=Relation Specific Profile
+contact=Contact
+profilenstatus=Profile & Approval History
+framemainnavigation=//div[@id='main-navigation']
+
+headers=//form[@id='supplierSearchResultForm']//table[@id='search_results']/thead/tr/th
+header=//form[@id='supplierSearchResultForm']//table/thead/tr/th[
+suppliertablesearch=//form[@id='supplierSearchResultForm']//table[@id='search_results']/tbody/tr
+suppliersearchtable=//form[@id='supplierSearchResultForm']//table[@id='search_results']
+
+

@@ -1,0 +1,429 @@
+package com.lavante.sim.customer.pageobjects;
+
+import org.openqa.selenium.support.PageFactory;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.AddressValidation.AddressValidationPage;
+import com.lavante.sim.customer.pageobjects.AdvanceSearch.AdvanceSearchPage;
+import com.lavante.sim.customer.pageobjects.BasicSearch.SupplierSearchPage;
+import com.lavante.sim.customer.pageobjects.Dashboard.CampaignDashboard;
+import com.lavante.sim.customer.pageobjects.Dashboard.ClaimsDashboard;
+import com.lavante.sim.customer.pageobjects.Dashboard.Dashboard;
+import com.lavante.sim.customer.pageobjects.Dashboard.ExpiringCertifications;
+import com.lavante.sim.customer.pageobjects.Dashboard.OnboardingProgress;
+import com.lavante.sim.customer.pageobjects.Dashboard.RegulatoryCompliance;
+import com.lavante.sim.customer.pageobjects.Dashboard.SupplierClaimsDashboard;
+import com.lavante.sim.customer.pageobjects.HomePage.HomePage;
+import com.lavante.sim.customer.pageobjects.HomePage.LayoutPage;
+import com.lavante.sim.customer.pageobjects.Login.DigCertPage;
+import com.lavante.sim.customer.pageobjects.Login.ForgotPasswordPage;
+import com.lavante.sim.customer.pageobjects.Login.ForgotPwd;
+import com.lavante.sim.customer.pageobjects.Login.GmailLoginPage;
+import com.lavante.sim.customer.pageobjects.Login.LoginPage;
+import com.lavante.sim.customer.pageobjects.Login.McafeePage;
+import com.lavante.sim.customer.pageobjects.Login.NotRegisteredPage;
+import com.lavante.sim.customer.pageobjects.Login.SimAccRegistrationPage;
+import com.lavante.sim.customer.pageobjects.Login.SimAccountRegistrationPage;
+import com.lavante.sim.customer.pageobjects.Login.SimAccountSetupPage;
+import com.lavante.sim.customer.pageobjects.Login.SimAccountSetupPages;
+import com.lavante.sim.customer.pageobjects.Admin.DealLocationMapping;
+import com.lavante.sim.customer.pageobjects.Admin.Departments;
+import com.lavante.sim.customer.pageobjects.Admin.GLCodeMappingPage;
+import com.lavante.sim.customer.pageobjects.Admin.GLCodePage;
+import com.lavante.sim.customer.pageobjects.Admin.ClaimResolutionPage;
+import com.lavante.sim.customer.pageobjects.Admin.ClaimTypeMappingPage;
+import com.lavante.sim.customer.pageobjects.Admin.ClaimTypePage;
+import com.lavante.sim.customer.pageobjects.Admin.DataIngestionSummaryPage;
+import com.lavante.sim.customer.pageobjects.Admin.PaymentCenterMappingPage;
+import com.lavante.sim.customer.pageobjects.Admin.ManageFiles.DownloadFiles;
+import com.lavante.sim.customer.pageobjects.Admin.ManageFiles.ManageFilesPage;
+import com.lavante.sim.customer.pageobjects.Admin.ManageFiles.UploadFiles;
+import com.lavante.sim.customer.pageobjects.Admin.DivisionPage;
+import com.lavante.sim.customer.pageobjects.Admin.ManageAddressesPage;
+import com.lavante.sim.customer.pageobjects.Admin.ManageUsersPage;
+import com.lavante.sim.customer.pageobjects.Admin.PaymentCenterPage;
+import com.lavante.sim.customer.pageobjects.Admin.PaymentTermsPage;
+import com.lavante.sim.customer.pageobjects.Admin.SuppliergroupPage;
+import com.lavante.sim.customer.pageobjects.Admin.UsersPage;
+import com.lavante.sim.customer.pageobjects.Messages.Message;
+import com.lavante.sim.customer.pageobjects.MyAccount.MyAccountPage;
+import com.lavante.sim.customer.pageobjects.OFAC.OFACPage;
+import com.lavante.sim.customer.pageobjects.OIG.OIGPage;
+import com.lavante.sim.customer.pageobjects.Recovery.RecoveryPage;
+import com.lavante.sim.customer.pageobjects.Reports.ReportUserDefined;
+import com.lavante.sim.customer.pageobjects.SAM.SAMPage;
+import com.lavante.sim.customer.pageobjects.SupplierID.AddSupplierIDTasksPage;
+import com.lavante.sim.customer.pageobjects.SupplierProfile.CustSupViewProfilePage;
+import com.lavante.sim.customer.pageobjects.SupplierProfile.SupplierProfilePage;
+import com.lavante.sim.customer.pageobjects.Suppliers.InvitenewSupplier;
+import com.lavante.sim.customer.pageobjects.Suppliers.ViewSupplier;
+import com.lavante.sim.customer.pageobjects.Suppliers.EditProfile.EditCompanyProfile;
+import com.lavante.sim.customer.pageobjects.Suppliers.EditProfile.EditCustomerProfile;
+import com.lavante.sim.customer.pageobjects.Suppliers.EditProfile.EditProfCertification;
+import com.lavante.sim.customer.pageobjects.Suppliers.EditProfile.EditProfContractManagement;
+import com.lavante.sim.customer.pageobjects.Suppliers.EditProfile.EditProfEnterprise;
+import com.lavante.sim.customer.pageobjects.Suppliers.EditProfile.EditProfLegalID;
+import com.lavante.sim.customer.pageobjects.Suppliers.EditProfile.EditProfPaymentInfo;
+import com.lavante.sim.customer.pageobjects.Suppliers.EditProfile.EditProfilePage;
+import com.lavante.sim.customer.pageobjects.Suppliers.Search.SupplierAdvancedSearchPage;
+import com.lavante.sim.customer.pageobjects.Suppliers.Search.SupplierAlertPage;
+import com.lavante.sim.customer.pageobjects.Suppliers.Search.SupplierBasicSearchPage;
+import com.lavante.sim.customer.pageobjects.Suppliers.Search.SupplierPage;
+import com.lavante.sim.customer.pageobjects.SupportProperties.BackGroundTasks;
+import com.lavante.sim.customer.pageobjects.SupportProperties.Cache;
+import com.lavante.sim.customer.pageobjects.SupportProperties.CustomerSetup;
+import com.lavante.sim.customer.pageobjects.SupportProperties.Properties;
+import com.lavante.sim.customer.pageobjects.Task.TasksApprovalPage;
+import com.lavante.sim.customer.pageobjects.Tasks.TasksTracker;
+import com.lavante.sim.customer.pageobjects.Tasks.AddSupplierERPID.AddSupplierERPID;
+import com.lavante.sim.customer.pageobjects.Tasks.Approvals.Approval;
+import com.lavante.sim.customer.pageobjects.Tasks.Campaigns.TasksCampaignsPage;
+import com.lavante.sim.customer.pageobjects.Tasks.Invoice.InvoiceQntoAnswer;
+import com.lavante.sim.customer.pageobjects.Tasks.Invoice.Invoices;
+import com.lavante.sim.customer.pageobjects.Tasks.Invoice.SplitInvoices;
+import com.lavante.sim.customer.pageobjects.Tasks.Payments.PaymentQntoAnswer;
+import com.lavante.sim.customer.pageobjects.Tasks.PendingUpdate.InvoicePendingUpdate;
+import com.lavante.sim.customer.pageobjects.Tasks.PendingUpdate.PendingUpdate;
+import com.lavante.sim.customer.pageobjects.Tasks.Reassignment.Reassignment;
+import com.lavante.sim.customer.pageobjects.Tasks.Claims.TasksClaimPage;
+import com.lavante.sim.customer.pageobjects.Transactions.Payments.PaymentsPage;
+import com.lavante.sim.customer.pageobjects.Transactions.Payments.ViewPaymentsPage;
+import com.lavante.sim.customer.pageobjects.Transactions.PromoAllowances.PromoAllowancePage;
+import com.lavante.sim.customer.pageobjects.Transactions.Claims.ClaimsAdvanceSearch;
+import com.lavante.sim.customer.pageobjects.Transactions.Claims.ClaimsBasicSearch;
+import com.lavante.sim.customer.pageobjects.Transactions.Claims.ClaimsPage;
+import com.lavante.sim.customer.pageobjects.Transactions.Claims.CreateClaimPage;
+import com.lavante.sim.customer.pageobjects.Transactions.Claims.ViewClaimsPage;
+import com.lavante.sim.customer.pageobjects.Transactions.ContractManagement.CMAdvancedSearch;
+import com.lavante.sim.customer.pageobjects.Transactions.ContractManagement.ContractManagement;
+import com.lavante.sim.customer.pageobjects.Transactions.Invoices.InvoiceAdvanceSearch;
+import com.lavante.sim.customer.pageobjects.Transactions.Invoices.InvoiceBasicSearch;
+import com.lavante.sim.customer.pageobjects.Transactions.Invoices.InvoicePage;
+import com.lavante.sim.customer.pageobjects.Transactions.Invoices.UploadInvoice;
+import com.lavante.sim.customer.pageobjects.Transactions.Invoices.ViewInvoicePage;
+import com.lavante.sim.customer.pageobjects.Transactions.NCH.NCHInvoice;
+import com.lavante.sim.customer.pageobjects.Transactions.NCH.ViewNCHPage;
+import com.lavante.sim.supplier.pageobjects.SupplierHomePage;
+import com.lavante.sim.supplier.pageobjects.Agreements.CreateCostChangePage;
+import com.lavante.sim.supplier.pageobjects.Agreements.ViewDetailsListCostChangePage;
+import com.lavante.sim.supplier.pageobjects.Agreements.ListCostChangePage;
+import com.lavante.sim.supplier.pageobjects.Items.CreateItemPage;
+import com.lavante.sim.supplier.pageobjects.Items.SupplierItemSearch;
+import com.lavante.sim.customer.pageobjects.Campaign.CampaignAdvancedSearch;
+import com.lavante.sim.customer.pageobjects.Campaign.CampaignBasicSearchPage;
+import com.lavante.sim.customer.pageobjects.Campaign.CampaignPage;
+import com.lavante.sim.customer.pageobjects.Compliance.Addresses.AddressesDetail;
+import com.lavante.sim.customer.pageobjects.Compliance.LegalID.LegalID;
+import com.lavante.sim.customer.pageobjects.Compliance.OFAC.OFACDetails;
+import com.lavante.sim.customer.pageobjects.Compliance.OIG.OIGDetails;
+import com.lavante.sim.customer.pageobjects.Compliance.SAM.SAMDetails;
+
+public class PageInitiator extends LavanteUtils {
+
+	public LoginPage objLoginPage = null;
+	public Myhomepage objMyhomePage = null;
+	public McafeePage objMcafeePage = null;
+	public HomePage objHomePage = null;
+	public DigCertPage objDigCertPage = null;
+	public RecoveryPage objRecoveryPage = null;
+	public NotRegisteredPage objNotRegisteredPage = null;
+	public ForgotPasswordPage objForgotPasswordPage = null;
+	public CustSupViewProfilePage objCustSupViewProfilePage = null;
+	public SupplierSearchPage objSupplierSearchPage = null;
+	public AdvanceSearchPage objAdvanceSearchPage = null;
+	public OFACPage objOFACPage = null;
+	public OIGPage objOIGPage = null;
+	public SAMPage objSAMPage = null;
+	public ManageUsersPage objManageUsersPage = null;
+	public AddSupplierIDTasksPage objaddsupplierIDpage = null;
+	public GmailLoginPage objGmailLoginPage = null;
+	public SimAccountSetupPage objSimAccountSetupPage = null;
+
+	public SimAccountSetupPages objSimAccSetupPages = null;
+	public SimAccRegistrationPage objSimAccRegistrationPage = null;
+	public AddressValidationPage objAddressValidationPage = null;
+	public TasksApprovalPage objtaskapprovalpage = null;
+	public MyAccountPage objMyAccountPage = null;
+	public ManageFilesPage objManageFilesPage = null;
+	public SupplierProfilePage objSupplierProfilePage = null;
+	public TasksApprovalPage objtaskapproval = null;
+
+	// EnhancementScripts PageObject
+	public SimAccountRegistrationPage objSimAccountRegistrationPage = null;
+	public MyLoginpage enobjloginpage = null;
+	public ForgotPwd enobjforgotPwdpage = null;
+	public Myhomepage enobjhomePage = null;
+	public MyAccountPages enMyAccountPages = null;
+
+	// Dashboard
+	public Dashboard enobjdashBoard = null;
+	public ClaimsDashboard objClaimsDashboard = null;
+	public SupplierClaimsDashboard objSupClaimsDashboard = null;
+	public CampaignDashboard objCampaignDashboard = null;
+
+	public OnboardingProgress enobjOnboardingProgress = null;
+	public ExpiringCertifications enObjExpiringCertifications = null;
+	public RegulatoryCompliance objRegulatoryCompliance = null;
+	public SupplierAlertPage objSupplierAlertPage = null;
+	public LayoutPage objLayoutPage = null;
+
+	public SupplierPage enobjsupplierPage = null;
+	public SupplierBasicSearchPage enobjsupplierBasicSearch = null;
+	public SupplierAdvancedSearchPage ensupplierAdvanced = null;
+
+	public InvitenewSupplier enobjInvitenewSupplier = null;
+
+	public AddSupplierERPID enaddSupplierERP = null;
+
+	public ContractManagement encontractManagement = null;
+	public CMAdvancedSearch encontractAdvancedSearch = null;
+	public EditProfContractManagement eneditContractManagement = null;
+
+	public EditProfilePage eneditProfile = null;
+	public EditCompanyProfile eneditCompanyProfile = null;
+	public EditProfEnterprise eneditEnterprise = null;
+	public EditCustomerProfile eneditCustomerProfile = null;
+	public EditProfPaymentInfo eneditPayment = null;
+	public EditProfCertification eneditCertification = null;
+	public EditProfLegalID eneditLegal = null;
+
+	public AddressesDetail enAddressDetail = null;
+	public LegalID enobjLegalID = null;
+	public OFACDetails enOFACdetails = null;
+	public SAMDetails enSAMdetails = null;
+	public OIGDetails enOIGdetails = null;
+
+	public ViewSupplier enviewSupplier = null;
+
+	public UploadFiles enobjuploadFiles = null;
+	public DownloadFiles endownloadFiles = null;
+
+	// TASK TAB
+	public Approval enapproval = null;
+
+	public Invoices enTaskinvoicestoApprve = null;
+	public InvoiceBasicSearch eninvoiceBasicSearch = null;
+	public InvoiceAdvanceSearch enInvoiceAdvanceSearch = null;
+	public InvoicePage eninvoicePage = null;
+	public UploadInvoice enuploadInvoice = null;
+	public SplitInvoices ensplitInvoice = null;
+	public TasksClaimPage objTasksClaimPage = null;
+	public PendingUpdate objPendingUpdatePage = null;
+	public InvoicePendingUpdate objInvoicePendingUpdatePage = null;
+	public TasksCampaignsPage objTasksCampaignsPage = null;
+	public InvoiceQntoAnswer enInvoiceQntoAnswer = null;
+	public PaymentQntoAnswer enPaymentQntoAnswer = null;
+	public TasksTracker enTasksTracker = null;
+	public Reassignment enReassign = null;
+
+	// Transactions
+	public PaymentsPage objPaymentsPage = null;
+	public CreateClaimPage objCreateClaimPage = null;
+	public ClaimsPage enClaimsPage = null;
+	public ClaimsBasicSearch enClaimsBasicSearch = null;
+	public ClaimsAdvanceSearch enClaimsAdvanceSearch = null;
+	public ViewClaimsPage objViewClaimsPage = null;
+	public ViewPaymentsPage objViewPaymentsPage = null;
+	public ViewInvoicePage objViewInvoicePage = null;
+	public NCHInvoice objNCHInvoicePage = null;
+	public ViewNCHPage objViewNCHPage = null;
+	public PromoAllowancePage objPromoPage = null;
+
+	// Message Tab
+	public Message enMessage = null;
+
+	// Admin Role
+	public Properties enprop = null;
+	public BackGroundTasks enBackgroundTask = null;
+	public Cache enCache = null;
+	public CustomerSetup enCustomerSetup = null;
+
+	// Admin Tab
+	public UsersPage objUserPage = null;
+	public ManageAddressesPage objManageAddressesPage = null;
+	public SuppliergroupPage objSupplierGroupPage = null;
+	public DivisionPage objDivisionPage = null;
+	public PaymentCenterPage objPaymentCenterPage = null;
+	public PaymentCenterMappingPage objPayCntrMapPage = null;
+	public PaymentTermsPage objPaymentTermPage = null;
+	public DataIngestionSummaryPage objDataIngestionSummaryPage = null;
+	public GLCodePage glcode = null;
+	public GLCodeMappingPage glcodemapping = null;
+	public ClaimResolutionPage objClaimResolutionPage = null;
+	public ClaimTypeMappingPage objClaimTypeMapPage = null;
+	public ClaimTypePage objClaimTypePage = null;
+	public Departments objDepartments = null;
+	public DealLocationMapping objDealLocation = null;
+
+	public ReportUserDefined enReportuserDefined = null;
+
+	// Supplier login
+	public SupplierHomePage enObjSupplierHomePage = null;
+	public SupplierItemSearch objItemSearch = null;
+	public CreateItemPage objItemPage = null;
+	public CreateCostChangePage objCostChangePage = null;
+	public ListCostChangePage objListCostChangePage = null;
+	public ViewDetailsListCostChangePage objListCostViewPage = null;
+
+	// Campaign
+	public CampaignBasicSearchPage objCampaignBasicSearchPage = null;
+	public CampaignAdvancedSearch objcampaignAdvancedSearchPage = null;
+	public CampaignPage objCampaignPage = null;
+
+	public void initiate() {
+
+		// Home
+
+		objSupplierAlertPage = PageFactory.initElements(driver, SupplierAlertPage.class);
+		objLayoutPage = PageFactory.initElements(driver, LayoutPage.class);
+
+		objSimAccSetupPages = PageFactory.initElements(driver, SimAccountSetupPages.class);
+		objSimAccRegistrationPage = PageFactory.initElements(driver, SimAccRegistrationPage.class);
+		objHomePage = PageFactory.initElements(driver, HomePage.class);
+		objGmailLoginPage = PageFactory.initElements(driver, GmailLoginPage.class);
+		objLoginPage = PageFactory.initElements(driver, LoginPage.class);
+		objMcafeePage = PageFactory.initElements(driver, McafeePage.class);
+		objForgotPasswordPage = PageFactory.initElements(driver, ForgotPasswordPage.class);
+		objDigCertPage = PageFactory.initElements(driver, DigCertPage.class);
+		objRecoveryPage = PageFactory.initElements(driver, RecoveryPage.class);
+		objNotRegisteredPage = PageFactory.initElements(driver, NotRegisteredPage.class);
+		objAdvanceSearchPage = PageFactory.initElements(driver, AdvanceSearchPage.class);
+		objOFACPage = PageFactory.initElements(driver, OFACPage.class);
+		objOIGPage = PageFactory.initElements(driver, OIGPage.class);
+		objSAMPage = PageFactory.initElements(driver, SAMPage.class);
+		objManageUsersPage = PageFactory.initElements(driver, ManageUsersPage.class);
+		objaddsupplierIDpage = PageFactory.initElements(driver, AddSupplierIDTasksPage.class);
+		objGmailLoginPage = PageFactory.initElements(driver, GmailLoginPage.class);
+		objSimAccountSetupPage = PageFactory.initElements(driver, SimAccountSetupPage.class);
+		objSimAccRegistrationPage = PageFactory.initElements(driver, SimAccRegistrationPage.class);
+		objAddressValidationPage = PageFactory.initElements(driver, AddressValidationPage.class);
+		objtaskapprovalpage = PageFactory.initElements(driver, TasksApprovalPage.class);
+		objMyAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
+		objManageFilesPage = PageFactory.initElements(driver, ManageFilesPage.class);
+		objSupplierProfilePage = PageFactory.initElements(driver, SupplierProfilePage.class);
+		objtaskapproval = PageFactory.initElements(driver, TasksApprovalPage.class);
+
+		// Enhancement Scripts PageObject
+		objSimAccountRegistrationPage = PageFactory.initElements(driver, SimAccountRegistrationPage.class);
+		enobjloginpage = PageFactory.initElements(driver, MyLoginpage.class);
+		enobjforgotPwdpage = PageFactory.initElements(driver, ForgotPwd.class);
+		enMyAccountPages = PageFactory.initElements(driver, MyAccountPages.class);
+		enobjhomePage = PageFactory.initElements(driver, Myhomepage.class);
+
+		// Dashboard
+		objClaimsDashboard = PageFactory.initElements(driver, ClaimsDashboard.class);
+		;
+		objSupClaimsDashboard = PageFactory.initElements(driver, SupplierClaimsDashboard.class);
+		objCampaignDashboard = PageFactory.initElements(driver, CampaignDashboard.class);
+		enobjdashBoard = PageFactory.initElements(driver, Dashboard.class);
+		enobjOnboardingProgress = PageFactory.initElements(driver, OnboardingProgress.class);
+		enObjExpiringCertifications = PageFactory.initElements(driver, ExpiringCertifications.class);
+		objRegulatoryCompliance = PageFactory.initElements(driver, RegulatoryCompliance.class);
+		enobjuploadFiles = PageFactory.initElements(driver, UploadFiles.class);
+		enobjsupplierBasicSearch = PageFactory.initElements(driver, SupplierBasicSearchPage.class);
+		ensupplierAdvanced = PageFactory.initElements(driver, SupplierAdvancedSearchPage.class);
+		enobjsupplierPage = PageFactory.initElements(driver, SupplierPage.class);
+		enobjInvitenewSupplier = PageFactory.initElements(driver, InvitenewSupplier.class);
+		enaddSupplierERP = PageFactory.initElements(driver, AddSupplierERPID.class);
+
+		encontractManagement = PageFactory.initElements(driver, ContractManagement.class);
+
+		encontractAdvancedSearch = PageFactory.initElements(driver, CMAdvancedSearch.class);
+		eneditContractManagement = PageFactory.initElements(driver, EditProfContractManagement.class);
+		eneditProfile = PageFactory.initElements(driver, EditProfilePage.class);
+		eneditCompanyProfile = PageFactory.initElements(driver, EditCompanyProfile.class);
+		eneditEnterprise = PageFactory.initElements(driver, EditProfEnterprise.class);
+		eneditCustomerProfile = PageFactory.initElements(driver, EditCustomerProfile.class);
+		eneditPayment = PageFactory.initElements(driver, EditProfPaymentInfo.class);
+		eneditCertification = PageFactory.initElements(driver, EditProfCertification.class);
+		eneditLegal = PageFactory.initElements(driver, EditProfLegalID.class);
+
+		enAddressDetail = PageFactory.initElements(driver, AddressesDetail.class);
+		enobjLegalID = PageFactory.initElements(driver, LegalID.class);
+		enOFACdetails = PageFactory.initElements(driver, OFACDetails.class);
+		enSAMdetails = PageFactory.initElements(driver, SAMDetails.class);
+		enOIGdetails = PageFactory.initElements(driver, OIGDetails.class);
+
+		enviewSupplier = PageFactory.initElements(driver, ViewSupplier.class);
+
+		// Task Page
+		enapproval = PageFactory.initElements(driver, Approval.class);
+		enTaskinvoicestoApprve = PageFactory.initElements(driver, Invoices.class);
+		eninvoiceBasicSearch = PageFactory.initElements(driver, InvoiceBasicSearch.class);
+		enInvoiceAdvanceSearch = PageFactory.initElements(driver, InvoiceAdvanceSearch.class);
+		eninvoicePage = PageFactory.initElements(driver, InvoicePage.class);
+		objTasksClaimPage = PageFactory.initElements(driver, TasksClaimPage.class);
+		objPendingUpdatePage = PageFactory.initElements(driver, PendingUpdate.class);
+		objInvoicePendingUpdatePage = PageFactory.initElements(driver, InvoicePendingUpdate.class);
+		objTasksCampaignsPage = PageFactory.initElements(driver, TasksCampaignsPage.class);
+		enInvoiceQntoAnswer = PageFactory.initElements(driver, InvoiceQntoAnswer.class);
+		enPaymentQntoAnswer = PageFactory.initElements(driver, PaymentQntoAnswer.class);
+		enTasksTracker = PageFactory.initElements(driver, TasksTracker.class);
+
+		endownloadFiles = PageFactory.initElements(driver, DownloadFiles.class);
+		enuploadInvoice = PageFactory.initElements(driver, UploadInvoice.class);
+
+		objManageAddressesPage = PageFactory.initElements(driver, ManageAddressesPage.class);
+		objUserPage = PageFactory.initElements(driver, UsersPage.class);
+		objSupplierGroupPage = PageFactory.initElements(driver, SuppliergroupPage.class);
+		objDivisionPage = PageFactory.initElements(driver, DivisionPage.class);
+		objPaymentCenterPage = PageFactory.initElements(driver, PaymentCenterPage.class);
+		objPayCntrMapPage = PageFactory.initElements(driver, PaymentCenterMappingPage.class);
+		objPaymentTermPage = PageFactory.initElements(driver, PaymentTermsPage.class);
+		objSimAccountSetupPage = PageFactory.initElements(driver, SimAccountSetupPage.class);
+
+		// Transactions
+
+		objPaymentsPage = PageFactory.initElements(driver, PaymentsPage.class);
+		objCreateClaimPage = PageFactory.initElements(driver, CreateClaimPage.class);
+		enClaimsPage = PageFactory.initElements(driver, ClaimsPage.class);
+		enClaimsBasicSearch = PageFactory.initElements(driver, ClaimsBasicSearch.class);
+		enClaimsAdvanceSearch = PageFactory.initElements(driver, ClaimsAdvanceSearch.class);
+		objViewClaimsPage = PageFactory.initElements(driver, ViewClaimsPage.class);
+		objViewPaymentsPage = PageFactory.initElements(driver, ViewPaymentsPage.class);
+		objViewInvoicePage = PageFactory.initElements(driver, ViewInvoicePage.class);
+		objNCHInvoicePage = PageFactory.initElements(driver, NCHInvoice.class);
+		objViewNCHPage = PageFactory.initElements(driver, ViewNCHPage.class);
+		objPromoPage = PageFactory.initElements(driver, PromoAllowancePage.class);
+
+		// Message Tab
+		enMessage = PageFactory.initElements(driver, Message.class);
+
+		// Admin
+		objDataIngestionSummaryPage = PageFactory.initElements(driver, DataIngestionSummaryPage.class);
+		objClaimResolutionPage = PageFactory.initElements(driver, ClaimResolutionPage.class);
+		glcode = PageFactory.initElements(driver, GLCodePage.class);
+		glcodemapping = PageFactory.initElements(driver, GLCodeMappingPage.class);
+		objClaimTypeMapPage = PageFactory.initElements(driver, ClaimTypeMappingPage.class);
+		objClaimTypePage = PageFactory.initElements(driver, ClaimTypePage.class);
+		objDepartments = PageFactory.initElements(driver, Departments.class);
+		ensplitInvoice = PageFactory.initElements(driver, SplitInvoices.class);
+		objDealLocation = PageFactory.initElements(driver, DealLocationMapping.class);
+
+		enReassign = PageFactory.initElements(driver, Reassignment.class);
+
+		enReportuserDefined = PageFactory.initElements(driver, ReportUserDefined.class);
+
+		objSupplierSearchPage = PageFactory.initElements(driver, SupplierSearchPage.class);
+		// Supplier Login
+		enObjSupplierHomePage = PageFactory.initElements(driver, SupplierHomePage.class);
+		objItemSearch = PageFactory.initElements(driver, SupplierItemSearch.class);
+		objItemPage = PageFactory.initElements(driver, CreateItemPage.class);
+		objCostChangePage = PageFactory.initElements(driver, CreateCostChangePage.class);
+		objListCostChangePage = PageFactory.initElements(driver, ListCostChangePage.class);
+		objListCostViewPage = PageFactory.initElements(driver, ViewDetailsListCostChangePage.class);
+
+		objCampaignBasicSearchPage = PageFactory.initElements(driver, CampaignBasicSearchPage.class);
+		objcampaignAdvancedSearchPage = PageFactory.initElements(driver, CampaignAdvancedSearch.class);
+		objCampaignPage = PageFactory.initElements(driver, CampaignPage.class);
+
+		// Admin
+		enprop = PageFactory.initElements(driver, Properties.class);
+		enBackgroundTask = PageFactory.initElements(driver, BackGroundTasks.class);
+		enCache = PageFactory.initElements(driver, Cache.class);
+		enCustomerSetup = PageFactory.initElements(driver, CustomerSetup.class);
+
+		System.out.println("INTITATED");
+	}
+
+}

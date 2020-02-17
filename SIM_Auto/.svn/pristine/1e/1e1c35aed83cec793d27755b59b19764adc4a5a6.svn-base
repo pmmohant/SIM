@@ -1,0 +1,130 @@
+#Title
+expSimRegistrationPageTitle=Lavante SIM
+#Expected Text
+expDefaultCountry=United States of America
+expTIN=Tax Identification Number [TIN]:
+#ID
+tinForThatCountry=tinForThatCountry
+companyLegalNameForNonUSCountry=companyLegalNameForThatCountry
+regClearBtn=reset_button
+qst=qst
+salesTaxId=salesTaxId
+province=province
+department=department
+countryName=country
+contactName=contactName
+companyLegalName=companyLegalName
+tinField=tin
+confirm=confirm
+password=password
+comLegalNameForCanada=companyLegalNameForCanada
+#class
+expClassLabelName=required
+
+#xpath
+#Registration
+countryHelpLink=//a[@class='help_text']
+companyLegalIDHelpLink=//a[@class='help_text legalInfoHelp']
+
+regContactName=//form[contains(@id,'accountRegistrationForm')]/div/table/tbody/tr/td/label[contains(@for,'contactName')]
+regCountryName=//form[contains(@id,'accountRegistrationForm')]/div/table/tbody/tr/td/label[contains(@for,'country')]
+regCompanyLegalName=//form[contains(@id,'accountRegistrationForm')]/fieldset[1]/table/tbody[2]/tr[1]/td[1]/label[contains(@for,'companyLegalName')]
+regTinId=//*[@id='legalIdentifierType']//label[@for='taxIDType']
+#//form[contains(@id,'accountRegistrationForm')]//label[contains(@for,'tin')]
+#//form[contains(@id,'accountRegistrationForm')]/fieldset[1]/table/tbody[2]/tr[2]/td[1]/label[contains(@for,'tin')]
+regConfirmRadioBtn=//form[contains(@id,'accountRegistrationForm')]/p/label[contains(@for,'confirm')]
+regUpdateCountryName=//form[contains(@id,'accountRegistrationForm')]/fieldset[1]/legend/span[contains(@class,'country_name highlight_green')]
+regUpdateCountryNameNonUS=//form[contains(@id,'accountRegistrationForm')]/fieldset[2]/legend/span[contains(@class,'country_name highlight_green')]
+regDisplayProvince=//form[contains(@id,'accountRegistrationForm')]/div/table[2]/tbody/tr[4][contains(@class,'canada-only recovery_supplier')][contains(@style,'display: table-row;')]
+regProvince=//form[contains(@id,'accountRegistrationForm')]/div/table[2]/tbody[1]/tr[4]/td[1]/label[contains(@for,'province')]
+regDisplayNonUS=//form[contains(@id,'accountRegistrationForm')]/fieldset[2][contains(@class,'non-us recovery_supplier')][contains(@style,'display: block;')]
+regNonUSLegalID=//form[contains(@id,'accountRegistrationForm')]/fieldset[2]/table/tbody[1]/tr[3]/td[1]/label
+regUSCanadaTableDis=//form[contains(@id,'accountRegistrationForm')]/fieldset[1][contains(@class,'us-only recovery_supplier')][contains(@style,'display: block;')]
+regRowRecordsOfUS=//form[contains(@id,'accountRegistrationForm')]/fieldset[1]/table/tbody[2]/tr
+regDisplayCanada=//form[contains(@id,'accountRegistrationForm')]/fieldset[1]/table/tbody[1][contains(@class,'canada-only')][contains(@style,'display: table-row-group;')]
+regRowRecordsOfCanada=//form[contains(@id,'accountRegistrationForm')]/fieldset[1]/table/tbody[1]/tr
+regRowRecordsOfNonUSCanada=//form[contains(@id,'accountRegistrationForm')]/fieldset[2]/table/tbody[1]/tr
+regAnyUSIncomeTableData=//form[contains(@id,'accountRegistrationForm')]/fieldset[1]/table/tbody[2][contains(@class,'US_income')][contains(@style,'display: table-row-group;')]
+
+regAnyUSIncomeRadioBtnYes=//input[contains(@id,'US_income_yes')]
+regAnyUSIncomeRadioBtnNo=//input[contains(@id,'US_income_no')]
+
+regAnyUSIncomeRadioBtnYes2=//input[contains(@id,'US_income_yes2')]
+regAnyUSIncomeRadioBtnNo2=//input[contains(@id,'US_income_no2')]
+regCompanyLegalNameNonUS=//form[contains(@id,'accountRegistrationForm')]/fieldset[2]/table/tbody[2]/tr[1]/td[1]/label[contains(@for,'companyLegalNameNonUS')]
+regTinNonUS=//*[@id='usIncomeLegalIdentifierType']//label[@for='usIncomeTaxIDType']
+#//form[contains(@id,'accountRegistrationForm')]/fieldset[2]/table/tbody[2]/tr[2]/td[1]/label[contains(@for,'tinNonUS')]
+
+regLagalIDTaxIDBtnYes=//form[contains(@id,'accountRegistrationForm')]/fieldset[2][contains(@class,'non-us recovery_supplier')]/table/tbody/tr[3]/td[2]/input[contains(@id,'VAT_yes')]
+regLagalIDTaxIDBtnNo=//form[contains(@id,'accountRegistrationForm')]/fieldset[2][contains(@class,'non-us recovery_supplier')]/table/tbody/tr[3]/td[2]/input[contains(@id,'VAT_no')]
+regLegalIDFieldDis=//form[contains(@id,'accountRegistrationForm')]/fieldset[2]/table/tbody[1]/tr[contains(@id,'AllCountryList')][contains(@style,'display: table-row;')]
+regLegalIDFieldLabel=//form[contains(@id,'accountRegistrationForm')]/fieldset[2]/table/tbody[1]/tr[contains(@id,'AllCountryList')]/td/label[contains(@for,'tinForThatCountry')]
+regLegalIDBtnCanadaYes=//form[contains(@id,'accountRegistrationForm')]/fieldset[1][contains(@class,'us-only recovery_supplier')]/table/tbody/tr[2]/td[2]/input[contains(@id,'VAT_yes')]
+regLegalIDBtnCanadaNo=//form[contains(@id,'accountRegistrationForm')]/fieldset[1][contains(@class,'us-only recovery_supplier')]/table/tbody/tr[2]/td[2]/input[contains(@id,'VAT_no')]
+
+checkBoxPopupHeader=//span[contains(@id,'ui-id')][contains(@class,'ui-dialog-title')]
+checkBoxPopupIFrame=//iframe[contains(@class,'popup_iframe ui-dialog-content ui-widget-content')]
+checkBoxPopupOkBtn=button[class='button button_green'][type='submit']
+checkBoxPopupErrorMsg=//span[contains(@class,'error')]
+
+errCheckBoxBtn=.//*[@id='accountRegistrationForm']/p[2]/span
+errLegalID_TaxID=.//*[@id='confirm_vat_other']/td[2]/span
+errName_BusinessNameNonUS=.//*[@id='accountRegistrationForm']/fieldset[2]/table/tbody[1]/tr[1]/td[2]/span
+errName_BusinessNameCanada=.//*[@id='accountRegistrationForm']/fieldset[1]/table/tbody[1]/tr[1]/td[2]/span
+errLegalID_TaxIDCanada=.//*[@id='legal_id_only']/td[2]/span
+errProvince=.//*[@id='accountRegistrationForm']/div[1]/table[2]/tbody/tr[4]/td[2]/span
+errNameField=.//*[@id='accountRegistrationForm']/div[1]/table[1]/tbody/tr[1]/td[2]/span
+errCountryField=.//*[@id='accountRegistrationForm']/div[1]/table[1]/tbody/tr[4]/td[2]/span
+errName_BusinessNameFieldForUS=.//*[@id='accountRegistrationForm']/fieldset[1]/table/tbody[2]/tr[1]/td[2]/span
+errTaxIDField=.//*[@id='accountRegistrationForm']/fieldset[1]/table/tbody[2]/tr[2]/td[2]/span
+
+#CSS
+btnAcceptSubmit=input[class='button_green'][type='submit']
+regNextBtn=//*[@id='accountRegistrationForm']//input[contains(@type,'submit')]
+
+#LinkS
+linkTextTermsCondition=Terms And Conditions.
+#Attribute
+regClass=class
+
+
+
+#Expected Label Text
+expBusinessNameLabelTxt=Name/Business Name (As shown on your income tax return)
+expTINIDLabelTxt=Taxpayer Identification Number [TIN] Type:
+#Tax Identification Number [TIN]:
+
+# Expected error messages for required mandate fields for test case SimAccRegistrationTC0002:#
+nameField='Name' cannot be left blank.
+countryField='Country' cannot be left blank.
+name_BusinessNameField=Name/Business Name (As shown on your income tax return) field cannot be left blank.
+taxIDField='Tax Identification Number' cannot be left blank.
+checkBoxField=Certify the accuracy of information provided by you by selecting the above checkbox
+provinceField='Province' cannot be left blank.
+legalID_TaxIDField=You need to specify a response to this question.
+eSignatureHeader=Electronic Signature
+#eSignatureHeader=
+
+#
+thanksforreg=//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-front dialog ui-dialog-buttons']/div[1]/span
+message=.//*[@class='dialog undefined ui-dialog-content ui-widget-content']
+exp_gratitude=Thank you, your account has been successfully created
+OKbtnThanks=//button[@class='button_green'][@type='button']
+
+#Expected Messages
+expCountryHelpLinkMsg=If you are a corporation, enter a country of incorporation
+expCompanyLegalIDHelpLinkMsg=A Legal ID is a unique number provided by the governments of various countries as a means of tracking their citizens
+
+
+
+
+
+
+
+
+
+
+
+
+
+

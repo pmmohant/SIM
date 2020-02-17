@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestSuite" time="382.945" tests="19" errors="0" skipped="0" failures="12">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_40\jre\bin"/>
+    <property name="java.vm.version" value="25.40-b25"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="maven.multiModuleProjectDirectory" value="D:\Recovery_Auto_Workspace\Recovery_Automation"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="D:\Recovery_Auto_Workspace\Recovery_Automation"/>
+    <property name="java.runtime.version" value="1.8.0_40-b26"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_40\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\TALLUR~1.SRI\AppData\Local\Temp\"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 7"/>
+    <property name="classworlds.conf" value="D:\Recovery_Auto_Workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf4090164153717113217.tmp"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_40\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jdk1.8.0_40/bin/../jre/bin/server;C:/Program Files/Java/jdk1.8.0_40/bin/../jre/bin;C:/Program Files/Java/jdk1.8.0_40/bin/../jre/lib/amd64;C:\Program Files\Java\jdk1.8.0_40\bin;C:\Program Files\Java\jdk1.8.0_40\jre\bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\TortoiseSVN\bin;D:\Softwares\maven\apache-maven-3.0.4-bin\apache-maven-3.0.4\bin;C:\Program Files (x86)\Skype\Phone\;D:\Selenium_Softwares\eclipse-mars\eclipse-java-mars-R-win32-x86_64;;."/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="6.1"/>
+    <property name="user.home" value="C:\Users\tallury.srikanth"/>
+    <property name="user.timezone" value="Asia/Calcutta"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="user.name" value="tallury.srikanth"/>
+    <property name="java.class.path" value="/D:/Selenium_Softwares/eclipse-mars/eclipse-java-mars-R-win32-x86_64/plugins/org.eclipse.m2e.maven.runtime_1.6.2.20150902-0001/jars/plexus-classworlds-2.5.2.jar"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_40\jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B test"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_40"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_40\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_40\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_40\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_40\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_40\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_40\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_40\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_40\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_40\jre\classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="D:\Recovery_Auto_Workspace\Recovery_Automation\EMBEDDED"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase name="verifyDashBoardClaims" classname="lavante.recovery.testsuites.SanityTestSuite" time="14.945"/>
+  <testcase name="verifyDashBoardSupplier" classname="lavante.recovery.testsuites.SanityTestSuite" time="31.354"/>
+  <testcase name="verifyDashBoardCompliance" classname="lavante.recovery.testsuites.SanityTestSuite" time="16.013"/>
+  <testcase name="verifyauditOutboundPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="17.774"/>
+  <testcase name="verifyauditInboundPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="55.196">
+    <failure message="Fail: &apos;correspondenceTable&apos; is not displayedElement not found in the cache - perhaps the page has changed since it was looked up&#10;For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html&#10;Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;&#10;System info: host: &apos;WSR12LAVAQA03&apos;, ip: &apos;192.168.21.79&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;&#10;Driver info: driver.version: unknown&#10;Command duration or timeout: 10.60 seconds&#10;For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html&#10;Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;&#10;System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;&#10;Driver info: org.openqa.selenium.remote.RemoteWebDriver&#10;Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]&#10;Session ID: 9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f" type="java.lang.AssertionError">java.lang.AssertionError: Fail: 'correspondenceTable' is not displayedElement not found in the cache - perhaps the page has changed since it was looked up
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA03', ip: '192.168.21.79', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: driver.version: unknown
+Command duration or timeout: 10.60 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:239)
+	at lavante.recovery.pageobjects.Audit.AuditInboundPage.verifyCorrespondenceTable(AuditInboundPage.java:143)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyauditInboundPage(SanityTestSuite.java:198)
+</failure>
+    <system-out><![CDATA[Pass: 'inboundLink' is clicked
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine
+Pass: 'inboundLink' is displayed
+Pass: 'inboundDocumentStatistics' is displayed
+Pass: 'inboundDocumentSummary' is displayed
+Pass: 'recognizedfax' is clicked
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine
+Pass: 'statements' is clicked
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine
+Pass: 'verifications' is clicked
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine
+Pass: 'statements' is displayed
+Pass: 'verificationsTable' is displayed
+Pass: 'checks' is clicked
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine
+Pass: 'checksTable' is displayed
+Pass: 'correspondence' is clicked
+Pass: 'correspondenceTable' is displayed
+Pass: 'duplicate' is clicked
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine
+Pass: 'duplicateTable' is displayed
+Pass: 'profiles' is clicked
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#recognized Page is working fine
+Pass: 'profilesTable' is displayed
+Pass: 'unrecognizedfax' is clicked
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine
+Pass: 'statements' is clicked
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine
+Pass: 'verifications' is clicked
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine
+Pass: 'statements' is displayed
+Pass: 'verificationsTable' is displayed
+Pass: 'checks' is clicked
+Pass: https://recoveryqa39.lavante.com/recovery/inbound.lvp#unrecognized Page is working fine
+Pass: 'checksTable' is displayed
+Pass: 'correspondence' is clicked
+Fail: 'correspondenceTable' is not displayedElement not found in the cache - perhaps the page has changed since it was looked up
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA03', ip: '192.168.21.79', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: driver.version: unknown
+Command duration or timeout: 10.60 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f
+]]></system-out>
+  </testcase>
+  <testcase name="verifycontactEntryPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="8.203"/>
+  <testcase name="verifyBatchingPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="24.68"/>
+  <testcase name="verifyInvoicePage" classname="lavante.recovery.testsuites.SanityTestSuite" time="22.025">
+    <failure message="Fail: &apos;invoicesTable&apos; is not displayedUnable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#Invoice_List tr td&quot;}&#10;For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html&#10;Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;&#10;System info: host: &apos;WSR12LAVAQA03&apos;, ip: &apos;192.168.21.79&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;&#10;Driver info: driver.version: unknown&#10;Command duration or timeout: 10.99 seconds&#10;For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html&#10;Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;&#10;System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;&#10;Driver info: org.openqa.selenium.remote.RemoteWebDriver&#10;Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]&#10;Session ID: 9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f&#10;*** Element info: {Using=css selector, value=#Invoice_List tr td}" type="java.lang.AssertionError">java.lang.AssertionError: Fail: 'invoicesTable' is not displayedUnable to locate element: {"method":"css selector","selector":"#Invoice_List tr td"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA03', ip: '192.168.21.79', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: driver.version: unknown
+Command duration or timeout: 10.99 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f
+*** Element info: {Using=css selector, value=#Invoice_List tr td}
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:239)
+	at lavante.recovery.pageobjects.Audit.AuditInvoicePage.verifyinvoicesTable(AuditInvoicePage.java:29)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyInvoicePage(SanityTestSuite.java:280)
+</failure>
+    <system-out><![CDATA[Pass: 'invoiceLink' is clicked
+Pass: https://recoveryqa39.lavante.com/recovery/invoicingPage.lvp Page is working fine
+Info: Switched successfully to frame :0
+Fail: 'invoicesTable' is not displayedUnable to locate element: {"method":"css selector","selector":"#Invoice_List tr td"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA03', ip: '192.168.21.79', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: driver.version: unknown
+Command duration or timeout: 10.99 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f
+*** Element info: {Using=css selector, value=#Invoice_List tr td}
+]]></system-out>
+  </testcase>
+  <testcase name="verifyPossibleDupesPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="12.205">
+    <failure message="Fail: &apos;possibleDupesLink&apos; is not displayed" type="java.lang.AssertionError">java.lang.AssertionError: Fail: 'possibleDupesLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:220)
+	at lavante.recovery.pageobjects.Audit.AuditPossibleDupesPage.verifypossibleDupesLink(AuditPossibleDupesPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyPossibleDupesPage(SanityTestSuite.java:310)
+</failure>
+    <system-out><![CDATA[Fail: 'possibleDupesLink' is not displayed
+]]></system-out>
+  </testcase>
+  <testcase name="verifySummaryPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="15.302">
+    <failure message="Fail: &apos;summaryLink&apos; is not displayed" type="java.lang.AssertionError">java.lang.AssertionError: Fail: 'summaryLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:220)
+	at lavante.recovery.pageobjects.Audit.AuditSummaryPage.verifysummaryLink(AuditSummaryPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifySummaryPage(SanityTestSuite.java:333)
+</failure>
+    <system-out><![CDATA[Fail: 'summaryLink' is not displayed
+]]></system-out>
+  </testcase>
+  <testcase name="verifyCheckRegistryPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="15.731">
+    <failure message="Fail: &apos;chkRegLink&apos; is not displayed" type="java.lang.AssertionError">java.lang.AssertionError: Fail: 'chkRegLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:220)
+	at lavante.recovery.pageobjects.Audit.AuditCheckRegistryPage.verifychkRegLink(AuditCheckRegistryPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyCheckRegistryPage(SanityTestSuite.java:349)
+</failure>
+    <system-out><![CDATA[Fail: 'chkRegLink' is not displayed
+]]></system-out>
+  </testcase>
+  <testcase name="verifyClaimsPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="11.863"/>
+  <testcase name="verifyInvoicesPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="16.014">
+    <failure message="Fail: &apos;invoiceSummaryTable&apos; is not displayedUnable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#invoiceSummary tr td&quot;}&#10;For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html&#10;Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593c&apos;, time: &apos;2016-02-11 19:06:42&apos;&#10;System info: host: &apos;WSR12LAVAQA03&apos;, ip: &apos;192.168.21.79&apos;, os.name: &apos;Windows Server 2012 R2&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_40&apos;&#10;Driver info: driver.version: unknown&#10;Command duration or timeout: 10.51 seconds&#10;For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html&#10;Build info: version: &apos;2.52.0&apos;, revision: &apos;4c2593cfc3689a7fcd7be52549167e5ccc93ad28&apos;, time: &apos;2016-02-11 11:22:43&apos;&#10;System info: host: &apos;WLW7-TALLURYS&apos;, ip: &apos;192.168.21.55&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_40&apos;&#10;Driver info: org.openqa.selenium.remote.RemoteWebDriver&#10;Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]&#10;Session ID: 9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f&#10;*** Element info: {Using=css selector, value=#invoiceSummary tr td}" type="java.lang.AssertionError">java.lang.AssertionError: Fail: 'invoiceSummaryTable' is not displayedUnable to locate element: {"method":"css selector","selector":"#invoiceSummary tr td"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA03', ip: '192.168.21.79', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: driver.version: unknown
+Command duration or timeout: 10.51 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f
+*** Element info: {Using=css selector, value=#invoiceSummary tr td}
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:239)
+	at lavante.recovery.pageobjects.InvoicesPage.verifyinvoiceSummaryTable(InvoicesPage.java:29)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyInvoicesPage(SanityTestSuite.java:368)
+</failure>
+    <system-out><![CDATA[Pass: 'invoicesLink' is clicked
+Pass: https://recoveryqa39.lavante.com/recovery/invoice.lvp Page is working fine
+Fail: 'invoiceSummaryTable' is not displayedUnable to locate element: {"method":"css selector","selector":"#invoiceSummary tr td"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA03', ip: '192.168.21.79', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: driver.version: unknown
+Command duration or timeout: 10.51 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=46.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webdriver.remote.sessionid=9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 9b1c225b-7bd6-493f-b5f0-9eb60cf01a3f
+*** Element info: {Using=css selector, value=#invoiceSummary tr td}
+]]></system-out>
+  </testcase>
+  <testcase name="verifyReportsPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="14.795">
+    <failure message="Fail: &apos;reportsLink&apos; is not displayed" type="java.lang.AssertionError">java.lang.AssertionError: Fail: 'reportsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:220)
+	at lavante.recovery.pageobjects.ReportsPage.verifyreportsLink(ReportsPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyReportsPage(SanityTestSuite.java:382)
+</failure>
+    <system-out><![CDATA[Fail: 'reportsLink' is not displayed
+]]></system-out>
+  </testcase>
+  <testcase name="verifySetupPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="15.323">
+    <failure message="Fail: &apos;configurationLink&apos; is not displayed" type="java.lang.AssertionError">java.lang.AssertionError: Fail: 'configurationLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:220)
+	at lavante.recovery.pageobjects.Configuration.Setup.AuditPage.verifyconfigurationLink(AuditPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifySetupPage(SanityTestSuite.java:394)
+</failure>
+    <system-out><![CDATA[Fail: 'configurationLink' is not displayed
+]]></system-out>
+  </testcase>
+  <testcase name="verifyauditStatisticsAssignmentsPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="19.769">
+    <failure message="Fail: &apos;assignmentsLink&apos; is not displayed" type="java.lang.AssertionError">java.lang.AssertionError: Fail: 'assignmentsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:220)
+	at lavante.recovery.pageobjects.Assignments.HoldsPage.verifyAssignmentsLink(HoldsPage.java:18)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyauditStatisticsAssignmentsPage(SanityTestSuite.java:526)
+</failure>
+    <system-out><![CDATA[Fail: 'assignmentsLink' is not displayed
+]]></system-out>
+  </testcase>
+  <testcase name="verifyHoldsAssignmentsPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="19.804">
+    <failure message="Fail: &apos;holdsLink&apos; is not displayed" type="java.lang.AssertionError">java.lang.AssertionError: Fail: 'holdsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:220)
+	at lavante.recovery.pageobjects.Assignments.HoldsPage.verifyHoldsLink(HoldsPage.java:28)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyHoldsAssignmentsPage(SanityTestSuite.java:539)
+</failure>
+    <system-out><![CDATA[Fail: 'holdsLink' is not displayed
+]]></system-out>
+  </testcase>
+  <testcase name="verifyCreditsAssignmentsPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="20.042">
+    <failure message="Fail: &apos;creditsLink&apos; is not displayed" type="java.lang.AssertionError">java.lang.AssertionError: Fail: 'creditsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:220)
+	at lavante.recovery.pageobjects.Assignments.CreditsPage.verifycreditsLink(CreditsPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyCreditsAssignmentsPage(SanityTestSuite.java:550)
+</failure>
+    <system-out><![CDATA[Fail: 'creditsLink' is not displayed
+]]></system-out>
+  </testcase>
+  <testcase name="verifyStatementsAssignmentsPage" classname="lavante.recovery.testsuites.SanityTestSuite" time="31.907">
+    <failure message="Fail: &apos;statementsLink&apos; is not displayed" type="java.lang.AssertionError">java.lang.AssertionError: Fail: 'statementsLink' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:23)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:220)
+	at lavante.recovery.pageobjects.Assignments.StatementsPage.verifyStatementsLink(StatementsPage.java:19)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyStatementsAssignmentsPage(SanityTestSuite.java:562)
+</failure>
+    <system-out><![CDATA[Fail: 'statementsLink' is not displayed
+]]></system-out>
+  </testcase>
+</testsuite>

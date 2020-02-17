@@ -1,0 +1,112 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 18, Failures: 5, Errors: 0, Skipped: 0, Time elapsed: 416.415 sec <<< FAILURE! - in TestSuite
+verifyauditInboundPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 13.706 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: stale element reference: element is not attached to the page document
+  (Session info: chrome=51.0.2704.84)
+  (Driver info: chromedriver=2.9.248315,platform=Windows NT 6.3 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 123 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA01', ip: '192.168.21.81', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, chrome={userDataDir=C:\Users\LAVANT~1\AppData\Local\Temp\2\scoped_dir3948_30094}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.84, platform=WIN8_1, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 23dcae4799d94800dc362099deb8842f
+Command duration or timeout: 2.04 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.92', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, chrome={userDataDir=C:\Users\LAVANT~1\AppData\Local\Temp\2\scoped_dir3948_30094}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.84, platform=WIN8_1, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, webdriver.remote.sessionid=e878acb0-5400-4b51-b1f9-95edfa0e6869, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: e878acb0-5400-4b51-b1f9-95edfa0e6869
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.verifyError(seleniumBaseClass.java:386)
+	at lavante.recovery.pageobjects.Audit.AuditInboundPage.verifyVerificationsTable(AuditInboundPage.java:103)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyauditInboundPage(SanityTestSuite.java:163)
+
+verifyInvoicePage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 20.797 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'invoicesTable' is not displayedno such element
+  (Session info: chrome=51.0.2704.84)
+  (Driver info: chromedriver=2.9.248315,platform=Windows NT 6.3 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 10.06 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA01', ip: '192.168.21.81', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, chrome={userDataDir=C:\Users\LAVANT~1\AppData\Local\Temp\2\scoped_dir3948_30094}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.84, platform=WIN8_1, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 23dcae4799d94800dc362099deb8842f
+*** Element info: {Using=css selector, value=#Invoice_List tr td}
+Command duration or timeout: 10.26 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.92', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, chrome={userDataDir=C:\Users\LAVANT~1\AppData\Local\Temp\2\scoped_dir3948_30094}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.84, platform=WIN8_1, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, webdriver.remote.sessionid=e878acb0-5400-4b51-b1f9-95edfa0e6869, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: e878acb0-5400-4b51-b1f9-95edfa0e6869
+*** Element info: {Using=css selector, value=#Invoice_List tr td}
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:216)
+	at lavante.recovery.pageobjects.Audit.AuditInvoicePage.verifyinvoicesTable(AuditInvoicePage.java:28)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyInvoicePage(SanityTestSuite.java:278)
+
+verifyPossibleDupesPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 15.996 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'possDupSummaryTable' is not displayedno such element
+  (Session info: chrome=51.0.2704.84)
+  (Driver info: chromedriver=2.9.248315,platform=Windows NT 6.3 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 10.07 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA01', ip: '192.168.21.81', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, chrome={userDataDir=C:\Users\LAVANT~1\AppData\Local\Temp\2\scoped_dir3948_30094}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.84, platform=WIN8_1, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 23dcae4799d94800dc362099deb8842f
+*** Element info: {Using=css selector, value=#possible_dup_summary tr td a}
+Command duration or timeout: 10.23 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.92', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, chrome={userDataDir=C:\Users\LAVANT~1\AppData\Local\Temp\2\scoped_dir3948_30094}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.84, platform=WIN8_1, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, webdriver.remote.sessionid=e878acb0-5400-4b51-b1f9-95edfa0e6869, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: e878acb0-5400-4b51-b1f9-95edfa0e6869
+*** Element info: {Using=css selector, value=#possible_dup_summary tr td a}
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:216)
+	at lavante.recovery.pageobjects.Audit.AuditPossibleDupesPage.verifypossDupSummaryTable(AuditPossibleDupesPage.java:28)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyPossibleDupesPage(SanityTestSuite.java:311)
+
+verifyReportsPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 17.038 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'runBtn' is not displayed
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.click(seleniumBaseClass.java:198)
+	at lavante.recovery.pageobjects.ReportsPage.verifyrunBtn(ReportsPage.java:54)
+	at lavante.recovery.testsuites.SanityTestSuite.verifyReportsPage(SanityTestSuite.java:385)
+
+verifySetupPage(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 20.251 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: 'addNewBtn' is not displayedstale element reference: element is not attached to the page document
+  (Session info: chrome=51.0.2704.84)
+  (Driver info: chromedriver=2.9.248315,platform=Windows NT 6.3 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 8 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593c', time: '2016-02-11 19:06:42'
+System info: host: 'WSR12LAVAQA01', ip: '192.168.21.81', os.name: 'Windows Server 2012 R2', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, chrome={userDataDir=C:\Users\LAVANT~1\AppData\Local\Temp\2\scoped_dir3948_30094}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.84, platform=WIN8_1, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 23dcae4799d94800dc362099deb8842f
+Command duration or timeout: 91 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.2.92', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, chrome={userDataDir=C:\Users\LAVANT~1\AppData\Local\Temp\2\scoped_dir3948_30094}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, version=51.0.2704.84, platform=WIN8_1, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, webdriver.remote.sessionid=e878acb0-5400-4b51-b1f9-95edfa0e6869, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: e878acb0-5400-4b51-b1f9-95edfa0e6869
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.isDisplayed(seleniumBaseClass.java:216)
+	at lavante.recovery.pageobjects.Configuration.Setup.AuditPage.verifyaddNewBtn(AuditPage.java:64)
+	at lavante.recovery.testsuites.SanityTestSuite.verifySetupPage(SanityTestSuite.java:404)
+

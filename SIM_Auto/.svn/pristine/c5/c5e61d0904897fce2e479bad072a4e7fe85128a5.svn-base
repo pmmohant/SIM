@@ -1,0 +1,593 @@
+package com.lavante.sim.customer.TestScripts.Supplier.Search;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.SupplierSearchDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 18-2-2016 Created for Supplier Search Enhancement covered SIM
+ * -4293,SIM-6821 Ended on 19-02-2016
+ * 
+ * @author Piramanayagam.S
+ *
+ */
+public class SupplierSearchTC extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * 
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		List listofdatafrm = lavanteUtils.login("Search-Supp", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+	}
+
+	@BeforeMethod()
+	public void before() {
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+
+		enobjsupplierBasicSearch.formAction(dataMap);
+
+	}
+
+	/**
+	 * SIM -4293 Tax ID Basic Search
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "TaxID", dataProviderClass = SupplierSearchDataProvider.class)
+	public void TaxIDSearch002(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for Tax ID Basic Search:" + currenttime());
+
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		Reporter.log("Tax ID field available,Expected:true,in app:" + enobjsupplierBasicSearch.taxidtxt().isDisplayed());
+		Assert.assertTrue(enobjsupplierBasicSearch.taxidtxt().isDisplayed(),"Tax ID field availble in the Basic Search");
+
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		
+		dataMap.put("SearchOption", "Invites");
+		enobjsupplierPage.searchView(dataMap);
+
+		String sid = enobjsupplierPage.headsupplierID().getText();
+		Reporter.log("supplier ID, Expected:Supplier ERP ID, Actual:" + sid);
+		softAssert.assertEquals(sid, "Supplier ERP ID", "Supplier ERP ID is not matched, Expected: ,Actual:" + sid);
+		String sn = enobjsupplierPage.headsupplierName().getText();
+		Reporter.log("supplier Name,  Expected:Supplier Name: ,Actual:" + sn);
+		softAssert.assertEquals(sn, "Supplier Name", "supplier Name is not matched, Expected: ,Actual:" + sn);
+		String sc = enobjsupplierPage.headsuppliercontact().getText();
+		Reporter.log("Supplier Contact, Expected: Supplier Contact: ,Actual:" + sc);
+		softAssert.assertEquals(sc, "Supplier Contact", "Supplier Contact is not matched, Expected: ,Actual:" + sc);
+		String rby = enobjsupplierPage.headInvitedBy().getText();
+		Reporter.log("Requested By,  Expected:Invited By: ,Actual:" + rby);
+		softAssert.assertEquals(rby, "Invited By", "Requested By is not matched, Expected: ,Actual:" + rby);
+		String ps = enobjsupplierPage.headprofilestatus().getText();
+		Reporter.log("Profile Status, Expected:Profile Status: ,Actual:" + ps);
+		softAssert.assertEquals(ps, "Profile Status", "Profile Status is not matched, Expected: ,Actual:" + ps);
+		String pcp = enobjsupplierPage.headprofilecompletepercentage().getText();
+		Reporter.log("Profile Complete %,  Expected:Profile Complete %: ,Actual:" + pcp);
+
+		dataMap.put("SearchOption", "Suppliers and Invites");
+		enobjsupplierPage.searchView(dataMap);
+
+		softAssert.assertEquals(pcp, "Profile Complete %",	"Profile Complete % is not matched, Expected: ,Actual:" + pcp);
+		String pmby = enobjsupplierPage.headprofilemanagedby().getText();
+		Reporter.log("Profile Managed By, Expected: Profile Managed By: ,Actual:" + pmby);
+		softAssert.assertEquals(pmby, "Profile Managed By",	"Profile Managed Byis not matched, Expected: ,Actual:" + pmby);
+		String nh = enobjsupplierPage.headNotesandhistory().getText();
+		Reporter.log("Notes, Expected:Notes ,Actual:" + nh);
+		softAssert.assertEquals(nh, "Notes", "Notes is not matched, Expected: ,Actual:" + nh);
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+
+			Reporter.log("Supplier Found for this TAX ID:"+ enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0).getText());
+
+			lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0));
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.fluentwait(enviewSupplier.taxIDNum());
+			String taxId = enviewSupplier.taxIDNum().getText();
+			String x=dataMap.get("TaxID");
+			x=x.substring(5);
+			Reporter.log("Tax ID ,Expected:" + dataMap.get("TaxID") + ",in app:" + taxId);
+			softAssert.assertTrue(taxId.contains(x),	"Tax ID not Matched ,Expected" + dataMap.get("TaxID") + ",But in app:" + taxId);
+			softAssert.assertTrue(taxId.contains("on"),	"Tax ID Validation ON not Matched ,Expected ON,But in app:" + taxId);
+			flag = true;
+
+		} else {
+			Reporter.log("No Supplier Found for this TAX ID");
+
+		}
+
+		if (flag == false) {
+			softAssert.assertTrue(false, "DATA NOT AVAILABLE");
+		}
+
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for Tax ID Basic Search at:" + currenttime());
+	}
+
+	/**
+	 * SIM-6877 supplier header information
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "TaxID", dataProviderClass = SupplierSearchDataProvider.class)
+	public void DISABLEDNOCONTACTsuppliercontactver005(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("------------Test Started for suppliercontact -----------"+currenttime());
+		SoftAssert softassert = new SoftAssert();
+		boolean flag = false;
+		Reporter.log("Test Started for suppliercontact :" + currenttime());
+		
+		click(enobjsupplierBasicSearch.searchbtn());
+		enobjsupplierPage.selectChangeView("Invites");
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Supplier Found  ");
+
+			String actcntctname = enobjsupplierPage.getColumnText("Contact", 0);
+
+			lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0));
+
+			dataMap.put("maintab", "Enterprise");
+			dataMap.put("subtab", "viewEnterpriseHeaderInformation");
+			enviewSupplier.selectTab(dataMap);
+
+			int expContactNameSize = enviewSupplier.ContactNameList().size();
+			if (expContactNameSize > 0) {
+				for (int i = 0; i <expContactNameSize; i++) {
+					String expContactName = enviewSupplier.ContactNameList().get(i).getText();
+					if (actcntctname.equals(expContactName)) {
+						Reporter.log("Contact details for the Supplier,Expected:" + expContactName + ",in app:"		+ actcntctname);
+						softassert.assertEquals(actcntctname, expContactName,	"Contact details for the Supplier not matched,Expected:" + expContactName + ",in app:"				+ actcntctname);
+						flag = true;
+						break;
+					}
+				}
+			}
+		}
+		if (flag == false) {
+			softassert.assertTrue(false, "No Data Available,Please add data and Retest");
+		}
+
+		softassert.assertAll();
+
+		Reporter.log("Test Ended for suppliercontact at:" + currenttime());
+	}
+
+	/**
+	 * SIM-6877 supplier header information
+	 * 
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	// IGNORED AS OF NOW BECAUSE RENIVITED BY IS NOT DISPLAYED IN UI
+	@Test(enabled = false)
+	public void supplierreqby005() throws Exception {
+		SoftAssert softassert = new SoftAssert();
+		boolean flag = false;
+		Reporter.log("Test Started for suppliercontact :" + currenttime());
+
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+
+		enobjsupplierPage.searchResultsFilterBy("Any");
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Invited").size() > 0) {
+			int i = enobjsupplierPage.VerifyRequestedBY() + 1;
+
+			String expreqby = enobjsupplierPage.getColumnText("Invited", 0);
+			Reporter.log("Requested by : " + expreqby);
+			Reporter.log("Supplier View Profile:" + enobjsupplierPage.getColumnText("Name", 0));
+			lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(i));
+
+			lavanteUtils.switchtoFrame(null);
+
+			dataMap.put("maintab", "Enterprise");
+			dataMap.put("subtab", "Header");
+			enviewSupplier.selectTab(dataMap);
+
+			String appreqby = enviewSupplier.reInvitedBy().getText();
+
+			if (appreqby.length() <= 0) {
+				String mail = enviewSupplier.reInvitedBy().getText();
+				if (mail.length() > 0) {
+					String query = " select ContactName from Contact where Email like '" + mail + "' ";
+					appreqby = lavanteUtils.fetchDBdata(query);
+				}
+			}
+
+			Reporter.log("Contact details for the Supplier,Expected:" + expreqby + ",in app:" + appreqby);
+			softassert.assertEquals(appreqby, expreqby,
+					"Contact details for the Supplier not matched,Expected:" + expreqby + ",in app:" + appreqby);
+			flag = true;
+		}
+
+		if (flag == false) {
+			softassert.assertTrue(false, "No Data Available,Please add data and Retest");
+		}
+
+		softassert.assertAll();
+
+		Reporter.log("Test Ended for suppliercontact at:" + currenttime());
+	}
+
+	/**
+	 * Supplier Selction and Profile Action Status
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@Test
+	public void SingleSupplierSelect() throws Exception {
+		SoftAssert softassert = new SoftAssert();
+		boolean flag = false;
+		Reporter.log("Test Started for Single Supplier Selection :" + currenttime());
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+		
+		dataMap.put("ProfStatus", "Loaded");
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		dataMap.put("SearchOption", "Suppliers");
+		enobjsupplierPage.searchView(dataMap);
+		
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Supplier Found ");
+
+			dataMap.put("supplierNameRandom", "");
+			dataMap.put("profile","");
+			enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+			
+			String enabled="buttons_group_button";
+			lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+			String ds=enobjsupplierPage.TakeControlbtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Takecontrol button is disabled");
+			ds=enobjsupplierPage.editprflebtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Edit Profile button is disabled");
+			
+			String disabled="disabled";
+			ds=enobjsupplierPage.activatebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Activate button is disabled");
+			ds=enobjsupplierPage.Deactivatebtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Deactivate button is disabled");
+			
+			ds=enobjsupplierPage.associateAgent().getAttribute("class");
+			softassert.assertTrue(ds.contains(enabled),"Associate Agent button is disabled");
+			ds=enobjsupplierPage.profcomplete().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Prof Complete button is disabled");
+			ds=enobjsupplierPage.downloaddoc().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Download Doc button is disabled");
+			ds=enobjsupplierPage.associateVendor().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Associate Vendor button is disabled");
+			
+			ds=enobjsupplierPage.EditInvitebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Edit Invite button is disabled");
+			ds=enobjsupplierPage.DeleteInvitebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Delete Invite button is disabled");
+			ds=enobjsupplierPage.Reinvitebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Re Invite button is disabled");
+			ds=enobjsupplierPage.ExtendInvitebtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Extend Invite button is disabled");
+			ds=enobjsupplierPage.sendEmailbtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Send Email button is disabled");
+			ds=enobjsupplierPage.StartOutreachBtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(enabled),"Start Outreach button is disabled");
+			
+			ds=enobjsupplierPage.enablebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(enabled),"Enabled button is disabled");
+			ds=enobjsupplierPage.disablebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(enabled),"Disabled button is disabled");
+			
+			flag=true;
+			
+		}
+		if (flag == false) {
+			softassert.assertTrue(false, "No Data Available,Please add data and Retest");
+		}
+
+		softassert.assertAll();
+
+		Reporter.log("Test Ended for suppliercontact at:" + currenttime());
+	}
+
+	/**
+	 * MultiSupplierSelect Selction and Profile Action Status
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@Test
+	public void MultiSupplierSelect() throws Exception {
+		SoftAssert softassert = new SoftAssert();
+		boolean flag = false;
+		Reporter.log("Test Started for Single Supplier Selection :" + currenttime());
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+		
+		dataMap.put("ProfStatus", "Loaded");
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		dataMap.put("SearchOption", "Suppliers");
+		enobjsupplierPage.searchView(dataMap);
+		
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 1) {
+			Reporter.log("Supplier Found ");
+
+			enobjsupplierPage.selectAllSupplier();
+			
+			dataMap.put("profile","");
+			enobjsupplierPage.ProfileAction(dataMap);
+			
+			String disabled="disabled";
+			String enabled="buttons_group_button";
+			lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+			String ds=enobjsupplierPage.TakeControlbtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Takecontrol button is disabled");
+			ds=enobjsupplierPage.editprflebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Edit Profile button is disabled");
+			
+			ds=enobjsupplierPage.activatebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Activate button is disabled");
+			ds=enobjsupplierPage.Deactivatebtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Deactivate button is disabled");
+			
+			ds=enobjsupplierPage.associateAgent().getAttribute("class");
+			softassert.assertTrue(ds.contains(enabled),"Associate Agent button is disabled");
+			ds=enobjsupplierPage.profcomplete().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Prof Complete button is disabled");
+			ds=enobjsupplierPage.downloaddoc().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Download Doc button is disabled");
+			ds=enobjsupplierPage.associateVendor().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Associate Vendor button is disabled");
+			
+			ds=enobjsupplierPage.EditInvitebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Edit Invite button is disabled");
+			ds=enobjsupplierPage.DeleteInvitebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Delete Invite button is disabled");
+			ds=enobjsupplierPage.Reinvitebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Re Invite button is disabled");
+			ds=enobjsupplierPage.ExtendInvitebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Extend Invite button is disabled");
+			ds=enobjsupplierPage.sendEmailbtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Send Email button is disabled");
+			ds=enobjsupplierPage.StartOutreachBtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(enabled),"Start Outreach button is disabled");
+			
+			ds=enobjsupplierPage.enablebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(enabled),"Enabled button is disabled");
+			ds=enobjsupplierPage.disablebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(enabled),"Disabled button is disabled");
+			
+			flag=true;
+			
+		}
+		if (flag == false) {
+			softassert.assertTrue(false, "No Data Available,Please add data and Retest");
+		}
+
+		softassert.assertAll();
+
+		Reporter.log("Test Ended for suppliercontact at:" + currenttime());
+	}
+
+	/**
+	 * SingleInviteSelect and Profile Action Status
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@Test
+	public void SingleInviteSelect() throws Exception {
+		SoftAssert softassert = new SoftAssert();
+		boolean flag = false;
+		Reporter.log("Test Started for Single Supplier Selection :" + currenttime());
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+		
+		dataMap.put("ProfStatus", "Loaded");
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		//By Default it logs in Invite View
+		enobjsupplierPage.selectChangeView("Invites");
+		
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Supplier Found ");
+			String disabled="disabled";
+			dataMap.put("supplierNameRandom", "");
+			dataMap.put("profile","");
+			enobjsupplierPage.supplierSelectionandProfileAction(dataMap);
+			
+			String enabled="buttons_group_button";
+			lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+			String ds=enobjsupplierPage.TakeControlbtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Takecontrol button is disabled");
+			ds=enobjsupplierPage.editprflebtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Edit Profile button is disabled");
+			
+			ds=enobjsupplierPage.activatebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Activate button is disabled");
+			ds=enobjsupplierPage.Deactivatebtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Deactivate button is disabled");
+			
+			ds=enobjsupplierPage.associateAgent().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Associate Agent button is disabled");
+			ds=enobjsupplierPage.profcomplete().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Prof Complete button is disabled");
+			ds=enobjsupplierPage.downloaddoc().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Download Doc button is disabled");
+			ds=enobjsupplierPage.associateVendor().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Associate Vendor button is disabled");
+
+			ds=enobjsupplierPage.EditInvitebtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Edit Invite button is disabled");
+			ds=enobjsupplierPage.DeleteInvitebtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Delete Invite button is disabled");
+			ds=enobjsupplierPage.Reinvitebtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Re Invite button is disabled");
+			ds=enobjsupplierPage.ExtendInvitebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Extend Invite button is disabled");
+			ds=enobjsupplierPage.sendEmailbtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Send Email button is disabled");
+			ds=enobjsupplierPage.StartOutreachBtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(enabled),"Start Outreach button is disabled");
+			
+			flag=true;
+			
+		}
+		if (flag == false) {
+			softassert.assertTrue(false, "No Data Available,Please add data and Retest");
+		}
+
+		softassert.assertAll();
+
+		Reporter.log("Test Ended for suppliercontact at:" + currenttime());
+	}
+
+	/**
+	 * MultiInviteSelect  and Profile Action Status
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@Test
+	public void MultiInviteSelect() throws Exception {
+		SoftAssert softassert = new SoftAssert();
+		boolean flag = false;
+		Reporter.log("Test Started for Single Supplier Selection :" + currenttime());
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();
+		String disabled="disabled";
+		String enabled="buttons_group_button";
+		
+		dataMap.put("ProfStatus", "Loaded");
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		enobjsupplierPage.selectChangeView("Invites");
+		
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 1) {
+			Reporter.log("Supplier Found ");
+
+			enobjsupplierPage.selectAllSupplier();
+			
+			dataMap.put("profile","");
+			enobjsupplierPage.ProfileAction(dataMap);
+			
+			lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+			String ds=enobjsupplierPage.TakeControlbtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Takecontrol button is disabled");
+			ds=enobjsupplierPage.editprflebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Edit Profile button is disabled");
+			
+			ds=enobjsupplierPage.activatebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Activate button is disabled");
+			ds=enobjsupplierPage.Deactivatebtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Deactivate button is disabled");
+			
+			ds=enobjsupplierPage.associateAgent().getAttribute("class");
+			softassert.assertTrue(ds.contains(enabled),"Associate Agent button is disabled");
+			ds=enobjsupplierPage.profcomplete().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Prof Complete button is disabled");
+			ds=enobjsupplierPage.downloaddoc().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Download Doc button is disabled");
+			ds=enobjsupplierPage.associateVendor().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Associate Vendor button is disabled");
+			
+			ds=enobjsupplierPage.EditInvitebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Edit Invite button is disabled");
+			ds=enobjsupplierPage.DeleteInvitebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(enabled),"Delete Invite button is disabled");
+			ds=enobjsupplierPage.Reinvitebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Re Invite button is disabled");
+			ds=enobjsupplierPage.ExtendInvitebtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(disabled),"Extend Invite button is disabled");
+			ds=enobjsupplierPage.sendEmailbtn().getAttribute("class");
+			softassert.assertEquals(ds,enabled,"Send Email button is disabled");
+			ds=enobjsupplierPage.StartOutreachBtn().getAttribute("class");
+			softassert.assertTrue(ds.contains(enabled),"Start Outreach button is disabled");
+			
+			flag=true;
+		}
+		if (flag == false) {
+			softassert.assertTrue(false, "No Data Available,Please add data and Retest");
+		}
+
+		softassert.assertAll();
+
+		Reporter.log("Test Ended for suppliercontact at:" + currenttime());
+	}
+	
+	
+	/**
+	 * SetupAfter method closes any popup
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@AfterMethod
+	public void SetupAftermethod() {
+		refreshPage();
+		enobjhomePage.backtoSearch();
+	}
+
+	/**
+	 * SetupAfter Class closes any popup and Closes the Browser and Driver
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@AfterClass
+	public void SetupafterClassmethod() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+}

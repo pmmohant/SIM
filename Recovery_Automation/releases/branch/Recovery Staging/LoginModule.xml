@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Recovery" parallel="tests" preserve-order="true"
+	thread-count="1" verbose="1">
+		
+	<!-- Running on FF 44 -->
+	<test preserve-order="true" thread-count="1"
+		name="Lavante Recovery - Running on Firefox v44">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="firefox" />
+		<parameter name="Version" value="44" />
+		<classes>
+				<class name="lavante.recovery.testsuites.SanityTestSuite" />
+		</classes>
+	</test>  
+</suite> 

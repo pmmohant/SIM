@@ -1,0 +1,9 @@
+#Xpath
+DigiCertLink=//img[contains(@alt,'Digi')]
+
+#XPATH
+DIgiCertTrustedDate=//*[@id='todays-date']
+
+#TimeFormat
+DigCertDateFormat=MMM-dd-yyyy
+GenericTimeZone=GMT-7:00

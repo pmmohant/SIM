@@ -1,0 +1,125 @@
+package com.lavante.sim.customer.pageobjects.Admin;
+
+import java.util.LinkedHashMap;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+/**
+ * @author Ramya
+ *
+ */
+public class GLCodeMappingPage {
+	
+	public LavanteUtils lavanteUtils=new LavanteUtils();
+	
+	public GLCodeMappingPage(WebDriver driver){
+		lavanteUtils.driver=driver;
+	}
+	
+	@FindBy(id="glCodeOrDivision")
+	private WebElement GLCodemappingSearch;
+	public WebElement GLCodemappingSearch(){
+		return GLCodemappingSearch;
+	}
+	
+	
+	@FindBy(css="table[class*='data_table'] tbody tr td:nth-child(2)")
+	private WebElement GLCodeValueinTable;
+	public WebElement GLCodeValueinTable(){
+		return GLCodeValueinTable;
+	}
+	
+	@FindBy(id="searchGLCode")
+	private WebElement SearchButton;
+	public WebElement SearchButton(){
+		return SearchButton;
+	}
+	
+	@FindBy(css="a[href*='addGLCodeMapping.lvp']")
+	private WebElement addGlCodeMappingButton;
+	public WebElement addGlCodeMappingButton(){
+		return addGlCodeMappingButton;
+	}
+	
+	@FindBy(css="iframe[src*='addGLCodeMapping']")
+	private WebElement AddWindowFrame;
+	public WebElement AddWindowFrame(){
+		return AddWindowFrame;
+	}
+	
+	@FindBy(css="#glCodes_chosen input")
+	private WebElement GLCodeSearchfield;
+	public WebElement GLCodeSearchfield(){
+		return GLCodeSearchfield;
+	}
+	
+	@FindBy(css="#glCodes_chosen ul li:nth-child(1)")
+	private WebElement GLCodeValueDropdown;
+	public WebElement GLCodeValueDropdown(){
+		return GLCodeValueDropdown;
+	}
+	
+	@FindBy(css="#customerOrganizations_chosen ul li:nth-child(3)")
+	private WebElement selectDivision;
+	public WebElement selectDivision(){
+		return selectDivision;
+	}
+	
+	@FindBy(id= "glCodes")
+	private WebElement glcodeDropdown;
+	public WebElement glcodeDropdown(){
+		return glcodeDropdown;
+	}
+	
+	public void addGLCodeMapping(LinkedHashMap<String, String> dataMap){
+		if(dataMap.containsKey("AddGLCodeMapping")){
+			lavanteUtils.click(addGlCodeMappingButton);
+			lavanteUtils.waitForTime(6000);
+		}
+		
+		if(dataMap.containsKey("Division")){
+			lavanteUtils.click(selectDivision());
+			lavanteUtils.waitForTime(10000);
+		}
+		
+		if(dataMap.containsKey("GLCode")){
+			lavanteUtils.switchtoFrame(AddWindowFrame());
+			String data = dataMap.get("GLCode");
+			lavanteUtils.click(GLCodeSearchfield());
+			lavanteUtils.waitForTime(2000);
+			lavanteUtils.typeString(data,GLCodeSearchfield);
+			lavanteUtils.waitForTime(8000);
+			lavanteUtils.switchtoFrame(null);
+		}
+	}
+	
+	/**
+	 * Sanity Test
+	 * 
+	 * @author Thejaswi.Bhat
+	 */
+	public boolean verifyGLCodeMappingPage() {
+		boolean flag=false;
+		lavanteUtils.switchtoFrame(null);
+		flag=lavanteUtils.verifyElementDisplayed("GLCodeMapping  Button", addGlCodeMappingButton);
+		
+		return flag;
+	}
+		
+	
+	
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+

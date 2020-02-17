@@ -1,0 +1,106 @@
+
+#Application URL
+#APPURL=http://simdev.lavante.com:8080/sim/login.lvp
+#AccSetupURL=http://simdev.lavante.com:8080/sim
+#APPURL=https://qasim.lavante.com/sim/login.lvp
+#AccSetupURL=https://qasim.lavante.com/sim/
+APPURL=https://stagesim.lavante.com/cassim/login?service=https%3A%2F%2Fstagesim.lavante.com%2Fsim%2Flogin.lvp
+APPURLAzure=https://stagesim.lavante.com/cassim/login?service=https%3A%2F%2Fstagesim.lavante.com%2Fsim%2Flogin.lvp
+APPURLQA=https://stagesim.lavante.com/cassim/login?service=https%3A%2F%2Fstagesim.lavante.com%2Fsim%2Flogin.lvp
+
+AccSetupURL=http://simqa.westus2.cloudapp.azure.com:8080/sim/
+
+lavante.db.driver=com.mysql.jdbc.Driver		 
+
+#Primary Automation Environment
+#Prod Envrionment [Grace]
+sim.dbURL.Prod=as10109
+sim.dbUser.Prod=SIM_AppUser
+sim.dbPass.Prod=SIM_AppUser
+sim.dbport.Prod=1433
+sim.dbName.Prod=SIM
+simplatform.dbName.Prod=SIM_Platform
+
+#Some Login Uses  [Grace]  
+password=Lavanste#123  
+
+sim.dbURL.Auto=192.168.21.17
+sim.dbUser.Auto=SIM_AppUser_QA
+sim.dbPass.Auto=simqa678!**
+sim.dbport.Auto=7603
+sim.dbName.Auto=SIM
+simplatform.dbName.Auto=SIM_Platform
+
+#Previous Release for Azure Environment
+sim.dbURL.QAAzure=simdevserver.database.windows.net
+sim.dbUser.QAAzure=simdevserveradmin@simdevserver.database.windows.net
+sim.dbPass.QAAzure=Lavante2017
+sim.dbport.QAAzure=1433
+sim.dbName.QAAzure=SIM_QA
+#Azure there is no Platform DB instance Separate
+simplatform.dbName.Auto=SIM_QA 
+
+#Current Release for QA Environment
+sim.dbURL.QA=192.168.21.97
+sim.dbUser.QA=SIM_AppUser_QA
+sim.dbPass.QA=simqa678!**
+sim.dbport.QA=5602
+sim.dbName.QA=SIM
+simplatform.dbName.QA=SIM_Platform
+
+#Previous Release for QA Environment
+sim.dbURL.SIMCONF=192.168.21.17
+sim.dbUser.SIMCONF=SIM_AppUser_QA
+sim.dbPass.SIMCONF=simqa678!**
+sim.dbport.SIMCONF=7605
+sim.dbName.SIMCONF=SIM
+simplatform.dbName.SIMCONF=SIM_Platform
+
+
+
+#G mail URL
+GMAILURL=https://accounts.google.com/ServiceLogin?service=mail
+
+#Created for Reading Email
+GMAIL_HOST_NAME =pop.gmail.com
+GMAIL_HOST_PORT =995
+GMAIL_AUTH_USER =simsupplierqa42@gmail.com
+GMAIL_AUTH_PWD =lavante123
+GMAIL_HOST_PROTOCAL =ON		
+
+#Server
+Server=windows
+
+#Linux
+lf.hostname=192.168.21.42
+lf.username=lavante
+lf.password=indecomm@123
+
+#Linux Folder
+exportContractManagement=D:/FILEREPO/exportContractManagement
+#/usr/share/FILEREPO/exportContractManagement
+
+#5.13
+#/usr/share/FILEREPO/exportContractManagement
+
+#6.0
+#D:/FILEREPO/exportContractManagement
+
+#lf.hostname=192.168.21.42
+#lf.username=lavante
+#lf.password=indecomm@123
+
+#Linux Folder
+#exportContractManagement=usr/share/FILEREPO/exportContractManagement
+
+SMTP_HOST_PORT=587
+SMTP_HOST_NAME=smtp.gmail.com
+SMTP_AUTH_USER=simprodqa
+SMTP_AUTH_PWD=lavante123
+SMTP_HOST_PROTOCAL =smtp
+emailFromAddress =simprodqa@gmail.com
+
+#emailToAddress =Santha.Nandakumar@lavante.com
+emailToAddress = Lavante-QA@Indecomm.net
+#emailCCAddress =Lavante-QA@Indecomm.net#Karthikeyan.Jayapaul@Indecomm.net#lakshmi.m@indecomm.net
+

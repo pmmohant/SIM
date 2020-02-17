@@ -1,0 +1,186 @@
+#Page Title
+expectedPageTitle=Lavante SIM - Search
+
+#ID
+advancedTab=adv_search_tab
+countryReg_chosen=countryReg_chosen
+countryOfRegistration_chosen=countryOfRegistration_chosen
+supplierHavingInsurance_chosen=supplierHavingInsurance_chosen
+prodServType_chosen=prodServType_chosen
+service_scope_chosen=service_scope_chosen
+isocurrencyId_chosen=isocurrencyId_chosen
+isBusinessEthicsPolicy_chosen=isBusinessEthicsPolicy_chosen
+foreignTaxInformationW8Provided_chosen=foreignTaxInformationW8Provided_chosen
+offerearlypaymentdiscounts_chosen=offerearlypaymentdiscounts_chosen
+paymentTypeSupportedId_chosen=paymentTypeSupportedId_chosen
+CF_conwayCustomField4_chosen=CF_conwayCustomField4_chosen
+supplierUpdatedOn_chosen=supplierUpdatedOn_chosen
+approvedDate_chosen=approvedDate_chosen
+addressTypeId_chosen=addressTypeId_chosen
+profileCompleteDate_chosen=profileCompleteDate_chosen
+invitedOn_chosen=invitedOn_chosen
+smallBusinessCertificationExpDate_chosen=smallBusinessCertificationExpDate_chosen
+minorityBusinessCertificationExpDate_chosen=minorityBusinessCertificationExpDate_chosen
+
+
+#Xpath
+supplierslink=//a[@title='Suppliers']
+buildQueryBtn=//form[contains(@id,'advanceSearchExecute')]/div[4]/button[contains(@title,'Build Query')]
+enterpriseDataTab=//form[contains(@id,'advanceSearch')]/div/div[2]/a[contains(@title,'Enterprise Generated Data')]
+taxInformationTab=//form[contains(@id,'advanceSearch')]/div/div[2]/a[contains(@title,'Tax Information')]
+companyLegalID=//form[contains(@id,'advanceSearch')]/div/div[2]/a[contains(@title,'Company Legal ID')]
+diversityTab=//form[contains(@id,'advanceSearch')]/div/div[2]/a[contains(@title,'Diversity')]
+advanceSearchBtn=//*[@id='advanceSearch']//input[@type='submit'][@title='Search']
+#//form[contains(@id,'advanceSearch')]/div[2]/div/input[contains(@title,'Search')]
+dateClearField=//div[contains(@id,'filters')]/table/tbody/tr/th/table/tbody/tr/td[2]/input[contains(@title,'Clear')]
+supplierTblName=//div/table[contains(@id,'search_results')]/tbody/tr[1]/td[3]/a[contains(@id,'supplier')]
+supplierManaged=//div[contains(@id,'main-navigation')]/a[contains(@title,'Supplier Managed')]
+statusAndHistory=//div[contains(@id,'main-navigation')]/a[contains(@title,'Status and History')]
+enterpriseOwned=//div[contains(@id,'main-navigation')]/a[contains(@title,'Enterprise-Owned')]
+tableRowCount=//*[@id='search_results']//tbody//tr
+#//form[@id='supplierSearchResultForm']/div[1]/div/div[2]/table/tbody/tr
+dataNotFound=//form[@id='supplierSearchResultForm']//tr[contains(@class,'data_not_found')]
+#//form[@id='supplierSearchResultForm']/div[1]/div/div[2]/table/tbody/tr[contains(@class,'data_not_found odd')]
+noData=//form[@id='supplierSearchResultForm']//tr[contains(@class,'data_not_found')]
+#//form[@id='supplierSearchResultForm']/div[1]/div/div[2]/table/tbody/tr[contains(@class,'data_not_found odd')]/td
+headerCount=//div/table[contains(@id,'search_results')]/thead/tr/th
+dataCount=//div/table[contains(@id,'search_results')]/tbody/tr[1]/td
+regulatory=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Regulatory')]
+paymentInformation=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Payment Information')]
+profileAndApprovalHistory=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Profile & Approval History')]
+diversitySubTab=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Diversity')]
+notesAndComments=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Notes & Comments')]
+countryOfReg=//*[@for='country']/../..//td[2]
+#//div[contains(@id,'dialog')]/table[1]/tbody/tr[2]/td[2]
+companyCertifications=//form[contains(@id,'advanceSearch')]/div[1]/div[2]/a[contains(@title,'Company Certification')]
+paymentInformationTab=//form[contains(@id,'advanceSearch')]/div[1]/div[2]/a[contains(@title,'Payment Information')]
+certificationsTab=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Certifications')]
+insuranceOptionValue=//div[contains(@id,'dialog')]/table[1]/tbody/tr[1]/td[2]
+customerSpecificProfileTab=//form[contains(@id,'advanceSearch')]/div/div[2]/a[contains(@title,'Customer Specific Profile')]
+relationSpecificProfile=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Relation Specific Profile')]
+productAndServicesValue=//*[@for='productServiceType']/../..//td[2]
+#//div[contains(@id,'dialog')]/table[4]/tbody/tr[1]/td[2]
+geographicalServiceChosen=//div[contains(@id,'service_scope_chosen')]/div/ul/li
+geographicalServiceScopeData=//div[contains(@id,'dialog')]/table[3]/tbody/tr[1]/td[2]
+companyProfileTab=//form[contains(@id,'advanceSearch')]/div/div[2]/a[contains(@title,'Company Profile')]
+coreProfile=//div[contains(@id,'sub-navigation')]/a[contains(@title,'Core Profile')]
+currencyDropDownField=//div[contains(@id,'isocurrencyId_chosen')]/div[contains(@class,'chosen-drop')]/ul/li
+currecyFieldName=//div[contains(@id,'dialog')]/table[4]/tbody/tr[5]/td[2]
+businessEthicsPolicyDropDownField=//div[contains(@id,'isBusinessEthicsPolicy_chosen')]/div[contains(@class,'chosen-drop')]/ul/li
+businessEthicsPolicyFieldName=//div[contains(@id,'dialog')]/div[6]/table/tbody/tr[1]/td[2]
+
+foreignTaxInfoDocDropDownField=//div[contains(@id,'foreignTaxInformationW8Provided_chosen')]/div/ul/li
+foreignTaxInfoDocFieldName=//div[contains(@id,'dialog')]/table[2]/tbody/tr[1]/td[1]
+
+paymentDiscountDropDownField=//div[contains(@id,'offerearlypaymentdiscounts_chosen')]/div/ul/li
+paymentDiscountFieldName=//div[contains(@id,'dialog')]/table[1]/tbody/tr[1]/td[2]
+
+paymentTypeDropDownField=//div[contains(@id,'paymentTypeSupportedId_chosen')]/div/ul/li
+paymentTypeFieldName=//div[contains(@id,'dialog')]/div[6]/table[1]/tbody/tr[2]/td[2]
+eftTermsDropDownField=//div[contains(@id,'CF_conwayCustomField4_chosen')]/div/ul/li
+eftTermsFieldName=//div[contains(@id,'dialog')]/div[7]/div/table/tbody/tr[1]/td[2]
+
+#Address Type
+addressTypeDropDownFieldName=//div[contains(@id,'addressTypeId_chosen')]/div/ul/li
+
+headquarterFieldName=//div[contains(@id,'dialog')]/table[1]/tbody/tr[2]/td[2]
+remitToFieldName=//div[contains(@id,'dialog')]/table[2]/tbody/tr[1]/td[2]
+orderFromFieldName=//div[contains(@id,'dialog')]/table[2]/tbody/tr[2]/td[2]
+legalNoticesFieldName=//div[contains(@id,'dialog')]/table[2]/tbody/tr[3]/td[2]
+supportFieldName=//div[contains(@id,'dialog')]/table[2]/tbody/tr[4]/td[2]
+
+#Latest Profiel udpate Date Field
+latestProfileUpdateDateDropDownField=//div[contains(@id,'supplierUpdatedOn_chosen')]/div/ul/li
+latestProfileUpdateDateFieldName=//div[contains(@id,'dialog')]/div[contains(@class,'float_left')]/table/tbody/tr[3]
+dateIcon=//div[contains(@id,'eg_data')]/table/tbody/tr[21]/td[3]/input[2]
+latestProfileInputField=//div[contains(@id,'eg_data')]/table/tbody/tr[21]/td[3]/input[1]
+
+#Approved Date
+approvedDateDropDownField=//div[contains(@id,'approvedDate_chosen')]/div/ul/li
+approvedDateFieldName=//div[contains(@id,'dialog')]/div[3]/div[1]/div[2]/table[1]/tbody/tr[1]/td[2]
+approvedDateFieldName=//div[contains(@id,'dialog')]/table[1]
+approveDateIcon=//div[contains(@id,'eg_data')]/table/tbody/tr[18]/td[3]/input[2]
+approvedDateInputField=//div[contains(@id,'eg_data')]/table/tbody/tr[18]/td[3]/input[1]
+expandOption=//h3[contains(@id,'select_4')]/a
+
+#Profile Complete Date
+profileCompleteDateDropDownField=//div[contains(@id,'profileCompleteDate_chosen')]/div/ul/li
+profileCompleteDateFieldName=//div[contains(@id,'dialog')]/table[2]
+profileCompleteDateIcon=//div[contains(@id,'eg_data')]/table/tbody/tr[16]/td[3]/input[2]
+profileCompleteDateInputField=//div[contains(@id,'eg_data')]/table/tbody/tr[16]/td[3]/input[1]
+
+#Invited On Date
+invitedOnDateDropDownField=//div[contains(@id,'invitedOn_chosen')]/div/ul/li
+invitedOnDateFieldName=//div[contains(@id,'dialog')]/table[2]
+invitedOnDateIcon=//div[contains(@id,'eg_data')]/table/tbody/tr[17]/td[3]/input[2]
+invitedOnDateInputField=//div[contains(@id,'eg_data')]/table/tbody/tr[17]/td[3]/input[1]
+
+#Small Business Expiration Date
+smlBnsDateDropDownField=//div[contains(@id,'smallBusinessCertificationExpDate_chosen')]/div/ul/li
+smlBnsDateFieldName=//table[contains(@id,'table_agency_certified_small_business')]
+smlBnsDateIcon=//div[contains(@id,'company_diversity')]/table[2]/tbody/tr[4]/td[3]/input[2]
+smlBnsDateInputField=//div[contains(@id,'company_diversity')]/table[2]/tbody/tr[4]/td[3]/input[1]
+
+#Minority Business Expiration Date
+mnrtyBnsDateDropDownField=//div[contains(@id,'minorityBusinessCertificationExpDate_chosen')]/div/ul/li
+mnrtyBnsDateFieldName=//table[contains(@id,'table_agency_certified_minority_business')]
+mnrtyBnsDateIcon=//div[contains(@id,'company_diversity')]/table[3]/tbody/tr[4]/td[3]/input[2]
+mnrtyBnsDateInputField=//div[contains(@id,'company_diversity')]/table[3]/tbody/tr[4]/td[3]/input[1]
+
+#Verification
+clsNodata=data_not_found
+
+#Date Field (Common)
+monthDropDownOption=//div[contains(@id,'ui-datepicker-div')]/div[1]/div[1]/select[1]/option
+yearDropDownOption=//div[contains(@id,'ui-datepicker-div')]/div[1]/div[1]/select[2]/option
+
+dateRowCount=//div[contains(@id,'ui-datepicker-div')]/table/tbody/tr
+
+#common
+rowNumber=//div[contains(@id,'ui-datepicker-div')]/table/tbody/tr[
+rowClose=]/td
+columnNumber=[
+columnClose=]/a
+
+#Between
+betweenMonthOption=//div[contains(@class,'datepick-popup')]/div[1]/div[2]/div[1]/div[1]/select[1]/option
+betweenYearOption=//div[contains(@class,'datepick-popup')]/div[1]/div[2]/div[1]/div[1]/select[2]/option
+
+betweenFirstTblRowCount=//div[contains(@class,'datepick-popup')]/div[1]/div[2]/div[1]/table/tbody/tr
+betweenFirstTbl=//div[contains(@class,'datepick-popup')]/div[1]/div[2]/div[1]/table/tbody/tr[
+betweenSecondTblRowCount=//div[contains(@class,'datepick-popup')]/div[1]/div[2]/div[2]/table/tbody/tr
+betweenSecondTbl=//div[contains(@class,'datepick-popup')]/div[1]/div[2]/div[2]/table/tbody/tr[
+
+#TIN Number
+tinNumber=//div[contains(@id,'dialog')]/table[1]/tbody/tr[6]/td[2]
+
+#CSS
+popupCloseBtn=button[title='close'][type='button']
+
+#TimeFormat
+dateFormat=MM/dd/yyyy
+genericTimeZone=GMT-7:00
+
+#IFrames
+supplierTableFrame=.//iframe[@class='iframe_page']
+activatePopupFrame=.//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+
+
+insurance=//div[@id='supplierHavingInsurance_chosen']
+insuranceinfo=//div[@id='InsuranceInfoProvided_chosen']
+policy=//div[@id='insurancePolicyTypeId_chosen']
+inscert=//div[@id='insuranceCertUploaded_chosen']
+insurancedropdown=//div[@class='chosen-drop']//ul/li
+datebtn=insuranceExpirationDate_chosen
+datebutton=//div[@id='company_cert']/table/tbody/tr[7]/td[3]/input[@class='date y-date hasDatepicker']
+dateeditbox=//div[@id='company_cert']/table/tbody/tr[7]/td[3]/input[@type='number'][@name='insuranceExpirationDate_field']
+haveInsuranceq=//div[@id='dialog']/table[@class='data_table table_outer_grid'][1]/tbody/tr/td
+insurancedetailstable=//div[@id='dialog']/table[@class='data_table table_grid zebra dynamic_table'][1]
+closebtnxpath=//div[@class='ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix']//button[@type='button'][@title='close']
+iframeInsurance=//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+searchresults=search_results
+formsearch=//form[@id='supplierSearchResultForm']
+nodata=data_not_found
+headers=//form[@id='supplierSearchResultForm']//table[@id='search_results']/thead/tr/th
+header=//form[@id='supplierSearchResultForm']//table/thead/tr/th[
+suppliertablesearch=//form[@id='supplierSearchResultForm']//table[@id='search_results']/tbody/tr

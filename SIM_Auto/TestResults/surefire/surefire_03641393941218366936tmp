@@ -1,0 +1,10 @@
+#surefire_0
+#Wed Sep 26 16:01:11 IST 2018
+RemoteURL=http\://192.168.21.20\:4445
+user.dir=D\:\\AutomationWS\\SIM_Auto
+webdriver.chrome.driver=C\:\\LavanteDrivers\\ChromeDriver.exe
+TestData=AzureStagingTestData
+RemoteExecution=false
+localRepository=C\:\\Users\\Priyanka.Mohanty\\.m2\\repository
+webdriver.ie.driver=C\:\\LavanteDrivers\\IEDriverServer.exe
+basedir=D\:\\AutomationWS\\SIM_Auto

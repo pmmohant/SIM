@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!-- MAX#3min for a test  49 Test -9000000ms to 2.5 hours -->
+<suite name="UAT-OIG SAM OFAC LEGALID ADDRESS"  parallel="tests" preserve-order="true"
+	thread-count="3" verbose="1">
+
+	<listeners>
+		 <listener class-name="com.lavante.sim.Common.Util.ExtentReporterNG"/>
+	 </listeners>
+	<!-- Running on FF 35 -->
+	 <test preserve-order="true" thread-count="1"
+		name="Lavante SIM - Running on IE">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="internet Explorer" />
+		<parameter name="Version" value="34" />
+		<classes>
+
+		</classes>
+	</test> 
+ 	
+ 	<test preserve-order="true" thread-count="1"
+		name="Lavante SIM - Running on Firefox v35">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="firefox" />
+		<parameter name="Version" value="34" />
+		<classes>
+
+		</classes>
+	</test> 
+	
+	 <test preserve-order="true" thread-count="1"
+		name="Lavante SIM - Running on chrome">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="chrome" />
+		<parameter name="Version" value="45" />
+		<classes>
+			<class 	name="com.lavante.sim.customer.TestScripts.Compliance.Address.AddressDetailValidationTC001" />
+			<class 	name="com.lavante.sim.customer.TestScripts.Compliance.Address.UATAddressTest" />
+
+			<class 	name="com.lavante.sim.customer.TestScripts.Compliance.LegalID.UATLegalIDDBCount" />
+			<class 	name="com.lavante.sim.customer.TestScripts.Compliance.LegalID.UATLegalID" />
+			<class 	name="com.lavante.sim.customer.TestScripts.Compliance.LegalID.BuyerCountryTests" />
+						
+			<!-- Invite Fails hence Comemnting as of Now 
+			<class 	name="com.lavante.sim.customer.TestScripts.Supplier.NetWorkSupplier.EditBuyerAsSupplier01" />
+			<class 	name="com.lavante.sim.customer.TestScripts.Compliance.OFAC.UATOFACTest" />
+			<class 	name="com.lavante.sim.customer.TestScripts.Compliance.OIG.UATOIGTest" />
+						<class 	name="com.lavante.sim.customer.TestScripts.Compliance.SAM.UATSAMTest" />   -->
+			<class 	name="com.lavante.sim.customer.TestScripts.Compliance.SAM.UATSAMSearchTest002" />
+			<class 	name="com.lavante.sim.customer.TestScripts.Compliance.OFAC.UATOFACSearchTest002" />
+			<class 	name="com.lavante.sim.customer.TestScripts.Compliance.OIG.UATOIGCSearchTest002" />
+	
+		</classes>
+	</test>  
+	
+	
+</suite> 

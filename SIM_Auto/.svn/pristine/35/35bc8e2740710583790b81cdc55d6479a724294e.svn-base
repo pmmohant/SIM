@@ -1,0 +1,2 @@
+Currency Code,Supplier ERP Id,Supplier Name,Invoice Number,Invoice Amount,Invoice Date,Payment Terms,Invoice Method,Invoice Received Date,ERP Invoice Number,Payment Status,Payment Scheduled Date,Paid Date,Payment Currency Code,Paid Amount,Payment Method,Payment Reference Number,Notes,Last Updated
+USD,AutoSP160804145301,AutoSP160804145301,1,1,01/01/2016,EFT,,,,Paid,,,,,,,,

@@ -1,0 +1,282 @@
+package com.lavante.sim.customer.pageobjects.Tasks.PendingUpdate;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+
+//Claims Pending Update
+
+public class PendingUpdate {
+
+	LavanteUtils lavanteUtils=new LavanteUtils();
+
+	public PendingUpdate(WebDriver driver){
+		lavanteUtils.driver=driver;
+	}
+
+	@FindBy(css="#filterWorkflow_chosen a")
+	private WebElement viewFilterDDL;
+	public WebElement viewFilterDDL(){
+		return viewFilterDDL;
+	}
+	
+	@FindBy(css="input[id*='taskId']+label")
+	private List<WebElement> selectClaimChkBoxList;
+	public List<WebElement> selectClaimChkBoxList(){
+		return selectClaimChkBoxList;
+	}
+
+	@FindBy(css="button[class*='action_buttons']")
+	private WebElement actionBtn;
+	public WebElement actionBtn(){
+		return actionBtn;
+	}
+	
+	@FindBy(css="div[class='page-header']")
+	private WebElement pageHeader;
+	public WebElement pageHeader(){
+		return pageHeader;
+	}
+	
+	@FindBy(css="input[value*='Edit Claim']")
+	private WebElement editClaimOption;
+	public WebElement editClaimOption(){
+		return editClaimOption;
+	}
+	
+	@FindBy(css="input[value*='Reassign']")
+	private WebElement reassignOption;
+	public WebElement reassignOption(){
+		return reassignOption;
+	}
+	
+	//Pagination
+	@FindBy(css="ul[class='pagination']")
+	private WebElement paginationBox;
+	public WebElement paginationBox(){
+		return paginationBox;
+	}
+	
+	@FindBy(css="thead th")
+	private List<WebElement> Headers;
+	
+	@FindBy(css="[class='pagination'] li a")
+	private List<WebElement> paginationBtns;
+	public List<WebElement> paginationBtns(){
+		return paginationBtns;
+	}
+	
+	@FindBy(css="div[class='header'] form-select  select")
+	private WebElement tasksClaimsViewDDL;
+	public WebElement tasksClaimsViewDDL(){
+		return tasksClaimsViewDDL;
+	}
+	
+	@FindBy(css="button[class*='primary']")
+	private WebElement searchbtn;
+	public WebElement searchbtn(){
+		return searchbtn;
+	}	
+	
+	/**
+	 * Method to switch Pending Update view
+	 * 
+	 * @author Girish.N
+	 * 
+	 */
+	public void switchPendingUpdateView(LinkedHashMap<String, String> dataMap){
+		
+		String data="17201";
+		if (dataMap.containsKey("View")){
+			data=dataMap.get("View");
+			if(data.contains("My Tasks")){
+				data=""+17202;
+			}else{
+				data=""+17201;
+			}
+		}	
+		lavanteUtils.selectbyvalue(data,tasksClaimsViewDDL);
+		lavanteUtils.waitForTime(5000);
+	}
+	
+  public LinkedHashMap<String, String> actionOnClaimsToUpdate(LinkedHashMap<String, String> dataMap) throws IOException {
+		
+		String index="";
+		dataMap=searchPendingUpdateClaim(dataMap);
+		
+		if(dataMap.containsKey("Index")){
+			index=dataMap.get("Index");
+		}
+		if(!index.equalsIgnoreCase("-1")){	
+			Reporter.log("Claim ID is found in Task Claim Page at index:"+index,true);
+			selectAction(dataMap);
+			dataMap.put("flag","true");
+		}
+		else{
+			Reporter.log("Claim ID is not present",true);
+			dataMap.put("flag","false");
+		}
+		
+		return dataMap;
+	
+	}	
+	/**
+	 * Method to search claim. Pagination is handled.
+	 * 
+	 * @param dataMap
+	 * @return
+	 */
+	public LinkedHashMap<String, String> searchPendingUpdateClaim(LinkedHashMap<String, String> dataMap) {
+		int ind=-1;
+		boolean flag=false;
+		do{
+			dataMap=searchClaim(dataMap);
+			if(dataMap.containsKey("Index")){
+				ind=Integer.parseInt(dataMap.get("Index"));
+			}
+			if(ind!=-1)
+			{
+				break;
+			}
+			if(paginationBtns.size()>2){
+				if(paginationBtns.get(paginationBtns.size()-2).getAttribute("href")!=null){
+					flag=true;
+					lavanteUtils.click(paginationBtns.get(paginationBtns.size()-2));
+					lavanteUtils.waitforPageload(pageHeader);
+				}else{
+					flag=false;
+				}
+			}
+		}while(flag);
+		return dataMap;
+	}
+	
+	private LinkedHashMap<String, String> searchClaim(LinkedHashMap<String, String> dataMap) {
+		switchPendingUpdateView(dataMap);
+		search(dataMap);
+		int index=-1;
+		dataMap.put("Index", String.valueOf(index));
+		if(iterateSearchHeaderFindColList("Claim ID").size()>0){
+			if (dataMap.containsKey("ClaimId")){
+					String data=dataMap.get("ClaimId");
+					if (data.equalsIgnoreCase("ALL")){
+						index=100;
+						dataMap.put("Index", String.valueOf(index));
+						int size=iterateSearchHeaderFindColList("Claim Type").size();
+						for(int ox=0;ox<size;ox++){
+							lavanteUtils.click(iterateSearchHeaderFindColList("Claim Type").get(ox));
+						}
+						return dataMap;
+					}
+					if (data.equalsIgnoreCase("Any")){
+						index=iterateSearchHeaderFindColList("Claim ID").size()-1;
+						dataMap.put("Index", String.valueOf(index));
+						dataMap.put("ClaimId", iterateSearchHeaderFindColList("Claim ID").get(index).getText().trim());
+						return dataMap;
+					}else{
+						for(int i=0;i<iterateSearchHeaderFindColList("Claim ID").size();i++){
+							if(data.equals(iterateSearchHeaderFindColList("Claim ID").get(i).getText().trim())){
+								index=i;
+								dataMap.put("Index", String.valueOf(index));
+								return dataMap;
+							}
+						}
+					}
+			}
+		}	
+		return dataMap;
+	}
+	
+	private void search(LinkedHashMap<String, String> dataMap) {
+		if(dataMap.containsKey("Search")){
+			lavanteUtils.fluentwait(searchbtn);
+			String y="DUMMY";
+			String x="//*[text()='"+y+"']/../following-sibling::div//input";
+			
+			if(dataMap.containsKey("ClaimId")){
+				if(!dataMap.get("ClaimId").equalsIgnoreCase("ANY")){
+					String z=x;
+					z=z.replace(y, "Claim ID");
+					lavanteUtils.driver.findElement(By.xpath(z)).clear();
+					lavanteUtils.driver.findElement(By.xpath(z)).sendKeys(dataMap.get("ClaimId"));
+				}
+			}
+			
+			lavanteUtils.click(searchbtn);
+		
+		}
+		
+	}
+
+	private void selectAction(LinkedHashMap<String, String> dataMap){
+		
+		if(dataMap.containsKey("Index")){
+			int index=Integer.parseInt(dataMap.get("Index"));
+			if(index!=100){
+				lavanteUtils.click(iterateSearchHeaderFindColList("Claim Type").get(index));
+			}
+			lavanteUtils.click(actionBtn);
+			lavanteUtils.waitForTime(2000);
+			
+			String action = dataMap.get("Action");
+			
+			if(action.equalsIgnoreCase("EditClaim")){
+				lavanteUtils.click(editClaimOption);
+				lavanteUtils.waitForTime(3000);;
+			}
+			
+			if(action.equalsIgnoreCase("Reassign")){
+				lavanteUtils.click(reassignOption);
+			}
+		}		
+	}
+	
+	public List<WebElement> iterateSearchHeaderFindColList(String col) {
+		List<WebElement> s = null;
+		int j = ColIdentify(col);
+		String x = "tbody td:nth-child(" + j + ")";
+		s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		if (col.contains("Supplier Name") || col.contains("Claim ID") ) {
+			x = "tbody td:nth-child(" + j + ") a";
+			s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		}
+		System.out.println("Iterate Search Col:" + col + ":" + s.size());
+		return s;
+	}
+	
+	public int ColIdentify(String col) {
+		int ki = 0;
+		boolean found = false;
+		if (Headers.size() > 0) {
+			for (int i = 0; i < Headers.size(); i++) {
+				String x = Headers.get(i).getText();
+				if (x.contains(col)) {
+					ki = i;
+					// List start with 0 but need a number more than that to
+					// fetch in xpath
+					ki = i + 1;
+					found = true;
+					break;
+				}
+			}
+		}
+
+		if (found == false) {
+			Assert.assertTrue(false, "Col name not found" + col);
+		}
+		return ki;
+
+	}
+
+	
+}

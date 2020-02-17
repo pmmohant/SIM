@@ -1,0 +1,382 @@
+package com.lavante.sim.customer.TestScripts.Supplier.Search;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.SupplierSearchDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class ChangeViewTests extends PageInitiator{
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String loginemail="";
+	String customerid="";
+
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * 
+	 * @author Vidya C
+	 * 
+	 */
+
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(
+			@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version)
+					throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		// Login
+		List<?> listofdatafrm = lavanteUtils.login("Discovery", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		customerid=(String) listofdatafrm.get(1);
+		loginemail=LdataMap.get("username");
+
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+	}
+	
+	/**
+	 * Verify the 3 filters outcome for different test data in Invites view
+	 * 
+	 * @author Vidya C
+	 * @throws Exception
+	 * 
+	 */
+	@Test(dataProvider = "Invite View", dataProviderClass = SupplierSearchDataProvider.class)
+	public void InvitesViewTest(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for Invite View Test : "	+ currenttime());
+		SoftAssert softAssert = new SoftAssert();
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);	
+		
+		enobjsupplierBasicSearch.formAction(dataMap);
+		
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		dataMap.put("SearchOption", "Invites");
+		enobjsupplierPage.searchView(dataMap);
+		enobjsupplierPage.searchResultsFilterBy("All");
+		
+		String filter=dataMap.get("Filter");
+		String query = dataMap.get("Query");
+		if(query.contains("AutoCustomerID")) {
+			query = query.replace("AutoCustomerID", customerid);
+		}
+		
+		if(query.contains("AutoLoginEmail")) {
+			query = query.replace("AutoLoginEmail", loginemail);
+		}
+		
+		String expInviteID = lavanteUtils.fetchDBdata(query);
+		Assert.assertNotEquals(expInviteID,null,"Invite ID is Null,:"+expInviteID);
+		Assert.assertTrue(expInviteID.length()>0,"Invite ID is Empty,:"+expInviteID);
+		dataMap.put("invitationId", expInviteID);
+		dataMap.put("InactiveSup", "");
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		String actualSuppName ="";
+		
+		dataMap.put("SearchOption", "Invites");
+		enobjsupplierPage.searchView(dataMap);
+		enobjsupplierPage.searchResultsFilterBy("All");
+		
+		lavanteUtils.fluentwait(enobjsupplierPage.FilterByMyInvitesRadiobtn());
+		lavanteUtils.waitForTime(4000);
+		
+		actualSuppName = enobjsupplierPage.getColumnText("Supplier Name", 0);
+		String actualInviteId = enobjsupplierPage.getColumnText("Invitation ID", 0);
+		softAssert.assertTrue(actualInviteId.contains(expInviteID),"Invite Id in Supplier seacrh table doesn't match in All filter");
+		Reporter.log("Verify InviteId for fecthed from DB filter is same as InviteId in search table for 'All' filter, Expected: "+expInviteID+" Actual: "+actualInviteId, true);
+				
+		enobjsupplierPage.searchResultsFilterBy("My Invites");
+		lavanteUtils.fluentwait(enobjsupplierPage.FilterByMyInvitesRadiobtn());
+		//lavanteUtils.waitForTime(4000);
+		
+		if(filter.equalsIgnoreCase("My Invites")){
+			String actualSuppName1 = enobjsupplierPage.getColumnText("Supplier Name", 0);
+			actualInviteId = enobjsupplierPage.getColumnText("Invitation ID", 0);
+			String actualInvitedBy = enobjsupplierPage.getColumnText("Invited By", 0);
+			
+			softAssert.assertEquals(actualSuppName1, actualSuppName,"Supplier Name doesn't exist in My Invites filter");
+			softAssert.assertTrue(actualInviteId.contains(expInviteID),"Invite Id in Supplier seacrh table doesn't match in My Invites filter");
+			softAssert.assertEquals(actualInvitedBy, loginemail,"Invited By doesn't match in My Invites filter");
+			Reporter.log("Verify Supplier for 'All' filter is same as Supplier for 'My Invites' filter, Expected: "+actualSuppName+" Actual: "+actualSuppName1, true);
+			Reporter.log("Verify InviteId for fecthed from DB filter is same as InviteId in search table for 'My Invites' filter, Expected: "+expInviteID+" Actual: "+actualInviteId, true);
+			Reporter.log("Verify Invited By and login email are same, Expected: "+loginemail+" Actual: "+actualInvitedBy, true);
+	
+		}else{
+			lavanteUtils.waitforPageload(enobjsupplierPage.noDataFound());
+			lavanteUtils.fluentwait(enobjsupplierPage.noDataFound());
+			softAssert.assertEquals(enobjsupplierPage.noDataFound().getText(), "No results","Supplier data is found for My Invites filter");
+			Reporter.log("Verify 'No results' text is present, if there is no results for the specific search"); 
+		}
+		
+		enobjsupplierPage.searchResultsFilterBy("My Division");
+		lavanteUtils.fluentwait(enobjsupplierPage.FilterByMyInvitesRadiobtn());
+		//lavanteUtils.waitForTime(4000);
+		
+		if(filter.equalsIgnoreCase("My Division")){
+			String actualSuppName1 = enobjsupplierPage.getColumnText("Supplier Name", 0);
+			actualInviteId = enobjsupplierPage.getColumnText("Invitation ID", 0);
+			
+			softAssert.assertEquals(actualSuppName1, actualSuppName,"Supplier Name doesn't exist in All filter");
+			softAssert.assertTrue(actualInviteId.contains(expInviteID),"Invite Id in Supplier seacrh table doesn't match in My Division filter");
+			Reporter.log("Verify Supplier for 'All' filter is same as Supplier for 'My Division' filter, Expected: "+actualSuppName+" Actual: "+actualSuppName1, true);
+			Reporter.log("Verify InviteId for fecthed from DB filter is same as InviteId in search table for 'My Division' filter, Expected: "+expInviteID+" Actual: "+actualInviteId, true);	
+		}else{
+			lavanteUtils.waitforPageload(enobjsupplierPage.noDataFound());
+			lavanteUtils.fluentwait(enobjsupplierPage.noDataFound());
+			String exp="No results#Logged in user is not mapped to any Divisions";
+			softAssert.assertTrue(exp.contains(enobjsupplierPage.noDataFound().getText()),"Supplier data is found for My Division filter");
+			Reporter.log("'No results' text is present, if there is no results for the specific search"); 
+		}
+		
+		softAssert.assertAll();
+		Reporter.log("Test Ended at:" + currenttime());		
+	}
+	
+	/**
+	 * Verify the 3 filters outcome for different test data in Suppliers view
+	 * 
+	 * 
+	 * @author Vidya C
+	 * @throws Exception
+	 * 
+	 */
+	@Test(dataProvider = "Suppliers View", dataProviderClass = SupplierSearchDataProvider.class)
+	public void SuppliersViewTest(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for Supplier View Test : "+ currenttime());
+
+		SoftAssert softAssert = new SoftAssert();
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+		
+		String filter=dataMap.get("Filter");
+		String query = dataMap.get("Query");
+		if(query.contains("AutoCustomerID")) {
+			query = query.replace("AutoCustomerID", customerid);
+		}
+		
+		if(query.contains("AutoLoginEmail")) {
+			query = query.replace("AutoLoginEmail", loginemail);
+		}
+		
+		String suppName = lavanteUtils.fetchDBdata(query);
+		enobjsupplierPage.searchResultsFilterBy("All");
+		
+		Assert.assertTrue(suppName.length()>0,"suppName id is empty,"+suppName);
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		dataMap.put("SearchOption", "Invites");
+		enobjsupplierPage.searchView(dataMap);
+		enobjsupplierPage.searchResultsFilterBy("All");
+		
+		dataMap.put("supplierName", suppName);
+		dataMap.put("InactiveSup", "");
+		
+		enobjsupplierBasicSearch.search(dataMap);
+		String actualSuppName ="";
+		
+		dataMap.put("SearchOption", "Suppliers");
+		enobjsupplierPage.searchView(dataMap);
+		enobjsupplierPage.searchResultsFilterBy("All");
+		
+		if(enobjsupplierPage.ListExpandSupplier().size()>0) {
+			lavanteUtils.click(enobjsupplierPage.ListExpandSupplier().get(0));
+			actualSuppName = enobjsupplierPage.getColumnText("Supplier Name", 0);
+			softAssert.assertTrue(actualSuppName.contains(suppName),"Supplier Name in Supplier seacrh table doesn't match in 'All' filter");
+			Reporter.log("Verify Supplier Name for fecthed from DB filter is same as Supplier Name in search table for 'All' filter, Expected: "+suppName+" Actual: "+actualSuppName, true);			
+		}
+		
+		enobjsupplierPage.searchResultsFilterBy("My Invites");
+		
+		if(filter.equalsIgnoreCase("My Invites")){
+			if(enobjsupplierPage.ListExpandSupplier().size()>0) {
+				lavanteUtils.click(enobjsupplierPage.ListExpandSupplier().get(0));
+				String actualSuppName1 = enobjsupplierPage.getColumnText("Supplier Name", 0);
+				
+				softAssert.assertEquals(actualSuppName1, suppName,"Supplier Name doesn't exist in 'My Invites' filter");
+				Reporter.log("Verify Supplier for 'All' filter is same as Supplier for 'My Invites' filter, Expected: "+actualSuppName+" Actual: "+actualSuppName1, true);
+			}
+			
+		}else{
+			lavanteUtils.waitforPageload(enobjsupplierPage.noDataFound());
+			lavanteUtils.fluentwait(enobjsupplierPage.noDataFound());
+			softAssert.assertEquals(enobjsupplierPage.noDataFound().getText(), "No results","Supplier data is found for 'My Invites' filter");
+			Reporter.log("Verify 'No results' text is present, if there is no results for the specific search"); 
+		}
+		
+		enobjsupplierPage.searchResultsFilterBy("My Division");
+		if(filter.equalsIgnoreCase("My Division")){
+			if(enobjsupplierPage.ListExpandSupplier().size()>0) {
+				lavanteUtils.click(enobjsupplierPage.ListExpandSupplier().get(0));
+				String actualSuppName1 = enobjsupplierPage.getColumnText("Supplier Name", 0);
+				
+				softAssert.assertEquals(actualSuppName1, suppName,"Supplier Name doesn't exist in 'My Division' filter");
+				Reporter.log("Verify Supplier for 'All' filter is same as Supplier for 'My Division' filter, Expected: "+actualSuppName+" Actual: "+actualSuppName1, true);
+		
+			}
+		}else{
+			lavanteUtils.waitforPageload(enobjsupplierPage.noDataFound());
+			lavanteUtils.fluentwait(enobjsupplierPage.noDataFound());
+			String exp="No results#Logged in user is not mapped to any Divisions";
+			softAssert.assertEquals(enobjsupplierPage.noDataFound().getText(), "No results","Supplier data is found for 'My Division' filter");
+			Reporter.log("Verify 'No results' text is present, if there is no results for the specific search"); 
+		}
+		
+		softAssert.assertAll();
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+	
+	/**
+	 * Verify the 3 filters outcome for different test data in Suppliers And Invite view
+	 * 
+	 * 
+	 * @author Vidya C
+	 * @throws Exception
+	 * 
+	 */
+	@Test(dataProvider = "SuppliersAndInvite View", dataProviderClass = SupplierSearchDataProvider.class)
+	public void SuppliersAndInvitesViewTest(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for Suppliers And Invite ViewTest : "+ currenttime());
+
+		boolean flag=false,flag1=false,flag2=false;
+		SoftAssert softAssert = new SoftAssert();
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+		
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		
+		String filter=dataMap.get("Filter");
+		String query = dataMap.get("Query");
+		if(query.contains("AutoCustomerID")) {
+			query = query.replace("AutoCustomerID", customerid);
+		}
+		
+		if(query.contains("AutoLoginEmail")) {
+			query = query.replace("AutoLoginEmail", loginemail);
+		}
+		
+		String InviteId = lavanteUtils.fetchDBdata(query);
+		enobjsupplierPage.searchResultsFilterBy("All");
+		
+		Assert.assertTrue(InviteId.length()>0,"Invite id is empty,"+InviteId);
+		dataMap.put("SearchOption", "Invites");
+		enobjsupplierPage.searchView(dataMap);
+		
+		dataMap.put("invitationId", InviteId);
+		dataMap.put("InactiveSup", "");
+		dataMap.put("Search", "");
+		enobjsupplierBasicSearch.search(dataMap);
+		String actualSuppName ="";
+		String actualInviteId="";
+		
+		dataMap.put("SearchOption", "Suppliers and Invites");
+		enobjsupplierPage.searchView(dataMap);
+		
+		enobjsupplierPage.searchResultsFilterBy("All");
+		lavanteUtils.fluentwait(enobjsupplierPage.FilterByMyInvitesRadiobtn());
+		lavanteUtils.waitForTime(4000);
+		
+		if(enobjsupplierPage.ListExpandSupplier().size()>0) {
+			lavanteUtils.click(enobjsupplierPage.ListExpandSupplier().get(0));
+			actualSuppName = enobjsupplierPage.getColumnText("Supplier Name", 0);
+			actualInviteId = enobjsupplierPage.getColumnText("Invitation ID", 1);
+			softAssert.assertTrue(actualInviteId.contains(InviteId),"Invite Id in Supplier seacrh table doesn't match in All filter");
+			Reporter.log("Verify InviteId for fecthed from DB filter is same as InviteId in search table for 'All' filter, Expected: "+InviteId+" Actual: "+actualInviteId, true);
+			flag=true;	
+		}
+		
+		enobjsupplierPage.searchResultsFilterBy("My Invites");
+		lavanteUtils.fluentwait(enobjsupplierPage.FilterByMyInvitesRadiobtn());
+		lavanteUtils.waitForTime(4000);
+		
+		if(filter.equalsIgnoreCase("My Invites")){
+			if(enobjsupplierPage.ListExpandSupplier().size()>0) {
+				lavanteUtils.click(enobjsupplierPage.ListExpandSupplier().get(0));
+				String actualSuppName1 = enobjsupplierPage.getColumnText("Supplier Name", 0);
+				actualInviteId = enobjsupplierPage.getColumnText("Invitation ID", 1);
+				
+				softAssert.assertEquals(actualSuppName1, actualSuppName,"Supplier Name doesn't exist in My Invites filter");
+				softAssert.assertTrue(actualInviteId.contains(InviteId),"Invite Id in Supplier seacrh table doesn't match in My Invites filter");
+				Reporter.log("Verify Supplier for 'All' filter is same as Supplier for 'My Invites' filter, Expected: "+actualSuppName+" Actual: "+actualSuppName1, true);
+				Reporter.log("Verify InviteId for fecthed from DB filter is same as InviteId in search table for 'My Invites' filter, Expected: "+InviteId+" Actual: "+actualInviteId, true);
+				flag1=true;
+			}
+			
+		}else{
+			lavanteUtils.waitforPageload(enobjsupplierPage.noDataFound());
+			lavanteUtils.fluentwait(enobjsupplierPage.noDataFound());
+			softAssert.assertEquals(enobjsupplierPage.noDataFound().getText(), "No results","Supplier data is found for My Invites filter");
+			Reporter.log("Verify 'No results' text is present, if there is no results for the specific search");
+			flag1=true;
+		}
+		
+		enobjsupplierPage.searchResultsFilterBy("My Division");
+		lavanteUtils.fluentwait(enobjsupplierPage.FilterByMyInvitesRadiobtn());
+		lavanteUtils.waitForTime(4000);
+		
+		if(filter.equalsIgnoreCase("My Division")){
+			if(enobjsupplierPage.ListExpandSupplier().size()>0) {
+				lavanteUtils.click(enobjsupplierPage.ListExpandSupplier().get(0));
+				String actualSuppName1 = enobjsupplierPage.getColumnText("Supplier Name", 0);
+				actualInviteId = enobjsupplierPage.getColumnText("Invitation ID", 1);
+				
+				softAssert.assertEquals(actualSuppName1, actualSuppName,"Supplier Name doesn't exist in All filter");
+				softAssert.assertTrue(actualInviteId.contains(InviteId),"Invite Id in Supplier seacrh table doesn't match in My Division filter");
+				Reporter.log("Verify Supplier for 'All' filter is same as Supplier for 'My Division' filter, Expected: "+actualSuppName+" Actual: "+actualSuppName1, true);
+				Reporter.log("Verify InviteId for fecthed from DB filter is same as InviteId in search table for 'My Division' filter, Expected: "+InviteId+" Actual: "+actualInviteId, true);	
+				flag2=true;
+			}
+		}else{
+			lavanteUtils.waitforPageload(enobjsupplierPage.noDataFound());
+			lavanteUtils.fluentwait(enobjsupplierPage.noDataFound());
+			String exp="No results#Logged in user is not mapped to any Divisions";
+			softAssert.assertTrue(exp.contains(enobjsupplierPage.noDataFound().getText()),"Supplier data is found for My Division filter");
+			Reporter.log("Verify 'No results' text is present, if there is no results for the specific search");
+			flag2=true;
+		}
+		
+		softAssert.assertTrue(flag,"ALL data has failed,Please Recheck");
+		softAssert.assertTrue(flag1,"My Invite has failed,Please Recheck");
+		softAssert.assertTrue(flag2,"My division data has failed,Please Recheck");
+		softAssert.assertAll();
+		Reporter.log("Test Ended at:" + currenttime());
+	}
+
+	@AfterMethod
+	public void SetupAftermethod() {
+		lavanteUtils.refreshPage();
+	}
+
+	@AfterClass
+	public void SetupafterClassmethod() {
+
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+}

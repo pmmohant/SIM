@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="CleanDialogSettings">
+		<item value="500" key="DIALOG_WIDTH"/>
+		<item value="true" key="TOGGLE_SELECTED"/>
+		<item value="377" key="DIALOG_HEIGHT"/>
+		<item value="433" key="DIALOG_X_ORIGIN"/>
+		<item value="113" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="TaskPropertiesDialogSettings">
+		<item value="723" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="282" key="DIALOG_HEIGHT"/>
+		<item value="330" key="DIALOG_X_ORIGIN"/>
+		<item value="184" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="NewWizardAction">
+		<item value="org.eclipse.wst.xml.ui.XMLExampleProjectCreationWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+		</list>
+	</section>
+	<section name="org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog">
+		<item value="true" key="ShowStatusLine"/>
+		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/TestScripts/SanityTest/SIMSanityTest.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/TestScripts/SanityTest/SIMSanityTest01.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/pageobjects/PageInitiator.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/Claims.xml&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/TestScripts/Supplier/Search/AssocitateSupplierAgent.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/TestScripts/Supplier/EditProfile/CMmsaTC.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/Manage_Users_UAT_6.0.xml&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/pageobjects/Admin/DivisionPage.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/TestScripts/Admin/UserPageTests.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/pageobjects/Admin/UsersPage.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/TestScripts/Admin/PaymentCenterMappingPageTests.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/TestScripts/Admin/ClaimTypeMappingTests.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/TestScripts/Admin/DealLocationMappingTests.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/TestScripts/Supplier/Search/SupplierAdvancedSearchTC.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/TestScripts/Admin/DepartmentsTest01.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/TestScripts/Admin/DivisionPageTests.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/TestScripts/UserRoles/CustomerProperty.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/AzureStagingTestData/data/Login.xls&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/QATestData/config/initConfig.properties&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/TestScripts/Transactions/NCH/NCHBasicSearchTest.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/customer/pageobjects/Transactions/NCH/ViewNCHPage.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/AzureStagingTestData/config/initConfig.properties&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/pom.xml&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/pomQA.xml&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/SIM_Auto/src/test/java/com/lavante/sim/Common/Util/LavanteUtils.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;/historyRootNode&gt;&#x0D;&#x0A;&lt;/History&gt;" key="History"/>
+		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;workingSet workingSetName=&quot;&quot;/&gt;" key="WorkingSet"/>
+		<item value="false" key="ShowDerived"/>
+		<section name="DialogBoundsSettings">
+			<item value="600" key="DIALOG_WIDTH"/>
+			<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+			<item value="500" key="DIALOG_HEIGHT"/>
+			<item value="621" key="DIALOG_X_ORIGIN"/>
+			<item value="227" key="DIALOG_Y_ORIGIN"/>
+		</section>
+	</section>
+</section>

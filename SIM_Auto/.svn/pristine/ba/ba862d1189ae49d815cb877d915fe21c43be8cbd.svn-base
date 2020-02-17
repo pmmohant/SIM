@@ -1,0 +1,168 @@
+package com.lavante.sim.customer.pageobjects.Admin;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Reporter;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+public class ManageAddressesPage {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+
+	public ManageAddressesPage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+	}
+
+	@FindBy(css = "a[href*='manageAddress']")
+	public WebElement AddressTab;
+
+	@FindBy(css = "button[href*='addEditAddress']")
+	public WebElement AddAddressBtn;
+
+	@FindBy(css = "iframe[src*='addEditAddress']")
+	public WebElement IframeAddAddress;
+
+	@FindBy(id = "address1")
+	public WebElement Address1TxtBox;
+
+	@FindBy(id = "city")
+	public WebElement CityTxtBox;
+
+	@FindBy(id = "countryId_chosen")
+	public WebElement CountryDropDwn;
+
+	@FindBy(css = "#stateId_chosen>a")
+	public WebElement StateDropDwn;
+
+	@FindBy(id = "zipCode")
+	public WebElement PostalCodeTxtbox;
+
+	@FindBy(css = "button[class*='cancel']")
+	public WebElement CancelBtn;
+
+	@FindBy(css = "button[type*='reset']")
+	public WebElement ClearBtn;
+
+	@FindBy(css = "button[type*='submit']")
+	public WebElement SaveBtn;
+
+	@FindBy(xpath = "//table[contains(@class,'grid')]/../..//td[2]")
+	public List<WebElement> GetAddress1;
+
+	@FindBy(css = "a[href*='edit'][href*='Address']")
+	public List<WebElement> GetAddressedit;
+
+	/**
+	 * Method Name addUserAddress : Add user address
+	 * 
+	 * @param testData
+	 *            : LinkedHashMap<String, String> testData
+	 */
+
+	public String addUserAddress(LinkedHashMap<String, String> testData) {
+
+		Reporter.log(" Adding User Address");
+		lavanteUtils.switchtoFrame(null);
+		clickAddAddress();
+		String address1 = fillDetails(testData);
+		formAction(testData);
+		return address1;
+	}
+
+	/**
+	 * Method Name editUserAddress : Edit user address
+	 * 
+	 * @param testData
+	 *            : LinkedHashMap<String, String> testData
+	 * 
+	 */
+
+	public void editUserAddress(LinkedHashMap<String, String> testData) {
+
+		Reporter.log(" Edit User Address");
+		fillDetails(testData);
+		formAction(testData);
+	}
+
+	private void clickAddAddress() {
+
+		lavanteUtils.waitforPageload(AddAddressBtn);
+		lavanteUtils.fluentwait(AddAddressBtn);
+		lavanteUtils.click(AddAddressBtn);
+		lavanteUtils.waitForTime(7000);
+	}
+
+	/**
+	 * Method Name FillDetails : ADD/Edit New Address : will add/edit new
+	 * address
+	 * 
+	 * @param testData
+	 *            : LinkedHashMap<String, String> testData
+	 * 
+	 */
+	private String fillDetails(LinkedHashMap<String, String> testData) {
+
+		String address1 = null;
+		lavanteUtils.waitForTime(4000);
+		lavanteUtils.switchtoFrame(IframeAddAddress);
+		if (testData.containsKey("Address1")) {
+			Address1TxtBox.clear();
+			address1 = lavanteUtils.typeString(testData.get("Address1"), Address1TxtBox);
+		}
+		if (testData.containsKey("City")) {
+			CityTxtBox.clear();
+			lavanteUtils.typeinEdit(testData.get("City"), CityTxtBox);
+		}
+		if (testData.containsKey("Country")) {
+			lavanteUtils.click(CountryDropDwn);
+			lavanteUtils.selectvalueFrmDpdn(testData.get("Country"));
+			lavanteUtils.switchtoFrame(IframeAddAddress);
+		}
+		if (testData.containsKey("State")) {
+			lavanteUtils.click(StateDropDwn);
+			lavanteUtils.selectvalueFrmDpdn(testData.get("State"));
+			lavanteUtils.switchtoFrame(IframeAddAddress);
+		}
+		if (testData.containsKey("PostalCode")) {
+			PostalCodeTxtbox.clear();
+			lavanteUtils.typeinEdit(testData.get("PostalCode"), PostalCodeTxtbox);
+		}
+		return address1;
+	}
+
+	/**
+	 * Method Name : formAction : Save/Cancel/Delete user
+	 * 
+	 * @param testData:
+	 *            LinkedHashMap<String, String> testData
+	 * 
+	 */
+	private void formAction(LinkedHashMap<String, String> testData) {
+
+		if (testData.containsKey("Save")) {
+			lavanteUtils.click("SaveBtn", SaveBtn);
+		}
+		if (testData.containsKey("Clear")) {
+			lavanteUtils.click("ClearBtn", ClearBtn);
+		}
+		if (testData.containsKey("Cancel")) {
+			lavanteUtils.click("CancelBtn", CancelBtn);
+		}
+		lavanteUtils.waitForTime(7000);
+		lavanteUtils.switchtoFrame(null);
+	}
+	
+	
+	//Sanity
+	public void verifyAddressPageDisplayed() {
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.verifyElementDisplayed("AddressButton", AddAddressBtn);
+	}
+	
+
+}

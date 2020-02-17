@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Sanity Test Suite" parallel="tests" preserve-order="true"  thread-count="1" verbose="1">
+	
+	<listeners>
+		 <listener class-name="com.lavante.sim.Common.Util.ExtentReporterNG"/>
+	 </listeners>
+	 
+	<!-- Running on IE 11 -->
+<!-- 	  <test preserve-order="true" thread-count="1"
+		name="Lavante SIM - Running on IE">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="internet Explorer" />
+		<parameter name="Version" value="11" />
+		<classes> 
+
+	 	</classes>
+
+	</test> 
+		 -->
+	<!-- Running on FF 35 -->
+	<!-- <test preserve-order="true" thread-count="1"
+		name="Lavante SIM - Running on Firefox">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="firefox" />
+		<parameter name="Version" value="44" />
+		<classes>
+		
+		</classes>
+	</test>   -->
+    <!-- Running on Chrome 46 -->
+	 <test preserve-order="true" name="Lavante SIM - Running on Chrome" group-by-instances="true">	
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="chrome" />
+		<parameter name="Version" value="47" />
+		<classes>				
+				<class name="com.lavante.sim.customer.TestScripts.SanityTest.SIMSanityTest01" />	
+			   <!--  <class name="com.lavante.sim.customer.TestScripts.SanityTest.SIMSanityTest02" />	
+			    <class name="com.lavante.sim.customer.TestScripts.SanityTest.SIMSanityTestAdmin03" />	 -->
+				<class name="com.lavante.sim.customer.TestScripts.SanityTest.SIMSanityTest" />	 
+		</classes>
+	</test>
+
+ 	  
+</suite> 

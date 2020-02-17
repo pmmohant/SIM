@@ -1,0 +1,684 @@
+package com.lavante.sim.customer.TestScripts.Supplier.Search;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.SupplierSearchDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * Created on 19-2-2016 Created for Supplier Search Ended on 19-02-2016
+ * 
+ * @author Piramanayagam.S
+ *
+ */
+public class SupplierAdvancedSearchTC002 extends PageInitiator {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String emailID = "";
+	String customerId = "";
+
+	
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * 
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;
+
+		List<?> listofdatafrm = lavanteUtils.login("Search-Tax", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		emailID = LdataMap.get("username");
+		customerId=(String) listofdatafrm.get(1);
+		
+		// Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+	}
+
+	@BeforeMethod
+	public void before() {
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		dataMap.put("maintab", "Supplier");
+		enobjhomePage.selectTab(dataMap);
+
+		lavanteUtils.waitForTime(3000);
+
+	}
+
+	/**
+	 * Supplier Product Service
+	 * 
+	 * Replica of customer advanced search 3
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "ProductServices", dataProviderClass = SupplierSearchDataProvider.class)
+	public void ProductServiceSearch001(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for Adv Search:" + currenttime());
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+		dataMap.put("Search", "");
+
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Query Returned with Search data");
+			Reporter.log("Supplier: "+enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0).getText(),true);
+			
+			lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0));
+
+			dataMap.put("maintab", "Supplier Managed");
+			dataMap.put("subtab", "Specific");
+			enviewSupplier.selectTab(dataMap);
+
+			lavanteUtils.fluentwait(enviewSupplier.TypeofProduct());
+			String productType = enviewSupplier.TypeofProduct().getText();
+			String x = dataMap.get("ProductType");
+			Reporter.log("Type of Product,Expected:" + x + ", Value,in app:" + productType);
+			softAssert.assertEquals(productType, x,	"Type of Product Not Matched,Please Retest:" + x + ",In app:" + productType);
+
+			productType = enviewSupplier.ProductServices().getText();
+			String[] data = ensupplierAdvanced.split(dataMap.get("ProductServices"));
+			Reporter.log("Product/Service,Expected:" + data[1] + ", Value,in app:" + productType);
+			softAssert.assertTrue(productType.contains(data[1]),"Product/Service  Result Not Matched,Please Retest:" + data[1] + ",In app:" + productType);
+
+			flag = true;
+
+		} else {
+			Reporter.log("No Supplier Found for this Search");
+
+		}
+
+		if (flag == false) {
+			softAssert.assertTrue(false, "DATA NOT AVAILABLE");
+			Reporter.log("Please Add test data for this Search and RETEST");
+		}
+
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for PRoduct Services Search at:" + currenttime());
+	}
+
+	/**
+	 * Supplier Geo Scope
+	 * 
+	 * Replica of customer advanced search 4
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "GeoScope", dataProviderClass = SupplierSearchDataProvider.class)
+	public void GeographicalScopeSearch002(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for Adv Search:" + currenttime());
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Query Returned with Search data");
+			Reporter.log("Supplier: "+enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0).getText(),true);
+
+			lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0));
+
+			lavanteUtils.switchtoFrame(null);
+
+			lavanteUtils.fluentwait(enviewSupplier.geoScope());
+			String productType = enviewSupplier.geoScope().getText();
+			String x = dataMap.get("GeoScope");
+			Reporter.log("GeoScope,Expected:" + x + ", Value,in app:" + productType);
+			softAssert.assertEquals(productType, x,	"GeoScope Not Matched,Please Retest:" + x + ",In app:" + productType);
+
+			flag = true;
+
+		} else {
+			Reporter.log("No Supplier Found for this Search");
+
+		}
+
+		if (flag == false) {
+			softAssert.assertTrue(false, "DATA NOT AVAILABLE");
+			Reporter.log("Please Add test data for this Search and RETEST");
+		}
+
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for Geo Scope ADV Search at:" + currenttime());
+	}
+
+	/**
+	 * Supplier Currency Scope
+	 * 
+	 * Replica of customer advanced search 5
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "CurrencySearch", dataProviderClass = SupplierSearchDataProvider.class)
+	public void CurrencySearch003(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for Adv Search-Currency:" + currenttime());
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Query Returned with Search data");
+			Reporter.log("Supplier: "+enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0).getText(),true);
+
+			lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0));
+
+			lavanteUtils.switchtoFrame(null);
+
+			lavanteUtils.fluentwait(enviewSupplier.currencytype());
+			String productType = enviewSupplier.currencytype().getText().trim();
+			String x = dataMap.get("Currency").trim();
+			if (x.contains(" - ")) {
+				String[] splitx = x.split(" - ");
+				x = splitx[0].trim();
+			}
+			Reporter.log("Currency,Expected:" + x + ", Value,in app:" + productType);
+			softAssert.assertTrue(productType.contains(x),	"Currency Not Matched,Expected:" + x + ",In app:" + productType);
+
+			flag = true;
+
+		} else {
+			Reporter.log("No Supplier Found for this Search");
+
+		}
+
+		if (flag == false) {
+			softAssert.assertTrue(false, "DATA NOT AVAILABLE");
+			Reporter.log("Please Add test data for this Search and RETEST");
+		}
+
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for Currency ADV Search at:" + currenttime());
+	}
+
+	/**
+	 * Supplier Business ethics Search
+	 * 
+	 * Replica of customer advanced search 6
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "BusinessEthicSearch", dataProviderClass = SupplierSearchDataProvider.class)
+	public void BusinessEthicSearch004(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for Adv Search-Business ethics:" + currenttime());
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		String x = dataMap.get("BusinessEthics");
+		if (x.equalsIgnoreCase("Yes")) {
+			x = "Business Ethics Policy";
+
+			if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+				Reporter.log("Query Returned with Search data");
+				Reporter.log("Supplier: "+enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0).getText(),true);
+
+				lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0));
+
+				dataMap.put("maintab", "Supplier Managed");
+				dataMap.put("subtab", "Certifications");
+				enviewSupplier.selectTab(dataMap);
+
+				lavanteUtils.fluentwait(enviewSupplier.haveinsurance());
+				outr: for (int i = 0; i < enviewSupplier.doctype().size(); i++) {
+					String docType = enviewSupplier.doctype().get(i).getText();
+
+					if (docType.equalsIgnoreCase(x)) {
+
+						System.out.println("Doc Type ,Expected:" + x + ", Value,in app:" + docType);
+						Reporter.log("Doc Type,Expected:" + x + ", Value,in app:" + docType);
+						softAssert.assertEquals(docType, x,	"Doc Type Not Matched,Please Retest:" + x + ",In app:" + docType);
+
+						docType = enviewSupplier.doccertifiedStatus().get(i).getText();
+						x = dataMap.get("BusinessEthicsUploaded");
+						Reporter.log("Doc Certified Status,Expected:" + x + ", Value,in app:" + docType);
+						softAssert.assertEquals(docType, x,		"Doc Certified Status Not Matched,Please Retest:" + x + ",In app:" + docType);
+						flag = true;
+						break outr;
+					}
+				}
+
+			} else {
+				Reporter.log("No Supplier Found for this Search");
+			}
+
+		} else {
+			Reporter.log("No Supplier Found for the NO Search of Business Ethics");
+			flag = true;
+		}
+
+		if (flag == false) {
+			softAssert.assertTrue(false, "DATA NOT AVAILABLE");
+			Reporter.log("Please Add test data for this Search and RETEST");
+		}
+
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for Business ethics ADV Search at:" + currenttime());
+	}
+
+	/**
+	 * Invite Search 
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "InviteSearch", dataProviderClass = SupplierSearchDataProvider.class)
+	public void InviteSearch005(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for Adv Search-Invite Advance Search:" + currenttime());
+		
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+
+		dataMap.put("Search","");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+				Reporter.log("Query Returned with Search data");
+				Reporter.log("Supplier: "+enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0).getText(),true);
+			
+				dataMap.put("SearchOption", "Invites");
+				enobjsupplierPage.searchView(dataMap);
+				
+				String suppStatus=enobjsupplierPage.getColumnText("Profile Status", 0);
+				String inviteid=enobjsupplierPage.getColumnText("Invitation ID",0);
+				
+				if(dataMap.containsKey("InviteID")){
+					String x = dataMap.get("InviteID");
+					String[] sp = x.split(",");
+					Reporter.log("Invite ID,Expected:"+sp[1]+",Actual:"+inviteid);
+					softAssert.assertTrue(inviteid.contains(sp[1]),"Invite ID Not matched");
+					flag=true;
+				}
+				
+				if(dataMap.containsKey("InviteProfStatus")){
+					String x = dataMap.get("InviteProfStatus");
+					Reporter.log("Invite Prof Status,Expected:"+x+",Actual:"+inviteid);
+					softAssert.assertEquals(suppStatus, x,"Invite Profile status Not matched");
+					flag=true;
+				}
+
+			}  else {
+			Reporter.log("No Supplier Found for the NO Search of Invite Search");
+			flag = true;
+		}
+
+		if (flag == false) {
+			softAssert.assertTrue(false, "DATA NOT AVAILABLE");
+			Reporter.log("Please Add test data for this Search and RETEST");
+		}
+
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for Invite Advance Search at:" + currenttime());
+	}
+
+	/**
+	 * Invitedby Search Replacement of CustomerSupplierSearchTC0013
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * 
+	 * 
+	 */
+	@Test
+	public void InvitedBySearch() throws Exception {
+		Reporter.log("Test Started for Adv Search:"+ currenttime());
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<String, String>();
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+
+		/*String query = " select MAX(ContactName) From Contact C where C.ContactID in (Select InvitedBy_CustomerContactMapID from Invite where  RelationshipID in ("
+				+ " select RelationshipID From Relationship where CustomerID="+customerId+"))";
+		query = lavanteUtils.fetchDBdata(query);*/
+		enobjsupplierPage.selectChangeView("Invites");
+		enobjsupplierPage.searchResultsFilterBy("All");
+		String invtdby="";
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			invtdby= enobjsupplierPage.iterateSearchHeaderFindColList("Invited By").get(0).getText();
+		}
+		
+		dataMap.put("Tab", "Invite");
+		dataMap.put("InvitedBY", invtdby );
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Query Returned with Search data");
+
+			Reporter.log("Supplier: "+enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0).getText(),true);
+			lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0));
+			lavanteUtils.switchtoFrame(null);
+
+			dataMap.put("maintab", "Enterprise");
+			dataMap.put("subtab", "viewEnterpriseHeaderInformation");
+			enviewSupplier.selectTab(dataMap);
+			lavanteUtils.fluentwait(enviewSupplier.invitedby());
+
+			String actualinvitedBY = enviewSupplier.invitedBY().getText();
+			Reporter.log("Invited By,Expected," + invtdby + ",Actual:"+ actualinvitedBY);
+			softAssert.assertEquals(actualinvitedBY, invtdby,"Invited By Not Matched:" + actualinvitedBY);
+
+			flag = true;
+
+		}
+
+		if (flag == false) {
+			softAssert.assertTrue(false, "DATA NOT AVAILABLE");
+			Reporter.log("Please Add test data for this Search and RETEST");
+		}
+
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for TAX Legal ID Search at:"+ currenttime());
+	}
+
+	/**
+	 * Approved Search Replacement of CustomerSupplierSearchTC0013
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "ApprovedSearch", dataProviderClass = SupplierSearchDataProvider.class)
+	public void InviteApprovedSearch(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for Invite Approved  Adv Search:"+ currenttime());
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+
+		enobjsupplierPage.selectChangeView("Invites");
+
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Query Returned with Search data");
+			Reporter.log("Supplier: "+enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0).getText(),true);
+			
+			String actualinvitedBY = enobjsupplierPage.getColumnText("Status",	0);
+			String expected = "Approved";
+			Reporter.log("Approved Search,Expected," + expected + ",Actual:"+ actualinvitedBY);
+			softAssert.assertEquals(actualinvitedBY, expected,"Invited By Not Matched:" + actualinvitedBY);
+
+			flag = true;
+
+		}
+
+		if (flag == false) {
+			softAssert.assertTrue(false, "DATA NOT AVAILABLE");
+			Reporter.log("Please Add test data for this Search and RETEST");
+		}
+
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for Invite Approved Advanced Search at:"+ currenttime());
+	}
+
+	/**
+	 * TaxLegalID Search Replacement of CustomerSupplierSearchTC0013
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "TAXIDLegalDocSearch", dataProviderClass = SupplierSearchDataProvider.class)
+	public void TAXLegalIDSearch(LinkedHashMap<String, String> dataMap)	throws Exception {
+		Reporter.log("Test Started for Adv Search:"	+ currenttime());
+
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+		dataMap.put("Clear", "");
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Query Returned with Search data");
+			Reporter.log("Supplier: "+enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0).getText(),true);
+			
+			lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0));
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.fluentwait(enviewSupplier.countryofReg());
+
+			String taxIdNum = enviewSupplier.taxIDNum().getText();
+			String[] data = ensupplierAdvanced.split(dataMap.get("TaxIDNumber"));
+			if(data[1].equalsIgnoreCase("Is Not Empty")){
+				Reporter.log("Tax ID ,Expected Some Value ,Actual:" + taxIdNum);
+				softAssert.assertTrue(taxIdNum.length()>0, "Tax ID Not Matched:"+ taxIdNum);
+			}
+
+			String legalDoc = enviewSupplier.LegalIDDoc().getText();
+			Reporter.log("Legal Doc ,Expected:Some  document,Actual:"+ legalDoc);
+			softAssert.assertTrue(legalDoc.length() > 0, "Legal Doc Not Found:"	+ legalDoc);
+
+			flag = true;
+
+		}
+
+		if (flag == false) {
+			softAssert.assertTrue(false, "DATA NOT AVAILABLE");
+			Reporter.log("Please Add test data for this Search and RETEST");
+		}
+
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for TAX Legal ID Search at:"+ currenttime());
+	}
+
+	/**
+	 * TaxLegalID Search Replacement of CustomerSupplierSearchTC0013
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * Bug Raised
+	 */
+	@Test(dataProvider = "TAXIDLegalDocSearch", dataProviderClass = SupplierSearchDataProvider.class)
+	public void LegalIDandDocSearch(LinkedHashMap<String, String> dataMap) 	throws Exception {
+		Reporter.log("Test Started for Adv Search:"	+ currenttime());
+
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+		dataMap.put("Clear", "");
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Query Returned with Search data");
+			Reporter.log("Supplier: "+enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0).getText(),true);
+			lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0));
+
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.fluentwait(enviewSupplier.taxIDNum());
+
+			String taxIdNum = enviewSupplier.taxIDNum().getText();
+			Reporter.log("Tax ID ,Expected,Some Number,Actual:" + taxIdNum);
+			softAssert.assertTrue(taxIdNum.length()>0, "Tax ID Not Matched:"+ taxIdNum);
+
+			String legalDoc = enviewSupplier.LegalIDDoc().getText();
+			Reporter.log("Legal Doc ,Expected:Some  document,Actual:"	+ legalDoc);
+			softAssert.assertTrue(legalDoc.length() > 0, "Legal Doc Not Found:"+ legalDoc);
+
+			flag = true;
+
+		}
+
+		if (flag == false) {
+			softAssert.assertTrue(false, "DATA NOT AVAILABLE");
+			Reporter.log("Please Add test data for this Search and RETEST");
+		}
+
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for TAX Legal ID Search at:"+ currenttime());
+	}
+
+	/**
+	 * Supplier PaymentInfoSearch
+	 * 
+	 * Replica of CustomerSupplierAdvanceSearchTC0008
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	@Test(dataProvider = "PaymentInfoSearch", dataProviderClass = SupplierSearchDataProvider.class)
+	public void PaymentInfoSearch01(LinkedHashMap<String, String> dataMap) throws Exception {
+		Reporter.log("Test Started for Payment Info Adv Search:"+ currenttime());
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag = false;
+
+		lavanteUtils.click(ensupplierAdvanced.advtab());
+		dataMap.put("Clear", "");
+		dataMap.put("Search", "");
+		ensupplierAdvanced.buildQuery(dataMap);
+
+		lavanteUtils.switchtoFrame(enobjsupplierPage.SearchListIFRAME());
+		if (enobjsupplierPage.iterateSearchHeaderFindColList("Name").size() > 0) {
+			Reporter.log("Query Returned with Search data");
+			Reporter.log("Supplier: "+enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0).getText(),true);
+
+			lavanteUtils.click(enobjsupplierPage.iterateSearchHeaderFindColList("Name").get(0));
+
+			dataMap.put("maintab", "Supplier Managed");
+			dataMap.put("subtab", "Treasury");
+			enviewSupplier.selectTab(dataMap);
+
+			//select * from CustomerMetadata where ProfileMetadataID=8500  -Offer is configurable
+			lavanteUtils.fluentwait(enviewSupplier.PaymentType());
+			String act = enviewSupplier.Discountoffer().getText();
+			Reporter.log("Discount Offer Expected:"	+ dataMap.get("OfferEarlyDiscount") + ",actual:" + act,true);
+			softAssert.assertEquals(act,dataMap.get("OfferEarlyDiscount"),"Discount Offer Not Matched,Expected:"+ dataMap.get("OfferEarlyDiscount") + ",actual"	+ act);
+
+			act = enviewSupplier.PaymentType().getText();
+			Reporter.log("Payment Type Expected:" + dataMap.get("PaymentType")	+ ",actual:" + act,true);
+			softAssert.assertTrue(act.contains(dataMap.get("PaymentType")),"Payment Type Not Matched,Expected:" + act);
+
+			flag = true;
+
+		} else {
+			Reporter.log("No Supplier Found for this Search");
+			softAssert.assertTrue(flag, "DATA NOT AVAILABLE");
+			flag=true;
+		}
+
+		softAssert.assertTrue(flag, "Please Retest");
+		softAssert.assertAll();
+
+		Reporter.log("Test Ended for Supplier Payment Info Search at:"	+ currenttime());
+
+	}
+	
+	/**
+	 * SetupAfter method closes any popup
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@AfterMethod
+	public void SetupAftermethod() {
+		enobjhomePage.backtoSearch();
+		lavanteUtils.refreshPage();
+		// enobjsupplierPage.selectSearchType("ALL");
+	}
+
+	/**
+	 * SetupAfter Class closes any popup and Closes the Browser and Driver
+	 * 
+	 * @author Piramanayagam.S
+	 */
+	@AfterClass
+	public void SetupafterClassmethod() {
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+}

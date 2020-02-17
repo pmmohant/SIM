@@ -1,0 +1,181 @@
+package com.lavante.sim.customer.pageobjects.Admin;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Reporter;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+/**
+ * 
+ * @author Vidya.C
+ */
+public class PaymentCenterMappingPage {
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	
+	public PaymentCenterMappingPage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+	}
+		
+	@FindBy(css = "button[href*='addEditPaymentCenterMapping']")
+	private WebElement AddMapping;
+	public WebElement AddMapping(){
+		return AddMapping;
+	}
+	
+	@FindBy(css = "iframe[src*='addEditPaymentCenterMapping']")
+	public WebElement IframePaymentCenter;
+	
+	@FindBy(css = "[id*='paymentCenterId'] a")
+	private WebElement PaymentCntrMapDropDwn;
+	public WebElement PaymentCntrMapDropDwn(){
+		return PaymentCntrMapDropDwn;
+	}
+	
+	@FindBy(css = "div[id*='customerOrganizations']>ul>li a")
+	public List<WebElement> ListDivision;
+	
+	@FindBy(css = "div[id*='customerOrganizations']>ul>li")
+	private WebElement DivisionSearchBox;
+	public WebElement DivisionSearchBox(){
+		return DivisionSearchBox;
+	}
+	
+	@FindBy(css = "button[value='Save']")
+	private WebElement AddNewMappingSaveBtn;
+	public WebElement AddNewMappingSaveBtn(){
+		return AddNewMappingSaveBtn;
+	}
+	
+	@FindBy(css = "div[class*='dialog'] [class*='primary']")
+	private WebElement OkBtn;
+	public WebElement OkBtn(){
+		return OkBtn;
+	}
+	
+	@FindBy(css = "button[value='Reset']")
+	private WebElement AddNewMappingResetBtn;
+	public WebElement AddNewMappingResetBtn(){
+		return AddNewMappingResetBtn;
+	}
+	
+	@FindBy(css = "button[class*='cancel']")
+	private WebElement AddNewMappingCancelBtn;
+	public WebElement AddNewMappingCancelBtn(){
+		return AddNewMappingCancelBtn;
+	}
+	
+	@FindBy(css = "ul[class='chosen-results'] li")
+	private List<WebElement> Selectpymntcenter;
+	public List<WebElement> Selectpymntcenter(){
+		return Selectpymntcenter;
+	}
+	
+	@FindBy(css = "div[class*='dialog'] button[class*='primary']")
+	private WebElement DeleteBtn;
+	public WebElement DeleteBtn(){
+		return DeleteBtn;
+	}
+	
+	@FindBy(css = "span[class='error']")
+	private WebElement Errormsg;
+	public WebElement Errormsg(){
+		return Errormsg;
+	}
+	
+	@FindBy(css=".bannerMessage")
+	private WebElement bannerMsg;
+	public WebElement bannerMsg(){
+		return bannerMsg;
+	}
+	
+		
+	@FindBy(css = "[id*='manage-buyer-pages'] table[class] tbody td:nth-child(1)")
+	public List<WebElement> ListPaymentCntrName;
+	
+	@FindBy(css = "[id*='manage-buyer-pages'] table[class] tbody td:nth-child(2)")
+	public List<WebElement> ListDivisionName;
+	
+	@FindBy(css = "a[href*='edit']")
+	public List<WebElement> ListEditPaymentCntrMapping;
+	
+	@FindBy(css = "a[href*='delete']")
+	public List<WebElement> ListDeletePaymentCntrMapping;
+	
+	/**
+	 * MethodName : addNewMapping : will add new payment center mapping
+	 * 
+	 * @param testData
+	 *            : LinkedHashMap<String, String> testData
+	 *            
+	 * @author Vidya.C
+	 */
+
+	public LinkedHashMap<String, String> addNewMapping(LinkedHashMap<String, String> testData) {
+		
+		Reporter.log("Adding new mapping");
+		
+		clickAddMapping();
+		LinkedHashMap<String, String> dataMap=fillPaymentMapping(testData);
+		formAction(testData);
+		return dataMap;
+	}
+
+	private void clickAddMapping() {
+		lavanteUtils.click(AddMapping);
+	}
+
+	public LinkedHashMap<String, String> fillPaymentMapping(LinkedHashMap<String, String> testData) {
+		String[] data = new String[6];
+		lavanteUtils.switchtoFrame(IframePaymentCenter);
+		
+		if (testData.containsKey("PaymentCenterMaping")) {
+			lavanteUtils.click(PaymentCntrMapDropDwn);
+			data[0]=lavanteUtils.selectvalueFrmDpdn(testData.get("PaymentCenterMaping"));	
+			testData.put("PaymentCenterMaping", data[0]);
+			lavanteUtils.switchtoFrame(IframePaymentCenter);
+		}
+		if (testData.containsKey("Division")) {
+			String org = testData.get("Division");
+			if(org.equalsIgnoreCase("ANY")){
+				int size=ListDivision.size();
+				for(int i=0;i<size;i++){
+					//Unselecting
+					lavanteUtils.click(ListDivision.get(0));
+					size=ListDivision.size();
+					
+				}
+			}
+			lavanteUtils.click(DivisionSearchBox);
+			data[1]=lavanteUtils.selectvalueFrmDpdn(org);
+			testData.put("Division", data[1]);
+			lavanteUtils.switchtoFrame(IframePaymentCenter);
+			}
+		
+		return testData;
+	}
+	
+	public void formAction(LinkedHashMap<String, String> testData) {
+		lavanteUtils.switchtoFrame(IframePaymentCenter);
+		if (testData.containsKey("Save")) {
+			lavanteUtils.click(AddNewMappingSaveBtn);
+			lavanteUtils.switchtoFrame(null);
+		}
+		
+		if(testData.containsKey("Reset")) {
+			lavanteUtils.click(AddNewMappingResetBtn);
+			lavanteUtils.click(AddNewMappingResetBtn);
+			lavanteUtils.switchtoFrame(null);
+		}
+		
+		if(testData.containsKey("Cancel")) {
+			lavanteUtils.click(AddNewMappingCancelBtn);
+			lavanteUtils.switchtoFrame(null);
+		}
+	}
+}

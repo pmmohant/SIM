@@ -1,0 +1,8 @@
+
+lsquid:S1226	">Introduce a new variable instead of reusing the parameter "i".(ÆÀ¬¹Hš®?RMINORZ
+CODE_SMELL
+lsquid:S1226	">Introduce a new variable instead of reusing the parameter "i".(ÆÀ¬¹H›®?RMINORZ
+CODE_SMELL
+m
+squid:S106";Replace this usage of System.out or System.err by a logger.(Çû¤ÃÿÿÿÿÿHœ®?RMAJORZ
+CODE_SMELL

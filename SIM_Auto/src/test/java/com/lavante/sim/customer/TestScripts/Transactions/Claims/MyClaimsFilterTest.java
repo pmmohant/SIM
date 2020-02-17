@@ -1,0 +1,298 @@
+package com.lavante.sim.customer.TestScripts.Transactions.Claims;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+/**
+ * SIM-16382  Changes to My Claim Filter
+ * @author Piramanayagam.S
+ *
+ */
+public class MyClaimsFilterTest extends PageInitiator{
+
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String username="";
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+					throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP1();
+	}
+	
+	/**
+	 * Test script to verify the My Claims filter feature for buyer user. The claims created by buyer user should not be listed in 
+	 * My claims of other users (Kroger Clerk).
+	 * 
+	 * SIM-16382  -My CLaim Filter
+	 * 
+	 * @throws Exception
+	 * @author Girish.N
+	 */
+	@Test
+	public void myClaimsFilterCustomerTest() throws Exception {
+		Reporter.log("<---------------------Test Started for myClaimsFilterCustomerTest: " + currenttime(),true);
+		
+		lavanteUtils.driver = driver;
+
+		List<?> listofdatafrm = lavanteUtils.login("CustomerKrogerAdmin", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+
+		// Login
+		if(LdataMap.containsKey("username")){
+			username=LdataMap.get("username");
+		}
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+
+		LdataMap.put("maintab","Transactions");
+		LdataMap.put("subtab", "customerClaimResult");
+		enobjhomePage.selectTab(LdataMap);
+		lavanteUtils.waitForTime(3000);
+		
+		SoftAssert softAssert = new SoftAssert();
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();	
+		boolean flag=false;
+	
+		String query="select count(*) from Claim where CreatedBy = '"+username+"'";
+		String expBuyerMyClmsCount = fetchDBdata(query);
+		
+		Reporter.log("My Claim Radio button Visibility:"+enClaimsPage.myClaimsRadBtn1().isDisplayed());
+		softAssert.assertTrue(enClaimsPage.myClaimsRadBtn1().isDisplayed(),"My Claim radio is not shown ");
+		Reporter.log("All Claim Radio button Visibility:"+enClaimsPage.allClaimsRadBtn1().isDisplayed());
+		softAssert.assertTrue(enClaimsPage.allClaimsRadBtn1().isDisplayed(),"All Claim radio not Shown");
+		
+		Reporter.log("My Claim Radio button Selection Staus:"+enClaimsPage.myClaimsRadBtn1().isSelected());
+		softAssert.assertFalse(enClaimsPage.myClaimsRadBtn1().isSelected(),"My Claim radio is Selected");
+		Reporter.log("All Claim Radio button  Selection Staus:"+enClaimsPage.allClaimsRadBtn1().isSelected());
+		softAssert.assertTrue(enClaimsPage.allClaimsRadBtn1().isSelected(),"All Claim radio not Selected");
+		
+		click(enClaimsPage.myClaimsRadBtn());
+		lavanteUtils.waitForTime(4000);
+		waitforPageload(enClaimsPage.myClaimsRadBtn());
+		int actBuyerMyClmsCnt = getCount();
+		
+		softAssert.assertEquals(String.valueOf(actBuyerMyClmsCnt), expBuyerMyClmsCount,"Customer Login Claim count not matched with DB");
+		Reporter.log("Expected My Claims Count:"+ expBuyerMyClmsCount+"::Actual My Claims Count:" +actBuyerMyClmsCnt, true);
+		
+		//To validate the claim listed in my claim is listed in all claims of the buyer and doesn't listed my claim of another user.
+		if(enClaimsPage.iterateSearchHeaderFindColList("Claim ID").size()>0){
+			String claimID = enClaimsPage.iterateSearchHeaderFindColList("Claim ID").get(0).getText().trim();
+			Reporter.log("Claim ID selected for My Claim Test:"+claimID,true);	
+			click(enClaimsPage.allClaimsRadBtn());
+			waitforPageload(enClaimsPage.myClaimsRadBtn());
+			
+			
+			dataMap.put("ClaimId", claimID);
+			dataMap.put("Search","");
+			enClaimsBasicSearch.Search(dataMap);
+			waitforPageload(enClaimsBasicSearch.Searchbtn());
+			
+			if(enClaimsPage.iterateSearchHeaderFindColList("Claim ID").size()>0){
+				String claimID1=enClaimsPage.iterateSearchHeaderFindColList("Claim ID").get(0).getText().trim();
+				Reporter.log("All Claim ID"+claimID1+",Expected:"+claimID);
+				softAssert.assertEquals(claimID1, claimID,"All Claims Seach Result in buyer");
+				
+				enobjhomePage.logout();
+				
+				listofdatafrm = lavanteUtils.login("KrogerClerk", browser);
+				LdataMap = new LinkedHashMap<String, String>();
+				LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		
+				// Login
+				enobjloginpage.logintoAPP(LdataMap);
+				enobjhomePage.close();
+				
+				dataMap.put("maintab","Transactions");
+				dataMap.put("subtab", "customerClaimResult");
+				enobjhomePage.selectTab(dataMap);
+				lavanteUtils.waitForTime(3000);
+				
+				enClaimsBasicSearch.Search(dataMap);
+				waitforPageload(enClaimsBasicSearch.Searchbtn());
+				
+				if(enClaimsPage.iterateSearchHeaderFindColList("Claim ID").size()>0){
+					String actClaimID=enClaimsPage.iterateSearchHeaderFindColList("Claim ID").get(0).getText().trim();
+					Reporter.log("All Claim ID in Other Login,"+claimID1+",Expected:"+claimID);
+					softAssert.assertEquals(actClaimID, claimID,"All Claims Seach Result in Other Login");
+					click(enClaimsPage.myClaimsRadBtn());
+					waitforPageload(enClaimsPage.myClaimsRadBtn());
+		
+					enClaimsBasicSearch.Search(dataMap);
+					fluentwait(enClaimsPage.myClaimsRadBtn());
+					if(enClaimsPage.iterateSearchHeaderFindColList("Claim ID").size()==0){
+						Reporter.log("My Claim ID in Other Login,"+claimID1+",Expected:0,Actual"+enClaimsPage.iterateSearchHeaderFindColList("Claim ID").size());
+						flag=true;
+					}else{
+						softAssert.assertTrue(false, "Claim is listed in My Claims of clerk");
+						flag=true;
+					}
+					
+				}else{
+					softAssert.assertTrue(false, "Claim is Not listed in All Claims of clerk");
+					flag=true;
+				}
+			}else{
+				softAssert.assertTrue(false, "Claim is Not listed in All Claims of Buyer");
+				flag=true;
+			}
+			
+		}else{
+			softAssert.assertTrue(false, "No data in Claims table. Please add test data(claims)");
+			flag=true;
+		}
+		
+		softAssert.assertTrue(flag,"Please Retest");
+		softAssert.assertAll();
+		Reporter.log("<---------------------Test Ended at:" + currenttime(),true);
+	}
+
+	/**
+	 * Test script to verify the My Claims filter feature for supplier user. The claims created by supplier user should not be listed in 
+	 * My claims of other users (Kroger buyer).
+	 * @throws Exception
+	 * @author Girish.N
+	 */
+	@Test
+	public void myClaimsFilterSupplierTest() throws Exception {
+		Reporter.log("<---------------------Test Started for myClaimsFilterCustomerTest: " + currenttime(),true);
+		
+		lavanteUtils.driver = driver;
+
+		List<?> listofdatafrm = lavanteUtils.login("SupplierKroger", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+
+		// Login
+		if(LdataMap.containsKey("username")){
+			username=LdataMap.get("username");
+		}
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String> ();	
+		SoftAssert softAssert = new SoftAssert();
+		boolean flag=false;
+		
+		dataMap.put("maintab","Claims");
+		enobjhomePage.selectTab(dataMap);
+		lavanteUtils.waitForTime(3000);
+	
+		dataMap.put("ClaimStatus", "Closed#Pending#Pending Update");
+		dataMap.put("Search","");
+		enClaimsBasicSearch.Search(dataMap);
+		
+		String query="select count(*) from Claim where CreatedBy = '"+username+"' and ClaimStatusID not in ('1')";
+		String expBuyerMyClmsCount = fetchDBdata(query);
+
+		click(enClaimsPage.myClaimsRadBtn());
+		lavanteUtils.waitForTime(4000);
+		waitforPageload(enClaimsPage.myClaimsRadBtn());
+		int actBuyerMyClmsCnt = getCount();
+		
+		softAssert.assertEquals(String.valueOf(actBuyerMyClmsCnt), expBuyerMyClmsCount,"Total My Claim Count Not matched");
+		Reporter.log("Expected My Claims Count:"+ expBuyerMyClmsCount+"::Actual My Claims Count:" +actBuyerMyClmsCnt, true);
+		
+		//To validate the claim listed in my claim doesn't listed my claim of another user.
+		if(enClaimsPage.iterateSearchHeaderFindColList("Claim ID").size()>0){
+			String claimID = enClaimsPage.iterateSearchHeaderFindColList("Claim ID").get(0).getText().trim();
+			Reporter.log("Claim ID selected for My Claim Test:"+claimID,true);
+			click(enClaimsPage.allClaimsRadBtn());
+			waitforPageload(enClaimsPage.myClaimsRadBtn());
+			
+			dataMap.put("ClaimId", claimID);
+			dataMap.put("Search","");
+			enClaimsBasicSearch.Search(dataMap);
+			
+			lavanteUtils.waitForTime(4000);
+			waitforPageload(enClaimsBasicSearch.Searchbtn());
+			
+			if(enClaimsPage.iterateSearchHeaderFindColList("Claim ID").size()>0){
+				String claimID1=enClaimsPage.iterateSearchHeaderFindColList("Claim ID").get(0).getText().trim();
+				Reporter.log("All Claim ID in Buyer Login,"+claimID1+",Expected:"+claimID);
+				softAssert.assertEquals(claimID1, claimID,"All Claims Seach Result in buyer");
+				
+				enobjhomePage.logout();
+				
+				listofdatafrm = lavanteUtils.login("CustomerKrogerAdmin", browser);
+				LdataMap = new LinkedHashMap<String, String>();
+				LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0);
+		
+				// Login
+				enobjloginpage.logintoAPP(LdataMap);
+				enobjhomePage.close();
+				
+				dataMap.put("maintab","Transactions");
+				dataMap.put("subtab", "customerClaimResult");
+				enobjhomePage.selectTab(dataMap);
+				lavanteUtils.waitForTime(3000);
+				
+				enClaimsBasicSearch.Search(dataMap);
+				
+				waitForTime(4000);
+				waitforPageload(enClaimsBasicSearch.Searchbtn());
+				int size=enClaimsPage.iterateSearchHeaderFindColList("Claim ID").size();
+				if(size>0){
+					String actClaimID=enClaimsPage.iterateSearchHeaderFindColList("Claim ID").get(0).getText().trim();
+					Reporter.log("All Claim ID in Buyer Login,"+claimID1+",Expected:"+claimID);
+					softAssert.assertEquals(actClaimID, claimID,"All Claims Seach Result in Buyer");
+					click(enClaimsPage.myClaimsRadBtn());
+					waitforPageload(enClaimsPage.myClaimsRadBtn());
+					
+					enClaimsBasicSearch.Search(dataMap);
+					fluentwait(enClaimsPage.myClaimsRadBtn());
+					size=enClaimsPage.iterateSearchHeaderFindColList("Claim ID").size();
+					if(size==0){
+						Reporter.log("My Claim ID in Buyer Login,"+claimID1+",Expected:0,Actual"+size);
+						flag=true;
+					}else{
+						softAssert.assertTrue(false, "Claim is listed in My Claims of Buyer");
+						flag=true;
+					}
+					
+				}else{
+					softAssert.assertTrue(false, "Claim is Not listed in All Claims of Buyer");
+					flag=true;
+				}
+			}else{
+				softAssert.assertTrue(false, "Claim is Not listed in All Claims of Supplier");
+				flag=true;
+			}
+		}else{
+			softAssert.assertTrue(false, "No data in Claims table. Please add test data(claims)");
+			flag=true;
+		}
+		
+		softAssert.assertTrue(flag,"Please Retest");
+		softAssert.assertAll();
+		Reporter.log("<---------------------Test Ended at:" + currenttime(),true);
+	}
+	
+	//After method to logout the application as it uses two logins
+	@AfterMethod
+	public void afterMethod() {
+		enobjhomePage.logout();		
+	}
+	
+	
+	@AfterClass
+	public void SetupafterClassmethod() {
+		quitBrowser();		
+	}
+}

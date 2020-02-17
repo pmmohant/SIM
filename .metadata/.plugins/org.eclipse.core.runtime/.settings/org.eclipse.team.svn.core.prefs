@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+externalMigrateFromAuthorizationDatabase/isMigrated=true
+migrateFromAuthorizationDatabase/isMigrated=true
+repositories/508133f7b08c00171890893640818725=508133f7b08c00171890893640818725;svn\://10.10.1.21/var/svn/lavante/Automation/Configurator/trunk;svn\://10.10.1.21/var/svn/lavante/Automation/Configurator/trunk;branches;tags;trunk;true;4050d918-930f-4b9b-8298-5b1f94de948b;svn\://10.10.1.21/var/svn/lavante;;false;;;0
+repositories/80601dda9a9e001713d2a7a9f95c8aa6=80601dda9a9e001713d2a7a9f95c8aa6;svn\://10.10.1.21/var/svn/lavante/Automation/SIM/releases/Trunk;svn\://10.10.1.21/var/svn/lavante/Automation/SIM/releases/Trunk;branches;tags;trunk;true;4050d918-930f-4b9b-8298-5b1f94de948b;svn\://10.10.1.21/var/svn/lavante;;false;<svn\://10.10.1.21\:3690> 4050d918-930f-4b9b-8298-5b1f94de948b;;0
+repositories/80d4857a9b9e001713d2a7a9f95c8aa6=80d4857a9b9e001713d2a7a9f95c8aa6;svn\://10.10.1.21/var/svn/lavante/Automation/Recovery;svn\://10.10.1.21/var/svn/lavante/Automation/Recovery;branches;tags;trunk;true;4050d918-930f-4b9b-8298-5b1f94de948b;svn\://10.10.1.21/var/svn/lavante;;false;;;0

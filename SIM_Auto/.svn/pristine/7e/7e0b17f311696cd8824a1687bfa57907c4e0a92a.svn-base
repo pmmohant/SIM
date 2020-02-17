@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Upload File" parallel="tests"  preserve-order="true"  verbose="1" thread-count="3">
+	
+	<listeners>
+		 <listener class-name="com.lavante.sim.Common.Util.ExtentReporterNG"/>
+	 </listeners>
+	 
+	<!-- Running on FF 35 -->
+	<test preserve-order="false" thread-count="1"
+		name="Lavante SIM - Running on Firefox v35">
+		<parameter name="Platform" value="Windows" />
+		<parameter name="Browser" value="firefox" />
+		<!-- <parameter name="Version" value="34" /> -->
+		<classes>			
+			<class name="com.lavante.sim.customer.TestScripts.Admin.DownloadFile.UATDownloadTC" />
+							
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.UploadVMFFile" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.UploadVMFFileDUNSField" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.UploadVMFCountryField" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.UploadVMFFileLegalIDField" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.UploadVMFERP001" />
+				
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.UATContactFilesTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.UATAddressFilesTC" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.UATUploadFilesTC" />
+			
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.DivisionFile01" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.DivisionFileMapping01" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.DuplicateVMF001" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.EFTFile01" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.PaymentCenterFile01" />
+			<class name="com.lavante.sim.customer.TestScripts.Admin.UploadFile.PaymentTermFile01" />
+
+		</classes>
+	</test>  
+	
+ 	
+</suite> 

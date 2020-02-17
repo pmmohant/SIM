@@ -1,0 +1,33 @@
+#IDs
+all=All
+valid=Valid
+invalid=Invalid
+pending=Pending
+Cannotbevalidated=Cannot be validated
+addHeadquarterAddress=headquarterAddressId_chosen
+showDeactivatedSuppliers=showDeactivatedSuppliers
+#LinkS
+suppliers=Suppliers
+addresses=Addresses
+
+#Xpath
+supplierManagedTab=.//*[@id='main-navigation']/a[1]
+supplierContactTab=.//*[@id='sub-navigation']/a[6]
+#addressDetails=//table[contains(@style,'table-layout:auto')]/tbody/tr/td/span[contains(@class,'highlight_green')]
+addressDetails=//table[contains(@style,'table-layout: auto')]/tbody/tr/td/span[contains(@class,'highlight_green')]
+supplierLocation=.//*[@id='supplierLocation_chosen']/a/span
+selectSupplierLocation=//div[@id='supplierLocation_chosen']/div[contains(@class,'chosen-drop')]/ul/li
+addressRecordRows=//table[contains(@id,'supplier_address')]/tbody/tr[not(contains(@class,'data_not_found'))]
+#//table[contains(@id,'supplier_address')]/tbody/tr
+selectSupLocationRadioBtns=//div/table[contains(@id,'supplier_address')]/caption/div/label
+supplierNameLinkPrefix=html/body/div[6]/div/div/form/table/tbody/tr/td/div/div[2]/table/tbody/tr[
+supplierNameLinkSuffix=]/td[3]/a
+validAddressRows=//span[contains(@class,'icon_checked')]
+invalidAddressRows=//span[contains(@class,'icon_reject')]
+cannotBeValidatedRows=//span[contains(@class,'icon_info')]
+pendingAddressRows=//span[contains(@class,'icon_pending')]
+noDataAvailableRows=//table[contains(@id,'supplier_address')]/tbody/tr[contains(@class,'data_not_found odd')]
+#CSS
+popupCloseBtn=button[title='close'][type='button']
+#IFrame
+supBodyDisFrame=//iframe[contains(@class,'popup_iframe ui-dialog-content ui-widget-content')]

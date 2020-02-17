@@ -1,0 +1,1142 @@
+package com.lavante.sim.customer.pageobjects.Task;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.Common.Util.*;
+
+public class TasksApprovalPage {
+	
+	Properties prop=null;
+	LavanteUtils lavanteUtils=new  LavanteUtils();
+	SoftAssert sassert=new SoftAssert();
+	public WebDriver wdtask;
+	
+	/*String linkTasks="",linkApprovals="",pgtitle="",idsearch="",idsearchbtn="",xpathdropSearch="",xpathlistSearch="",xpathEditprofile="",xpathReject="",
+			xpathReassign="",xpathApprove="",xpathdropFilter="",xpathlistFilter="",xpathframeApprove="",xpathclearbtn="",xpathsubmitbtn="",xpathcomment="",
+			xpathclose="",xpathTableHeader="",xpathtableRows="",xpathtableRows2="",xpathtableradiobtn1="",xpathtableradiobtn2="",clsDataNotFound="",xpathTableHeaders="",
+			xpathRequiredRow1="",xpathRequiredRow2="",xpathframeReject="",xpathframeReassign="",xpathdropdwngroupbtn="",xpathdropdwnuserbtn="",xpathreassignbtn="",xpathlistgroup="",
+			xpathlistuser="",xpathclose1="",xpathpopupOK="";*/
+	
+	/**
+	 * Method Name : Constructor method
+	 * Purpose: Constructor method where we initialize the driver
+	 */
+	
+	public TasksApprovalPage(WebDriver driver){
+		lavanteUtils.driver=driver;
+		this.wdtask=driver;
+	}
+	
+	// Page Objects 
+	
+	@FindBy(linkText="Tasks")
+	private WebElement linkTasks;
+	
+	@FindBy(css="[id*='sub'] [href*='customerApprovals']")
+	private WebElement linkApprovals;
+	
+	@FindBy(xpath="//a[@title='Tasks']")
+	private WebElement Tasks;
+
+	@FindBy(id = "suppliersERPID_form")
+	private WebElement supplierERPDTable;
+	
+	@FindBy(id = "new-supplier-approval")
+	private WebElement newsupplierapprovalTable;
+	
+	@FindBy(css="div[id*='sub'] [href*='addSupplierERPID']")
+	private WebElement linkAddSupplierID;
+	
+	@FindBy(xpath="//a[@href='supplierRequireDisposition.lvp']")
+	private WebElement linkValidations;
+	
+	@FindBy(id="table_ofac")
+	private WebElement tablevalidations;
+	
+	@FindBy(id="suppliersDisposition_form")
+	private WebElement suppliersDisposition_form;
+	
+	@FindBy(css = "a[href*='Invoice']")
+	private WebElement linkInvoice;
+	
+	@FindBy(id = "invoice-approval-task")
+	private WebElement InvoiceApprovalsTable;
+	
+	
+	@FindBy(id = "invoice-approval-task")
+	private WebElement tableInvoiceApprovalsTasks;
+	
+	@FindBy(css = "a[href*='viewApprovalTasks']")
+	private WebElement linkReassignment;
+	
+	@FindBy(id = "new-supplier-approval")
+	private WebElement linkReassignmentPendingTasksTable;
+	
+	@FindBy(linkText = "Pending Update")
+	private WebElement linkReassignmentPendingUpdate;
+	
+	
+	
+	@FindBy(id = "new-supplier-approval" )
+	private WebElement tableReassignmentApprovalTasks;	
+	
+	@FindBy(linkText="//div[@id='searchSelect_chosen']//ul[@class='chosen-results']/li[2]")
+	private WebElement xpathlistSearch;
+	
+	String pgtitle = "Lavante SIM - Approvals";
+	
+	/*@FindBy(id="Approvals")
+	private WebElement Approvals;*/
+	
+	@FindBy(id="searchText")
+	private WebElement idsearch;
+	
+	@FindBy(id="searchSupplier")
+	private WebElement idsearchbtn;
+	
+	@FindBy(id="//div[@id='searchSelect_chosen']/a/div")
+	private WebElement xpathdropSearch;
+	
+/*	@FindBy(id="//div[@id='searchSelect_chosen']//ul[@class='chosen-results']/li[2]")
+	private WebDriver xpathdropSearch;*/
+	
+	@FindBy(id="//input[@title='Edit Profile']")
+	private WebElement xpathEditprofile;
+	
+	@FindBy(id="//input[@title='Reject']")
+	private WebElement xpathReject;
+	
+	@FindBy(id="//input[@title='Reassign']")
+	private WebElement xpathReassign;
+	
+	@FindBy(id="//input[@title='Approve']")
+	private WebElement xpathApprove;
+	
+	@FindBy(id="//div[@id='filterWorkflow_chosen']/a/div")
+	private WebElement xpathdropFilter;
+	
+	@FindBy(id="//div[@class='chosen-drop']/ul/li")
+	private WebElement xpathlistFilter;
+	
+	@FindBy(xpath="//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']")
+	private WebElement xpathframeReassign;
+	
+	@FindBy(id="//div[@id='customerGroup_chosen']/a")
+	private WebElement xpathdropdwngroupbtn;
+	
+	@FindBy(id="//div[@id='groupUser_chosen']/a")
+	private WebElement xpathdropdwnuserbtn;
+	
+	@FindBy(id="//form[@id='customerReassignForm']//input[@title='Clear']")
+	private WebElement xpathclearbtn;
+	
+	@FindBy(id="//*[@id='customerReassignForm']//input[@type='submit']")
+	private WebElement xpathreassignbtn;
+	
+	@FindBy(id="//div[@id='customerGroup_chosen']//ul/li")
+	private WebElement xpathlistgroup;
+	
+	@FindBy(id="//div[@id='groupUser_chosen']/div/ul/li")
+	private WebElement xpathlistuser;
+	
+	@FindBy(id="//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']")
+	private WebElement xpathframeApprove;
+	
+	/*@FindBy(id="//input[@title='Clear']")
+	private WebElement xpathclearbtn;*/
+	
+	@FindBy(id="//input[@title='Submit']")
+	private WebElement xpathsubmitbtn;
+	
+	@FindBy(id="//textarea[@id='comment']")
+	private WebElement xpathcomment;
+	
+	@FindBy(id="//div[12]/div[1]/button[starts-with(@class,'ui-button ui-widget') and contains(@class,'close')]/span[1]")
+	private WebElement xpathclose;
+	
+	@FindBy(id="//div[10]/div[1]/button[starts-with(@class,'ui-button ui-widget') and contains(@class,'close')]/span[1]")
+	private WebElement xpathclose1;
+	
+	@FindBy(id="//table[@id='new-supplier-approval']/thead/tr")
+	private WebElement xpathTableHeaders;
+	
+	//@FindBy(id="//table[@id='new-supplier-approval']/thead/tr/th")
+	private String xpathTableHeader = "//table[@id='new-supplier-approval']/thead/tr/th" ;
+	
+	@FindBy(id="//table[@id='new-supplier-approval']/tbody/tr")
+	private WebElement xpathtableRows;
+	
+	@FindBy(xpath="//form[@id='approve_customer']//table[@id='new-supplier-approval']//tr[1]//td[1]")
+	private WebElement xpathSupplierApproval_FirstRow;
+	
+	@FindBy(xpath="//form[@id='approve_customer']//table[@id='new-supplier-approval']//tr[1]//td[2]/a")
+	private WebElement link_SupplierApprovalNameLink_FirstRow;
+	
+	/*@FindBy(id="//table[@id='new-supplier-approval']/tbody/tr[")
+	private WebElement xpathtableradiobtn1;
+	
+	@FindBy(id="]/td[1]/input")
+	private WebElement xpathtableradiobtn2;*/
+	
+	@FindBy(css="data_not_found")
+	private WebElement clsDataNotFound;
+	
+	//@FindBy(id="//table[@id='new-supplier-approval']/tbody/tr/td[")
+	private String xpathtableRows2 = "//table[@id='new-supplier-approval']/tbody/tr/td[";
+	
+	//@FindBy(id="//table[@id='new-supplier-approval']/tbody/tr[")
+	private String xpathRequiredRow1 = "//table[@id='new-supplier-approval']/tbody/tr[";
+	
+	@FindBy(id="//td[")
+	private String xpathRequiredRow2 = "//td[";
+	
+	//@FindBy(id="//table[@id='new-supplier-approval']/tbody/tr[")
+	private String xpathtableradiobtn1 = "//table[@id='new-supplier-approval']/tbody/tr[";
+	
+	//@FindBy(id="]/td[1]/input")
+	private String xpathtableradiobtn2 = "]/td[1]/input";
+	
+	@FindBy(id="//div[@class='ui-dialog-buttonset']/button[@class='primary']")
+	private WebElement xpathpopupOK;
+	
+	@FindBy(id="//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']")
+	private WebElement xpathframeReject;
+	
+	@FindBy(xpath="//input[@name='editProfile']")
+	private WebElement xpathEditProfile_Button;
+	
+	@FindBy(id="GPVRCustomField13")
+	private WebElement descriptionOfServices;
+
+	@FindBy(id="saveexit_button")
+	private WebElement saveExit_button;
+	
+	/*@FindBy(id="//div[@class='ui-dialog-buttonset']/button")
+	private WebElement button_OK;*/
+	
+	@FindBy(xpath="//input[@name='sendMessage']")
+	private WebElement button_SendMail;
+	
+	@FindBy(xpath="//button[1]")
+	private WebElement button_Cancel;
+	
+	@FindBy(xpath = "//input[@name='rejectSupplier]'")
+	private WebElement button_Reject;
+	
+	@FindBy(id="comment")
+	private WebElement textField_RejectionComment;
+	
+	@FindBy(xpath="//input[@name='Submit']")
+	private WebElement button_Submit;
+	
+	@FindBy(xpath="//input[@name='reassignSupplier']")
+	private WebElement button_reassign;
+	
+	@FindBy(xpath=".//*[@id='assignType_role']")
+	private WebElement radioButton_role;
+	
+	@FindBy(xpath=".//*[@id='customerUserRole_chosen']")
+	private WebElement dropDown_role;
+	
+	@FindBy(xpath="//input[@name='Submit']")
+	private WebElement button_reassig2;
+	
+	@FindBy(xpath="//input[@name='approveSupplier']")
+	private WebElement button_Approve;
+	
+	@FindBy(id="comment")
+	private WebElement TextArea_Comments;
+	
+	@FindBy(xpath="//input[@name='Submit']")
+	private WebElement Button_Submit;
+	
+	@FindBy(xpath=".//*[@id='from_chosen']/a")
+	private WebElement From_Address;
+	
+	@FindBy(xpath=".//input[@id='subject']")
+	private WebElement subject;
+	
+	@FindBy(xpath="//div[@class='jqte']/div[3]")
+	private WebElement Message;	
+	
+	@FindBy(id="send_message")
+	private WebElement button_send_message;
+	
+	@FindBy(xpath="//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-front dialog ui-dialog-buttons']")
+	private WebElement Send_Message_Confirmation_Popup;
+	
+	@FindBy(xpath="//div[@class='ui-dialog-buttonset']/button[1]")
+	private WebElement button_OK;
+	
+	@FindBy(xpath="//button[@class='primary']")
+	private WebElement Email_Sent_OK_Button;
+	
+	//Used by Sanity Test for Task Page
+	@FindBy(css="div[ng-controller*='supplierRegistrationsToApprove'] table")
+	private WebElement TableSupplierRegistrationsToApprove;
+	
+	@FindBy(css="div[ng-controller*='supplierERPIDToUpdate'] table")
+	private WebElement TableSupplierERPIDToUpdate;
+	
+	@FindBy(css="div[ng-controller*='supplierDataChangesToApprove'] table")
+	private WebElement TableSupplierDataChangesToApprove;
+	
+	@FindBy(css="div[ng-controller*='invoicesToApprove'] table")
+	private WebElement TableInvoicesToApprove;
+	
+	@FindBy(css="div[ng-controller*='invoiceQuestionsToAnswer'] table")
+	private WebElement TableInvoiceQuestionsToAnswer;
+	
+	@FindBy(css="div[ng-controller*='supplierInvitesToApprove'] table")
+	private WebElement TableSupplierInvitesToApprove;
+	
+	@FindBy(css="div[ng-controller*='TaskTracker'] table")
+	private WebElement TableTaskTracker;
+	
+	//Invoice Pending Update
+	@FindBy(css="div[ng-controller*='invoicesToUpdate'] table")
+	private WebElement TableInvoicesToUpdate;
+	
+	@FindBy(id="new-supplier-approval")
+	private WebElement TableReassignment;
+	
+	//button[class*='primary']
+	//search button 
+	@FindBy(css="button[type *='Submit']")
+	private WebElement searchBtn;
+	
+	//Table for claims to approve
+	@FindBy(css="div[ng-controller*='claimsToApprove'] div[class*='table-component']")
+	private WebElement claimsToApproveTable;
+	
+	//Table for claims pending update
+	@FindBy(css="div[ng-controller*='claimsToUpdate'] div[class *='table-component']")
+	private WebElement claimsPendingUpdateTable;
+	
+	//Table for payments question to answer
+	@FindBy(css="table[class*='table']")
+	private WebElement paymentQuestionsToAnswerTable;
+		
+	
+	// End of  Sanity 
+	/**
+	 * Method: navigatetoTasksApproval
+	 * Description : to navigate to the tasks approval tab
+	 * @return none
+	 * @param none
+	 */
+
+	public void navigatetoTasksApproval(){
+		try{
+			lavanteUtils.waitForTime(2000);
+			lavanteUtils.click("linkTasks",linkTasks);
+			lavanteUtils.waitForTime(2000);
+			Reporter.log("\n Clicked on the |Tasks| TAB ");
+			lavanteUtils.fluentwait(linkApprovals);
+			lavanteUtils.click("linkApprovals",linkApprovals);
+			lavanteUtils.waitForTime(5000);
+			Reporter.log("Clicked on the |Approvals| TAB");
+
+		}catch(Exception e){
+			Reporter.log("Navigation to the approval tasks failed due to : "+e.getCause());
+			//log.severe("FAilure in navigating to the approval tasks tab due to : "+e.getMessage());
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage());
+		}
+	}
+
+	/**
+	 * Method : searchSupplier
+	 * Purpose : To search for a string under options Supplier ID, Supplier name, Business/ Sales contact
+	 * @param String supplier, String option
+	 * @return none
+	 */
+	public void searchSupplier(String str_supplier,String str_option){
+		try{
+			lavanteUtils.click("xpathdropSearch",xpathdropSearch);
+			Reporter.log("\n Clicked on the drop down option");
+			lavanteUtils.selectDropDownValue(xpathlistSearch, str_option);
+			Reporter.log("Selected the option |"+str_option+"| from the list");
+			lavanteUtils.enterText("idsearch", idsearch, str_supplier);
+			Reporter.log("The search text entered is : "+str_supplier);
+			lavanteUtils.click("idsearchbtn", idsearchbtn);
+			Reporter.log("Clicked on the search button ");
+		}catch(Exception e){
+			Reporter.log("Failure in searching due to : "+e.getCause());
+			//log.severe("Failure in the search method : "+e.getMessage());
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage());
+		}
+	}
+
+	/**
+	 * Method : taskOptionType
+	 * Purpose: to gp.clicks on the option that is required
+	 * @param option : edit profile,reject,reassign,Approve
+	 * @return none
+	 */
+	public void taskOptionType(String str_option){
+		try{
+			lavanteUtils.waitForTime(2000);
+			switch(str_option){
+			case "Edit Profile":
+				lavanteUtils.click("xpathEditprofile",xpathEditprofile);
+				Reporter.log("Clicked on |Edit Profile| button");
+				break;
+			case "Reject":
+				lavanteUtils.click("xpathReassign",xpathReject);
+				Reporter.log("Clicked on |Reject| button");
+				break;
+			case "Reassign":
+				lavanteUtils.click("xpathReassign",xpathReassign);
+				Reporter.log("Clicked on |Reassign| button");
+				break;
+			case "Approve":
+				lavanteUtils.click("xpathReassign",xpathApprove);
+				Reporter.log("Clicked on |Approve| button");
+				break;
+			default:
+				Assert.assertTrue(false,"Option parameter passed is not valid one. The value passed is : "+str_option);
+				break;
+			}
+
+		}catch(Exception e){
+			Reporter.log("Failure in the method taskOptiontype due to :"+e.getCause());
+			//log.severe("FAilure in the method taskOptionTpye due to : "+e.getMessage());
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage());
+		}
+	}
+
+	/**
+	 * Method: filterByOption
+	 * Purpose: to filter the supplier tasks table results
+	 * @param String option
+	 * @return none
+	 */
+	public void filterByOption(String str_option){
+		try{
+			lavanteUtils.click("xpathdropFilter",xpathdropFilter);
+			Reporter.log("\n Clicked on the drop down button");
+			lavanteUtils.selectDropDownValue(xpathlistFilter, str_option);
+			Reporter.log("Selected the drop down option |"+str_option+"| from the list");
+		}catch(Exception e){
+			Reporter.log("Failure in the method to filter the supplier tasks based on the dropdown option selected due to :"+e.getCause());
+			//log.severe("Failure in the filterByOtion method due to : "+e.getMessage());
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage());
+		}
+	}
+
+	/**
+	 * Method: frameReassign
+	 * Purpose: to reassign the supplier to any other user
+	 * @param String str_user, String group
+	 * @return String str_time
+	 */
+	public String frameReassign(String str_group,String str_user){
+		String str_time="";
+		try{
+			str_time=dbGetTime().replace(" ", "")+"PDT";
+			lavanteUtils.switchtoFrame(xpathframeReassign);
+			lavanteUtils.click("xpathdropdwngroupbtn",xpathdropdwngroupbtn);
+			Reporter.log("Clicked on the dropdown button");
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.selectDropDownValue( xpathlistgroup, str_group);
+			Reporter.log("Selected the group  : "+str_group);
+			lavanteUtils.switchtoFrame(xpathframeReassign);
+			//gp.clicks(wdtask,ConfigPathFile.XPATH.getConstantValue(),xpathdropdwnuserbtn);
+			//gp.switchToFrameBy(wdtask, "", "", "");
+			//gp.selectDropDownValue(wdtask, ConfigPathFile.XPATH.getConstantValue(), xpathlistuser, str_user);
+			//Reporter.log("Selected the user : "+str_user);
+		//	gp.switchToFrameBy(wdtask, xpathframeReassign, ConfigPathFile.IN.getConstantValue(), ConfigPathFile.XPATH.getConstantValue());
+			lavanteUtils.waitForTime(2000);
+			lavanteUtils.click("xpathreassignbtn",xpathreassignbtn);
+			Reporter.log("Clicked on the reassign button successfully");
+			lavanteUtils.waitForTime(2000);
+			popUpAfterAction();
+		}catch(Exception e){
+			e.printStackTrace();
+			Reporter.log("Failed to reassign the task due to : "+e.getMessage());
+			//log.severe("Failed to reassign the task to the user due to : "+e.getCause());
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage());
+		}
+		lavanteUtils.switchtoFrame(null);
+		popUpAfterAction();
+		return str_time;
+	}
+
+	/**
+	 * Method: decideAction
+	 * Purpose: To get the appropriate action type and proceed with that
+	 * @param String str_actiontobedone
+	 * @return String str_time
+	 */
+	public String actionToBeDone(setTestData objdata){
+		String str_action="";
+		String str_time="";
+		try{
+			str_action=objdata.getActionType().toString();
+			switch(str_action){
+			case "Approve":
+				str_time=frameApprove(objdata.getComments().toString(), ConfigPathFile.Comment.getConstantValue());
+				break;
+			case "Reject":
+				str_time=frameReject(objdata.getComments().toString(), ConfigPathFile.Comment.getConstantValue());
+				lavanteUtils.waitForTime(2000);
+				break;
+			case "Reassign":
+				str_time=frameReassign(objdata.getReassignUserGrp().toString(), objdata.getReassignUserName().toString()+"("+objdata.getReassignUserID().toString()+")");
+				break;
+			}
+
+		}catch(Exception e){
+			Reporter.log("Failed due to an exception occured while executing the method to be performed");
+			//log.severe("Failed due to exception occured : "+e.getMessage());
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage());
+		}
+		return str_time;
+	}
+
+
+	/**
+	 * Method: frameApprove
+	 * Description: Operations to be performed after the pop-up for approve task is opened
+	 * @param String comments, String option
+	 * @return String str_time
+	 */
+	public String  frameApprove(String str_comment, String str_option){
+		String str_ret="";
+		try{
+			Assert.assertTrue(lavanteUtils.switchtoFrame( xpathframeApprove),"Failure to switch to the frame of Approve Tasks");
+			Reporter.log("\n The switch to the approval task pop-up is successful");
+			switch(str_option){
+			case "close":
+				lavanteUtils.switchtoFrame(null);
+				if(lavanteUtils.verifyElementDisplayed("xpathclose",xpathclose))
+					lavanteUtils.click("xpathclose", xpathclose);
+				else if(lavanteUtils.verifyElementDisplayed("xpathclose1",xpathclose1));
+					Reporter.log("clicked on the close button to close the approve pop-up");
+				break;
+			case "Comment":
+				str_ret=dbGetTime().replace(" ", "")+"PDT";
+				lavanteUtils.enterText("xpathcomment",xpathcomment, str_comment);
+				Reporter.log("The comment is typed in the input box provided in the approve tasks pop-ups");
+				lavanteUtils.click("xpathsubmitbtn",xpathsubmitbtn);
+				Reporter.log("Clicked on submit button");
+				break;
+			case "clear":
+				lavanteUtils.click("xpathclearbtn",xpathclearbtn);
+				Reporter.log("Clicked on clear button");
+				break;
+			default: 
+				Assert.assertTrue(false,"The option entered is not present in the pop-up");
+				break;
+			}
+
+		}catch(Exception e)
+		{
+			Reporter.log("Failure due to : "+e.getMessage());
+			//log.severe("Error in the method frameApprove due to : "+e.getCause());
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage());
+		}
+		lavanteUtils.switchtoFrame(null);
+		popUpAfterAction();
+		return str_ret;
+	}
+
+	/**
+	 * Method: supTableSearchHeader
+	 * Purpose: to fetch the supplier from the table
+	 * @param String SupplierName
+	 * @return int_rowNumber
+	 */
+	public int supTableSearchHeader(String str_detail){
+		String str_temp="";
+		int int_returnrow=0;
+		try{
+			Assert.assertTrue(lavanteUtils.verifyElementDisplayed("xpathTableHeaders",xpathTableHeaders),"The table of the Supplier Approvals task is not present on the webpage");
+			List<WebElement> lst_webelem=wdtask.findElements(By.xpath(xpathTableHeader));
+			//System.out.println(lst_webelem.size());
+			for(int i=1;i<=lst_webelem.size();i++){
+				Assert.assertTrue(lavanteUtils.isElementDisplayed(wdtask.findElement( By.xpath(xpathTableHeader+"["+i+"]"))),"Failure to find the table header");	
+				str_temp=wdtask.findElement(By.xpath(xpathTableHeader+"["+i+"]")).getText();
+				System.out.println(str_temp+" at "+i);
+				if(str_temp.trim().equalsIgnoreCase(str_detail)){
+					Reporter.log("Header found at position : "+i);
+					int_returnrow=i;
+					break;
+				}
+			}
+		}catch(Exception e){
+			Reporter.log("Failure in finding the supplier due to : "+e.getCause());
+			//log.severe("Failure in the method supTableSearch was due to : "+e.getMessage());
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage());
+		}
+		return int_returnrow;
+	}
+
+	/**
+	 * Method: noDataAvailable
+	 * Purpose: Checks if there is no data available (True if no data is available, False if data is available)
+	 * @param none
+	 * @return boolean
+	 */
+	public boolean noDataAvailable(){
+		boolean bool_ret=false;
+		try{
+			if (lavanteUtils.verifyElementDisplayed("clsDataNotFound",clsDataNotFound)){
+				Reporter.log("No Data is Available");
+				bool_ret=true;
+			}
+			else{
+				Reporter.log("Data is available ");
+				bool_ret=false;
+			}
+
+		}catch(Exception e){
+			Reporter.log("Failure in the check for no data availability due to : "+e.getCause());
+			//log.severe("Failed to check the data availability in the table due to : "+e.getMessage());
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage());
+		}
+		return bool_ret;
+	}
+
+	/**
+	 * Method : rowNumber 
+	 * Purpose : to get the corresponding row number of the header
+	 * @param String str_header
+	 * @return boolean
+	 */
+	public boolean searchSupplierwithHeader(String str_supplierdetail, String str_header){
+		boolean bool_ret=false;
+		try{
+			String xpath_detail="";
+			int int_row=supTableSearchHeader(str_header);
+			String str_xpath=int_row+"]";
+			if(noDataAvailable()){
+				Reporter.log("\n No data is task is pending for approval");
+				//log.severe("No data is available for task approval");
+				sassert.assertTrue(false,"No data found in the table");
+			}
+			List<WebElement> lst_webelem =wdtask.findElements(By.xpath(xpathtableRows2+str_xpath));
+			int row_cnt = lst_webelem.size();
+			for(int i=1;i<=row_cnt;i++){
+				xpath_detail=xpathRequiredRow1+i+xpathRequiredRow2+str_xpath;
+				System.out.println(lavanteUtils.getText(wdtask.findElement(By.xpath( xpath_detail))).trim()+xpath_detail+str_supplierdetail);
+				if((str_supplierdetail.trim()).equalsIgnoreCase(lavanteUtils.getText(wdtask.findElement(By.xpath( xpath_detail))).trim())){
+					Reporter.log("\n Found the suplier detail - "+str_header+" to be :"+str_supplierdetail);
+					lavanteUtils.click(wdtask.findElement(By.xpath(xpathtableradiobtn1+i+xpathtableradiobtn2)));
+					Reporter.log("The radio button corresponding to the supplier is clicked ");
+					bool_ret=true;
+					break;
+				}
+			}
+		}catch(Exception e){
+			Reporter.log("Failed to find the supplier detail in the approval tasks table ");
+			//log.severe("Failure to find the supplier detail in the table of approval tasks due to : "+e.getCause());
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage()); 
+		}
+		return bool_ret;
+	}
+
+	/**
+	 * Method : popUpAfterApprove
+	 * Purpose : To handle the pop-up after operations
+	 * @param none
+	 * @return none
+	 */
+	public void popUpAfterAction(){
+		try{	lavanteUtils.waitForTime(2000);
+			if(lavanteUtils.verifyElementDisplayed("xpathpopupOK",xpathpopupOK)){
+				lavanteUtils.click("xpathpopupOK",xpathpopupOK);
+				Reporter.log("Clicked on OK button");
+			}
+
+		}catch(Exception e){
+			Reporter.log("Failure to handle the popup");
+			//log.severe("Failure to handle the popup due to "+e.getMessage());
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage());
+		}
+
+	}
+	/**
+	 * Method: frameReject
+	 * Purpose : to perform operations in the reject frame
+	 * @param String str_operation
+	 * @return none
+	 */
+	public String frameReject(String str_comment,String str_option){
+		String str_ret="";
+		try{ lavanteUtils.waitForTime(2000);
+			Assert.assertTrue(lavanteUtils.switchtoFrame(xpathframeReject),"Failure to switch to the frame of Approve Tasks");
+			Reporter.log("\n The switch to the approval task pop-up is successful");
+			switch(str_option){
+			case "close":
+				lavanteUtils.switchtoFrame(null);
+				if(lavanteUtils.verifyElementDisplayed("xpathclose",xpathclose))
+					lavanteUtils.click("xpathclose", xpathclose);
+				else if(lavanteUtils.verifyElementDisplayed("xpathclose1",xpathclose1))
+					Reporter.log("clicked on the close button to close the approve pop-up");
+				break;
+			case "Comment":
+				str_ret=dbGetTime().replace(" ", "")+"PDT";
+				lavanteUtils.enterText("xpathcomment", xpathcomment, str_comment);
+				Reporter.log("The comment is typed in the input box provided in the approve tasks pop-ups");
+				lavanteUtils.click("xpathsubmitbtn",xpathsubmitbtn);
+				Reporter.log("Clicked on submit button");
+				lavanteUtils.waitForTime(2000);
+				lavanteUtils.switchtoFrame(null);
+				lavanteUtils.waitForTime(2000);
+				break;
+			case "clear":
+				lavanteUtils.click("xpathclearbtn",xpathclearbtn);
+				Reporter.log("Clicked on clear button");
+				lavanteUtils.switchtoFrame(null);
+				break;
+			default: 
+				Assert.assertTrue(false,"The option entered is not present in the pop-up");
+				break;
+			}
+
+		}catch(Exception e)
+		{
+			Reporter.log("Failure due to : "+e.getMessage());
+			//log.severe("Error in the method frameApprove due to : "+e.getCause());
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage());
+		}
+		return str_ret;
+	}
+
+	/**
+	 * Method: dbGetTime
+	 * Purpose: Get the time from the database
+	 * @param none
+	 * @return String 
+	 */
+	public String dbGetTime(){
+		String str_time="";
+		try{
+			str_time=dBconnect("SELECT CONVERT(VARCHAR, getdate(), 101) + ',' +  CONVERT(varchar(15),CAST(GETDATE() AS TIME),100)");
+			Reporter.log("The time got from database : "+str_time);
+		}catch(Exception e){
+			Reporter.log("Failure in the DB component execution : "+e.getCause());
+			//log.severe("DB query data fetching failure");
+			Assert.assertTrue(false,"Failure in the DB query execution");
+		}
+		return str_time;
+	}
+
+	/**
+	 * Method: dBconnect
+	 * Purpose: to fetch data from DB
+	 * @param test_query
+	 * @return
+	 * @throws SQLException
+	 */
+	public String dBconnect(String test_query){
+		ResultSet res_query=null;
+		String str_result="";
+		Connection con=null;
+		List<String> lst=new ArrayList<String>();
+		try{
+			/*con=lavanteUtils.ConnectToDB();
+
+			if(con.isValid(1000)){
+				Reporter.log("DATABASE connection is estabished and is valid. ");
+				res_query=lavanteUtils.DBResultSet(con, test_query);
+				int i=1;
+				while(res_query.next()){
+					lst.add(res_query.getString(i++));
+				}
+				str_result=lst.get(0);
+			}*/
+			str_result=lavanteUtils.fetchDBdata(test_query);
+		}catch(Exception e)
+		{
+			//log.severe("DB query execution error due to :"+e.getMessage());
+			Assert.assertTrue(false,"DB query execution error");
+		}
+		try{
+			if(!con.isClosed() && con!= null ){
+				con.close();
+				Reporter.log("DATABASE connection closed");
+			}}catch(SQLException e){
+				Reporter.log(" "+e.getErrorCode());
+				e.printStackTrace();
+				//log.severe(""+e.getSQLState());
+			}
+
+		return str_result;
+	}
+
+	/**
+	 * Method: firstSupplierName
+	 * Purpose:  to get the suppliers name as per the count
+	 * @param int count
+	 * @return List<String>
+	 */
+	public List<String> firstSuppliers(int int_count){
+		List<String> lstSuppliers=new ArrayList<String>();
+		int int_i=0;
+		try{
+			int int_column=supTableSearchHeader(ConfigPathFile.SupplierNAME.getConstantValue());
+			List<WebElement> lst_we=wdtask.findElements(By.xpath(xpathtableRows2+int_column+"]"));
+			Assert.assertFalse(noDataAvailable(),"No Data available in the table");
+			if(int_count<=lst_we.size()){
+				for(WebElement we: lst_we){
+					if(int_i==int_count){
+						break;
+					}
+					lstSuppliers.add(int_i, we.getText());
+					int_i=int_i+1;
+				}
+			}
+		}catch(Exception e){
+
+		}
+		return lstSuppliers;
+	}
+	/**
+	 * Method verifyListpresentinTasks
+	 * Purpose: to check if the suppliers are present in the tasks list
+	 * @param lst_sup
+	 * @return boolean
+	 */
+
+	public boolean verifyListpresentinTasks(List<String> lst_sup){
+		boolean bool_ret=false;
+		int i=0;
+		try{
+			int int_column=supTableSearchHeader(ConfigPathFile.SupplierNAME.getConstantValue());
+			for(String str_temp:lst_sup){
+				List<WebElement> lst_we=wdtask.findElements(By.xpath(xpathtableRows2+int_column+"]"));
+				Assert.assertFalse(noDataAvailable(),"No Data available in the table");
+				for(WebElement we: lst_we){
+					if(str_temp.equals(we.getText())){
+						Reporter.log("Found the matching data in the table : "+str_temp);
+						i=i+1;
+						break;
+					}
+				}
+			}
+			if(i==lst_sup.size()){
+				Reporter.log("Found the list of suppliers in the table");
+				return true;
+			}
+		}catch(Exception e){
+
+		}
+		return bool_ret;
+	}
+
+	/**
+	 * method :supplierDetailRow
+	 * @purpose : to get the row with the corresponding data
+	 * @param: suppierdetailRef, supplierheaderinfoRef, supplierdetailReq, supplierheaderinfoReq
+	 */
+	public boolean supplierDetailRow(String suppierdetailRef,String supplierheaderinfoRef,String supplierdetailReq,String supplierheaderinfoReq){
+		int introw1=0;
+		int intcol=0;
+		String xpathofelem="";
+		try{
+			introw1=checkRow(suppierdetailRef,supplierheaderinfoRef);
+			intcol=supTableSearchHeader(supplierheaderinfoReq);
+			String str_xpath=intcol+"]";
+			xpathofelem=xpathRequiredRow1+introw1+xpathRequiredRow2+str_xpath;
+			String supplierdetailexpected=wdtask.findElement(By.xpath(xpathofelem)).getText();
+			if(supplierdetailReq.contains(supplierdetailexpected)){
+				Reporter.log("Found the "+supplierheaderinfoReq+" having the expected value  : "+supplierdetailReq+" against "+supplierheaderinfoRef+" : "+suppierdetailRef);
+				lavanteUtils.click(wdtask.findElement(By.xpath(xpathtableradiobtn1+introw1+xpathtableradiobtn2)));
+				return true;
+			}else{
+				//log.severe("Failed to find the expected supplier details");
+				sassert.assertFalse(true,"Did not find the detail in the table ");
+				lavanteUtils.takeScreenshot(wdtask, "supplier_details");
+			}
+		}
+		catch(NullPointerException e){
+			//log.severe("Null value ");
+		}
+		catch(Exception e){
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage());
+		}
+		return false;
+	}
+
+	/**
+	 * method : checkRow
+	 * Purpose : to check the row number
+	 * @param str_supplierdetail
+	 * @param str_header
+	 * @return
+	 */
+	public int checkRow(String str_supplierdetail, String str_header){
+		int introw=0;
+		try{
+			String xpath_detail="";
+			int int_row=supTableSearchHeader(str_header);
+			String str_xpath=int_row+"]";
+			if(noDataAvailable()){
+				Reporter.log("\n No data is task is pending for approval");
+				//log.severe("No data is available for task approval");
+				sassert.assertTrue(false,"No data found in the table");
+			}
+			List<WebElement> lst_webelem =wdtask.findElements(By.xpath(xpathtableRows2+str_xpath));
+			int row_cnt = lst_webelem.size();
+			for(int i=1;i<=row_cnt;i++){
+				xpath_detail=xpathRequiredRow1+i+xpathRequiredRow2+str_xpath;
+				if((str_supplierdetail.trim()).equalsIgnoreCase(lavanteUtils.getText(wdtask.findElement(By.xpath(xpath_detail))).trim())){
+					Reporter.log("\n Found the suplier detail - "+str_header+" :"+str_supplierdetail);
+					return i;
+				}
+			}
+		}catch(Exception e){
+			Reporter.log("Failed to find the supplier detail in the approval tasks table ");
+			//log.severe("Failure to find the supplier detail in the table of approval tasks due to : "+e.getCause());
+			Assert.assertFalse(true,"Test failed due to: "+e.getMessage()); 
+		}
+		return introw;
+	}
+	
+	public void verifyApprovalsPageDetailsDisplayed()
+	{
+		lavanteUtils.fluentwait(Tasks);
+		lavanteUtils.fluentwait(linkApprovals);
+		//lavanteUtils.click("linkApprovals", linkApprovals);
+		lavanteUtils.fluentwait(newsupplierapprovalTable);
+		lavanteUtils.verifyElementDisplayed("newsupplierapprovalTable",newsupplierapprovalTable);
+		
+	}
+	
+	public void verifyAddSupplierIDPageDetailsDisplayed()
+	{
+		lavanteUtils.fluentwait(supplierERPDTable);
+		lavanteUtils.verifyElementDisplayed("supplierERPDTable",supplierERPDTable);
+	}
+	
+	public void verifyValidationsPageDetailsDisplayed()
+	{
+		lavanteUtils.verifyElementDisplayed("suppliersDisposition_form", suppliersDisposition_form);
+	}
+	
+	public void verifyInvoicePageDetailsDisplayed()
+	{
+		lavanteUtils.verifyElementDisplayed("InvoiceApprovalsTable",InvoiceApprovalsTable);		
+		
+	}
+	
+	public void verifyReassignmentPageDetailsDisplayed()
+	{
+		lavanteUtils.verifyElementDisplayed("linkReassignmentPendingTasksTable", linkReassignmentPendingTasksTable);
+		
+	}
+	
+	public void verifyPendingUpdatePageDetailsDisplayed()
+	{
+		//linkReassignmentPendingTasksTable and Pending update table locators are same.
+		lavanteUtils.verifyElementDisplayed("linkReassignmentPendingTasksTable", linkReassignmentPendingTasksTable);
+		
+	}
+	public String Select_FirstRow_SupplierApproval()
+	{
+		String supplierName;
+		lavanteUtils.click(xpathSupplierApproval_FirstRow);
+		supplierName =  lavanteUtils.getText(link_SupplierApprovalNameLink_FirstRow);
+		
+		return supplierName;
+	}
+
+	public void VerifyEditProfile()	{
+		
+		lavanteUtils.waitForTime(5000);
+		lavanteUtils.click(xpathEditProfile_Button);
+		lavanteUtils.waitForTime(5000);
+		lavanteUtils.typeinEdit("Test Edit Profile", descriptionOfServices);
+		lavanteUtils.click(saveExit_button);
+		lavanteUtils.click(button_OK);
+		lavanteUtils.waitForTime(5000);
+		
+	}
+	
+	public void verifyReject() {
+		
+		lavanteUtils.waitForTime(5000);
+		lavanteUtils.click(button_Reject);
+		lavanteUtils.switchtoFrame(xpathframeReassign);
+		lavanteUtils.typeinEdit("test reject", textField_RejectionComment);
+		lavanteUtils.click(button_Submit);
+		lavanteUtils.switchtoFrame(null);
+		
+	}
+	
+	public void verifyReAssign()
+	{
+		lavanteUtils.waitForTime(5000);
+		lavanteUtils.click(button_reassign);
+		lavanteUtils.switchtoFrame(xpathframeReassign);
+		lavanteUtils.click(radioButton_role);
+		lavanteUtils.click(dropDown_role);
+		lavanteUtils.selectvalueFrmDpdn("Audit");
+		lavanteUtils.switchtoFrame(xpathframeReassign);
+		lavanteUtils.click(button_reassig2);
+		
+		// Re assign, DB verification should be done here
+	}
+	
+	public void verifyApprove()
+	{
+		lavanteUtils.waitForTime(5000);
+		lavanteUtils.click(button_Approve);
+		lavanteUtils.switchtoFrame(xpathframeReassign);
+		lavanteUtils.enterText("TextArea_Comments", TextArea_Comments, "Test Approve");
+		lavanteUtils.click(Button_Submit);
+		
+		// Approve, DB Verification should be done here
+	}
+
+	//Methods used for Task Page sanity
+	public boolean verifySuppRegToAprvPageDtlsDisplayed()
+	{
+		boolean flag1=false;
+		boolean flag=lavanteUtils.verifyElementDisplayed("Search Btn",searchBtn);
+		boolean flag2=lavanteUtils.verifyElementDisplayed("TableSupplierRegistrationsToApprove",TableSupplierRegistrationsToApprove);
+		
+		if(flag && flag2){
+			flag1=true;
+		}
+		
+		return flag1;
+	}
+	
+	public boolean verifySuppERPIDToUpdtPageDtlsDisplayed()
+	{
+		boolean flag1=false;
+		boolean flag=lavanteUtils.verifyElementDisplayed("Search Btn",searchBtn);
+		boolean flag2=lavanteUtils.verifyElementDisplayed("TableSupplierERPIDToUpdate",TableSupplierERPIDToUpdate);
+	
+
+		if(flag && flag2){
+			flag1=true;
+		}
+		
+		return flag1;
+	}
+	
+	public boolean verifySuppDataChngsToAprvPageDtlsDisplayed()
+	{
+		boolean flag1 = false;
+		boolean flag=lavanteUtils.verifyElementDisplayed("Search Btn on Supp Data Change to approve",searchBtn);
+		boolean flag2=lavanteUtils.verifyElementDisplayed("TableSupplierDataChangesToApprove on Supp Data Change to approve",TableSupplierDataChangesToApprove);
+		
+		if(flag && flag2){
+			flag1=true;
+		}
+		
+		return flag1;
+	}
+	
+	public boolean verifyInvoicesToAprvPageDtlsDisplayed()
+	{
+		boolean flag1 = false;
+		boolean flag=lavanteUtils.verifyElementDisplayed("Search Btn on Invoice to Approve ",searchBtn);
+		boolean flag2=lavanteUtils.verifyElementDisplayed("TableInvoicesToApprove on Invoice to Approve",TableInvoicesToApprove);
+		if(flag && flag2){
+			flag1=true;
+		}
+		
+		return flag1;
+	}
+	public boolean verifyInvoiceQuestsToAnsPageDtlsDisplayed()
+	{
+		boolean flag1 = false;
+		boolean flag=lavanteUtils.verifyElementDisplayed("Search Btn on Invoice Qn to Answer",searchBtn);
+		boolean flag2=lavanteUtils.verifyElementDisplayed("TableInvoiceQuestionsToAnswer on Invoice Qn to Answer",TableInvoiceQuestionsToAnswer);
+		if(flag && flag2){
+			flag1=true;
+		}
+		
+		return flag1;
+	}
+	
+	public boolean verifySuppInvitesToAprvPageDtlsDisplayed()
+	{
+		boolean flag1 = false;
+		boolean flag=lavanteUtils.verifyElementDisplayed("Search Btn on Supplier Invites to Approve",searchBtn);
+		boolean flag2=lavanteUtils.verifyElementDisplayed("TableSupplierInvitesToApprove on Supplier Invites to Approve",TableSupplierInvitesToApprove);
+		if(flag && flag2){
+			flag1=true;
+		}
+		
+		return flag1;
+		
+	}
+	
+	public boolean verifyTaskTrackerPageDtlsDisplayed()
+	{
+		boolean flag1 = false;
+		boolean flag=lavanteUtils.verifyElementDisplayed("Search Btn on Task Tracker",searchBtn);
+		boolean flag2=lavanteUtils.verifyElementDisplayed("TableTaskTracker  on Task Tracker",TableTaskTracker);
+		if(flag && flag2){
+			flag1=true;
+		}
+		
+		return flag1;
+	}
+	
+	public boolean verifyInvoicesToUpdatePageDtlsDisplayed()
+	{
+		boolean flag1 = false;
+		boolean flag2=lavanteUtils.verifyElementDisplayed("Search Btn  on Invoice to Update",searchBtn);
+		boolean flag=lavanteUtils.verifyElementDisplayed("TableInvoicesToUpdate on Invoice to Update",TableInvoicesToUpdate);
+		if(flag && flag2){
+			flag1=true;
+		}
+		
+		return flag1;
+	}
+	
+	public boolean verifyReassignmentPageDtlsDisplayed()
+	{
+		boolean flag=lavanteUtils.verifyElementDisplayed("TableReassignment  on Reassignment",TableReassignment);
+				
+		return flag;
+	}
+	
+	public boolean verifyClaimsToApprovePageIsDisplayed(){
+		boolean flag=lavanteUtils.verifyElementDisplayed("Search Button", searchBtn);
+		return flag;
+		//lavanteUtils.verifyElementDisplayed("Table Claims to Approve", claimsToApproveTable);
+	}
+	
+	public boolean verifyClaimsPendingUpdatePageIsDisplayed(){
+		boolean flag2=lavanteUtils.verifyElementDisplayed("Search Button", searchBtn);
+		return flag2;
+		//lavanteUtils.verifyElementDisplayed("Claims Pending Update table", claimsPendingUpdateTable);
+	}
+	
+	
+	public boolean verifyPaymentQuestionsToAnswerPageIsDisplayed(){
+		lavanteUtils.switchtoFrame(null);
+		boolean flag2=lavanteUtils.verifyElementDisplayed("Search Button", searchBtn);
+		return flag2;
+	}
+
+
+    public boolean verifySupplierRegistrationsPendingUpdate(){
+    	lavanteUtils.switchtoFrame(null);
+    	boolean flag2=lavanteUtils.verifyElementDisplayed("Search Button", searchBtn);
+    	return flag2;
+    }
+	//End of Sanity
+}

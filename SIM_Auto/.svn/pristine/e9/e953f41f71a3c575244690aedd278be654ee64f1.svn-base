@@ -1,0 +1,1702 @@
+/**
+ * 
+ */
+package com.lavante.sim.customer.pageobjects.Suppliers.EditProfile;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+/**
+ * @author Piramanayagam.S
+ *
+ */
+public class EditProfContractManagement{
+	
+	public WebDriver driver;
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	
+	String excelkey="ANY"; 
+	Integer fut=null;
+
+	WebElement iframeElement=null;
+	
+	
+	public EditProfContractManagement(WebDriver driver){
+		lavanteUtils.driver=driver;
+		this.driver=driver;
+	}
+	
+	//Header verification for SOW
+	
+	@FindBy(css="[id*='Statement'] th:nth-child(1)")
+	private WebElement SOWheadMSAN;
+	public  WebElement SOWheadMSAN(){
+		return SOWheadMSAN;
+	}
+	@FindBy(css="[id*='Statement'] th:nth-child(2)")
+	private WebElement SheadSOWNumber;
+	public  WebElement SheadSOWNumber(){
+		return SheadSOWNumber;
+	}
+	@FindBy(css="[id*='Statement'] th:nth-child(3)")
+	private WebElement SOWheadStdate;
+	public  WebElement SOWheadStdate(){
+		return SOWheadStdate;
+	}
+	@FindBy(css="[id*='Statement'] th:nth-child(4)")
+	private WebElement SOWheadDes;
+	public  WebElement SOWheadDes(){
+		return SOWheadDes;
+	}
+	@FindBy(css="[id*='Statement'] th:nth-child(5)")
+	private WebElement SOWheadIntcontact;
+	public  WebElement SOWheadIntcontact(){
+		return SOWheadIntcontact;
+	}
+   @FindBy(css="[id*='Statement'] th:nth-child(6)")
+   private WebElement SOWheadstatus;
+   public  WebElement SOWheadstatus(){
+	return SOWheadstatus;
+   }
+   @FindBy(css="[id*='Statement'] th:nth-child(7)")
+   private WebElement SOWheadpayterms;
+   public  WebElement SOWheadpayterms(){
+	return SOWheadpayterms;
+   }
+   @FindBy(css="[id*='Statement'] th:nth-child(8)")
+   private WebElement SOWheadNotexceddamt;
+   public  WebElement SOWheadNotexceddamt(){
+	return SOWheadNotexceddamt;
+   }
+   @FindBy(css="[id*='Statement'] th:nth-child(9)")
+   private WebElement SOWheadActions;
+   public  WebElement SOWheadActions(){
+   return SOWheadActions;
+   }
+ 
+   
+	//Header verification for deliverables
+   
+   @FindBy(css="[id*='Deliverable'] th:nth-child(1)")
+   private WebElement DeheadlMSA;
+   public  WebElement DeheadlMSA(){
+   return DeheadlMSA;
+   }
+	
+   @FindBy(css="[id*='Deliverable'] th:nth-child(2)")
+   private WebElement DeheadlSOW;
+   public  WebElement DeheadlSOW(){
+   return DeheadlSOW;
+   }
+   @FindBy(css="[id*='Deliverable'] th:nth-child(3)")
+   private WebElement DelheadItem;
+   public  WebElement DelheadItem(){
+   return DelheadItem;
+   }
+   @FindBy(css="[id*='Deliverable'] th:nth-child(4)")
+   private WebElement headDeliverable;
+   public  WebElement headDeliverable(){
+   return headDeliverable;
+   }
+   @FindBy(css="[id*='Deliverable'] th:nth-child(5)")
+   private WebElement headExpdeldate;
+   public  WebElement headExpdeldate(){
+   return headExpdeldate;
+   }
+	
+   @FindBy(css="[id*='Deliverable'] th:nth-child(6)")
+   private WebElement headDellocation;
+   public  WebElement headDellocation(){
+   return headDellocation;
+   }
+   @FindBy(css="[id*='Deliverable'] th:nth-child(7)")
+   private WebElement Delheaditemtype;
+   public  WebElement Delheaditemtype(){
+   return Delheaditemtype;
+   }
+   @FindBy(css="[id*='Deliverable'] th:nth-child(8)")
+   private WebElement Delheaditemamt;
+   public  WebElement Delheaditemamt(){
+   return Delheaditemamt;
+   }
+   @FindBy(css="[id*='Deliverable'] th:nth-child(9)")
+   private WebElement Delheadpaystatus;
+   public  WebElement Delheadpaystatus(){
+   return Delheadpaystatus;
+   }
+   @FindBy(css="[id*='Deliverable'] th:nth-child(10)")
+   private WebElement Delheadactions;
+   public  WebElement Delheadactions(){
+   return Delheadactions;
+   }
+   //Header verification for MSA clent name
+   @FindBy(css="[id*='Mast'] th:nth-child(1)")
+   private WebElement MSAheadClient;
+   public  WebElement MSAheadClient(){
+   return MSAheadClient;
+   }
+   
+   
+//Edit MSA client name
+  
+   @FindBy(xpath="//*[contains(@for,'clientNameID')]/../..//td[2]")
+	private WebElement MSAeditclientName;
+	public WebElement MSAeditclientName(){
+		return MSAeditclientName;
+	}
+   
+   
+	//For Adding MSA 
+	@FindBy(css="button[href*='addEditMaster']")
+	private WebElement addMSAnwBtn;
+	public WebElement addMSAnwBtn(){
+		return addMSAnwBtn;
+	}
+	
+	@FindBy(css="[id*='clientNameID'] a")
+	private WebElement MSAClientName;
+	public WebElement MSAClientName(){
+		return MSAClientName;
+	}	
+	
+	@FindBy(css="input[name*='Addendum']")
+	private List<WebElement> MSAaddendumRdbtnElmnt;
+	public List<WebElement> MSAaddendumRdbtnElmnt(){
+		return MSAaddendumRdbtnElmnt;
+	}	
+	
+	@FindBy(id="startDate")
+	private WebElement MSAstartDate;
+	public WebElement MSAstartDate(){
+		return MSAstartDate;
+	}	
+
+	@FindBy(css="a[class*='high']")
+	private WebElement MSAtodayDate;
+	public WebElement MSAtodayDate(){
+		return MSAtodayDate;
+	}
+	
+	@FindBy(css="input[name*='Ever']")
+	private List<WebElement> MSAYesEver;
+	public List<WebElement> MSAYesEver(){
+		return MSAYesEver;
+	}
+	
+	
+	@FindBy(css="[id*='endDate']")
+	private WebElement MSAEnddate;
+	public WebElement MSAEnddate(){
+		return MSAEnddate;
+	}
+	@FindBy(css="[id*='msaNumber'] a")
+	private WebElement MSANumberDpdn;
+	public WebElement MSANumberDpdn(){
+		return MSANumberDpdn;
+	}
+	@FindBy(id="notToExceedAmount")
+	private WebElement MSAnottoexceed;
+	public WebElement MSAnottoexceed(){
+		return MSAnottoexceed;
+	}
+	
+	
+	@FindBy(css="[id*=statusKVID] a")
+	private WebElement MSAStatusDpdn;
+	public WebElement MSAStatusDpdn(){
+		return MSAStatusDpdn;
+	}
+	
+	@FindBy(id="msaFile")
+	private WebElement MSAupload;
+	public WebElement MSAupload(){
+		return MSAupload;
+	}
+	
+	
+	
+	@FindBy(css="input[type*='submit']")
+	private WebElement MSASave;
+	public WebElement MSASave(){
+		return MSASave;
+	}
+	
+	@FindBy(css="[id*='Master'] td:nth-child(6)")
+	private List<WebElement> MSAnottoexceedList;
+	public List<WebElement> MSAnottoexceedList(){
+		return MSAnottoexceedList;
+	}
+	
+	@FindBy(css="a[href*='viewMaster']")
+	private List<WebElement> MSANumTxt;
+	public List<WebElement> MSANumTxt(){
+		return MSANumTxt;
+	}
+	
+	@FindBy(css="div[style*='visible'] iframe[src*='addEditMaster']")
+	private WebElement IFRAMEMSAAddEdit;
+	public WebElement IFRAMEMSAAddEdit(){
+		return IFRAMEMSAAddEdit;
+	}
+	
+	
+	@FindBy(css="iframe[src*='viewMaster']")
+	private WebElement MSAViewIFRAME;
+	public WebElement MSAViewIFRAME(){
+		return MSAViewIFRAME;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'clientNameID')]/../..//td[2]")
+	private WebElement MSAViewClientName;
+	public WebElement MSAViewClientName(){
+		return MSAViewClientName;
+	}
+
+	@FindBy(xpath="//*[contains(@for,'msaType')]/../..//td[2]")
+	private WebElement MSAViewMSAtype;
+	public WebElement MSAViewMSAtype(){
+		return MSAViewMSAtype;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'msaNumber')]/../..//td[2]")
+	private WebElement MSAViewMSAnum;
+	public WebElement MSAViewMSAnum(){
+		return MSAViewMSAnum;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'isEverGreenMSA')]/../..//td[2]")
+	private WebElement MSAViewEvergreen;
+	public WebElement MSAViewEvergreen(){
+		return MSAViewEvergreen;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'notToExceedAmount')]/../..//td[2]")
+	private WebElement msaviewnttoexced;
+	public WebElement msaviewnttoexced(){
+		return msaviewnttoexced;
+	}
+	
+	
+	@FindBy(xpath="//*[contains(@for,'status')]/../..//td[2]")
+	private WebElement MSAviewStatus;
+	public WebElement MSAviewStatus(){
+		return MSAviewStatus;
+	}
+	
+	
+	@FindBy(xpath="//label[contains(text(),'Upload')]/../..//td[2]//a")
+	private WebElement MSAViewUpload;
+	public WebElement MSAViewUpload(){
+		return MSAViewUpload;
+	}
+	
+	
+	@FindBy(css="button[href*='Statement']")
+	private WebElement addSOWnwBtn;
+	public WebElement addSOWnwBtn(){
+		return addSOWnwBtn;
+	}
+	
+	
+	@FindBy(css="[id*='msaType'] a")
+	private WebElement SOWmsatypedpdn;
+	public WebElement SOWmsatypedpdn(){
+		return SOWmsatypedpdn;
+	}
+	
+	@FindBy(css="[id*='msaNumber'] a")
+	private WebElement SOWnumdpdn;
+	public WebElement SOWnumdpdn(){
+		return SOWnumdpdn;
+	}
+	
+	@FindBy(id="startDate")
+	private WebElement SOWstartDate;
+	public WebElement SOWstartDate(){
+		return SOWstartDate;
+	}
+	
+	@FindBy(css="a[class*='highlight']")
+	private WebElement SOWtodayDate;
+	public WebElement SOWtodayDate(){
+		return SOWtodayDate;
+	}
+	
+	@FindBy(id="endDate")
+	private WebElement SOWEndDate;
+	public WebElement SOWEndDate(){
+		return SOWEndDate;
+	}
+	
+	@FindBy(id="description")
+	private WebElement SOWdescr;
+	public WebElement SOWdescr(){
+		return SOWdescr;
+	}
+	
+	@FindBy(id="internalContact")
+	private WebElement SOWinternalContact;
+	public WebElement SOWinternalContact(){
+		return SOWinternalContact;
+	}
+	
+	@FindBy(id="notes")
+	private WebElement SOWNotes;
+	public WebElement SOWNotes(){
+		return SOWNotes;
+	}
+	
+	
+	@FindBy(css="[id*='status'] a")
+	private WebElement SOWstatusdpdn;
+	public WebElement SOWstatusdpdn(){
+		return SOWstatusdpdn;
+	}
+	
+	@FindBy(css="[id*='paymentType'] a")
+	private WebElement SOWpaymenttypedpdn;
+	public WebElement SOWpaymenttypedpdn(){
+		return SOWpaymenttypedpdn;
+	}
+	@FindBy(css="[id*='paymentTerms'] a")
+	private WebElement SOWpaymenttrmdpdn;
+	public WebElement SOWpaymenttrmdpdn(){
+		return SOWpaymenttrmdpdn;
+	}
+	@FindBy(css="[id*='clientName'] a")
+	private WebElement SOWClientnamedpdn;
+	public WebElement SOWClientnamedpdn(){
+		return SOWClientnamedpdn;
+	}
+	
+	@FindBy(id="notToExceedAmount")
+	private WebElement SOWnotToExceedAmount;
+	public WebElement SOWnotToExceedAmount(){
+		return SOWnotToExceedAmount;
+	}
+	
+	@FindBy(css="[id*=ExceedAmount]")
+	private List<WebElement> SownottoexceedList;
+	public List<WebElement> SownottoexceedList(){
+		return SownottoexceedList;
+	}
+	
+	@FindBy(css="#upfrontPaymentRequired:nth-child(1)")
+	private WebElement SOWUpfrontYes;
+	public  WebElement SOWUpfrontYes(){
+		return SOWUpfrontYes;
+	}
+	
+	@FindBy(css="#upfrontPaymentRequired:nth-child(1)~input")
+	private WebElement SOWUpfrontNO;
+	public  WebElement SOWUpfrontNO(){
+		return SOWUpfrontNO;
+	}
+	
+	@FindBy(css="[id*='vendorPayment']~label:nth-child(2)")
+	private WebElement SOWCreditcardYes;
+	public  WebElement SOWCreditcardYes(){
+		return SOWCreditcardYes;
+	}
+	
+	@FindBy(css="[id*='vendorPaymentNo']~label:nth-child(5)")
+	private WebElement SOWCreditcardNo;
+	public  WebElement SOWCreditcardNo(){
+		return SOWCreditcardNo;
+	}
+	
+	@FindBy(css="a[title*='Edit Statement']")
+	private List<WebElement> SOWEdit;
+	public  List<WebElement> SOWEdit(){
+		return SOWEdit;
+	}
+		
+	@FindBy(css="input[type*='submit']")
+	private WebElement SOWsave;
+	public WebElement SOWsave(){
+		return SOWsave;
+	}
+	
+	@FindBy(css="input[type*='submit']")
+	private WebElement SOWCancel;
+	public WebElement SOWCancel(){
+		return SOWCancel;
+	}
+	
+	@FindBy(css="a[href*='viewStatement']")
+	private WebElement SOWNoTxt;
+	public WebElement SOWNoTxt(){
+		return SOWNoTxt;
+	}
+	
+
+	@FindBy(css="div[style*='visible'] iframe[src*='addEditStatement']")
+	private WebElement SOWAddIframe;
+	public WebElement SOWAddIframe(){
+		return SOWAddIframe;
+	}
+
+	@FindBy(css="[id*='paymentTerms'] a span")
+	private WebElement SOWPaymenttrmvalue;
+	public WebElement SOWPaymenttrmvalue(){
+		return SOWPaymenttrmvalue;
+	}
+	
+	
+	@FindBy(css="div[style*='visible'] iframe[src*='EditStatement']")
+	private WebElement SOWEditIframe;
+	public WebElement SOWEditIframe(){
+		return SOWEditIframe;
+	}
+
+//EDit SOW
+	
+	@FindBy(xpath="//*[contains(@for,'client')]/../..//td[2]")
+	private WebElement SOWEditClientName;
+	public WebElement SOWEditClientName(){
+		return SOWEditClientName;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'msaType')]/../..//td[2]")
+	private WebElement SOWEditmsatype;
+	public WebElement SOWEditmsatype(){
+		return SOWEditmsatype;
+	}
+	@FindBy(xpath="//*[contains(@for,'msaNumber')]/../..//td[2]")
+	private WebElement SOWEditmsanumber;
+	public WebElement SOWEditmsanumber(){
+		return SOWEditmsanumber;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'sowNumber')]/../..//td[2]")
+	private WebElement SOWEditsowNumber;
+	public WebElement SOWEditsowNumber(){
+		return SOWEditsowNumber;
+	}
+	
+	
+	
+	//View SOW
+	@FindBy(css="div[style*='visible']  iframe[src*='viewStatement']")
+	private WebElement SOWViewIframe;
+	public WebElement SOWViewIframe(){
+		return SOWViewIframe;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'clientNameID')]/../..//td[2]")
+	private WebElement SOWViewClientName;
+	public WebElement SOWViewClientName(){
+		return SOWViewClientName;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'msaType')]/../..//td[2]")
+	private WebElement SOWViewMSAType;
+	public WebElement SOWViewMSAType(){
+		return SOWViewMSAType;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'msaNumber')]/../..//td[2]")
+	private WebElement SOWViewMSANum;
+	public WebElement SOWViewMSANum(){
+		return SOWViewMSANum;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'sowNumber')]/../..//td[2]")
+	private WebElement SOWViewSOWNum;
+	public WebElement SOWViewSOWNum(){
+		return SOWViewSOWNum;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'description')]/../..//td[2]")
+	private WebElement SOWViewDesc;
+	public WebElement SOWViewDesc(){
+		return SOWViewDesc;
+	}
+
+	@FindBy(xpath="//*[contains(@for,'notes')]/../..//td[2]")
+	private WebElement SOWViewNotes;
+	public WebElement SOWViewNotes(){
+		return SOWViewNotes;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'internalContact')]/../..//td[2]")
+	private WebElement SOWViewInternal;
+	public WebElement SOWViewInternal(){
+		return SOWViewInternal;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'status')]/../..//td[2]")
+	private WebElement SOWViewStatus;
+	public WebElement SOWViewStatus(){
+		return SOWViewStatus;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'paymentType')]/../..//td[2]")
+	private WebElement SOWViewPaymentyp;
+	public WebElement SOWViewPaymentyp(){
+		return SOWViewPaymentyp;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'paymentTerms')]/../..//td[2]")
+	private WebElement SOWViewPaymentTerms;
+	public WebElement SOWViewPaymentTerms(){
+		return SOWViewPaymentTerms;
+	}
+	
+	@FindBy(xpath="//*[contains(@for,'notToExceedAmount')]/../..//td[2]")
+	private WebElement SOWViewNottoExceed;
+	public WebElement SOWViewNottoExceed(){
+		return SOWViewNottoExceed;
+	}
+	
+	
+	@FindBy(xpath="//*[contains(@for,'isCreditUsedForVendorPayment')]/../..//td[2]")
+	private WebElement SOWViewCredit;
+	public WebElement SOWViewCredit(){
+		return SOWViewCredit;
+	}
+	
+	
+	
+	
+	@FindBy(css="button[href*='Deliverable']")
+	private WebElement adddelnwBtn;
+	public WebElement adddelnwBtn(){
+		return adddelnwBtn;
+	}
+	
+	//ADD DELEIVERABLES 
+	
+
+	@FindBy(css="div[style*='visible'] iframe[src*='Del']")
+	private WebElement DELIframe;
+	public WebElement DELIframe(){
+		return DELIframe;
+	}
+	
+	@FindBy(css="div[style*='visible']  iframe[src*='table_id=Add_Edit_Delive']")
+	private WebElement DELIframeEdit;
+	public WebElement DELEditIframe(){
+		return DELIframeEdit;
+	}	
+
+	@FindBy(css="iframe[src*='viewDelivera']")
+	private WebElement DELIframeView;
+	public WebElement DELIframeView(){
+		return DELIframeView;
+	}
+	
+	@FindBy(css="div[style*='visible'] iframe[src*='copy']")
+	private WebElement DELIframeCopy;
+	public WebElement DELIframeCopy(){
+		return DELIframeCopy;
+	}	
+	
+	@FindBy(css="button[class*='close']")
+	private WebElement DELviewClose;
+	public WebElement DELviewClose(){
+		return DELviewClose;
+	}	
+	
+	@FindBy(css="[id*='msaType'] a")
+	private WebElement Delmsatypedpdn;
+	public WebElement Delmsatypedpdn(){
+		return Delmsatypedpdn;
+	}
+	
+	@FindBy(css="[id*='msaNumber'] a")
+	private WebElement Delmsanumdpdn;
+	public WebElement Delmsanumdpdn(){
+		return Delmsanumdpdn;
+	}
+	
+	@FindBy(css="[id*='sowNumber'] a")
+	private WebElement DELsownumdpdn;
+	public WebElement DELsownumdpdn(){
+		return DELsownumdpdn;
+	}	
+	
+	@FindBy(id="itemNumber")
+	private WebElement DELitemnumbr;
+	public WebElement DELitemnumbr(){
+		return DELitemnumbr;
+	}
+	
+	@FindBy(id="deliverable")
+	private WebElement DELdeliverable;
+	public WebElement DELdeliverable(){
+		return DELdeliverable;
+	}	
+	
+	@FindBy(id="expectedDeliverableDate")
+	private WebElement DELexpdate;
+	public WebElement DELexpdate(){
+		return DELexpdate;
+	}
+	
+	@FindBy(css="a[class*='highlight']")
+	private WebElement DELtodaydate;
+	public WebElement DELtodaydate(){
+		return DELtodaydate;
+	}
+	
+	
+	
+	@FindBy(css="[id*='deliverableLocation'] a")
+	private WebElement DELdellocationdpdn;
+	public WebElement DELdellocationdpdn(){
+		return DELdellocationdpdn;
+	}
+	
+	@FindBy(css="[id*='deliverableLocation'] a span")
+	private WebElement DELdellocationname;
+	public WebElement DELdellocationname(){
+		return DELdellocationname;
+	}
+	
+	@FindBy(css="[id*='itemType'] a")
+	private WebElement DELitemtypedpdn;
+	public WebElement DELitemtypedpdn(){
+		return DELitemtypedpdn;
+	}
+	
+	@FindBy(id="invoiceAmount")
+	private WebElement DELinvamnt;
+	public WebElement DELinvamnt(){
+		return DELinvamnt;
+	}
+	
+	@FindBy(css="[id*='currency'] a")
+	private WebElement DELcurrencydpdn;
+	public WebElement DELcurrencydpdn(){
+		return DELcurrencydpdn;
+	}
+	
+	@FindBy(css="[id*='paymentStatus'] a")
+	private WebElement DELpaymntstatusdpdn;
+	public WebElement DELpaymntstatusdpdn(){
+		return DELpaymntstatusdpdn;
+	}
+	
+	
+	@FindBy(id="chargeNumber")
+	private WebElement DELAccnum;
+	public WebElement DELAccnum(){
+		return DELAccnum;
+	}
+	
+	@FindBy(id="listPrice")
+	private WebElement DELlistPrice;
+	public WebElement DELlistPrice(){
+		return DELlistPrice;
+	}
+	
+	@FindBy(css="#costingSavings[data-validate*='req']")
+	private WebElement DELMandlistPrice;
+	public WebElement DELMandlistPrice(){
+		return DELMandlistPrice;
+	}
+	
+	
+	
+	@FindBy(id="discountPrice")
+	private WebElement DELdiscountPrice;
+	public WebElement DELdiscountPrice(){
+		return DELdiscountPrice;
+	}
+	@FindBy(css="#discountPrice[data-validate*='req']")
+	private WebElement DELManddiscPrice;
+	public WebElement DELManddiscPrice(){
+		return DELManddiscPrice;
+	}
+	
+	
+	@FindBy(id="costingSavings")
+	private WebElement DELcostingSavings;
+	public WebElement DELcostingSavings(){
+		return DELcostingSavings;
+	}
+	@FindBy(css="#costingSavings[data-validate*='req']")
+	private WebElement DELMandcostsaving;
+	public WebElement DELMandcostsaving(){
+		return DELMandcostsaving;
+	}
+	
+	@FindBy(id="taxRate")
+	private WebElement DELestTaxPercent;
+	public WebElement DELestTaxPercent(){
+		return DELestTaxPercent;
+	}
+	@FindBy(css="#taxRate[readonly]")
+	private WebElement DELesttaxRatereadonly;
+	public WebElement DELesttaxRatereadonly(){
+		return DELesttaxRatereadonly;
+	}	
+	
+
+	@FindBy(id="taxes")
+	private WebElement DELestTax;
+	public WebElement DELestTax(){
+		return DELestTax;
+	}
+	
+	
+	@FindBy(id="deliverableExpense")
+	private WebElement DELExptoClient;
+	public  WebElement DELExptoClient(){
+		return DELExptoClient;
+	}
+
+	@FindBy(css="input~input[type*='radio']")
+	private WebElement DELCancelledNo;
+	public  WebElement DELCancelledNO(){
+		return DELCancelledNo;
+	}
+	
+	@FindBy(css="input:nth-child(1)[type*='radio']")
+	private WebElement DELCancelledYES;
+	public  WebElement DELCancelledYES(){
+		return DELCancelledYES;
+	}
+	
+	@FindBy(css="textarea[id]")
+	private WebElement DELCancelledNotestxt;
+	public  WebElement DELCancelledNotestxt(){
+		return DELCancelledNotestxt;
+	}
+	
+	@FindBy(css="[id*='CF-TR-Pleaseattachsecurityvetting']")
+	private WebElement DELbrwse;
+	public  WebElement DELbrwse(){
+		return DELbrwse;
+	}
+	
+	@FindBy(css="[type='reset']")
+	private WebElement DELClear;
+	public WebElement DELClear(){
+		return DELClear;
+	}
+	@FindBy(css="[type='submit']")
+	private WebElement DELSave;
+	public WebElement DELSave(){
+		return DELSave;
+	}
+	
+	@FindBy(css="[title='Cancel']")
+	private WebElement DELCancel;
+	public WebElement DELCancel(){
+		return DELCancel;
+	}
+	
+	@FindBy(css="div[style*='block'] button[title*='close']")
+	private List<WebElement> closebtn;
+	public List<WebElement> closebtn(){
+		return closebtn;
+	}
+	
+	
+	
+	@FindBy(css="a[href*='viewDel']")
+	private List<WebElement> DELSavedList;
+	public List<WebElement> DELSavedList(){
+		return DELSavedList;
+	}
+	
+
+	@FindBy(css="a[href*='copy'][href*='Del']")
+	private List<WebElement> DELCopy;
+	public  List<WebElement> DELCopy(){
+		return DELCopy;
+	}
+	
+	@FindBy(css="a[title*='Edit Deliver']")
+	private List<WebElement> DELedit;
+	public  List<WebElement> DELedit(){
+		return DELedit;
+	}
+	
+	
+	@FindBy(css="a[href*='deleteDel']")
+	private List<WebElement> DELdelete;
+	public  List<WebElement> DELdelete(){
+		return DELdelete;
+	}
+	@FindBy(css="label")
+	private List<WebElement> labellist;
+	public  List<WebElement>  labellist(){
+		return labellist;
+	}
+	
+	
+	@FindBy(css="div[style*='block'] button[class*='primary']")
+	private WebElement DELdeleteOKbtn;
+	public  WebElement DELdeleteOKbtn(){
+		return DELdeleteOKbtn;
+	}
+	
+	
+	
+	@FindBy(css="span[class*='error']")
+	private WebElement DELgetValidErrormsg;
+	public WebElement DELgetValidErrormsg(){
+		return DELgetValidErrormsg;
+	}
+
+	@FindBy(css="span[class*='error']")
+	private List<WebElement> DELgetErrormsgList;
+	public  List<WebElement> DELgetErrormsgList(){
+		return DELgetErrormsgList;
+	}
+	
+	@FindBy(css="a[href*='viewMaster']")
+	private List<WebElement> MSAnolist;
+	public  List<WebElement> MSAnolist(){
+		return MSAnolist;
+	}
+	
+	@FindBy(xpath="//*[contains(@href,'viewMaster')]/../..//td[3]")
+	private List<WebElement> MSAtypelist;
+	public  List<WebElement> MSAtypelist(){
+		return MSAtypelist;
+	}
+	
+	@FindBy(css="[href*='deleteMaster']")
+	private List<WebElement> MSADellist;
+	public List<WebElement> MSADellist(){
+		return MSADellist;
+	}
+
+	@FindBy(css="[role*='dia'] div[class*='dialog-cont']")
+	private WebElement MSADelMsg;
+	public WebElement MSADelMsg(){
+		return MSADelMsg;
+	}
+	
+	@FindBy(css="a[href*='viewStatement']")
+	private List<WebElement> SOWnolist;
+	public  List<WebElement> SOWnolist(){
+		return SOWnolist;
+	}
+	@FindBy(xpath="//a[contains(@href,'viewStatement')]/../..//td[1]")
+	private List<WebElement> SOWmsanolist;
+	public  List<WebElement> SOWmsanolist(){
+		return SOWmsanolist;
+	}
+	@FindBy(xpath="//a[contains(@href,'viewStatement')]/../..//td[4]")
+	private List<WebElement> SOWDesclist;
+	public  List<WebElement> SOWDesclist(){
+		return SOWDesclist;
+	}
+	
+	@FindBy(xpath="//a[contains(@href,'viewStatement')]/../..//td[6]")
+	private List<WebElement> SOWStatuslist;
+	public  List<WebElement> SOWStatuslist(){
+		return SOWStatuslist;
+	}
+	
+	
+
+	@FindBy(css="a[href*='viewDel']")
+	private List<WebElement> DELnolist;
+	public  List<WebElement> DELnolist(){
+		return DELnolist;
+	}
+	
+	@FindBy(xpath="//a[contains(@href,'viewD')]/../..//td[1]")
+	private List<WebElement> DELmsanolist;
+	public  List<WebElement> DELmsanolist(){
+		return DELmsanolist;
+	}
+		
+	@FindBy(xpath="//a[contains(@href,'viewD')]/../..//td[2]")
+	private List<WebElement> DELsownolist;
+	public  List<WebElement> DELsownolist(){
+		return DELsownolist;
+	}
+	
+	@FindBy(xpath="//a[contains(@href,'viewD')]/../..//td[3]")
+	private List<WebElement> DELitmnumbr;
+	public  List<WebElement> DELitmnumbr(){
+		return DELitmnumbr;
+	}
+	
+	@FindBy(xpath="//a[contains(@href,'viewD')]/../..//td[6]")
+	private List<WebElement> DELcurrencylist;
+	public  List<WebElement> DELcurrencylist(){
+		return DELcurrencylist;
+	}
+		
+	//View DEL
+
+
+	@FindBy(xpath="//*[@for='Deliverable']/../..//td[2]")
+	private WebElement DELViewDeliverable;
+	public  WebElement DELViewDeliverable(){
+		return DELViewDeliverable;
+	}
+
+	@FindBy(xpath="//*[@for='deliverableLocation']/../..//td[2]")
+	private WebElement DELViewdeliverableLocation;
+	public  WebElement DELViewdeliverableLocation(){
+		return DELViewdeliverableLocation;
+	}
+	
+	@FindBy(xpath="//*[@for='itemType']/../..//td[2]")
+	private WebElement DELViewitemType;
+	public  WebElement DELViewitemType(){
+		return DELViewitemType;
+	}	
+	
+	@FindBy(xpath="//*[@for='chargeNumber']/../..//td[2]")
+	private WebElement DELViewAccnum;
+	public  WebElement DELViewAccnum(){
+		return DELViewAccnum;
+	}
+		
+	@FindBy(xpath="//*[@for='status']/../..//td[2]")
+	private WebElement DELViewPaymntStatus;
+	public  WebElement DELViewPaymntStatus(){
+		return DELViewPaymntStatus;
+	}
+	
+	@FindBy(xpath="//*[@for='clientBudgetCode']/../..//td[2]")
+	private WebElement DELViewBudgtCode;
+	public  WebElement DELViewBudgtCode(){
+		return DELViewBudgtCode;
+	}
+	
+	@FindBy(xpath="//*[@for='clientOrgCodes']/../..//td[2]")
+	private WebElement DELViewOrgCode;
+	public  WebElement DELViewOrgCode(){
+		return DELViewOrgCode;
+	}
+	
+	@FindBy(xpath="//*[@for='Expenses']/../..//td[2]")
+	private WebElement DELViewExptoClient;
+	public  WebElement DELViewExptoClient(){
+		return DELViewExptoClient;
+	}
+	
+	@FindBy(css="a[href*='Invoice']")
+	private List<WebElement> DELViewInvoiceList;
+	public  List<WebElement> DELViewInvoiceList(){
+		return DELViewInvoiceList;
+	}
+	
+	@FindBy(xpath="//a[contains(@href,'Invoice')]/../..//td[2]")
+	private List<WebElement> DELViewInvoicedateList;
+	public  List<WebElement> DELViewInvoicedateList(){
+		return DELViewInvoicedateList;
+	}
+	
+	@FindBy(xpath="//a[contains(@href,'Invoice')]/../..//td[3]")
+	private List<WebElement> DELViewInvoiceamntList;
+	public  List<WebElement> DELViewInvoiceamntList(){
+		return DELViewInvoiceamntList;
+	}
+	
+	@FindBy(xpath="//a[contains(@href,'Invoice')]/../..//td[4]")
+	private List<WebElement> DELViewInvoiceStatusList;
+	public  List<WebElement> DELViewInvoiceStatusList(){
+		return DELViewInvoiceStatusList;
+	}
+	
+	
+	//STORING OF DELIVERABLE LOCATORS ENDED
+	
+	//REUSABLE METHODS FOR DELIVERABLE PAGE STARTS
+	
+	
+	//To Add Delieverables
+	public String MSANUMBER=null;
+	public String SOWNumber=null;
+	public int deliverable=0;
+	
+	/**
+	 * Add SOW 
+	 * @author Piramanayagam.S
+	 * @return null
+	 * @param dataMap
+	 * @throws IOException 
+	 */
+	public void AddSOW(LinkedHashMap<String, String> dataMap) throws IOException
+	{
+		//GET SOW AND MSA NUMBER
+		int sowSize=SOWnolist.size();
+		 if(sowSize<0)
+		 { 
+			 if(MSAnolist.size()<0){
+				 MSANUMBER=createMSA(dataMap);
+			 }else{
+				 int i=MSAnolist.size()-1;
+				 MSANUMBER=MSAnolist.get(i).getText();
+			 }
+			 SOWNumber=createSOW(dataMap,MSANUMBER);
+			
+		 }else{
+			 int i=SOWnolist.size()-1;
+			 MSANUMBER=SOWmsanolist.get(i).getText();
+
+			 outr:for(int j=SOWnolist.size()-1;j>0;j--){
+				 //For ClientName
+				 if(SOWmsanolist.get(j).getText().contains(dataMap.get("SOWClientName"))){
+					 //To Avoid Addendum
+					 if(!SOWmsanolist.get(j).getText().contains("-A")){
+						 	MSANUMBER=SOWmsanolist.get(j).getText();
+						 	break outr;
+					 }
+				 }
+			 }
+			
+			 SOWNumber=createSOW(dataMap,MSANUMBER);
+		 }
+	
+	}
+	
+	
+	/**
+	 * Add Deliverable 
+	 * @author Piramanayagam.S
+	 * @return null
+	 * @param dataMap
+	 * @throws IOException 
+	 */
+	public int AddDelievarable(LinkedHashMap<String, String> dataMap) throws IOException
+	{
+		//GET SOW AND MSA NUMBER
+		 if(SOWnolist.size()<0)
+		 { 
+			 if(MSAnolist.size()<0){
+				 MSANUMBER=createMSA(dataMap);
+			 }else{
+				 int i=MSAnolist.size()-1;
+				 MSANUMBER=MSAnolist.get(i).getText();
+			 }
+			 SOWNumber=createSOW(dataMap,MSANUMBER);
+			
+		 }else{ 
+			outr: for(int j=0;j<SOWnolist.size();j++){
+		
+			 MSANUMBER=SOWmsanolist.get(j).getText();
+			 SOWNumber=SOWnolist.get(j).getText();
+			 if(!MSANUMBER.contains("-A")){
+				 	MSANUMBER=SOWmsanolist.get(j).getText();
+				 	SOWNumber=SOWnolist.get(j).getText();
+				 	break outr;
+				 }
+			 }
+		 }
+	
+		int amnt=0;
+		//TO START WITH FRESH DELIVERABLE AS ITEM TYPE IS UNIQUE and ACCEPTS ONLY TWO DIGITS UPTO 1-99
+		//clearDeliverablelist(dataMap);
+		amnt=createDeliverable(dataMap,MSANUMBER,SOWNumber);
+		System.out.println(amnt+"CREATE");
+		return amnt;
+	}
+	
+	
+	/**
+	 * Clear Deliverable-if any created will delete the existing deliverable 
+	 * @author Piramanayagam.S
+	 * @return null
+	 * @param dataMap
+	 */
+	public void clearDeliverablelist(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.waitForTime(2000);
+		if(dataMap.containsKey("emptyDel")){
+			int size=DELnolist.size();
+			for(int i=0;i<size;i++)
+			{
+				lavanteUtils.click(DELdelete.get(0));
+				lavanteUtils.waitForTime(4000);
+			}
+		}
+	}
+
+
+	/**
+	 * Clear Deliverable-if any created will delete the existing deliverable 
+	 * @author Piramanayagam.S
+	 * @return null
+	 * @param dataMap
+	 * @throws IOException 
+	 */
+	public int COPYDelievarable(LinkedHashMap<String, String> dataMap) throws IOException	{
+		clickDeliverable();
+		int amnt=fillDeliverableDetails(dataMap, MSANUMBER, SOWNumber);
+		formActionDeliverable(dataMap);
+		return amnt;
+	}
+	
+	
+	//CREATION OF MSA and ITS CORRESPONDING METHODs
+	public String createMSA(LinkedHashMap<String, String> dataMap) throws IOException {
+		clickMSA();
+		fillMSAdetails(dataMap);
+		formActionMSA(dataMap);
+		String MSANumber=getMSANUM(dataMap);
+		
+		return MSANumber;
+		
+	}
+
+	public void clickMSA() {
+		lavanteUtils.click(addMSAnwBtn);
+	}
+
+	public void fillMSAdetails(LinkedHashMap<String, String> dataMap) throws IOException {
+		lavanteUtils.switchtoFrame(IFRAMEMSAAddEdit);
+		if(dataMap.containsKey("msaclient")){
+			lavanteUtils.click(MSAClientName);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("msaclient"));
+			lavanteUtils.switchtoFrame(IFRAMEMSAAddEdit);
+		}
+		
+		if(dataMap.containsKey("addendum")){
+			if(MSAaddendumRdbtnElmnt.size()>0)
+			{
+				if(dataMap.get("addendum").length()>2){
+					lavanteUtils.clickJavaScriptNoWait(MSAaddendumRdbtnElmnt.get(0));
+				}else {
+					lavanteUtils.clickJavaScriptNoWait(MSAaddendumRdbtnElmnt.get(1));
+				}
+			}	
+		}
+		if(dataMap.containsKey("msanum")){
+			lavanteUtils.click(MSANumberDpdn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("msanum"));
+			lavanteUtils.switchtoFrame(IFRAMEMSAAddEdit);
+		}
+	
+		if(dataMap.containsKey("MSAstartdate")){
+			String date=dataMap.get("MSAstartdate");
+			lavanteUtils.click(MSAstartDate);
+			lavanteUtils.waitForTime(4000);
+			lavanteUtils.switchtoFrame(null);
+			if(date.equalsIgnoreCase("Any")){ 
+				lavanteUtils.clickJavaScript(MSAtodayDate);
+			}else {
+				int org=Integer.parseInt(date);
+				String today=MSAtodayDate.getText();
+				int to=Integer.parseInt(today);
+				to=to+org;
+				List<WebElement> ds=driver.findElements(By.cssSelector("a[class*='default']"));
+				for(int i=0;i<ds.size();i++){
+					String dates=ds.get(i).getText();
+					int x=Integer.parseInt(dates);
+					if(x==to){
+						lavanteUtils.click(ds.get(i));
+						break;
+					}
+				}
+			}
+			lavanteUtils.switchtoFrame(IFRAMEMSAAddEdit);
+		}
+		
+		if(dataMap.containsKey("msaevergreen")){
+			if(dataMap.get("msaevergreen").length()>2){
+				lavanteUtils.clickJavaScriptNoWait(MSAYesEver.get(0));
+				}else {
+					lavanteUtils.clickJavaScriptNoWait(MSAYesEver.get(1));
+
+							//MSA Ever End Date appears for NO
+							if(dataMap.containsKey("MSAeverEndDate")){
+
+								String date=dataMap.get("MSAeverEndDate");
+								
+								lavanteUtils.click(MSAEnddate);
+								lavanteUtils.switchtoFrame(null);
+							
+								if(date.equalsIgnoreCase("Any")){
+									lavanteUtils.click(MSAtodayDate);
+								}else {
+									int org=Integer.parseInt(date);
+									String today=MSAtodayDate.getText();
+									int to=Integer.parseInt(today);
+									to=to+org;
+									List<WebElement> ds=driver.findElements(By.cssSelector("a[class*='default']"));
+									for(int i=0;i<ds.size();i++){
+										String dates=ds.get(i).getText();
+										int x=Integer.parseInt(dates);
+										if(x==to){
+											lavanteUtils.click(ds.get(i));
+											break;
+										}
+										
+									}
+									
+								}
+								lavanteUtils.switchtoFrame(IFRAMEMSAAddEdit);
+							}
+					
+				}
+			
+		}
+		if(dataMap.containsKey("msanottoexceed")){
+			MSAnottoexceed.clear();
+			lavanteUtils.typeinEdit(dataMap.get("msanottoexceed"), MSAnottoexceed);
+		}
+		
+		if(dataMap.containsKey("MSAstatus")){
+			lavanteUtils.click(MSAStatusDpdn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("MSAstatus"));
+			lavanteUtils.switchtoFrame(IFRAMEMSAAddEdit);
+		}
+		if(dataMap.containsKey("msaupload")){
+			lavanteUtils.uploadFile(dataMap.get("msaupload"), MSAupload);
+		}
+
+	}
+
+	public void formActionMSA(LinkedHashMap<String, String> dataMap) {
+		if(dataMap.containsKey("MSASave")){
+			lavanteUtils.click(MSASave);
+			lavanteUtils.switchtoFrame(null);
+			if(dataMap.containsKey("Errmsg")){
+				
+			}else{
+				lavanteUtils.refreshPage();
+				lavanteUtils.waitforPageload(addMSAnwBtn);
+				lavanteUtils.fluentwait(addMSAnwBtn);
+			}
+		}
+	}
+	
+
+	public String getMSANUM(LinkedHashMap<String, String> dataMap) {
+		String MSANumber=null;
+		lavanteUtils.fluentwait(addMSAnwBtn);
+		if(dataMap.containsKey("MSASave")){
+			MSANumber=MSANumTxt.get(MSANumTxt.size()-1).getText();
+		}
+		return MSANumber;
+	}
+
+	
+	//CREATION OF SOW and ITS CORRESPONDING METHODs
+	public String createSOW(LinkedHashMap<String, String> dataMap, String MSANUMBER) throws IOException {
+		clickSOW();
+		fillSOWDetails(dataMap, MSANUMBER);
+		formActionSOW(dataMap);
+		
+		String SOWNo=getSOWNUMBER();
+		return SOWNo;
+		
+	}
+
+	public void clickSOW() {
+		lavanteUtils.click(addSOWnwBtn);
+		//lavanteUtils.waitForTime(2000);
+	}
+
+	public void fillSOWDetails(LinkedHashMap<String, String> dataMap,String MSANUMBER) throws IOException {
+		lavanteUtils.switchtoFrame(SOWAddIframe);
+		lavanteUtils.fluentwait(SOWinternalContact);
+		
+		if(dataMap.containsKey("SOWRMSNo")){
+			String id=lavanteUtils.getCustomIDQUERY("SOWRMS", "2",dataMap.get("CustomerID"));
+			WebElement e=driver.findElement(By.id(id));
+			lavanteUtils.typeinEdit(dataMap.get("SOWRMSNo"), e);
+		}
+		
+		if(dataMap.containsKey("SOWClientName")){
+			lavanteUtils.click(SOWClientnamedpdn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("SOWClientName"));
+			lavanteUtils.switchtoFrame(SOWAddIframe);
+		}
+		lavanteUtils.waitForTime(4000);
+		if(dataMap.containsKey("MSATYPE")){
+			lavanteUtils.click(SOWmsatypedpdn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("MSATYPE"));
+			lavanteUtils.switchtoFrame(SOWAddIframe);
+			lavanteUtils.fluentwait(SOWsave);
+		}
+		if(MSANUMBER.length()>0){
+			lavanteUtils.click(SOWnumdpdn);
+			lavanteUtils.selectvalueFrmDpdn(MSANUMBER);
+			lavanteUtils.switchtoFrame(SOWAddIframe);
+			lavanteUtils.fluentwait(SOWsave);
+		}
+		if(dataMap.containsKey("SOWStartDate")){
+			lavanteUtils.fluentwait(SOWsave);
+		/*	Actions s=new Actions(driver);
+			s.moveToElement(SOWstartDate).click();
+			s.build().perform();*/
+			lavanteUtils.click(SOWstartDate);
+			/*lavanteUtils.click(SOWstartDate);*/
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.waitForTime(2000);
+		/*	Actions ss=new Actions(driver);
+			ss.moveToElement(SOWtodayDate).click();
+			ss.build().perform();*/
+			lavanteUtils.clickJavaScript(SOWtodayDate);
+			lavanteUtils.switchtoFrame(SOWAddIframe);
+			lavanteUtils.fluentwait(SOWsave);
+		}
+		if(dataMap.containsKey("SOWEnddate")){
+			lavanteUtils.fluentwait(SOWsave);
+		/*	Actions s=new Actions(driver);
+			s.moveToElement(SOWEndDate).click();
+			s.build().perform();*/
+			lavanteUtils.click(SOWEndDate);
+		/*	lavanteUtils.click(SOWEndDate);*/
+			lavanteUtils.waitForTime(2000);
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.waitForTime(2000);
+			/*Actions ss=new Actions(driver);
+			ss.moveToElement(SOWtodayDate).click();
+			ss.build().perform();*/
+			lavanteUtils.clickJavaScript(SOWtodayDate);
+		/*	lavanteUtils.click(SOWtodayDate);*/
+			lavanteUtils.switchtoFrame(SOWAddIframe);
+			lavanteUtils.fluentwait(SOWsave);
+		}
+		if(dataMap.containsKey("SOWDescription")){
+			lavanteUtils.typeString(dataMap.get("SOWDescription"), SOWdescr);
+		}
+		
+		if(dataMap.containsKey("SOWNotes")){
+			lavanteUtils.typeString(dataMap.get("SOWNotes"), SOWNotes);
+		}
+
+		if(dataMap.containsKey("SOWInternalContact")){
+			lavanteUtils.typeString(dataMap.get("SOWInternalContact"), SOWinternalContact);
+		}
+		
+		if(dataMap.containsKey("SOWStatus")){
+			lavanteUtils.click(SOWstatusdpdn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("SOWStatus"));
+			lavanteUtils.switchtoFrame(SOWAddIframe);
+			
+		}
+		if(dataMap.containsKey("SOWPaymentType")){
+			lavanteUtils.click(SOWpaymenttypedpdn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("SOWPaymentType"));
+			lavanteUtils.switchtoFrame(SOWAddIframe);
+			
+		}
+		if(dataMap.containsKey("SOWPaymentTerms")){
+			lavanteUtils.click(SOWpaymenttrmdpdn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("SOWPaymentTerms"));
+			lavanteUtils.switchtoFrame(SOWAddIframe);
+			lavanteUtils.fluentwait(SOWsave);
+		}
+		if(dataMap.containsKey("SOWNotToExecedAmnt")){
+			SOWnotToExceedAmount.clear();
+			lavanteUtils.typeinEdit(dataMap.get("SOWNotToExecedAmnt"), SOWnotToExceedAmount);
+		}
+		
+		if(dataMap.containsKey("SOWUpfront")){
+			if(dataMap.get("SOWUpfront").equalsIgnoreCase("ANY")||dataMap.get("SOWUpfront").equalsIgnoreCase("NO"))
+			{
+				lavanteUtils.selectChckbx(SOWUpfrontNO);
+			}	else{
+				lavanteUtils.selectChckbx(SOWUpfrontYes);
+			}
+		}
+		if(dataMap.containsKey("SOWCreditCard")){
+			if(dataMap.get("SOWCreditCard").equalsIgnoreCase("ANY")||dataMap.get("SOWCreditCard").equalsIgnoreCase("NO"))
+			{
+				lavanteUtils.selectChckbx(SOWCreditcardNo);
+			}	else{
+				lavanteUtils.selectChckbx(SOWCreditcardYes);
+			}
+		}
+		if(dataMap.containsKey("SOWsingleFile")){
+			String attachsingle=lavanteUtils.getCustomIDQUERY("attach single","2",dataMap.get("CustomerID"));
+			WebElement el=driver.findElement(By.id(attachsingle));
+			lavanteUtils.uploadFile(dataMap.get("SOWsingleFile"),el);
+			
+		}
+		if(dataMap.containsKey("SOWmultiFile")){
+			
+			String attachmulti=lavanteUtils.getCustomIDQUERY("attach any","2",dataMap.get("CustomerID"));
+			
+			String s=dataMap.get("SOWmultiFile");
+			if(s.contains("#"))
+			{
+				String[] sp=s.split("#");
+				String ss="[name='"+attachmulti+"']";
+				
+				for(int i=0;i<sp.length;i++)
+				{ 
+					List<WebElement> el=driver.findElements(By.cssSelector(ss));
+					int sss=el.size();
+					for(int ij=0;ij<sss;ij++)
+					{
+						System.out.println(ij+el.get(ij).getAttribute("style"));
+						if(el.get(ij).getAttribute("style").length()<1)
+						{
+							lavanteUtils.fluentwait(el.get(ij));
+							lavanteUtils.uploadFile(sp[i],el.get(ij));
+						} 
+					} 
+						
+					
+				}
+			}
+			
+		}
+
+	}
+
+	/**
+	 * 
+	 * @author Piramanayagam.S
+	 * @param dataMap
+	 */
+	public void formActionSOW(LinkedHashMap<String, String> dataMap) {
+		
+		if(dataMap.containsKey("SOWSave")){
+				lavanteUtils.click(SOWsave);
+				if(dataMap.containsKey("ErrMsg")){
+					
+				}else{
+					lavanteUtils.refreshPage();
+				}
+		}if(dataMap.containsKey("SOWCancel")){
+			lavanteUtils.switchtoFrame(SOWAddIframe);
+			lavanteUtils.click(SOWCancel);
+		}
+	}
+
+	public String getSOWNUMBER() {
+		String SOWNo="";
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(addMSAnwBtn);
+		SOWNo=SOWNoTxt.getText();
+		return SOWNo;
+	}
+
+	
+	//CREATION OF DELIVERABLE and ITS CORRESPONDING METHODs
+	public int createDeliverable(LinkedHashMap<String, String> dataMap, String mSANUMBER, String sOWNumber) throws IOException {
+
+		int deliverable=0;
+		clickDeliverable();
+		deliverable=fillDeliverableDetails(dataMap, mSANUMBER, sOWNumber);
+		formActionDeliverable(dataMap);
+		
+		return deliverable;
+	}
+
+	public void clickDeliverable() {
+		lavanteUtils.click(adddelnwBtn);
+	}
+
+	/**
+	 * Fill Deliverable Details 
+	 * @author Piramanayagam.S
+	 * @param LinkedHashMap<String, String> dataMap,String mSANUMBER, String sOWNumber
+	 * @return integer deliverable
+	 * @throws IOException 
+	 * 
+	 */
+	public int fillDeliverableDetails(LinkedHashMap<String, String> dataMap, String mSANUMBER, String sOWNumber) throws IOException {
+		
+		lavanteUtils.switchtoFrame(DELIframe);
+	
+		if(dataMap.containsKey("clear")){
+			lavanteUtils.click(DELClear);
+		}
+		if(dataMap.containsKey("MSATYPE")){
+			lavanteUtils.click(Delmsatypedpdn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("MSATYPE"));
+			lavanteUtils.switchtoFrame(DELIframe);
+		}
+		if(mSANUMBER.length()>0){
+			lavanteUtils.click(Delmsanumdpdn);
+			lavanteUtils.selectvalueFrmDpdn(mSANUMBER);
+			lavanteUtils.switchtoFrame(DELIframe);
+		}
+		if(sOWNumber.length()>0){
+			lavanteUtils.click(DELsownumdpdn);
+			lavanteUtils.selectvalueFrmDpdn(sOWNumber);
+			lavanteUtils.switchtoFrame(DELIframe);
+		}
+		if(dataMap.containsKey("DELitemNumber")){
+			String itmtype=dataMap.get("DELitemNumber");
+			if(itmtype.equalsIgnoreCase("Any")){
+				lavanteUtils.switchtoFrame(null);
+						
+				List<Integer> ads=new ArrayList<Integer>();
+				for(int i=0;i<DELitmnumbr.size();i++){
+					String x=DELitmnumbr.get(i).getText();
+					Integer a=Integer.parseInt(x);
+					ads.add(a);
+				}
+				
+				Collections.sort(ads);
+				if(ads.size()>0){
+				int n=ads.size()-1;
+				
+				for(int is=0;is<=n;is++){
+					Integer current=ads.get(is);
+					fut=current+1;
+					int addi=is+1;
+					if(addi<=n){
+						Integer nwfut=ads.get(addi);
+						if(fut!=nwfut){
+							lavanteUtils.switchtoFrame(DELIframe);
+							lavanteUtils.typeinEdit(""+fut,DELitemnumbr);
+							break;
+						}
+					}else{
+							lavanteUtils.switchtoFrame(DELIframe);
+							lavanteUtils.typeinEdit(""+fut,DELitemnumbr);
+							break;
+					}
+				}	
+			}else{
+				lavanteUtils.switchtoFrame(DELIframe);
+				lavanteUtils.typeinEdit(""+1,DELitemnumbr);
+			}
+			}else{ 
+				lavanteUtils.typeinEdit(itmtype,DELitemnumbr);
+			}
+			
+		}
+		if(dataMap.containsKey("DELdeliverable")){
+			String totype=dataMap.get("DELdeliverable");
+			if(totype.equalsIgnoreCase("ANY"))
+			{	
+				deliverable=LavanteUtils.randomnum(9);
+				totype=""+fut+deliverable+LavanteUtils.randomnum(9);
+			}
+			deliverable=Integer.parseInt(totype);
+			lavanteUtils.typeinEdit(""+totype,DELdeliverable);
+		}
+		
+		if(dataMap.containsKey("DELexpectedDelivarabledate")){
+			lavanteUtils.click(DELexpdate);
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.click(DELtodaydate);
+			lavanteUtils.switchtoFrame(DELIframe);
+		}
+		if(dataMap.containsKey("DELdeliverablelocation")){
+			lavanteUtils.click(DELdellocationdpdn);
+			lavanteUtils.ScrollselectvalueFrmDpdn(dataMap.get("DELdeliverablelocation"));
+			lavanteUtils.switchtoFrame(DELIframe);
+		}
+		if(dataMap.containsKey("DELitemtype")){
+			lavanteUtils.click(DELitemtypedpdn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("DELitemtype"));
+			lavanteUtils.switchtoFrame(DELIframe);
+		}
+		if(dataMap.containsKey("DELinvamount")){
+			String tso=dataMap.get("DELinvamount");
+			if(tso.equalsIgnoreCase("ANY"))
+			{	
+				tso=""+LavanteUtils.randomnum(9999);
+			}
+			lavanteUtils.typeinEdit(tso,DELinvamnt);
+		}
+		if(dataMap.containsKey("DELcurrency")){
+			lavanteUtils.click(DELcurrencydpdn);
+			lavanteUtils.ScrollselectvalueFrmDpdn(dataMap.get("DELcurrency"));
+			lavanteUtils.switchtoFrame(DELIframe);
+		}
+		if(dataMap.containsKey("DELpaymentstatus")){
+			lavanteUtils.click(DELpaymntstatusdpdn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("DELpaymentstatus"));
+			lavanteUtils.switchtoFrame(DELIframe);
+		}
+		if(dataMap.containsKey("DELaccnumber")){
+			DELAccnum.clear();
+			lavanteUtils.typeinEdit(dataMap.get("DELaccnumber"),DELAccnum);	
+		}
+		if(dataMap.containsKey("DELlistprice")){
+			DELlistPrice.clear();
+			lavanteUtils.typeinEdit(dataMap.get("DELlistprice"),DELlistPrice);
+		}
+		if(dataMap.containsKey("DELdiscprice")){
+			DELdiscountPrice.clear();
+			lavanteUtils.typeinEdit(dataMap.get("DELdiscprice"),DELdiscountPrice);
+		}
+		if(dataMap.containsKey("DELcostsaving")){
+			DELcostingSavings.clear();
+			lavanteUtils.typeinEdit(dataMap.get("DELcostsaving"),DELcostingSavings);
+		}
+		if(dataMap.containsKey("DELCancelled")){
+			if(dataMap.get("DELCancelled").equalsIgnoreCase("ANY")||dataMap.get("DELCancelled").equalsIgnoreCase("NO"))
+			{
+				driver.findElement(By.cssSelector("input~input[type*='radio']")).click();
+			}	else{
+				lavanteUtils.selectChckbx(DELCancelledYES);
+			}
+		}
+		if(dataMap.containsKey("DELCancelledNotes")){
+			lavanteUtils.typeinEdit(dataMap.get("DELCancelledNotes"),DELCancelledNotestxt );
+		}
+		if(dataMap.containsKey("DELBrowse")){
+			lavanteUtils.uploadFile(dataMap.get("DELBrowse"),DELbrwse);
+		}
+		if(dataMap.containsKey("DELexpenseNottoClient")){
+			
+		}
+		return deliverable;
+
+	}
+
+	/**
+	 * Form Action deliverable  button to close any popups available
+	 * @author Piramanayagam.S
+	 * @param LinkedHashMap<String, String> dataMap
+	 * @return null
+	 * 
+	 */
+	public void formActionDeliverable(LinkedHashMap<String, String> dataMap) {
+		if(dataMap.containsKey("save")){
+			lavanteUtils.click(DELSave);
+			lavanteUtils.switchtoFrame(null);
+			if(dataMap.containsKey("errormsg")){
+				
+			}else{
+				lavanteUtils.refreshPage();
+			}
+		}
+		if(dataMap.containsKey("cancel")){
+			lavanteUtils.click(DELCancel);
+			lavanteUtils.switchtoFrame(null);
+		}
+		if(dataMap.containsKey("clear")){
+			lavanteUtils.click(DELClear);
+		}
+	}
+
+
+	/**
+	 * Close button to close any popups available
+	 * @author Piramanayagam.S
+	 * @param null
+	 * @return null
+	 * 
+	 */
+	public void close() {
+		int closesize=closebtn.size();
+		
+		for(int i=0;i>closesize;i++)
+		{
+			lavanteUtils.fluentwait(closebtn.get(0));
+			if(closebtn.get(0).isDisplayed()==true)
+			{
+				lavanteUtils.click(closebtn.get(0));
+			}
+		}
+	}
+	
+
+}

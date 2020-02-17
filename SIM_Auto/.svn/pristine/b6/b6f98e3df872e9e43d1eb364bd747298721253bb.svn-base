@@ -1,0 +1,39 @@
+#LINKS
+Suppliers=Suppliers
+OFAC=OFAC
+OFAC_SDN=What is OFAC SDN?
+#change
+OFAChelp=Help
+OFACSDN=What is OFAC SDN?
+#ID
+searchEditBx=searchFilter
+searchBtn=supplierSearchOFAC
+radioAll=All
+radioAwaitingCheck=Awaiting Check
+radioNoMatch=No Match
+radioRequiresDisposition=Requires Disposition
+radioOverridden=Overridden
+radioDeactivated=Deactivated
+
+#change
+chkInactiveCustomers=showDeactivatedSuppliers
+OverrideBtn=ofacOverride
+DeactivateBtn=ofacDeactivate
+
+#XPATH
+detailsText=//form[@id='supplierofacsdnForm']/table/tbody/tr/td/div/div[1]/table/tbody/tr/td[1]
+helpFrame=/html/body/div[10]/iframe
+inactiveCustomersTxt=//div[@class='deactivate-supplier float_right']/label
+OFACTxt=//table[@id='supplier_ofacsdn']/caption/div/div[@class='float_right']
+#helpFrame=//iframe[@class='popup_iframe ui-dialog-content ui-widget-content']
+helpClose=/html/body/div[11]/div[1]/button
+helpFrameClose=//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-front dialog ui-draggable ui-resizable']/div/button[@class='ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close']
+OFAChelptitle=//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-front dialog ui-draggable ui-resizable']/div/span
+sendEmailBtn=//form[@id='supplierofacsdnForm']/div/button[@class='button_gold open_popup']
+chkshwInactivecust=//div[@class='deactivate-supplier float_right']/label[@class='show-deactivate']
+SendEmail=//button[@class='button_gold open_popup']
+Deactivate=//input[@class='button_red open_popup']
+Override=//input[@class='button_green open_popup']
+#Text
+pagetitle=Lavante SIM - OFAC
+DetailsOFAC=Details of OFAC SDN Screening 

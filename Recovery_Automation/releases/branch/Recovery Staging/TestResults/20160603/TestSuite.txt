@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 20, Failures: 1, Errors: 0, Skipped: 19, Time elapsed: 2 sec <<< FAILURE! - in TestSuite
+preCondition(lavante.recovery.testsuites.SanityTestSuite)  Time elapsed: 1.885 sec  <<< FAILURE!
+java.lang.AssertionError: Fail: Application is not Launched.Could not start a new session. Possible causes are invalid address of the remote server or browser start-up failure.
+Build info: version: '2.52.0', revision: '4c2593cfc3689a7fcd7be52549167e5ccc93ad28', time: '2016-02-11 11:22:43'
+System info: host: 'WLW7-TALLURYS', ip: '192.168.21.55', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_40'
+Driver info: driver.version: RemoteWebDriver
+	at org.testng.Assert.fail(Assert.java:94)
+	at lavante.recovery.utilities.Report.fail(Report.java:20)
+	at lavante.recovery.utilities.seleniumBaseClass.launchAppThroughPOM(seleniumBaseClass.java:116)
+	at lavante.recovery.testsuites.SanityTestSuite.preCondition(SanityTestSuite.java:31)
+

@@ -1,0 +1,606 @@
+package com.lavante.sim.customer.TestScripts.Transactions.Invoices;
+
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.UtilFunction.DataProvider.Supplier.InvoiceDataProvider;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+
+/**
+ * Created on 16-12-2015
+ * Created for Invoice Test case
+ * Enhancement covered SIM -7532,SIM-7014
+ * Ended on 04-02-2016
+ * @author Piramanayagam.S
+ *
+ */
+public class  InvoiceTC002 extends PageInitiator {
+	
+	LavanteUtils lavanteUtils=new LavanteUtils();
+	String customerid="";
+	/**
+	 * This class all test starts using login page and driver initialization
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,@Optional(LavanteUtils.browser) String browser,
+			@Optional(LavanteUtils.browserVersion) String Version) throws Exception{
+				
+		launchAppFromPOM(Platform,browser,Version);
+		initiate();
+		openAPP();	
+		lavanteUtils.driver=driver;
+		
+		//Login
+		List<?> listofdatafrm=lavanteUtils.login("Invoice",browser);
+		LinkedHashMap<String, String> LdataMap=new LinkedHashMap<String, String>();
+		LdataMap=(LinkedHashMap<String, String>) listofdatafrm.get(0);
+		customerid=(String) listofdatafrm.get(1);
+		
+		//Login		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+	
+	}
+	
+	@BeforeMethod
+	public void beforeMethod(){
+		
+		LinkedHashMap<String,String> dataMap=new LinkedHashMap<String, String>();
+		dataMap.put("maintab","Invoice");
+		dataMap.put("subtab", "InvoiceSearchResult");
+		
+		enobjhomePage.selectTab(dataMap);
+		dataMap.clear();
+		eninvoiceBasicSearch.formAction(dataMap);
+		lavanteUtils.waitForTime(3000);
+	}
+	
+	/**
+	 * viewInvoiceDELTASKPage 
+	 * 
+	 * * Enhancement: SIM-7532	Checking Deliverables in Edit invoice page
+	 * @author Piramanayagam S
+	 * @param dataMap
+	 * @throws Exception 
+	 */
+	@Test(dataProvider="SubmitInvoice",dataProviderClass=InvoiceDataProvider.class)
+	public void viewInvoiceDELTASKPage(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		
+		Reporter.log("Test Started for muti select deliverables in edit invoice:"+currenttime());
+		boolean flag=true;
+		SoftAssert softassert=new SoftAssert();
+	
+		dataMap.put("maintab","Tasks");
+		dataMap.put("subtab", "getInvoiceTasks");
+		enobjhomePage.selectTab(dataMap);
+		
+		dataMap.put("InvoiceType","SOW");
+		dataMap.remove("supplierName");
+		enTaskinvoicestoApprve.Search(dataMap);
+		
+		for(int i=0;i<enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Invoice Type").size();i++){
+			String invtype=enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Invoice Type").get(i).getText();
+			if(invtype.equalsIgnoreCase("SOW")){
+				Reporter.log("Found SOW  Invoice:");
+				
+				String suppname=enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Supplier Name").get(i).getText();
+				lavanteUtils.click(enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Task ID").get(i));
+				lavanteUtils.click(ensplitInvoice.Actnbtn());
+				lavanteUtils.click(enTaskinvoicestoApprve.EditInvoice());
+				
+				lavanteUtils.switchtoFrame(enTaskinvoicestoApprve.IFRAMEEditInvoice());
+				lavanteUtils.waitForTime(3000);
+		
+				String explineitem="39";
+				String expitmttyp="Services";
+				String expdesc="89899";
+				
+				String actuallineitm=enTaskinvoicestoApprve.editDellitm().get(0).getText();
+				String actualdesc=enTaskinvoicestoApprve.editDeldescription().get(0).getText();
+				String actualItmtype=enTaskinvoicestoApprve.editDelitemType().get(0).getText();
+				
+				
+				String x="select Deliverable From Deliverable where Deliverable='"+actualdesc+"' and "
+						+ "  SOWID in (Select SOWID From StatementOfWork where MSAID in (Select MSAID From MasterServiceAgreement"
+						+ "  where RelationShipID in (Select RelationShipID from RelationShip where LavanteUID "
+						+ "  in (Select LavanteUID From Supplier where SupplierName='"+suppname+"'))))";
+				expdesc=lavanteUtils.fetchDBdata(x);
+				
+				Reporter.log("Description in edit invoice, Expected:"+expdesc+", Actual:"+actualdesc,true);	
+				softassert.assertEquals(expdesc,actualdesc,"Description not matched in edit invoice, Expected:"+expdesc+" ,Actual:"+actualdesc);
+				
+				x="select ItemNumber From Deliverable where Deliverable='"+actualdesc+"' and "
+						+ "  SOWID in (Select SOWID From StatementOfWork where MSAID in (Select MSAID From MasterServiceAgreement"
+						+ "  where RelationShipID in (Select RelationShipID from RelationShip where LavanteUID "
+						+ "  in (Select LavanteUID From Supplier where SupplierName='"+suppname+"'))))";
+				explineitem=lavanteUtils.fetchDBdata(x);
+				
+				Reporter.log("Lineitm in edit invoice, Expected:"+explineitem+", Actual:"+actuallineitm,true);	
+				softassert.assertEquals(actuallineitm,explineitem,"Lineitm not matched in edit invoice, Expected:"+explineitem+" ,Actual:"+actuallineitm);
+				
+				x="select DeliverableItemTypeDescription From DeliverableITemtype where DeliverableITemtypeID in ( select DeliverableITemtypeID From Deliverable where Deliverable='"+actualdesc+"' and "
+						+ "  SOWID in (Select SOWID From StatementOfWork where MSAID in (Select MSAID From MasterServiceAgreement"
+						+ "  where RelationShipID in (Select RelationShipID from RelationShip where LavanteUID "
+						+ "  in (Select LavanteUID From Supplier where SupplierName='"+suppname+"')))))";
+				expitmttyp=lavanteUtils.fetchDBdata(x);
+				
+				Reporter.log("Item type in edit invoice, Expected:"+expitmttyp+", Actual:"+actualItmtype,true);	
+				softassert.assertEquals(actualItmtype,expitmttyp,"Item type  not matched in edit invoice, Expected:"+expitmttyp+" ,Actual:"+actualItmtype);
+				
+				if(enTaskinvoicestoApprve.editDellitm().size()>0){
+					actuallineitm=enTaskinvoicestoApprve.editDellitm().get(1).getText();
+					actualdesc=enTaskinvoicestoApprve.editDeldescription().get(1).getText();
+					actualItmtype=enTaskinvoicestoApprve.editDelitemType().get(1).getText();
+					 
+					x="select Deliverable From Deliverable where Deliverable='"+actualdesc+"' and "
+							+ "  SOWID in (Select SOWID From StatementOfWork where MSAID in (Select MSAID From MasterServiceAgreement"
+							+ "  where RelationShipID in (Select RelationShipID from RelationShip where LavanteUID "
+							+ "  in (Select LavanteUID From Supplier where SupplierName='"+suppname+"'))))";
+					expdesc=lavanteUtils.fetchDBdata(x);
+					
+					Reporter.log("Description in edit invoice, Expected:"+expdesc+", Actual:"+actualdesc,true);	
+					softassert.assertEquals(expdesc,actualdesc,"Description not matched in edit invoice, Expected:"+expdesc+" ,Actual:"+actualdesc);
+					
+					x="select ItemNumber From Deliverable where Deliverable='"+actualdesc+"' and "
+							+ "  SOWID in (Select SOWID From StatementOfWork where MSAID in (Select MSAID From MasterServiceAgreement"
+							+ "  where RelationShipID in (Select RelationShipID from RelationShip where LavanteUID "
+							+ "  in (Select LavanteUID From Supplier where SupplierName='"+suppname+"'))))";
+					explineitem=lavanteUtils.fetchDBdata(x);
+					
+					Reporter.log("Lineitm in edit invoice, Expected:"+explineitem+", Actual:"+actuallineitm,true);	
+					softassert.assertEquals(actuallineitm,explineitem,"Lineitm not matched in edit invoice, Expected:"+explineitem+" ,Actual:"+actuallineitm);
+					
+					x="select DeliverableItemTypeDescription From DeliverableITemtype where DeliverableITemtypeID in ( select DeliverableITemtypeID From Deliverable where Deliverable='"+actualdesc+"' and "
+							+ "  SOWID in (Select SOWID From StatementOfWork where MSAID in (Select MSAID From MasterServiceAgreement"
+							+ "  where RelationShipID in (Select RelationShipID from RelationShip where LavanteUID "
+							+ "  in (Select LavanteUID From Supplier where SupplierName='"+suppname+"')))))";
+					expitmttyp=lavanteUtils.fetchDBdata(x);
+					
+					Reporter.log("Item type in edit invoice, Expected:"+expitmttyp+", Actual:"+actualItmtype,true);	
+					softassert.assertEquals(actualItmtype,expitmttyp,"Item type  not matched in edit invoice, Expected:"+expitmttyp+" ,Actual:"+actualItmtype);
+				}
+				flag=true;
+				break;
+			
+			}
+		}
+		
+		if(flag==false)
+		{
+			softassert.assertTrue(false,"please Re check");
+		}
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended for muti select deliverables in edit invoice:"+currenttime());
+		
+	}
+	
+	/** Enhancement: SIM-7532	verifying sow number in contract management page and upload invoice
+	 * TC_01: Upload an Invoice (PO/Non-PO) and Submit for Approval.
+	 * @author Piramanayagam S
+	 * @param dataMap
+	 * @throws Exception 
+	 */
+	@Test(dataProvider="EmptyDEL",dataProviderClass=InvoiceDataProvider.class)
+	public void ItemtypeSearch(LinkedHashMap<String, String> dataMap) throws Exception
+	{
+		
+		Reporter.log("Test Started for matching sow number in invoice and contract management page :"+currenttime());
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+		
+		dataMap.put("SelectSupplier","");
+		dataMap.remove("InvDate");
+		String x=eninvoicePage.fetchDelSupplier(customerid);
+		dataMap.put("supplierName",x);
+		dataMap.put("InvSOWNum","ANY");
+		enuploadInvoice.UploadInvoice(dataMap);
+		Reporter.log("Upload invoice page");
+
+		/*Select x=new Select(uploadInvoice.selectdeliverable());
+		String appcontent="";
+		for(int i=0;i<x.getOptions().size();){
+			 appcontent=x.getOptions().get(i).getText();
+				break;
+		}*/
+		String lineitem="";
+		String itemtype="";
+		String desc="";
+		lineitem=enuploadInvoice.lineitemdeliverable().get(0).getText();
+		itemtype=enuploadInvoice.lineitemtype().get(0).getText();
+		desc=enuploadInvoice.lineitemdesc().get(0).getText();
+		
+		lavanteUtils.switchtoFrame(null);
+		enobjhomePage.popupclose();
+		
+		Reporter.log("contract management page");
+		dataMap.put("maintab", "TRANSACTIONS");
+		dataMap.put("subtab", "customerContractManagement");
+		enobjhomePage.selectTab(dataMap);
+		dataMap.put("AdvSearch","");
+		lavanteUtils.waitForTime(4000);
+		encontractManagement.selectSearchTab(dataMap);
+		
+		lavanteUtils.fluentwait(encontractManagement.advSearchtab());
+		Reporter.log("In Adv Search Tab of Contract Management");
+		
+		dataMap.put("Build", "");
+		encontractManagement.SelectSearchOption(dataMap);
+				
+		dataMap.put("DELdeliverable", desc);	
+		dataMap.put("TypeDel","Contains");	
+		dataMap.put("DELitemtype", itemtype);	
+		dataMap.put("Search", "");	
+		encontractAdvancedSearch.buildquery(dataMap);
+		Reporter.log("Query Built");
+		
+		lavanteUtils.switchtoFrame(encontractManagement.IFRAMESearchResult());
+		
+		for(int j=0;j<encontractManagement.DELDel().size();j++)
+		{
+			String lishyht=encontractManagement.DELDel().get(j).getText();
+			if(lishyht.equalsIgnoreCase(lineitem))
+			{
+				Reporter.log("Data Matched");
+				String sow=encontractManagement.sowlist().get(j).getText();
+				Reporter.log("Sow displayed in Invoice :"+dataMap.get("InvSOWNum")+",Contract management SOW num:"+sow);
+				softassert.assertEquals(sow,dataMap.get("InvSOWNum"));
+				flag=true;
+				break;
+			}
+		}
+				
+		if(flag==false)
+		{
+			softassert.assertTrue(false,"please Re check");
+		}
+		
+		softassert.assertAll();
+		Reporter.log("Test Ended for for matching sow number in invoice and contract management page:"+currenttime());
+	
+	
+	}
+	
+	/** Enhancement: SIM-7014 - There will be an option for the user to search for the suppliers, Upon clicking on search supplier name, only those suppliers who are approved and have an ERP ID assigned need to be displayed. 
+	 * TC_01: No SOW Selection 
+	 * @author Piramanayagam S
+	 * @param dataMap
+	 * @throws Exception 
+	 */	
+	@Test
+	public void searchname() throws Exception
+	{
+		
+		Reporter.log("Test Started for Verification of uploadinvoice button and invoice popup in invoice page :"+currenttime());
+		
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String>();
+		SoftAssert softassert=new SoftAssert();
+		
+		softassert.assertTrue(eninvoicePage.uploadInvoicebtn().isEnabled(),"Supp name is not  displayed");
+		softassert.assertTrue(eninvoicePage.uploadInvoicebtn().isDisplayed(),"Supp name is not  displayed");
+		
+		String button=eninvoicePage.uploadInvoicebtn().getText();
+		Reporter.log("Invoice Button Text:"+button);	
+		softassert.assertEquals(button,"Upload Invoice","upload invoice button is Not Available");
+		
+		dataMap.put("Upload", "");
+		eninvoicePage.formAction(dataMap);
+	
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(enuploadInvoice.Uploadinvoicebtn());
+		
+		Reporter.log(" In Invoice popup is Supp name is displayed :"+enuploadInvoice.SearchName().isDisplayed());	
+		softassert.assertTrue(enuploadInvoice.SearchName().isDisplayed(),"Supp name is not  displayed");
+		
+		dataMap.put("supplierName",""+randomnum());
+		enuploadInvoice.fillInvoiceDetails(dataMap);
+		lavanteUtils.switchtoFrame(enuploadInvoice.IFRAMEsearchSuppliersByName());
+		Reporter.log("Invalid Supplier Search,Searched: "+dataMap.get("supplierName")+":"+enuploadInvoice.ListSuppNameSearch().size());
+		softassert.assertFalse(enuploadInvoice.ListSuppNameSearch().size()>0,"Invalid Supplier"+enuploadInvoice.ListSuppNameSearch().size());
+		
+		lavanteUtils.switchtoFrame(enuploadInvoice.IFRAMEsearchSuppliersByName());
+		
+		String Sname=eninvoicePage.fetchPoSupplier(customerid);
+		dataMap.put("supplierName",Sname);		
+		enuploadInvoice.entersupplierName().clear();
+		lavanteUtils.typeinEdit(Sname, enuploadInvoice.entersupplierName());
+		lavanteUtils.click(enuploadInvoice.Suppliersearchgobtn());
+		
+		lavanteUtils.fluentwait(enuploadInvoice.Suppliersearchgobtn());
+		lavanteUtils.waitForTime(4000);
+		Reporter.log("Valid Supplier Search,Searched: "+dataMap.get("supplierName")+":"+enuploadInvoice.ListSuppNameSearch().size());
+		softassert.assertTrue(enuploadInvoice.ListSuppNameSearch().size()>0,"Valid Supplier Search, No Result Found, Expected >0 ,Actual:"+enuploadInvoice.ListSuppNameSearch().size());
+		
+		
+		for(int i=0;i<enuploadInvoice.ListSuppNameSearch().size();i++)
+		{
+			String app=enuploadInvoice.ListSuppNameSearch().get(i).getText().toLowerCase();
+			Reporter.log("Application displayed after searching with supplier Name, "+dataMap.get("supplierName").toLowerCase()+":"+app,true);
+			softassert.assertTrue(app.contains(dataMap.get("supplierName").toLowerCase()),"Supplier Name Not Matching for Name Search,"+app+dataMap.get("supplierName"));
+		}
+		
+		
+		String Sid="select MAX(rem.SupplierERPID) From  Relationship r, Supplier s,Relationship_ERP_Map rem  where "
+				+ " s.LavanteUID = r.LavanteUID and r.CustomerID="+customerid+"  and r.RelationshipID=rem.RelationshipID"
+				+ " and S.SupplierName='"+Sname+"'";
+		Sid=lavanteUtils.fetchDBdata(Sid);
+		dataMap.put("supplierName",Sname);
+		enuploadInvoice.entersupplierName().clear();
+		lavanteUtils.typeinEdit(Sname, enuploadInvoice.entersupplierName());
+		enuploadInvoice.entersupplierID().clear();
+		lavanteUtils.typeinEdit(Sid, enuploadInvoice.entersupplierID());
+		lavanteUtils.click(enuploadInvoice.Suppliersearchgobtn());
+		
+		lavanteUtils.fluentwait(enuploadInvoice.Suppliersearchgobtn());
+		lavanteUtils.waitForTime(5000);
+		for(int i=0;i<enuploadInvoice.ListSuppIDSearch().size();)
+		{
+			String app=enuploadInvoice.ListSuppIDSearch().get(i).getText();
+			Reporter.log("Application displayed after searching with Name and Supplier ID: "+Sid+" with Supplier ID :"+app);
+			softassert.assertEquals(app,Sid,"Supplier ID Not Matching for ID Search"+app+","+Sid);
+			String appname=enuploadInvoice.ListSuppNameSearch().get(i).getText();
+			softassert.assertEquals(appname,Sname,"Supplier Name Not Matching for Search:"+appname+","+Sname);
+			lavanteUtils.fluentwait(enuploadInvoice.SelectSupplier());
+			lavanteUtils.click(enuploadInvoice.SelectSupplier());
+			lavanteUtils.click(enuploadInvoice.Selectinsearch());
+			break;
+		}
+		
+		
+		softassert.assertAll();
+		
+		Reporter.log("Test Ended for Verification of uploadinvoice button and invoice popup in invoice page:"+currenttime());
+	}
+	
+	/** Enhancement: SIM-7014 - Customer should have an option of editing and deleting an invoice uploaded by them
+	 * TC_01: No SOW Selection 
+	 * @author Piramanayagam S
+	 * @param dataMap
+	 * @throws Exception 
+	 */	
+	@Test
+	public void Editinvoice() throws Exception
+	{
+		Reporter.log("Test Started for Edit invoice:"+currenttime());
+		boolean flag=false;
+		SoftAssert softassert=new SoftAssert();
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String>();
+	
+		lavanteUtils.fluentwait(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.click(enInvoiceAdvanceSearch.AdvancedSearchTab());
+		
+		lavanteUtils.click(enInvoiceAdvanceSearch.BuildQuerybtn());	
+		
+		dataMap.put("Search","");
+		dataMap.put("InvStatus","Not Submitted");
+		dataMap.put("InvoiceType","PO");
+		enInvoiceAdvanceSearch.buildquery(dataMap);
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		
+		if(eninvoicePage.iterateSearchHeaderFindColList("Invoice Number").size()>0){
+			for(int i=0;i<eninvoicePage.actinbtn().size();i++){
+				Reporter.log("Searched Invoice is available in the list");
+				String invnum=eninvoicePage.getColumnText("Invoice Number",0);
+				lavanteUtils.click(eninvoicePage.actinbtn().get(i));
+				lavanteUtils.click(eninvoicePage.editinvoice().get(i));
+				
+				Reporter.log("Edit Invoice Page:");
+				String exp=randomnum(9)+",000.00";
+				dataMap.put("NetAmnt",exp);
+				dataMap.put("uploadSave", "");
+				enuploadInvoice.UploadInvoice(dataMap);
+				
+				dataMap.clear();
+				lavanteUtils.click(eninvoiceBasicSearch.BasicSearchTab());
+				dataMap.put("InvNum",invnum);
+				dataMap.put("Search","");
+				Reporter.log("search for edited invoice number");
+				eninvoiceBasicSearch.Search(dataMap);
+				
+				lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+				String appinvnum=eninvoicePage.getColumnText("Invoice Number",0);
+				String app=eninvoicePage.getColumnText("Net Amount",0);
+				Reporter.log("Edited net amount using edit invoice, Expected:"+exp+", Actual:"+app,true);	
+				softassert.assertEquals(appinvnum,invnum,"Inv Num, Expected:"+invnum+" ,Actual:"+appinvnum);
+				softassert.assertEquals(app,exp,"Edited net amount using edit invoice in edit invoice, Expected:"+exp+" ,Actual:"+app);
+				flag=true;
+				break;
+			}
+		}else{
+			softassert.assertTrue(false,"No Data , Please Add Test Data");
+			flag=true;
+		}
+		
+		if(flag==false)
+		{
+			softassert.assertTrue(false,"please Re check");
+		}
+
+		softassert.assertAll();
+		Reporter.log("Test Ended for Edit Invoice:"+currenttime());
+		
+	}
+
+	/** Enhancement: SIM-7014 - Customer should have an option of editing and deleting an invoice uploaded by them
+	 * TC_01: No SOW Selection 
+	 * @author Piramanayagam S
+	 * @param dataMap
+	 * @throws Exception 
+	 */	
+	@Test
+	public void deleteinvoice() throws Exception
+		{
+			
+			Reporter.log("Test Started for delete invoice:"+currenttime());
+			boolean flag=false;
+			SoftAssert softassert=new SoftAssert();
+			LinkedHashMap<String, String> dataMap=new LinkedHashMap<>();
+			
+			lavanteUtils.fluentwait(eninvoiceBasicSearch.BasicSearchTab());
+			dataMap.put("InvStatus","Not Submitted");
+			dataMap.put("Search","");
+			eninvoiceBasicSearch.Search(dataMap);
+			
+			lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+			
+			if(eninvoicePage.Listinvnum().size()>0){
+				for(int i=0;i<eninvoicePage.Listinvnum().size();){
+					lavanteUtils.click(eninvoicePage.selectfirstinvrecord());
+					String invnum=eninvoicePage.getColumnText("Invoice Number",0);
+					Reporter.log("click on delete invoice");
+					lavanteUtils.click(eninvoicePage.formactinbtn().get(i));
+					lavanteUtils.click(eninvoicePage.deleteinvoice());
+					
+					lavanteUtils.switchtoFrame(null);
+								
+					lavanteUtils.click(eninvoicePage.popupok());
+					Reporter.log("click on ok button ");
+					lavanteUtils.waitForTime(3000);
+	
+					dataMap.clear();
+					dataMap.put("InvNum",invnum);
+					dataMap.put("Search","");
+					Reporter.log("search for deleted invoice number");
+					
+					eninvoiceBasicSearch.Search(dataMap);
+					
+					lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+					Reporter.log("Invoice number found"+eninvoicePage.Listinvnum().size());
+					softassert.assertFalse(eninvoicePage.Listinvnum().size()>0,"Invoice Is Found");
+					flag=true;
+				}
+			}else{
+				softassert.assertTrue(false,"please add Test Data");
+				flag=true;
+			}
+				
+			
+			if(flag==false)
+			{
+				softassert.assertTrue(false,"please Re check");
+			}
+				
+				
+			softassert.assertAll();
+			Reporter.log("Test Started for multi select deliverables:"+currenttime());
+			
+		}
+	
+	/** Enhancement: SIM-7014 - Customer should have an option of editing and deleting an invoice uploaded by them
+	 * For Approved Invoice Edit /Delete invoice wont be avaialble
+	 * Only Download Invoice would be there 
+	 *  
+	 * @author Piramanayagam S
+	 * @param dataMap
+	 * @throws Exception 
+	 */	
+	@Test
+	public void ApprovedInvoiceUI() throws Exception
+	{
+		
+		Reporter.log("Test Started for Approved UI invoice:"+currenttime());
+		boolean flag=false;
+		
+		LinkedHashMap<String, String> dataMap=new LinkedHashMap<String, String>();
+		SoftAssert softassert=new SoftAssert();
+		lavanteUtils.fluentwait(eninvoiceBasicSearch.BasicSearchTab());
+		
+		dataMap.put("InvStatus","Approved");
+		dataMap.put("Search","");
+		Reporter.log("Searching for invoice number");
+		eninvoiceBasicSearch.Search(dataMap);
+		Reporter.log("Searched for Approved Invoice:");
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		
+		if(eninvoicePage.Listinvnum().size()>0){
+			for(int i=0;i<eninvoicePage.Listinvnum().size();){
+				lavanteUtils.click(eninvoicePage.selectfirstinvrecord());
+				lavanteUtils.click(eninvoicePage.actinbtn().get(i));
+				lavanteUtils.waitForTime(4000);
+				
+				boolean flag2=lavanteUtils.isElementDisplayed(eninvoicePage.editinvoice().get(0));
+				Assert.assertTrue(flag2,"Edit button shown");
+				Reporter.log("Edit option for Approved Invocie,Exp False,In App:"+flag2,true);
+				
+				String x=eninvoicePage.editinvoice().get(0).getAttribute("class");
+				
+				Reporter.log("Edit option for Approved Invocie should be disabled,Exp 0,In App:"+x,true);
+				softassert.assertEquals(x,"disabled","Edit Option for Approved Invoice is avaliable");
+				
+				flag2=lavanteUtils.isElementDisplayed(eninvoicePage.listdeleteinvoice().get(0));
+				Assert.assertTrue(flag2,"Delete button shown");
+				 x=eninvoicePage.listdeleteinvoice().get(0).getAttribute("class");
+				
+				Reporter.log("Delete option for Approved Invocie should be disabled,Exp 0,In App:"+x,true);
+				softassert.assertEquals(x,"disabled","Delete Option for Approved Invoice is avaliable");
+				
+				flag2=lavanteUtils.isElementDisplayed(eninvoicePage.Submitinvoice());
+				Assert.assertTrue(flag2,"Submit button shown");
+				 x=eninvoicePage.Submitinvoice().getAttribute("class");
+				
+				Reporter.log("Submit option for Approved Invocie should be disabled,Exp 0,In App:"+x,true);
+				softassert.assertTrue(x.contains("disabled"),"Submit Option for Approved Invoice is avaliable");
+				
+				flag2=lavanteUtils.isElementDisplayed(eninvoicePage.downloadinvoice().get(0));
+				Assert.assertTrue(flag2,"Download button not avaialble");
+				x=eninvoicePage.downloadinvoice().get(0).getAttribute("class");
+				Reporter.log("Download option for Approved Invocie,Exp Available,In App:"+x,true);
+				softassert.assertTrue(x.contains("buttons_group_button"),"Download Option for Approved Invoice is not avaliable");
+				
+				flag=true;
+				break;
+			}
+		}else{
+			softassert.assertTrue(false,"No Data Available for the given search");
+			flag=true;
+		}
+			
+			if(flag==false)
+			{
+				softassert.assertTrue(false,"No Search Done,Please Re check");
+			}
+			
+			softassert.assertAll();
+			Reporter.log("Test Ended for multi select deliverables:"+currenttime());
+		}
+	
+	@AfterMethod
+	public void SetupAftermethod()
+	{
+		lavanteUtils.refreshPage();
+	}
+		
+	@AfterClass
+	public void SetupafterClassmethod(){
+		enobjhomePage.logout();
+		quitBrowser();
+	}
+
+
+
+}
+

@@ -1,0 +1,388 @@
+package com.lavante.sim.customer.TestScripts.Tasks.Invoice;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+import com.lavante.sim.customer.pageobjects.PageInitiator;
+
+public class InvoiceRejectComment extends PageInitiator{
+	
+	LavanteUtils lavanteUtils = new LavanteUtils();
+	String username ="";
+	
+	/**
+	 * This class all test starts using login page and driver intilization
+	 * 
+	 * @author Subhas.BV
+	 * 
+	 */
+	@BeforeClass
+	@Parameters({ "Platform", "Browser", "Version" })
+	public void navigateToLoginPage(@Optional(LavanteUtils.Platform) String Platform,
+			@Optional(LavanteUtils.browser) String browser, @Optional(LavanteUtils.browserVersion) String Version)
+			throws Exception {
+
+		launchAppFromPOM(Platform, browser, Version);
+		initiate();
+		openAPP1();
+		// Assigning the driver to the object of lavante utils
+		lavanteUtils.driver = driver;				
+	}
+	
+	@BeforeMethod
+	public void BeforeMethod() throws FileNotFoundException, IOException, SQLException {
+		List<?> listofdatafrm = lavanteUtils.login("Kroger", browser);
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0); 
+
+		//Login
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+		dataMap.put("maintab", "Tasks");
+		dataMap.put("subtab", "InvoiceTasks");
+		enobjhomePage.selectTab(dataMap);
+	}
+	
+	/**
+	 * @author: Vidya.C
+	 * 	Buyer rejects an Invoice with some comments and supplier should see the reject comments,
+	 *  if it's public
+	 * @throws Exception 
+	 * 
+	 * @FileNotFoundException
+	 * @IOException
+	 * @SQLException
+	 * 
+	 */
+	@Test 
+	public void VerifyInvoiceRejectCommentsTest() throws Exception {
+		Reporter.log("Test Started for VerifyInvoiceRejectCommentsTest: "+currenttime());
+		
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		List<?> listofdatafrm = lavanteUtils.login("KrogerSupplier", browser);
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0); 
+		username = LdataMap.get("username");
+		
+		String query = "select MAX(S.SupplierName) from Supplier s,Supplier_Contact_Map scm,Contact C,Relationship r "
+				+ "      where SCM.ContactID=C.ContactID and scm.lavanteUID=r.lavanteUID and S.lavanteUID=r.lavanteUID  "
+				+ "   and C.Email='"+username+"' and R.ProfileManagedBy_KVID  not in (5104) group by S.SupplierName";
+		String supName = lavanteUtils.fetchDBdata(query);
+		
+		SoftAssert softAssert = new SoftAssert();
+		LinkedHashMap< String, String> dataMap = new LinkedHashMap<>();
+		
+		boolean flag = false;
+
+		String rejectComment = "AustoSP_RejectInvoice_"+currenttime();
+		dataMap.put("InvoiceNumber", "ANY");
+		dataMap.put("supplierName", supName);
+		dataMap.put("View", "My Tasks");
+		dataMap.put("Reject", "");
+		dataMap.put("RejectComment", rejectComment);
+		dataMap.put("CommentError", "");
+		enTaskinvoicestoApprve.selectInvoiceMethod(dataMap);
+		
+		Reporter.log("Mandatory check message for Reject Comment, Expected: 'Comment' cannot be left blank. Actual: "+dataMap.get("CommentError"),true);
+		softAssert.assertEquals(dataMap.get("CommentError").trim(),"'Comment' cannot be left blank.","Mandatory check message for Reject Comment, Expected: 'Comment' cannot be left blank. Actual: "+dataMap.get("CommentError"));
+		
+		Reporter.log("Message after submitting the reject comment, Expected: Selected record(s) has been processed successfully. Actual: "+dataMap.get("bannerMsg"),true);
+		softAssert.assertEquals(dataMap.get("BannerMsg").trim(), "Selected record(s) has been processed successfully.","Message after submitting the reject comment, Expected: Selected record(s) has been processed successfully. Actual: "+dataMap.get("BannerMsg"));
+		
+		lavanteUtils.waitForTime(4000);
+		String invNum = dataMap.get("InvoiceNumber");
+		enTaskinvoicestoApprve.search(dataMap);
+
+		List<WebElement> invList = enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Invoice Number");
+		if(invList.size()>0) {
+			flag = false;
+		} else {
+			softAssert.assertEquals("No Results", enTaskinvoicestoApprve.NoData().getText());
+			flag = true;
+		}
+		
+		if(!flag) {
+			Reporter.log("Rejected Invoice is still in Invoice to approve Page");
+			softAssert.assertTrue(flag, "Rejected Invoice is still in Invoice to approve Page");
+		}
+		
+		//Transaction->Invoices->check in view invoice page
+		dataMap.put("maintab", "Transactions");
+		dataMap.put("subtab", "customerInvoiceSearchResult");
+		enobjhomePage.selectTab(dataMap);	
+		
+		dataMap.put("SuppName", supName);
+		dataMap.put("InvNum",invNum);
+		dataMap.put("Search","");
+		eninvoiceBasicSearch.Search(dataMap);
+		
+		lavanteUtils.click(eninvoicePage.iterateSearchHeaderFindColList("Invoice Number").get(0));
+		
+		lavanteUtils.fluentwait(eninvoicePage.addCommentBtn());
+		flag = false;
+		String actualComment = null;
+		List<WebElement> commentList = eninvoicePage.PublicCommentsList();
+		for (int i = 0; i < commentList.size(); i++) {
+			actualComment = commentList.get(i).getText();
+			if (actualComment.equals(rejectComment)) {
+				flag = true;
+				break;
+			}
+		}
+		Reporter.log("Mismatch in the reject comment added by customer, Expected :"+ rejectComment + ", Actual :" + actualComment);
+		softAssert.assertTrue(flag,"Mismatch in the reject comment added by customer, Expected :"	+ rejectComment + ", Actual :" + actualComment);
+		
+		flag = false;
+		String actualApprovalComnt = null;
+		List<WebElement> approvalcomntList = objViewInvoicePage.ApprovalComntList();
+		for(int j = 0; j<approvalcomntList.size(); j++) {
+			actualApprovalComnt = approvalcomntList.get(j).getText();
+			if(actualApprovalComnt.equals(rejectComment)) {
+				flag = true;
+				break;
+			}
+		}
+		Reporter.log("Mismatch in Invoice approval history reject comment added by customer, Expected :"+ rejectComment + ", Actual :" + actualComment);
+		softAssert.assertTrue(flag,"Mismatch in Invoice approval history reject comment added by customer, Expected :"	+ rejectComment + ", Actual :" + actualComment);
+		
+		enobjhomePage.logout();
+		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		dataMap.remove("subtab");
+		dataMap.remove("SuppName");
+	//	lavanteUtils.fluentwait(enobjhomePage.pageHeader());
+		dataMap.put("maintab", "Invoices");
+		enobjhomePage.selectTab(dataMap);
+		
+		dataMap.put("InvNum", invNum);
+		dataMap.put("Search","");
+		eninvoiceBasicSearch.Search(dataMap);
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.click(eninvoicePage.iterateSearchHeaderFindColList("Invoice Number").get(0));
+		
+		lavanteUtils.fluentwait(eninvoicePage.addCommentTxt());
+		flag = false;
+		actualComment = null;
+		commentList = eninvoicePage.PublicCommentsList();
+		for (int i = 0; i < commentList.size(); i++) {
+			actualComment = commentList.get(i).getText();
+			if (actualComment.equals(rejectComment)) {
+				flag = true;
+				break;
+			}
+		}
+		
+		Reporter.log("Mismatch in the reject comment added by customer in Supplier login, Expected :"+ rejectComment + ", Actual :" + actualComment);
+		softAssert.assertTrue(flag,"Mismatch in the reject comment added by customer in Supplier login, Expected :"	+ rejectComment + ", Actual :" + actualComment);
+		
+		flag = false;
+		actualApprovalComnt = null;
+		approvalcomntList = objViewInvoicePage.ApprovalComntList();
+		for(int j = 0; j<approvalcomntList.size(); j++) {
+			actualApprovalComnt = approvalcomntList.get(j).getText();
+			if(actualApprovalComnt.equals(rejectComment)) {
+				flag = true;
+				break;
+			}
+		}
+		Reporter.log("Mismatch in Invoice approval history reject comment in Supplier login, Expected :"+ rejectComment + ", Actual :" + actualComment);
+		softAssert.assertTrue(flag,"Mismatch in Invoice approval history reject comment in Supplier login, Expected :"	+ rejectComment + ", Actual :" + actualComment);
+		
+		softAssert.assertAll();
+		Reporter.log("Test Ended for VerifyInvoiceRejectCommentsTest: "+currenttime());		
+	}
+	
+	/**
+	 * @author: Vidya.C
+	 * 	Buyer rejects an Invoice with some comments and supplier should see the reject comments,
+	 *  when it is set to private
+	 * @throws Exception 
+	 * 
+	 * @FileNotFoundException
+	 * @IOException
+	 * @SQLException
+	 * 
+	 */
+	@Test 
+	public void VerifyInvoicePrivateRejectCommentsTest() throws Exception {
+		Reporter.log("Test Started for VerifyInvoicePrivateRejectCommentsTest: "+currenttime());
+		
+		LinkedHashMap<String, String> LdataMap = new LinkedHashMap<String, String>();
+		List<?> listofdatafrm = lavanteUtils.login("KrogerSupplier", browser);
+		LdataMap = (LinkedHashMap<String, String>) listofdatafrm.get(0); 
+		username = LdataMap.get("username");
+		
+		String query = "select MAX(S.SupplierName) from Supplier s,Supplier_Contact_Map scm,Contact C,Relationship r "
+				+ "      where SCM.ContactID=C.ContactID and scm.lavanteUID=r.lavanteUID and S.lavanteUID=r.lavanteUID  and C.Email='"+username+"' "
+				+ "		 and R.ProfileManagedBy_KVID  not in (5104) group by S.SupplierName";
+		String supName = lavanteUtils.fetchDBdata(query);
+		
+		SoftAssert softAssert = new SoftAssert();
+		LinkedHashMap< String, String> dataMap = new LinkedHashMap<>();
+		
+		boolean flag = false;
+		String rejectComment = "AustoSP_RejectInvoice_"+currenttime();
+		dataMap.put("InvoiceNumber", "ANY");
+		dataMap.put("supplierName", supName);
+		dataMap.put("View", "My Tasks");
+		dataMap.put("Reject", "");
+		dataMap.put("RejectComment", rejectComment);
+		dataMap.put("PrivateFlag", "");
+		enTaskinvoicestoApprve.selectInvoiceMethod(dataMap);
+		
+		Reporter.log("Message after submitting the reject comment, Expected: Selected record(s) has been processed successfully. Actual: "+dataMap.get("bannerMsg"),true);
+		softAssert.assertEquals(dataMap.get("BannerMsg").trim(), "Selected record(s) has been processed successfully.","Message after submitting the reject comment, Expected: Selected record(s) has been processed successfully. Actual: "+dataMap.get("BannerMsg"));
+		
+		lavanteUtils.waitForTime(4000);
+		String invNum = dataMap.get("InvoiceNumber");
+		enTaskinvoicestoApprve.search(dataMap);
+
+		List<WebElement> invList = enTaskinvoicestoApprve.iterateSearchHeaderFindColList("Invoice Number");
+		if(invList.size()>0) {
+			flag = false;
+		} else {
+			softAssert.assertEquals("No Results", enTaskinvoicestoApprve.NoData().getText());
+			flag = true;
+		}
+		
+		if(flag == false) {
+			Reporter.log("Rejected Invoice is still in Invoice to approve Page");
+			Assert.assertTrue(flag, "Rejected Invoice is still in Invoice to approve Page");
+		}
+		
+		//Transaction->Invoices->check in view invoice page
+		dataMap.put("maintab", "Transactions");
+		dataMap.put("subtab", "customerInvoiceSearchResult");
+		enobjhomePage.selectTab(dataMap);	
+		
+		dataMap.put("SuppName", supName);
+		dataMap.put("InvNum",invNum);
+		dataMap.put("Search","");
+		eninvoiceBasicSearch.Search(dataMap);
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.click(eninvoicePage.iterateSearchHeaderFindColList("Invoice Number").get(0));
+		
+		lavanteUtils.fluentwait(eninvoicePage.AddCommentBtn());
+		flag = false;
+		String actualComment = null;
+		List<WebElement> commentList = eninvoicePage.PrivateCommentsList();
+		for (int i = 0; i < commentList.size(); i++) {
+			actualComment = commentList.get(i).getText();
+			if (actualComment.equals(rejectComment)) {
+				flag = true;
+				break;
+			}
+		}
+		Reporter.log("Mismatch in the reject comment added by customer, Expected :"+ rejectComment + ", Actual :" + actualComment);
+		softAssert.assertTrue(flag,"Mismatch in the reject comment added by customer, Expected :"	+ rejectComment + ", Actual :" + actualComment);
+		
+		flag = false;
+		String actualApprovalComnt = null;
+		List<WebElement> approvalcomntList = objViewInvoicePage.ApprovalComntList();
+		for(int j = 0; j<approvalcomntList.size(); j++) {
+			actualApprovalComnt = approvalcomntList.get(j).getText();
+			if(actualApprovalComnt.equals(rejectComment)) {
+				flag = true;
+				break;
+			}
+		}
+		Reporter.log("Mismatch in Invoice approval history reject comment added by customer, Expected :"+ rejectComment + ", Actual :" + actualComment);
+		softAssert.assertTrue(flag,"Mismatch in Invoice approval history reject comment added by customer, Expected :"	+ rejectComment + ", Actual :" + actualComment);
+		
+		enobjhomePage.logout();
+		
+		enobjloginpage.logintoAPP(LdataMap);
+		enobjhomePage.close();
+		
+		dataMap.remove("subtab");
+		dataMap.remove("SuppName");
+		dataMap.put("maintab", "Invoices");
+		enobjhomePage.selectTab(dataMap);
+		
+		dataMap.put("InvNum", invNum);
+		dataMap.put("Search","");
+		eninvoiceBasicSearch.Search(dataMap);
+		
+		lavanteUtils.switchtoFrame(eninvoicePage.IFRAMEsearchresult());
+		lavanteUtils.click(eninvoicePage.iterateSearchHeaderFindColList("Invoice Number").get(0));
+		
+		lavanteUtils.fluentwait(eninvoicePage.AddCommentBtn());
+		flag = false;
+		actualComment = null;
+		commentList = eninvoicePage.PrivateCommentsList();
+		if(commentList.size() > 0) {
+			for (int i = 0; i < commentList.size(); i++) {
+				actualComment = commentList.get(i).getText();
+				if (actualComment.equals(rejectComment)) {
+					flag = true;
+					break;
+				}
+			}
+		} else {
+			Reporter.log("No Comments are listed. Hence private reject comments are not displayed to Supplier", true);
+			flag = false;
+		}
+		
+		Reporter.log("Private reject comments should not be displayed to the Supplier in comments list"+flag);
+		softAssert.assertFalse(flag,"Private reject comments are not displayed to the Supplier in comments list");
+		
+		flag = false;
+		actualApprovalComnt = null;
+		approvalcomntList = objViewInvoicePage.ApprovalComntList();
+		for(int j = 0; j<approvalcomntList.size(); j++) {
+			actualApprovalComnt = approvalcomntList.get(j).getText();
+			if(actualApprovalComnt.equals(rejectComment)) {
+				flag = true;
+				break;
+			}
+		}
+		
+		Reporter.log("Private reject comments Should not be displayed to the Supplier in Approval history,Actual"+flag);
+		softAssert.assertFalse(flag,"Private reject comments are not displayed to the Supplier in Approval history");
+		
+		softAssert.assertAll();
+		Reporter.log("Test Ended for VerifyInvoicePrivateRejectCommentsTest: "+currenttime());
+	}
+	
+	/**
+	 * SetupAfter method closes any popup
+	 * 
+	 * @author subhas.bv
+	 */
+	@AfterMethod
+	public void SetupAfterMethod() {
+		enobjhomePage.logout();
+	}
+
+	/**
+	 * SetupAfter Class closes any popup and Closes the Browser and Driver
+	 * 
+	 * @author subhas.bv
+	 */
+	@AfterClass
+	public void SetupafterClassMethod() {
+		quitBrowser();
+	}
+
+}

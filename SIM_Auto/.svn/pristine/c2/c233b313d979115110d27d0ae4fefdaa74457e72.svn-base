@@ -1,0 +1,886 @@
+package com.lavante.sim.customer.pageobjects.Transactions.Payments;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
+
+import com.lavante.sim.Common.Util.LavanteUtils;
+
+public class PaymentsPage {
+
+	WebDriver driver;
+
+	public PaymentsPage(WebDriver driver) {
+		lavanteUtils.driver = driver;
+		this.driver = driver;
+	}
+
+	String methodName = "";
+	SoftAssert sAssert = new SoftAssert();
+	LavanteUtils lavanteUtils = new LavanteUtils();
+
+	// Results Page
+
+	@FindBy(css = "#search_results tr.data_not_found>td")
+	private WebElement NoData;
+
+	public WebElement NoData() {
+		return NoData;
+	}
+
+	@FindBy(css = "iframe[id='search_results']")
+	private WebElement IframeResultsPage;
+
+	public WebElement IframeResultsPage() {
+		return IframeResultsPage;
+	}
+
+	@FindBy(id = "getRecords")
+	private List<WebElement> ShowCountLink;
+
+	public List<WebElement> ShowCountLink() {
+		return ShowCountLink;
+	}
+
+	@FindBy(css = "[class='highlight_green']")
+	private WebElement GetCountNo;
+
+	public WebElement GetCountNo() {
+		return GetCountNo;
+	}
+
+	@FindBy(css = "div[id='payment-details-box'] span[class='highlight_green']")
+	private WebElement GetResultsCount;
+
+	public WebElement GetResultsCount() {
+		return GetResultsCount;
+	}
+
+	@FindBy(css = "div[id*='batchViewFilter'] a")
+	private WebElement ViewDropDwn;
+
+	public WebElement ViewDropDwn() {
+		return ViewDropDwn;
+	}
+
+	@FindBy(css = "#search_results th")
+	private List<WebElement> Headers;
+
+	@FindBy(css = "iframe[src*='Payment']")
+	private WebElement IFRAMEComments;
+
+	public WebElement IFRAMEComments() {
+		return IFRAMEComments;
+	}
+
+	// Search Page Comment/Respond comment
+	@FindBy(id = "comment")
+	private WebElement invCommentTextArea;
+
+	@FindBy(css = "input[type*='submit']")
+	private WebElement submitComment;
+
+	/*
+	 * Bug in App
+	 * 
+	 * @FindBy(css = "form[action*='Notes'] td:nth-child(4)") private
+	 * List<WebElement> CommentComment; public List<WebElement> CommentComment()
+	 * { return CommentComment; }
+	 */
+	// End of comment
+
+	// Basic Search
+
+	@FindBy(id = "search_tab")
+	private WebElement BasicSearchTab;
+
+	public WebElement BasicSearchTab() {
+		return BasicSearchTab;
+	}
+
+	@FindBy(css = "#supplierERPID")
+	private WebElement SupplierERPIDTxtBox;
+
+	@FindBy(css = "#supplierName")
+	private WebElement SupplierNameTxtBox;
+
+	@FindBy(id = "paymentReferenceNumber")
+	private WebElement PaymentRefNoTxtBox;
+
+	@FindBy(css = "#invoiceNumber")
+	private WebElement InvoiceNumberTxtBox;
+
+	@FindBy(css = "#supplierERPID")
+	private WebElement PaymentMethodDropDwn;
+
+	@FindBy(css = "#supplierERPID")
+	private WebElement BasicDivisionDropDwn;
+
+	@FindBy(css = "#poNumber")
+	private WebElement PONumberTxtBox;
+
+	@FindBy(css = "#claimId")
+	private WebElement ClaimIDTxtBox;
+
+	@FindBy(css = "div[id*='claimStatusId'] input")
+	private WebElement ClaimStatusDropDwn;
+
+	@FindBy(css = "div[id*='claimTypeId'] input")
+	private WebElement ClaimTypeDropDwn;
+
+	@FindBy(css = "[name='clear']")
+	private WebElement ClearBtn;
+
+	@FindBy(css = "button[id='claimsPaymentBasicSearch']")
+	private WebElement SearchBtn;
+
+	@FindBy(css = "[id='submitToProcess']")
+	private WebElement SubmittoProcessBtn;
+
+	@FindBy(css = "[id='processImmediately']")
+	private WebElement ProcessImmediatelyBtn;
+
+	// Advance Search
+
+	@FindBy(css = "iframe[src*='loadPaymentAdvanceSearch']")
+	private WebElement IframeAdvanceSearch;
+
+	public WebElement IframeAdvanceSearch() {
+		return IframeAdvanceSearch;
+	}
+
+	@FindBy(css = "iframe[src*='loadAdvanceSavedSearch']")
+	private WebElement IframeAdvanceSavedSearch;
+
+	public WebElement IframeAdvanceSavedSearch() {
+		return IframeAdvanceSavedSearch;
+	}
+
+	@FindBy(css = "#adv_search_tab")
+	private WebElement AdvanceSearchTab;
+
+	public WebElement AdvanceSearchTab() {
+		return AdvanceSearchTab;
+	}
+
+	@FindBy(css = "[name='adv_cancel']")
+	private WebElement AdvanceClearSearchBtn;
+
+	public WebElement AdvanceClearSearchBtn() {
+		return AdvanceClearSearchBtn;
+	}
+
+	@FindBy(css = "[id=public_queries] span.query_name")
+	private List<WebElement> ListSavedPublicQuery;
+
+	public List<WebElement> ListSavedPublicQuery() {
+		return ListSavedPublicQuery;
+	}
+
+	@FindBy(css = "[id=private_queries] span.query_name")
+	private List<WebElement> ListSavedPrivateQuery;
+
+	public List<WebElement> ListSavedPrivateQuery() {
+		return ListSavedPrivateQuery;
+	}
+
+	@FindBy(css = "div[class*='buttonpane '] button[class*='primary']")
+	private WebElement SavedQueryDeleteBtn;
+
+	public WebElement SavedQueryDeleteBtn() {
+		return SavedQueryDeleteBtn;
+	}
+
+	@FindBy(css = "table[id='private_queries'] a[id*='query']")
+	private List<WebElement> ListSavedPrivateQueryRunBtn;
+
+	public List<WebElement> ListSavedPrivateQueryRunBtn() {
+		return ListSavedPrivateQueryRunBtn;
+	}
+
+	@FindBy(css = "table[id='public_queries'] a[id*='query']")
+	private List<WebElement> ListSavedPublicQueryRunBtn;
+
+	public List<WebElement> ListSavedPublicQueryRunBtn() {
+		return ListSavedPublicQueryRunBtn;
+	}
+
+	@FindBy(css = "button[class*='cancel']")
+	private WebElement AdvCancelLink;
+
+	public WebElement AdvCancelLink() {
+		return AdvCancelLink;
+	}
+
+	@FindBy(css = "[href*='loadAdvanceSavedSearch']")
+	private WebElement SaveQueryBtn;
+
+	public WebElement SaveQueryBtn() {
+		return SaveQueryBtn;
+	}
+
+	@FindBy(css = "form[id='advanceSearch'] input[name='search']")
+	private WebElement AdvSearchBtn;
+
+	public WebElement AdvSearchBtn() {
+		return AdvSearchBtn;
+	}
+
+	@FindBy(css = "button[href*='loadPaymentAdvanceSearch']")
+	private WebElement BuildQueryBtn;
+
+	public WebElement BuildQueryBtn() {
+		return BuildQueryBtn;
+	}
+
+	@FindBy(css = "button[class*='clear']")
+	private WebElement CriteriaClearBtn;
+
+	public WebElement CriteriaClearBtn() {
+		return CriteriaClearBtn;
+	}
+
+	@FindBy(css = "div[id*='paymentReferenceNumber'] a")
+	private WebElement PaymentRefNoDropDwn;
+
+	@FindBy(css = "div[id*='paidDate'] a")
+	private WebElement PaymentRefDateDropDwn;
+
+	@FindBy(css = "div[id*='paidAmount'] a")
+	private WebElement PaidAmountDropDwn;
+
+	@FindBy(css = "div[id*='DivisionId'] ul li")
+	private WebElement DivisionDropDwn;
+
+	@FindBy(css = "div[id*='PONumber'] a")
+	private WebElement PONumDropDwn;
+
+	@FindBy(css = "input[name='PONumber_field']")
+	private WebElement PONumAdvTxtBox;
+
+	@FindBy(css = "div[id*='associatedWithDiscount'] a")
+	private WebElement AssociatedDiscountDropDwn;
+
+	@FindBy(css = "div[id*='associatedWithPromotion'] a")
+	private WebElement AssociatedPromotionDropDwn;
+
+	@FindBy(css = "div[id*='deductionAmount'] a")
+	private WebElement DeductionAmountDropDwn;
+
+	@FindBy(css = "div[id*='discountAmount'] a")
+	private WebElement DiscountAmountDropDwn;
+
+	@FindBy(css = "div[id*='invoiceNumber'] a")
+	private WebElement InvoiceNumDropDwn;
+
+	@FindBy(css = "input[name='invoiceNumber_field']")
+	private WebElement InvoiceNumAdvTxtBox;
+
+	@FindBy(css = "div[id*='invoiceApprovedDate'] a")
+	private WebElement InvoiceApprovedDateDropDwn;
+
+	@FindBy(css = "div[id*='invoiceApprovedDate'] a")
+	private WebElement InvoiceDateDropDwn;
+
+	@FindBy(css = "div[id*='invoiceAmount'] a")
+	private WebElement InvoiceAmountDropDwn;
+
+	@FindBy(css = "div[id*='claimId'] a")
+	private WebElement ClaimIdDropDwn;
+
+	@FindBy(css = "div[id*='claimDate'] a")
+	private WebElement ClaimDateDropDwn;
+
+	@FindBy(css = " div[id*='claimStatus'] input")
+	private WebElement claimStatusDpdn;
+
+	@FindBy(css = "form[id='advanceSearch'] div[id*='claimTypeID'] input")
+	private WebElement AdvanceClaimTypeDropDwn;
+
+	@FindBy(css = "form[id='advanceSearch'] div[id*='claimResolution'] input")
+	private WebElement AdvanceClaimResolutionDropDwn;
+
+	@FindBy(css = "div[id*='supplierName'] a")
+	private WebElement SupplierNameDropDwn;
+
+	@FindBy(css = "input[name='supplierName_field']")
+	private WebElement AdvSupplierNameTxtBox;
+
+	@FindBy(css = "div[id*='supplierERPId'] a")
+	private WebElement SupplierERPIDDropDwn;
+
+	@FindBy(css = "input[name='supplierERPId_field']")
+	private WebElement AdvSupplierERPIDTxtBox;
+
+	// Save query pop-up
+	@FindBy(css = "input[id='specify_query']")
+	private WebElement SpecifyQueryNameTxtBox;
+
+	@FindBy(css = "[id='adv_search'] input[id='private_query']")
+	private WebElement OtherUsersChkBox;
+
+	@FindBy(css = "input[name='Save']")
+	private WebElement SaveQuerySaveBtn;
+
+	public WebElement SaveQuerySaveBtn() {
+		return SaveQuerySaveBtn;
+	}
+
+	@FindBy(css = "button[class*='action_buttons']")
+	private WebElement ActionsDropDwn;
+
+	public WebElement ActionsDropDwn() {
+		return ActionsDropDwn;
+	}
+
+	@FindBy(css = "div a img[src*='ic_comment_black']")
+	private List<WebElement> CommentImg;
+
+	public List<WebElement> CommentImg() {
+		return CommentImg;
+	}
+	
+
+	@FindBy(css = "div a sup[id='readUnreadComments']")
+	private List<WebElement> GetCommentCount;
+
+	public List<WebElement> GetCommentCount() {
+		return GetCommentCount;
+	}
+
+	// Same is used for Table Action and View Payment Page
+	@FindBy(css = "a[href*='createClaim.lvp']")
+	private WebElement CreateClaimLink;
+
+	public WebElement CreateClaimLink() {
+		return CreateClaimLink;
+	}
+
+	@FindBy(css = "#submit_question")
+	private WebElement SubmitQuestLink;
+
+	public WebElement SubmitQuestLink() {
+		return SubmitQuestLink;
+	}
+
+	// @FindBy(css = "iframe[src*='requestForPaymentInformation.lvp']")
+	// private WebElement IFrameRequestPaymentInfo;
+	//
+	// public WebElement IFrameRequestPaymentInfo() {
+	// return IFrameRequestPaymentInfo;
+	// }
+	//
+	// @FindBy(css = "#comment")
+	// private WebElement QuestionsTxt;
+	//
+	// public WebElement QuestionsTxt() {
+	// return QuestionsTxt;
+	// }
+	//
+	// @FindBy(css = "input[name='search']")
+	// private WebElement QuesSubmitBtn;
+	//
+	// public WebElement QuesSubmitBtn() {
+	// return QuesSubmitBtn;
+	// }
+
+	@FindBy(css = "[class*='submitQuestionTextArea']")
+	private WebElement QuestionsTextArea;
+
+	public WebElement QuestionsTextArea() {
+		return QuestionsTextArea;
+	}
+
+	@FindBy(css = "div[class*='buttons-container'] button[class*='button_primary ng-binding']")
+	private WebElement QuestSaveBtn;
+
+	public WebElement QuestSaveBtn() {
+		return QuestSaveBtn;
+	}
+
+	@FindBy(css = "#bannerDiv")
+	private WebElement BannerMsg;
+
+	public WebElement BannerMsg() {
+		return BannerMsg;
+	}
+
+	@FindBy(css = "td[class='check_box'] label")
+	private List<WebElement> ListSelectChkBox;
+
+	public List<WebElement> ListSelectChkBox() {
+		return ListSelectChkBox;
+	}
+
+	// View Payment Page
+	// Associated Claims Section
+	@FindBy(xpath = "//*[contains(@href,'viewClaim')]/../..//td[contains(@title,'Status')]")
+	private List<WebElement> ViewclaimstatusList;
+
+	public List<WebElement> ViewclaimstatusList() {
+		return ViewclaimstatusList;
+	}
+
+	// End of View Payment
+
+	// End of Locators
+
+	public void basicSearch(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.switchtoFrame(null);
+		lavanteUtils.fluentwait(BasicSearchTab);
+		basicFillSearchDetails(dataMap);
+		formAction(dataMap);
+	}
+
+	public void basicFillSearchDetails(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.fluentwait(SearchBtn);
+		if (dataMap.containsKey("SupplierERPID")) {
+			SupplierERPIDTxtBox.clear();
+			lavanteUtils.typeinEdit(dataMap.get("SupplierERPID"), SupplierERPIDTxtBox);
+		}
+		if (dataMap.containsKey("SupplierName")) {
+			SupplierNameTxtBox.clear();
+			lavanteUtils.typeinEdit(dataMap.get("SupplierName"), SupplierNameTxtBox);
+		}
+		if (dataMap.containsKey("PaymentRefNo")) {
+			PaymentRefNoTxtBox.clear();
+			lavanteUtils.typeinEdit(dataMap.get("PaymentRefNo"), PaymentRefNoTxtBox);
+		}
+		if (dataMap.containsKey("InvoiceNumber")) {
+			InvoiceNumberTxtBox.clear();
+			lavanteUtils.typeinEdit(dataMap.get("InvoiceNumber"), InvoiceNumberTxtBox);
+		}
+		if (dataMap.containsKey("Division")) {
+			lavanteUtils.click(DivisionDropDwn);
+		}
+		if (dataMap.containsKey("PONumber")) {
+			PONumberTxtBox.clear();
+			lavanteUtils.typeinEdit(dataMap.get("PONumber"), PONumberTxtBox);
+		}
+		if (dataMap.containsKey("ClaimID")) {
+			ClaimIDTxtBox.clear();
+			lavanteUtils.typeinEdit(dataMap.get("ClaimID"), ClaimIDTxtBox);
+		}
+		if (dataMap.containsKey("ClaimStatus")) {
+			if (dataMap.get("ClaimStatus").contains("#")) {
+				String getStatus[] = dataMap.get("ClaimStatus").split("#");
+				for (int i = 0; i < getStatus.length; i++) {
+					lavanteUtils.click(claimStatusDpdn);
+					lavanteUtils.selectValueFrmdropdown(getStatus[i]);
+				}
+			} else {
+				lavanteUtils.click(claimStatusDpdn);
+				lavanteUtils.selectvalueFrmDpdn(dataMap.get("ClaimStatus"));
+			}
+		}
+		if (dataMap.containsKey("ClaimType")) {
+			lavanteUtils.click(ClaimTypeDropDwn);
+			lavanteUtils.selectvalueFrmDpdn(dataMap.get("ClaimStatus"));
+		}
+	}
+
+	public void buildQuerySearch(LinkedHashMap<String, String> dataMap) {
+
+		lavanteUtils.clicks(BuildQueryBtn);
+
+		lavanteUtils.switchtoFrame(IframeAdvanceSearch);
+		lavanteUtils.clicks(CriteriaClearBtn);
+		advanceFillSearchDetails(dataMap);
+		formAction(dataMap);
+	}
+
+	public void advanceFillSearchDetails(LinkedHashMap<String, String> dataMap) {
+
+		lavanteUtils.switchtoFrame(IframeAdvanceSearch);
+		lavanteUtils.fluentwait(CriteriaClearBtn);
+
+		if (dataMap.containsKey("PO Number")) {
+			String getValue[] = dataMap.get("PO Number").split("#");
+
+			lavanteUtils.clicks(PONumDropDwn);
+			lavanteUtils.selectValueFrmdropdown(getValue[0]);
+			lavanteUtils.switchtoFrame(IframeAdvanceSearch);
+
+			if (!getValue[0].startsWith("Is")) {
+				lavanteUtils.fluentwait(PONumAdvTxtBox);
+				lavanteUtils.typeinEdit(getValue[1], PONumAdvTxtBox);
+			}
+		}
+		if (dataMap.containsKey("InvoiceNumber")) {
+			String getValue[] = dataMap.get("InvoiceNumber").split("#");
+
+			lavanteUtils.click(InvoiceNumDropDwn);
+			lavanteUtils.selectValueFrmdropdown(getValue[0]);
+			lavanteUtils.switchtoFrame(IframeAdvanceSearch);
+
+			if (!getValue[0].startsWith("Is")) {
+				lavanteUtils.fluentwait(InvoiceNumAdvTxtBox);
+				lavanteUtils.typeinEdit(getValue[1], InvoiceNumAdvTxtBox);
+			}
+		}
+
+		if (dataMap.containsKey("ClaimStatus")) {
+			if (dataMap.get("ClaimStatus").contains("#")) {
+				String getStatus[] = dataMap.get("ClaimStatus").split("#");
+				for (int i = 0; i < getStatus.length; i++) {
+					lavanteUtils.click(claimStatusDpdn);
+					lavanteUtils.selectValueFrmdropdown(getStatus[i]);
+					lavanteUtils.switchtoFrame(IframeAdvanceSearch);
+				}
+			} else {
+				lavanteUtils.click(claimStatusDpdn);
+				lavanteUtils.selectValueFrmdropdown(dataMap.get("ClaimStatus"));
+				lavanteUtils.switchtoFrame(IframeAdvanceSearch);
+			}
+
+		}
+
+		if (dataMap.containsKey("AdvSupplierName")) {
+			String getValue[] = dataMap.get("AdvSupplierName").split("#");
+
+			lavanteUtils.click(SupplierNameDropDwn);
+			lavanteUtils.selectValueFrmdropdown(getValue[0]);
+			lavanteUtils.switchtoFrame(IframeAdvanceSearch);
+			if (!getValue[0].startsWith("Is Empty")) {
+				lavanteUtils.fluentwait(AdvSupplierNameTxtBox);
+				lavanteUtils.typeinEdit(getValue[1], AdvSupplierNameTxtBox);
+			}
+		}
+
+		if (dataMap.containsKey("AdvSupplierERPID")) {
+			String getValue[] = dataMap.get("AdvSupplierERPID").split("#");
+
+			lavanteUtils.click(SupplierERPIDDropDwn);
+			lavanteUtils.selectValueFrmdropdown(getValue[0]);
+			lavanteUtils.switchtoFrame(IframeAdvanceSearch);
+			if (!getValue[0].startsWith("Is Empty")) {
+				lavanteUtils.fluentwait(AdvSupplierERPIDTxtBox);
+				lavanteUtils.typeinEdit(getValue[1], AdvSupplierERPIDTxtBox);
+			}
+		}
+	}
+
+	public void formAction(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.switchtoFrame(null);
+		if (dataMap.containsKey("Clear")) {
+			lavanteUtils.clicks(ClearBtn);
+		}
+		if (dataMap.containsKey("Search")) {
+			lavanteUtils.clicks(SearchBtn);
+		}
+
+		if (dataMap.containsKey("SaveQuery")) {
+			lavanteUtils.clicks(SaveQueryBtn);
+			lavanteUtils.fluentwait(IframeAdvanceSavedSearch);
+			saveQuery(dataMap);
+		}
+		if (dataMap.containsKey("BuildQuery")) {
+			lavanteUtils.clicks(BuildQueryBtn);
+		}
+		if (dataMap.containsKey("AdvSearch")) {
+			lavanteUtils.switchtoFrame(IframeAdvanceSearch);
+			lavanteUtils.clicks(AdvSearchBtn);
+		}
+		if (dataMap.containsKey("AdvSaveQuery")) {
+			lavanteUtils.switchtoFrame(IframeAdvanceSearch);
+			lavanteUtils.clicks(SaveQueryBtn);
+			lavanteUtils.switchtoFrame(null);
+			lavanteUtils.fluentwait(IframeAdvanceSavedSearch);
+			saveQuery(dataMap);
+		}
+	}
+
+	public void saveQuery(LinkedHashMap<String, String> dataMap) {
+
+		lavanteUtils.switchtoFrame(IframeAdvanceSavedSearch);
+		if (dataMap.containsKey("EnterQueryName")) {
+			lavanteUtils.typeinEdit(dataMap.get("EnterQueryName"), SpecifyQueryNameTxtBox);
+		}
+		if (dataMap.containsKey("SavePrivateQuery")) {
+			lavanteUtils.selectChkBox(OtherUsersChkBox, "Yes");
+		}
+		lavanteUtils.clicks(SaveQuerySaveBtn);
+		lavanteUtils.switchtoFrame(null);
+	}
+
+	public String getColumnText(String colname, int count) {
+		String x = "";
+		lavanteUtils.switchtoFrame(IframeResultsPage);
+		int size = iterateSearchHeaderFindColList(colname).size();
+		List<WebElement> sx = iterateSearchHeaderFindColList(colname);
+		outr: for (int i = 0; i < size; i++) {
+			x = sx.get(i).getText();
+			if (count == 0) {
+				break outr;
+			} else {
+				x = sx.get(count).getText();
+				break outr;
+			}
+		}
+		return x;
+	}
+
+	public String clickColText(String colname, String PaymentNum) {
+		String x = "";
+		lavanteUtils.switchtoFrame(IframeResultsPage);
+		int size = iterateSearchHeaderFindColList(colname).size();
+		List<WebElement> sx = iterateSearchHeaderFindColList(colname);
+		outr: for (int i = 0; i < size; i++) {
+			x = sx.get(i).getText();
+			if (x.equalsIgnoreCase(PaymentNum)) {
+				lavanteUtils.click(sx.get(i));
+				break outr;
+			}
+		}
+		return x;
+	}
+
+	public List<WebElement> iterateSearchHeaderFindColList(String col) {
+		List<WebElement> s = null;
+		int j = ColIdentify(col);
+		int y = j + 1;
+		String x = "#search_results tr td:nth-child(" + j + ")";
+		s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		System.out.println("Iterate col locator:" + x + ",Size:" + s.size());
+		if (col.contains("Payment Ref No") || col.contains("Invoice")) {
+			x = "#search_results tr td:nth-child(" + j + ") a";
+			System.out.println("Iterate for name/contact:" + x);
+			s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		} else if (col.contains("Notes")) {
+			x = "#search_results tr td:nth-child(" + j + ") a";
+			s = lavanteUtils.driver.findElements(By.cssSelector(x));
+		}
+		System.out.println("Iterate Search Col:" + col + ":" + s.size());
+		return s;
+	}
+
+	public int ColIdentify(String col) {
+		int ki = 0;
+		boolean found = false;
+		if (Headers.size() > 0) {
+			for (int i = 0; i < Headers.size(); i++) {
+				String x = Headers.get(i).getText();
+				if (x.contains(col)) {
+					ki = i;
+					// List start with 0 but need a number more than that to
+					// fetch in xpath
+					ki = i + 1;
+					System.out.println(col + ",Col Found at " + ki);
+					found = true;
+					break;
+				}
+			}
+		}
+
+		if (found == false) {
+			Assert.assertTrue(false, "Col name not found" + col);
+		}
+		return ki;
+
+	}
+
+	/**
+	 * 
+	 * By Default Payment View default is Payment view Use this method only if
+	 * it requires different view
+	 * 
+	 * @author subhas.bv
+	 * 
+	 * @param dataMap
+	 */
+	public void selectChangeView(LinkedHashMap<String, String> dataMap) {
+
+		if (dataMap.containsKey("View")) {
+			lavanteUtils.switchtoFrame(IframeResultsPage);
+			lavanteUtils.clicks(ViewDropDwn);
+			String sub = "//div[@id='batchViewFilter_chosen']/descendant::li[.='" + dataMap.get("View") + "']";
+			WebElement e = driver.findElement(By.xpath(sub));
+			lavanteUtils.clicks(e);
+		}
+		lavanteUtils.waitForTime(2000);
+	}
+
+	/**
+	 * Delete Query
+	 * 
+	 * @param LinkedHashMap<String,
+	 *            String> dataMap queryType(PrivateQuery/PublicQuery)
+	 *            queryName(queryName/subQueryName Example: SearchByStatus,
+	 *            SearyBy )
+	 *
+	 */
+
+	public void deleteMyQuery(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.switchtoFrame(null);
+		List<WebElement> query = null;
+		String deleteIconObject = "//table[@id='QueryType']/../../..//span[contains(text(),'name')]/..//following-sibling::td[2]/a";
+
+		if (dataMap.containsKey("PublicQuery")) {
+			query = ListSavedPublicQuery();
+			deleteIconObject = deleteIconObject.replace("QueryType", "public_queries");
+		}
+		if (dataMap.containsKey("PrivateQuery")) {
+			query = ListSavedPrivateQuery();
+			deleteIconObject = deleteIconObject.replace("QueryType", "private_queries");
+		}
+		int size = query.size();
+		for (int i = 0; i < size; i++) {
+			String getSavedQueryName = query.get(i).getText();
+			if (getSavedQueryName.contains(dataMap.get("QueryName"))
+					|| getSavedQueryName.equals(dataMap.get("QueryName"))) {
+				deleteIconObject = deleteIconObject.replace("name", dataMap.get("QueryName"));
+				WebElement queryDeleteBtn = driver.findElement(By.xpath(deleteIconObject));
+				lavanteUtils.clicks(queryDeleteBtn);
+				lavanteUtils.click(SavedQueryDeleteBtn);
+				i = -1;
+				// lavanteUtils.fluentwait(SavedQueryDeleteBtn);
+				lavanteUtils.waitForTime(4000);
+				size = query.size();
+			}
+		}
+	}
+
+	/**
+	 * Edit Query
+	 * 
+	 * @param LinkedHashMap<String,
+	 *            String> dataMap queryType(PrivateQuery/PublicQuery)
+	 *            queryName(queryName)
+	 *
+	 */
+
+	public void editMyQuery(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.switchtoFrame(null);
+		List<WebElement> query = null;
+		String editIconObject = "//table[@id='QueryType']/../../..//span[contains(text(),'name')]/..//following-sibling::td[1]/a";
+
+		if (dataMap.containsKey("PublicQuery")) {
+			query = ListSavedPublicQuery();
+			editIconObject = editIconObject.replace("QueryType", "public_queries");
+		}
+		if (dataMap.containsKey("PrivateQuery")) {
+			query = ListSavedPrivateQuery();
+			editIconObject = editIconObject.replace("QueryType", "private_queries");
+		}
+		int size = query.size();
+		for (int i = 0; i < size; i++) {
+			String getSavedQueryName = query.get(i).getText();
+			if (getSavedQueryName.equals(dataMap.get("QueryName"))) {
+				editIconObject = editIconObject.replace("name", dataMap.get("QueryName"));
+				WebElement queryEditBtn = driver.findElement(By.xpath(editIconObject));
+				lavanteUtils.click(queryEditBtn);
+				lavanteUtils.fluentwait(IframeAdvanceSearch);
+				break;
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * Run Query
+	 * 
+	 * @param LinkedHashMap<String,
+	 *            String> dataMap queryType(PrivateQuery/PublicQuery)
+	 *            queryName(queryName)
+	 *
+	 */
+
+	public void runMyQuery(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.switchtoFrame(null);
+		List<WebElement> query = null;
+		String runIconObject = "//table[@id='QueryType']/../../..//span[contains(text(),'name')]/..//following-sibling::td[3]/a";
+
+		if (dataMap.containsKey("PublicQuery")) {
+			query = ListSavedPublicQuery();
+			runIconObject = runIconObject.replace("QueryType", "public_queries");
+		}
+		if (dataMap.containsKey("PrivateQuery")) {
+			query = ListSavedPrivateQuery();
+			runIconObject = runIconObject.replace("QueryType", "private_queries");
+		}
+		int size = query.size();
+		for (int i = 0; i < size; i++) {
+			String getSavedQueryName = query.get(i).getText();
+			if (getSavedQueryName.equals(dataMap.get("QueryName"))) {
+				runIconObject = runIconObject.replace("name", dataMap.get("QueryName"));
+				WebElement queryRunBtn = driver.findElement(By.xpath(runIconObject));
+				lavanteUtils.click(queryRunBtn);
+				lavanteUtils.waitForTime(4000);
+				break;
+			}
+		}
+	}
+
+	/**
+	 * Select action create claim
+	 * 
+	 */
+	public void selectPaymentAction(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.switchtoFrame(IframeResultsPage());
+		lavanteUtils.clicks(ListSelectChkBox.get(0));
+		lavanteUtils.clicks(ActionsDropDwn);
+		if(dataMap.containsKey("SubmitQuestion")) {
+			lavanteUtils.click(SubmitQuestLink);
+			SubmitQuestion(dataMap);
+		}
+		if(dataMap.containsKey("CreateClaim")) {
+			lavanteUtils.click(CreateClaimLink);
+		}
+		lavanteUtils.switchtoFrame(null);
+	}
+
+	/**
+	 * Add comments from search Page/Respond page from task
+	 * 
+	 * @author Piramanayagam.S
+	 * 
+	 */
+	public void CommentSearch(LinkedHashMap<String, String> dataMap) {
+
+		lavanteUtils.switchtoFrame(IFRAMEComments);
+
+		if (dataMap.containsKey("EnterComment")) {
+			lavanteUtils.typeinEdit(dataMap.get("EnterComment"), invCommentTextArea);
+		}
+
+		// As No Use Case would be just to enter putting both
+		lavanteUtils.clicks(submitComment);
+
+	}
+
+	/**
+	 * Method to select a payment and submit question
+	 * 
+	 * @author Vidya.C
+	 * @param dataMap
+	 */
+	public void SubmitQuestion(LinkedHashMap<String, String> dataMap) {
+		lavanteUtils.switchtoFrame(null);
+		if (dataMap.containsKey("Question")) {
+			lavanteUtils.typeinEdit(dataMap.get("Question"), QuestionsTextArea);
+			lavanteUtils.clicks(QuestSaveBtn);
+		}
+
+		lavanteUtils.fluentwait(BannerMsg);
+		dataMap.put("QuesBannerMsg", BannerMsg.getText());
+	}
+
+
+	public String fetchPaymentRef(String getInvoiceNo,String Email) throws FileNotFoundException, IOException, SQLException {
+		String x="";
+		x=" select MAX(P.PaymentRefNumber) from InvoiceHeader  I,Payment P,Supplier_Contact_Map sc, Contact c  where I.InvoiceNumber='"+getInvoiceNo+"' "
+				+ " and I.InvoiceHeaderID=P.InvoiceHeaderID and I.LavanteUID =sc.LavanteUID and sc.ContactID=c.ContactID "
+				+ " and C.Email like '"+Email+"'  and  P.PaymentID not in (Select PaymentID from Claim  )";
+		x=lavanteUtils.fetchDBdata(x);
+		return x;
+	}
+}
